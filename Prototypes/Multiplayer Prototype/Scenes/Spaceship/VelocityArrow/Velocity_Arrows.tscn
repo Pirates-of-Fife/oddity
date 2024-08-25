@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0j0koj552phk"]
+
+[ext_resource type="Script" path="res://Scenes/Spaceship/VelocityArrow/Velocity_Arrows.gd" id="1_4lst2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ewhua"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arsax"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drk52"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tmic2"]
+albedo_color = Color(0, 0, 1, 1)
+
+[node name="Velocity_Arrows" type="Node3D" node_paths=PackedStringArray("z", "x", "y")]
+script = ExtResource("1_4lst2")
+z = NodePath("Z")
+x = NodePath("X")
+y = NodePath("Y")
+
+[node name="Y" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+rotation_order = 0
+mesh = SubResource("BoxMesh_ewhua")
+skeleton = NodePath("../X")
+surface_material_override/0 = SubResource("StandardMaterial3D_arsax")
+
+[node name="X" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_ewhua")
+surface_material_override/0 = SubResource("StandardMaterial3D_drk52")
+
+[node name="Z" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_ewhua")
+skeleton = NodePath("../X")
+surface_material_override/0 = SubResource("StandardMaterial3D_tmic2")

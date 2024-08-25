@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://j2n3sg4hak6u"]
+
+[ext_resource type="Script" path="res://Scenes/ShipComponents/Common/Fuel Tank/Fuel Types/FuelType.gd" id="1_3d0uj"]
+
+[node name="Hydrogen" type="Node3D"]
+script = ExtResource("1_3d0uj")
+efficiency = 1.0
+power = 1.0
+heat_generation = 1.0

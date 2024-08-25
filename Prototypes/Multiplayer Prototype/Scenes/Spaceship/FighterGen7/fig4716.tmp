@@ -1,0 +1,2281 @@
+[gd_scene load_steps=119 format=3 uid="uid://cpb2nlkghtm13"]
+
+[ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://Assets/Spaceships/FighterGen7/fighter_gen_7_model.tscn" id="1_fr140"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/SFCS/ThrusterControl.gd" id="1_hkveg"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Camera/CameraScripts/CameraSwitchingController.gd" id="2_iyjy7"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/SpeedUI.gd" id="3_g5ucr"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Camera/CameraScripts/CameraController.gd" id="3_wocjs"]
+[ext_resource type="PackedScene" uid="uid://bgf8dwq20dfn3" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/ThrustBar.tscn" id="4_hcjig"]
+[ext_resource type="ArrayMesh" uid="uid://dh5qg0701ykbr" path="res://Assets/Spaceships/FighterGen7/fighterGen7-CollisionMesh.obj" id="4_u2t7m"]
+[ext_resource type="PackedScene" uid="uid://cr7t8smpohmy4" path="res://Scenes/Spaceship/FighterGen7/UI/Crosshair/crosshair.tscn" id="5_xwav3"]
+[ext_resource type="PackedScene" uid="uid://cq8467stblljy" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/Fuel/FuelBar.tscn" id="6_td6pj"]
+[ext_resource type="PackedScene" uid="uid://y7nouloq56us" path="res://Scenes/Spaceship/FighterGen7/UI/ExteriorUI/ExteriorUI.tscn" id="6_uelne"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Camera/CameraScripts/CameraShake.gd" id="7_1k7xb"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/FighterGen7/UI/ExteriorUI/ExteriorUI.gd" id="7_wip5u"]
+[ext_resource type="PackedScene" uid="uid://cv7jdo4pxmx3g" path="res://Scenes/Spaceship/Common/Components/Components.tscn" id="8_y26dh"]
+[ext_resource type="PackedScene" uid="uid://chtrvx6ohr6xy" path="res://Scenes/ShipComponents/Placeholder Components/placeholder_cooler.tscn" id="9_q8q8c"]
+[ext_resource type="PackedScene" uid="uid://bexkr2ymqd75k" path="res://Scenes/ShipComponents/Placeholder Components/fuel_tank.tscn" id="9_yecg1"]
+[ext_resource type="PackedScene" uid="uid://csglb1gnox6c5" path="res://Scenes/Spaceship/FighterGen7/Particles/FighterGen7/MainThrusterParticleFX/SmokeFX.tscn" id="10_eeo7v"]
+[ext_resource type="PackedScene" uid="uid://dbfnlo84a3qu7" path="res://Scenes/ShipComponents/Placeholder Components/placeholder_powerplant.tscn" id="10_soc1f"]
+[ext_resource type="PackedScene" uid="uid://c4gsrugxmj0dh" path="res://Scenes/Spaceship/FighterGen7/Particles/FighterGen7/MainThrusterParticleFX/MainParticleFX.tscn" id="11_k0hjx"]
+[ext_resource type="PackedScene" uid="uid://cekt6m8i15jo6" path="res://Scenes/Spaceship/FighterGen7/Particles/FighterGen7/RetroThrusterParticleFX/RetroThrusterParticleFX.tscn" id="12_7r5i3"]
+[ext_resource type="PackedScene" uid="uid://bpfmvy0xddnto" path="res://Scenes/ShipComponents/Placeholder Components/placeholder_radiator.tscn" id="12_ihhbb"]
+[ext_resource type="PackedScene" uid="uid://pfmpbnsgedr3" path="res://Scenes/Spaceship/FighterGen7/Particles/FighterGen7/RCSThrusterParticleFX/RCSThrusterParticleFX.tscn" id="13_i7t06"]
+[ext_resource type="PackedScene" uid="uid://chm807g5g01xq" path="res://Scenes/ShipComponents/Placeholder Components/placeholder_shield_generator.tscn" id="13_l306k"]
+[ext_resource type="PackedScene" uid="uid://cuylgiivyvpks" path="res://Scenes/ShipComponents/Placeholder Components/placeholder_jump_drive.tscn" id="14_sk35s"]
+[ext_resource type="PackedScene" uid="uid://b0pecf7ale8x4" path="res://Scenes/ShipComponents/Placeholder Components/placeholder_battery.tscn" id="16_cnnct"]
+[ext_resource type="PackedScene" uid="uid://ca8w1ch33w85y" path="res://Scenes/Spaceship/Common/Input/PlayerInput.tscn" id="16_dljen"]
+[ext_resource type="PackedScene" uid="uid://cu2pi0cv7n5v0" path="res://Scenes/Spaceship/Common/ShipStats/ShipStats.tscn" id="17_obsua"]
+[ext_resource type="PackedScene" uid="uid://b4lc3783rrexa" path="res://Scenes/Spaceship/Common/Thruster/Thrusters.tscn" id="18_dj4rr"]
+[ext_resource type="PackedScene" uid="uid://bxnepkoil8so3" path="res://Scenes/Spaceship/Common/SFCS/SimpleFlightControlSystem.tscn" id="18_fkptq"]
+[ext_resource type="PackedScene" uid="uid://bl7fyywe4oqux" path="res://Scenes/Spaceship/Common/Thruster/Thruster_Component/Thruster.tscn" id="19_mnngf"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/PowerTickRate.gd" id="30_0svyr"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/FighterGen7/Animation/InteriorAnimationTree.gd" id="34_qmx8t"]
+
+[sub_resource type="Animation" id="Animation_b1nji"]
+resource_name = "SwitchCameraToThirdPersonView"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 5.238, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 14.946, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5p352"]
+_data = {
+"SwitchCameraToThirdPersonView": SubResource("Animation_b1nji")
+}
+
+[sub_resource type="Curve" id="Curve_r0men"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0347003, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_v42ei"]
+_data = [Vector2(0, 0), 0.0, 7.09578, 0, 0, Vector2(0.0509804, 0.617021), 7.81538, 7.81538, 0, 0, Vector2(0.109804, 0.914894), 0.306486, 0.306486, 0, 0, Vector2(0.983607, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_nhltq"]
+_data = [Vector2(0, 0), 0.0, 2.57675, 0, 0, Vector2(0.819608, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rm3t2"]
+points = PackedVector3Array(9.16666, 4.58589, 5.79973, 2.39356, 0.462733, 0.793534, 2.39356, 1.34661, 0.793534, 2.39356, 0.462733, 4.32669, 9.16666, 3.40738, 4.03218, 2.68859, 1.64124, 4.32669, 8.5766, 4.58589, 4.03218, 8.5766, 3.11316, 5.79973, 5.04419, 1.34661, 1.97158, 7.98786, 4.29126, 5.79973, 2.98296, 0.462733, 4.32669, 8.87096, 4.29126, 3.73766, 2.68859, 1.64124, 1.08805, 2.68859, 0.462733, 0.793534, 5.04419, 1.34661, 4.6212, 2.39356, 1.34661, 4.32669, 9.16666, 3.40738, 5.79973, 7.98786, 3.11316, 5.79973, 9.16666, 4.58589, 4.03218, 7.69349, 2.81853, 3.14962, 2.68859, 1.34661, 0.793534, 2.98296, 0.462733, 1.08805, 8.5766, 4.58589, 5.79973, 6.221, 1.93546, 5.21022, 8.87096, 3.40738, 3.73766, 7.69349, 3.70201, 3.14962)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fu4qp"]
+points = PackedVector3Array(3.86606, -2.18853, 1.67692, 2.68859, -0.126289, 4.03235, 3.27733, -0.421204, 4.32683, 9.16666, -3.36559, 4.03235, 8.5766, -4.54396, 5.21071, 2.68859, -0.126289, 0.793044, 2.68859, -1.59913, 4.32683, 9.16666, -4.54396, 4.03235, 9.16666, -3.36559, 5.21071, 2.39356, -1.30465, 0.793044, 7.98786, -3.07111, 5.21071, 2.39356, -0.126289, 4.03235, 8.5766, -4.54396, 4.03235, 2.68859, -1.30465, 0.793044, 2.39356, -0.126289, 0.793044, 2.39356, -1.30465, 4.03235, 9.16666, -4.54396, 5.21071, 2.68859, -0.421204, 4.32683, 7.98786, -4.24904, 5.21071, 2.68859, -1.59913, 1.08796, 8.5766, -3.07111, 5.21071)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qgljf"]
+points = PackedVector3Array(2.3929, 1.34609, 4.0318, 2.3929, -1.30428, 4.0318, 0.920114, 0.168943, -7.15876, -2.02454, 1.64066, 6.97706, -2.02454, -1.59884, 6.38801, -0.846492, -1.00933, -7.15876, 2.09816, 0.462387, 7.27229, -0.9284, 1.88456, 1.38365, 1.21486, -1.30428, -5.3916, 1.21486, 2.2298, 3.44275, -1.43551, 0.756956, -4.2135, 2.09816, -1.59884, 6.38801, 2.3929, 1.34609, 0.792727, -2.31928, -1.30428, 4.32703, 2.09816, 1.34609, 7.27229, -2.31928, 1.34609, 4.32703, 2.3929, -1.30428, 0.792727, -1.14077, -1.30428, -5.3916, -0.846492, 0.462387, -6.27447, 0.920114, 0.462387, -6.27447, -1.73026, 1.05152, -2.15112, 0.920114, -1.00933, -7.15876, 1.21486, 1.64066, 6.97706, -0.846492, 0.168943, -7.15876, -1.14077, -1.00933, -5.98065, 2.09816, -1.59884, 5.79895, -2.02454, -1.59884, 6.09419, -1.14077, 0.462387, -5.98065, -2.02454, 1.64066, 6.09419, -0.9284, 1.88456, 2.8321)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o4vqt"]
+points = PackedVector3Array(-6.14677, 1.93546, 2.56028, -8.79806, 4.58589, 5.21071, -7.91453, 4.29126, 5.21071, -2.31928, 1.64124, 1.08756, -2.61402, 0.462733, 4.62146, -2.31928, 1.64124, 4.32683, -9.0928, 3.40738, 5.21071, -9.38754, 4.58589, 3.73798, -2.90876, 0.462733, 1.08756, -9.38754, 3.70201, 3.73798, -7.91453, 4.29126, 3.44336, -2.31928, 0.462733, 1.08756, -2.90876, 0.462733, 4.62146, -2.90876, 1.64124, 1.08756, -7.03099, 3.70201, 5.21071, -7.91453, 2.81853, 5.21071, -2.61402, 1.64124, 4.62146, -2.31928, 0.462733, 4.32683, -7.32574, 2.52431, 2.85491, -9.38754, 3.70201, 5.21071, -7.32574, 3.70201, 2.85491, -6.14677, 1.93546, 4.91608, -9.0928, 3.40738, 3.73798, -8.79806, 4.58589, 3.73798, -6.14677, 3.40738, 2.56028, -8.79806, 4.29126, 3.44336, -9.10214, 4.4194, 5.04422)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jbudj"]
+points = PackedVector3Array(-5.85364, -1.89361, 5.21022, -2.61405, -1.30465, 0.793534, -5.26482, -2.48171, 1.97158, -3.20287, -1.89361, 4.6212, -9.09179, -4.54396, 5.79973, -9.68206, -3.36559, 4.03218, -2.61405, -0.126289, 0.793534, -2.61405, -0.126289, 4.32669, -9.09179, -4.54396, 4.03218, -9.68206, -3.36559, 5.79973, -2.61405, -1.59913, 1.08805, -2.31928, -1.30465, 4.32669, -9.68206, -4.54396, 4.03218, -2.31928, -0.126289, 0.793534, -2.31928, -0.126289, 4.32669, -7.03056, -3.66008, 3.14962, -8.50369, -3.36559, 5.79973, -2.31928, -1.30465, 0.793534, -9.68206, -4.54396, 5.79973, -3.79313, -2.18853, 4.6212, -8.50369, -4.24904, 5.79973, -8.50369, -3.07111, 3.44315, -3.79313, -2.18853, 1.67707, -7.03056, -3.66008, 5.21022, -3.20287, -0.715686, 4.6212, -7.61938, -2.48171, 5.50473, -2.61405, -1.59913, 4.32669, -8.50369, -3.95456, 3.44315)
+
+[sub_resource type="Animation" id="Animation_w27o2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/Cylinder_001:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.0363679, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/StickHandle:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -7.80223e-09, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/Cylinder_001:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(7.80223e-09, -4.73695e-14, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/StickHandle:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0442424, 5.10097e-10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Throttle_001/Cylinder:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(8.20771e-10, -0.039369, -0.00190312)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Throttle_001/ThrottleHandle:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(8.20771e-10, 0.031921, 0.000421941)]
+}
+
+[sub_resource type="Animation" id="Animation_lple1"]
+resource_name = "pitch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/Cylinder_001:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(4.25556e-08, -7.85466e-09, -0.523599), Vector3(4.25556e-08, -7.85469e-09, 0), Vector3(4.25556e-08, -7.85473e-09, 0.523599)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/StickHandle:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3.97704e-08, -1.51428e-08, -0.523599), Vector3(3.97704e-08, -1.51428e-08, 0), Vector3(3.97703e-08, -1.51428e-08, 0.523599)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/Cylinder_001:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.00910997, -0.0375402, 0.00416917), Vector3(-0.000964642, -0.0375402, 0.00416917), Vector3(-0.00729704, -0.0375402, 0.00416917)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/StickHandle:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0384228, 0.039162, 0.00404328), Vector3(0.00237226, 0.039162, 0.00404328), Vector3(-0.0477358, 0.032317, 0.0040431)]
+}
+
+[sub_resource type="Animation" id="Animation_jvkno"]
+resource_name = "roll"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/Cylinder_001:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.0363679, 0), Vector3(0, -0.0363679, 0), Vector3(0, -0.0363679, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/Cylinder_001:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -4.73695e-14, 0), Vector3(0, -4.73695e-14, 0), Vector3(0.523599, -4.73695e-14, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/StickHandle:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.0442424, -0.0434765), Vector3(0, 0.0442424, 0), Vector3(0, 0.038867, 0.034232)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/StickHandle:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.523599, -5.29127e-14, 0), Vector3(0, -3.02359e-14, 0), Vector3(0.523599, -6.04717e-14, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gao68"]
+resource_name = "throttle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Throttle_001/ThrottleHandle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0797024, 0.031921, 0.000421941), Vector3(0, 0.031921, 0.000421941), Vector3(0.055081, 0.031921, 0.00042206)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Throttle_001/Cylinder:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0797024, -0.039369, -0.00190312), Vector3(0, -0.039369, -0.00190312), Vector3(0.055081, -0.039369, -0.001903)]
+}
+
+[sub_resource type="Animation" id="Animation_r13bj"]
+resource_name = "yaw"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001/StickHandle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.523599, 0), Vector3(0, 0, 0), Vector3(0, -0.523599, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7f2in"]
+_data = {
+"RESET": SubResource("Animation_w27o2"),
+"pitch": SubResource("Animation_lple1"),
+"roll": SubResource("Animation_jvkno"),
+"throttle": SubResource("Animation_gao68"),
+"yaw": SubResource("Animation_r13bj")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5qkox"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mhbk5"]
+animation = &"yaw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_54orm"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iwif2"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d7r0r"]
+animation = &"roll"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_asd7g"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ch6dm"]
+animation = &"throttle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mwja"]
+animation = &"pitch"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_pjqi1"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_d6eu6"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_cajgt"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_l1nxe"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_6a0p8"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_lwarj"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_38yr8"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sl66b"]
+graph_offset = Vector2(-592.342, -13.35)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_7mwja")
+nodes/Animation/position = Vector2(20, 220)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5qkox")
+"nodes/Animation 2/position" = Vector2(40, 400)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_mhbk5")
+"nodes/Animation 3/position" = Vector2(60, 540)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_54orm")
+"nodes/Animation 4/position" = Vector2(127.668, 722.013)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_iwif2")
+"nodes/Animation 5/position" = Vector2(-20, 80)
+"nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_d7r0r")
+"nodes/Animation 6/position" = Vector2(244.218, 896.566)
+"nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_asd7g")
+"nodes/Animation 7/position" = Vector2(440, 1000)
+"nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_ch6dm")
+"nodes/Animation 8/position" = Vector2(520, 1140)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_cajgt")
+nodes/Blend2/position = Vector2(700, 200)
+"nodes/Blend2 2/node" = SubResource("AnimationNodeBlend2_pjqi1")
+"nodes/Blend2 2/position" = Vector2(840, 680)
+"nodes/Blend2 3/node" = SubResource("AnimationNodeBlend2_d6eu6")
+"nodes/Blend2 3/position" = Vector2(1000, 380)
+nodes/Pitch/node = SubResource("AnimationNodeAdd2_l1nxe")
+nodes/Pitch/position = Vector2(389.11, 60.2414)
+nodes/Roll/node = SubResource("AnimationNodeAdd2_6a0p8")
+nodes/Roll/position = Vector2(480, 740)
+nodes/Throttle/node = SubResource("AnimationNodeAdd2_lwarj")
+nodes/Throttle/position = Vector2(680, 860)
+nodes/Yaw/node = SubResource("AnimationNodeAdd2_38yr8")
+nodes/Yaw/position = Vector2(383.556, 449.454)
+nodes/output/position = Vector2(1320, 500)
+node_connections = [&"Blend2", 0, &"Pitch", &"Blend2", 1, &"Yaw", &"Blend2 2", 0, &"Roll", &"Blend2 2", 1, &"Throttle", &"Blend2 3", 0, &"Blend2", &"Blend2 3", 1, &"Blend2 2", &"Pitch", 0, &"Animation 5", &"Pitch", 1, &"Animation", &"Roll", 0, &"Animation 4", &"Roll", 1, &"Animation 6", &"Throttle", 0, &"Animation 7", &"Throttle", 1, &"Animation 8", &"Yaw", 0, &"Animation 2", &"Yaw", 1, &"Animation 3", &"output", 0, &"Blend2 3"]
+
+[sub_resource type="Animation" id="Animation_ui28b"]
+resource_name = "fly_backwards"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RetroThruster1/ParticleFX/RetroThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RetroThruster2/ParticleFX/RetroThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ahb1g"]
+resource_name = "fly_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSTopThruster1/ParticleFX/top_middle_left:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSTopThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSTopThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSTopThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Thrusters/RCSTopThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Thrusters/RCSTopWingThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Thrusters/RCSTopWingThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_14kus"]
+resource_name = "fly_forwards"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/MainThruster/ParticleFX/MainParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/MainThruster/ParticleFX/SmokeFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ovrsc"]
+resource_name = "fly_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSRightThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSRightThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSRightThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_4ro7n"]
+resource_name = "fly_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSLeftThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSLeftThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSLeftThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_t3o5n"]
+resource_name = "fly_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSBottomThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSBottomThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSBottomThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSBottomThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Thrusters/RCSBottomThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Thrusters/RCSBottomWingThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Thrusters/RCSBottomWingThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_f28xs"]
+resource_name = "not_firing_forwards"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/MainThruster/ParticleFX/SmokeFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/MainThruster/ParticleFX/MainParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RetroThruster1/ParticleFX/RetroThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.025, 0.975),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RetroThruster2/ParticleFX/RetroThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.975),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4mgay"]
+resource_name = "not_firing_lateral"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSLeftThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSLeftThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSLeftThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSRightThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Thrusters/RCSRightThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Thrusters/RCSRightThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5s2mn"]
+resource_name = "not_firing_pitch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSBottomThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSBottomThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSBottomThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSTopThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Thrusters/RCSTopThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Thrusters/RCSTopThruster1/ParticleFX/top_middle_left:amount_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xwn8j"]
+resource_name = "not_firing_roll"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSTopThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSTopThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSTopThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSTopThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Thrusters/RCSBottomThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Thrusters/RCSBottomThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Thrusters/RCSBottomThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Thrusters/RCSBottomThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Thrusters/RCSTopWingThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Thrusters/RCSTopWingThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Thrusters/RCSBottomWingThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Thrusters/RCSBottomWingThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wqo00"]
+resource_name = "not_firing_vertical"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSTopWingThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSTopWingThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSBottomWingThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSBottomWingThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Thrusters/RCSTopThruster1/ParticleFX/top_middle_left:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Thrusters/RCSTopThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Thrusters/RCSTopThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Thrusters/RCSTopThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Thrusters/RCSTopThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Thrusters/RCSBottomThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Thrusters/RCSBottomThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Thrusters/RCSBottomThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Thrusters/RCSBottomThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Thrusters/RCSBottomThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_k7usq"]
+resource_name = "not_firing_yaw"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSLeftThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSLeftThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSRightThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSRightThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_47vei"]
+resource_name = "pitch_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSTopThruster1/ParticleFX/top_middle_left:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSBottomThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSBottomThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_4ubir"]
+resource_name = "pitch_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSBottomThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSTopThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSTopThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_jm88b"]
+resource_name = "roll_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSTopWingThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSBottomWingThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSTopThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSTopThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Thrusters/RCSBottomThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Thrusters/RCSBottomThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_vvrkm"]
+resource_name = "roll_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSTopWingThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSBottomWingThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Thrusters/RCSTopThruster2/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Thrusters/RCSTopThruster4/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Thrusters/RCSBottomThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Thrusters/RCSBottomThruster5/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_45b32"]
+resource_name = "yaw_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSLeftThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSRightThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_e05fv"]
+resource_name = "yaw_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thrusters/RCSLeftThruster1/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Thrusters/RCSRightThruster3/ParticleFX/RCSThrusterParticleFX:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rrndt"]
+_data = {
+"fly_backwards": SubResource("Animation_ui28b"),
+"fly_down": SubResource("Animation_ahb1g"),
+"fly_forwards": SubResource("Animation_14kus"),
+"fly_left": SubResource("Animation_ovrsc"),
+"fly_right": SubResource("Animation_4ro7n"),
+"fly_up": SubResource("Animation_t3o5n"),
+"not_firing_forwards": SubResource("Animation_f28xs"),
+"not_firing_lateral": SubResource("Animation_4mgay"),
+"not_firing_pitch": SubResource("Animation_5s2mn"),
+"not_firing_roll": SubResource("Animation_xwn8j"),
+"not_firing_vertical": SubResource("Animation_wqo00"),
+"not_firing_yaw": SubResource("Animation_k7usq"),
+"pitch_down": SubResource("Animation_47vei"),
+"pitch_up": SubResource("Animation_4ubir"),
+"roll_left": SubResource("Animation_jm88b"),
+"roll_right": SubResource("Animation_vvrkm"),
+"yaw_left": SubResource("Animation_45b32"),
+"yaw_right": SubResource("Animation_e05fv")
+}
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_veqx7"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_dy2gs"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_fml3e"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_ot1kl"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_ivmh0"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yt4ic"]
+animation = &"fly_backwards"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_5a0ha"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1dbnd"]
+animation = &"fly_forwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6ddwq"]
+animation = &"not_firing_forwards"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_f13cb"]
+graph_offset = Vector2(-86.1329, -24.821)
+nodes/Backwards/node = SubResource("AnimationNodeAnimation_yt4ic")
+nodes/Backwards/position = Vector2(120, 440)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_5a0ha")
+nodes/Blend3/position = Vector2(360, 240)
+nodes/Forwards/node = SubResource("AnimationNodeAnimation_1dbnd")
+nodes/Forwards/position = Vector2(140, 140)
+"nodes/Not Firing/node" = SubResource("AnimationNodeAnimation_6ddwq")
+"nodes/Not Firing/position" = Vector2(120, 280)
+nodes/output/position = Vector2(580, 240)
+node_connections = [&"Blend3", 0, &"Forwards", &"Blend3", 1, &"Not Firing", &"Blend3", 2, &"Backwards", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_wg8dw"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ns8ao"]
+animation = &"fly_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7lrmq"]
+animation = &"fly_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ldtw"]
+animation = &"not_firing_lateral"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_t5yb1"]
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_wg8dw")
+nodes/Blend3/position = Vector2(640, 320)
+"nodes/Fly Left/node" = SubResource("AnimationNodeAnimation_ns8ao")
+"nodes/Fly Left/position" = Vector2(380, 220)
+"nodes/Fly Right/node" = SubResource("AnimationNodeAnimation_7lrmq")
+"nodes/Fly Right/position" = Vector2(419.547, 614.337)
+"nodes/Not Firing/node" = SubResource("AnimationNodeAnimation_1ldtw")
+"nodes/Not Firing/position" = Vector2(400, 380)
+nodes/output/position = Vector2(840, 340)
+node_connections = [&"Blend3", 0, &"Fly Left", &"Blend3", 1, &"Not Firing", &"Blend3", 2, &"Fly Right", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ebs6c"]
+animation = &"not_firing_pitch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6wedq"]
+animation = &"pitch_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ipgq3"]
+animation = &"pitch_up"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_bn28g"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_td8f7"]
+graph_offset = Vector2(231.361, 94.3701)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_ipgq3")
+nodes/Animation/position = Vector2(680, 200)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_ebs6c")
+"nodes/Animation 2/position" = Vector2(680, 380)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_6wedq")
+"nodes/Animation 3/position" = Vector2(680, 540)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_bn28g")
+nodes/Blend3/position = Vector2(924.536, 379.297)
+nodes/output/position = Vector2(1100, 460)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_bvdr8"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2igib"]
+animation = &"not_firing_roll"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nj02e"]
+animation = &"roll_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0igro"]
+animation = &"roll_right"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wbeau"]
+graph_offset = Vector2(37, 12.5)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_bvdr8")
+nodes/Blend3/position = Vector2(526.099, 396.239)
+"nodes/Not Firing/node" = SubResource("AnimationNodeAnimation_2igib")
+"nodes/Not Firing/position" = Vector2(233.082, 441.19)
+"nodes/Roll Left/node" = SubResource("AnimationNodeAnimation_nj02e")
+"nodes/Roll Left/position" = Vector2(204.779, 254.725)
+"nodes/Roll Right/node" = SubResource("AnimationNodeAnimation_0igro")
+"nodes/Roll Right/position" = Vector2(248.066, 620.996)
+nodes/output/position = Vector2(960, 380)
+node_connections = [&"Blend3", 0, &"Roll Left", &"Blend3", 1, &"Not Firing", &"Blend3", 2, &"Roll Right", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nhaus"]
+animation = &"not_firing_vertical"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nf1ep"]
+animation = &"fly_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c0quw"]
+animation = &"fly_up"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_ngcsb"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qlktf"]
+graph_offset = Vector2(-11.4359, -82.0241)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_c0quw")
+nodes/Animation/position = Vector2(420, 40)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_nhaus")
+"nodes/Animation 2/position" = Vector2(420, 180)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_nf1ep")
+"nodes/Animation 3/position" = Vector2(420, 320)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_ngcsb")
+nodes/Blend3/position = Vector2(680, 140)
+nodes/output/position = Vector2(920, 200)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_k7hgq"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b1066"]
+animation = &"not_firing_yaw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_74q3v"]
+animation = &"yaw_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_71u0x"]
+animation = &"yaw_right"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_if74t"]
+graph_offset = Vector2(-155.972, 176.177)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_k7hgq")
+nodes/Blend3/position = Vector2(456.008, 289.354)
+"nodes/No Thrust/node" = SubResource("AnimationNodeAnimation_b1066")
+"nodes/No Thrust/position" = Vector2(182.137, 360.777)
+"nodes/Yaw Left/node" = SubResource("AnimationNodeAnimation_74q3v")
+"nodes/Yaw Left/position" = Vector2(273.705, 177.642)
+"nodes/Yaw Right/node" = SubResource("AnimationNodeAnimation_71u0x")
+"nodes/Yaw Right/position" = Vector2(147.174, 555.567)
+nodes/output/position = Vector2(700, 320)
+node_connections = [&"Blend3", 0, &"Yaw Left", &"Blend3", 1, &"No Thrust", &"Blend3", 2, &"Yaw Right", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cg3fd"]
+nodes/Add2/node = SubResource("AnimationNodeAdd2_ivmh0")
+nodes/Add2/position = Vector2(960, -20)
+"nodes/Add2 2/node" = SubResource("AnimationNodeAdd2_veqx7")
+"nodes/Add2 2/position" = Vector2(800, 120)
+"nodes/Add2 3/node" = SubResource("AnimationNodeAdd2_dy2gs")
+"nodes/Add2 3/position" = Vector2(640, 280)
+"nodes/Add2 4/node" = SubResource("AnimationNodeAdd2_fml3e")
+"nodes/Add2 4/position" = Vector2(440, 460)
+"nodes/Add2 5/node" = SubResource("AnimationNodeAdd2_ot1kl")
+"nodes/Add2 5/position" = Vector2(220, 660)
+nodes/Forwards/node = SubResource("AnimationNodeBlendTree_f13cb")
+nodes/Forwards/position = Vector2(120, 360)
+nodes/Lateral/node = SubResource("AnimationNodeBlendTree_t5yb1")
+nodes/Lateral/position = Vector2(-100, 880)
+nodes/Pitch/node = SubResource("AnimationNodeBlendTree_td8f7")
+nodes/Pitch/position = Vector2(120, 100)
+nodes/Roll/node = SubResource("AnimationNodeBlendTree_wbeau")
+nodes/Roll/position = Vector2(-80, 660)
+nodes/Vertical/node = SubResource("AnimationNodeBlendTree_qlktf")
+nodes/Vertical/position = Vector2(140, 220)
+nodes/Yaw/node = SubResource("AnimationNodeBlendTree_if74t")
+nodes/Yaw/position = Vector2(120, 520)
+nodes/output/position = Vector2(1200, 60)
+node_connections = [&"Add2", 0, &"Pitch", &"Add2", 1, &"Add2 2", &"Add2 2", 0, &"Vertical", &"Add2 2", 1, &"Add2 3", &"Add2 3", 0, &"Forwards", &"Add2 3", 1, &"Add2 4", &"Add2 4", 0, &"Yaw", &"Add2 4", 1, &"Add2 5", &"Add2 5", 0, &"Roll", &"Add2 5", 1, &"Lateral", &"output", 0, &"Add2"]
+
+[node name="FighterGen7" type="Node3D"]
+
+[node name="ShipBody" type="RigidBody3D" parent="."]
+mass = 10.0
+gravity_scale = 0.0
+inertia = Vector3(70, 70, 100)
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_hkveg")
+
+[node name="Mesh" type="Node3D" parent="ShipBody"]
+
+[node name="fighterGen7" parent="ShipBody/Mesh" instance=ExtResource("1_fr140")]
+
+[node name="Cylinder_001" parent="ShipBody/Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001" index="0"]
+transform = Transform3D(0.3, -2.58711e-22, -1.42109e-14, 0, 0.7, -2.34067e-09, 1.42109e-14, 5.46156e-09, 0.3, 0, -0.0363679, 0)
+
+[node name="StickHandle" parent="ShipBody/Mesh/fighterGen7/Hull/Cockpit/Seat/Stick_001" index="1"]
+transform = Transform3D(0.47, 0, -3.58903e-09, 0, 1.31, 0, 3.66705e-09, 0, 0.46, 0, 0.0442424, 5.10097e-10)
+
+[node name="Throttle_001" parent="ShipBody/Mesh/fighterGen7/Hull/Cockpit/Seat" index="1"]
+transform = Transform3D(1.25, 0, -1.42109e-14, 0, 1.25, 0, 1.42109e-14, 0, 1.25, 0.221455, 0.0297902, -0.50953)
+
+[node name="Cylinder" parent="ShipBody/Mesh/fighterGen7/Hull/Cockpit/Seat/Throttle_001" index="0"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 8.20771e-10, -0.039369, -0.00190312)
+
+[node name="ThrottleHandle" parent="ShipBody/Mesh/fighterGen7/Hull/Cockpit/Seat/Throttle_001" index="1"]
+transform = Transform3D(0.29, 0, -4.26326e-14, 0, 0.3, 0, 2.13163e-14, 0, 0.62, 8.20771e-10, 0.031921, 0.000421941)
+
+[node name="Cockpit Lighting" type="OmniLight3D" parent="ShipBody/Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0492553, 0.849313, 0.79377)
+light_color = Color(0.909137, 0.496878, 0.253429, 1)
+light_bake_mode = 1
+omni_range = 1.293
+omni_attenuation = 0.707106
+
+[node name="UI" type="Node3D" parent="ShipBody"]
+
+[node name="InteriorUI" type="Node3D" parent="ShipBody/UI"]
+
+[node name="SpeedUI" type="Label3D" parent="ShipBody/UI/InteriorUI"]
+transform = Transform3D(0.824723, -0.251608, 0.506483, 0.0378511, 0.918129, 0.394469, -0.564268, -0.306157, 0.766726, -0.430985, 0.726422, 0.508235)
+pixel_size = 0.002
+modulate = Color(0.772549, 0.47451, 0.145098, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Test"
+font_size = 74
+script = ExtResource("3_g5ucr")
+
+[node name="ThrustBar" parent="ShipBody/UI/InteriorUI" instance=ExtResource("4_hcjig")]
+transform = Transform3D(0.143435, 0, -0.0815555, 0, 0.165, 0, 0.0815555, 0, 0.143435, 0.396223, 0.726971, 0.475676)
+
+[node name="Crosshair" parent="ShipBody/UI/InteriorUI" instance=ExtResource("5_xwav3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4316, 0.50529)
+is_first_person_crosshair = true
+
+[node name="FuelBar" parent="ShipBody/UI/InteriorUI" node_paths=PackedStringArray("fuel_tank") instance=ExtResource("6_td6pj")]
+transform = Transform3D(0.137946, 0.0155861, -0.0689415, -0.00361303, 0.152542, 0.0272568, 0.070589, -0.0226509, 0.136122, 0.372908, 0.494616, 0.546384)
+fuel_tank = NodePath("../../../Components/Fuel Tanks")
+
+[node name="ExteriorUI" type="Node3D" parent="ShipBody/UI"]
+
+[node name="ExteriorUI" parent="ShipBody/UI/ExteriorUI" instance=ExtResource("6_uelne")]
+visible = false
+script = ExtResource("7_wip5u")
+
+[node name="Components" parent="ShipBody" instance=ExtResource("8_y26dh")]
+unique_name_in_owner = true
+script = null
+
+[node name="FuelTank2" parent="ShipBody/Components/Fuel Tanks" index="0" instance=ExtResource("9_yecg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.383516, -0.731441, 0)
+fuel_capacity = 12000.0
+
+[node name="FuelTank" parent="ShipBody/Components/Fuel Tanks" index="1" instance=ExtResource("9_yecg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.661099, -0.729032, 0)
+fuel_capacity = 12000.0
+
+[node name="Placeholder Cooler" parent="ShipBody/Components/Coolers" index="0" instance=ExtResource("9_q8q8c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.717464, 0, -2.60727)
+required_power = 10.0
+
+[node name="PlaceholderRadiator" parent="ShipBody/Components/Radiators" index="0" instance=ExtResource("12_ihhbb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0667158, 1.49163, 4.15456)
+
+[node name="PlaceholderRadiator2" parent="ShipBody/Components/Radiators" index="1" instance=ExtResource("12_ihhbb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.940423, 4.63505)
+
+[node name="ShieldGenerator" parent="ShipBody/Components/Shield Generators" index="0" instance=ExtResource("13_l306k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34814, -0.52167, -1.73936)
+required_power = 15.0
+
+[node name="ShieldGenerator2" parent="ShipBody/Components/Shield Generators" index="1" instance=ExtResource("13_l306k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.716141, -0.315054, -2.15489)
+required_power = 15.0
+
+[node name="PlaceholderJumpDrive" parent="ShipBody/Components/Jump Drive" index="0" instance=ExtResource("14_sk35s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.99823)
+required_power = 15.0
+
+[node name="PlaceholderBattery" parent="ShipBody/Components/Power Components/Battery" index="0" instance=ExtResource("16_cnnct")]
+required_power = 40.0
+
+[node name="Powerplant" parent="ShipBody/Components/Power Components/Power Plants" index="0" instance=ExtResource("10_soc1f")]
+fuel_per_power = 0.01
+
+[node name="Thrusters" parent="ShipBody" instance=ExtResource("18_dj4rr")]
+unique_name_in_owner = true
+main_thrusters = [NodePath("MainThruster")]
+retro_thrusters = [NodePath("RetroThruster1"), NodePath("RetroThruster2")]
+left_thrusters = [NodePath("RCSLeftThruster1"), NodePath("RCSLeftThruster2"), NodePath("RCSLeftThruster3")]
+right_thrusters = [NodePath("RCSRightThruster1"), NodePath("RCSRightThruster2"), NodePath("RCSRightThruster3")]
+top_thrusters = [NodePath("RCSTopThruster1"), NodePath("RCSTopThruster2"), NodePath("RCSTopThruster3"), NodePath("RCSTopThruster4"), NodePath("RCSTopThruster5"), NodePath("RCSTopWingThruster1"), NodePath("RCSTopWingThruster2")]
+bottom_thrusters = [NodePath("RCSBottomThruster1"), NodePath("RCSBottomThruster2"), NodePath("RCSBottomThruster3"), NodePath("RCSBottomThruster4"), NodePath("RCSBottomThruster5"), NodePath("RCSBottomWingThruster1"), NodePath("RCSBottomWingThruster2")]
+roll_right_thrusters = [NodePath("RCSTopThruster2"), NodePath("RCSTopThruster4"), NodePath("RCSTopWingThruster1"), NodePath("RCSTopThruster3"), NodePath("RCSTopThruster5"), NodePath("RCSBottomWingThruster2")]
+roll_left_thrusters = [NodePath("RCSTopThruster3"), NodePath("RCSTopThruster5"), NodePath("RCSTopWingThruster2"), NodePath("RCSBottomThruster2"), NodePath("RCSBottomThruster4"), NodePath("RCSBottomWingThruster1")]
+pitch_up_thrusters = [NodePath("RCSBottomThruster1"), NodePath("RCSTopThruster4"), NodePath("RCSTopThruster5")]
+pitch_down_thrusters = [NodePath("RCSTopThruster1"), NodePath("RCSBottomThruster4"), NodePath("RCSBottomThruster5")]
+yaw_right_thrusters = [NodePath("RCSLeftThruster1"), NodePath("RCSRightThruster3")]
+yaw_left_thrusters = [NodePath("RCSRightThruster1"), NodePath("RCSLeftThruster3")]
+required_power = 4.0
+
+[node name="MainThruster" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.03356)
+thruster_force = 4500.0
+thruster_fuel_consumption = 15.0
+
+[node name="ParticleFX" parent="ShipBody/Thrusters/MainThruster" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.32684)
+
+[node name="SmokeFX" parent="ShipBody/Thrusters/MainThruster/ParticleFX" index="0" instance=ExtResource("10_eeo7v")]
+transform = Transform3D(15.92, 0, 0, 0, 15.92, 0, 0, 0, 15.92, 0, 0, -0.191907)
+
+[node name="MainParticleFX" parent="ShipBody/Thrusters/MainThruster/ParticleFX" index="1" instance=ExtResource("11_k0hjx")]
+transform = Transform3D(15.92, 0, 0, 0, 15.92, 0, 0, 0, 15.92, 0, 0, -0.191907)
+
+[node name="RetroThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.4, 0, -1.72)
+thruster_force = 1600.0
+thruster_fuel_consumption = 6.0
+
+[node name="RetroThrusterParticleFX" parent="ShipBody/Thrusters/RetroThruster1/ParticleFX" index="0" instance=ExtResource("12_7r5i3")]
+transform = Transform3D(0.999657, -2.28846e-09, -0.0261769, 0, -1, 8.74227e-08, -0.0261769, -8.73928e-08, -0.999657, 0.0652461, -0.281057, 0)
+
+[node name="RetroThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.4, 0, -1.72)
+thruster_force = 1600.0
+thruster_fuel_consumption = 6.0
+
+[node name="RetroThrusterParticleFX" parent="ShipBody/Thrusters/RetroThruster2/ParticleFX" index="0" instance=ExtResource("12_7r5i3")]
+transform = Transform3D(0.999657, -2.28846e-09, -0.0261769, 0, -1, 8.74227e-08, -0.0261769, -8.73928e-08, -0.999657, -0.0872685, -0.245871, 0)
+
+[node name="RCSTopThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.25995, -6.33182)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="top_middle_left" parent="ShipBody/Thrusters/RCSTopThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, 0.116705, -0.993167, 0, 0.993167, 0.116705, 0.00254533, 0.012507, -0.0249647)
+amount_ratio = 0.0
+
+[node name="RCSTopThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.993086, 0.80773, -1.38341)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, 0.0770149, -0.99703, 0, 0.99703, 0.0770149, -0.00778675, 0.00329471, -0.0770251)
+amount_ratio = 0.0
+
+[node name="RCSTopThruster3" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.993, 0.808, -1.383)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopThruster3/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, 0.00631801, -0.99998, 0, 0.99998, 0.00631801, -0.0158311, -0.00986516, -0.0528816)
+amount_ratio = 0.0
+
+[node name="RCSTopThruster4" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.46162, 1.29696, 5.9374)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopThruster4/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, 0.0124962, -0.999922, 0, 0.999922, 0.0124962, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSTopThruster5" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.462, 1.297, 5.937)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopThruster5/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, 0.0122171, -0.999925, 0, 0.999925, 0.0122171, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSBottomThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.815, -6.00045)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSBottomThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.856302, -1.20667, -0.686276)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSBottomThruster3" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.856, -1.207, -0.686)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster3/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSBottomThruster4" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.29265, -1.33242, 4.47518)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster4/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSBottomThruster5" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.293, -1.332, 4.475)
+thruster_force = 450.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster5/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSLeftThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.781, -0.252564, -6.192)
+thruster_force = 600.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSLeftThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(0.970792, -0.239923, 1.04874e-08, 0, -4.37114e-08, -1, 0.239923, 0.970792, -4.24347e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSLeftThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.49, -0.170812, -0.027)
+thruster_force = 600.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSLeftThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSLeftThruster3" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.809, -0.185651, 4.559)
+thruster_force = 600.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSLeftThruster3/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSRightThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.781, -0.252564, -6.192)
+thruster_force = 600.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSRightThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(0.95475, 0.297408, -1.30001e-08, 0, -4.37114e-08, -1, -0.297408, 0.95475, -4.17335e-08, -0.0116343, -0.0250475, 0)
+amount_ratio = 0.0
+
+[node name="RCSRightThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.49, -0.170812, -0.027)
+thruster_force = 600.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSRightThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(0.989114, 0.147153, -6.43228e-09, 0, -4.37114e-08, -1, -0.147153, 0.989114, -4.32355e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSRightThruster3" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.809, -0.185651, 4.559)
+thruster_force = 600.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSRightThruster3/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(0.995675, 0.0929093, -4.0612e-09, 0, -4.37114e-08, -1, -0.0929093, 0.995675, -4.35223e-08, 0.0119028, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSTopWingThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6.29303, 2.8828, 3.9292)
+thruster_force = 250.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopWingThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(0.927569, -0.373652, -3.55271e-15, -1.63328e-08, -4.05453e-08, -1, 0.373652, 0.927569, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSTopWingThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6.293, 2.883, 3.929)
+thruster_force = 250.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopWingThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(0.89838, 0.439218, 3.55271e-15, 1.91988e-08, -3.92695e-08, -1, -0.439218, 0.89838, -4.37114e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSBottomWingThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6.66258, -3.01632, 3.97729)
+thruster_force = 250.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomWingThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(0.879358, -0.476161, 4.16274e-08, 2.08137e-08, -4.89848e-08, -1, 0.476161, 0.879358, -3.31645e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="RCSBottomWingThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.663, -3.016, 3.977)
+thruster_force = 250.0
+thruster_fuel_consumption = 1.0
+
+[node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomWingThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
+transform = Transform3D(0.901953, 0.431834, -3.77521e-08, -1.88761e-08, -4.79972e-08, -1, -0.431834, 0.901953, -3.51399e-08, 0, 0, 0)
+amount_ratio = 0.0
+
+[node name="Cameras" type="Node3D" parent="ShipBody"]
+script = ExtResource("2_iyjy7")
+third_person_position = Vector3(0, 5.238, 14.946)
+
+[node name="CameraPivots" type="Node3D" parent="ShipBody/Cameras"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44426, 1.7775)
+script = ExtResource("3_wocjs")
+
+[node name="TwistPivot" type="Node3D" parent="ShipBody/Cameras/CameraPivots"]
+
+[node name="PitchPivot" type="Node3D" parent="ShipBody/Cameras/CameraPivots/TwistPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot"]
+current = true
+far = 50000.0
+script = ExtResource("7_1k7xb")
+min_fov_first_person = 60.0
+max_fov_first_person = 90.0
+maximum_movement_first_person = 3.0
+acceleration_movement_factor_first_person = 0.025
+camera_shake_strength_first_person = 15.0
+min_fov_third_person = 80.0
+max_fov_third_person = 110.0
+maximum_movement_third_person = 0.2
+acceleration_movement_factor_third_person = 0.2
+camera_shake_strength_third_person = 100.0
+
+[node name="Crosshair" parent="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot/Camera3D" instance=ExtResource("5_xwav3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.06799)
+visible = false
+
+[node name="CameraViewSwitchAnimator" type="AnimationPlayer" parent="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot/Camera3D"]
+libraries = {
+"": SubResource("AnimationLibrary_5p352")
+}
+
+[node name="PlayerInput" parent="ShipBody" instance=ExtResource("16_dljen")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.596864, 0, -3.12915)
+is_throttle_axis = false
+mouse_sensitivity = 0.1
+mouse_sensitivity_curve = SubResource("Curve_r0men")
+use_mouse_for_movement = true
+required_power = 10.0
+
+[node name="SimpleFlightControlSystem" parent="ShipBody" instance=ExtResource("18_fkptq")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.85616)
+flight_assist = true
+rotational_assist = true
+max_velocity = 450.0
+max_pitch_velocity = 5.0
+max_yaw_velocity = 5.0
+max_roll_velocity = 5.0
+controller_curve = SubResource("Curve_v42ei")
+rotation_control_curve = SubResource("Curve_nhltq")
+required_power = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShipBody"]
+visible = false
+mesh = ExtResource("4_u2t7m")
+
+[node name="WingCollision4" type="CollisionShape3D" parent="ShipBody"]
+shape = SubResource("ConvexPolygonShape3D_rm3t2")
+
+[node name="WingCollision3" type="CollisionShape3D" parent="ShipBody"]
+shape = SubResource("ConvexPolygonShape3D_fu4qp")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="ShipBody"]
+shape = SubResource("ConvexPolygonShape3D_qgljf")
+
+[node name="WingCollision2" type="CollisionShape3D" parent="ShipBody"]
+shape = SubResource("ConvexPolygonShape3D_o4vqt")
+
+[node name="WingCollision" type="CollisionShape3D" parent="ShipBody"]
+shape = SubResource("ConvexPolygonShape3D_jbudj")
+
+[node name="ShipStats" parent="." instance=ExtResource("17_obsua")]
+unique_name_in_owner = true
+test = 10.0
+
+[node name="PowerTickRateRelay" type="Node3D" parent="."]
+script = ExtResource("30_0svyr")
+
+[node name="PowerTickRate" type="Timer" parent="PowerTickRateRelay"]
+autostart = true
+
+[node name="InteriorAnimations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ShipBody/Components/Fuel Tanks")
+libraries = {
+"": SubResource("AnimationLibrary_7f2in")
+}
+
+[node name="InteriorAnimationTree" type="AnimationTree" parent="InteriorAnimations"]
+root_node = NodePath("%Components/Fuel Tanks")
+libraries = {
+"": SubResource("AnimationLibrary_7f2in")
+}
+tree_root = SubResource("AnimationNodeBlendTree_sl66b")
+anim_player = NodePath("..")
+parameters/Blend2/blend_amount = 0.5
+"parameters/Blend2 2/blend_amount" = 0.5
+"parameters/Blend2 3/blend_amount" = 0.5
+parameters/Pitch/add_amount = 0.0
+parameters/Roll/add_amount = 0
+parameters/Throttle/add_amount = 0
+parameters/Yaw/add_amount = 0
+script = ExtResource("34_qmx8t")
+
+[node name="ThrusterAnimations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ShipBody")
+libraries = {
+"": SubResource("AnimationLibrary_rrndt")
+}
+
+[node name="ThrusterAnimationTree" type="AnimationTree" parent="ThrusterAnimations"]
+unique_name_in_owner = true
+root_node = NodePath("%ThrusterAnimationTree/../../ShipBody")
+libraries = {
+"": SubResource("AnimationLibrary_rrndt")
+}
+tree_root = SubResource("AnimationNodeBlendTree_cg3fd")
+anim_player = NodePath("..")
+parameters/Add2/add_amount = 0.5
+"parameters/Add2 2/add_amount" = 0.5
+"parameters/Add2 3/add_amount" = 0.5
+"parameters/Add2 4/add_amount" = 0.5
+"parameters/Add2 5/add_amount" = 0.5
+parameters/Forwards/Blend3/blend_amount = 0
+parameters/Lateral/Blend3/blend_amount = 0
+parameters/Pitch/Blend3/blend_amount = 0.0
+parameters/Roll/Blend3/blend_amount = 0
+parameters/Vertical/Blend3/blend_amount = 0
+parameters/Yaw/Blend3/blend_amount = 0
+
+[connection signal="output_acceleration" from="ShipBody" to="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot/Camera3D" method="_on_fighter_gen_7_output_acceleration"]
+[connection signal="output_acceleration" from="ShipBody" to="ShipBody/SimpleFlightControlSystem" method="_on_fighter_gen_7_output_acceleration"]
+[connection signal="output_local_angular_velocity" from="ShipBody" to="ShipBody/SimpleFlightControlSystem" method="_on_fighter_gen_7_output_local_angular_velocity"]
+[connection signal="output_velocity" from="ShipBody" to="ShipBody/UI/InteriorUI/SpeedUI" method="_on_fighter_gen_7_output_velocity"]
+[connection signal="output_velocity" from="ShipBody" to="ShipBody/UI/ExteriorUI/ExteriorUI" method="_on_fighter_gen_7_output_velocity"]
+[connection signal="output_velocity" from="ShipBody" to="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot/Camera3D" method="_on_fighter_gen_7_output_velocity"]
+[connection signal="output_velocity" from="ShipBody" to="ShipBody/SimpleFlightControlSystem" method="_on_fighter_gen_7_output_velocity"]
+[connection signal="set_fuel_tank" from="ShipBody/Components/Fuel Tanks" to="ShipBody/UI/InteriorUI/FuelBar" method="_on_fuel_tanks_set_fuel_tank"]
+[connection signal="is_first_person_signal" from="ShipBody/Cameras" to="ShipBody/UI/ExteriorUI/ExteriorUI" method="_on_cameras_is_first_person_signal"]
+[connection signal="is_first_person_signal" from="ShipBody/Cameras" to="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot/Camera3D" method="_on_cameras_is_first_person_signal"]
+[connection signal="is_first_person_signal" from="ShipBody/Cameras" to="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot/Camera3D/Crosshair" method="_on_cameras_is_first_person_signal"]
+[connection signal="set_default_position" from="ShipBody/Cameras" to="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot/Camera3D" method="_on_cameras_set_default_position"]
+[connection signal="send_movement_vector" from="ShipBody/PlayerInput" to="ShipBody/UI/InteriorUI/ThrustBar" method="_on_player_input_send_movement_vector"]
+[connection signal="send_movement_vector" from="ShipBody/PlayerInput" to="ShipBody/UI/ExteriorUI/ExteriorUI" method="_on_player_input_send_movement_vector"]
+[connection signal="send_movement_vector" from="ShipBody/PlayerInput" to="ShipBody/SimpleFlightControlSystem" method="_on_player_input_send_movement_vector"]
+[connection signal="send_movement_vector" from="ShipBody/PlayerInput" to="InteriorAnimations/InteriorAnimationTree" method="_on_player_input_send_movement_vector"]
+[connection signal="send_rotation_vector" from="ShipBody/PlayerInput" to="ShipBody/UI/InteriorUI/Crosshair" method="_on_player_input_send_rotation_vector"]
+[connection signal="send_rotation_vector" from="ShipBody/PlayerInput" to="ShipBody/Cameras/CameraPivots/TwistPivot/PitchPivot/Camera3D/Crosshair" method="_on_player_input_send_rotation_vector"]
+[connection signal="send_rotation_vector" from="ShipBody/PlayerInput" to="ShipBody/SimpleFlightControlSystem" method="_on_player_input_send_rotation_vector"]
+[connection signal="send_rotation_vector" from="ShipBody/PlayerInput" to="InteriorAnimations/InteriorAnimationTree" method="_on_player_input_send_rotation_vector"]
+[connection signal="output_thrust_vector" from="ShipBody/SimpleFlightControlSystem" to="ShipBody" method="_on_simple_flight_control_system_output_thrust_vector"]
+[connection signal="output_torque_vector" from="ShipBody/SimpleFlightControlSystem" to="ShipBody" method="_on_simple_flight_control_system_output_torque_vector"]
+[connection signal="output_unit_thrust_vector" from="ShipBody/SimpleFlightControlSystem" to="ShipBody" method="_on_simple_flight_control_system_output_unit_thrust_vector"]
+[connection signal="output_unit_torque_vector" from="ShipBody/SimpleFlightControlSystem" to="ShipBody" method="_on_simple_flight_control_system_output_unit_torque_vector"]
+[connection signal="timeout" from="PowerTickRateRelay/PowerTickRate" to="PowerTickRateRelay" method="_on_power_tick_rate_timeout"]
+
+[editable path="ShipBody/Mesh/fighterGen7"]
+[editable path="ShipBody/Components"]
+[editable path="ShipBody/Thrusters/MainThruster"]
+[editable path="ShipBody/Thrusters/RetroThruster1"]
+[editable path="ShipBody/Thrusters/RetroThruster2"]
+[editable path="ShipBody/Thrusters/RCSTopThruster1"]
+[editable path="ShipBody/Thrusters/RCSTopThruster2"]
+[editable path="ShipBody/Thrusters/RCSTopThruster3"]
+[editable path="ShipBody/Thrusters/RCSTopThruster4"]
+[editable path="ShipBody/Thrusters/RCSTopThruster5"]
+[editable path="ShipBody/Thrusters/RCSBottomThruster1"]
+[editable path="ShipBody/Thrusters/RCSBottomThruster2"]
+[editable path="ShipBody/Thrusters/RCSBottomThruster3"]
+[editable path="ShipBody/Thrusters/RCSBottomThruster4"]
+[editable path="ShipBody/Thrusters/RCSBottomThruster5"]
+[editable path="ShipBody/Thrusters/RCSLeftThruster1"]
+[editable path="ShipBody/Thrusters/RCSLeftThruster2"]
+[editable path="ShipBody/Thrusters/RCSLeftThruster3"]
+[editable path="ShipBody/Thrusters/RCSRightThruster1"]
+[editable path="ShipBody/Thrusters/RCSRightThruster2"]
+[editable path="ShipBody/Thrusters/RCSRightThruster3"]
+[editable path="ShipBody/Thrusters/RCSTopWingThruster1"]
+[editable path="ShipBody/Thrusters/RCSTopWingThruster2"]
+[editable path="ShipBody/Thrusters/RCSBottomWingThruster1"]
+[editable path="ShipBody/Thrusters/RCSBottomWingThruster2"]

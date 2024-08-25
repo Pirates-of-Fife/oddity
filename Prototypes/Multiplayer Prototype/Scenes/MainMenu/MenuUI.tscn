@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfey7r0rojaxn"]
+
+[ext_resource type="Texture2D" uid="uid://cfyq4aowbbrj2" path="res://Assets/Images/OddityLogo-02.png" id="1_553w5"]
+[ext_resource type="Texture2D" uid="uid://cgq0gf7dv4u73" path="res://Assets/Images/OddityLogo-04.png" id="2_ho22x"]
+
+[node name="MenuUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ODDITY" type="Sprite2D" parent="."]
+position = Vector2(364, 110)
+scale = Vector2(0.0488833, 0.0488833)
+texture = ExtResource("2_ho22x")
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(110, 111)
+scale = Vector2(0.0110991, 0.0110991)
+texture = ExtResource("1_553w5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 310.0
+offset_right = 266.065
+offset_bottom = 424.3
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Name"
+max_length = 20
+
+[node name="JoinButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="HostButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 363.0
+offset_right = 500.0
+offset_bottom = 403.0
+
+[node name="IP" type="LineEdit" parent="VBoxContainer2"]
+layout_mode = 2
+placeholder_text = "IP Adress"

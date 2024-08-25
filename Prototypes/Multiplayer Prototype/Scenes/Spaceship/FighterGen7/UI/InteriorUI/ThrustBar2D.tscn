@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcrgqef52ouim"]
+
+[ext_resource type="StyleBox" uid="uid://d1o06fc36eqdq" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/BarBackgroundStyle.tres" id="1_ebw78"]
+[ext_resource type="StyleBox" uid="uid://celx0qg176twn" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/BarFillStyle.tres" id="2_oxfab"]
+
+[node name="ThrustBar2D" type="ProgressBar"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.5
+offset_top = -26.0
+offset_right = 186.5
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = ExtResource("1_ebw78")
+theme_override_styles/fill = ExtResource("2_oxfab")
+show_percentage = false

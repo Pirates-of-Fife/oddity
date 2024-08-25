@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8u1r0q72k8ai"]
+
+[ext_resource type="Script" path="res://Scenes/MainMenu/MainMenu.gd" id="1_i1c54"]
+[ext_resource type="Texture2D" uid="uid://bv2cmqlgs7i4u" path="res://Assets/SkyBox/skyboxv2.png" id="1_m3y0b"]
+[ext_resource type="Script" path="res://Multiplayer/MultiplayerController.gd" id="2_bjqns"]
+[ext_resource type="PackedScene" uid="uid://bqavgaetn2avj" path="res://Scenes/MainMenu/FighterMainMenuExample.tscn" id="2_l805g"]
+[ext_resource type="PackedScene" uid="uid://cfey7r0rojaxn" path="res://Scenes/MainMenu/MenuUI.tscn" id="3_h2rl0"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_csd37"]
+panorama = ExtResource("1_m3y0b")
+filter = false
+
+[sub_resource type="Sky" id="Sky_7ow04"]
+sky_material = SubResource("PanoramaSkyMaterial_csd37")
+radiance_size = 4
+
+[sub_resource type="Environment" id="Environment_4xgq5"]
+background_mode = 2
+sky = SubResource("Sky_7ow04")
+sky_rotation = Vector3(4.71239, 0, 0)
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_i1c54")
+
+[node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("host_button", "join_button", "start_button", "exit_button", "name_control", "ip_address_control", "camera", "ui")]
+script = ExtResource("2_bjqns")
+host_button = NodePath("../SubViewportContainer/MenuUi/VBoxContainer/HostButton")
+join_button = NodePath("../SubViewportContainer/MenuUi/VBoxContainer/JoinButton")
+start_button = NodePath("../SubViewportContainer/MenuUi/VBoxContainer/StartButton")
+exit_button = NodePath("../SubViewportContainer/MenuUi/VBoxContainer/Exit")
+name_control = NodePath("../SubViewportContainer/MenuUi/VBoxContainer/LineEdit")
+ip_address_control = NodePath("../SubViewportContainer/MenuUi/VBoxContainer2/IP")
+camera = NodePath("../SubViewportContainer/SubViewport/Camera3D")
+ui = NodePath("../SubViewportContainer")
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.213703, 0.340815, -0.91552, -0.622456, 0.674789, 0.396495, 0.752914, 0.654603, 0.0679381, -3.44035, 22.1304, -4.91917)
+light_color = Color(1, 1, 0.85098, 1)
+light_energy = 2.098
+light_indirect_energy = 1.627
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.625, 0.345994, -0.69976, -0.433013, 0.899519, 0.0580127, 0.649519, 0.266747, 0.712019, -5.40885, 10.4925, -2.45609)
+light_color = Color(1, 1, 0.85098, 1)
+light_energy = 2.098
+light_indirect_energy = 1.627
+shadow_enabled = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0171515, -0.482602, -0.875672, 0.652812, 0.668769, -0.355787, 0.757326, -0.565547, 0.326519, -13.5073, -11.5643, 860.107)
+light_energy = 1.512
+light_indirect_energy = 0.686
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4xgq5")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="FighterMainMenuExample" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_l805g")]
+transform = Transform3D(0.914749, -0.0896919, 0.393942, 0.0975829, 0.995227, 0, -0.392062, 0.038442, 0.919135, 0.12, -0.055, 10.63)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.2252, 0.276627, -0.934218, 0.0648261, 0.960977, 0.268924, 0.972154, 3.62155e-09, -0.234345, -15.787, 8.38292, 0)
+fov = 60.6
+
+[node name="MenuUi" parent="SubViewportContainer" instance=ExtResource("3_h2rl0")]
+layout_mode = 2
+
+[editable path="SubViewportContainer/MenuUi"]

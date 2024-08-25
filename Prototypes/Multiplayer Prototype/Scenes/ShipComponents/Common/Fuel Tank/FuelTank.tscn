@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://dysjmkyuk6ft6"]
+
+[ext_resource type="Script" path="res://Scenes/ShipComponents/Common/Fuel Tank/FuelTank.gd" id="1_sb26i"]
+[ext_resource type="PackedScene" uid="uid://cmr577y6qv110" path="res://Scenes/ShipComponents/Common/Fuel Tank/Fuel Types/HighEfficiencyFuel.tscn" id="2_ogfkc"]
+[ext_resource type="PackedScene" uid="uid://bvr3lmc7stvpm" path="res://Scenes/ShipComponents/Common/Fuel Tank/Fuel Types/HighPerformanceFuel.tscn" id="3_667gy"]
+[ext_resource type="PackedScene" uid="uid://j2n3sg4hak6u" path="res://Scenes/ShipComponents/Common/Fuel Tank/Fuel Types/Hydrogen.tscn" id="4_nqdvl"]
+[ext_resource type="PackedScene" uid="uid://blcs4xhgwx7bf" path="res://Scenes/ShipComponents/Common/Fuel Tank/Fuel Types/TritiumEnrichedHydrogen.tscn" id="5_0sixt"]
+
+[node name="FuelTank" type="Node3D"]
+script = ExtResource("1_sb26i")
+
+[node name="FuelTypes" type="Node3D" parent="."]
+
+[node name="HighEfficiencyFuel" parent="FuelTypes" instance=ExtResource("2_ogfkc")]
+
+[node name="Hydrogen" parent="FuelTypes" instance=ExtResource("4_nqdvl")]
+
+[node name="TritiumEnrichedHydrogen" parent="FuelTypes" instance=ExtResource("5_0sixt")]
+heat_generation = 0.9
+
+[node name="HighPerformanceFuel" parent="FuelTypes" instance=ExtResource("3_667gy")]

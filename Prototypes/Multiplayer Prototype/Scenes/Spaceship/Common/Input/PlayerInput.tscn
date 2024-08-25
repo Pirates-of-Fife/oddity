@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca8w1ch33w85y"]
+
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Input/PlayerInput.gd" id="1_j28q0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f8c5j"]
+
+[node name="PlayerInput" type="Node3D"]
+script = ExtResource("1_j28q0")
+throttle_sensitivity = 0.8
+throttle_deadzone = 0.15
+is_throttle_axis = true
+mouse_sensitivity = 0.2
+
+[node name="ThrottleDeadzoneTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = SubResource("BoxMesh_f8c5j")
+
+[connection signal="timeout" from="ThrottleDeadzoneTimer" to="." method="_on_throttle_deadzone_timer_timeout"]

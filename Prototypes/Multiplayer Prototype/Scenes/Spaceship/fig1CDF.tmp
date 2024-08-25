@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://cjx6yultmv13k"]
+
+[ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://Assets/Spaceships/FighterGen7/fighter_gen_7_model.tscn" id="1_fr140"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Scripts/FlightControl/SimpleFlightControlSystem.gd" id="1_q1vmv"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Scripts/CameraScripts/CameraSwitchingController.gd" id="2_iyjy7"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Scripts/FlightControl/UserControl.gd" id="2_y8fcc"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Scripts/CameraScripts/CameraController.gd" id="3_wocjs"]
+[ext_resource type="ArrayMesh" uid="uid://dh5qg0701ykbr" path="res://Assets/Spaceships/FighterGen7/fighterGen7-CollisionMesh.obj" id="4_u2t7m"]
+[ext_resource type="PackedScene" uid="uid://d0j0koj552phk" path="res://Scenes/Spaceship/VelocityArrow/Velocity_Arrows.tscn" id="7_8us3n"]
+[ext_resource type="PackedScene" uid="uid://bfe8v0o7ohgvi" path="res://Scenes/Spaceship/UI/UI.tscn" id="8_nilws"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rm3t2"]
+points = PackedVector3Array(9.16666, 4.58589, 5.79973, 2.39356, 0.462733, 0.793534, 2.39356, 1.34661, 0.793534, 2.39356, 0.462733, 4.32669, 9.16666, 3.40738, 4.03218, 2.68859, 1.64124, 4.32669, 8.5766, 4.58589, 4.03218, 8.5766, 3.11316, 5.79973, 5.04419, 1.34661, 1.97158, 7.98786, 4.29126, 5.79973, 2.98296, 0.462733, 4.32669, 8.87096, 4.29126, 3.73766, 2.68859, 1.64124, 1.08805, 2.68859, 0.462733, 0.793534, 5.04419, 1.34661, 4.6212, 2.39356, 1.34661, 4.32669, 9.16666, 3.40738, 5.79973, 7.98786, 3.11316, 5.79973, 9.16666, 4.58589, 4.03218, 7.69349, 2.81853, 3.14962, 2.68859, 1.34661, 0.793534, 2.98296, 0.462733, 1.08805, 8.5766, 4.58589, 5.79973, 6.221, 1.93546, 5.21022, 8.87096, 3.40738, 3.73766, 7.69349, 3.70201, 3.14962)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fu4qp"]
+points = PackedVector3Array(3.86606, -2.18853, 1.67692, 2.68859, -0.126289, 4.03235, 3.27733, -0.421204, 4.32683, 9.16666, -3.36559, 4.03235, 8.5766, -4.54396, 5.21071, 2.68859, -0.126289, 0.793044, 2.68859, -1.59913, 4.32683, 9.16666, -4.54396, 4.03235, 9.16666, -3.36559, 5.21071, 2.39356, -1.30465, 0.793044, 7.98786, -3.07111, 5.21071, 2.39356, -0.126289, 4.03235, 8.5766, -4.54396, 4.03235, 2.68859, -1.30465, 0.793044, 2.39356, -0.126289, 0.793044, 2.39356, -1.30465, 4.03235, 9.16666, -4.54396, 5.21071, 2.68859, -0.421204, 4.32683, 7.98786, -4.24904, 5.21071, 2.68859, -1.59913, 1.08796, 8.5766, -3.07111, 5.21071)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qgljf"]
+points = PackedVector3Array(2.3929, 1.34609, 4.0318, 2.3929, -1.30428, 4.0318, 0.920114, 0.168943, -7.15876, -2.02454, 1.64066, 6.97706, -2.02454, -1.59884, 6.38801, -0.846492, -1.00933, -7.15876, 2.09816, 0.462387, 7.27229, -0.9284, 1.88456, 1.38365, 1.21486, -1.30428, -5.3916, 1.21486, 2.2298, 3.44275, -1.43551, 0.756956, -4.2135, 2.09816, -1.59884, 6.38801, 2.3929, 1.34609, 0.792727, -2.31928, -1.30428, 4.32703, 2.09816, 1.34609, 7.27229, -2.31928, 1.34609, 4.32703, 2.3929, -1.30428, 0.792727, -1.14077, -1.30428, -5.3916, -0.846492, 0.462387, -6.27447, 0.920114, 0.462387, -6.27447, -1.73026, 1.05152, -2.15112, 0.920114, -1.00933, -7.15876, 1.21486, 1.64066, 6.97706, -0.846492, 0.168943, -7.15876, -1.14077, -1.00933, -5.98065, 2.09816, -1.59884, 5.79895, -2.02454, -1.59884, 6.09419, -1.14077, 0.462387, -5.98065, -2.02454, 1.64066, 6.09419, -0.9284, 1.88456, 2.8321)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o4vqt"]
+points = PackedVector3Array(-6.14677, 1.93546, 2.56028, -8.79806, 4.58589, 5.21071, -7.91453, 4.29126, 5.21071, -2.31928, 1.64124, 1.08756, -2.61402, 0.462733, 4.62146, -2.31928, 1.64124, 4.32683, -9.0928, 3.40738, 5.21071, -9.38754, 4.58589, 3.73798, -2.90876, 0.462733, 1.08756, -9.38754, 3.70201, 3.73798, -7.91453, 4.29126, 3.44336, -2.31928, 0.462733, 1.08756, -2.90876, 0.462733, 4.62146, -2.90876, 1.64124, 1.08756, -7.03099, 3.70201, 5.21071, -7.91453, 2.81853, 5.21071, -2.61402, 1.64124, 4.62146, -2.31928, 0.462733, 4.32683, -7.32574, 2.52431, 2.85491, -9.38754, 3.70201, 5.21071, -7.32574, 3.70201, 2.85491, -6.14677, 1.93546, 4.91608, -9.0928, 3.40738, 3.73798, -8.79806, 4.58589, 3.73798, -6.14677, 3.40738, 2.56028, -8.79806, 4.29126, 3.44336, -9.10214, 4.4194, 5.04422)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jbudj"]
+points = PackedVector3Array(-5.85364, -1.89361, 5.21022, -2.61405, -1.30465, 0.793534, -5.26482, -2.48171, 1.97158, -3.20287, -1.89361, 4.6212, -9.09179, -4.54396, 5.79973, -9.68206, -3.36559, 4.03218, -2.61405, -0.126289, 0.793534, -2.61405, -0.126289, 4.32669, -9.09179, -4.54396, 4.03218, -9.68206, -3.36559, 5.79973, -2.61405, -1.59913, 1.08805, -2.31928, -1.30465, 4.32669, -9.68206, -4.54396, 4.03218, -2.31928, -0.126289, 0.793534, -2.31928, -0.126289, 4.32669, -7.03056, -3.66008, 3.14962, -8.50369, -3.36559, 5.79973, -2.31928, -1.30465, 0.793534, -9.68206, -4.54396, 5.79973, -3.79313, -2.18853, 4.6212, -8.50369, -4.24904, 5.79973, -8.50369, -3.07111, 3.44315, -3.79313, -2.18853, 1.67707, -7.03056, -3.66008, 5.21022, -3.20287, -0.715686, 4.6212, -7.61938, -2.48171, 5.50473, -2.61405, -1.59913, 4.32669, -8.50369, -3.95456, 3.44315)
+
+[node name="FighterGen7" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_q1vmv")
+max_thrust_main = 8000.0
+max_thrust_retro = 5000.0
+max_thrust_up = 2000.0
+max_thrust_down = 2000.0
+max_thrust_left = 2000.0
+max_thrust_right = 2000.0
+
+[node name="Thrusters" type="Node3D" parent="."]
+
+[node name="UserControl" type="Node3D" parent="."]
+script = ExtResource("2_y8fcc")
+throttle_deadzone = 7.0
+throttle_sensivity = 80.0
+
+[node name="Timer" type="Timer" parent="UserControl"]
+process_callback = 0
+wait_time = 0.578
+one_shot = true
+
+[node name="Ship" type="Node3D" parent="."]
+
+[node name="fighterGen7" parent="Ship" instance=ExtResource("1_fr140")]
+
+[node name="Cameras" type="Node3D" parent="Ship" node_paths=PackedStringArray("first_person_camera", "third_person_camera")]
+script = ExtResource("2_iyjy7")
+first_person_camera = NodePath("FirstPersonCamera/TwistPivot/PitchPivot/Camera3D")
+third_person_camera = NodePath("ThirdPersonCamera/TwistPivot/PitchPivot/Camera3D")
+
+[node name="ThirdPersonCamera" type="Node3D" parent="Ship/Cameras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.94318)
+script = ExtResource("3_wocjs")
+
+[node name="TwistPivot" type="Node3D" parent="Ship/Cameras/ThirdPersonCamera"]
+
+[node name="PitchPivot" type="Node3D" parent="Ship/Cameras/ThirdPersonCamera/TwistPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="Ship/Cameras/ThirdPersonCamera/TwistPivot/PitchPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.994703, 0.102793, 0, -0.102793, 0.994703, 0, 5.238, 14.946)
+current = true
+
+[node name="FirstPersonCamera" type="Node3D" parent="Ship/Cameras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44426, 1.7775)
+script = ExtResource("3_wocjs")
+
+[node name="TwistPivot" type="Node3D" parent="Ship/Cameras/FirstPersonCamera"]
+
+[node name="PitchPivot" type="Node3D" parent="Ship/Cameras/FirstPersonCamera/TwistPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="Ship/Cameras/FirstPersonCamera/TwistPivot/PitchPivot"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("4_u2t7m")
+
+[node name="WingCollision4" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_rm3t2")
+
+[node name="WingCollision3" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_fu4qp")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_qgljf")
+
+[node name="WingCollision2" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_o4vqt")
+
+[node name="WingCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_jbudj")
+
+[node name="Velocity_Arrows" parent="." node_paths=PackedStringArray("rigid_body") instance=ExtResource("7_8us3n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45328, 4.95195, 0)
+rigid_body = NodePath("..")
+
+[node name="Velocity_Arrows2" parent="." node_paths=PackedStringArray("rigid_body") instance=ExtResource("7_8us3n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.63001, 6.08609, -0.679127)
+visible = false
+rigid_body = NodePath("..")
+global = true
+
+[node name="UI" parent="." instance=ExtResource("8_nilws")]
+
+[connection signal="speed_signal" from="." to="UI" method="_on_fighter_gen_7_speed_signal"]
+[connection signal="no_roll_left" from="UserControl" to="." method="_on_user_control_no_roll_left"]
+[connection signal="no_roll_right" from="UserControl" to="." method="_on_user_control_no_roll_right"]
+[connection signal="no_thrust_down" from="UserControl" to="." method="_on_user_control_no_thrust_down"]
+[connection signal="no_thrust_left" from="UserControl" to="." method="_on_user_control_no_thrust_left"]
+[connection signal="no_thrust_right" from="UserControl" to="." method="_on_user_control_no_thrust_right"]
+[connection signal="no_thrust_up" from="UserControl" to="." method="_on_user_control_no_thrust_up"]
+[connection signal="pitch" from="UserControl" to="." method="_on_user_control_pitch"]
+[connection signal="roll_left" from="UserControl" to="." method="_on_user_control_roll_left"]
+[connection signal="roll_right" from="UserControl" to="." method="_on_user_control_roll_right"]
+[connection signal="throttle_signal" from="UserControl" to="." method="_on_user_control_throttle_signal"]
+[connection signal="throttle_signal" from="UserControl" to="UI" method="_on_user_control_throttle_signal"]
+[connection signal="thrust_backwards" from="UserControl" to="." method="_on_user_control_thrust_backwards"]
+[connection signal="thrust_down" from="UserControl" to="." method="_on_user_control_thrust_down"]
+[connection signal="thrust_forwards" from="UserControl" to="." method="_on_user_control_thrust_forwards"]
+[connection signal="thrust_left" from="UserControl" to="." method="_on_user_control_thrust_left"]
+[connection signal="thrust_right" from="UserControl" to="." method="_on_user_control_thrust_right"]
+[connection signal="thrust_up" from="UserControl" to="." method="_on_user_control_thrust_up"]
+[connection signal="yaw" from="UserControl" to="." method="_on_user_control_yaw"]
+[connection signal="timeout" from="UserControl/Timer" to="UserControl" method="_on_timer_timeout"]

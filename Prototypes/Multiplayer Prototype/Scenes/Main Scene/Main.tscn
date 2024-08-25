@@ -1,0 +1,123 @@
+[gd_scene load_steps=13 format=3 uid="uid://brkmh327ycklk"]
+
+[ext_resource type="PackedScene" uid="uid://cpb2nlkghtm13" path="res://Scenes/Spaceship/FighterGen7/fighter_gen_7.tscn" id="1_2ddtf"]
+[ext_resource type="Script" path="res://Scenes/Main Scene/Multiplayer.gd" id="1_lw3xx"]
+[ext_resource type="Texture2D" uid="uid://bv2cmqlgs7i4u" path="res://Assets/SkyBox/skyboxv2.png" id="1_qpgfj"]
+[ext_resource type="PackedScene" uid="uid://b62vde3oekq23" path="res://Scenes/Rings/Courses/course.tscn" id="2_xe5xt"]
+[ext_resource type="Script" path="res://Scenes/Main Scene/OriginShift.gd" id="3_ofit1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_46trt"]
+panorama = ExtResource("1_qpgfj")
+filter = false
+
+[sub_resource type="Sky" id="Sky_kriuc"]
+sky_material = SubResource("PanoramaSkyMaterial_46trt")
+radiance_size = 4
+
+[sub_resource type="Environment" id="Environment_af0w1"]
+background_mode = 2
+sky = SubResource("Sky_kriuc")
+sky_rotation = Vector3(4.71239, 0, 0)
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fmfcv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvofr"]
+albedo_color = Color(1, 1, 0.862745, 1)
+emission_enabled = true
+emission = Color(1, 1, 0.662745, 1)
+emission_energy_multiplier = 30.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0fs2i"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_g62ti"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_lw3xx")
+player_scene = ExtResource("1_2ddtf")
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.213703, 0.340815, -0.91552, -0.622456, 0.674789, 0.396495, 0.752914, 0.654603, 0.0679381, -3.44035, 22.1304, -4.91917)
+light_color = Color(1, 1, 0.85098, 1)
+light_energy = 2.098
+light_indirect_energy = 1.627
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.625, 0.345994, -0.69976, -0.433013, 0.899519, 0.0580127, 0.649519, 0.266747, 0.712019, -5.40885, 10.4925, -2.45609)
+light_color = Color(1, 1, 0.85098, 1)
+light_energy = 2.098
+light_indirect_energy = 1.627
+shadow_enabled = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0171515, -0.482602, -0.875672, 0.652812, 0.668769, -0.355787, 0.757326, -0.565547, 0.326519, -13.5073, -11.5643, 860.107)
+light_energy = 1.512
+light_indirect_energy = 0.686
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_af0w1")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport"]
+script = ExtResource("3_ofit1")
+
+[node name="course" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_xe5xt")]
+transform = Transform3D(-0.0975829, 0, -0.995227, 0, 1, 0, 0.995227, 0, -0.0975829, -0.477354, 30.8539, -798.968)
+
+[node name="Star" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(-0.000120288, -0.183458, 3560.51, 4500, -1.31134e-08, -3.05619e-12, 0.000155635, 0.237367, 2751.87, -21827.1, 2549.69, 21773.1)
+mesh = SubResource("CylinderMesh_fmfcv")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_lvofr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(315.87, 0, 0, 0, 315.87, 0, 0, 0, 315.87, 9.645, -362.114, -32.5673)
+mesh = SubResource("PlaneMesh_0fs2i")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_g62ti")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(21.465, 0, 0, 0, 21.465, 0, 0, 0, 21.465, -43.355, 27, 9.7138)
+mesh = SubResource("PlaneMesh_0fs2i")
+skeleton = NodePath("../../../..")
+
+[node name="Spawn Locations" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
+
+[node name="0" type="Marker3D" parent="SubViewportContainer/SubViewport/World/Spawn Locations" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.3997, -44.7973, 0)
+gizmo_extents = 6.84
+
+[node name="1" type="Marker3D" parent="SubViewportContainer/SubViewport/World/Spawn Locations" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.0407, -44.7973, 0)
+gizmo_extents = 6.84
+
+[node name="2" type="Marker3D" parent="SubViewportContainer/SubViewport/World/Spawn Locations" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.32383, -44.7973, -80.651)
+gizmo_extents = 6.84
+
+[node name="3" type="Marker3D" parent="SubViewportContainer/SubViewport/World/Spawn Locations" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.1347, -44.7973, -65.8724)
+gizmo_extents = 6.84

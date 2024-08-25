@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq8467stblljy"]
+
+[ext_resource type="PackedScene" uid="uid://c2sdlpnw1eqs4" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/Fuel/FuelBar2D.tscn" id="1_io8bj"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/Fuel/FuelBar.gd" id="1_rpdw6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qe7fg"]
+viewport_path = NodePath("SubViewport")
+
+[node name="FuelBar" type="Node3D"]
+script = ExtResource("1_rpdw6")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="FuelBar2d" parent="SubViewport" instance=ExtResource("1_io8bj")]
+
+[node name="FuelUsage" parent="SubViewport/FuelBar2d" index="1"]
+max_value = 25.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_qe7fg")
+
+[node name="Current Fuel" type="Label3D" parent="."]
+transform = Transform3D(1.53, 0, 0, 0, 1.53, 0, 0, 0, 1.53, -1.56885, -0.434537, 0)
+pixel_size = 0.002
+modulate = Color(0.772549, 0.47451, 0.145098, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Test"
+font_size = 74
+
+[node name="Range Estimate" type="Label3D" parent="."]
+transform = Transform3D(1.68, 0, 0, 0, 1.68, 0, 0, 0, 1.68, -1.27571, 0.652015, 0)
+pixel_size = 0.002
+modulate = Color(0.772549, 0.47451, 0.145098, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Test"
+font_size = 74
+
+[node name="Current Fuel Tank" type="Label3D" parent="."]
+transform = Transform3D(1.722, 0, 0, 0, 1.722, 0, 0, 0, 1.722, 1.5712, -0.414216, 0)
+pixel_size = 0.002
+modulate = Color(0.772549, 0.47451, 0.145098, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Test"
+font_size = 74
+
+[node name="Fuel Usage" type="Label3D" parent="."]
+transform = Transform3D(1.68, 0, 0, 0, 1.68, 0, 0, 0, 1.68, 1.51075, 0.68057, 0)
+pixel_size = 0.002
+modulate = Color(0.772549, 0.47451, 0.145098, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Test"
+font_size = 74
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="SubViewport/FuelBar2d"]

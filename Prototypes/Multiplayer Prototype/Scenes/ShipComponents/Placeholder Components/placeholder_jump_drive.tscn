@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuylgiivyvpks"]
+
+[ext_resource type="PackedScene" uid="uid://bxlxeafbfxv4n" path="res://Scenes/ShipComponents/Common/Jump Drive/JumpDrive.tscn" id="1_77g1p"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_afgdb"]
+
+[node name="PlaceholderJumpDrive" instance=ExtResource("1_77g1p")]
+manufacturer = "Placeholder"
+model = "Jump Drive"
+size_class = 1
+health_points = 50.0
+integrity = 1.0
+
+[node name="Mesh" type="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_afgdb")
