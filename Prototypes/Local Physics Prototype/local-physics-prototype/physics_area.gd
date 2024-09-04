@@ -26,10 +26,6 @@ func _physics_process(delta: float) -> void:
 
 	for b : RigidBody3D in bodies:
 		b.global_position += movement_delta
-		
-		var force = velocity_delta * b.mass
-		
-		PhysicsServer3D.body_apply_central_force(b.get_rid(), force)
 	
 
 func _on_body_entered(body: Node3D) -> void:
