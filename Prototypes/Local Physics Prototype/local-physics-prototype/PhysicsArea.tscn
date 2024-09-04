@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://berv1xw4dr10"]
+[gd_scene load_steps=6 format=3 uid="uid://berv1xw4dr10"]
 
 [ext_resource type="Script" path="res://physics_area.gd" id="1_uka3f"]
 
@@ -11,6 +11,9 @@ size = Vector3(9.63, 0.145, 5.675)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjapr"]
 albedo_color = Color(0.592157, 0.705882, 0.372549, 1)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1rii8"]
+points = PackedVector3Array(-4.815, -0.0725, -2.8375, -4.815, 0.0725, -2.8375, 4.81406, -0.0725, -2.8375, -4.815, -0.0725, 2.8375, -4.815, 0.0725, 2.8375, 4.81406, 0.0725, -2.8375, 4.81406, -0.0725, 2.8375, 4.81406, 0.0725, 2.8375)
+
 [node name="PhysicsArea" type="Area3D"]
 script = ExtResource("1_uka3f")
 
@@ -22,6 +25,11 @@ shape = SubResource("BoxShape3D_3540w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.592483, -0.748966, -0.316544)
 mesh = SubResource("BoxMesh_csdwc")
 surface_material_override/0 = SubResource("StandardMaterial3D_wjapr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_1rii8")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
