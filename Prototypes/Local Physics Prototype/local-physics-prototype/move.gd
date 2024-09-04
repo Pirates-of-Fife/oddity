@@ -5,6 +5,21 @@ extends RigidBody3D
 var move_speed: float = 10.0
 var rotation_speed: float = 0.05
 
+var last_pos = Vector3.ZERO
+var movement_delta = Vector3.ZERO
+
+var last_vel = Vector3.ZERO
+var velocity_delta = Vector3.ZERO
+
+var probe : Marker3D
+
+func _ready() -> void:
+	last_pos = global_position
+	last_vel = linear_velocity
+
+func _physics_process(delta: float) -> void:
+	pass
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Resetting forces for this frame

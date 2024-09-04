@@ -35,11 +35,12 @@ func _physics_process(delta: float) -> void:
 	for b : RigidBody3D in bodies:
 		b.global_position += movement_delta
 		
-		#var additional_velocity = velocity_delta
-		#var force = additional_velocity * b.mass
-		#PhysicsServer3D.body_apply_central_force(b.get_rid(), force)
+		b.probe.global_position = b.global_position
+		
+		print(b.probe.global_position - parent.global_position)
 		
 		var force = velocity_delta * b.mass
+		
 		PhysicsServer3D.body_apply_central_force(b.get_rid(), force)
 	
 	#print(global_position)
@@ -47,8 +48,16 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	#print(body)
 	bodies.append(body)
+	
+	var probe = preload("res://PhysicsBodyProbe.tscn").instantiate()
+	
+	add_child(probe)
+	
+	body.probe = probe
 
 
 func _on_body_exited(body: Node3D) -> void:
 	#print(body)
 	bodies.remove_at(bodies.find(body))
+	
+	remove_child(body.probe)

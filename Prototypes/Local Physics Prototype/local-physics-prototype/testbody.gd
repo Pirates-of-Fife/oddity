@@ -15,6 +15,12 @@ func _physics_process(delta: float) -> void:
 		input_vector.x -= 1
 	if Input.is_action_pressed("ui_right"):
 		input_vector.x += 1
+	
+	if Input.is_key_pressed(KEY_Y):
+		input_vector.y += 1
+	if Input.is_key_pressed(KEY_C):
+		input_vector.y -= 1
+
 
 	# Normalize the vector to ensure consistent force application
 	input_vector = input_vector.normalized()
@@ -22,3 +28,4 @@ func _physics_process(delta: float) -> void:
 	# Apply the force based on the input vector
 	if input_vector != Vector3.ZERO:
 		apply_central_force(input_vector * move_force)
+		apply_torque(Vector3(0, 0, input_vector.y))
