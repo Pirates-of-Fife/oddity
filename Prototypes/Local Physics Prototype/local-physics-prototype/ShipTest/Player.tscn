@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci6mxxt8onp2a"]
+
+[ext_resource type="Script" path="res://ShipTest/player.gd" id="1_1yhrh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qfd78"]
+friction = 0.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vg54f"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dk76p"]
+size = Vector3(1, 2.115, 1)
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("twist_pivot", "pitch_pivot")]
+physics_material_override = SubResource("PhysicsMaterial_qfd78")
+script = ExtResource("1_1yhrh")
+twist_pivot = NodePath("Head/Twist")
+pitch_pivot = NodePath("Head/Twist/Pitch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972078, 0)
+shape = SubResource("BoxShape3D_vg54f")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.612, 0)
+
+[node name="Twist" type="Node3D" parent="Head"]
+
+[node name="Pitch" type="Node3D" parent="Head/Twist"]
+
+[node name="Camera3D" type="Camera3D" parent="Head/Twist/Pitch"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0351, 0)
+mesh = SubResource("BoxMesh_dk76p")

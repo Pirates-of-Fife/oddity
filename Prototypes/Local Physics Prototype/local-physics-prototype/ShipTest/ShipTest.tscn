@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://2inpg3mqikmw"]
+
+[ext_resource type="PackedScene" uid="uid://ci6mxxt8onp2a" path="res://ShipTest/Player.tscn" id="1_tqr4r"]
+[ext_resource type="Shader" path="res://Shaders/star sky.gdshader" id="2_84noj"]
+[ext_resource type="PackedScene" uid="uid://beoxsu08qsywd" path="res://ShipTest/PhysicsGrid.tscn" id="3_jnpor"]
+[ext_resource type="PackedScene" uid="uid://hs2gwy3h2ttn" path="res://ShipTest/Starship.tscn" id="4_ufl30"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_emk11"]
+shader = ExtResource("2_84noj")
+shader_parameter/sky_color = Color(1.33488e-08, 0.00691674, 0.0126235, 1)
+shader_parameter/star_base_color = Color(1, 1, 1, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.043
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.151
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_v3ktg"]
+sky_material = SubResource("ShaderMaterial_emk11")
+
+[sub_resource type="Environment" id="Environment_v1es3"]
+background_mode = 2
+sky = SubResource("Sky_v3ktg")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_73y2m"]
+size = Vector3(10.6343, 13.1793, 5.75021)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x3tig"]
+size = Vector3(9.63, 0.145, 5.675)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipt7k"]
+albedo_color = Color(0.592157, 0.705882, 0.372549, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vwkp5"]
+points = PackedVector3Array(-4.815, -0.0725, -2.8375, -4.815, 0.0725, -2.8375, 4.81406, -0.0725, -2.8375, -4.815, -0.0725, 2.8375, -4.815, 0.0725, 2.8375, 4.81406, 0.0725, -2.8375, 4.81406, -0.0725, 2.8375, 4.81406, 0.0725, 2.8375)
+
+[node name="ShipTest" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_tqr4r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.363, 0.97549, -10.6422)
+axis_lock_angular_y = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v1es3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0724401, -0.717117, 0.693178, -0.074536, 0.696952, 0.713233, -0.994584, 0, -0.103938, 7.60211, 1.84372, 0)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="PhysicsGrid" parent="Node3D" instance=ExtResource("3_jnpor")]
+gravity_space_override = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/PhysicsGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.302002, 4.82795, -0.319431)
+shape = SubResource("BoxShape3D_73y2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/PhysicsGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.592483, -1.68202, -0.316544)
+mesh = SubResource("BoxMesh_x3tig")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ipt7k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D/PhysicsGrid/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/PhysicsGrid/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_vwkp5")
+
+[node name="Starship" parent="." instance=ExtResource("4_ufl30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4854, 0, -3.20981)
