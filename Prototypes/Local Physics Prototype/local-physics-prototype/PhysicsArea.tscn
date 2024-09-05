@@ -23,7 +23,8 @@ albedo_color = Color(0.98261, 0, 0.385455, 1)
 albedo_color = Color(1.73271e-06, 0.737281, 0.747229, 1)
 
 [node name="PhysicsArea" type="Area3D"]
-gravity = 3.0
+gravity_space_override = 3
+gravity = 5.0
 script = ExtResource("1_uka3f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

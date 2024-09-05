@@ -24,7 +24,8 @@ func _physics_process(delta: float) -> void:
 	process_movement_delta()
 	process_rotation_delta()
 	process_velocity_delta()
-
+	
+	gravity_direction = -global_transform.basis.y
 
 	for b : RigidBody3D in bodies:	
 		move_rigidbody(b)
@@ -58,9 +59,15 @@ func move_rigidbody(body : RigidBody3D):
 	
 	var delta_euler = rotation_delta.get_euler()
 
+	var new_transform = body.global_transform
+	new_transform.basis = Basis(rotation_delta) * new_transform.basis
+	body.global_transform = new_transform
 	#print(global_position - body.global_position)
 	
-	print(body.quaternion)
+	#var basis_from_quaternion = Basis(rotation_delta)
+	
+	#print(basis_from_quaternion)
+
 
 	#body.global_rotation += delta_euler
 
