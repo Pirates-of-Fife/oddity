@@ -43,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7151, 0, -1.68108)
 gravity_scale = 0.0
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.32357, 2.44892, -0.806734)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.32357, 2.22627, -0.806734)
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
@@ -53,6 +53,7 @@ script = ExtResource("2_kbvl2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 transform = Transform3D(0.338616, 0, 0, 0, 1, 0, 0, 0, 0.32806, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_vk7ao")
 skeleton = NodePath("../..")
 
@@ -60,6 +61,7 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_bbtvs")
 
 [node name="PhysicsArea" parent="RigidBody3D" instance=ExtResource("2_tokd0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0412869, 0.685017, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.236017, 11.7571, 0, -2.16658, 1.28076, 0, 0, 0, 1, 0.202608, 0, -12.5392)

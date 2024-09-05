@@ -28,4 +28,4 @@ func _physics_process(delta: float) -> void:
 	# Apply the force based on the input vector
 	if input_vector != Vector3.ZERO:
 		apply_central_force(input_vector * move_force)
-		apply_torque(Vector3(0, 0, input_vector.y))
+		apply_torque(Vector3(0, 0, input_vector.y / 2))

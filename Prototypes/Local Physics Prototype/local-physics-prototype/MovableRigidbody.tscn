@@ -7,7 +7,8 @@
 [sub_resource type="BoxMesh" id="BoxMesh_sxn51"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1r2al"]
-albedo_color = Color(1, 0, 1, 1)
+transparency = 1
+albedo_color = Color(1, 0, 1, 0.101961)
 
 [node name="MovableRigidbody" type="RigidBody3D"]
 linear_damp = 1.0
