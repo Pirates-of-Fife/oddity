@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://ShipTest/player.gd" id="1_1yhrh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qfd78"]
-friction = 0.05
+friction = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vg54f"]
 size = Vector3(1, 2, 1)
@@ -12,6 +12,10 @@ size = Vector3(1, 2, 1)
 size = Vector3(1, 2.115, 1)
 
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("twist_pivot", "pitch_pivot")]
+collision_layer = 3
+collision_mask = 3
+axis_lock_angular_x = true
+axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_qfd78")
 script = ExtResource("1_1yhrh")
 twist_pivot = NodePath("Head/Twist")

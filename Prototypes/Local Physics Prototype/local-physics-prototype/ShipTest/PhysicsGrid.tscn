@@ -4,3 +4,6 @@
 
 [node name="PhysicsGrid" type="Area3D"]
 script = ExtResource("1_ujcto")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

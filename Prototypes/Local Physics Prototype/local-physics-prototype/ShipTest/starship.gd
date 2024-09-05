@@ -1,8 +1,8 @@
 extends RigidBody3D
 
 # Variables for thrust and rotation speed
-var thrust_force: float = 100000000.0
-var torque_force: float = 100000.0
+var thrust_force: float = 9000000.0
+var torque_force: float = 50000.0
 var max_speed: float = 50.0
 
 var in_control : bool = false
@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	if (Input.is_action_just_released("switch")):
 		if (in_control == false):
 			in_control = true
-			print("shuo" + str(in_control))
+			#print("shuo" + str(in_control))
 		else:
 			in_control = false
 			
@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 
 # Handles input and applies force and torque to the ship.
 func _handle_input(delta: float) -> void:
-	print("sip input")
+	#print("sip input")
 	# Initialize force and torque vectors
 	var thrust = Vector3.ZERO
 	var torque = Vector3.ZERO

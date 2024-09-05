@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://2inpg3mqikmw"]
+[gd_scene load_steps=13 format=3 uid="uid://2inpg3mqikmw"]
 
 [ext_resource type="PackedScene" uid="uid://ci6mxxt8onp2a" path="res://ShipTest/Player.tscn" id="1_tqr4r"]
 [ext_resource type="Shader" path="res://Shaders/star sky.gdshader" id="2_84noj"]
 [ext_resource type="PackedScene" uid="uid://beoxsu08qsywd" path="res://ShipTest/PhysicsGrid.tscn" id="3_jnpor"]
 [ext_resource type="PackedScene" uid="uid://hs2gwy3h2ttn" path="res://ShipTest/Starship.tscn" id="4_ufl30"]
+[ext_resource type="PackedScene" uid="uid://pvv3e3hi82ip" path="res://ShipTest/Planet.tscn" id="5_a82p4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_emk11"]
 shader = ExtResource("2_84noj")
@@ -70,3 +71,6 @@ shape = SubResource("ConvexPolygonShape3D_vwkp5")
 
 [node name="Starship" parent="." instance=ExtResource("4_ufl30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4854, 0, -3.20981)
+
+[node name="Planet" parent="." instance=ExtResource("5_a82p4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 273.9)

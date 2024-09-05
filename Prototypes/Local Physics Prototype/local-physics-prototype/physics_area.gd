@@ -25,9 +25,11 @@ func _physics_process(delta: float) -> void:
 	process_rotation_delta()
 	process_velocity_delta()
 	
+	print(bodies)
+		
 	gravity_direction = -global_transform.basis.y
 
-	for b : RigidBody3D in bodies:	
+	for b : RigidBody3D in bodies:
 		move_rigidbody(b)
 
 
@@ -47,7 +49,7 @@ func move_rigidbody(body : RigidBody3D):
 	
 	
 	
-	$Rotation.global_position = newPos
+	#$Rotation.global_position = newPos
 	
 	#print(newPos)
 	
@@ -103,3 +105,11 @@ func _on_body_entered(body: Node3D) -> void:
 
 func _on_body_exited(body: Node3D) -> void:
 	bodies.remove_at(bodies.find(body))
+
+
+func _on_area_entered(area: Area3D) -> void:
+	pass # Replace with function body.
+
+
+func _on_area_exited(area: Area3D) -> void:
+	pass # Replace with function body.

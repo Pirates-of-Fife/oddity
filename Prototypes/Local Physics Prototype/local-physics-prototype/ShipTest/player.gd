@@ -57,10 +57,15 @@ func _physics_process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (!in_control):
-		pass
+		return
 	
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	
+	#apply_torque(Vector3(0, twist_input * 100, 0))
+	
+	#rotate_y(twist_input)
 	
 	twist_pivot.rotate_y(twist_input)
 	pitch_pivot.rotate_x(pitch_input)
