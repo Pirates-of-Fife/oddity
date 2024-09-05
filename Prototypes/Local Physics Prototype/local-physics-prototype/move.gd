@@ -46,6 +46,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("rotate_right"):
 		torque -= Vector3.UP * rotation_speed
 
+	if Input.is_key_pressed(KEY_ALT):
+		force += transform.basis.y * 5
+	
 	# Apply forces and torques to the rigid body
 	apply_central_force(force)
 	apply_torque_impulse(torque)
