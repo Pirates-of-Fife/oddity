@@ -1,9 +1,9 @@
 extends RigidBody3D
 
 # Variables for thrust and rotation speed
-var thrust_force: float = 9000000.0
-var torque_force: float = 50000.0
-var max_speed: float = 50.0
+var thrust_force: float = 50000000.0
+var torque_force: float = 60000.0
+var max_speed: float = 500.0
 
 var in_control : bool = false
 

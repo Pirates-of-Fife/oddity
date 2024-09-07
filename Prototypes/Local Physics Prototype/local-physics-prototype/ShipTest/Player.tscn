@@ -4,6 +4,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qfd78"]
 friction = 0.2
+rough = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vg54f"]
 size = Vector3(1, 2, 1)
@@ -14,10 +15,13 @@ size = Vector3(1, 2.115, 1)
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("twist_pivot", "pitch_pivot")]
 collision_layer = 3
 collision_mask = 3
-axis_lock_angular_x = true
-axis_lock_angular_z = true
+mass = 60.0
 physics_material_override = SubResource("PhysicsMaterial_qfd78")
+continuous_cd = true
+linear_damp = 5.0
+angular_damp = 5.0
 script = ExtResource("1_1yhrh")
+walk_force = 1000.0
 twist_pivot = NodePath("Head/Twist")
 pitch_pivot = NodePath("Head/Twist/Pitch")
 
@@ -33,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.612, 0)
 [node name="Pitch" type="Node3D" parent="Head/Twist"]
 
 [node name="Camera3D" type="Camera3D" parent="Head/Twist/Pitch"]
+transform = Transform3D(1, 0, 0, 0, 0.989831, 0.142249, 0, -0.142249, 0.989831, 0, 1.30976, 2.52402)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0351, 0)

@@ -20,8 +20,11 @@ size = Vector3(4.78314, 1, 1)
 size = Vector3(4.24599, 3.85651, 15.6408)
 
 [node name="Starship" type="RigidBody3D"]
+physics_interpolation_mode = 1
 mass = 100000.0
+continuous_cd = true
 linear_damp = 10.0
+angular_damp = 1.0
 script = ExtResource("1_qpfk3")
 
 [node name="ship" parent="." instance=ExtResource("1_adw3s")]

@@ -1,6 +1,6 @@
-extends RigidBody3D
+extends CharacterBody3D
 
-class_name Player
+
 
 @export_category("Mouse Settings")
 @export
@@ -10,8 +10,8 @@ var twist_input : float = 0.0
 var pitch_input : float = 0.0
 
 @export_category("Speed")
-@export
-var walk_force : float = 6
+const SPEED = 5.0
+const JUMP_VELOCITY = 4.5
 
 @export_category("Camera Pivots")
 
@@ -23,22 +23,19 @@ var pitch_pivot : Node3D
 
 var in_control : bool = true
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-# Replace with function body.
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
 	if (Input.is_action_just_released("switch")):
 		if (in_control == false):
 			in_control = true
-			#freeze = false
-			print("Control set to player")
+			print(in_control)
 		else:
 			in_control = false 
-			#freeze = true
-			print("control set to ship")
-
+			
 	if (!in_control):
 		return
 	
@@ -46,24 +43,27 @@ func _physics_process(delta):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	# Handle jump.
-	if Input.is_action_just_pressed("move_up"):
-		apply_central_impulse(global_transform.basis.y * 2)
+	if Input.is_action_just_pressed("move_up") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	
 	var direction = (transform.basis * twist_pivot.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	print(direction)
-	
-	apply_central_force(direction * walk_force)
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	move_and_slide()
+
 func _process(delta):
 	if (!in_control):
 		return
-
+	
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
