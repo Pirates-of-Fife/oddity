@@ -47,18 +47,24 @@ func _physics_process(delta):
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("move_up"):
-		apply_central_impulse(global_transform.basis.y * 2)
-
+		apply_central_impulse(global_transform.basis.y * 300)
+	
+	if Input.is_action_just_pressed("move_down"):
+		apply_central_impulse(-global_transform.basis.y * 10000)
+		print("dwo")
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	
-	var direction = (transform.basis * twist_pivot.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	print(direction)
-	
-	apply_central_force(direction * walk_force)
+	var input_vector = Vector3(input_dir.x, 0, input_dir.y)
 
+	# Apply the movement relative to the twist_pivot's orientation.
+	# Use only the twist_pivot's global_transform.basis for the direction.
+	var direction = (twist_pivot.global_transform.basis * input_vector).normalized()
+
+	# Apply the calculated direction as a force for movement.
+	apply_central_force(direction * walk_force)
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (!in_control):

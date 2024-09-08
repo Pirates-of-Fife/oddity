@@ -2,8 +2,8 @@ extends RigidBody3D
 
 # Variables for thrust and rotation speed
 var thrust_force: float = 50000000.0
-var torque_force: float = 60000.0
-var max_speed: float = 500.0
+var torque_force: float = 50000.0
+var max_speed: float = 50000.0
 
 var in_control : bool = false
 
@@ -35,9 +35,9 @@ func _handle_input(delta: float) -> void:
 
 	# Thrust controls
 	if Input.is_action_pressed("move_forward"): # W
-		thrust += transform.basis.z * -thrust_force
-	if Input.is_action_pressed("move_backward"): # S
 		thrust += transform.basis.z * thrust_force
+	if Input.is_action_pressed("move_backward"): # S
+		thrust += transform.basis.z * -thrust_force
 	if Input.is_action_pressed("move_left"): # A
 		thrust += transform.basis.x * -thrust_force
 	if Input.is_action_pressed("move_right"): # D
@@ -57,9 +57,9 @@ func _handle_input(delta: float) -> void:
 	if Input.is_action_pressed("ui_right"): # Right arrow
 		torque += transform.basis.y * torque_force
 	if Input.is_action_pressed("rotate_left"): # Q
-		torque += transform.basis.z * torque_force
-	if Input.is_action_pressed("rotate_right"): # E
 		torque += transform.basis.z * -torque_force
+	if Input.is_action_pressed("rotate_right"): # E
+		torque += transform.basis.z * torque_force
 
 	# Apply the forces and torques to the RigidBody
 	if thrust.length() > 0:
@@ -70,3 +70,5 @@ func _handle_input(delta: float) -> void:
 	# Limit velocity to prevent the ship from going too fast
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
+
+	print(rotation)

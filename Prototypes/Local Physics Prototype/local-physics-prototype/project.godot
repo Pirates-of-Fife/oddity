@@ -75,5 +75,12 @@ freeze_test={
 
 [physics]
 
+common/physics_ticks_per_second=240
+common/max_physics_steps_per_frame=12
 3d/physics_engine="JoltPhysics3D"
 3d/default_gravity=0.0
+3d/solver/solver_iterations=64
+common/continuous_cd/max_penetration=25.0
+common/continuous_cd/movement_threshold=75.0
+common/limits/max_temporary_memory=64
+jolt_3d/limits/max_temporary_memory=64

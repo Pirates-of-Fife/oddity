@@ -24,8 +24,9 @@ func _physics_process(delta: float) -> void:
 	process_movement_delta()
 	process_rotation_delta()
 	process_velocity_delta()
-			
-	gravity_direction = -global_transform.basis.y
+	
+	if (gravity_point == false):
+		gravity_direction = -global_transform.basis.y
 
 	#print("======== " + str(self))
 	#for b : RigidBody3D in bodies:
@@ -67,8 +68,6 @@ func move_rigidbody(body):
 	
 	body.global_position += movement_delta + deltaVec
 	
-	var delta_euler = rotation_delta.get_euler()
-
 	var new_transform = body.global_transform
 	new_transform.basis = Basis(rotation_delta) * new_transform.basis
 	body.global_transform = new_transform
@@ -95,6 +94,9 @@ func _on_body_entered(body: Node3D) -> void:
 	#print("BODY ENTERED " + str(body) + " " + str(body.freeze) + " " + str(bodies))
 
 	bodies.append(body)
+	
+	
+	print(body)
 	#print("added " + str(body) + " to bodies")
 
 	#if (body.get_parent_node_3d() == self):

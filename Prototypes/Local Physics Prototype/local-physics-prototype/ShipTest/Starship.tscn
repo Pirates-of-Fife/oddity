@@ -4,9 +4,6 @@
 [ext_resource type="Script" path="res://ShipTest/starship.gd" id="1_qpfk3"]
 [ext_resource type="PackedScene" uid="uid://beoxsu08qsywd" path="res://ShipTest/PhysicsGrid.tscn" id="2_g8jpe"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_uk1mn"]
-size = Vector3(0.917542, 4.18457, 15.8341)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_yrkpm"]
 size = Vector3(4.54733, 0.433014, 16.0683)
 
@@ -19,23 +16,18 @@ size = Vector3(4.78314, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_foxxm"]
 size = Vector3(4.24599, 3.85651, 15.6408)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uk1mn"]
+size = Vector3(0.917542, 4.18457, 15.8341)
+
 [node name="Starship" type="RigidBody3D"]
 physics_interpolation_mode = 1
 mass = 100000.0
 continuous_cd = true
-linear_damp = 10.0
-angular_damp = 1.0
+linear_damp = 2.0
+angular_damp = 2.0
 script = ExtResource("1_qpfk3")
 
 [node name="ship" parent="." instance=ExtResource("1_adw3s")]
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.64295, 2.56868, 2.08453)
-shape = SubResource("BoxShape3D_uk1mn")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76303, 2.56868, 2.08453)
-shape = SubResource("BoxShape3D_uk1mn")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0171509, 4.67691, 2.29224)
@@ -73,6 +65,14 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0770457, 0.227913, -0.602197)
 shape = SubResource("BoxShape3D_yrkpm")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PhysicsGrid/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6601, 2.55869, -0.20771)
+shape = SubResource("BoxShape3D_uk1mn")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="PhysicsGrid/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74588, 2.55869, -0.20771)
+shape = SubResource("BoxShape3D_uk1mn")
+
 [node name="Starship" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -92,6 +92,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.21831, 3.98699, -2.80945)
 light_color = Color(0.216589, 0.712456, 0, 1)
 shadow_enabled = true
 omni_range = 6.864
-
-[connection signal="body_entered" from="PhysicsGrid" to="PhysicsGrid" method="_on_body_entered"]
-[connection signal="body_exited" from="PhysicsGrid" to="PhysicsGrid" method="_on_body_exited"]
