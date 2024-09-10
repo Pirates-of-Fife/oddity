@@ -1,0 +1,109 @@
+[gd_scene load_steps=14 format=3 uid="uid://dnhfxurd87i8d"]
+
+[ext_resource type="Script" path="res://InteractableSystem/InteractionPrompt.gd" id="1_xoouh"]
+[ext_resource type="Texture2D" uid="uid://c57go3puueqkx" path="res://InteractableSystem/AnimationFrames/interact_1.png" id="2_8l3mo"]
+[ext_resource type="Texture2D" uid="uid://btqkfkx6cy20c" path="res://InteractableSystem/AnimationFrames/interact_2.png" id="3_txwdu"]
+[ext_resource type="Texture2D" uid="uid://dmhabavov3vcb" path="res://InteractableSystem/AnimationFrames/interact_3.png" id="4_ht81b"]
+[ext_resource type="Texture2D" uid="uid://cjl21v7jatmkl" path="res://InteractableSystem/AnimationFrames/interact_4.png" id="5_2v6at"]
+[ext_resource type="AudioStream" uid="uid://sad52xve1yy2" path="res://InteractableSystem/Select2-reverse.wav" id="6_5ae4s"]
+[ext_resource type="AudioStream" uid="uid://cm2pp7rr2ntbf" path="res://InteractableSystem/Select2.wav" id="7_ws40n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l42yv"]
+animations = [{
+"frames": [{
+"duration": 0.2,
+"texture": ExtResource("2_8l3mo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_txwdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ht81b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2v6at")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_bs3ts"]
+resource_name = "hide_prompt"
+length = 0.2
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.505, 0.505, 0.505, 0.2, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_hhctn"]
+resource_name = "hide_prompt_ship_scale"
+length = 0.2
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.02, 2.02, 2.02, 0.2, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_wan1x"]
+resource_name = "show_prompt"
+length = 0.2
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.15, 1, 0.6, 0.6, 0.6, 0.2, 1, 0.505, 0.505, 0.505)
+
+[sub_resource type="Animation" id="Animation_d4b6q"]
+resource_name = "show_prompt_ship_scale"
+length = 0.2
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.15, 1, 2.4, 2.4, 2.4, 0.2, 1, 2.02, 2.02, 2.02)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_spbyl"]
+_data = {
+"hide_prompt": SubResource("Animation_bs3ts"),
+"hide_prompt_ship_scale": SubResource("Animation_hhctn"),
+"show_prompt": SubResource("Animation_wan1x"),
+"show_prompt_ship_scale": SubResource("Animation_d4b6q")
+}
+
+[node name="InteractionPrompt" type="Node3D"]
+script = ExtResource("1_xoouh")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.505, 0, 0, 0, 0.505, 0, 0, 0, 0.505, 0, 0, 0)
+flip_h = true
+pixel_size = 0.0001
+sprite_frames = SubResource("SpriteFrames_l42yv")
+autoplay = "default"
+frame_progress = 0.0525152
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_spbyl")
+}
+
+[node name="SelectHide" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_5ae4s")
+volume_db = -18.0
+bus = &"UI"
+
+[node name="SelectShow" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_ws40n")
+volume_db = -20.0
+pitch_scale = 1.5
+max_polyphony = 2
+bus = &"UI"

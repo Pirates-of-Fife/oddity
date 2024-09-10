@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpfmvy0xddnto"]
+
+[ext_resource type="PackedScene" uid="uid://y2lwlonnllfo" path="res://Scenes/ShipComponents/Common/Radiator/Radiator.tscn" id="1_0ctkt"]
+
+[node name="PlaceholderRadiator" instance=ExtResource("1_0ctkt")]
+manufacturer = "Placeholder"
+model = "Radiator"
+size_class = 1
+total_cooling_output = 600.0
+health_points = 50.0
+integrity = 1.0

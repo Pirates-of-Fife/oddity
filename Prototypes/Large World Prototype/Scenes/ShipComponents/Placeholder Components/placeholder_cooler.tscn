@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://chtrvx6ohr6xy"]
+
+[ext_resource type="PackedScene" uid="uid://c1d6871eu6221" path="res://Scenes/ShipComponents/Common/Cooler/Cooler.tscn" id="1_p4awx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_an4vo"]
+
+[node name="Placeholder Cooler" instance=ExtResource("1_p4awx")]
+manufacturer = "Placeholder"
+model = "Cooler"
+size_class = 1
+total_cooling_output = 500.0
+power_per_cool = 5.0
+health_points = 50.0
+integrity = 5.0
+
+[node name="Mesh" type="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_an4vo")

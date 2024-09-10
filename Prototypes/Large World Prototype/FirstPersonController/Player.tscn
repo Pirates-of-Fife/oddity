@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://brh07riyg1qv0"]
+
+[ext_resource type="Script" path="res://FirstPersonController/PlayerController.gd" id="1_gxowu"]
+[ext_resource type="Script" path="res://FirstPersonController/ViewBob.gd" id="2_3llqn"]
+[ext_resource type="Shader" path="res://FirstPersonController/CameraUnderWaterShader.gdshader" id="3_ie4wj"]
+[ext_resource type="PackedScene" uid="uid://by7gk77toq1l7" path="res://InteractableSystem/InteractableSystem.tscn" id="4_6asnr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sy628"]
+radius = 0.09
+height = 1.19131
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oudi6"]
+render_priority = 0
+shader = ExtResource("3_ie4wj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uh78k"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("twist_pivot", "pitch_pivot", "camera")]
+collision_layer = 9
+collision_mask = 9
+script = ExtResource("1_gxowu")
+jump_velocity = 3.0
+twist_pivot = NodePath("Head/TwistPivot")
+pitch_pivot = NodePath("Head/TwistPivot/PitchPivot")
+camera = NodePath("Head/TwistPivot/PitchPivot/PlayerCamera")
+float_force = 0.015
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.440132, 0)
+shape = SubResource("CapsuleShape3D_sy628")
+
+[node name="Head" type="Node3D" parent="." node_paths=PackedStringArray("camera", "player")]
+script = ExtResource("2_3llqn")
+enable = true
+amplitude = 0.01
+toggle_speed = 0.2
+camera = NodePath("TwistPivot/PitchPivot/PlayerCamera")
+player = NodePath("..")
+
+[node name="TwistPivot" type="Node3D" parent="Head"]
+
+[node name="PitchPivot" type="Node3D" parent="Head/TwistPivot"]
+
+[node name="PlayerCamera" type="Camera3D" parent="Head/TwistPivot/PitchPivot"]
+current = true
+
+[node name="WaterEffect" type="MeshInstance3D" parent="Head/TwistPivot/PitchPivot/PlayerCamera"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.16654e-08, -0.0657659)
+visible = false
+material_override = SubResource("ShaderMaterial_oudi6")
+mesh = SubResource("PlaneMesh_uh78k")
+
+[node name="BuyoancyProbes" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="BuyoancyProbes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.06999, 0)
+
+[node name="InteractableSystem" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_6asnr")]
+camera = NodePath("../Head/TwistPivot/PitchPivot/PlayerCamera")
+interaction_distance = 0.8

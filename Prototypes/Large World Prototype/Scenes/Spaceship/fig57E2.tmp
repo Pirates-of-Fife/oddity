@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq0cv154m3m76"]
+
+[ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://Assets/Spaceships/FighterGen7/fighter_gen_7_model.tscn" id="1_fr140"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/ThirdPersonCamera.gd" id="2_pxgjj"]
+
+[node name="Fighter Gen 7" type="Node3D"]
+
+[node name="Thrusters" type="Node3D" parent="."]
+
+[node name="SimpleFlightControlSystem" type="Node3D" parent="."]
+
+[node name="UserControl" type="Node3D" parent="."]
+
+[node name="Ship" type="Node3D" parent="."]
+
+[node name="fighterGen7" parent="Ship" instance=ExtResource("1_fr140")]
+
+[node name="Cameras" type="Node3D" parent="Ship"]
+
+[node name="ThirdPersonCamera" type="Node3D" parent="Ship/Cameras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.94318)
+script = ExtResource("2_pxgjj")
+
+[node name="TwistPivot" type="Node3D" parent="Ship/Cameras/ThirdPersonCamera"]
+
+[node name="PitchPivot" type="Node3D" parent="Ship/Cameras/ThirdPersonCamera/TwistPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="Ship/Cameras/ThirdPersonCamera/TwistPivot/PitchPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.994703, 0.102793, 0, -0.102793, 0.994703, 0, 5.238, 14.946)
+current = true
+
+[node name="FirstPersonCamera" type="Node3D" parent="Ship/Cameras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44426, 1.7775)
+
+[node name="TwistPivot" type="Node3D" parent="Ship/Cameras/FirstPersonCamera"]
+
+[node name="PitchPivot" type="Node3D" parent="Ship/Cameras/FirstPersonCamera/TwistPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="Ship/Cameras/FirstPersonCamera/TwistPivot/PitchPivot"]

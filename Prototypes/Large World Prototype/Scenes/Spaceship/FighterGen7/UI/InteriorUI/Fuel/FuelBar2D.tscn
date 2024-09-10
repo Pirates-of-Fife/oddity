@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2sdlpnw1eqs4"]
+
+[ext_resource type="StyleBox" uid="uid://d1o06fc36eqdq" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/BarBackgroundStyle.tres" id="1_45hnj"]
+[ext_resource type="StyleBox" uid="uid://celx0qg176twn" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/BarFillStyle.tres" id="2_e3d7w"]
+
+[node name="FuelGauge" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FuelBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -26.0
+offset_right = 188.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = ExtResource("1_45hnj")
+theme_override_styles/fill = ExtResource("2_e3d7w")
+show_percentage = false
+
+[node name="FuelUsage" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -50.0
+offset_right = 188.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = ExtResource("1_45hnj")
+theme_override_styles/fill = ExtResource("2_e3d7w")
+show_percentage = false

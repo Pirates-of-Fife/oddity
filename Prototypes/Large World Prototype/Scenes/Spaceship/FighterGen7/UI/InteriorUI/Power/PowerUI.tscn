@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0ikyjy0j6pev"]
+
+[ext_resource type="PackedScene" uid="uid://clrk43wabl81" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/Power/PowerBar2DUI.tscn" id="1_r84gn"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/Power/PowerUI.gd" id="1_t8npr"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3tx85"]
+viewport_path = NodePath("SubViewport")
+
+[node name="PowerUi" type="Node3D"]
+script = ExtResource("1_t8npr")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="PowerBar2dui" parent="SubViewport" instance=ExtResource("1_r84gn")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_3tx85")
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.771304, 0)
+modulate = Color(0.992157, 0.411765, 0.211765, 1)
+text = "Battery"
+outline_size = 0
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325244, 0)
+modulate = Color(0.992157, 0.411765, 0.211765, 1)
+text = "Powerplant"
+outline_size = 0
+
+[editable path="SubViewport/PowerBar2dui"]

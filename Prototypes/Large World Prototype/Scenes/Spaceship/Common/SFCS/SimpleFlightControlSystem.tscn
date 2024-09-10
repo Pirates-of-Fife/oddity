@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxnepkoil8so3"]
+
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/SFCS/SimpleFlightControlSystem.gd" id="1_m3c4l"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dhjrp"]
+
+[node name="SimpleFlightControlSystem" type="Node3D"]
+script = ExtResource("1_m3c4l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = SubResource("BoxMesh_dhjrp")
