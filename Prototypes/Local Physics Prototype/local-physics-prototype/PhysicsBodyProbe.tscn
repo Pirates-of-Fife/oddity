@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://baxqb754bl4s7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_stp0r"]
+radius = 0.1
+height = 0.2
+
+[node name="PhysicsBodyProbe" type="Marker3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47501, 0)
+mesh = SubResource("SphereMesh_stp0r")

@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci6mxxt8onp2a"]
+
+[ext_resource type="Script" path="res://ShipTest/player.gd" id="1_1yhrh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qfd78"]
+friction = 0.2
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vg54f"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b5o5w"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_dk76p"]
+size = Vector3(1, 2.115, 1)
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("twist_pivot", "pitch_pivot")]
+collision_layer = 3
+collision_mask = 3
+mass = 60.0
+physics_material_override = SubResource("PhysicsMaterial_qfd78")
+continuous_cd = true
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("1_1yhrh")
+walk_force = 1000.0
+twist_pivot = NodePath("Head/Twist")
+pitch_pivot = NodePath("Head/Twist/Pitch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972078, 0)
+shape = SubResource("BoxShape3D_vg54f")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.612, 0)
+
+[node name="Twist" type="Node3D" parent="Head"]
+
+[node name="Pitch" type="Node3D" parent="Head/Twist"]
+
+[node name="Camera3D" type="Camera3D" parent="Head/Twist/Pitch"]
+transform = Transform3D(1, 0, 0, 0, 0.989831, 0.142249, 0, -0.142249, 0.989831, 1.31458, 1.30976, 2.52402)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Twist"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09496, -1.86892)
+mesh = SubResource("CylinderMesh_b5o5w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0351, 0)
+mesh = SubResource("BoxMesh_dk76p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09496, -0.752957)
+mesh = SubResource("CylinderMesh_b5o5w")

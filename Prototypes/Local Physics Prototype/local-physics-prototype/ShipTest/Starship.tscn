@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=3 uid="uid://hs2gwy3h2ttn"]
+
+[ext_resource type="PackedScene" uid="uid://gpf7gb1las4h" path="res://ShipTest/ship_mesh.tscn" id="1_adw3s"]
+[ext_resource type="Script" path="res://ShipTest/starship.gd" id="1_qpfk3"]
+[ext_resource type="PackedScene" uid="uid://beoxsu08qsywd" path="res://ShipTest/PhysicsGrid.tscn" id="2_g8jpe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yrkpm"]
+size = Vector3(4.54733, 0.433014, 16.0683)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jb042"]
+size = Vector3(5.08508, 4.51453, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h7w72"]
+size = Vector3(4.78314, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_foxxm"]
+size = Vector3(4.24599, 3.85651, 15.6408)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uk1mn"]
+size = Vector3(0.917542, 4.18457, 15.8341)
+
+[node name="Starship" type="RigidBody3D"]
+physics_interpolation_mode = 1
+mass = 100000.0
+continuous_cd = true
+linear_damp = 2.0
+angular_damp = 2.0
+script = ExtResource("1_qpfk3")
+
+[node name="ship" parent="." instance=ExtResource("1_adw3s")]
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0171509, 4.67691, 2.29224)
+shape = SubResource("BoxShape3D_yrkpm")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0106812, 1.75726, 10.4955)
+shape = SubResource("BoxShape3D_jb042")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105119, -0.777532, 9.41179)
+shape = SubResource("BoxShape3D_h7w72")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0106812, 1.75726, 10.4955)
+shape = SubResource("BoxShape3D_jb042")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0844256, -0.777532, -4.03338)
+shape = SubResource("BoxShape3D_h7w72")
+
+[node name="PhysicsGrid" parent="." instance=ExtResource("2_g8jpe")]
+gravity_space_override = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00525665, 2.31221, 2.08966)
+shape = SubResource("BoxShape3D_foxxm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="PhysicsGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0171509, 0.00998616, 2.29224)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="PhysicsGrid/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0770457, 0.227913, -0.602197)
+shape = SubResource("BoxShape3D_yrkpm")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PhysicsGrid/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6601, 2.55869, -0.20771)
+shape = SubResource("BoxShape3D_uk1mn")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="PhysicsGrid/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74588, 2.55869, -0.20771)
+shape = SubResource("BoxShape3D_uk1mn")
+
+[node name="Starship" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.98699, 8.48204)
+light_color = Color(1, 0.333333, 0.235294, 1)
+shadow_enabled = true
+omni_range = 6.864
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50526, 3.98699, -2.80945)
+light_color = Color(1, 0.333333, 0.235294, 1)
+shadow_enabled = true
+omni_range = 6.864
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.21831, 3.98699, -2.80945)
+light_color = Color(0.216589, 0.712456, 0, 1)
+shadow_enabled = true
+omni_range = 6.864

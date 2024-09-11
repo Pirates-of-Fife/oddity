@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://berv1xw4dr10"]
+
+[ext_resource type="Script" path="res://physics_area.gd" id="1_uka3f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3540w"]
+size = Vector3(8.78119, 2.56982, 5.27496)
+
+[sub_resource type="BoxMesh" id="BoxMesh_csdwc"]
+size = Vector3(9.63, 0.145, 5.675)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjapr"]
+albedo_color = Color(0.592157, 0.705882, 0.372549, 1)
+
+[node name="PhysicsArea" type="Area3D"]
+script = ExtResource("1_uka3f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.519623, 0.784912, -0.288727)
+shape = SubResource("BoxShape3D_3540w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.592483, -0.748966, -0.316544)
+mesh = SubResource("BoxMesh_csdwc")
+surface_material_override/0 = SubResource("StandardMaterial3D_wjapr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
