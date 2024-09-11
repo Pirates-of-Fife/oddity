@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl7fyywe4oqux"]
+
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Thruster/Thruster_Component/ThrustPosition.gd" id="1_buobr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8gcid"]
+
+[node name="Thruster" type="Node3D"]
+script = ExtResource("1_buobr")
+
+[node name="ParticleFX" type="Node3D" parent="."]
+
+[node name="ThrustPosition" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="ThrustPosition"]
+transform = Transform3D(0.052317, 0, -0.245871, 0, 0.08, 0, 0.0605222, 0, 0.212538, 0.0936526, 0, 0.191557)
+mesh = SubResource("BoxMesh_8gcid")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="ThrustPosition"]
+transform = Transform3D(-0.0556329, 0, -0.233549, 0, 0.08, 0, 0.057489, 0, -0.226009, -0.0921932, 0, 0.186933)
+mesh = SubResource("BoxMesh_8gcid")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ThrustPosition"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.57, 0, 0, 0)
+mesh = SubResource("BoxMesh_8gcid")

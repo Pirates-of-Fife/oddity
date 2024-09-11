@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi8ebqsm3obsa"]
+
+[ext_resource type="Script" path="res://InteractableSystem/Interactable.gd" id="1_1dq5e"]
+[ext_resource type="PackedScene" uid="uid://dnhfxurd87i8d" path="res://InteractableSystem/InteractionPrompt.tscn" id="2_lapls"]
+
+[node name="Interactable" type="StaticBody3D"]
+collision_layer = 16384
+collision_mask = 16384
+script = ExtResource("1_1dq5e")
+
+[node name="InteractionPrompt" parent="." instance=ExtResource("2_lapls")]

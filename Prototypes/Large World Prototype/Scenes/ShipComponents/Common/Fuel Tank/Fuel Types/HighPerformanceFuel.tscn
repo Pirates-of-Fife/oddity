@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvr3lmc7stvpm"]
+
+[ext_resource type="Script" path="res://Scenes/ShipComponents/Common/Fuel Tank/Fuel Types/FuelType.gd" id="1_tttlv"]
+
+[node name="HighPerformanceFuel" type="Node3D"]
+script = ExtResource("1_tttlv")
+efficiency = 0.75
+power = 1.4
+heat_generation = 1.4
