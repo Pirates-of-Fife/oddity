@@ -1824,6 +1824,7 @@ transform = Transform3D(0.0201209, 0, -0.294313, 0, 0.295, 0, 0.294313, 0, 0.020
 
 [node name="Coords" type="Label3D" parent="ShipBody/UI/InteriorUI"]
 transform = Transform3D(0.931279, -0.175545, 0.319222, 0.0378511, 0.918129, 0.394469, -0.362334, -0.355278, 0.861679, -0.430985, 0.927506, 0.422068)
+visible = false
 pixel_size = 0.002
 modulate = Color(0.772549, 0.47451, 0.145098, 1)
 outline_modulate = Color(0, 0, 0, 0)
@@ -1897,7 +1898,7 @@ required_power = 11.0
 
 [node name="MainThruster" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.03356)
-thruster_force = 4500.0
+thruster_force = 6000.0
 thruster_fuel_consumption = 15.0
 
 [node name="ParticleFX" parent="ShipBody/Thrusters/MainThruster" index="0"]
@@ -1911,7 +1912,7 @@ transform = Transform3D(15.92, 0, 0, 0, 15.92, 0, 0, 0, 15.92, 0, 0, -0.191907)
 
 [node name="RetroThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.4, 0, -1.72)
-thruster_force = 1600.0
+thruster_force = 2000.0
 thruster_fuel_consumption = 6.0
 
 [node name="RetroThrusterParticleFX" parent="ShipBody/Thrusters/RetroThruster1/ParticleFX" index="0" instance=ExtResource("12_7r5i3")]
@@ -1919,7 +1920,7 @@ transform = Transform3D(0.999657, -2.28846e-09, -0.0261769, 0, -1, 8.74227e-08, 
 
 [node name="RetroThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.4, 0, -1.72)
-thruster_force = 1600.0
+thruster_force = 2000.0
 thruster_fuel_consumption = 6.0
 
 [node name="RetroThrusterParticleFX" parent="ShipBody/Thrusters/RetroThruster2/ParticleFX" index="0" instance=ExtResource("12_7r5i3")]

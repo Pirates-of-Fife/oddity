@@ -38,6 +38,8 @@ var peer : ENetMultiplayerPeer
 @export
 var ui : Control
 
+var hosted : bool = false
+
 func _ready():
 	host_button.pressed.connect(_on_host)
 	join_button.pressed.connect(_on_join)
@@ -52,6 +54,9 @@ func _ready():
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
+	if (hosted == false):
+		_on_host()
+	
 	camera.current = false
 	var scene : Node3D = preload(MainScene).instantiate()
 	get_tree().root.add_child(scene)
@@ -98,6 +103,9 @@ func _on_host() -> void:
 	print("Waiting for Players!")
 	
 	send_player_information(name_control.text, multiplayer.get_unique_id())
+	
+	hosted = true
+	
 
 func _on_join() -> void:
 	if (ip_address_control.text != ""):

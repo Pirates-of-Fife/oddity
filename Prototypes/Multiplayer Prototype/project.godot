@@ -11,12 +11,12 @@ config_version=5
 [application]
 
 config/name="Oddity Multiplayer Prototype"
+config/tags=PackedStringArray("oddity")
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-boot_splash/bg_color=Color(0.427451, 0.239216, 0.705882, 1)
-boot_splash/image="res://oddity_splasch_screen.png"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://OddityLogo-05.png"
 config/icon="res://icon.svg"
-config/tags=PackedStringArray("oddity")
 
 [autoload]
 
@@ -26,6 +26,7 @@ GameManager="*res://Multiplayer/GameManager.gd"
 
 window/size/viewport_width=960
 window/size/viewport_height=540
+window/size/mode=3
 window/size/resizable=false
 window/vsync/vsync_mode=2
 
