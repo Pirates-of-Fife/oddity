@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bb3qdw2vwofdu"]
+
+[ext_resource type="Script" path="res://classes/basic player controller/basic_player.gd" id="1_g7po0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xe8ac"]
+friction = 0.2
+rough = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1s73r"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r1b65"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0u7d1"]
+
+[node name="BasicPlayer" type="RigidBody3D"]
+mass = 60.0
+physics_material_override = SubResource("PhysicsMaterial_xe8ac")
+linear_damp = 2.0
+script = ExtResource("1_g7po0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_1s73r")
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="TwistPivot" type="Node3D" parent="Head"]
+
+[node name="PitchPivot" type="Node3D" parent="Head/TwistPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="Head/TwistPivot/PitchPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70775, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/TwistPivot/PitchPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.08407, -0.262144)
+mesh = SubResource("BoxMesh_r1b65")
+skeleton = NodePath("../Camera3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.894065, 0)
+mesh = SubResource("CapsuleMesh_0u7d1")

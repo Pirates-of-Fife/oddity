@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://uffcaccrule1"]
+
+[ext_resource type="PackedScene" uid="uid://bb3qdw2vwofdu" path="res://classes/basic player controller/BasicPlayer.tscn" id="1_mljxn"]
+[ext_resource type="Script" path="res://classes/frame of reference/GravityGrid.gd" id="2_ojw0s"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n5voa"]
+size = Vector2(15, 15)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_w6bs8"]
+data = PackedVector3Array(7.5, 0, 7.5, -7.5, 0, 7.5, 7.5, 0, -7.5, -7.5, 0, 7.5, -7.5, 0, -7.5, 7.5, 0, -7.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k0k3u"]
+size = Vector3(15, 10, 15)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_del5p"]
+
+[sub_resource type="Sky" id="Sky_00tmt"]
+sky_material = SubResource("ProceduralSkyMaterial_del5p")
+
+[sub_resource type="Environment" id="Environment_vi3de"]
+background_mode = 2
+sky = SubResource("Sky_00tmt")
+
+[node name="BasicPlayerTest" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.860653, 0.509192, 0, -0.509192, 0.860653, 0, 2.96298, 6.57868)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_n5voa")
+skeleton = NodePath("../DirectionalLight3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_w6bs8")
+
+[node name="BasicPlayer" parent="." instance=ExtResource("1_mljxn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69223, 0)
+
+[node name="GravityGrid" type="Area3D" parent="."]
+script = ExtResource("2_ojw0s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GravityGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.45856, 0)
+shape = SubResource("BoxShape3D_k0k3u")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vi3de")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.990596, 0.136822, 0, -0.136822, 0.990596, 0, 5.73832, 12.7704)
