@@ -56,6 +56,14 @@ func _ready() -> void:
 	collision_shape.shape = sphere_shape
 	add_child(collision_shape)
 	
+	if (enable_gravity):
+		gravity_space_override = SpaceOverride.SPACE_OVERRIDE_REPLACE
+		gravity_point = true
+		gravity_point_center = Vector3.ZERO
+		gravity_point_unit_distance = radius * (1 + gravity_attraction_from_surface_max / 100.0)
+	else:
+		gravity_space_override = SpaceOverride.SPACE_OVERRIDE_DISABLED
+	
 func _physics_process(delta: float) -> void:
 	calculate_movement_deltas(delta)
 	move_bodies_in_frame_of_reference()

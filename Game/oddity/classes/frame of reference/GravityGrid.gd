@@ -15,15 +15,21 @@ var enable_gravity : bool = true :
 	set(value):
 		enable_gravity = value
 		
-		if (value):
+		if (value == true):
 			gravity_space_override = SpaceOverride.SPACE_OVERRIDE_REPLACE
 		else:
 			gravity_space_override = SpaceOverride.SPACE_OVERRIDE_DISABLED
 
 @export_range(0, 3, 0.1, "suffix:G")
-var gravity_strength : float = 9.8 : 
+var gravity_strength : float = 1 : 
 	set(value):
 		gravity = value * 9.8
+
+func _ready() -> void:
+	if (enable_gravity):
+		gravity_space_override = SpaceOverride.SPACE_OVERRIDE_REPLACE
+	else:
+		gravity_space_override = SpaceOverride.SPACE_OVERRIDE_DISABLED
 
 func _physics_process(delta: float) -> void:
 	calculate_movement_deltas(delta)
