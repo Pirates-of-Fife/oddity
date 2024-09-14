@@ -1,15 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://brkmh327ycklk"]
+[gd_scene load_steps=10 format=3 uid="uid://brkmh327ycklk"]
 
 [ext_resource type="PackedScene" uid="uid://cpb2nlkghtm13" path="res://Scenes/Spaceship/FighterGen7/fighter_gen_7.tscn" id="1_2ddtf"]
 [ext_resource type="Script" path="res://Scenes/Main Scene/Multiplayer.gd" id="1_lw3xx"]
 [ext_resource type="PackedScene" uid="uid://b62vde3oekq23" path="res://Scenes/Rings/Courses/course.tscn" id="2_xe5xt"]
+[ext_resource type="Shader" path="res://star sky.gdshader" id="3_fymwm"]
 
-[sub_resource type="Sky" id="Sky_kriuc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v58w3"]
+shader = ExtResource("3_fymwm")
+shader_parameter/sky_color = Color(0, 0.0313726, 0.0470588, 1)
+shader_parameter/star_base_color = Color(0.925866, 0.908911, 0.903488, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.405
+shader_parameter/star_twinkle_intensity = 0.163
+shader_parameter/layer_scale = 9.63
+shader_parameter/layer_scale_step = 6.05
+shader_parameter/layers_count = 4
+
+[sub_resource type="Sky" id="Sky_0ua7k"]
+sky_material = SubResource("ShaderMaterial_v58w3")
 radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_af0w1"]
 background_mode = 2
-sky = SubResource("Sky_kriuc")
+sky = SubResource("Sky_0ua7k")
 sky_rotation = Vector3(4.71239, 0, 0)
 tonemap_mode = 2
 glow_enabled = true
@@ -62,7 +76,7 @@ stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(320, 180)
+size = Vector2i(460, 259)
 render_target_update_mode = 4
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport"]
