@@ -1,22 +1,30 @@
 [gd_scene load_steps=9 format=3 uid="uid://c8u1r0q72k8ai"]
 
 [ext_resource type="Script" path="res://Scenes/MainMenu/MainMenu.gd" id="1_i1c54"]
-[ext_resource type="Texture2D" uid="uid://bv2cmqlgs7i4u" path="res://Assets/SkyBox/skyboxv2.png" id="1_m3y0b"]
 [ext_resource type="Script" path="res://Multiplayer/MultiplayerController.gd" id="2_bjqns"]
 [ext_resource type="PackedScene" uid="uid://bqavgaetn2avj" path="res://Scenes/MainMenu/FighterMainMenuExample.tscn" id="2_l805g"]
 [ext_resource type="PackedScene" uid="uid://cfey7r0rojaxn" path="res://Scenes/MainMenu/MenuUI.tscn" id="3_h2rl0"]
+[ext_resource type="Shader" path="res://star sky.gdshader" id="5_rpjti"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_csd37"]
-panorama = ExtResource("1_m3y0b")
-filter = false
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvbqj"]
+shader = ExtResource("5_rpjti")
+shader_parameter/sky_color = Color(0, 0, 0, 1)
+shader_parameter/star_base_color = Color(0.870941, 0.948708, 0.746153, 1)
+shader_parameter/star_hue_offset = 0.859
+shader_parameter/star_intensity = 0.09
+shader_parameter/star_twinkle_speed = 0.1
+shader_parameter/star_twinkle_intensity = 0.163
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 5.0
+shader_parameter/layers_count = 4
 
-[sub_resource type="Sky" id="Sky_7ow04"]
-sky_material = SubResource("PanoramaSkyMaterial_csd37")
+[sub_resource type="Sky" id="Sky_kriuc"]
+sky_material = SubResource("ShaderMaterial_xvbqj")
 radiance_size = 4
 
-[sub_resource type="Environment" id="Environment_4xgq5"]
+[sub_resource type="Environment" id="Environment_q8oes"]
 background_mode = 2
-sky = SubResource("Sky_7ow04")
+sky = SubResource("Sky_kriuc")
 sky_rotation = Vector3(4.71239, 0, 0)
 tonemap_mode = 2
 glow_enabled = true
@@ -56,9 +64,6 @@ light_energy = 1.512
 light_indirect_energy = 0.686
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_4xgq5")
-
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
 anchors_preset = 15
@@ -67,11 +72,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 2
+stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(480, 270)
+size = Vector2i(460, 259)
 render_target_update_mode = 4
 
 [node name="FighterMainMenuExample" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_l805g")]
@@ -83,5 +88,8 @@ fov = 60.6
 
 [node name="MenuUi" parent="SubViewportContainer" instance=ExtResource("3_h2rl0")]
 layout_mode = 2
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q8oes")
 
 [editable path="SubViewportContainer/MenuUi"]
