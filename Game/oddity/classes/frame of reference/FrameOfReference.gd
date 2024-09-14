@@ -55,6 +55,9 @@ func move_bodies_in_frame_of_reference() -> void:
 	for body : RigidBody3D in bodies_in_reference_frame:
 		move_body(body)
 		
+		if (body is BasicPlayer):
+			body.upright_direction = -gravity_direction
+		
 func move_body(body : RigidBody3D) -> void:
 	var origin_vector : Vector3 = vector_origin_body(body)
 	
