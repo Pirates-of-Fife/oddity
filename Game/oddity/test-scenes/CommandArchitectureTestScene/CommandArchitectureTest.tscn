@@ -109,22 +109,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07854, -0.609585)
 
 [node name="Laikan" parent="." instance=ExtResource("4_2mhyb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.62249)
-walk_force = null
-run_multiplier = null
-upright_force_p = null
-upright_force_i = null
-upright_force_d = null
 
 [node name="MeshInstance3D" parent="Laikan/CollisionShape3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_di0ss")
 
 [node name="Laikan2" parent="." instance=ExtResource("4_2mhyb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.23112)
-walk_force = null
-run_multiplier = null
-upright_force_p = null
-upright_force_i = null
-upright_force_d = null
 
 [node name="MeshInstance3D" parent="Laikan2/CollisionShape3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_lnx4y")
