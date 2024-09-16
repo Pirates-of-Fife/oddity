@@ -1,17 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://uffcaccrule1"]
+[gd_scene load_steps=16 format=3 uid="uid://uffcaccrule1"]
 
-[ext_resource type="PackedScene" uid="uid://bb3qdw2vwofdu" path="res://classes/basic player controller/BasicPlayer.tscn" id="1_mljxn"]
 [ext_resource type="Script" path="res://classes/frame of reference/GravityGrid.gd" id="2_ojw0s"]
 [ext_resource type="Script" path="res://test-scenes/BasicPlayerTestScene/animation_player.gd" id="3_83lb3"]
+[ext_resource type="PackedScene" uid="uid://ik0bqvjr0uki" path="res://classes/Laikan/Laikan.tscn" id="3_uk0xw"]
+[ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/player/player.tscn" id="4_1f61c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_del5p"]
 
-[sub_resource type="Sky" id="Sky_00tmt"]
+[sub_resource type="Sky" id="Sky_khrwv"]
 sky_material = SubResource("ProceduralSkyMaterial_del5p")
 
 [sub_resource type="Environment" id="Environment_vi3de"]
 background_mode = 2
-sky = SubResource("Sky_00tmt")
+sky = SubResource("Sky_khrwv")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_n5voa"]
 size = Vector2(15, 15)
@@ -68,14 +69,8 @@ _data = {
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.860653, 0.509192, 0, -0.509192, 0.860653, 0, 2.96298, 6.57868)
 
-[node name="BasicPlayer" parent="." instance=ExtResource("1_mljxn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69223, -20.4257)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vi3de")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.990596, 0.136822, 0, -0.136822, 0.990596, 0, 5.73832, 12.7704)
 
 [node name="Node3D" type="Node3D" parent="."]
 
@@ -159,3 +154,11 @@ libraries = {
 "": SubResource("AnimationLibrary_px4nq")
 }
 script = ExtResource("3_83lb3")
+
+[node name="Laikan" parent="." instance=ExtResource("3_uk0xw")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("control_entity") instance=ExtResource("4_1f61c")]
+control_entity = NodePath("../Laikan")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.990596, 0.136822, 0, -0.136822, 0.990596, 0, 5.73832, 12.7704)
