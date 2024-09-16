@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3ry8dgeqrhg1"]
+
+[ext_resource type="Script" path="res://classes/player/player.gd" id="1_1lph1"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_1lph1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="InteractionRayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -10)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5

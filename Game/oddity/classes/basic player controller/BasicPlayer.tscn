@@ -19,8 +19,6 @@ physics_material_override = SubResource("PhysicsMaterial_xe8ac")
 linear_damp = 5.0
 angular_damp = 5.0
 script = ExtResource("1_g7po0")
-walk_force = 1000.0
-run_multiplier = 4.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
