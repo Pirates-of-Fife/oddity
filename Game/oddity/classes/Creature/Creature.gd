@@ -1,10 +1,8 @@
 extends ControlEntity
 
-class_name Laikan
+class_name Creature
 
 # WARNING: TEMPORARY CODE #
-
-
 
 @export_category("Speed")
 @export

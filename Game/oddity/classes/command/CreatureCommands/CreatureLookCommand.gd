@@ -1,6 +1,6 @@
-extends LaikanCommand
+extends CreatureCommand
 
-class_name LaikanLookCommand
+class_name CreatureLookCommand
 
 class Params:
 	var twist_input : float
@@ -11,5 +11,5 @@ class Params:
 		self.pitch_input = pitch_input
 
 func execute(control_entity : ControlEntity, data : Object = null) -> void:
-	if data is Params and control_entity is Laikan:
+	if data is Params and control_entity is Creature:
 		control_entity.look(data.twist_input, data.pitch_input)
