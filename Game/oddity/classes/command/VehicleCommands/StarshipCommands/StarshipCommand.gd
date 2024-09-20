@@ -1,0 +1,3 @@
+extends VehicleCommand
+
+class_name StarshipCommand
