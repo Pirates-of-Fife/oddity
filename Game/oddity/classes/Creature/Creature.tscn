@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ik0bqvjr0uki"]
 
-[ext_resource type="Script" path="res://classes/Laikan/Laikan.gd" id="1_xu7ml"]
-[ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="2_f18fn"]
+[ext_resource type="Script" path="res://classes/Creature/Creature.gd" id="1_8w455"]
+[ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="2_4xlh2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0f0b5"]
 friction = 0.2
@@ -11,13 +11,13 @@ rough = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tg1nt"]
 
-[node name="Laikan" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+[node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
 mass = 60.0
 physics_material_override = SubResource("PhysicsMaterial_0f0b5")
 continuous_cd = true
 linear_damp = 5.0
 angular_damp = 5.0
-script = ExtResource("1_xu7ml")
+script = ExtResource("1_8w455")
 anchor = NodePath("Head/TwistPivot/PitchPivot/Anchor")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -36,4 +36,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8275, 0)
 [node name="PitchPivot" type="Node3D" parent="Head/TwistPivot"]
 
 [node name="Anchor" type="Node3D" parent="Head/TwistPivot/PitchPivot"]
-script = ExtResource("2_f18fn")
+script = ExtResource("2_4xlh2")

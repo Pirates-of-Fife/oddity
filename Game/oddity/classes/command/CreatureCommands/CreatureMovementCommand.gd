@@ -1,6 +1,6 @@
-extends LaikanCommand
+extends CreatureCommand
 
-class_name LaikanMovementCommand
+class_name  CreatureMovementCommand
 
 class Params:
 	var input : Vector2
@@ -9,5 +9,5 @@ class Params:
 		self.input = input
 
 func execute(control_entity : ControlEntity, data : Object = null) -> void:
-	if data is Params and control_entity is Laikan:
+	if data is Params and control_entity is Creature:
 		control_entity.move(data.input)
