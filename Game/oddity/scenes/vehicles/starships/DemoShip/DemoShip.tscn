@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqfonknridwp7"]
+
+[ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/DemoShip.gd" id="1_5hdip"]
+[ext_resource type="PackedScene" uid="uid://hfwqp0yy2khv" path="res://scenes/vehicles/starships/DemoShip/Assets/DemoShipMesh.tscn" id="2_h5s4g"]
+
+[node name="DemoShip" type="RigidBody3D"]
+script = ExtResource("1_5hdip")
+
+[node name="DemoShipMesh" parent="." instance=ExtResource("2_h5s4g")]
