@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqfonknridwp7"]
+[gd_scene load_steps=14 format=3 uid="uid://cqfonknridwp7"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/DemoShip.gd" id="1_5hdip"]
 [ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="2_ga564"]
+[ext_resource type="Resource" uid="uid://25ljcxn4nxy0" path="res://resources/resources/vehicles/starships/DemoShip/DemoShip.tres" id="2_gep6i"]
 [ext_resource type="PackedScene" uid="uid://hfwqp0yy2khv" path="res://scenes/vehicles/starships/DemoShip/Assets/DemoShipMesh.tscn" id="2_h5s4g"]
 [ext_resource type="Script" path="res://classes/frame of reference/GravityGrid.gd" id="3_lj764"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/thrust_vector_label.gd" id="5_lejdu"]
@@ -31,6 +32,9 @@ radius = 2.7792
 
 [node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
 script = ExtResource("1_5hdip")
+ship_info = ExtResource("2_gep6i")
+max_thrust = 10.0
+max_rotation_thrust = 2.0
 anchor = NodePath("PlayerCam/TwistPivot/PitchPivot/Anchor")
 
 [node name="PlayerCam" type="Node3D" parent="."]

@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="VehicleStats" load_steps=2 format=3 uid="uid://25ljcxn4nxy0"]
+[gd_resource type="Resource" script_class="StarshipInfo" load_steps=2 format=3 uid="uid://25ljcxn4nxy0"]
 
-[ext_resource type="Script" path="res://resources/classes/vehicle/VehicleInfo.gd" id="1_ciqvf"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/StarshipInfo.gd" id="1_enpg6"]
 
 [resource]
-script = ExtResource("1_ciqvf")
-manufacturer = "Demo"
-model_name = "Demo"
-release_year = "Demo"
+script = ExtResource("1_enpg6")
+max_linear_velocity = 50.0
+max_angular_pitch_velocity = 5.0
+max_angular_yaw_velocity = 5.0
+max_angular_roll_velocity = 3.0
+manufacturer = "The Little Company"
+model_name = "Josephine"
+release_year = "210"

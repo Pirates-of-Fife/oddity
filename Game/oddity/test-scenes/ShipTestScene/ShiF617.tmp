@@ -123,8 +123,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.23112)
 surface_material_override/0 = SubResource("StandardMaterial3D_tmylq")
 
 [node name="DemoShip" parent="." instance=ExtResource("4_efvbd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87725, 4.33342, -45.5569)
-max_thrust = 100.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87725, 2.07402, 15.1196)
+target_thrust_vector = null
+target_rotational_thrust_vector = null
+max_thrust = null
+max_rotation_thrust = null
 
 [editable path="Laikan"]
 [editable path="Laikan2"]
