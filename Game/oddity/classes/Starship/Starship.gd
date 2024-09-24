@@ -13,9 +13,12 @@ var target_thrust_vector : Vector3 = Vector3.ZERO
 @export
 var target_rotational_thrust_vector : Vector3 = Vector3.ZERO
 
+
+
 func _physics_process(delta: float) -> void:
-	print(target_thrust_vector)
-	
+	#print("Target Thurst: " + str(target_thrust_vector))
+	#print("Target Rotation: " + str(target_rotational_thrust_vector))
+
 	# reset thrust vector
 	
 	target_thrust_vector = Vector3.ZERO

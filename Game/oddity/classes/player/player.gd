@@ -8,6 +8,9 @@ class_name Player
 var mouse_sensitivity : float = 0.001
 
 @export
+var ship_mouse_controls_sensitivity : float = 0.01
+
+@export
 var keyboard_throttle_sensitivity : float = 0.8
 
 @export
@@ -106,15 +109,15 @@ func _process(delta: float) -> void:
 		current_throttle_forwards_axis = clampf(current_throttle_forwards_axis, -1, 1)
 		
 		starship_last_throttle_value = current_throttle_forwards_axis
-		
-		if (current_throttle_forwards_axis >= 0):
-			starship_thrust_forward_command.execute(starship_control_entity, StarshipThrustForwardCommand.Params.new(current_throttle_forwards_axis))
+				
+		if (current_throttle_forwards_axis <= 0):
+			starship_thrust_forward_command.execute(starship_control_entity, StarshipThrustForwardCommand.Params.new(-current_throttle_forwards_axis))
 		else:
 			starship_thrust_backward_command.execute(starship_control_entity, StarshipThrustBackwardCommand.Params.new(current_throttle_forwards_axis))
 		
 		if (abs(current_throttle_forwards_axis) < keyboard_throttle_deadzone and current_throttle_forwards_axis != 0):
-			if ($ThrottleDeadzoneTimer.is_stopped()):
-				$ThrottleDeadzoneTimer.start()
+			if (throttle_deadzone_reset_timer.is_stopped()):
+				throttle_deadzone_reset_timer.start()
 		
 		if (Input.is_action_pressed("starship_throttle_left")):
 			starship_thrust_left_command.execute(starship_control_entity, StarshipThrustLeftCommand.Params.new(Input.get_action_strength("starship_throttle_left")))
@@ -122,20 +125,20 @@ func _process(delta: float) -> void:
 		if (Input.is_action_pressed("starship_throttle_right")):
 			starship_thrust_right_command.execute(starship_control_entity, StarshipThrustRightCommand.Params.new(Input.get_action_strength("starship_throttle_right")))
 
-		if (Input.is_action_just_pressed("starship_throttle_up")):
+		if (Input.is_action_pressed("starship_throttle_up")):
 			starship_thrust_up_command.execute(starship_control_entity, StarshipThrustUpCommand.Params.new(Input.get_action_strength("starship_throttle_up")))
 		
-		if (Input.is_action_just_pressed("starship_throttle_down")):
+		if (Input.is_action_pressed("starship_throttle_down")):
 			starship_thrust_down_command.execute(starship_control_entity, StarshipThrustDownCommand.Params.new(Input.get_action_strength("starship_throttle_down")))
 			
-		if (Input.is_action_just_pressed("starship_roll_left")):
+		if (Input.is_action_pressed("starship_rotate_roll_left")):
 			starship_roll_left_command.execute(starship_control_entity, StarshipRollLeftCommand.Params.new(Input.get_action_strength("starship_rotate_roll_left")))
 
-		if (Input.is_action_just_pressed("starship_roll_right")):
+		if (Input.is_action_pressed("starship_rotate_roll_right")):
 			starship_roll_right_command.execute(starship_control_entity, StarshipRollRightCommand.Params.new(Input.get_action_strength("starship_rotate_roll_right")))
 
 		# Starship Mouse Pitch
-		
+				
 		if (mouse_pitch > 0):
 			starship_pitch_up_command.execute(starship_control_entity, StarshipPitchUpCommand.Params.new(abs(mouse_pitch)))
 		else:
@@ -146,8 +149,8 @@ func _process(delta: float) -> void:
 		if (mouse_yaw > 0):
 			starship_yaw_left_command.execute(starship_control_entity, StarshipYawLeftCommand.Params.new(abs(mouse_yaw)))
 		else:
-			starship_yaw_right_command.execute(starship_control_entity, StarshipYawRightCommand.Params.new(abs(mouse_pitch)))
-
+			starship_yaw_right_command.execute(starship_control_entity, StarshipYawRightCommand.Params.new(abs(mouse_yaw)))
+	
 	
 	# Reset mouse input
 	pitch_input = 0
@@ -159,9 +162,11 @@ func _input(event: InputEvent) -> void:
 			twist_input = - event.relative.x * mouse_sensitivity
 			pitch_input = - event.relative.y * mouse_sensitivity
 			
-			mouse_yaw += lerp(0,1,clamp(event.relative.x * get_process_delta_time(),-1,1)) * mouse_sensitivity
-			mouse_pitch += lerp(0,1,clamp(event.relative.y * get_process_delta_time(),-1,1)) * mouse_sensitivity
-
+			mouse_yaw += lerp(0,1,clamp(event.relative.x * get_process_delta_time(),-1,1)) * ship_mouse_controls_sensitivity
+			mouse_pitch += lerp(0,1,clamp(event.relative.y * get_process_delta_time(),-1,1)) * ship_mouse_controls_sensitivity
+			
+			mouse_yaw = clamp(mouse_yaw, -1, 1)
+			mouse_pitch = clamp(mouse_pitch, -1, 1)
 
 func _on_throttle_deadzone_reset_timer_timeout() -> void:
 	if (abs(current_throttle_forwards_axis) < keyboard_throttle_deadzone):
