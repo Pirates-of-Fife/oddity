@@ -19,6 +19,21 @@ var creature_movement_command : CreatureMovementCommand = CreatureMovementComman
 var creature_jump_command : CreatureJumpCommand = CreatureJumpCommand.new()
 var creature_look_command : CreatureLookCommand = CreatureLookCommand.new()
 
+# Starship Commands
+var starship_pitch_down_command : StarshipPitchDownCommand = StarshipPitchDownCommand.new()
+var starship_pitch_up_command : StarshipPitchUpCommand = StarshipPitchUpCommand.new()
+var starship_roll_left_command : StarshipRollLeftCommand = StarshipRollLeftCommand.new()
+var starship_roll_right_command : StarshipRollRightCommand = StarshipRollRightCommand.new()
+var starship_yaw_left_command : StarshipYawLeftCommand = StarshipYawLeftCommand.new()
+var starship_yaw_right_command : StarshipYawRightCommand = StarshipYawRightCommand.new()
+
+var starship_thrust_forward_command : StarshipThrustForwardCommand = StarshipThrustForwardCommand.new()
+var starship_thrust_backward_command : StarshipThrustBackwardCommand = StarshipThrustBackwardCommand.new()
+var starship_thrust_left_command : StarshipThrustLeftCommand = StarshipThrustLeftCommand.new()
+var starship_thrust_right_command : StarshipThrustRightCommand = StarshipThrustRightCommand.new()
+var starship_thrust_up_command : StarshipThrustUpCommand = StarshipThrustUpCommand.new()
+var starship_thrust_down_command : StarshipThrustDownCommand = StarshipThrustDownCommand.new()
+
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -58,7 +73,12 @@ func _process(delta: float) -> void:
 		
 		if (Input.is_action_just_pressed("player_jump")):
 			creature_jump_command.execute(control_entity)
-			
+	
+	if control_entity is Starship:
+		pass
+	
+	
+	# Reset mouse input
 	pitch_input = 0
 	twist_input = 0
 

@@ -10,5 +10,4 @@ class Params:
 
 func execute(control_entity : ControlEntity, data : Object = null) -> void:
 	if data is Params and control_entity is Starship:
-		# set thrust vector
-		pass
+		control_entity.set_target_thrust_backward(data.thrust)
