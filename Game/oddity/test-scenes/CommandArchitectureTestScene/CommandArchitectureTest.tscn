@@ -106,6 +106,9 @@ shape = SubResource("ConcavePolygonShape3D_dr1up")
 
 [node name="Player" parent="." instance=ExtResource("3_35wx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07854, -0.609585)
+mouse_sensivity = 0.001
+keyboard_throttle_sensitivity = 0.8
+keyboard_throttle_deadzone = 0.15
 
 [node name="Laikan" parent="." instance=ExtResource("4_2mhyb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.62249)

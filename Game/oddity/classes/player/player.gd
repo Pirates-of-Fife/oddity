@@ -2,12 +2,21 @@ extends Node3D
 
 class_name Player
 
+@export_category("Control Settings")
+
 @export
 var mouse_sensivity : float = 0.001
+
+@export
+var keyboard_throttle_sensitivity : float = 0.8
+
+@export
+var keyboard_throttle_deadzone : float = 0.15
 
 var twist_input : float = 0.0
 var pitch_input : float = 0.0
 
+@export_category("Control Entity")
 @export
 var control_entity : ControlEntity
 
@@ -33,6 +42,8 @@ var starship_thrust_left_command : StarshipThrustLeftCommand = StarshipThrustLef
 var starship_thrust_right_command : StarshipThrustRightCommand = StarshipThrustRightCommand.new()
 var starship_thrust_up_command : StarshipThrustUpCommand = StarshipThrustUpCommand.new()
 var starship_thrust_down_command : StarshipThrustDownCommand = StarshipThrustDownCommand.new()
+
+var starship_last_throttle_value : float = 0
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_cancel"):
@@ -75,8 +86,33 @@ func _process(delta: float) -> void:
 			creature_jump_command.execute(control_entity)
 	
 	if control_entity is Starship:
-		pass
-	
+		var starship_control_entity : Starship = control_entity
+		
+		var current_throttle_forwards_axis : float = starship_last_throttle_value #control_entity.target_thrust_vector.z
+		
+		if (Input.is_action_pressed("starship_throttle_forward")):
+			current_throttle_forwards_axis -= keyboard_throttle_sensitivity * delta
+		
+		if (Input.is_action_pressed("starship_throttle_backward")):
+			current_throttle_forwards_axis += keyboard_throttle_sensitivity * delta
+		
+		current_throttle_forwards_axis = clampf(current_throttle_forwards_axis, -1, 1)
+		
+		starship_last_throttle_value = current_throttle_forwards_axis
+		
+		if (current_throttle_forwards_axis >= 0):
+			starship_thrust_forward_command.execute(starship_control_entity, StarshipThrustForwardCommand.Params.new(current_throttle_forwards_axis))
+		else:
+			starship_thrust_backward_command.execute(starship_control_entity, StarshipThrustBackwardCommand.Params.new(current_throttle_forwards_axis))
+		
+		if (Input.is_action_pressed("starship_throttle_left")):
+			starship_thrust_left_command.execute(starship_control_entity, StarshipThrustLeftCommand.Params.new(Input.get_action_strength("starship_throttle_left")))
+
+		if (Input.is_action_pressed("starship_throttle_right")):
+			starship_thrust_right_command.execute(starship_control_entity, StarshipThrustRightCommand.Params.new(Input.get_action_strength("starship_throttle_right")))
+
+		#if (Input.is_action_just_pressed("sta"))
+		
 	
 	# Reset mouse input
 	pitch_input = 0
