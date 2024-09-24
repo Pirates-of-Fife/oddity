@@ -5,7 +5,7 @@ class_name Player
 @export_category("Control Settings")
 
 @export
-var mouse_sensivity : float = 0.001
+var mouse_sensitivity : float = 0.001
 
 @export
 var keyboard_throttle_sensitivity : float = 0.8
@@ -15,6 +15,9 @@ var keyboard_throttle_deadzone : float = 0.15
 
 var twist_input : float = 0.0
 var pitch_input : float = 0.0
+
+var mouse_yaw : float = 0.0
+var mouse_pitch : float = 0.0
 
 @export_category("Control Entity")
 @export
@@ -44,12 +47,16 @@ var starship_thrust_up_command : StarshipThrustUpCommand = StarshipThrustUpComma
 var starship_thrust_down_command : StarshipThrustDownCommand = StarshipThrustDownCommand.new()
 
 var starship_last_throttle_value : float = 0
+var current_throttle_forwards_axis : float = 0
+
+@onready
+var throttle_deadzone_reset_timer : Timer = $ThrottleDeadzoneResetTimer
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	if (Input.is_anything_pressed() and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and mouse_sensivity > 0):
+	if (Input.is_anything_pressed() and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and mouse_sensitivity > 0):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	if (Input.is_action_just_pressed("player_interact")):
@@ -88,7 +95,7 @@ func _process(delta: float) -> void:
 	if control_entity is Starship:
 		var starship_control_entity : Starship = control_entity
 		
-		var current_throttle_forwards_axis : float = starship_last_throttle_value #control_entity.target_thrust_vector.z
+		current_throttle_forwards_axis = starship_last_throttle_value #control_entity.target_thrust_vector.z
 		
 		if (Input.is_action_pressed("starship_throttle_forward")):
 			current_throttle_forwards_axis -= keyboard_throttle_sensitivity * delta
@@ -105,14 +112,42 @@ func _process(delta: float) -> void:
 		else:
 			starship_thrust_backward_command.execute(starship_control_entity, StarshipThrustBackwardCommand.Params.new(current_throttle_forwards_axis))
 		
+		if (abs(current_throttle_forwards_axis) < keyboard_throttle_deadzone and current_throttle_forwards_axis != 0):
+			if ($ThrottleDeadzoneTimer.is_stopped()):
+				$ThrottleDeadzoneTimer.start()
+		
 		if (Input.is_action_pressed("starship_throttle_left")):
 			starship_thrust_left_command.execute(starship_control_entity, StarshipThrustLeftCommand.Params.new(Input.get_action_strength("starship_throttle_left")))
 
 		if (Input.is_action_pressed("starship_throttle_right")):
 			starship_thrust_right_command.execute(starship_control_entity, StarshipThrustRightCommand.Params.new(Input.get_action_strength("starship_throttle_right")))
 
-		#if (Input.is_action_just_pressed("sta"))
+		if (Input.is_action_just_pressed("starship_throttle_up")):
+			starship_thrust_up_command.execute(starship_control_entity, StarshipThrustUpCommand.Params.new(Input.get_action_strength("starship_throttle_up")))
 		
+		if (Input.is_action_just_pressed("starship_throttle_down")):
+			starship_thrust_down_command.execute(starship_control_entity, StarshipThrustDownCommand.Params.new(Input.get_action_strength("starship_throttle_down")))
+			
+		if (Input.is_action_just_pressed("starship_roll_left")):
+			starship_roll_left_command.execute(starship_control_entity, StarshipRollLeftCommand.Params.new(Input.get_action_strength("starship_rotate_roll_left")))
+
+		if (Input.is_action_just_pressed("starship_roll_right")):
+			starship_roll_right_command.execute(starship_control_entity, StarshipRollRightCommand.Params.new(Input.get_action_strength("starship_rotate_roll_right")))
+
+		# Starship Mouse Pitch
+		
+		if (mouse_pitch > 0):
+			starship_pitch_up_command.execute(starship_control_entity, StarshipPitchUpCommand.Params.new(abs(mouse_pitch)))
+		else:
+			starship_pitch_down_command.execute(starship_control_entity, StarshipPitchDownCommand.Params.new(abs(mouse_pitch)))
+		
+		# Starship Mouse Yaw
+	
+		if (mouse_yaw > 0):
+			starship_yaw_left_command.execute(starship_control_entity, StarshipYawLeftCommand.Params.new(abs(mouse_yaw)))
+		else:
+			starship_yaw_right_command.execute(starship_control_entity, StarshipYawRightCommand.Params.new(abs(mouse_pitch)))
+
 	
 	# Reset mouse input
 	pitch_input = 0
@@ -121,5 +156,14 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			twist_input = - event.relative.x * mouse_sensivity
-			pitch_input = - event.relative.y * mouse_sensivity
+			twist_input = - event.relative.x * mouse_sensitivity
+			pitch_input = - event.relative.y * mouse_sensitivity
+			
+			mouse_yaw += lerp(0,1,clamp(event.relative.x * get_process_delta_time(),-1,1)) * mouse_sensitivity
+			mouse_pitch += lerp(0,1,clamp(event.relative.y * get_process_delta_time(),-1,1)) * mouse_sensitivity
+
+
+func _on_throttle_deadzone_reset_timer_timeout() -> void:
+	if (abs(current_throttle_forwards_axis) < keyboard_throttle_deadzone):
+		if (control_entity is Starship):
+			starship_thrust_forward_command.execute(control_entity, StarshipThrustForwardCommand.Params.new(0))

@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 	# reset thrust vector
 	
 	target_thrust_vector = Vector3.ZERO
+	target_rotational_thrust_vector = Vector3.ZERO
 
 func set_target_thrust_up(thrust : float) -> void:
 	target_thrust_vector.y = thrust
