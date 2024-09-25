@@ -84,72 +84,84 @@ script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDBackward" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDUp" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDDown" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDRollLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDRollRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDYawLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDYawRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDPitchUp" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="PIDPitchDown" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
 Kp = 15.0
 Ki = 0.1
 Kd = 0.01
+use_absolute_error = true
 
 [node name="Interior" type="StaticBody3D" parent="."]
 

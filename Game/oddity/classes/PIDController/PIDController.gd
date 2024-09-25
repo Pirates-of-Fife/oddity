@@ -31,6 +31,11 @@ var limit_min : float
 @export
 var limit_max : float
 
+@export_category("Error")
+
+@export
+var use_absolute_error : bool = false
+
 # controller "memory"
 var integrator : float = 0
 var previous_error : float = 0
@@ -56,6 +61,9 @@ func init(proportional_gain : float, integral_gain : float, derivative_gain : fl
 func update(setpoint : float, measurement : float, delta : float) -> float:	
 	# Error signal
 	var error : float = setpoint - measurement
+	
+	if (use_absolute_error):
+		error = absf(error)
 	
 	# Proportional
 	var proportional : float = Kp * error

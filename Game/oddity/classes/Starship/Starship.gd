@@ -49,13 +49,6 @@ var pid_pitch_down : PIDController =  $PIDControllers/PIDPitchDown
 
 var epsilon : float = 0.0001
 
-#func _physics_process(delta):
-#	# Example: forward movement control
-#	var forward_input = get_input_axis_value() # Placeholder for your actual input method
-#	var forward_output = pid_forward.calculate(forward_input, delta)
-#	apply_thrust_in_direction(forward_output, Vector3.FORWARD)  # Apply thrust to the ship
-
-
 var acceleration : Vector3 = Vector3.ZERO
 var local_linear_velocity : Vector3 = Vector3.ZERO
 var local_angular_velocity : Vector3 = Vector3.ZERO
@@ -64,6 +57,8 @@ var local_linear_velocity_last_frame : Vector3 = Vector3.ZERO
 
 var target_speed_vector : Vector3 
 var target_rotation_speed_vector : Vector3
+
+var actual_thrust_vector : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	pid_forward.limit_max = thruster_force.forward_thrust
@@ -77,6 +72,9 @@ func _physics_process(delta: float) -> void:
 	target_speed_vector = calculate_target_speed_vector()
 	target_rotation_speed_vector = calculate_target_rotation_speed_vector()
 	
+	var velocity_delta : float = 0
+	var thrust : float = 0
+	
 	# forwards axis
 	var forwards_thrust : float
 	
@@ -85,11 +83,16 @@ func _physics_process(delta: float) -> void:
 	print("DELTA " + str(forwards_speed_delta) )
 	print("Speed: " + str(local_linear_velocity.z) + " Target: " + str(target_speed_vector.z))
 	
-	if (get_target_forwards_axis_movement() == MovementDirection.FORWARD):
-		forwards_thrust = pid_forward.update(abs(forwards_speed_delta), abs(local_linear_velocity.z), delta)
+	velocity_delta = local_linear_velocity.z - target_speed_vector.z
 	
-	if (get_target_forwards_axis_movement() == MovementDirection.BACKWARD):
-		forwards_thrust = -pid_backward.update(abs(forwards_speed_delta), (local_linear_velocity.z), delta)
+	if (velocity_delta < 0):
+		thrust = pid_forward.update(target_speed_vector.z, local_linear_velocity.z, delta)
+		thrust_forward(thrust)
+	if (velocity_delta > 0):
+		thrust = pid_backward.update(target_speed_vector.z, local_linear_velocity.z, delta)
+		thrust_backward(thrust)
+		
+	print("TH " + str(thrust))
 	
 	#print("AXIS: " + str(get_target_forwards_axis_movement()))
 	#print("THRUST: " + str(forwards_thrust))
@@ -98,8 +101,7 @@ func _physics_process(delta: float) -> void:
 	#var backwards_thrust : float = pid_backward.update(target_speed_vector.z, local_linear_velocity.z, delta)
 	
 	
-	apply_central_force(Vector3(0,0, forwards_thrust))
-	
+	apply_central_force(actual_thrust_vector * global_basis.inverse())
 	# reset thrust vector
 	reset_thrust_vectors()
 
@@ -150,6 +152,29 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 	
 	return new_target_vector
 
+#===========================================================================#
+
+
+func thrust_up(thrust : float) -> void:
+	actual_thrust_vector.y = thrust
+	
+func thrust_down(thrust: float) -> void:
+	actual_thrust_vector.y = -thrust
+
+func thrust_forward(thrust: float) -> void:
+	actual_thrust_vector.z = thrust
+
+func thrust_backward(thrust: float) -> void:
+	actual_thrust_vector.z = -thrust
+
+func thrust_left(thrust: float) -> void:
+	actual_thrust_vector.x = -thrust
+
+func thrust_right(thrust: float) -> void:
+	actual_thrust_vector.x = thrust
+
+#===========================================================================#
+
 func set_target_thrust_up(thrust : float) -> void:
 	target_thrust_vector.y = thrust
 
@@ -163,10 +188,10 @@ func set_target_thrust_right(thrust : float) -> void:
 	target_thrust_vector.x = thrust
 
 func set_target_thrust_forward(thrust : float) -> void:
-	target_thrust_vector.z = -thrust
+	target_thrust_vector.z = thrust
 
 func set_target_thrust_backward(thrust : float) -> void:
-	target_thrust_vector.z = thrust
+	target_thrust_vector.z = -thrust
 	
 func set_target_rotation_pitch_up(thrust : float) -> void:
 	target_rotational_thrust_vector.x = thrust
