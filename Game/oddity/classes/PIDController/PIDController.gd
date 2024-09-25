@@ -40,7 +40,10 @@ var previous_measurement : float = 0
 # controller output
 var output : float = 0
 
-func _init(proportional_gain : float, integral_gain : float, derivative_gain : float, low_pass_filter_tau : float, minimum_limit : float, maximum_limit : float) -> void:
+func _ready() -> void:
+	init(Kp, Ki, Kd, tau, limit_min, limit_max)
+
+func init(proportional_gain : float, integral_gain : float, derivative_gain : float, low_pass_filter_tau : float, minimum_limit : float, maximum_limit : float) -> void:
 	Kp = proportional_gain
 	Ki = integral_gain
 	Kd = derivative_gain
