@@ -59,10 +59,22 @@ var target_speed_vector : Vector3
 var target_rotation_speed_vector : Vector3
 
 var actual_thrust_vector : Vector3 = Vector3.ZERO
+var actual_rotation_vector : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust
+	pid_up.limit_max = thruster_force.up_thrust
+	pid_down.limit_max = thruster_force.down_thrust
+	pid_left.limit_max = thruster_force.left_thrust
+	pid_right.limit_max = thruster_force.right_thrust
+	
+	pid_roll_left.limit_max = thruster_force.roll_left_thrust
+	pid_roll_right.limit_max = thruster_force.roll_right_thrust
+	pid_yaw_left.limit_max = thruster_force.yaw_left_thrust
+	pid_yaw_right.limit_max = thruster_force.yaw_right_thrust
+	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
+	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
 
 func _physics_process(delta: float) -> void:
 	calculate_local_linear_velocity()
@@ -72,17 +84,13 @@ func _physics_process(delta: float) -> void:
 	target_speed_vector = calculate_target_speed_vector()
 	target_rotation_speed_vector = calculate_target_rotation_speed_vector()
 	
+	print(str(target_speed_vector) + " vs " + str(local_linear_velocity))
+	
 	var velocity_delta : float = 0
 	var thrust : float = 0
 	
 	# forwards axis
-	var forwards_thrust : float
-	
-	var forwards_speed_delta : float = target_speed_vector.z - local_linear_velocity.z
-	
-	print("DELTA " + str(forwards_speed_delta) )
-	print("Speed: " + str(local_linear_velocity.z) + " Target: " + str(target_speed_vector.z))
-	
+
 	velocity_delta = local_linear_velocity.z - target_speed_vector.z
 	
 	if (velocity_delta < 0):
@@ -91,17 +99,69 @@ func _physics_process(delta: float) -> void:
 	if (velocity_delta > 0):
 		thrust = pid_backward.update(target_speed_vector.z, local_linear_velocity.z, delta)
 		thrust_backward(thrust)
+	
+	# Up/Down axis
+
+	velocity_delta = local_linear_velocity.y - target_speed_vector.y
+	
+	print(velocity_delta)
+	
+	if (velocity_delta < 0):
+		thrust = pid_up.update(target_speed_vector.y, local_linear_velocity.y, delta)
+		thrust_up(thrust)
+	if (velocity_delta > 0):
+		thrust = pid_down.update(target_speed_vector.y, local_linear_velocity.y, delta)
+		thrust_down(thrust)
+
+	# Left/Right axis
+
+	velocity_delta = local_linear_velocity.x - target_speed_vector.x
 		
-	print("TH " + str(thrust))
+	if (velocity_delta < 0):
+		thrust = pid_left.update(target_speed_vector.x, local_linear_velocity.x, delta)
+		thrust_left(thrust)
+	if (velocity_delta > 0):
+		thrust = pid_right.update(target_speed_vector.x, local_linear_velocity.x, delta)
+		thrust_right(thrust)
+		
+	# Pitch axis
+#
+	#velocity_delta = local_angular_velocity.x - target_rotation_speed_vector.x
+#
+	#if (velocity_delta < 0):
+		#thrust = pid_pitch_up.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
+		#set_target_rotation_pitch_up(thrust)
+	#if (velocity_delta > 0):
+		#thrust = pid_pitch_down.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
+		#set_target_rotation_pitch_down(thrust)
+#
+	## Yaw axis
+#
+	#velocity_delta = local_angular_velocity.y - target_rotation_speed_vector.y
+#
+	#if (velocity_delta < 0):
+		#thrust = pid_yaw_left.update(target_rotation_speed_vector.y, local_angular_velocity.y, delta)
+		#set_target_rotation_yaw_left(thrust)
+	#if (velocity_delta > 0):
+		#thrust = pid_yaw_right.update(target_rotation_speed_vector.y, local_angular_velocity.y, delta)
+		#set_target_rotation_yaw_right(thrust)
+#
+	## Roll axis
+#
+	#velocity_delta = local_angular_velocity.z - target_rotation_speed_vector.z
+#
+	#if (velocity_delta < 0):
+		#thrust = pid_roll_left.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
+		#set_target_rotation_roll_left(thrust)
+	#if (velocity_delta > 0):
+		#thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
+		#set_target_rotation_roll_right(thrust)
 	
-	#print("AXIS: " + str(get_target_forwards_axis_movement()))
-	#print("THRUST: " + str(forwards_thrust))
+	#apply_central_force(actual_thrust_vector * global_basis.inverse())
+	#apply_torque(actual_rotation_vector * global_basis.inverse())
 	
-	#var forwards_thrust : float = pid_forward.update(target_speed_vector.z, local_linear_velocity.z, delta)
-	#var backwards_thrust : float = pid_backward.update(target_speed_vector.z, local_linear_velocity.z, delta)
+	apply_central_force(Vector3(1000, 0, 1000))
 	
-	
-	apply_central_force(actual_thrust_vector * global_basis.inverse())
 	# reset thrust vector
 	reset_thrust_vectors()
 
@@ -154,13 +214,12 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 
 #===========================================================================#
 
-
 func thrust_up(thrust : float) -> void:
 	actual_thrust_vector.y = thrust
 	
 func thrust_down(thrust: float) -> void:
 	actual_thrust_vector.y = -thrust
-
+	
 func thrust_forward(thrust: float) -> void:
 	actual_thrust_vector.z = thrust
 
@@ -168,10 +227,28 @@ func thrust_backward(thrust: float) -> void:
 	actual_thrust_vector.z = -thrust
 
 func thrust_left(thrust: float) -> void:
-	actual_thrust_vector.x = -thrust
+	actual_thrust_vector.x = thrust
 
 func thrust_right(thrust: float) -> void:
-	actual_thrust_vector.x = thrust
+	actual_thrust_vector.x = -thrust
+
+func roll_left(thrust: float) -> void:
+	actual_rotation_vector.z = thrust 
+
+func roll_right(thrust: float) -> void:
+	actual_rotation_vector.z = -thrust 
+
+func yaw_left(thrust: float) -> void:
+	actual_rotation_vector.y = thrust 
+
+func yaw_right(thrust: float) -> void:
+	actual_rotation_vector.y = -thrust 
+
+func pitch_up(thrust: float) -> void:
+	actual_rotation_vector.x = thrust
+
+func pitch_down(thrust: float) -> void:
+	actual_rotation_vector.x = -thrust
 
 #===========================================================================#
 
@@ -182,10 +259,10 @@ func set_target_thrust_down(thrust : float) -> void:
 	target_thrust_vector.y = -thrust
 	
 func set_target_thrust_left(thrust : float) -> void:
-	target_thrust_vector.x = -thrust
+	target_thrust_vector.x = thrust
 	
 func set_target_thrust_right(thrust : float) -> void:
-	target_thrust_vector.x = thrust
+	target_thrust_vector.x = -thrust
 
 func set_target_thrust_forward(thrust : float) -> void:
 	target_thrust_vector.z = thrust

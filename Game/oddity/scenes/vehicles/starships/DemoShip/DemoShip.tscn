@@ -14,8 +14,8 @@
 script = ExtResource("3_jnc0e")
 forward_thrust = 1000.0
 backward_thrust = 500.0
-up_thrust = 300.0
-down_thrust = 300.0
+up_thrust = 600.0
+down_thrust = 600.0
 left_thrust = 300.0
 right_thrust = 300.0
 roll_left_thrust = 50.0
@@ -48,7 +48,6 @@ height = 4.95257
 radius = 2.7792
 
 [node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
-mass = 1000.0
 script = ExtResource("1_5hdip")
 ship_info = ExtResource("2_gep6i")
 thruster_force = SubResource("Resource_xuaf6")
