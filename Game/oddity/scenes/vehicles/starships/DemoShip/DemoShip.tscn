@@ -18,12 +18,12 @@ up_thrust = 600.0
 down_thrust = 600.0
 left_thrust = 300.0
 right_thrust = 300.0
-roll_left_thrust = 50.0
-roll_right_thrust = 50.0
-yaw_left_thrust = 50.0
-yaw_right_thrust = 50.0
-pitch_up_thrust = 50.0
-pitch_down_thrust = 50.0
+roll_left_thrust = 200.0
+roll_right_thrust = 200.0
+yaw_left_thrust = 200.0
+yaw_right_thrust = 200.0
+pitch_up_thrust = 200.0
+pitch_down_thrust = 200.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_cx6yd"]
 radius = 0.1
@@ -164,6 +164,8 @@ Kd = 0.01
 use_absolute_error = true
 
 [node name="Interior" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interior"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206604, 0.338113, 2.11804)

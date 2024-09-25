@@ -125,40 +125,42 @@ func _physics_process(delta: float) -> void:
 		thrust_right(thrust)
 		
 	# Pitch axis
-#
-	#velocity_delta = local_angular_velocity.x - target_rotation_speed_vector.x
-#
-	#if (velocity_delta < 0):
-		#thrust = pid_pitch_up.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
-		#set_target_rotation_pitch_up(thrust)
-	#if (velocity_delta > 0):
-		#thrust = pid_pitch_down.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
-		#set_target_rotation_pitch_down(thrust)
-#
-	## Yaw axis
-#
-	#velocity_delta = local_angular_velocity.y - target_rotation_speed_vector.y
-#
-	#if (velocity_delta < 0):
-		#thrust = pid_yaw_left.update(target_rotation_speed_vector.y, local_angular_velocity.y, delta)
-		#set_target_rotation_yaw_left(thrust)
-	#if (velocity_delta > 0):
-		#thrust = pid_yaw_right.update(target_rotation_speed_vector.y, local_angular_velocity.y, delta)
-		#set_target_rotation_yaw_right(thrust)
-#
-	## Roll axis
-#
-	#velocity_delta = local_angular_velocity.z - target_rotation_speed_vector.z
-#
-	#if (velocity_delta < 0):
-		#thrust = pid_roll_left.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
-		#set_target_rotation_roll_left(thrust)
-	#if (velocity_delta > 0):
-		#thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
-		#set_target_rotation_roll_right(thrust)
+
+	velocity_delta = local_angular_velocity.x - target_rotation_speed_vector.x
+
+	if (velocity_delta < 0):
+		thrust = pid_pitch_up.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
+		pitch_up(thrust)
+	if (velocity_delta > 0):
+		thrust = pid_pitch_down.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
+		pitch_down(thrust)
+
+	# Yaw axis
+
+	velocity_delta = local_angular_velocity.y - target_rotation_speed_vector.y
+
+	if (velocity_delta < 0):
+		thrust = pid_yaw_left.update(target_rotation_speed_vector.y, local_angular_velocity.y, delta)
+		yaw_left(thrust)
+	if (velocity_delta > 0):
+		thrust = pid_yaw_right.update(target_rotation_speed_vector.y, local_angular_velocity.y, delta)
+		yaw_right(thrust)
+
+	# Roll axis
+
+	velocity_delta = local_angular_velocity.z - target_rotation_speed_vector.z
+
+	if (velocity_delta < 0):
+		thrust = pid_roll_left.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
+		set_target_rotation_roll_left(thrust)
+	if (velocity_delta > 0):
+		thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
+		set_target_rotation_roll_right(thrust)
 	
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
-	#apply_torque(actual_rotation_vector * global_basis.inverse())
+	apply_torque(actual_rotation_vector * global_basis.inverse())
+	
+	print(actual_rotation_vector)
 	
 	#apply_central_force(Vector3(1000, 0, 1000))
 	
