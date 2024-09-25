@@ -157,10 +157,10 @@ func _physics_process(delta: float) -> void:
 		#thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
 		#set_target_rotation_roll_right(thrust)
 	
-	#apply_central_force(actual_thrust_vector * global_basis.inverse())
+	apply_central_force(actual_thrust_vector * global_basis.inverse())
 	#apply_torque(actual_rotation_vector * global_basis.inverse())
 	
-	apply_central_force(Vector3(1000, 0, 1000))
+	#apply_central_force(Vector3(1000, 0, 1000))
 	
 	# reset thrust vector
 	reset_thrust_vectors()

@@ -48,6 +48,7 @@ height = 4.95257
 radius = 2.7792
 
 [node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+mass = 1000.0
 script = ExtResource("1_5hdip")
 ship_info = ExtResource("2_gep6i")
 thruster_force = SubResource("Resource_xuaf6")
