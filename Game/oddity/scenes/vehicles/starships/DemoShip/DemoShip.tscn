@@ -1,12 +1,29 @@
-[gd_scene load_steps=14 format=3 uid="uid://cqfonknridwp7"]
+[gd_scene load_steps=17 format=3 uid="uid://cqfonknridwp7"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/DemoShip.gd" id="1_5hdip"]
 [ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="2_ga564"]
 [ext_resource type="Resource" uid="uid://25ljcxn4nxy0" path="res://resources/resources/vehicles/starships/DemoShip/DemoShip.tres" id="2_gep6i"]
 [ext_resource type="PackedScene" uid="uid://hfwqp0yy2khv" path="res://scenes/vehicles/starships/DemoShip/Assets/DemoShipMesh.tscn" id="2_h5s4g"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="3_jnc0e"]
 [ext_resource type="Script" path="res://classes/frame of reference/GravityGrid.gd" id="3_lj764"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/thrust_vector_label.gd" id="5_lejdu"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/rotation_vector_label.gd" id="6_d1bcb"]
+[ext_resource type="Script" path="res://classes/PIDController/PIDController.gd" id="9_xxpud"]
+
+[sub_resource type="Resource" id="Resource_xuaf6"]
+script = ExtResource("3_jnc0e")
+forward_thrust = 1000.0
+backward_thrust = 500.0
+up_thrust = 300.0
+down_thrust = 300.0
+left_thrust = 300.0
+right_thrust = 300.0
+roll_left_thrust = 50.0
+roll_right_thrust = 50.0
+yaw_left_thrust = 50.0
+yaw_right_thrust = 50.0
+pitch_up_thrust = 50.0
+pitch_down_thrust = 50.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_cx6yd"]
 radius = 0.1
@@ -33,8 +50,7 @@ radius = 2.7792
 [node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
 script = ExtResource("1_5hdip")
 ship_info = ExtResource("2_gep6i")
-max_thrust = 10.0
-max_rotation_thrust = 2.0
+thruster_force = SubResource("Resource_xuaf6")
 anchor = NodePath("PlayerCam/TwistPivot/PitchPivot/Anchor")
 
 [node name="PlayerCam" type="Node3D" parent="."]
@@ -117,3 +133,77 @@ script = ExtResource("5_lejdu")
 transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.4706, 1.53827, 10.5045)
 text = "Placeholder"
 script = ExtResource("6_d1bcb")
+
+[node name="PIDControllers" type="Node" parent="."]
+
+[node name="PIDForward" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDBackward" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDUp" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDDown" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDLeft" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDRight" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDRollLeft" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDRollRight" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDYawLeft" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDYawRight" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDPitchUp" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
+
+[node name="PIDPitchDown" type="Node" parent="PIDControllers"]
+script = ExtResource("9_xxpud")
+Kp = 15.0
+Ki = 0.1
+Kd = 0.01
