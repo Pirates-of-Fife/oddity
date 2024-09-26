@@ -84,8 +84,6 @@ func _physics_process(delta: float) -> void:
 	target_speed_vector = calculate_target_speed_vector()
 	target_rotation_speed_vector = calculate_target_rotation_speed_vector()
 	
-	print(str(target_speed_vector) + " vs " + str(local_linear_velocity))
-	
 	var velocity_delta : float = 0
 	var thrust : float = 0
 	
@@ -103,9 +101,7 @@ func _physics_process(delta: float) -> void:
 	# Up/Down axis
 
 	velocity_delta = local_linear_velocity.y - target_speed_vector.y
-	
-	print(velocity_delta)
-	
+		
 	if (velocity_delta < 0):
 		thrust = pid_up.update(target_speed_vector.y, local_linear_velocity.y, delta)
 		thrust_up(thrust)
@@ -127,6 +123,8 @@ func _physics_process(delta: float) -> void:
 	# Pitch axis
 
 	velocity_delta = local_angular_velocity.x - target_rotation_speed_vector.x
+
+	print(str(local_angular_velocity.x) + " " + str(target_rotation_speed_vector.x) + " " + str(velocity_delta))
 
 	if (velocity_delta < 0):
 		thrust = pid_pitch_up.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
@@ -159,9 +157,7 @@ func _physics_process(delta: float) -> void:
 	
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 	apply_torque(actual_rotation_vector * global_basis.inverse())
-	
-	print(actual_rotation_vector)
-	
+		
 	#apply_central_force(Vector3(1000, 0, 1000))
 	
 	# reset thrust vector
