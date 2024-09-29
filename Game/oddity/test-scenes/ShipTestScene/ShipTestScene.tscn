@@ -50,6 +50,7 @@ shape = SubResource("ConcavePolygonShape3D_c7r4v")
 
 [node name="GravityGrid" type="Area3D" parent="Node3D/MeshInstance3D"]
 script = ExtResource("1_q0ntb")
+gravity_strength = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D/GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 233.341, 0)
@@ -61,7 +62,7 @@ ship_mouse_controls_sensitivity = 0.1
 control_entity = NodePath("../DemoShip")
 
 [node name="DemoShip" parent="." instance=ExtResource("4_efvbd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87725, 4.33342, -45.5569)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87725, 4.33342, 196.722)
 
 [node name="Node3D2" type="Node3D" parent="."]
 transform = Transform3D(2.855, 0, 0, 0, 2.855, 0, 0, 0, 2.855, 55.8822, 0, 112.978)
