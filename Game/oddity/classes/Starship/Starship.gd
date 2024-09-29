@@ -199,41 +199,55 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 
 #===========================================================================#
 
-func thrust_up(thrust : float) -> void:
+func thrust_up(thrust: float) -> void:
+	thrust = clampf(thrust, 0, thruster_force.up_thrust)  
 	actual_thrust_vector.y = thrust
-	
+
 func thrust_down(thrust: float) -> void:
-	actual_thrust_vector.y = -thrust
-	
+	thrust = clampf(thrust, 0, thruster_force.down_thrust)  
+	actual_thrust_vector.y = -thrust  
+
 func thrust_forward(thrust: float) -> void:
+	thrust = clampf(thrust, 0, thruster_force.forward_thrust) 
 	actual_thrust_vector.z = thrust
 
 func thrust_backward(thrust: float) -> void:
-	actual_thrust_vector.z = -thrust
+	thrust = clampf(thrust, 0, thruster_force.backward_thrust) 
+	actual_thrust_vector.z = -thrust 
 
 func thrust_left(thrust: float) -> void:
+	thrust = clampf(thrust, 0, thruster_force.left_thrust)  
 	actual_thrust_vector.x = thrust
 
 func thrust_right(thrust: float) -> void:
-	actual_thrust_vector.x = -thrust
+	thrust = clampf(thrust, 0, thruster_force.right_thrust)
+	actual_thrust_vector.x = -thrust  
 
 func roll_left(thrust: float) -> void:
-	actual_rotation_vector.z = -thrust 
+	thrust = clampf(thrust, 0, thruster_force.roll_left_thrust)  
+	actual_rotation_vector.z = -thrust
 
 func roll_right(thrust: float) -> void:
-	actual_rotation_vector.z = thrust 
+	thrust = clampf(thrust, 0, thruster_force.roll_right_thrust) 
+	actual_rotation_vector.z = thrust
 
 func yaw_left(thrust: float) -> void:
+	thrust = clampf(thrust, 0, thruster_force.yaw_left_thrust) 
 	actual_rotation_vector.y = thrust 
 
 func yaw_right(thrust: float) -> void:
-	actual_rotation_vector.y = -thrust 
+	thrust = clampf(thrust, 0, thruster_force.yaw_right_thrust)
+	actual_rotation_vector.y = -thrust
 
 func pitch_up(thrust: float) -> void:
+	thrust = clampf(thrust, 0, thruster_force.pitch_up_thrust)
 	actual_rotation_vector.x = -thrust
 
 func pitch_down(thrust: float) -> void:
+	thrust = clampf(thrust, 0, thruster_force.pitch_down_thrust)
 	actual_rotation_vector.x = thrust
+
+
 
 #===========================================================================#
 
