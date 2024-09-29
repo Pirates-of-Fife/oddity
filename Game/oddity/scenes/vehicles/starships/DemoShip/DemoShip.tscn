@@ -22,8 +22,8 @@ roll_left_thrust = 200.0
 roll_right_thrust = 200.0
 yaw_left_thrust = 200.0
 yaw_right_thrust = 200.0
-pitch_up_thrust = 400.0
-pitch_down_thrust = 400.0
+pitch_up_thrust = 200.0
+pitch_down_thrust = 200.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_cx6yd"]
 radius = 0.1
@@ -123,44 +123,44 @@ use_absolute_error = true
 
 [node name="PIDRollLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
-Kd = 0.01
+Kp = 250.0
+Ki = 0.2
+Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDRollRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
-Kd = 0.01
+Kp = 250.0
+Ki = 0.2
+Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDYawLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
-Kd = 0.01
+Kp = 250.0
+Ki = 0.2
+Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDYawRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
-Kd = 0.01
+Kp = 250.0
+Ki = 0.2
+Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDPitchUp" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
-Kd = 0.01
+Kp = 250.0
+Ki = 0.2
+Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDPitchDown" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
-Kd = 0.01
+Kp = 250.0
+Ki = 0.2
+Kd = 0.05
 use_absolute_error = true
 
 [node name="Interior" type="StaticBody3D" parent="."]

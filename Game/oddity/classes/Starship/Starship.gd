@@ -105,6 +105,7 @@ func _physics_process(delta: float) -> void:
 	if (velocity_delta < 0):
 		thrust = pid_up.update(target_speed_vector.y, local_linear_velocity.y, delta)
 		thrust_up(thrust)
+		print("up" + str(thrust))
 	if (velocity_delta > 0):
 		thrust = pid_down.update(target_speed_vector.y, local_linear_velocity.y, delta)
 		thrust_down(thrust)
@@ -124,19 +125,21 @@ func _physics_process(delta: float) -> void:
 
 	velocity_delta = local_angular_velocity.x - target_rotation_speed_vector.x
 
-	print(str(local_angular_velocity.x) + " " + str(target_rotation_speed_vector.x) + " " + str(velocity_delta))
+	#print(str(local_angular_velocity.x) + " " + str(target_rotation_speed_vector.x) + " " + str(velocity_delta))
 
-	if (velocity_delta < 0):
+	if (velocity_delta > 0):
 		thrust = pid_pitch_up.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
 		pitch_up(thrust)
-	if (velocity_delta > 0):
+	if (velocity_delta < 0):
 		thrust = pid_pitch_down.update(target_rotation_speed_vector.x, local_angular_velocity.x, delta)
 		pitch_down(thrust)
-
+	
 	# Yaw axis
 
 	velocity_delta = local_angular_velocity.y - target_rotation_speed_vector.y
-
+	
+	#print(velocity_delta)
+	
 	if (velocity_delta < 0):
 		thrust = pid_yaw_left.update(target_rotation_speed_vector.y, local_angular_velocity.y, delta)
 		yaw_left(thrust)
@@ -144,17 +147,21 @@ func _physics_process(delta: float) -> void:
 		thrust = pid_yaw_right.update(target_rotation_speed_vector.y, local_angular_velocity.y, delta)
 		yaw_right(thrust)
 
+
 	# Roll axis
 
 	velocity_delta = local_angular_velocity.z - target_rotation_speed_vector.z
-
+		
 	if (velocity_delta < 0):
 		thrust = pid_roll_left.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
-		set_target_rotation_roll_left(thrust)
+		print("LEFT " + str(thrust) + " Delta: " + str(velocity_delta))
+		roll_right(thrust)
+
 	if (velocity_delta > 0):
 		thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
-		set_target_rotation_roll_right(thrust)
-	
+		roll_left(thrust)
+		print("RIGHT " + str(thrust) + " Delta: " + str(velocity_delta))
+
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 	apply_torque(actual_rotation_vector * global_basis.inverse())
 		
@@ -225,16 +232,16 @@ func thrust_backward(thrust: float) -> void:
 	actual_thrust_vector.z = -thrust
 
 func thrust_left(thrust: float) -> void:
-	actual_thrust_vector.x = thrust
-
-func thrust_right(thrust: float) -> void:
 	actual_thrust_vector.x = -thrust
 
+func thrust_right(thrust: float) -> void:
+	actual_thrust_vector.x = thrust
+
 func roll_left(thrust: float) -> void:
-	actual_rotation_vector.z = thrust 
+	actual_rotation_vector.z = -thrust 
 
 func roll_right(thrust: float) -> void:
-	actual_rotation_vector.z = -thrust 
+	actual_rotation_vector.z = thrust 
 
 func yaw_left(thrust: float) -> void:
 	actual_rotation_vector.y = thrust 
@@ -243,10 +250,10 @@ func yaw_right(thrust: float) -> void:
 	actual_rotation_vector.y = -thrust 
 
 func pitch_up(thrust: float) -> void:
-	actual_rotation_vector.x = thrust
+	actual_rotation_vector.x = -thrust
 
 func pitch_down(thrust: float) -> void:
-	actual_rotation_vector.x = -thrust
+	actual_rotation_vector.x = thrust
 
 #===========================================================================#
 
@@ -275,16 +282,16 @@ func set_target_rotation_pitch_down(thrust : float) -> void:
 	target_rotational_thrust_vector.x = -thrust
 	
 func set_target_rotation_yaw_left(thrust : float) -> void:
-	target_rotational_thrust_vector.y = thrust
+	target_rotational_thrust_vector.y = -thrust
 	
 func set_target_rotation_yaw_right(thrust : float) -> void:
-	target_rotational_thrust_vector.y = -thrust
+	target_rotational_thrust_vector.y = thrust
 
 func set_target_rotation_roll_left(thrust : float) -> void:
-	target_rotational_thrust_vector.z = thrust
+	target_rotational_thrust_vector.z = -thrust
 
 func set_target_rotation_roll_right(thrust : float) -> void:
-	target_rotational_thrust_vector.z = -thrust
+	target_rotational_thrust_vector.z = thrust
 
 enum MovementDirection
 {

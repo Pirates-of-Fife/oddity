@@ -8,6 +8,9 @@ class_name Player
 var mouse_sensitivity : float = 0.001
 
 @export
+var mouse_joystick_deadzone : float = 0.03
+
+@export
 var ship_mouse_controls_sensitivity : float = 0.01
 
 @export
@@ -167,6 +170,12 @@ func _input(event: InputEvent) -> void:
 			
 			mouse_yaw = clamp(mouse_yaw, -1, 1)
 			mouse_pitch = clamp(mouse_pitch, -1, 1)
+			
+			if abs(mouse_yaw) < mouse_joystick_deadzone:
+				mouse_yaw = 0
+
+			if abs(mouse_pitch) < mouse_joystick_deadzone:
+				mouse_pitch = 0
 
 func _on_throttle_deadzone_reset_timer_timeout() -> void:
 	if (abs(current_throttle_forwards_axis) < keyboard_throttle_deadzone):
