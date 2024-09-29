@@ -112,9 +112,7 @@ func _physics_process(delta: float) -> void:
 	# Left/Right axis
 
 	velocity_delta = local_linear_velocity.x - target_speed_vector.x
-	
-	print(str(local_linear_velocity.x) + " target " + str(target_speed_vector.x))
-	
+		
 	if (velocity_delta < 0):
 		thrust = pid_left.update(target_speed_vector.x, local_linear_velocity.x, delta)
 		thrust_left(thrust)
@@ -163,36 +161,13 @@ func _physics_process(delta: float) -> void:
 
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 	apply_torque(actual_rotation_vector * global_basis.inverse())
-		
-	#apply_central_force(Vector3(1000, 0, 1000))
-	
+			
 	# reset thrust vector
 	reset_thrust_vectors()
 
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO
 	target_rotational_thrust_vector = Vector3.ZERO
-
-func flight_calculations() -> void:
-	#pid_controller.update()
-	pass
-
-func get_forwards_axis_movement() -> MovementDirection:
-	if (local_linear_velocity.z > epsilon):
-		return MovementDirection.BACKWARD
-	if (local_linear_velocity.z < -epsilon):
-		return MovementDirection.FORWARD
-	
-	return MovementDirection.NONE
-
-func get_target_forwards_axis_movement() -> MovementDirection:
-	if (target_speed_vector.z > epsilon):
-		return MovementDirection.BACKWARD
-	if (target_speed_vector.z < -epsilon):
-		return MovementDirection.FORWARD
-	
-	return MovementDirection.NONE
-	
 
 func calculate_acceleration(delta : float) -> void:
 	acceleration = (snapped(local_linear_velocity, Vector3(0.1, 0.1, 0.1)) - snapped(local_linear_velocity_last_frame, Vector3(0.1, 0.1, 0.1))) / delta
@@ -291,20 +266,3 @@ func set_target_rotation_roll_left(thrust : float) -> void:
 
 func set_target_rotation_roll_right(thrust : float) -> void:
 	target_rotational_thrust_vector.z = thrust
-
-enum MovementDirection
-{
-	FORWARD,
-	BACKWARD,
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	ROLL_LEFT,
-	ROLL_RIGHT,
-	YAW_LEFT,
-	YAW_RIGHT,
-	PITCH_UP,
-	PITCH_DOWN,
-	NONE
-}
