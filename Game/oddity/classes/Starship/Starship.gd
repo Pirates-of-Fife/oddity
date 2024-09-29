@@ -61,6 +61,10 @@ var target_rotation_speed_vector : Vector3
 var actual_thrust_vector : Vector3 = Vector3.ZERO
 var actual_rotation_vector : Vector3 = Vector3.ZERO
 
+var relative_gravity_vector : Vector3 = Vector3.ZERO
+var relative_gravity_direction : Vector3 = Vector3.ZERO
+var gravity_strength : float = 0
+
 func _ready() -> void:
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust
@@ -159,11 +163,26 @@ func _physics_process(delta: float) -> void:
 		thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
 		roll_left(thrust)
 
+	var gravity_delta : Vector3 = actual_thrust_vector + relative_gravity_vector * mass 
+
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
+	
 	apply_torque(actual_rotation_vector * global_basis.inverse())
-			
+	
+	#print("Gravity " + str(relative_gravity_vector) + " " + str(relative_gravity_vector.length()))
+	#print("Thurst " + str(actual_thrust_vector)+ " " + str(actual_thrust_vector.length())) 
+	
+	
+
+	
+	print("Gravity Delta: " + str(gravity_delta))
+	#print(relative_gravity_vector)
+	
+	
 	# reset thrust vector
 	reset_thrust_vectors()
+	
+	relative_gravity_vector = Vector3.ZERO
 
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO
