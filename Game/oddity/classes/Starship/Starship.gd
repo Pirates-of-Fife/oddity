@@ -105,7 +105,6 @@ func _physics_process(delta: float) -> void:
 	if (velocity_delta < 0):
 		thrust = pid_up.update(target_speed_vector.y, local_linear_velocity.y, delta)
 		thrust_up(thrust)
-		print("up" + str(thrust))
 	if (velocity_delta > 0):
 		thrust = pid_down.update(target_speed_vector.y, local_linear_velocity.y, delta)
 		thrust_down(thrust)
@@ -113,7 +112,9 @@ func _physics_process(delta: float) -> void:
 	# Left/Right axis
 
 	velocity_delta = local_linear_velocity.x - target_speed_vector.x
-		
+	
+	print(str(local_linear_velocity.x) + " target " + str(target_speed_vector.x))
+	
 	if (velocity_delta < 0):
 		thrust = pid_left.update(target_speed_vector.x, local_linear_velocity.x, delta)
 		thrust_left(thrust)
@@ -154,13 +155,11 @@ func _physics_process(delta: float) -> void:
 		
 	if (velocity_delta < 0):
 		thrust = pid_roll_left.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
-		print("LEFT " + str(thrust) + " Delta: " + str(velocity_delta))
 		roll_right(thrust)
 
 	if (velocity_delta > 0):
 		thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
 		roll_left(thrust)
-		print("RIGHT " + str(thrust) + " Delta: " + str(velocity_delta))
 
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 	apply_torque(actual_rotation_vector * global_basis.inverse())
@@ -232,10 +231,10 @@ func thrust_backward(thrust: float) -> void:
 	actual_thrust_vector.z = -thrust
 
 func thrust_left(thrust: float) -> void:
-	actual_thrust_vector.x = -thrust
+	actual_thrust_vector.x = thrust
 
 func thrust_right(thrust: float) -> void:
-	actual_thrust_vector.x = thrust
+	actual_thrust_vector.x = -thrust
 
 func roll_left(thrust: float) -> void:
 	actual_rotation_vector.z = -thrust 

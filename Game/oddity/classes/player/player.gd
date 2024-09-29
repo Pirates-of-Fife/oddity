@@ -8,7 +8,7 @@ class_name Player
 var mouse_sensitivity : float = 0.001
 
 @export
-var mouse_joystick_deadzone : float = 0.03
+var mouse_joystick_deadzone : float = 0.04
 
 @export
 var ship_mouse_controls_sensitivity : float = 0.01
@@ -141,18 +141,27 @@ func _process(delta: float) -> void:
 			starship_roll_right_command.execute(starship_control_entity, StarshipRollRightCommand.Params.new(Input.get_action_strength("starship_rotate_roll_right")))
 
 		# Starship Mouse Pitch
+		
+		var deadzoned_yaw : float = mouse_yaw
+		var deazoned_pitch : float = mouse_pitch
+		
+		if abs(mouse_yaw) < mouse_joystick_deadzone:
+			deadzoned_yaw = 0
+
+		if abs(mouse_pitch) < mouse_joystick_deadzone:
+			deazoned_pitch = 0
 				
 		if (mouse_pitch > 0):
-			starship_pitch_up_command.execute(starship_control_entity, StarshipPitchUpCommand.Params.new(abs(mouse_pitch)))
+			starship_pitch_up_command.execute(starship_control_entity, StarshipPitchUpCommand.Params.new(abs(deazoned_pitch)))
 		else:
-			starship_pitch_down_command.execute(starship_control_entity, StarshipPitchDownCommand.Params.new(abs(mouse_pitch)))
+			starship_pitch_down_command.execute(starship_control_entity, StarshipPitchDownCommand.Params.new(abs(deazoned_pitch)))
 		
 		# Starship Mouse Yaw
 	
 		if (mouse_yaw > 0):
-			starship_yaw_left_command.execute(starship_control_entity, StarshipYawLeftCommand.Params.new(abs(mouse_yaw)))
+			starship_yaw_left_command.execute(starship_control_entity, StarshipYawLeftCommand.Params.new(abs(deadzoned_yaw)))
 		else:
-			starship_yaw_right_command.execute(starship_control_entity, StarshipYawRightCommand.Params.new(abs(mouse_yaw)))
+			starship_yaw_right_command.execute(starship_control_entity, StarshipYawRightCommand.Params.new(abs(deadzoned_yaw)))
 	
 	
 	# Reset mouse input
@@ -170,12 +179,6 @@ func _input(event: InputEvent) -> void:
 			
 			mouse_yaw = clamp(mouse_yaw, -1, 1)
 			mouse_pitch = clamp(mouse_pitch, -1, 1)
-			
-			if abs(mouse_yaw) < mouse_joystick_deadzone:
-				mouse_yaw = 0
-
-			if abs(mouse_pitch) < mouse_joystick_deadzone:
-				mouse_pitch = 0
 
 func _on_throttle_deadzone_reset_timer_timeout() -> void:
 	if (abs(current_throttle_forwards_axis) < keyboard_throttle_deadzone):

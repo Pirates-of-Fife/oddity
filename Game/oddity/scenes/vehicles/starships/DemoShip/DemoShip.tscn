@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqfonknridwp7"]
+[gd_scene load_steps=20 format=3 uid="uid://cqfonknridwp7"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/DemoShip.gd" id="1_5hdip"]
 [ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="2_ga564"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/thrust_vector_label.gd" id="5_lejdu"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/rotation_vector_label.gd" id="6_d1bcb"]
 [ext_resource type="Script" path="res://classes/PIDController/PIDController.gd" id="9_xxpud"]
+[ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/speed_label.gd" id="10_n2mvt"]
+[ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/thrust_vectors.gd" id="11_h7835"]
 
 [sub_resource type="Resource" id="Resource_xuaf6"]
 script = ExtResource("3_jnc0e")
@@ -18,18 +20,21 @@ up_thrust = 600.0
 down_thrust = 600.0
 left_thrust = 300.0
 right_thrust = 300.0
-roll_left_thrust = 200.0
-roll_right_thrust = 200.0
+roll_left_thrust = 400.0
+roll_right_thrust = 400.0
 yaw_left_thrust = 200.0
 yaw_right_thrust = 200.0
 pitch_up_thrust = 200.0
 pitch_down_thrust = 200.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_cx6yd"]
-radius = 0.1
-height = 0.2
+radius = 0.05
+height = 0.1
 radial_segments = 32
 rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nct20"]
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h4lve"]
 size = Vector3(4.68597, 4.18689, 16.0146)
@@ -64,6 +69,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.5
 [node name="Anchor" type="Node3D" parent="PlayerCam/TwistPivot/PitchPivot"]
 script = ExtResource("2_ga564")
 
+[node name="Center" type="MeshInstance3D" parent="PlayerCam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
+mesh = SubResource("SphereMesh_cx6yd")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_nct20")
+
 [node name="SpaceBall" type="MeshInstance3D" parent="PlayerCam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
 mesh = SubResource("SphereMesh_cx6yd")
@@ -81,85 +92,85 @@ shape = SubResource("BoxShape3D_h4lve")
 
 [node name="PIDForward" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
+Kp = 200.0
+Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDBackward" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
+Kp = 200.0
+Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDUp" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
+Kp = 200.0
+Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDDown" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
+Kp = 200.0
+Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
-Ki = 0.1
+Kp = 200.0
+Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 15.0
+Kp = 120.0
 Ki = 0.1
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDRollLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 250.0
-Ki = 0.2
+Kp = 500.0
+Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDRollRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 250.0
-Ki = 0.2
+Kp = 500.0
+Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDYawLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 250.0
-Ki = 0.2
+Kp = 500.0
+Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDYawRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 250.0
-Ki = 0.2
+Kp = 500.0
+Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDPitchUp" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 250.0
-Ki = 0.2
+Kp = 500.0
+Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDPitchDown" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 250.0
-Ki = 0.2
+Kp = 500.0
+Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
@@ -214,11 +225,21 @@ shape = SubResource("CylinderShape3D_eoiej")
 [node name="Labels" type="Node3D" parent="."]
 
 [node name="ThrustVectorLabel" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.44806, 1.7665, 10.5045)
+transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.43623, 2.00049, 10.5045)
 text = "Placeholder"
 script = ExtResource("5_lejdu")
 
 [node name="RotationVectorLabel" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.4706, 1.53827, 10.5045)
+transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.45877, 1.77226, 10.5045)
 text = "Placeholder"
 script = ExtResource("6_d1bcb")
+
+[node name="speed label" type="Label3D" parent="Labels"]
+transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, -1.03366, 1.58578, 10.5045)
+text = "Placeholder"
+script = ExtResource("10_n2mvt")
+
+[node name="Thrust Vectors" type="Label3D" parent="Labels"]
+transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, -1.05158, 1.94436, 10.5045)
+text = "Placeholder"
+script = ExtResource("11_h7835")
