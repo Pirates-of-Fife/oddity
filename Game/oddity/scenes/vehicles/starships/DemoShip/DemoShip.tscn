@@ -14,18 +14,18 @@
 
 [sub_resource type="Resource" id="Resource_xuaf6"]
 script = ExtResource("3_jnc0e")
-forward_thrust = 7e+07
-backward_thrust = 4e+07
-up_thrust = 3.5e+07
-down_thrust = 3.5e+07
-left_thrust = 3.5e+07
-right_thrust = 3.5e+07
-roll_left_thrust = 1e+07
-roll_right_thrust = 1e+07
-yaw_left_thrust = 1e+07
-yaw_right_thrust = 1e+07
-pitch_up_thrust = 1e+07
-pitch_down_thrust = 1e+07
+forward_thrust = 490500.0
+backward_thrust = 490500.0
+up_thrust = 490500.0
+down_thrust = 490500.0
+left_thrust = 490500.0
+right_thrust = 490500.0
+roll_left_thrust = 100000.0
+roll_right_thrust = 100000.0
+yaw_left_thrust = 100000.0
+yaw_right_thrust = 100000.0
+pitch_up_thrust = 100000.0
+pitch_down_thrust = 100000.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_cx6yd"]
 radius = 0.05
@@ -92,14 +92,14 @@ shape = SubResource("BoxShape3D_h4lve")
 
 [node name="PIDForward" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 19199.8
+Kp = 35000.0
 Ki = 0.4
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDBackward" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 19199.8
+Kp = 35000.0
 Ki = 0.4
 Kd = 0.01
 use_absolute_error = true
