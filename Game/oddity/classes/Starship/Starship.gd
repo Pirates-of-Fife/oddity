@@ -85,6 +85,8 @@ func _physics_process(delta: float) -> void:
 	calculate_local_angular_velocity()
 	calculate_acceleration(delta)
 	
+	#print(Vector3(0, thruster_force.forward_thrust, 0))
+	
 	target_speed_vector = calculate_target_speed_vector()
 	target_rotation_speed_vector = calculate_target_rotation_speed_vector()
 	
@@ -108,10 +110,15 @@ func _physics_process(delta: float) -> void:
 		
 	if (velocity_delta < 0):
 		thrust = pid_up.update(target_speed_vector.y, local_linear_velocity.y, delta)
+		
+		#print("thrust: " + str(thrust) + " gravity " + str(relative_gravity_vector.y) + " combined" + str(thrust + relative_gravity_vector.y))
+		
 		thrust_up(thrust)
 	if (velocity_delta > 0):
 		thrust = pid_down.update(target_speed_vector.y, local_linear_velocity.y, delta)
+		#print(thrust + relative_gravity_vector.y)
 		thrust_down(thrust)
+		
 
 	# Left/Right axis
 
@@ -163,8 +170,8 @@ func _physics_process(delta: float) -> void:
 		thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
 		roll_left(thrust)
 
-	var gravity_delta : Vector3 = actual_thrust_vector + relative_gravity_vector * mass 
-
+	#var gravity_delta : Vector3 = actual_thrust_vector + relative_gravity_vector * mass 
+	
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 	
 	apply_torque(actual_rotation_vector * global_basis.inverse())
@@ -172,10 +179,10 @@ func _physics_process(delta: float) -> void:
 	#print("Gravity " + str(relative_gravity_vector) + " " + str(relative_gravity_vector.length()))
 	#print("Thurst " + str(actual_thrust_vector)+ " " + str(actual_thrust_vector.length())) 
 	
-	
+	print(local_linear_velocity)
 
 	
-	print("Gravity Delta: " + str(gravity_delta))
+	#print("Gravity Delta: " + str(gravity_delta))
 	#print(relative_gravity_vector)
 	
 	

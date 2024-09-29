@@ -62,6 +62,8 @@ control_entity = NodePath("../DemoShip")
 
 [node name="DemoShip" parent="." instance=ExtResource("4_efvbd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87725, 4.33342, -45.5569)
+target_thrust_vector = null
+target_rotational_thrust_vector = null
 
 [node name="Node3D2" type="Node3D" parent="."]
 transform = Transform3D(2.855, 0, 0, 0, 2.855, 0, 0, 0, 2.855, 55.8822, 0, 112.978)
