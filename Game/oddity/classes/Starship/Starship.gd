@@ -97,6 +97,8 @@ func _physics_process(delta: float) -> void:
 
 	velocity_delta = local_linear_velocity.z - target_speed_vector.z
 	
+	print(relative_gravity_vector)
+	
 	if (velocity_delta < 0):
 		thrust = pid_forward.update(target_speed_vector.z, local_linear_velocity.z, delta)
 		thrust_forward(thrust + relative_gravity_vector.z)

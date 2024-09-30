@@ -22,10 +22,10 @@ left_thrust = 490500.0
 right_thrust = 490500.0
 roll_left_thrust = 100000.0
 roll_right_thrust = 100000.0
-yaw_left_thrust = 100000.0
-yaw_right_thrust = 100000.0
-pitch_up_thrust = 100000.0
-pitch_down_thrust = 100000.0
+yaw_left_thrust = 180000.0
+yaw_right_thrust = 180000.0
+pitch_up_thrust = 180000.0
+pitch_down_thrust = 180000.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_cx6yd"]
 radius = 0.05
@@ -92,84 +92,84 @@ shape = SubResource("BoxShape3D_h4lve")
 
 [node name="PIDForward" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 35000.0
+Kp = 40000.0
 Ki = 0.4
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDBackward" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 35000.0
+Kp = 40000.0
 Ki = 0.4
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDUp" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 19199.8
+Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDDown" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 19199.8
+Kp = 40000.0
 Ki = 0.4
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 19199.8
+Kp = 40000.0
 Ki = 0.4
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 19199.8
+Kp = 40000.0
 Ki = 0.4
 Kd = 0.01
 use_absolute_error = true
 
 [node name="PIDRollLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 82500.0
+Kp = 180000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDRollRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 82500.0
+Kp = 180000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDYawLeft" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 82500.0
+Kp = 180000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDYawRight" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 82500.0
+Kp = 180000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDPitchUp" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 82500.0
+Kp = 180000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
 [node name="PIDPitchDown" type="Node" parent="PIDControllers"]
 script = ExtResource("9_xxpud")
-Kp = 82500.0
+Kp = 180000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true

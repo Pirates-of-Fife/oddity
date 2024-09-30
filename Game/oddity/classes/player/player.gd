@@ -17,7 +17,7 @@ var ship_mouse_controls_sensitivity : float = 0.01
 var keyboard_throttle_sensitivity : float = 0.8
 
 @export
-var keyboard_throttle_deadzone : float = 0.15
+var keyboard_throttle_deadzone : float = 0.05
 
 var twist_input : float = 0.0
 var pitch_input : float = 0.0
@@ -184,3 +184,5 @@ func _on_throttle_deadzone_reset_timer_timeout() -> void:
 	if (abs(current_throttle_forwards_axis) < keyboard_throttle_deadzone):
 		if (control_entity is Starship):
 			starship_thrust_forward_command.execute(control_entity, StarshipThrustForwardCommand.Params.new(0))
+			current_throttle_forwards_axis = 0
+			starship_last_throttle_value = 0
