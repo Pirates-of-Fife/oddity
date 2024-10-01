@@ -57,6 +57,11 @@ func move_bodies_in_frame_of_reference() -> void:
 		
 		if (body is Creature):
 			body.upright_direction = -gravity_direction
+			
+		if (body is Starship):
+			body.relative_gravity_vector = gravity_direction * body.global_basis.inverse() * gravity
+			body.relative_gravity_direction = gravity_direction * body.global_basis.inverse()
+			body.gravity_strength = gravity
 		
 func move_body(body : RigidBody3D) -> void:
 	var origin_vector : Vector3 = vector_origin_body(body)

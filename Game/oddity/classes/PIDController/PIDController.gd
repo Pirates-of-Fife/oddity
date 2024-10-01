@@ -31,6 +31,11 @@ var limit_min : float
 @export
 var limit_max : float
 
+@export_category("Error")
+
+@export
+var use_absolute_error : bool = false
+
 # controller "memory"
 var integrator : float = 0
 var previous_error : float = 0
@@ -40,7 +45,10 @@ var previous_measurement : float = 0
 # controller output
 var output : float = 0
 
-func _init(proportional_gain : float, integral_gain : float, derivative_gain : float, low_pass_filter_tau : float, minimum_limit : float, maximum_limit : float) -> void:
+func _ready() -> void:
+	init(Kp, Ki, Kd, tau, limit_min, limit_max)
+
+func init(proportional_gain : float, integral_gain : float, derivative_gain : float, low_pass_filter_tau : float, minimum_limit : float, maximum_limit : float) -> void:
 	Kp = proportional_gain
 	Ki = integral_gain
 	Kd = derivative_gain
@@ -53,6 +61,9 @@ func _init(proportional_gain : float, integral_gain : float, derivative_gain : f
 func update(setpoint : float, measurement : float, delta : float) -> float:	
 	# Error signal
 	var error : float = setpoint - measurement
+	
+	if (use_absolute_error):
+		error = absf(error)
 	
 	# Proportional
 	var proportional : float = Kp * error
