@@ -168,6 +168,9 @@ func _process(delta: float) -> void:
 	pitch_input = 0
 	twist_input = 0
 
+func possess(control_entity : ControlEntity) -> void:
+	self.control_entity = control_entity
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
