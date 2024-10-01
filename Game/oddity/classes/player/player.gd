@@ -74,13 +74,8 @@ func _process(delta: float) -> void:
 		if raycast.is_colliding():
 			var collider : Object = raycast.get_collider()
 			
-			if collider is ControlEntity:
-				
-				control_entity = collider
-				
-				print("control_entity entity set to: ", control_entity)
-			else:
-				print("The object is not possessable. :", collider)
+			if (collider is Interactable):
+				collider.interact()
 	
 	if control_entity == null:
 		return
