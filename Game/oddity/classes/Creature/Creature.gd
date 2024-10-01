@@ -28,24 +28,19 @@ var upright_force_i : float = 0.01  # Integral gain
 var upright_force_d : float = 8.0  # Derivative gain
 
 var upright_integral : float = 0.0
+
 var last_tilt_angle : float = 0.0
 
 # Other variables for applying force
 var last_time : float = 0.0
 
 var upright_direction : Vector3 = Vector3.UP
-# Commands
 
 var input_vector : Vector3
 
 func _physics_process(delta : float) -> void:
 	var multiplier : float = 1
-	
-	#if Input.is_action_just_pressed("player_jump"):
-	
-	#if (Input.is_action_pressed("player_run")):
-	#	multiplier = run_multiplier
-	
+		
 	var direction : Vector3 = (twist_pivot.global_transform.basis * input_vector).normalized()
 
 	apply_central_force(direction * walk_force * multiplier)
@@ -79,8 +74,8 @@ func keep_upright(delta: float) -> void:
 	last_tilt_angle = tilt_angle
 
 	var corrective_torque: float = proportional + integral + derivative
-
-	if tilt_angle > 0.01:  # Avoid tiny corrections
+	
+	if tilt_angle > 0.01:
 		apply_torque_impulse(tilt_axis * corrective_torque)
 
 	if tilt_angle < 0.01:
