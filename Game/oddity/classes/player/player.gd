@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 			var collider : Object = raycast.get_collider()
 			
 			if (collider is Interactable):
-				collider.interact()
+				collider.interact(self, control_entity)
 	
 	if control_entity == null:
 		return

@@ -2,8 +2,8 @@ extends StaticBody3D
 
 class_name Interactable
 
-signal interacted
+signal interacted(player : Player, control_entity : ControlEntity)
 
-func interact() -> void:
-	interacted.emit()
+func interact(player : Player, control_entity : ControlEntity) -> void:
+	interacted.emit(player, control_entity)
 	
