@@ -66,6 +66,7 @@ var throttle_deadzone_reset_timer : Timer = $ThrottleDeadzoneResetTimer
 func _ready() -> void:
 	if (control_entity != null):
 		raycast.add_exception(control_entity)
+		
 
 func _process(delta: float) -> void:	
 	if Input.is_action_pressed("ui_cancel"):
@@ -76,12 +77,21 @@ func _process(delta: float) -> void:
 	
 	
 	if (Input.is_action_just_pressed("player_interact")):
-		raycast.position = Vector3.ZERO
+		var space_state : PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 		
-		if raycast.is_colliding():
-			var collider : Object = raycast.get_collider()
-						
-			if (collider is Interactable):
+		var origin : Vector3 = global_position
+		var end : Vector3 = global_position + Vector3(0, 0, -interaction_length)
+		
+		var query : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, end, 536870912)
+		
+		var result : Dictionary = space_state.intersect_ray(query)
+		
+		print(result)
+		
+		if result.size() > 0:
+			var collider : Object = result["collider"]
+
+			if collider is Interactable:
 				collider.interact(self, control_entity)
 				
 	if control_entity == null:

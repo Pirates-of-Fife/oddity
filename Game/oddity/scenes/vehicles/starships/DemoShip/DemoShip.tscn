@@ -252,8 +252,6 @@ script = ExtResource("11_h7835")
 
 [node name="Seat" parent="." node_paths=PackedStringArray("starship") instance=ExtResource("12_mti32")]
 transform = Transform3D(1.755, 0, 0, 0, 1.755, 0, 0, 0, 1.755, 0.058674, 0.38572, 8.57449)
-collision_layer = 536871936
-collision_mask = 1024
 starship = NodePath("..")
 
 [node name="Interactable" parent="Seat" index="2"]
