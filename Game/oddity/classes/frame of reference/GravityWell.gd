@@ -40,33 +40,68 @@ var enable_gravity : bool = true :
 			gravity_space_override = SpaceOverride.SPACE_OVERRIDE_DISABLED
 
 @export_range(0, 10, 0.1, "suffix:G")
-var gravity_strength : float = 9.8 : 
-	set(value):
-		gravity = value * 9.8
-		
+var gravity_strength : float = 1 
 
 func _ready() -> void:
 	if (radius <= 0):
 		radius = 1
 	
+	gravity_strength *= 9.8
+	
 	var collision_shape : CollisionShape3D = CollisionShape3D.new()
 	var sphere_shape : SphereShape3D = SphereShape3D.new()
-	sphere_shape.radius = radius
+	sphere_shape.radius = radius * (1 + gravity_attraction_from_surface_start / 100.0)
+	
+	print(sphere_shape.radius)
 	
 	collision_shape.shape = sphere_shape
 	add_child(collision_shape)
 	
-	if (enable_gravity):
-		gravity_space_override = SpaceOverride.SPACE_OVERRIDE_REPLACE
-		gravity_point = true
-		gravity_point_center = Vector3.ZERO
-		gravity_point_unit_distance = radius * (1 + gravity_attraction_from_surface_max / 100.0)
-	else:
-		gravity_space_override = SpaceOverride.SPACE_OVERRIDE_DISABLED
-	
 func _physics_process(delta: float) -> void:
 	calculate_movement_deltas(delta)
 	move_bodies_in_frame_of_reference()
+	apply_gravity()
+	
+func apply_gravity() -> void:
+	for body : RigidBody3D in bodies_in_reference_frame:
+		var gravity_vector : Vector3 = calculate_gravity_vector(body)
+		var gravity_strenth : float = calculate_gravity_strength(body)
+		
+		print(str(body) + " " + str(gravity_strength))
+		
+		if (body is Creature):
+			body.upright_direction = -gravity_vector
+			
+		if (body is Starship):
+			body.relative_gravity_vector = gravity_vector * body.global_basis.inverse() * gravity_strenth
+			body.relative_gravity_direction = gravity_vector * body.global_basis.inverse()
+			body.gravity_strength = gravity_strenth
+		
+		body.apply_central_force(gravity_vector * gravity_strenth * body.mass)
+
+func calculate_gravity_vector(body : RigidBody3D) -> Vector3:
+	return (global_position - body.global_position).normalized()
+
+func calculate_gravity_strength(body : RigidBody3D) -> float:
+	var distance_from_center : float = (body.global_position - global_position).length()
+	var distance_from_surface : float = max(0, distance_from_center - radius)
+
+	var distance_max_gravity_attraction : float = radius * (1 + gravity_attraction_from_surface_max / 100.0) 
+	var distance_min_gravity_attraction : float = radius * (1 + gravity_attraction_from_surface_start / 100.0)
+	
+	print()
+	print("############################")
+	print("body:\t\t" + str(body))
+	print("min:\t\t" + str(distance_min_gravity_attraction))
+	print("center:\t" + str(distance_from_center))
+	print("result:\t\t" + str((distance_from_center / distance_max_gravity_attraction) * gravity_strength))
+	print("############################")
+	print()
+	
+	if distance_from_center <= distance_min_gravity_attraction:
+		return (distance_from_center / distance_min_gravity_attraction) * gravity_strength
+	else:
+		return 0.0
 
 func _on_body_entered(body : Node3D) -> void:
 	if (body is RigidBody3D):

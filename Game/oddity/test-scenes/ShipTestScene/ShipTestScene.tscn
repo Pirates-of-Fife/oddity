@@ -261,8 +261,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_738e6")
 
 [node name="GravityWell" type="Area3D" parent="Planet/MeshInstance3D"]
 script = ExtResource("8_j62fs")
-radius = 550.0
-gravity_strength = 1.0
+radius = 750.0
+gravity_attraction_from_surface_start = 50.0
+gravity_attraction_from_surface_max = 5.0
+gravity_strength = 3.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Planet/MeshInstance3D"]
 

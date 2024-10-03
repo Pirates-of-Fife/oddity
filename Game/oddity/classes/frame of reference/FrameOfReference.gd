@@ -54,15 +54,10 @@ func calculate_movement_deltas(delta : float) -> void:
 func move_bodies_in_frame_of_reference() -> void:
 	for body : RigidBody3D in bodies_in_reference_frame:
 		move_body(body)
-		
-		if (body is Creature):
-			body.upright_direction = -gravity_direction
-			
-		if (body is Starship):
-			body.relative_gravity_vector = gravity_direction * body.global_basis.inverse() * gravity
-			body.relative_gravity_direction = gravity_direction * body.global_basis.inverse()
-			body.gravity_strength = gravity
-		
+
+func apply_gravity() -> void:
+	pass
+
 func move_body(body : RigidBody3D) -> void:
 	var origin_vector : Vector3 = vector_origin_body(body)
 	
