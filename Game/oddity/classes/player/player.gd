@@ -25,12 +25,14 @@ var pitch_input : float = 0.0
 var mouse_yaw : float = 0.0
 var mouse_pitch : float = 0.0
 
+@export_category("Interaction")
+
+@export
+var interaction_length : float = 2.5
+
 @export_category("Control Entity")
 @export
 var control_entity : ControlEntity
-
-@onready
-var raycast : RayCast3D = $InteractionRayCast
 
 # Creature Commands
 var creature_movement_command : CreatureMovementCommand = CreatureMovementCommand.new()
@@ -58,30 +60,30 @@ var current_throttle_forwards_axis : float = 0
 @onready
 var throttle_deadzone_reset_timer : Timer = $ThrottleDeadzoneResetTimer
 
-func _process(delta: float) -> void:
+func _process(delta: float) -> void:	
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if (Input.is_anything_pressed() and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and mouse_sensitivity > 0):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	if (Input.is_action_just_pressed("player_interact")):
-		raycast.clear_exceptions()
-		
-		if control_entity:
-			raycast.add_exception(control_entity)
-		
-		if raycast.is_colliding():
-			var collider : Object = raycast.get_collider()
-			
-			if collider is ControlEntity:
-				
-				control_entity = collider
-				
-				print("control_entity entity set to: ", control_entity)
-			else:
-				print("The object is not possessable. :", collider)
 	
+	if (Input.is_action_just_pressed("player_interact")):
+		var space_state : PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
+		
+		var origin : Vector3 = global_position
+		var end : Vector3 = global_position + Vector3(0, 0, -interaction_length) * global_basis.inverse()
+		
+		var query : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, end, 536870912)
+		
+		var result : Dictionary = space_state.intersect_ray(query)
+				
+		if result.size() > 0:
+			var collider : Object = result["collider"]
+
+			if collider is Interactable:
+				collider.interact(self, control_entity)
+				
 	if control_entity == null:
 		return
 	
@@ -168,6 +170,9 @@ func _process(delta: float) -> void:
 	pitch_input = 0
 	twist_input = 0
 
+func possess(control_entity : ControlEntity) -> void:
+	self.control_entity = control_entity
+		
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

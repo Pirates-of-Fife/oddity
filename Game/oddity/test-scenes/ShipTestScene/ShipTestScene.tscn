@@ -1,9 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=21 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/frame of reference/GravityGrid.gd" id="1_q0ntb"]
 [ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/player/player.tscn" id="2_fb43t"]
+[ext_resource type="Script" path="res://classes/interactable/Interactable.gd" id="3_qr0f7"]
 [ext_resource type="PackedScene" uid="uid://cqfonknridwp7" path="res://scenes/vehicles/starships/DemoShip/DemoShip.tscn" id="4_efvbd"]
+[ext_resource type="Script" path="res://test-scenes/ShipTestScene/interaction_target.gd" id="4_i5a5r"]
+[ext_resource type="PackedScene" uid="uid://ik0bqvjr0uki" path="res://classes/Creature/Creature.tscn" id="6_nbteu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj070"]
 shader = ExtResource("1_eqyqr")
@@ -33,6 +36,14 @@ data = PackedVector3Array(7.5, 0, 7.5, -7.5, 0, 7.5, 7.5, 0, -7.5, -7.5, 0, 7.5,
 [sub_resource type="BoxShape3D" id="BoxShape3D_42qyo"]
 size = Vector3(500, 500, 500)
 
+[sub_resource type="PrismMesh" id="PrismMesh_l042m"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2cjsw"]
+data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5ox6"]
+albedo_color = Color(1, 0, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_hjst8"]
 size = Vector3(20, 20, 20)
 
@@ -41,6 +52,11 @@ albedo_color = Color(0.34902, 0.792157, 1, 1)
 emission_enabled = true
 emission = Color(1, 0.815686, 1, 1)
 emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_fmgd6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_snent"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
 [node name="ShipTestScene" type="Node3D"]
 
@@ -68,19 +84,43 @@ shape = SubResource("ConcavePolygonShape3D_c7r4v")
 
 [node name="GravityGrid" type="Area3D" parent="Node3D/MeshInstance3D"]
 script = ExtResource("1_q0ntb")
-gravity_strength = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D/GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 233.341, 0)
 shape = SubResource("BoxShape3D_42qyo")
 
+[node name="Interactable" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.866348, 16.1805)
+script = ExtResource("3_qr0f7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Interactable"]
+mesh = SubResource("PrismMesh_l042m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Interactable"]
+shape = SubResource("ConcavePolygonShape3D_2cjsw")
+
+[node name="Interaction Target" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09562, 0.835075, 15.5527)
+script = ExtResource("4_i5a5r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Interaction Target"]
+mesh = SubResource("PrismMesh_l042m")
+surface_material_override/0 = SubResource("StandardMaterial3D_s5ox6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Interaction Target"]
+shape = SubResource("ConcavePolygonShape3D_2cjsw")
+
+[node name="Label3D" type="Label3D" parent="Node3D/Interaction Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.764442, 0)
+text = "PLaceholder"
+
 [node name="Player" parent="." node_paths=PackedStringArray("control_entity") instance=ExtResource("2_fb43t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07854, -0.609585)
 ship_mouse_controls_sensitivity = 0.1
-control_entity = NodePath("../DemoShip")
+control_entity = NodePath("../Creature")
 
 [node name="DemoShip" parent="." instance=ExtResource("4_efvbd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87725, 4.33342, 196.722)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.652085, -117.991, 340.711)
 
 [node name="Node3D2" type="Node3D" parent="."]
 transform = Transform3D(2.855, 0, 0, 0, 2.855, 0, 0, 0, 2.855, 55.8822, 0, 112.978)
@@ -179,3 +219,21 @@ transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, 
 mesh = SubResource("BoxMesh_hjst8")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_insp3")
+
+[node name="Creature" parent="." instance=ExtResource("6_nbteu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.182299, -116.878, 346.937)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.977471, 0.211069, 0, -0.211069, 0.977471, 0, -114.883, 330.321)
+collision_layer = 3
+collision_mask = 3
+mass = 30.0
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_fmgd6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_snent")
+
+[connection signal="interacted" from="Node3D/Interactable" to="Node3D/Interaction Target" method="_on_interactable_interacted"]
