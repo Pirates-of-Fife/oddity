@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=21 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/frame of reference/GravityGrid.gd" id="1_q0ntb"]
@@ -52,6 +52,11 @@ albedo_color = Color(0.34902, 0.792157, 1, 1)
 emission_enabled = true
 emission = Color(1, 0.815686, 1, 1)
 emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_fmgd6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_snent"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
 [node name="ShipTestScene" type="Node3D"]
 
@@ -218,5 +223,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_insp3")
 
 [node name="Creature" parent="." instance=ExtResource("6_nbteu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.182299, -116.878, 346.937)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.977471, 0.211069, 0, -0.211069, 0.977471, 0, -114.883, 330.321)
+collision_layer = 3
+collision_mask = 3
+mass = 30.0
+continuous_cd = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_fmgd6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_snent")
 
 [connection signal="interacted" from="Node3D/Interactable" to="Node3D/Interaction Target" method="_on_interactable_interacted"]

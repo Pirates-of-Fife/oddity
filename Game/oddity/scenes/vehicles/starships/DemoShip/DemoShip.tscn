@@ -54,7 +54,12 @@ height = 4.95257
 radius = 2.7792
 
 [node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+collision_layer = 513
+collision_mask = 513
 mass = 5000.0
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 100
 script = ExtResource("1_5hdip")
 ship_info = ExtResource("2_gep6i")
 thruster_force = SubResource("Resource_xuaf6")
@@ -176,8 +181,8 @@ Kd = 0.05
 use_absolute_error = true
 
 [node name="Interior" type="StaticBody3D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 1024
+collision_mask = 1024
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interior"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206604, 0.338113, 2.11804)
@@ -247,10 +252,14 @@ script = ExtResource("11_h7835")
 
 [node name="Seat" parent="." node_paths=PackedStringArray("starship") instance=ExtResource("12_mti32")]
 transform = Transform3D(1.755, 0, 0, 0, 1.755, 0, 0, 0, 1.755, 0.058674, 0.38572, 8.57449)
+collision_layer = 536871936
+collision_mask = 1024
 starship = NodePath("..")
 
 [node name="Interactable" parent="Seat" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.808837, 0.3531, 0.363646)
+collision_layer = 536870912
+collision_mask = 0
 
 [node name="CollisionShape3D" parent="Seat/Interactable" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.666283, 0.724018, 0.189442)

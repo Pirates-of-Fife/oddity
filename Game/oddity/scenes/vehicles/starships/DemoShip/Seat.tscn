@@ -49,4 +49,7 @@ shape = SubResource("ConcavePolygonShape3D_wy86w")
 transform = Transform3D(1, 0, 0, 0, 0.951369, 0.308054, 0, -0.308054, 0.951369, 0, 0.423835, -0.311807)
 shape = SubResource("ConcavePolygonShape3D_sm37l")
 
+[node name="SpawnPositionMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.677578, -1.59275)
+
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
