@@ -34,9 +34,6 @@ var interaction_length : float = 2.5
 @export
 var control_entity : ControlEntity
 
-@onready
-var raycast : RayCast3D = $InteractionRayCast
-
 # Creature Commands
 var creature_movement_command : CreatureMovementCommand = CreatureMovementCommand.new()
 var creature_jump_command : CreatureJumpCommand = CreatureJumpCommand.new()
@@ -63,11 +60,6 @@ var current_throttle_forwards_axis : float = 0
 @onready
 var throttle_deadzone_reset_timer : Timer = $ThrottleDeadzoneResetTimer
 
-func _ready() -> void:
-	if (control_entity != null):
-		raycast.add_exception(control_entity)
-		
-
 func _process(delta: float) -> void:	
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -80,14 +72,12 @@ func _process(delta: float) -> void:
 		var space_state : PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 		
 		var origin : Vector3 = global_position
-		var end : Vector3 = global_position + Vector3(0, 0, -interaction_length)
+		var end : Vector3 = global_position + Vector3(0, 0, -interaction_length) * global_basis.inverse()
 		
 		var query : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, end, 536870912)
 		
 		var result : Dictionary = space_state.intersect_ray(query)
-		
-		print(result)
-		
+				
 		if result.size() > 0:
 			var collider : Object = result["collider"]
 
@@ -181,13 +171,8 @@ func _process(delta: float) -> void:
 	twist_input = 0
 
 func possess(control_entity : ControlEntity) -> void:
-	if (control_entity != null):
-		raycast.remove_exception(control_entity)
-	
 	self.control_entity = control_entity
 		
-	raycast.add_exception(control_entity)
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

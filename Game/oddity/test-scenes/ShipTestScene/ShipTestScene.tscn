@@ -84,7 +84,6 @@ shape = SubResource("ConcavePolygonShape3D_c7r4v")
 
 [node name="GravityGrid" type="Area3D" parent="Node3D/MeshInstance3D"]
 script = ExtResource("1_q0ntb")
-gravity_strength = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D/GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 233.341, 0)
