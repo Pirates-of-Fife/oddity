@@ -54,4 +54,8 @@ shape = SubResource("ConcavePolygonShape3D_sm37l")
 [node name="SpawnPositionMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.677578, -1.59275)
 
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.485, 0, 4.24e-08, 0, 0.485, 0, -4.24e-08, 0, -0.485, 0, 0.814995, -0.973637)
+text = "Enter Ship by pressing 'F'"
+
 [connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
