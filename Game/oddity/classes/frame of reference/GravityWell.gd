@@ -75,21 +75,28 @@ func apply_gravity() -> void:
 				body.gravity_strength = gravity_strenth
 			
 			body.apply_central_force(gravity_vector * gravity_strenth * body.mass)
+			#print(str(body) + " " + str(gravity_vector * gravity_strenth * body.mass))
 
 func calculate_gravity_vector(body : GameEntity) -> Vector3:
 	return (global_position - body.global_position).normalized()
 
-func calculate_gravity_strength(body : GameEntity) -> float:
-	var distance_from_center : float = (body.global_position - global_position).length()
-	var distance_from_surface : float = max(0, distance_from_center - radius)
+#*********************************************************************************#
+# INFO WARNING not working right now, so just applying full gravity all the time. #
+#*********************************************************************************#
 
-	var distance_max_gravity_attraction : float = radius * (1 + gravity_attraction_from_surface_max / 100.0) 
-	var distance_min_gravity_attraction : float = radius * (1 + gravity_attraction_from_surface_start / 100.0)
+func calculate_gravity_strength(body : GameEntity) -> float:
+	#var distance_from_center : float = (body.global_position - global_position).length()
+	#var distance_from_surface : float = max(0, distance_from_center - radius)
+
+	#var distance_max_gravity_attraction : float = radius * (1 + gravity_attraction_from_surface_max / 100.0) 
+	#var distance_min_gravity_attraction : float = radius * (1 + gravity_attraction_from_surface_start / 100.0)
+
+	#if distance_from_surface <= distance_min_gravity_attraction:
+	#	return (distance_from_surface / distance_min_gravity_attraction) * gravity_strength
+	#else:
+	#	return 0.0
 	
-	if distance_from_center <= distance_min_gravity_attraction:
-		return (distance_from_center / distance_min_gravity_attraction) * gravity_strength
-	else:
-		return 0.0
+	return gravity_strength
 
 func _on_body_entered(body : Node3D) -> void:
 	body_entered(body)
