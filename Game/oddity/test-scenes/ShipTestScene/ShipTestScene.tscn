@@ -98,6 +98,8 @@ shape = SubResource("ConcavePolygonShape3D_c7r4v")
 
 [node name="GravityGrid" type="Area3D" parent="Plane/MeshInstance3D"]
 script = ExtResource("1_q0ntb")
+frame_of_reference_name = "World"
+size = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/MeshInstance3D/GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 233.341, 0)
@@ -264,7 +266,8 @@ script = ExtResource("8_j62fs")
 radius = 750.0
 gravity_attraction_from_surface_start = 50.0
 gravity_attraction_from_surface_max = 5.0
-gravity_strength = 3.0
+frame_of_reference_name = "Planet"
+size = 6
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Planet/MeshInstance3D"]
 

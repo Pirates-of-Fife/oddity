@@ -10,6 +10,7 @@ extends Area3D
 class_name FrameOfReference
 
 var bodies_in_reference_frame : Array = Array()
+var frame_of_references_in_reference_frame : Array = Array()
 
 var last_position : Vector3 = Vector3.ZERO
 var movement_delta : Vector3 = Vector3.ZERO
@@ -21,16 +22,34 @@ var velocity : Vector3 = Vector3.ZERO
 var last_velocity : Vector3 = Vector3.ZERO
 var velocity_delta : Vector3 = Vector3.ZERO
 
+@export
+var frame_of_reference_name : String = ""
+
+@export
+var size : FrameOfReferenceSize
+
+enum FrameOfReferenceSize 
+{
+	SMALL,
+	MEDIUM,
+	LARGE,
+	HUGE,
+	STATION,
+	MOON,
+	PLANET,
+	STAR
+}
+
 func _init() -> void:
 	var error_enter : Error = self.connect("body_entered", _on_body_entered)
 	var error_exit : Error = self.connect("body_exited", _on_body_exited)
-	
+
 	if (error_enter != OK):
 		printerr(str(self) + " failed to connect to body_entered.")
 	
 	if (error_exit != OK):
 		printerr(str(self) + " failed to connect to body_exited.")
-	
+		
 func _enter_tree() -> void:
 	last_position = global_position
 	last_velocity = velocity
@@ -52,13 +71,16 @@ func calculate_movement_deltas(delta : float) -> void:
 	last_rotation = global_basis.get_rotation_quaternion()
 
 func move_bodies_in_frame_of_reference() -> void:
-	for body : RigidBody3D in bodies_in_reference_frame:
+	for body : GameEntity in bodies_in_reference_frame:
 		move_body(body)
 
 func apply_gravity() -> void:
 	pass
 
-func move_body(body : RigidBody3D) -> void:
+func move_body(body : GameEntity) -> void:
+	if body.active_frame_of_reference != self:
+		return
+		
 	var origin_vector : Vector3 = vector_origin_body(body)
 	
 	var new_position_vector : Vector3 = rotation_delta.normalized() * origin_vector
@@ -72,13 +94,23 @@ func move_body(body : RigidBody3D) -> void:
 	new_transform.basis = Basis(rotation_delta) * new_transform.basis
 	body.global_transform = new_transform
 
-func vector_origin_body(body : RigidBody3D) -> Vector3:
+func vector_origin_body(body : GameEntity) -> Vector3:
 	return body.global_position - global_position
 
 func _on_body_entered(body : Node3D) -> void:
-	if (body is RigidBody3D):
-		bodies_in_reference_frame.append(body)
+	body_entered(body)
 	
 func _on_body_exited(body : Node3D) -> void:
-	if (body is RigidBody3D):
+	body_exited(body)
+
+func body_entered(body : Node3D) -> void:
+	if (body is GameEntity):
+		bodies_in_reference_frame.append(body)
+		body.in_frame_of_references.append(self)
+		body.evaluate_active_frame_of_reference()
+		
+func body_exited(body : Node3D) -> void:
+	if (body is GameEntity):
 		bodies_in_reference_frame.erase(body)
+		body.in_frame_of_references.erase(self)
+		body.evaluate_active_frame_of_reference()

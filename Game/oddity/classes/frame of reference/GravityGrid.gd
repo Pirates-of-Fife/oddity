@@ -23,24 +23,23 @@ func _physics_process(delta: float) -> void:
 	apply_gravity()
 
 func apply_gravity() -> void:
-	for body : RigidBody3D in bodies_in_reference_frame:
-		if (body is Creature):
-			body.upright_direction = -gravity_direction
+	for body : GameEntity in bodies_in_reference_frame:
+		if body.active_frame_of_reference == self:
+			if (body is Creature):
+				body.upright_direction = -gravity_direction
+				
+			if (body is Starship):
+				body.relative_gravity_vector = gravity_direction * body.global_basis.inverse() * gravity
+				body.relative_gravity_direction = gravity_direction * body.global_basis.inverse()
+				body.gravity_strength = gravity
 			
-		if (body is Starship):
-			body.relative_gravity_vector = gravity_direction * body.global_basis.inverse() * gravity
-			body.relative_gravity_direction = gravity_direction * body.global_basis.inverse()
-			body.gravity_strength = gravity
-		
-		body.apply_central_force(gravity_direction * 9.8 * gravity_strength * body.mass)
+			body.apply_central_force(gravity_direction * 9.8 * gravity_strength * body.mass)
 
 func set_local_gravity_direction() -> void:
 	gravity_direction = -global_transform.basis.y
 
 func _on_body_entered(body : Node3D) -> void:
-	if (body is RigidBody3D):
-		bodies_in_reference_frame.append(body)
+	body_entered(body)
 	
 func _on_body_exited(body : Node3D) -> void:
-	if (body is RigidBody3D):
-		bodies_in_reference_frame.erase(body)
+	body_exited(body)
