@@ -89,6 +89,7 @@ mesh = SubResource("SphereMesh_cx6yd")
 
 [node name="GravityGrid" type="Area3D" parent="."]
 script = ExtResource("3_lj764")
+frame_of_reference_name = "Demo Ship"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0677185, 2.41433, 1.91138)
