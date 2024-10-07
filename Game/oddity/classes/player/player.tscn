@@ -1,11 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3ry8dgeqrhg1"]
+[gd_scene load_steps=3 format=3 uid="uid://c3ry8dgeqrhg1"]
 
 [ext_resource type="Script" path="res://classes/player/player.gd" id="1_1lph1"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_genkd"]
+auto_exposure_enabled = true
+auto_exposure_scale = 0.3
+auto_exposure_speed = 0.2
+dof_blur_far_distance = 120.0
+dof_blur_far_transition = 1557.36
+dof_blur_near_distance = 0.5
+auto_exposure_min_sensitivity = 50.0
+auto_exposure_max_sensitivity = 500.0
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_1lph1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+attributes = SubResource("CameraAttributesPractical_genkd")
+far = 10000.0
 
 [node name="ThrottleDeadzoneResetTimer" type="Timer" parent="."]
 wait_time = 0.4
