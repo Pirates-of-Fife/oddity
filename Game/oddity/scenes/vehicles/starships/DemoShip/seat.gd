@@ -21,6 +21,9 @@ func interact(player : Player, control_entity : ControlEntity) -> void:
 	control_entity.queue_free()
 
 func _on_interactable_interacted(player: Player, control_entity : ControlEntity) -> void:
+	if (control_entity is not Starship):
+		return
+	
 	entity_using_seat = creature.instantiate()
 	entity_parent.add_child(entity_using_seat)
 	entity_using_seat.global_position = $SpawnPositionMarker.global_position
