@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci6pe2jfbwwi1"]
+
+[ext_resource type="PackedScene" uid="uid://biupstf6k44fk" path="res://scenes/vehicles/starships/DemoShip2/fighterGen7.gltf" id="1_2lsd1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ol32"]
+transparency = 1
+albedo_color = Color(0.588235, 0.988235, 1, 1)
+metallic = 0.15
+metallic_specular = 1.0
+roughness = 0.4
+proximity_fade_enabled = true
+proximity_fade_distance = 10.29
+distance_fade_mode = 1
+distance_fade_max_distance = 2.0
+
+[node name="fighterGen7" instance=ExtResource("1_2lsd1")]
+
+[node name="Cockpit" parent="Hull" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8ol32")

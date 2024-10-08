@@ -85,8 +85,8 @@ _data = [Vector2(0, 0), 0.0, 7.09578, 0, 0, Vector2(0.0509804, 0.617021), 7.8153
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_nhltq"]
-_data = [Vector2(0, 0), 0.0, 2.57675, 0, 0, Vector2(0.819608, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 2.57675, 0, 0, Vector2(0.0789474, 0.417582), 1.58681, 1.58681, 0, 0, Vector2(0.819608, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rm3t2"]
 points = PackedVector3Array(9.16666, 4.58589, 5.79973, 2.39356, 0.462733, 0.793534, 2.39356, 1.34661, 0.793534, 2.39356, 0.462733, 4.32669, 9.16666, 3.40738, 4.03218, 2.68859, 1.64124, 4.32669, 8.5766, 4.58589, 4.03218, 8.5766, 3.11316, 5.79973, 5.04419, 1.34661, 1.97158, 7.98786, 4.29126, 5.79973, 2.98296, 0.462733, 4.32669, 8.87096, 4.29126, 3.73766, 2.68859, 1.64124, 1.08805, 2.68859, 0.462733, 0.793534, 5.04419, 1.34661, 4.6212, 2.39356, 1.34661, 4.32669, 9.16666, 3.40738, 5.79973, 7.98786, 3.11316, 5.79973, 9.16666, 4.58589, 4.03218, 7.69349, 2.81853, 3.14962, 2.68859, 1.34661, 0.793534, 2.98296, 0.462733, 1.08805, 8.5766, 4.58589, 5.79973, 6.221, 1.93546, 5.21022, 8.87096, 3.40738, 3.73766, 7.69349, 3.70201, 3.14962)
@@ -1824,6 +1824,7 @@ transform = Transform3D(0.0201209, 0, -0.294313, 0, 0.295, 0, 0.294313, 0, 0.020
 
 [node name="Coords" type="Label3D" parent="ShipBody/UI/InteriorUI"]
 transform = Transform3D(0.931279, -0.175545, 0.319222, 0.0378511, 0.918129, 0.394469, -0.362334, -0.355278, 0.861679, -0.430985, 0.927506, 0.422068)
+visible = false
 pixel_size = 0.002
 modulate = Color(0.772549, 0.47451, 0.145098, 1)
 outline_modulate = Color(0, 0, 0, 0)
@@ -1838,6 +1839,7 @@ script = ExtResource("7_wip5u")
 
 [node name="Components" parent="ShipBody" instance=ExtResource("8_y26dh")]
 unique_name_in_owner = true
+visible = false
 script = null
 
 [node name="FuelTank2" parent="ShipBody/Components/Fuel Tanks" index="0" instance=ExtResource("9_yecg1")]
@@ -1897,7 +1899,7 @@ required_power = 11.0
 
 [node name="MainThruster" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.03356)
-thruster_force = 4500.0
+thruster_force = 6000.0
 thruster_fuel_consumption = 15.0
 
 [node name="ParticleFX" parent="ShipBody/Thrusters/MainThruster" index="0"]
@@ -1911,7 +1913,7 @@ transform = Transform3D(15.92, 0, 0, 0, 15.92, 0, 0, 0, 15.92, 0, 0, -0.191907)
 
 [node name="RetroThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.4, 0, -1.72)
-thruster_force = 1600.0
+thruster_force = 2000.0
 thruster_fuel_consumption = 6.0
 
 [node name="RetroThrusterParticleFX" parent="ShipBody/Thrusters/RetroThruster1/ParticleFX" index="0" instance=ExtResource("12_7r5i3")]
@@ -1919,7 +1921,7 @@ transform = Transform3D(0.999657, -2.28846e-09, -0.0261769, 0, -1, 8.74227e-08, 
 
 [node name="RetroThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.4, 0, -1.72)
-thruster_force = 1600.0
+thruster_force = 2000.0
 thruster_fuel_consumption = 6.0
 
 [node name="RetroThrusterParticleFX" parent="ShipBody/Thrusters/RetroThruster2/ParticleFX" index="0" instance=ExtResource("12_7r5i3")]
@@ -1927,7 +1929,7 @@ transform = Transform3D(0.999657, -2.28846e-09, -0.0261769, 0, -1, 8.74227e-08, 
 
 [node name="RCSTopThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.25995, -6.33182)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="top_middle_left" parent="ShipBody/Thrusters/RCSTopThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -1936,7 +1938,7 @@ amount_ratio = 0.0
 
 [node name="RCSTopThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.993086, 0.80773, -1.38341)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -1945,7 +1947,7 @@ amount_ratio = 0.0
 
 [node name="RCSTopThruster3" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.993, 0.808, -1.383)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopThruster3/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -1954,7 +1956,7 @@ amount_ratio = 0.0
 
 [node name="RCSTopThruster4" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.46162, 1.29696, 5.9374)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopThruster4/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -1963,7 +1965,7 @@ amount_ratio = 0.0
 
 [node name="RCSTopThruster5" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.462, 1.297, 5.937)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopThruster5/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -1972,7 +1974,7 @@ amount_ratio = 0.0
 
 [node name="RCSBottomThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.815, -6.00045)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -1981,7 +1983,7 @@ amount_ratio = 0.0
 
 [node name="RCSBottomThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.856302, -1.20667, -0.686276)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -1990,7 +1992,7 @@ amount_ratio = 0.0
 
 [node name="RCSBottomThruster3" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.856, -1.207, -0.686)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster3/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -1999,7 +2001,7 @@ amount_ratio = 0.0
 
 [node name="RCSBottomThruster4" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.29265, -1.33242, 4.47518)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster4/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2008,7 +2010,7 @@ amount_ratio = 0.0
 
 [node name="RCSBottomThruster5" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.293, -1.332, 4.475)
-thruster_force = 450.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomThruster5/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2017,7 +2019,7 @@ amount_ratio = 0.0
 
 [node name="RCSLeftThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.781, -0.252564, -6.192)
-thruster_force = 600.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSLeftThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2026,7 +2028,7 @@ amount_ratio = 0.0
 
 [node name="RCSLeftThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.49, -0.170812, -0.027)
-thruster_force = 600.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSLeftThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2035,7 +2037,7 @@ amount_ratio = 0.0
 
 [node name="RCSLeftThruster3" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.809, -0.185651, 4.559)
-thruster_force = 600.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSLeftThruster3/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2044,7 +2046,7 @@ amount_ratio = 0.0
 
 [node name="RCSRightThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.781, -0.252564, -6.192)
-thruster_force = 600.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSRightThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2053,7 +2055,7 @@ amount_ratio = 0.0
 
 [node name="RCSRightThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.49, -0.170812, -0.027)
-thruster_force = 600.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSRightThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2062,7 +2064,7 @@ amount_ratio = 0.0
 
 [node name="RCSRightThruster3" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.809, -0.185651, 4.559)
-thruster_force = 600.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSRightThruster3/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2071,7 +2073,7 @@ amount_ratio = 0.0
 
 [node name="RCSTopWingThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6.29303, 2.8828, 3.9292)
-thruster_force = 250.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopWingThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2080,7 +2082,7 @@ amount_ratio = 0.0
 
 [node name="RCSTopWingThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6.293, 2.883, 3.929)
-thruster_force = 250.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSTopWingThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2089,7 +2091,7 @@ amount_ratio = 0.0
 
 [node name="RCSBottomWingThruster1" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6.66258, -3.01632, 3.97729)
-thruster_force = 250.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomWingThruster1/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2098,7 +2100,7 @@ amount_ratio = 0.0
 
 [node name="RCSBottomWingThruster2" parent="ShipBody/Thrusters" instance=ExtResource("19_mnngf")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.663, -3.016, 3.977)
-thruster_force = 250.0
+thruster_force = 1500.0
 thruster_fuel_consumption = 1.0
 
 [node name="RCSThrusterParticleFX" parent="ShipBody/Thrusters/RCSBottomWingThruster2/ParticleFX" index="0" instance=ExtResource("13_i7t06")]
@@ -2157,10 +2159,10 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.85616)
 flight_assist = true
 rotational_assist = true
-max_velocity = 500.0
-max_pitch_velocity = 5.0
-max_yaw_velocity = 5.0
-max_roll_velocity = 5.0
+max_velocity = 300.0
+max_pitch_velocity = 3.0
+max_yaw_velocity = 3.0
+max_roll_velocity = 3.0
 controller_curve = SubResource("Curve_v42ei")
 rotation_control_curve = SubResource("Curve_nhltq")
 required_power = 10.0

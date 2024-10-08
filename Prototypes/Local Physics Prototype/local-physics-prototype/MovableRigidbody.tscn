@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://clsh1tpd7m6of"]
+
+[ext_resource type="Script" path="res://move.gd" id="1_doufa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rdyh6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sxn51"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1r2al"]
+transparency = 1
+albedo_color = Color(1, 0, 1, 0.101961)
+
+[node name="MovableRigidbody" type="RigidBody3D"]
+linear_damp = 1.0
+angular_damp = 2.0
+script = ExtResource("1_doufa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_rdyh6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("BoxMesh_sxn51")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_1r2al")

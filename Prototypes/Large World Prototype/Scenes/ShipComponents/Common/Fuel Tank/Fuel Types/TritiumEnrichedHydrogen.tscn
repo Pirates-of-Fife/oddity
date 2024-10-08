@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://blcs4xhgwx7bf"]
+
+[ext_resource type="Script" path="res://Scenes/ShipComponents/Common/Fuel Tank/Fuel Types/FuelType.gd" id="1_8slu6"]
+
+[node name="TritiumEnrichedHydrogen" type="Node3D"]
+script = ExtResource("1_8slu6")
+efficiency = 1.1
+power = 1.1
+heat_generation = 1.0

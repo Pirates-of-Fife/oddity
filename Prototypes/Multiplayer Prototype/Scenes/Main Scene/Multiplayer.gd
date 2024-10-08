@@ -13,10 +13,7 @@ func _ready():
 		
 		currentPlayer.name = str(GameManager.players[i].id)
 		
-		if (currentPlayer.get_node("MultiplayerSynchronizer").get_multiplayer_authority() == multiplayer.get_unique_id()):
-			$SubViewportContainer/SubViewport.add_child(currentPlayer)
-		else:
-			$SubViewportContainer/SubViewport/World.add_child(currentPlayer)
+		$SubViewportContainer/SubViewport/World.add_child(currentPlayer)
 		
 		
 		for spawn in get_tree().get_nodes_in_group("PlayerSpawnPoint"):

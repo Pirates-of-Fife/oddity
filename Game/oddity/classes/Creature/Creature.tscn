@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://ik0bqvjr0uki"]
+
+[ext_resource type="Script" path="res://classes/Creature/Creature.gd" id="1_8w455"]
+[ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="2_4xlh2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0f0b5"]
+friction = 0.2
+rough = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vlfjs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tg1nt"]
+
+[node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+collision_layer = 1537
+collision_mask = 1537
+axis_lock_angular_y = true
+mass = 60.0
+physics_material_override = SubResource("PhysicsMaterial_0f0b5")
+gravity_scale = 2.0
+continuous_cd = true
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("1_8w455")
+walk_force = 1300.0
+anchor = NodePath("Head/TwistPivot/PitchPivot/Anchor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_vlfjs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_tg1nt")
+skeleton = NodePath("../..")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8275, 0)
+
+[node name="TwistPivot" type="Node3D" parent="Head"]
+
+[node name="PitchPivot" type="Node3D" parent="Head/TwistPivot"]
+
+[node name="Anchor" type="Node3D" parent="Head/TwistPivot/PitchPivot"]
+script = ExtResource("2_4xlh2")

@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://xrcvu7jq57xu"]
+
+[ext_resource type="Script" path="res://RigidBody3D.gd" id="1_2reff"]
+[ext_resource type="Shader" path="res://node_3d.gdshader" id="2_hl0hm"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lohis"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m53s6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xyogq"]
+shader = ExtResource("2_hl0hm")
+shader_parameter/sky_color = Color(0.03, 0.05, 0.11, 1)
+shader_parameter/star_base_color = Color(0.8, 1, 0.3, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_41dgr"]
+sky_material = SubResource("ShaderMaterial_xyogq")
+
+[sub_resource type="Environment" id="Environment_nredf"]
+background_mode = 2
+sky = SubResource("Sky_41dgr")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.98865)
+
+[node name="ParentBody" type="RigidBody3D" parent="."]
+unique_name_in_owner = true
+gravity_scale = 0.0
+script = ExtResource("1_2reff")
+follow_parent = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParentBody"]
+shape = SubResource("ConvexPolygonShape3D_lohis")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ParentBody/CollisionShape3D"]
+mesh = SubResource("BoxMesh_m53s6")
+skeleton = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nredf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.809181, 0.587559, 0, -0.587559, 0.809181, 0, 8.0992, 11.6528)
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.92221, 1.12516, 0)
+gravity_scale = 0.0
+script = ExtResource("1_2reff")
+use_wasd = false
+can_be_child = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_lohis")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2/CollisionShape3D"]
+mesh = SubResource("BoxMesh_m53s6")
+skeleton = NodePath("../..")

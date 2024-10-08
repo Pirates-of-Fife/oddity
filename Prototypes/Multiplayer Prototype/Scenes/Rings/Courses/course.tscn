@@ -36,6 +36,14 @@ surface_material_override/0 = SubResource("StandardMaterial3D_66prq")
 transform = Transform3D(0.981467, 0, 0.191631, 0, 1, 0, -0.191631, 0, 0.981467, -615.505, 0, -20.0023)
 course = NodePath("../..")
 
+[node name="Label3D" type="Label3D" parent="Rings/ring"]
+transform = Transform3D(-0.00438063, 0, 0.999991, 0, 1, 0, -0.999991, 0, -0.00438063, 0, 147.105, 0)
+pixel_size = 0.3
+modulate = Color(0.97489, 0.445165, 0, 1)
+outline_modulate = Color(1, 1, 1, 0)
+text = "START"
+font_size = 500
+
 [node name="ring2" parent="Rings" node_paths=PackedStringArray("course") instance=ExtResource("1_ve4xj")]
 transform = Transform3D(0.291019, -4.12141e-09, 0.956717, 0.0360755, 0.999289, -0.0109737, -0.956037, 0.0377076, 0.290813, -1770.32, -165.061, 1190.78)
 course = NodePath("../..")

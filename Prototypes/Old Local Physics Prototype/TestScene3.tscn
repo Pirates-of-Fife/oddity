@@ -1,0 +1,152 @@
+[gd_scene load_steps=19 format=3 uid="uid://bcfmfpnbuemx5"]
+
+[ext_resource type="Script" path="res://OddRigidBody.gd" id="1_ugtg8"]
+[ext_resource type="Script" path="res://Player.gd" id="2_co34o"]
+[ext_resource type="Shader" path="res://node_3d.gdshader" id="3_m6sol"]
+[ext_resource type="Script" path="res://planet.gd" id="3_tdfx1"]
+[ext_resource type="Script" path="res://area_3d.gd" id="5_xkefv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tukvq"]
+shader = ExtResource("3_m6sol")
+shader_parameter/sky_color = Color(0.03, 0.05, 0.11, 1)
+shader_parameter/star_base_color = Color(0.8, 1, 0.3, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_41dgr"]
+sky_material = SubResource("ShaderMaterial_tukvq")
+
+[sub_resource type="Environment" id="Environment_wbdy6"]
+background_mode = 2
+sky = SubResource("Sky_41dgr")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xs7tk"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0i2v3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivuyx"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cl0n2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sal1e"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eg56t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvul1"]
+transparency = 1
+albedo_color = Color(1, 1, 0.372549, 0.458824)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_so0pn"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kq3xr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1sfcr"]
+radius = 9.846
+
+[node name="TestScene3" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wbdy6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.809181, 0.587559, 0, -0.587559, 0.809181, 0, 8.0992, 11.6528)
+
+[node name="Child" type="RigidBody3D" parent="." node_paths=PackedStringArray("parent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13818, 0)
+continuous_cd = true
+linear_damp = 3.0
+angular_damp = 5.0
+script = ExtResource("2_co34o")
+id = 2
+move_speed = 10
+torque_speed = 3
+parent = NodePath("../Parent")
+is_in_control = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Child"]
+shape = SubResource("ConvexPolygonShape3D_xs7tk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Child/CollisionShape3D"]
+mesh = SubResource("BoxMesh_0i2v3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ivuyx")
+
+[node name="Status" type="MeshInstance3D" parent="Child"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.741897, 0)
+mesh = SubResource("SphereMesh_cl0n2")
+
+[node name="Parent" type="RigidBody3D" parent="." node_paths=PackedStringArray("parent")]
+mass = 1000.0
+continuous_cd = true
+linear_damp = 3.0
+script = ExtResource("2_co34o")
+id = 1
+move_speed = 10
+torque_speed = 10
+parent = NodePath("../OddRigidBody")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parent"]
+shape = SubResource("ConvexPolygonShape3D_xs7tk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Parent/CollisionShape3D"]
+mesh = SubResource("BoxMesh_0i2v3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_sal1e")
+
+[node name="Status" type="MeshInstance3D" parent="Parent"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.741897, 0)
+visible = false
+mesh = SubResource("SphereMesh_cl0n2")
+
+[node name="Camera3D" type="Camera3D" parent="Parent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86792, 7.66354)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.69109, 2.91798, 9.25464, 0, 9.60393, -3.02811, -9.70376, 0.809226, 2.56654, 0, 0, -20.1668)
+mesh = SubResource("BoxMesh_eg56t")
+surface_material_override/0 = SubResource("StandardMaterial3D_jvul1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.601748, -10.0132, 0.882028, 2.62295, 0.696582, 9.69741, -9.70376, 0.809226, 2.56654, 18.8243, 0, -20.1668)
+mesh = SubResource("BoxMesh_eg56t")
+surface_material_override/0 = SubResource("StandardMaterial3D_jvul1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.69109, 2.91798, 9.25464, -9.65746, -0.131647, 2.84973, 0.946753, -9.63706, 2.76325, -14.8818, -0.390942, -19.9949)
+mesh = SubResource("BoxMesh_eg56t")
+surface_material_override/0 = SubResource("StandardMaterial3D_jvul1")
+
+[node name="OddRigidBody" type="RigidBody3D" parent="."]
+mass = 1e+07
+gravity_scale = 0.0
+script = ExtResource("1_ugtg8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OddRigidBody"]
+transform = Transform3D(10.09, 0, 0, 0, 10.09, 0, 0, 0, 10.09, 0, -7.21568, 0)
+shape = SubResource("SphereShape3D_so0pn")
+
+[node name="Planet" type="MeshInstance3D" parent="OddRigidBody/CollisionShape3D"]
+mesh = SubResource("SphereMesh_kq3xr")
+skeleton = NodePath("../../..")
+script = ExtResource("3_tdfx1")
+
+[node name="Area3D" type="Area3D" parent="OddRigidBody"]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_unit_distance = 5.0
+gravity = 3.0
+script = ExtResource("5_xkefv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OddRigidBody/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.30104, 0)
+shape = SubResource("SphereShape3D_1sfcr")
+
+[connection signal="body_entered" from="OddRigidBody/Area3D" to="OddRigidBody/Area3D" method="_on_body_entered"]

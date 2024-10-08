@@ -1,22 +1,29 @@
-[gd_scene load_steps=13 format=3 uid="uid://brkmh327ycklk"]
+[gd_scene load_steps=10 format=3 uid="uid://brkmh327ycklk"]
 
 [ext_resource type="PackedScene" uid="uid://cpb2nlkghtm13" path="res://Scenes/Spaceship/FighterGen7/fighter_gen_7.tscn" id="1_2ddtf"]
 [ext_resource type="Script" path="res://Scenes/Main Scene/Multiplayer.gd" id="1_lw3xx"]
-[ext_resource type="Texture2D" uid="uid://bv2cmqlgs7i4u" path="res://Assets/SkyBox/skyboxv2.png" id="1_qpgfj"]
 [ext_resource type="PackedScene" uid="uid://b62vde3oekq23" path="res://Scenes/Rings/Courses/course.tscn" id="2_xe5xt"]
-[ext_resource type="Script" path="res://Scenes/Main Scene/OriginShift.gd" id="3_ofit1"]
+[ext_resource type="Shader" path="res://star sky.gdshader" id="3_fymwm"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_46trt"]
-panorama = ExtResource("1_qpgfj")
-filter = false
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v58w3"]
+shader = ExtResource("3_fymwm")
+shader_parameter/sky_color = Color(0, 0.0313726, 0.0470588, 1)
+shader_parameter/star_base_color = Color(0.925866, 0.908911, 0.903488, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.405
+shader_parameter/star_twinkle_intensity = 0.163
+shader_parameter/layer_scale = 9.63
+shader_parameter/layer_scale_step = 6.05
+shader_parameter/layers_count = 4
 
-[sub_resource type="Sky" id="Sky_kriuc"]
-sky_material = SubResource("PanoramaSkyMaterial_46trt")
+[sub_resource type="Sky" id="Sky_0ua7k"]
+sky_material = SubResource("ShaderMaterial_v58w3")
 radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_af0w1"]
 background_mode = 2
-sky = SubResource("Sky_kriuc")
+sky = SubResource("Sky_0ua7k")
 sky_rotation = Vector3(4.71239, 0, 0)
 tonemap_mode = 2
 glow_enabled = true
@@ -29,11 +36,6 @@ albedo_color = Color(1, 1, 0.862745, 1)
 emission_enabled = true
 emission = Color(1, 1, 0.662745, 1)
 emission_energy_multiplier = 30.0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_0fs2i"]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_g62ti"]
-data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_lw3xx")
@@ -74,11 +76,10 @@ stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(320, 180)
+size = Vector2i(460, 259)
 render_target_update_mode = 4
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport"]
-script = ExtResource("3_ofit1")
 
 [node name="course" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_xe5xt")]
 transform = Transform3D(-0.0975829, 0, -0.995227, 0, 1, 0, 0.995227, 0, -0.0975829, -0.477354, 30.8539, -798.968)
@@ -88,21 +89,6 @@ transform = Transform3D(-0.000120288, -0.183458, 3560.51, 4500, -1.31134e-08, -3
 mesh = SubResource("CylinderMesh_fmfcv")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_lvofr")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(315.87, 0, 0, 0, 315.87, 0, 0, 0, 315.87, 9.645, -362.114, -32.5673)
-mesh = SubResource("PlaneMesh_0fs2i")
-skeleton = NodePath("../../../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_g62ti")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(21.465, 0, 0, 0, 21.465, 0, 0, 0, 21.465, -43.355, 27, 9.7138)
-mesh = SubResource("PlaneMesh_0fs2i")
-skeleton = NodePath("../../../..")
 
 [node name="Spawn Locations" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
 

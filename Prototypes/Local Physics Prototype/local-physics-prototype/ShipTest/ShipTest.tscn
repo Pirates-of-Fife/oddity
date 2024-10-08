@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://2inpg3mqikmw"]
+
+[ext_resource type="PackedScene" uid="uid://ci6mxxt8onp2a" path="res://ShipTest/Player.tscn" id="1_tqr4r"]
+[ext_resource type="Shader" path="res://Shaders/star sky.gdshader" id="2_84noj"]
+[ext_resource type="PackedScene" uid="uid://hs2gwy3h2ttn" path="res://ShipTest/Starship.tscn" id="4_ufl30"]
+[ext_resource type="PackedScene" uid="uid://pvv3e3hi82ip" path="res://ShipTest/Planet.tscn" id="5_a82p4"]
+[ext_resource type="Script" path="res://ShipTest/box.gd" id="6_falhs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_emk11"]
+shader = ExtResource("2_84noj")
+shader_parameter/sky_color = Color(0.00535547, 0.104848, 0.177329, 1)
+shader_parameter/star_base_color = Color(1, 1, 1, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.043
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.151
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_v3ktg"]
+sky_material = SubResource("ShaderMaterial_emk11")
+
+[sub_resource type="Environment" id="Environment_v1es3"]
+background_mode = 2
+sky = SubResource("Sky_v3ktg")
+
+[sub_resource type="BoxMesh" id="BoxMesh_e3kru"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fktrl"]
+albedo_color = Color(0.226686, 0.474282, 0.574676, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ddgth"]
+points = PackedVector3Array(-0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25)
+
+[node name="ShipTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v1es3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0724401, -0.717117, 0.693178, -0.074536, 0.696952, 0.713233, -0.994584, 0, -0.103938, 7.60211, 1.84372, 0)
+
+[node name="Starship" parent="." instance=ExtResource("4_ufl30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.29939, 9479.67, 834.602)
+linear_damp = 0.0
+angular_damp = 0.0
+
+[node name="Planet" parent="." instance=ExtResource("5_a82p4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2744.16, 830.609)
+
+[node name="Player" parent="." instance=ExtResource("1_tqr4r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21134, 9480.5, 823.714)
+
+[node name="Box" type="RigidBody3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53644, 9481.61, 833.666)
+collision_layer = 3
+collision_mask = 3
+mass = 10.0
+inertia = Vector3(1, 1, 1)
+continuous_cd = true
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("6_falhs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+mesh = SubResource("BoxMesh_e3kru")
+surface_material_override/0 = SubResource("StandardMaterial3D_fktrl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+shape = SubResource("ConvexPolygonShape3D_ddgth")
+
+[node name="Box2" type="RigidBody3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(0.970612, 0, 0.240652, 0, 1, 0, -0.240652, 0, 0.970612, 2.53644, 9482.24, 833.666)
+collision_layer = 3
+collision_mask = 3
+mass = 10.0
+inertia = Vector3(1, 1, 1)
+continuous_cd = true
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("6_falhs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box2"]
+mesh = SubResource("BoxMesh_e3kru")
+surface_material_override/0 = SubResource("StandardMaterial3D_fktrl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2"]
+shape = SubResource("ConvexPolygonShape3D_ddgth")

@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4ahpcw3rnlw8"]
+
+[ext_resource type="Script" path="res://classes/interactable/Interactable.gd" id="1_404kt"]
+[ext_resource type="Script" path="res://scenes/vehicles/starships/DemoShip/seat.gd" id="1_bv8s3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jnbvk"]
+size = Vector3(0.59, 0.415, 0.575)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g33gb"]
+size = Vector3(0.405, 0.9, 0.275)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_78tig"]
+size = Vector3(1.16148, 0.829895, 0.734161)
+
+[sub_resource type="BoxMesh" id="BoxMesh_imspu"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wy86w"]
+data = PackedVector3Array(-0.295, 0.2075, 0.2875, 0.295, 0.2075, 0.2875, -0.295, -0.2075, 0.2875, 0.295, 0.2075, 0.2875, 0.295, -0.2075, 0.2875, -0.295, -0.2075, 0.2875, 0.295, 0.2075, -0.2875, -0.295, 0.2075, -0.2875, 0.295, -0.2075, -0.2875, -0.295, 0.2075, -0.2875, -0.295, -0.2075, -0.2875, 0.295, -0.2075, -0.2875, 0.295, 0.2075, 0.2875, 0.295, 0.2075, -0.2875, 0.295, -0.2075, 0.2875, 0.295, 0.2075, -0.2875, 0.295, -0.2075, -0.2875, 0.295, -0.2075, 0.2875, -0.295, 0.2075, -0.2875, -0.295, 0.2075, 0.2875, -0.295, -0.2075, -0.2875, -0.295, 0.2075, 0.2875, -0.295, -0.2075, 0.2875, -0.295, -0.2075, -0.2875, 0.295, 0.2075, 0.2875, -0.295, 0.2075, 0.2875, 0.295, 0.2075, -0.2875, -0.295, 0.2075, 0.2875, -0.295, 0.2075, -0.2875, 0.295, 0.2075, -0.2875, -0.295, -0.2075, 0.2875, 0.295, -0.2075, 0.2875, -0.295, -0.2075, -0.2875, 0.295, -0.2075, 0.2875, 0.295, -0.2075, -0.2875, -0.295, -0.2075, -0.2875)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sm37l"]
+data = PackedVector3Array(-0.2025, 0.45, 0.1375, 0.2025, 0.45, 0.1375, -0.2025, -0.45, 0.1375, 0.2025, 0.45, 0.1375, 0.2025, -0.45, 0.1375, -0.2025, -0.45, 0.1375, 0.2025, 0.45, -0.1375, -0.2025, 0.45, -0.1375, 0.2025, -0.45, -0.1375, -0.2025, 0.45, -0.1375, -0.2025, -0.45, -0.1375, 0.2025, -0.45, -0.1375, 0.2025, 0.45, 0.1375, 0.2025, 0.45, -0.1375, 0.2025, -0.45, 0.1375, 0.2025, 0.45, -0.1375, 0.2025, -0.45, -0.1375, 0.2025, -0.45, 0.1375, -0.2025, 0.45, -0.1375, -0.2025, 0.45, 0.1375, -0.2025, -0.45, -0.1375, -0.2025, 0.45, 0.1375, -0.2025, -0.45, 0.1375, -0.2025, -0.45, -0.1375, 0.2025, 0.45, 0.1375, -0.2025, 0.45, 0.1375, 0.2025, 0.45, -0.1375, -0.2025, 0.45, 0.1375, -0.2025, 0.45, -0.1375, 0.2025, 0.45, -0.1375, -0.2025, -0.45, 0.1375, 0.2025, -0.45, 0.1375, -0.2025, -0.45, -0.1375, 0.2025, -0.45, 0.1375, 0.2025, -0.45, -0.1375, -0.2025, -0.45, -0.1375)
+
+[node name="Seat" type="StaticBody3D"]
+collision_layer = 536871936
+collision_mask = 536871936
+script = ExtResource("1_bv8s3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_jnbvk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.951369, 0.308054, 0, -0.308054, 0.951369, 0, 0.423835, -0.311807)
+mesh = SubResource("BoxMesh_g33gb")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.167337, 0, 0)
+script = ExtResource("1_404kt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738824, 0.542224, 0.184277)
+shape = SubResource("BoxShape3D_78tig")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactable"]
+transform = Transform3D(0.285, 0, 0, 0, 0.285, 0, 0, 0, 0.285, -0.824227, 0.352753, 0)
+mesh = SubResource("BoxMesh_imspu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_wy86w")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.951369, 0.308054, 0, -0.308054, 0.951369, 0, 0.423835, -0.311807)
+shape = SubResource("ConcavePolygonShape3D_sm37l")
+
+[node name="SpawnPositionMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.677578, -1.59275)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.485, 0, 4.24e-08, 0, 0.485, 0, -4.24e-08, 0, -0.485, 0, 0.814995, -0.973637)
+text = "Enter Ship by pressing 'F'"
+
+[connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]

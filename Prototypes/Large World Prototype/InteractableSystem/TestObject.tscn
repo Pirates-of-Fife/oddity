@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpdaioj42j4hu"]
+
+[ext_resource type="Script" path="res://InteractableSystem/TestObject.gd" id="1_u2xlt"]
+[ext_resource type="PackedScene" uid="uid://bi8ebqsm3obsa" path="res://InteractableSystem/Interactable.tscn" id="2_ttr53"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kvnb2"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g5k36"]
+points = PackedVector3Array(-0.1, -0.1, -0.1, 0.0999954, 0.1, 0.1, 0.0999954, 0.1, -0.1, 0.0999954, -0.1, 0.1, -0.1, 0.1, 0.1, 0.0999954, -0.1, -0.1, -0.1, 0.1, -0.1, -0.1, -0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_343nd"]
+size = Vector3(0.246948, 0.27301, 0.255127)
+
+[sub_resource type="Animation" id="Animation_3ll7n"]
+resource_name = "Test"
+length = 2.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 2, 0, 2, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r4x0n"]
+_data = {
+"Test": SubResource("Animation_3ll7n")
+}
+
+[node name="TestObject" type="Node3D"]
+script = ExtResource("1_u2xlt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_kvnb2")
+
+[node name="PromptContainer" type="Node3D" parent="MeshInstance3D"]
+
+[node name="Marker3D" type="Marker3D" parent="MeshInstance3D/PromptContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0952088, 0.0421472, 0.232115)
+
+[node name="Marker3D2" type="Marker3D" parent="MeshInstance3D/PromptContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.240843, 0.0842943, -0.205222)
+
+[node name="Marker3D3" type="Marker3D" parent="MeshInstance3D/PromptContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.213611, 0.0842943, -0.0314207)
+
+[node name="Marker3D4" type="Marker3D" parent="MeshInstance3D/PromptContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.415894, 0.0842943, -0.0314207)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_g5k36")
+
+[node name="Interactable" parent="MeshInstance3D" node_paths=PackedStringArray("interaction_shape") instance=ExtResource("2_ttr53")]
+interaction_shape = NodePath("CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00408936, -0.00747681, -0.00777024)
+shape = SubResource("BoxShape3D_343nd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_r4x0n")
+}
+
+[connection signal="interact" from="MeshInstance3D/Interactable" to="." method="_on_interactable_interact"]
