@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=29 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/frame of reference/GravityGrid.gd" id="1_q0ntb"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cqfonknridwp7" path="res://scenes/vehicles/starships/DemoShip/DemoShip.tscn" id="4_efvbd"]
 [ext_resource type="Script" path="res://test-scenes/ShipTestScene/interaction_target.gd" id="4_i5a5r"]
 [ext_resource type="PackedScene" uid="uid://ik0bqvjr0uki" path="res://classes/Creature/Creature.tscn" id="6_nbteu"]
-[ext_resource type="Script" path="res://test-scenes/ShipTestScene/temp-planet.gd" id="8_1a8xg"]
 [ext_resource type="Script" path="res://classes/frame of reference/GravityWell.gd" id="8_j62fs"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/DemoShip2/DemoShip2.tscn" id="8_ybp2k"]
 [ext_resource type="Texture2D" uid="uid://dxgu1oyd8j3xb" path="res://test-scenes/ShipTestScene/2k_earth_daymap.jpg" id="9_7bmdm"]
@@ -305,7 +304,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -19.55
 
 [node name="Planet" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7174.31, 0, 0)
-script = ExtResource("8_1a8xg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Planet"]
 mesh = SubResource("SphereMesh_c5kup")
