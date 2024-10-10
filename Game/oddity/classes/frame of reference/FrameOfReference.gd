@@ -23,6 +23,9 @@ var last_velocity : Vector3 = Vector3.ZERO
 var velocity_delta : Vector3 = Vector3.ZERO
 
 @export
+var disabled : bool = false
+
+@export
 var frame_of_reference_name : String = ""
 
 @export
@@ -54,6 +57,7 @@ func _enter_tree() -> void:
 	last_position = global_position
 	last_velocity = velocity
 	last_rotation = global_basis.get_rotation_quaternion().normalized()
+	add_to_group("FrameOfReference")
 	
 func _physics_process(delta: float) -> void:
 	calculate_movement_deltas(delta)
@@ -71,6 +75,9 @@ func calculate_movement_deltas(delta : float) -> void:
 	last_rotation = global_basis.get_rotation_quaternion()
 
 func move_bodies_in_frame_of_reference() -> void:
+	if disabled:
+		return
+	
 	for body : GameEntity in bodies_in_reference_frame:
 		move_body(body)
 

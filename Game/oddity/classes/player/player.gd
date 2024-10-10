@@ -60,6 +60,23 @@ var current_throttle_forwards_axis : float = 0
 @onready
 var throttle_deadzone_reset_timer : Timer = $ThrottleDeadzoneResetTimer
 
+@export
+var floating_origin : FloatingOrigin
+
+@export
+var world : Node3D
+
+func _ready() -> void:
+	if floating_origin == null:
+		floating_origin = get_tree().get_nodes_in_group("FloatingOrigin")[0] 
+	
+	if world == null:
+		world = get_tree().get_nodes_in_group("World")[0]
+		
+	if control_entity != null:
+		control_entity.reparent.call_deferred(world)
+
+
 func _process(delta: float) -> void:	
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -171,8 +188,13 @@ func _process(delta: float) -> void:
 	twist_input = 0
 
 func possess(control_entity : ControlEntity) -> void:
+	if self.control_entity != null:
+		self.control_entity.reparent.call_deferred(floating_origin)
+	
 	self.control_entity = control_entity
-		
+	
+	self.control_entity.reparent.call_deferred(world)
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

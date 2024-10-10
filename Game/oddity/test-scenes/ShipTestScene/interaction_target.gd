@@ -9,6 +9,3 @@ func _on_interactable_interacted(player : Player, control_entity : ControlEntity
 	count += 1
 	$Label3D.text = str(count)
 	$AnimationPlayer.play("splosh")
-
-func _process(delta: float) -> void:
-	print(global_position)
