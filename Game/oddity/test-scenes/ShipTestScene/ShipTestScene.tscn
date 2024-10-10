@@ -93,8 +93,8 @@ emission = Color(1, 0.815686, 1, 1)
 emission_energy_multiplier = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_c5kup"]
-radius = 750.0
-height = 1500.0
+radius = 7500.0
+height = 15000.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_738e6"]
 albedo_texture = ExtResource("9_7bmdm")
@@ -131,7 +131,7 @@ render_target_update_mode = 4
 
 [node name="FloatingOrigin" type="Node3D" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("player") groups=["FloatingOrigin"]]
 script = ExtResource("1_uu773")
-shift_threshold = 5.0
+shift_threshold = 5000.0
 player = NodePath("../Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World/FloatingOrigin"]
@@ -311,17 +311,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88956, -118.745, 305.073)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -19.5545, -114.587, 304.351)
 
 [node name="Planet" type="Node3D" parent="SubViewportContainer/SubViewport/World/FloatingOrigin"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15002.3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 388883, 0, 0)
 script = ExtResource("8_1a8xg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/FloatingOrigin/Planet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35630.8, 0, 0)
 mesh = SubResource("SphereMesh_c5kup")
 surface_material_override/0 = SubResource("StandardMaterial3D_738e6")
 
 [node name="GravityWell" type="Area3D" parent="SubViewportContainer/SubViewport/World/FloatingOrigin/Planet/MeshInstance3D"]
 script = ExtResource("8_j62fs")
-radius = 750.0
+radius = 7500.0
 gravity_attraction_from_surface_start = 50.0
 gravity_attraction_from_surface_max = 5.0
 frame_of_reference_name = "Planet"
@@ -330,6 +329,7 @@ size = 6
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/FloatingOrigin/Planet/MeshInstance3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/FloatingOrigin/Planet/MeshInstance3D/StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_hkqi0")
 
 [node name="Cubes2" type="Node3D" parent="SubViewportContainer/SubViewport/World/FloatingOrigin"]
