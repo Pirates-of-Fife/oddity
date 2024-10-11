@@ -35,9 +35,7 @@ var interaction_length : float = 2.5
 var control_entity : ControlEntity
 
 # Creature Commands
-var creature_movement_command : CreatureMovementCommand = CreatureMovementCommand.new()
-var creature_jump_command : CreatureJumpCommand = CreatureJumpCommand.new()
-var creature_look_command : CreatureLookCommand = CreatureLookCommand.new()
+
 
 # Starship Commands
 var starship_pitch_down_command : StarshipPitchDownCommand = StarshipPitchDownCommand.new()
@@ -90,15 +88,7 @@ func _process(delta: float) -> void:
 	self.global_position = control_entity.anchor.global_position
 	self.global_rotation = control_entity.anchor.global_rotation
 	
-	if control_entity is Creature:
-		var input_dir : Vector2 = Input.get_vector("player_walk_left", "player_walk_right", "player_walk_forwards", "player_walk_backwards")
-		
-		creature_movement_command.execute(control_entity, CreatureMovementCommand.Params.new(input_dir))
-		
-		creature_look_command.execute(control_entity, CreatureLookCommand.Params.new(twist_input, pitch_input))
-		
-		if (Input.is_action_just_pressed("player_jump")):
-			creature_jump_command.execute(control_entity)
+	
 	
 	if control_entity is Starship:
 		var starship_control_entity : Starship = control_entity
