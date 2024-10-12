@@ -290,7 +290,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_insp3")
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("2_fb43t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07854, -0.609585)
-ship_mouse_controls_sensitivity = 0.1
 control_entity = NodePath("../Creature")
 
 [node name="DemoShip" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("4_efvbd")]

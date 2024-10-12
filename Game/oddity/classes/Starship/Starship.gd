@@ -65,6 +65,13 @@ var relative_gravity_vector : Vector3 = Vector3.ZERO
 var relative_gravity_direction : Vector3 = Vector3.ZERO
 var gravity_strength : float = 0
 
+@export_category("Interaction")
+
+@export
+var interaction_length : float = 2.5
+
+var raycast_helper : RaycastHelper = RaycastHelper.new()
+
 func _ready() -> void:
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust
@@ -171,6 +178,15 @@ func _physics_process(delta: float) -> void:
 	
 	relative_gravity_vector = Vector3.ZERO
 
+func use_interact() -> void:
+	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
+	
+	if result.size() > 0:
+		var collider : Object = result["collider"]
+
+		if collider is Interactable:
+			collider.interact(player, self)
+	
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO
 	target_rotational_thrust_vector = Vector3.ZERO

@@ -18,9 +18,3 @@ script = ExtResource("1_1lph1")
 [node name="Camera3D" type="Camera3D" parent="."]
 attributes = SubResource("CameraAttributesPractical_genkd")
 far = 1e+06
-
-[node name="ThrottleDeadzoneResetTimer" type="Timer" parent="."]
-wait_time = 0.4
-one_shot = true
-
-[connection signal="timeout" from="ThrottleDeadzoneResetTimer" to="." method="_on_throttle_deadzone_reset_timer_timeout"]
