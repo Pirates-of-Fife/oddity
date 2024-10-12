@@ -69,6 +69,7 @@ mass = 1200.0
 script = ExtResource("1_gtrcu")
 ship_info = SubResource("Resource_8x1bo")
 thruster_force = SubResource("Resource_4ayql")
+controller_reference = "res://classes/controller/vehicle-controller/starship-controller/StarshipController.tscn"
 anchor = NodePath("PlayerCam/TwistPivot/PitchPivot/Anchor")
 
 [node name="fighterGen7" parent="." instance=ExtResource("2_qgepc")]

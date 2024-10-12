@@ -63,6 +63,7 @@ max_contacts_reported = 100
 script = ExtResource("1_5hdip")
 ship_info = ExtResource("2_gep6i")
 thruster_force = SubResource("Resource_xuaf6")
+controller_reference = "res://classes/controller/vehicle-controller/starship-controller/StarshipController.tscn"
 anchor = NodePath("PlayerCam/TwistPivot/PitchPivot/Anchor")
 
 [node name="PlayerCam" type="Node3D" parent="."]

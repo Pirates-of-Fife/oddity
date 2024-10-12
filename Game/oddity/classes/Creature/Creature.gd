@@ -17,6 +17,12 @@ var twist_pivot : Node3D = $Head/TwistPivot
 @onready
 var pitch_pivot : Node3D = $Head/TwistPivot/PitchPivot
 
+
+@export_category("Interaction")
+
+@export
+var interaction_length : float = 2.5
+
 @export_category("PID Settings")
 @export
 var upright_force_p : float = 110.0  # Proportional gain
@@ -38,6 +44,8 @@ var upright_direction : Vector3 = Vector3.UP
 
 var input_vector : Vector3
 
+var raycast_helper : RaycastHelper = RaycastHelper.new()
+
 func _physics_process(delta : float) -> void:
 	var multiplier : float = 1
 		
@@ -58,6 +66,15 @@ func look(twist_input : float, pitch_input : float) -> void:
 
 func jump() -> void:
 	apply_central_impulse(global_transform.basis.y * 300)
+
+func use_interact() -> void:
+	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
+	
+	if result.size() > 0:
+		var collider : Object = result["collider"]
+
+		if collider is Interactable:
+			collider.interact(player, self)
 
 func keep_upright(delta: float) -> void:
 	var current_up: Vector3 = global_transform.basis.y
