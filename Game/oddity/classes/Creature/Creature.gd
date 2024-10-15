@@ -24,12 +24,7 @@ var pitch_pivot : Node3D = $Head/TwistPivot/PitchPivot
 var interaction_length : float = 2.5
 
 @export
-var pick_up_strength : float = 500
-
-@export
 var pick_up_distance : float = 2
-
-var pick_up_pid_controller : PIDController = PIDController.new()
 
 var game_entity_being_picked_up : GameEntity
 
@@ -57,11 +52,7 @@ var input_vector : Vector3
 var raycast_helper : RaycastHelper = RaycastHelper.new()
 
 func _ready() -> void:
-	pick_up_pid_controller.limit_min = 0
-	pick_up_pid_controller.limit_max = pick_up_strength
-	pick_up_pid_controller.Kp = pick_up_strength / 2
-	pick_up_pid_controller.Ki = 0.001
-	pick_up_pid_controller.Kd = 0.001
+	pass
 
 func _physics_process(delta : float) -> void:
 	var multiplier : float = 1
@@ -90,6 +81,10 @@ func jump() -> void:
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
 	
+	if (game_entity_being_picked_up != null):
+		game_entity_being_picked_up = null
+		return
+	
 	if result.size() > 0:
 		var collider : Object = result["collider"]
 
@@ -102,23 +97,9 @@ func use_interact() -> void:
 
 func pick_up(game_entity : GameEntity, delta : float) -> void:
 	var entity_goal_position : Vector3 = anchor.global_position + Vector3(0, 0, -pick_up_distance) * anchor.global_basis.inverse()
-	print("goal: " + str(entity_goal_position))
 
-	var position_delta : Vector3 = entity_goal_position - game_entity.global_position
-	print("DElta: " + str(position_delta.normalized()))
+	game_entity.global_position = entity_goal_position
 
-	var distance : float = position_delta.length()
-	
-	print("distan: " + str(distance))
-
-	
-	var force : float = pick_up_pid_controller.update(0, -distance, delta)
-	print("foce: " + str(force))
-
-
-	#game_entity.global_position = entity_goal_position
-
-	game_entity.apply_central_force(position_delta.normalized() * force)
 
 func keep_upright(delta: float) -> void:
 	var current_up: Vector3 = global_transform.basis.y
