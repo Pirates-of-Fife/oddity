@@ -24,6 +24,9 @@ func _physics_process(delta: float) -> void:
 
 func apply_gravity() -> void:
 	for body : GameEntity in bodies_in_reference_frame:
+		if body.is_being_held:
+			continue
+		
 		if body.active_frame_of_reference == self:
 			if (body is Creature):
 				body.upright_direction = -gravity_direction

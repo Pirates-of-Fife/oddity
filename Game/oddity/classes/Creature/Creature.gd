@@ -82,6 +82,7 @@ func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
 	
 	if (game_entity_being_picked_up != null):
+		game_entity_being_picked_up.is_being_held = false
 		game_entity_being_picked_up = null
 		return
 	
@@ -94,12 +95,12 @@ func use_interact() -> void:
 		if collider is GameEntity:
 			if collider.can_be_picked_up == true:
 				game_entity_being_picked_up = collider
+				game_entity_being_picked_up.is_being_held = true
 
 func pick_up(game_entity : GameEntity, delta : float) -> void:
 	var entity_goal_position : Vector3 = anchor.global_position + Vector3(0, 0, -pick_up_distance) * anchor.global_basis.inverse()
 
 	game_entity.global_position = entity_goal_position
-
 
 func keep_upright(delta: float) -> void:
 	var current_up: Vector3 = global_transform.basis.y

@@ -7,6 +7,9 @@ class_name GameEntity
 @export
 var can_be_picked_up : bool = false
 
+@export
+var is_being_held : bool = false
+
 var active_frame_of_reference : FrameOfReference
 var in_frame_of_references : Array = Array()
 
