@@ -94,7 +94,7 @@ func update(setpoint : float, measurement : float, delta : float) -> float:
 						+ ((2.0 * tau - delta) * differentiator)
 						/ (2.0 * tau + delta)
 					)
-	
+		
 	# Compute output and apply limits
 	output = proportional + integrator + differentiator
 	
