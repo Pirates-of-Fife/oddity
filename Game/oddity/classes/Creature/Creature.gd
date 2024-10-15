@@ -23,6 +23,11 @@ var pitch_pivot : Node3D = $Head/TwistPivot/PitchPivot
 @export
 var interaction_length : float = 2.5
 
+@export
+var pick_up_distance : float = 2
+
+var game_entity_being_picked_up : GameEntity
+
 @export_category("PID Settings")
 @export
 var upright_force_p : float = 110.0  # Proportional gain
@@ -46,6 +51,9 @@ var input_vector : Vector3
 
 var raycast_helper : RaycastHelper = RaycastHelper.new()
 
+func _ready() -> void:
+	pass
+
 func _physics_process(delta : float) -> void:
 	var multiplier : float = 1
 		
@@ -54,6 +62,9 @@ func _physics_process(delta : float) -> void:
 	apply_central_force(direction * walk_force * multiplier)
 	
 	keep_upright(delta)
+	
+	if (game_entity_being_picked_up != null):
+		pick_up(game_entity_being_picked_up, delta)
 
 func move(input_dir : Vector2) -> void:
 	input_vector = Vector3(input_dir.x, 0, input_dir.y)
@@ -70,11 +81,26 @@ func jump() -> void:
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
 	
+	if (game_entity_being_picked_up != null):
+		game_entity_being_picked_up.is_being_held = false
+		game_entity_being_picked_up = null
+		return
+	
 	if result.size() > 0:
 		var collider : Object = result["collider"]
 
 		if collider is Interactable:
 			collider.interact(player, self)
+	
+		if collider is GameEntity:
+			if collider.can_be_picked_up == true:
+				game_entity_being_picked_up = collider
+				game_entity_being_picked_up.is_being_held = true
+
+func pick_up(game_entity : GameEntity, delta : float) -> void:
+	var entity_goal_position : Vector3 = anchor.global_position + Vector3(0, 0, -pick_up_distance) * anchor.global_basis.inverse()
+
+	game_entity.global_position = entity_goal_position
 
 func keep_upright(delta: float) -> void:
 	var current_up: Vector3 = global_transform.basis.y
