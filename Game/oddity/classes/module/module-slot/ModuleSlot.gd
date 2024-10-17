@@ -2,43 +2,20 @@ extends Node3D
 
 class_name ModuleSlot
 
-var module_in_area : Module
-
 @export
 var module : Module
 
-func _ready() -> void:
-	create_area()
-	
-func _process(delta: float) -> void:
-	print(module_in_area)
-	
-	if module != null:
-		return
-	if module_in_area != null:
-		if !module_in_area.is_being_held:
-			module_in_area.insert(self)
-
-func _on_body_entered(body : Node3D) -> void:
-	print(body)
-	if module != null:
-		if body is Module:
-			module_in_area = body
-			print(module_in_area)
-
-func _on_body_exited(body : Node3D) -> void:
+func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Module:
-		module_in_area = null
+		if _module_fits(body) == true: 
+			if body.is_being_held_after_uninsert == false:
+				if body.module_slot == null:
+					body.on_game_entity_drop_request.emit()
+					body.insert(self)
 
-func create_area() -> void:
-	var area : Area3D = Area3D.new()
-	
-	area.body_entered.connect(_on_body_entered)
-	area.body_exited.connect(_on_body_exited)
-	
-	var collider : CollisionShape3D = CollisionShape3D.new()
-	collider.shape = BoxShape3D.new()
-	
-	add_child(area)
-	
-	area.add_child(collider)
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body is Module:
+		body.is_being_held_after_uninsert = false
+
+func _module_fits(module : Module) -> bool:
+	return false

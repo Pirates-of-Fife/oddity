@@ -46,6 +46,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Oddity"
 
+[global_group]
+
+World=""
+
 [input]
 
 player_walk_forwards={
@@ -147,6 +151,7 @@ starship_rotate_pitch_down={
 3d_physics/layer_1="Common"
 3d_physics/layer_10="Ship Exterior"
 3d_physics/layer_11="Ship Interior"
+3d_physics/layer_20="Module"
 3d_physics/layer_30="Interactable"
 
 [physics]
