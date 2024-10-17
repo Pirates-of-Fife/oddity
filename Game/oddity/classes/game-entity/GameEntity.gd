@@ -20,3 +20,10 @@ func evaluate_active_frame_of_reference() -> void:
 	
 func _sort_frame_of_references(a : FrameOfReference, b : FrameOfReference) -> bool:
 	return a.size < b.size
+	
+func freeze_static() -> void:
+	freeze_mode = FreezeMode.FREEZE_MODE_STATIC
+	freeze = true
+	
+func unfreeze() -> void:
+	freeze = false

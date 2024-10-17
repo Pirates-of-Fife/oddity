@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://clnked1cnk5p0"]
+
+[ext_resource type="Script" path="res://classes/module/Module.gd" id="1_gkypt"]
+[ext_resource type="Texture2D" uid="uid://3pgs4i3wknxr" path="res://scenes/vehicles/starships/demo-ship/assets/metal.png" id="2_plhgs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nhpfp"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke1yi"]
+albedo_color = Color(1.61238e-06, 0.49415, 0.339551, 1)
+albedo_texture = ExtResource("2_plhgs")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h61oc"]
+points = PackedVector3Array(0.25, 0.25, 0.5, 0.25, -0.25, 0.5, 0.25, 0.25, -0.5, -0.25, 0.25, 0.5, -0.25, -0.25, 0.5, 0.25, -0.25, -0.5, -0.25, 0.25, -0.5, -0.25, -0.25, -0.5)
+
+[node name="Test-module" type="RigidBody3D"]
+collision_layer = 536872449
+collision_mask = 536872449
+mass = 15.0
+script = ExtResource("1_gkypt")
+can_be_picked_up = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_nhpfp")
+surface_material_override/0 = SubResource("StandardMaterial3D_ke1yi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_h61oc")

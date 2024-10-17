@@ -24,7 +24,7 @@ var pitch_pivot : Node3D = $Head/TwistPivot/PitchPivot
 var interaction_length : float = 2.5
 
 @export
-var pick_up_distance : float = 2
+var pick_up_distance : float = 1
 
 var game_entity_being_picked_up : GameEntity
 
