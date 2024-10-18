@@ -5,6 +5,10 @@ class_name DynamicModuleSlot
 @export
 var module : Module
 
+func _ready() -> void:
+	_initialize_area()
+	_default_ready()
+
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Module:
 		if _module_fits(body) == true: 
@@ -19,3 +23,6 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 func _module_fits(module : Module) -> bool:
 	return false
+
+func _initialize_area() -> void:
+	pass

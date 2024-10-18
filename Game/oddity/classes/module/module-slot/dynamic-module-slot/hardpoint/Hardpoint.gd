@@ -10,3 +10,6 @@ func _module_fits(module : Module) -> bool:
 		if module.size == size:
 			return true
 	return false
+
+func _default_ready() -> void:
+	add_to_group("Hardpoint")
