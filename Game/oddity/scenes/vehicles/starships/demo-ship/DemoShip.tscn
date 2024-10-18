@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cqfonknridwp7"]
+[gd_scene load_steps=23 format=3 uid="uid://cqfonknridwp7"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/DemoShip.gd" id="1_5hdip"]
 [ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="2_ga564"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/speed_label.gd" id="10_n2mvt"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/thrust_vectors.gd" id="11_h7835"]
 [ext_resource type="PackedScene" uid="uid://c4ahpcw3rnlw8" path="res://scenes/vehicles/starships/demo-ship/Seat.tscn" id="12_mti32"]
+[ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ComponentSlot.gd" id="13_udpm1"]
 
 [sub_resource type="Resource" id="Resource_xuaf6"]
 script = ExtResource("3_jnc0e")
@@ -52,6 +53,9 @@ size = Vector3(4.10693, 5.12695, 0.5448)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eoiej"]
 height = 4.95257
 radius = 2.7792
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gm6xy"]
+size = Vector2(0.5, 1)
 
 [node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
 collision_layer = 513
@@ -266,5 +270,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.666283, 0.724018, 0.189442
 
 [node name="MeshInstance3D" parent="Seat/Interactable" index="1"]
 visible = false
+
+[node name="Modules" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Modules"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87933, 0.802053, -4.06874)
+mesh = SubResource("PlaneMesh_gm6xy")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Modules"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87933, 0.802053, -2.12351)
+mesh = SubResource("PlaneMesh_gm6xy")
+skeleton = NodePath("")
+
+[node name="ComponentSlot" type="Node3D" parent="Modules"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82877, 1.26739, -2.16688)
+script = ExtResource("13_udpm1")
+
+[node name="ComponentSlot2" type="Node3D" parent="Modules"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96454, 1.24004, -4.16371)
+script = ExtResource("13_udpm1")
 
 [editable path="Seat"]

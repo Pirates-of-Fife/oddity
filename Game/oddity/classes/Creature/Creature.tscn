@@ -8,8 +8,10 @@ friction = 0.2
 rough = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vlfjs"]
+height = 1.6
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tg1nt"]
+height = 1.6
 
 [node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
 collision_layer = 1537
@@ -34,7 +36,7 @@ mesh = SubResource("CapsuleMesh_tg1nt")
 skeleton = NodePath("../..")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8275, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49244, 0)
 
 [node name="TwistPivot" type="Node3D" parent="Head"]
 

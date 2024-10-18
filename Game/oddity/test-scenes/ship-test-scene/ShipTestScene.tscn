@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=36 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="1_q0ntb"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="8_j62fs"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="8_ybp2k"]
 [ext_resource type="Texture2D" uid="uid://dxgu1oyd8j3xb" path="res://test-scenes/ship-test-scene/2k_earth_daymap.jpg" id="9_7bmdm"]
+[ext_resource type="PackedScene" uid="uid://clnked1cnk5p0" path="res://scenes/modules/test-module/test-module.tscn" id="12_ugjym"]
+[ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ComponentSlot.gd" id="13_5d2nf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj070"]
 shader = ExtResource("1_eqyqr")
@@ -130,7 +132,7 @@ handle_input_locally = false
 size = Vector2i(320, 180)
 render_target_update_mode = 4
 
-[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)
@@ -322,6 +324,7 @@ shape = SubResource("ConvexPolygonShape3D_65ety")
 
 [node name="Creature" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("6_nbteu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88956, -118.745, 305.073)
+pick_up_distance = 2.0
 
 [node name="PickThisBallUp3" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25201, -115.849, 307.351)
@@ -683,5 +686,11 @@ mesh = SubResource("SphereMesh_b3pti")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/PickThisBallUp2"]
 shape = SubResource("ConvexPolygonShape3D_65ety")
+
+[node name="Test-module" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("12_ugjym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.232001, -118.346, 309.245)
+
+[node name="ComponentSlot" type="Node3D" parent="."]
+script = ExtResource("13_5d2nf")
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]

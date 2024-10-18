@@ -46,6 +46,37 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Oddity"
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://classes/": "red",
+"res://classes/command/": "pink",
+"res://classes/controller/": "green",
+"res://classes/creature/": "orange",
+"res://classes/frame-of-reference/": "blue",
+"res://classes/game-entity/": "orange",
+"res://classes/interactable/": "orange",
+"res://classes/module/": "teal",
+"res://classes/pid-controller/": "gray",
+"res://classes/player/": "yellow",
+"res://classes/starship/": "orange",
+"res://classes/vehicle/": "orange",
+"res://project-images/": "blue",
+"res://resources/": "pink",
+"res://scenes/": "purple",
+"res://shaders/": "yellow",
+"res://test-scenes/": "green"
+}
+
+[global_group]
+
+World=""
+ComponentSlot="A component slot"
+Hardpoint="A hardpoint"
+InteriorModuleSlot=""
+ExteriorModuleSlot=""
+
 [input]
 
 player_walk_forwards={
@@ -147,6 +178,7 @@ starship_rotate_pitch_down={
 3d_physics/layer_1="Common"
 3d_physics/layer_10="Ship Exterior"
 3d_physics/layer_11="Ship Interior"
+3d_physics/layer_20="Module"
 3d_physics/layer_30="Interactable"
 
 [physics]
