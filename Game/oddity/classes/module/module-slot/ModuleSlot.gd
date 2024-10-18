@@ -18,4 +18,4 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 		body.is_being_held_after_uninsert = false
 
 func _module_fits(module : Module) -> bool:
-	return false
+	return true
