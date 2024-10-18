@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends StaticGameEntity
 
 class_name Interactable
 

@@ -1,11 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3ud1o2v8q3yk"]
 
-[ext_resource type="Script" path="res://classes/module/module-slot/ModuleSlot.gd" id="1_pykmt"]
+[ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ComponentSlot.gd" id="1_6ngxs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uqkxk"]
 
 [node name="ModuleSlot" type="Node3D"]
-script = ExtResource("1_pykmt")
+script = ExtResource("1_6ngxs")
+size = 1
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 524288

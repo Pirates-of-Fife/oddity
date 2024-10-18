@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://clnked1cnk5p0"]
 
-[ext_resource type="Script" path="res://classes/module/Module.gd" id="1_gkypt"]
+[ext_resource type="Script" path="res://classes/module/component/Component.gd" id="1_xskmy"]
 [ext_resource type="Texture2D" uid="uid://3pgs4i3wknxr" path="res://scenes/vehicles/starships/demo-ship/assets/metal.png" id="2_plhgs"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nhpfp"]
@@ -17,7 +17,8 @@ points = PackedVector3Array(0.25, 0.25, 0.5, 0.25, -0.25, 0.5, 0.25, 0.25, -0.5,
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 15.0
-script = ExtResource("1_gkypt")
+script = ExtResource("1_xskmy")
+size = 1
 can_be_picked_up = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
