@@ -28,11 +28,6 @@ func _process(delta: float) -> void:
 	print(self.global_rotation)
 
 func possess(control_entity : ControlEntity) -> void:
-	if control_entity is ControlEntityDelegate:
-		control_entity.control_entity.set_active_anchor(control_entity.anchor)
-		possess(control_entity.control_entity)
-		return
-
 	if current_controller != null:
 		current_controller.queue_free()
 	
