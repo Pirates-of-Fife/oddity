@@ -9,7 +9,7 @@ var entity_using_seat : ControlEntity
 
 var entity_parent : Node3D
 
-var creature : PackedScene = preload("res://classes/Creature/Creature.tscn")
+var creature : PackedScene = preload("res://classes/creature/Creature.tscn")
 
 func interact(player : Player, control_entity : ControlEntity) -> void:
 	interacted.emit(player, control_entity)

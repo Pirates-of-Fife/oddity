@@ -6,5 +6,5 @@ func _process(delta: float) -> void:
 	move_ball()
 
 func move_ball() -> void:
-	$PlayerCam/SpaceBall.position.x = -target_rotational_thrust_vector.y
-	$PlayerCam/SpaceBall.position.y = -target_rotational_thrust_vector.x
+	$Anchor/SpaceBall.position.x = -target_rotational_thrust_vector.y
+	$Anchor/SpaceBall.position.y = -target_rotational_thrust_vector.x

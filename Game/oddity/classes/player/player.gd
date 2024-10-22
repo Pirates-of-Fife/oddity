@@ -22,8 +22,10 @@ func _process(delta: float) -> void:
 	if control_entity == null:
 		return
 	
-	self.global_position = control_entity.anchor.global_position
-	self.global_rotation = control_entity.anchor.global_rotation
+	self.global_position = control_entity.anchor.camera_anchor.global_position
+	self.global_rotation = control_entity.anchor.camera_anchor.global_rotation
+
+	print(self.global_rotation)
 
 func possess(control_entity : ControlEntity) -> void:
 	if current_controller != null:

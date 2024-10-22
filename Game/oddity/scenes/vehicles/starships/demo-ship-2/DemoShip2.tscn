@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://scenes/vehicles/starships/demo-ship-2/fighter_gen_7_model.tscn" id="2_qgepc"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/StarshipInfo.gd" id="2_wijyj"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="3_dqaga"]
-[ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="3_tu71r"]
 [ext_resource type="ArrayMesh" uid="uid://0evsbkipsbqe" path="res://scenes/vehicles/starships/demo-ship-2/fighterGen7-CollisionMesh.obj" id="4_en1wd"]
 [ext_resource type="Script" path="res://classes/pid-controller/PIDController.gd" id="7_3qamo"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/thrust_vector_label.gd" id="8_2a822"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/rotation_vector_label.gd" id="9_iapp8"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/speed_label.gd" id="10_pywgb"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/thrust_vectors.gd" id="11_fvq50"]
+[ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="12_2ad4s"]
 [ext_resource type="PackedScene" uid="uid://c4ahpcw3rnlw8" path="res://scenes/vehicles/starships/demo-ship/Seat.tscn" id="12_bf1cl"]
 
 [sub_resource type="Resource" id="Resource_8x1bo"]
@@ -53,16 +53,16 @@ points = PackedVector3Array(-6.14677, 1.93546, 2.56028, -8.79806, 4.58589, 5.210
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xw1k0"]
 points = PackedVector3Array(-5.85364, -1.89361, 5.21022, -2.61405, -1.30465, 0.793534, -5.26482, -2.48171, 1.97158, -3.20287, -1.89361, 4.6212, -9.09179, -4.54396, 5.79973, -9.68206, -3.36559, 4.03218, -2.61405, -0.126289, 0.793534, -2.61405, -0.126289, 4.32669, -9.09179, -4.54396, 4.03218, -9.68206, -3.36559, 5.79973, -2.61405, -1.59913, 1.08805, -2.31928, -1.30465, 4.32669, -9.68206, -4.54396, 4.03218, -2.31928, -0.126289, 0.793534, -2.31928, -0.126289, 4.32669, -7.03056, -3.66008, 3.14962, -8.50369, -3.36559, 5.79973, -2.31928, -1.30465, 0.793534, -9.68206, -4.54396, 5.79973, -3.79313, -2.18853, 4.6212, -8.50369, -4.24904, 5.79973, -8.50369, -3.07111, 3.44315, -3.79313, -2.18853, 1.67707, -7.03056, -3.66008, 5.21022, -3.20287, -0.715686, 4.6212, -7.61938, -2.48171, 5.50473, -2.61405, -1.59913, 4.32669, -8.50369, -3.95456, 3.44315)
 
-[sub_resource type="SphereMesh" id="SphereMesh_xevcb"]
+[sub_resource type="SphereMesh" id="SphereMesh_ksn18"]
 radius = 0.05
 height = 0.1
 radial_segments = 32
 rings = 16
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xuqj1"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8kr5"]
 albedo_color = Color(1, 0, 0, 1)
 
-[node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+[node name="DemoShip2" type="RigidBody3D"]
 collision_layer = 513
 collision_mask = 513
 mass = 1200.0
@@ -70,7 +70,6 @@ script = ExtResource("1_gtrcu")
 ship_info = SubResource("Resource_8x1bo")
 thruster_force = SubResource("Resource_4ayql")
 controller_reference = "res://classes/controller/vehicle-controller/starship-controller/StarshipController.tscn"
-anchor = NodePath("PlayerCam/TwistPivot/PitchPivot/Anchor")
 
 [node name="fighterGen7" parent="." instance=ExtResource("2_qgepc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -98,26 +97,6 @@ shape = SubResource("ConvexPolygonShape3D_0otas")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_xw1k0")
-
-[node name="PlayerCam" type="Node3D" parent="."]
-transform = Transform3D(-0.999999, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -0.999999, -1.63224e-07, 1.59063, -1.90353)
-
-[node name="TwistPivot" type="Node3D" parent="PlayerCam"]
-
-[node name="PitchPivot" type="Node3D" parent="PlayerCam/TwistPivot"]
-
-[node name="Anchor" type="Node3D" parent="PlayerCam/TwistPivot/PitchPivot"]
-script = ExtResource("3_tu71r")
-
-[node name="Center" type="MeshInstance3D" parent="PlayerCam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
-mesh = SubResource("SphereMesh_xevcb")
-skeleton = NodePath("../../fighterGen7")
-surface_material_override/0 = SubResource("StandardMaterial3D_xuqj1")
-
-[node name="SpaceBall" type="MeshInstance3D" parent="PlayerCam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
-mesh = SubResource("SphereMesh_xevcb")
 
 [node name="PIDControllers" type="Node" parent="."]
 
@@ -260,5 +239,18 @@ transform = Transform3D(1, 0, -2.23517e-08, 0, 1, 0, 2.23517e-08, 0, 1, -2.42551
 
 [node name="Label3D" parent="Seat" index="6"]
 transform = Transform3D(-0.0262282, 0, -0.48429, 0, 0.485, 0, 0.48429, 0, -0.0262282, -0.908921, -0.0450811, 1.43725)
+
+[node name="Anchor" parent="." instance=ExtResource("12_2ad4s")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.33571, -1.95017)
+
+[node name="Center" type="MeshInstance3D" parent="Anchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
+mesh = SubResource("SphereMesh_ksn18")
+skeleton = NodePath("../../fighterGen7")
+surface_material_override/0 = SubResource("StandardMaterial3D_y8kr5")
+
+[node name="SpaceBall" type="MeshInstance3D" parent="Anchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
+mesh = SubResource("SphereMesh_ksn18")
 
 [editable path="Seat"]

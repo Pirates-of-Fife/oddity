@@ -11,12 +11,6 @@ var walk_force : float = 1000
 @export
 var run_multiplier : float = 4
 
-@onready
-var twist_pivot : Node3D = $Head/TwistPivot
-
-@onready
-var pitch_pivot : Node3D = $Head/TwistPivot/PitchPivot
-
 
 @export_category("Interaction")
 
@@ -57,7 +51,7 @@ func _ready() -> void:
 func _physics_process(delta : float) -> void:
 	var multiplier : float = 1
 		
-	var direction : Vector3 = (twist_pivot.global_transform.basis * input_vector).normalized()
+	var direction : Vector3 = (anchor.twist_pivot.global_transform.basis * input_vector).normalized()
 
 	apply_central_force(direction * walk_force * multiplier)
 	
@@ -70,16 +64,18 @@ func move(input_dir : Vector2) -> void:
 	input_vector = Vector3(input_dir.x, 0, input_dir.y)
 
 func look(twist_input : float, pitch_input : float) -> void:
-	twist_pivot.rotate_y(twist_input)
-	pitch_pivot.rotate_x(pitch_input)
+	anchor.look(twist_input, pitch_input)
 	
-	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
+	#twist_pivot.rotate_y(twist_input)
+	#pitch_pivot.rotate_x(pitch_input)
+	
+#	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 
 func jump() -> void:
 	apply_central_impulse(global_transform.basis.y * 300)
 
 func use_interact() -> void:
-	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
+	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor.camera_anchor, interaction_length)
 	
 	if (game_entity_being_picked_up != null):
 		drop()
@@ -100,7 +96,7 @@ func use_interact() -> void:
 
 
 func pick_up(game_entity : GameEntity, delta : float) -> void:
-	var entity_goal_position : Vector3 = anchor.global_position + Vector3(0, 0, -pick_up_distance) * anchor.global_basis.inverse()
+	var entity_goal_position : Vector3 = anchor.camera_anchor.global_position + Vector3(0, 0, -pick_up_distance) * anchor.camera_anchor.global_basis.inverse()
 
 	game_entity.global_position = entity_goal_position
 
