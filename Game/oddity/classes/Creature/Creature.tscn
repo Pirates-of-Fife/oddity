@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ik0bqvjr0uki"]
 
 [ext_resource type="Script" path="res://classes/creature/Creature.gd" id="1_8w455"]
-[ext_resource type="Script" path="res://classes/player/anchor/anchor.gd" id="2_4xlh2"]
+[ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="2_2yapl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0f0b5"]
 friction = 0.2
@@ -25,7 +25,7 @@ angular_damp = 5.0
 script = ExtResource("1_8w455")
 walk_force = 1200.0
 controller_reference = "res://classes/controller/creature-controller/CreatureController.tscn"
-anchor = NodePath("Head/TwistPivot/PitchPivot/Anchor")
+anchor = NodePath("Anchor")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -35,12 +35,7 @@ shape = SubResource("CapsuleShape3D_vlfjs")
 mesh = SubResource("CapsuleMesh_tg1nt")
 skeleton = NodePath("../..")
 
-[node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49244, 0)
-
-[node name="TwistPivot" type="Node3D" parent="Head"]
-
-[node name="PitchPivot" type="Node3D" parent="Head/TwistPivot"]
-
-[node name="Anchor" type="Node3D" parent="Head/TwistPivot/PitchPivot"]
-script = ExtResource("2_4xlh2")
+[node name="Anchor" parent="." instance=ExtResource("2_2yapl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47027, 0)
+enable_pitch_limit = true
+pitch_limit = 90.0
