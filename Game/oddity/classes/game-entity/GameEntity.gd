@@ -20,6 +20,12 @@ var in_frame_of_references : Array = Array()
 var original_collision_layer: int
 var original_collision_mask: int
 
+func _default_process(delta : float) -> void:
+	pass
+
+func _default_ready() -> void:
+	pass 
+
 func evaluate_active_frame_of_reference() -> void:
 	if in_frame_of_references.size() > 0:
 		in_frame_of_references.sort_custom(_sort_frame_of_references)

@@ -86,7 +86,7 @@ func _ready() -> void:
 	pid_yaw_right.limit_max = thruster_force.yaw_right_thrust
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
-
+	
 func _physics_process(delta: float) -> void:
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
