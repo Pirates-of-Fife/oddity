@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=39 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://classes/game-entity/GameEntity.gd" id="7_djqj2"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="8_j62fs"]
 [ext_resource type="Texture2D" uid="uid://dxgu1oyd8j3xb" path="res://test-scenes/ship-test-scene/2k_earth_daymap.jpg" id="9_7bmdm"]
+[ext_resource type="Script" path="res://test-scenes/ship-test-scene/temp-planet.gd" id="10_x2ly6"]
 [ext_resource type="PackedScene" uid="uid://clnked1cnk5p0" path="res://scenes/modules/test-module/test-module.tscn" id="12_ugjym"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="13_h4u2q"]
 [ext_resource type="PackedScene" uid="uid://behanbk2jf42k" path="res://classes/game-entity/static-game-entity/openable/DemoOpenableManual.tscn" id="15_n2ehj"]
@@ -350,6 +351,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7174.31, 0, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Planet"]
 mesh = SubResource("SphereMesh_c5kup")
 surface_material_override/0 = SubResource("StandardMaterial3D_738e6")
+script = ExtResource("10_x2ly6")
 
 [node name="GravityWell" type="Area3D" parent="SubViewportContainer/SubViewport/World/Planet/MeshInstance3D"]
 script = ExtResource("8_j62fs")
@@ -673,6 +675,9 @@ Shift - Space : Down / Up
 Q - E : Roll
 Mouse : Yaw and Pitch "
 
+[node name="DemoOpenableManual" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_n2ehj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1021, -119.44, 323.643)
+
 [node name="PickThisBallUp2" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.07269, -115.849, 307.351)
 collision_layer = 536872449
@@ -690,13 +695,10 @@ shape = SubResource("ConvexPolygonShape3D_65ety")
 [node name="Test-module" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("12_ugjym")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.232001, -118.346, 309.245)
 
-[node name="DemoShip" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("4_efvbd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17047, -119.44, 323.852)
-
-[node name="DemoShip2" parent="." instance=ExtResource("13_h4u2q")]
+[node name="DemoShip2" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("13_h4u2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7947, -115.442, 312.334)
 
-[node name="DemoOpenableManual" parent="." instance=ExtResource("15_n2ehj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1021, -119.44, 323.643)
+[node name="DemoShip" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("4_efvbd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17047, -119.44, 323.852)
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]
