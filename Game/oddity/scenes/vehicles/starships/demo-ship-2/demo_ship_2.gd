@@ -11,4 +11,4 @@ func move_ball() -> void:
 
 
 func _on_interaction_button_interacted(player: Player, control_entity: ControlEntity) -> void:
-	$DemoControlSeat.
+	$DemoControlSeat.enter_seat(player, control_entity)

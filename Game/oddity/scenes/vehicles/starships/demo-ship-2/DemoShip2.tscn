@@ -63,19 +63,15 @@ rings = 16
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8kr5"]
 albedo_color = Color(1, 0, 0, 1)
 
-[node name="DemoShip2" type="RigidBody3D"]
+[node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
 collision_layer = 513
 collision_mask = 513
 mass = 1200.0
 script = ExtResource("1_gtrcu")
-target_thrust_vector = null
-target_rotational_thrust_vector = null
 ship_info = SubResource("Resource_8x1bo")
 thruster_force = SubResource("Resource_4ayql")
-interaction_length = null
 controller_reference = "res://classes/controller/vehicle-controller/starship-controller/StarshipController.tscn"
-can_be_picked_up = null
-is_being_held = null
+anchor = NodePath("DemoControlSeat/Anchor")
 
 [node name="fighterGen7" parent="." instance=ExtResource("2_qgepc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -237,7 +233,7 @@ target_control_entity = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16777, -1.22166, -2.38015)
 
 [node name="InteractionButton" parent="." instance=ExtResource("13_ejv10")]
-transform = Transform3D(-0.00275762, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275762, -1.4023, -1.04238, 0.467072)
+transform = Transform3D(-0.00275762, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275762, -1.4023, -1.04238, 0.463093)
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 

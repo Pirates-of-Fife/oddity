@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=36 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="8_j62fs"]
 [ext_resource type="Texture2D" uid="uid://dxgu1oyd8j3xb" path="res://test-scenes/ship-test-scene/2k_earth_daymap.jpg" id="9_7bmdm"]
 [ext_resource type="PackedScene" uid="uid://clnked1cnk5p0" path="res://scenes/modules/test-module/test-module.tscn" id="12_ugjym"]
+[ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="13_h4u2q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj070"]
 shader = ExtResource("1_eqyqr")
@@ -686,5 +687,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.232001, -118.346, 309.245)
 
 [node name="DemoShip" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("4_efvbd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17047, -119.44, 323.852)
+
+[node name="DemoShip2" parent="." instance=ExtResource("13_h4u2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7947, -115.442, 312.334)
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]
