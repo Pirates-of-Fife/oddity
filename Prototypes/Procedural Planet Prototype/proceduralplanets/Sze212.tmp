@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://4w7by46gsamp"]
+
+[ext_resource type="Script" path="res://script/Planet.gd" id="1_ivc8j"]
+[ext_resource type="Script" path="res://script/settings/NoiseSettings.gd" id="2_k030m"]
+[ext_resource type="Script" path="res://script/ShapeSettings.gd" id="2_t3ai2"]
+[ext_resource type="Script" path="res://script/ColourSettings.gd" id="3_oyphc"]
+
+[sub_resource type="Resource" id="Resource_bay40"]
+script = ExtResource("2_k030m")
+strength = 2.0
+num_layers = 1
+base_roughness = 1.0
+roughness = 2.0
+persistence = 0.5
+centre = Vector3(0, 0, 0)
+min_value = 0.0
+
+[sub_resource type="Resource" id="Resource_vdgfh"]
+script = ExtResource("2_t3ai2")
+planet_radius = 1.645
+height_scale = 1.0
+noise_layers = [SubResource("Resource_bay40")]
+
+[sub_resource type="Resource" id="Resource_ta3ht"]
+script = ExtResource("3_oyphc")
+planet_color = Color(0, 0.164706, 0.945098, 1)
+
+[sub_resource type="Environment" id="Environment_7057h"]
+
+[node name="Szene1" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.964764, 0.263115, 0, -0.263115, 0.964764, 0, 0, 0)
+script = ExtResource("1_ivc8j")
+resolution = 123
+auto_update = false
+shape_settings = SubResource("Resource_vdgfh")
+colour_settings = SubResource("Resource_ta3ht")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.902646, -0.430385, 0, 0.430385, 0.902646, 0.147142, -1.47973, 6.21799)
+fov = 56.25
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_7057h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(0.816932, -0.0215866, -0.576328, 0.151747, -0.956044, 0.250907, -0.556412, -0.292431, -0.777748, 0, 0, 0)
+light_bake_mode = 0
