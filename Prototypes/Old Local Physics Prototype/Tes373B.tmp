@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://cbhoh21nhkib8"]
+
+[ext_resource type="Shader" path="res://node_3d.gdshader" id="1_tqrhk"]
+[ext_resource type="Script" path="res://ParentBodyMovement.gd" id="2_f0j7e"]
+[ext_resource type="Script" path="res://ChildBody.gd" id="3_5783g"]
+[ext_resource type="Script" path="res://planet.gd" id="4_0waoh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_useyk"]
+shader = ExtResource("1_tqrhk")
+shader_parameter/sky_color = Color(0.03, 0.05, 0.11, 1)
+shader_parameter/star_base_color = Color(0.8, 1, 0.3, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_41dgr"]
+sky_material = SubResource("ShaderMaterial_useyk")
+
+[sub_resource type="Environment" id="Environment_8eu7l"]
+background_mode = 2
+sky = SubResource("Sky_41dgr")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5kv6j"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2747b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hlkau"]
+
+[node name="TestScene2" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86792, 7.66354)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8eu7l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.809181, 0.587559, 0, -0.587559, 0.809181, 0, 8.0992, 11.6528)
+
+[node name="ChildBody" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.92221, 1.12516, 0)
+gravity_scale = 0.0
+script = ExtResource("3_5783g")
+move_speed = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChildBody"]
+shape = SubResource("ConvexPolygonShape3D_5kv6j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ChildBody/CollisionShape3D"]
+mesh = SubResource("BoxMesh_2747b")
+skeleton = NodePath("../..")
+
+[node name="ParentBody" type="RigidBody3D" parent="." node_paths=PackedStringArray("remote_transform")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27515, 2.34623, 0)
+gravity_scale = 0.0
+script = ExtResource("2_f0j7e")
+move_speed = 3
+remote_transform = NodePath("RemoteTransform3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParentBody"]
+shape = SubResource("ConvexPolygonShape3D_5kv6j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ParentBody/CollisionShape3D"]
+mesh = SubResource("BoxMesh_2747b")
+skeleton = NodePath("../..")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="ParentBody"]
+update_position = false
+update_rotation = false
+update_scale = false
+
+[node name="Planet" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.646879, -1.44911, 0)
+script = ExtResource("4_0waoh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet"]
+shape = SubResource("ConvexPolygonShape3D_5kv6j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Planet/CollisionShape3D"]
+mesh = SubResource("BoxMesh_hlkau")
+skeleton = NodePath("../..")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://brkik5oaep1vf"]
+
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="1_qobgk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_54fdh"]
+size = Vector3(0.2, 0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i4qkp"]
+points = PackedVector3Array(-0.0985089, -0.05, -0.05, 0.0954305, 0.05, 0.05, 0.0954305, -0.0484127, 0.05, 0.0985089, -0.05, -0.05, -0.0954305, 0.05, -0.0484127, -0.0954305, -0.0484127, 0.05, 0.0954305, 0.05, -0.0484127, -0.0954305, 0.05, 0.05)
+
+[node name="InteractionButton" type="StaticBody3D"]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_qobgk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_54fdh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_i4qkp")

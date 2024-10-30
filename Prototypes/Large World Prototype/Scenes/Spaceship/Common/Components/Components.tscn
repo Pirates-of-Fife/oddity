@@ -1,0 +1,38 @@
+[gd_scene load_steps=10 format=3 uid="uid://cv7jdo4pxmx3g"]
+
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/Components.gd" id="1_8mbip"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/ShipFuelTanks.gd" id="2_g2jep"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/ShipPowerPlants.gd" id="3_1bl6b"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/ShipCoolers.gd" id="4_nhnnk"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/ShipRadiators.gd" id="5_5b3rt"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/ShipShieldGenerators.gd" id="6_g6n5o"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/Power Components.gd" id="7_n26k4"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/ShipJumpDrive.gd" id="7_s4m7t"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/Common/Components/ShipBatteries.gd" id="8_y0nmm"]
+
+[node name="Components" type="Node3D"]
+script = ExtResource("1_8mbip")
+
+[node name="Fuel Tanks" type="Node3D" parent="."]
+script = ExtResource("2_g2jep")
+
+[node name="Coolers" type="Node3D" parent="."]
+script = ExtResource("4_nhnnk")
+
+[node name="Radiators" type="Node3D" parent="."]
+script = ExtResource("5_5b3rt")
+
+[node name="Shield Generators" type="Node3D" parent="."]
+script = ExtResource("6_g6n5o")
+
+[node name="Jump Drive" type="Node3D" parent="."]
+script = ExtResource("7_s4m7t")
+
+[node name="Power Components" type="Node3D" parent="."]
+script = ExtResource("7_n26k4")
+
+[node name="Battery" type="Node3D" parent="Power Components"]
+script = ExtResource("8_y0nmm")
+
+[node name="Power Plants" type="Node3D" parent="Power Components"]
+script = ExtResource("3_1bl6b")

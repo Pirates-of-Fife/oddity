@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgikiit5i48m"]
+
+[ext_resource type="Script" path="res://ShipTest/kinematic_player.gd" id="1_6tpdn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ad0h"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1ctrj"]
+size = Vector3(1, 2.115, 1)
+
+[node name="KinematicPlayer" type="CharacterBody3D" node_paths=PackedStringArray("twist_pivot", "pitch_pivot")]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_6tpdn")
+twist_pivot = NodePath("Head/Twist")
+pitch_pivot = NodePath("Head/Twist/Pitch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.972078, 0)
+shape = SubResource("BoxShape3D_7ad0h")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.612, 0)
+
+[node name="Twist" type="Node3D" parent="Head"]
+
+[node name="Pitch" type="Node3D" parent="Head/Twist"]
+
+[node name="Camera3D" type="Camera3D" parent="Head/Twist/Pitch"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0351, 0)
+mesh = SubResource("BoxMesh_1ctrj")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://y7nouloq56us"]
+
+[ext_resource type="PackedScene" uid="uid://dcrgqef52ouim" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/ThrustBar2D.tscn" id="1_cfluk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7noet"]
+font_size = 36
+font_color = Color(0.929412, 0.560784, 0, 1)
+
+[node name="ExteriorUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ThrustBar2D" parent="." instance=ExtResource("1_cfluk")]
+layout_mode = 1
+offset_left = 273.0
+offset_top = 291.0
+offset_right = 566.0
+offset_bottom = 329.0
+
+[node name="Speed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 625.0
+offset_right = 213.0
+offset_bottom = 678.0
+label_settings = SubResource("LabelSettings_7noet")
+horizontal_alignment = 1
+vertical_alignment = 1

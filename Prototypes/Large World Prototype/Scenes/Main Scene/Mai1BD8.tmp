@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://brkmh327ycklk"]
+
+[ext_resource type="PackedScene" uid="uid://cjx6yultmv13k" path="res://Scenes/Spaceship/fighter_gen_7.tscn" id="1_2ddtf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yldws"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7ow04"]
+sky_material = SubResource("ProceduralSkyMaterial_yldws")
+
+[sub_resource type="Environment" id="Environment_af0w1"]
+background_mode = 2
+sky = SubResource("Sky_7ow04")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_63hev"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_54ktt"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_20505"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_af0w1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23154, 1.84959, -27.9415)
+mesh = SubResource("CylinderMesh_63hev")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(15.92, 0, 0, 0, 15.92, 0, 0, 0, 15.92, 0, -9.00348, 0)
+mesh = SubResource("PlaneMesh_54ktt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_20505")
+
+[node name="FighterGen7" parent="." instance=ExtResource("1_2ddtf")]
+transform = Transform3D(1, 0, 0, 0, 0.813913, 0.580987, 0, -0.580987, 0.813913, 0, 0, 0)

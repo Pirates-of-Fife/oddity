@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StarshipInfo" load_steps=2 format=3 uid="uid://25ljcxn4nxy0"]
+
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/StarshipInfo.gd" id="1_enpg6"]
+
+[resource]
+script = ExtResource("1_enpg6")
+max_linear_velocity = 400.0
+max_angular_pitch_velocity = 0.5
+max_angular_yaw_velocity = 0.5
+max_angular_roll_velocity = 1.0
+manufacturer = "The Little Company"
+model_name = "Josephine"
+release_year = "210"

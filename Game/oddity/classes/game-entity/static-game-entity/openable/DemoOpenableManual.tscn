@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://behanbk2jf42k"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_wyjd4"]
+[ext_resource type="PackedScene" uid="uid://brkik5oaep1vf" path="res://scenes/interactable/interaction-button/InteractionButton.tscn" id="2_pxux2"]
+
+[sub_resource type="Animation" id="Animation_4v72r"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 0.724017, 0)
+
+[sub_resource type="Animation" id="Animation_tkxfs"]
+resource_name = "close"
+length = 2.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 2.72213, 0, 2, 1, 0, 0.724, 0)
+
+[sub_resource type="Animation" id="Animation_vja80"]
+resource_name = "open"
+length = 2.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 0.724017, 0, 2, 1, 0, 2.72213, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7n5in"]
+_data = {
+"RESET": SubResource("Animation_4v72r"),
+"close": SubResource("Animation_tkxfs"),
+"open": SubResource("Animation_vja80")
+}
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pf764"]
+data = PackedVector3Array(-0.105, 0.9175, 1.1025, 0.105, 0.9175, 1.1025, -0.105, -0.9175, 1.1025, 0.105, 0.9175, 1.1025, 0.105, -0.9175, 1.1025, -0.105, -0.9175, 1.1025, 0.105, 0.9175, -1.1025, -0.105, 0.9175, -1.1025, 0.105, -0.9175, -1.1025, -0.105, 0.9175, -1.1025, -0.105, -0.9175, -1.1025, 0.105, -0.9175, -1.1025, 0.105, 0.9175, 1.1025, 0.105, 0.9175, -1.1025, 0.105, -0.9175, 1.1025, 0.105, 0.9175, -1.1025, 0.105, -0.9175, -1.1025, 0.105, -0.9175, 1.1025, -0.105, 0.9175, -1.1025, -0.105, 0.9175, 1.1025, -0.105, -0.9175, -1.1025, -0.105, 0.9175, 1.1025, -0.105, -0.9175, 1.1025, -0.105, -0.9175, -1.1025, 0.105, 0.9175, 1.1025, -0.105, 0.9175, 1.1025, 0.105, 0.9175, -1.1025, -0.105, 0.9175, 1.1025, -0.105, 0.9175, -1.1025, 0.105, 0.9175, -1.1025, -0.105, -0.9175, 1.1025, 0.105, -0.9175, 1.1025, -0.105, -0.9175, -1.1025, 0.105, -0.9175, 1.1025, 0.105, -0.9175, -1.1025, -0.105, -0.9175, -1.1025)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eva3b"]
+size = Vector3(0.21, 1.835, 2.205)
+
+[node name="DemoOpenableManual" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_wyjd4")
+animation_player = NodePath("AnimationPlayer")
+interactables = [NodePath("InteractionButton"), NodePath("InteractionButton2")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7n5in")
+}
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0509051, 0.873659, 1.29248)
+use_collision = true
+size = Vector3(0.393167, 2.0782, 0.302759)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0509051, 0.873659, -1.14408)
+use_collision = true
+size = Vector3(0.393167, 2.0782, 0.302759)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.00277507, 0.999996, 0, -0.999996, 0.00277507, -0.0509051, 1.80201, 0.106211)
+use_collision = true
+size = Vector3(0.393167, 2.35506, 0.302759)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.724017, 0)
+shape = SubResource("ConcavePolygonShape3D_pf764")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("BoxMesh_eva3b")
+skeleton = NodePath("../..")
+
+[node name="InteractionButton" parent="." instance=ExtResource("2_pxux2")]
+transform = Transform3D(0.0629299, 0, 0.998018, 0, 1, 0, -0.998018, 0, 0.0629299, 0.200607, 0.749527, 1.32565)
+
+[node name="InteractionButton2" parent="." instance=ExtResource("2_pxux2")]
+transform = Transform3D(0.0629299, 0, 0.998018, 0, 1, 0, -0.998018, 0, 0.0629299, -0.292081, 0.749527, 1.32565)

@@ -1,0 +1,22 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://c0itvlqsysjlw"]
+
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_tsp74"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj070"]
+shader = ExtResource("1_tsp74")
+shader_parameter/sky_color = Color(0, 0, 0, 1)
+shader_parameter/star_base_color = Color(1, 0.92549, 0.945098, 1)
+shader_parameter/star_hue_offset = 0.918
+shader_parameter/star_intensity = 0.149
+shader_parameter/star_twinkle_speed = 0.627
+shader_parameter/star_twinkle_intensity = 0.138
+shader_parameter/layer_scale = 48.889
+shader_parameter/layer_scale_step = 6.049
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_naasy"]
+sky_material = SubResource("ShaderMaterial_yj070")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_naasy")

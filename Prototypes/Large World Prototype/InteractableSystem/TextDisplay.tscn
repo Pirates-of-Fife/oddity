@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://boorry5kus31v"]
+
+[ext_resource type="Script" path="res://InteractableSystem/TextDisplay.gd" id="1_dja8m"]
+[ext_resource type="AudioStream" uid="uid://b2ik7db8vwfj0" path="res://InteractableSystem/character.wav" id="2_o26u4"]
+
+[sub_resource type="Theme" id="Theme_1toeu"]
+default_font_size = 25
+
+[sub_resource type="Animation" id="Animation_s4y5q"]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.360784)]
+}
+
+[sub_resource type="Animation" id="Animation_jqcpk"]
+resource_name = "Disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.360784), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16xmr"]
+_data = {
+"Appear": SubResource("Animation_s4y5q"),
+"Disappear": SubResource("Animation_jqcpk")
+}
+
+[node name="TextDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 486.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dja8m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -493.0
+offset_top = -54.0
+offset_right = 493.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1toeu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_16xmr")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_o26u4")
+bus = &"UI"

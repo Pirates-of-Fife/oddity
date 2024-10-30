@@ -91,6 +91,8 @@ func _process(delta):
 
 	## Yaw
 	
+	print(rotation_vector)
+	
 	if (use_mouse_for_movement):
 		rotation_vector.y = clamp(mouse_yaw, -1, 1)
 		

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbfnlo84a3qu7"]
+
+[ext_resource type="PackedScene" uid="uid://bj2jr5lr0euij" path="res://Scenes/ShipComponents/Common/Powerplant/Powerplant.tscn" id="1_23vde"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wfx1o"]
+
+[node name="Powerplant" instance=ExtResource("1_23vde")]
+manufacturer = "Placeholder"
+model = "Powerplant"
+size_class = 1
+total_power_output = 500.0
+heat_per_power = 40.0
+fuel_per_power = 0.01
+health_points = 50.0
+integrity = 1.0
+
+[node name="Mesh" type="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_wfx1o")

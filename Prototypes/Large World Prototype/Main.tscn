@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://caner416v8g6j"]
+
+[ext_resource type="PackedScene" uid="uid://bgjpdcul5ssl5" path="res://Planet1.tscn" id="2_76tbp"]
+[ext_resource type="Script" path="res://Scenes/Main Scene/OriginShift.gd" id="3_gj2f0"]
+[ext_resource type="PackedScene" uid="uid://cpb2nlkghtm13" path="res://Scenes/Spaceship/FighterGen7/fighter_gen_7.tscn" id="3_kdgvj"]
+[ext_resource type="PackedScene" uid="uid://sa0nt5vp1cas" path="res://world_environment_2.tscn" id="5_6ta71"]
+[ext_resource type="PackedScene" uid="uid://rnclamwblv5d" path="res://Planet2.tscn" id="5_hitjw"]
+[ext_resource type="Script" path="res://Planet3.cs" id="6_kvhgi"]
+[ext_resource type="PackedScene" uid="uid://h6r8onsy548q" path="res://Planet3.tscn" id="7_3iy12"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w0wiu"]
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.110235, -0.618203, 0.77825, -0.0866996, 0.786019, 0.612093, -0.990117, 7.37695e-09, -0.140245, 1.51058, 0.906905, 0)
+
+[node name="World" type="Node3D" parent="." node_paths=PackedStringArray("player", "planet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1484.77, 0, 0)
+script = ExtResource("3_gj2f0")
+player = NodePath("../FighterGen7")
+planet = NodePath("Planet/Mercury")
+
+[node name="Planet" type="Node3D" parent="World" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -227672, 0, 0)
+script = ExtResource("6_kvhgi")
+player = NodePath("../../FighterGen7")
+PlanetPath = "res://Planet1.tscn"
+
+[node name="Mercury" parent="World/Planet" node_paths=PackedStringArray("player") instance=ExtResource("2_76tbp")]
+transform = Transform3D(35000, 0, 0, 0, 22980.8, 26538.9, 0, -26538.9, 22980.8, 0, 0, 0.35389)
+player = NodePath("../../../FighterGen7")
+render_distance = 190000.0
+debug = true
+
+[node name="Area3D" type="Area3D" parent="World/Planet/Mercury"]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_unit_distance = 35000.0
+gravity = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Planet/Mercury/Area3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("SphereShape3D_w0wiu")
+
+[node name="Planet2" type="Node3D" parent="World" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26093.9, 0, 46623.8)
+script = ExtResource("6_kvhgi")
+player = NodePath("../../FighterGen7")
+PlanetPath = "res://Planet2.tscn"
+
+[node name="Mercury2" parent="World/Planet2" node_paths=PackedStringArray("player") instance=ExtResource("5_hitjw")]
+transform = Transform3D(116.87, 0, 1996.58, 1705.8, 1039.63, -99.849, -1037.86, 1708.72, 60.7514, 0, 0, 0)
+layers = 1
+player = NodePath("../../../FighterGen7")
+debug = false
+
+[node name="Planet3" type="Node3D" parent="World" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51181e+06)
+script = ExtResource("6_kvhgi")
+player = NodePath("../../FighterGen7")
+PlanetPath = "res://Planet3.tscn"
+
+[node name="Mercury3" parent="World/Planet3" node_paths=PackedStringArray("player") instance=ExtResource("7_3iy12")]
+transform = Transform3D(5317.61, 0, 90844.5, 77613.8, 47303.6, -4543.15, -47222.6, 77746.6, 2764.2, 0, 0, 0)
+player = NodePath("../../../FighterGen7")
+debug = false
+
+[node name="WorldEnvironment2" parent="." instance=ExtResource("5_6ta71")]
+
+[node name="FighterGen7" parent="." instance=ExtResource("3_kdgvj")]

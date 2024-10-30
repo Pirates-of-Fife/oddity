@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgf8dwq20dfn3"]
+
+[ext_resource type="PackedScene" uid="uid://dcrgqef52ouim" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/ThrustBar2D.tscn" id="1_6ellf"]
+[ext_resource type="Script" path="res://Scenes/Spaceship/FighterGen7/UI/InteriorUI/ThrustBar.gd" id="1_j0yq7"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gaf51"]
+viewport_path = NodePath("SubViewport")
+
+[node name="ThrustBar" type="Node3D"]
+script = ExtResource("1_j0yq7")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="ThrustBar2D" parent="SubViewport" instance=ExtResource("1_6ellf")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_gaf51")
