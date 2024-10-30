@@ -22,6 +22,10 @@ var velocity : Vector3 = Vector3.ZERO
 var last_velocity : Vector3 = Vector3.ZERO
 var velocity_delta : Vector3 = Vector3.ZERO
 
+var angular_velocity : Vector3 = Vector3.ZERO
+
+var acceleration : Vector3 = Vector3.ZERO
+
 @export
 var frame_of_reference_name : String = ""
 
@@ -67,8 +71,12 @@ func calculate_movement_deltas(delta : float) -> void:
 	movement_delta = global_position - last_position
 	last_position = global_position
 	
+	acceleration = velocity_delta / delta
+	
 	rotation_delta = global_basis.get_rotation_quaternion() * last_rotation.inverse()
 	last_rotation = global_basis.get_rotation_quaternion()
+	
+	angular_velocity = movement_delta / delta
 
 func move_bodies_in_frame_of_reference() -> void:
 	for body : GameEntity in bodies_in_reference_frame:

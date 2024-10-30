@@ -49,7 +49,6 @@ var pid_pitch_down : PIDController =  $PIDControllers/PIDPitchDown
 
 var epsilon : float = 0.0001
 
-var acceleration : Vector3 = Vector3.ZERO
 var local_linear_velocity : Vector3 = Vector3.ZERO
 var local_angular_velocity : Vector3 = Vector3.ZERO
 
@@ -88,6 +87,8 @@ func _ready() -> void:
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
 	
 func _physics_process(delta: float) -> void:
+	_default_physics_process(delta)
+	
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
 	calculate_acceleration(delta)
@@ -196,7 +197,7 @@ func calculate_acceleration(delta : float) -> void:
 	local_linear_velocity_last_frame = local_linear_velocity
 
 func calculate_local_linear_velocity() -> void:
-	local_linear_velocity = transform.basis.inverse() * linear_velocity
+	local_linear_velocity = transform.basis.inverse() * relative_linear_velocity
 
 func calculate_local_angular_velocity() -> void:
 	local_angular_velocity = transform.basis.inverse() * angular_velocity

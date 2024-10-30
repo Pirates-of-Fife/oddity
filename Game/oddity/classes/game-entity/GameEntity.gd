@@ -20,6 +20,18 @@ var in_frame_of_references : Array = Array()
 var original_collision_layer: int
 var original_collision_mask: int
 
+var last_linear_velocity : Vector3
+var last_relative_linear_velocity : Vector3
+
+var acceleration : Vector3
+
+var relative_linear_velocity : Vector3
+var relative_angular_velocity : Vector3
+var relative_acceleration : Vector3
+
+func _default_physics_process(delta : float) -> void:
+	calculate_velocities(delta)
+
 func _default_process(delta : float) -> void:
 	pass
 
@@ -49,3 +61,17 @@ func unfreeze() -> void:
 	collision_mask = original_collision_mask
 	
 	freeze = false
+
+func calculate_velocities(delta : float) -> void:
+	acceleration = (linear_velocity - last_linear_velocity) / delta
+
+	if active_frame_of_reference == null:
+		relative_acceleration = acceleration
+		relative_angular_velocity = angular_velocity
+		relative_linear_velocity = linear_velocity
+		last_linear_velocity = linear_velocity
+	else:
+		relative_linear_velocity = linear_velocity - active_frame_of_reference.velocity
+		relative_angular_velocity = angular_velocity - active_frame_of_reference.angular_velocity		
+		relative_acceleration = acceleration - active_frame_of_reference.acceleration
+		last_relative_linear_velocity = relative_linear_velocity
