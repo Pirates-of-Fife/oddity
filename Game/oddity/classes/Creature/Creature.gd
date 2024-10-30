@@ -65,11 +65,6 @@ func move(input_dir : Vector2) -> void:
 
 func look(twist_input : float, pitch_input : float) -> void:
 	anchor.look(twist_input, pitch_input)
-	
-	#twist_pivot.rotate_y(twist_input)
-	#pitch_pivot.rotate_x(pitch_input)
-	
-#	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 
 func jump() -> void:
 	apply_central_impulse(global_transform.basis.y * 300)
