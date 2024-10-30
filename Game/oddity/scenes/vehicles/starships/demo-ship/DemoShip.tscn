@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://classes/pid-controller/PIDController.gd" id="9_xxpud"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/speed_label.gd" id="10_n2mvt"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/thrust_vectors.gd" id="11_h7835"]
-[ext_resource type="PackedScene" uid="uid://c4ahpcw3rnlw8" path="res://scenes/vehicles/starships/demo-ship/Seat.tscn" id="12_mti32"]
+[ext_resource type="PackedScene" uid="uid://q7qxuwsn55b5" path="res://scenes/interactable/control-seat/DemoControlSeat.tscn" id="13_3chp0"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="13_qeu3b"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ComponentSlot.gd" id="13_udpm1"]
 
@@ -236,21 +236,6 @@ transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.9998
 text = "Placeholder"
 script = ExtResource("11_h7835")
 
-[node name="Seat" parent="." node_paths=PackedStringArray("starship") instance=ExtResource("12_mti32")]
-transform = Transform3D(1.755, 0, 0, 0, 1.755, 0, 0, 0, 1.755, 0.058674, 0.38572, 8.57449)
-starship = NodePath("..")
-
-[node name="Interactable" parent="Seat" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.808837, 0.3531, 0.363646)
-collision_layer = 536870912
-collision_mask = 0
-
-[node name="CollisionShape3D" parent="Seat/Interactable" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.666283, 0.724018, 0.189442)
-
-[node name="MeshInstance3D" parent="Seat/Interactable" index="1"]
-visible = false
-
 [node name="Modules" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Modules"]
@@ -274,7 +259,7 @@ script = ExtResource("13_udpm1")
 size = 1
 
 [node name="Anchor" parent="." instance=ExtResource("13_qeu3b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.96804, 8.6803)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.96804, 8.83934)
 
 [node name="Center" type="MeshInstance3D" parent="Anchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
@@ -286,4 +271,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_iu4cg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
 mesh = SubResource("SphereMesh_t5phk")
 
-[editable path="Seat"]
+[node name="DemoControlSeat" parent="." node_paths=PackedStringArray("target_control_entity") instance=ExtResource("13_3chp0")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 1.96075, 9.3262)
+target_control_entity = NodePath("..")

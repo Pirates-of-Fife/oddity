@@ -120,6 +120,9 @@ func _default_process(delta : float) -> void:
 		
 		if (Input.is_action_just_pressed("player_interact")):
 			starship_player_interact_command.execute(control_entity)
+			
+		if (Input.is_action_just_pressed("vehicle_exit_seat")):
+			vehicle_exit_seat_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
