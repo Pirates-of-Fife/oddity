@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=38 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -8,11 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://cqfonknridwp7" path="res://scenes/vehicles/starships/demo-ship/DemoShip.tscn" id="4_efvbd"]
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/interaction_target.gd" id="4_i5a5r"]
 [ext_resource type="PackedScene" uid="uid://ik0bqvjr0uki" path="res://classes/creature/Creature.tscn" id="6_nbteu"]
+[ext_resource type="PackedScene" uid="uid://cvxqpkh355e7y" path="res://classes/game-entity/static-game-entity/openable/DemoOpenable.tscn" id="6_sot4v"]
 [ext_resource type="Script" path="res://classes/game-entity/GameEntity.gd" id="7_djqj2"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="8_j62fs"]
 [ext_resource type="Texture2D" uid="uid://dxgu1oyd8j3xb" path="res://test-scenes/ship-test-scene/2k_earth_daymap.jpg" id="9_7bmdm"]
 [ext_resource type="PackedScene" uid="uid://clnked1cnk5p0" path="res://scenes/modules/test-module/test-module.tscn" id="12_ugjym"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="13_h4u2q"]
+[ext_resource type="PackedScene" uid="uid://behanbk2jf42k" path="res://classes/game-entity/static-game-entity/openable/DemoOpenableManual.tscn" id="15_n2ehj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj070"]
 shader = ExtResource("1_eqyqr")
@@ -203,6 +205,9 @@ text = "PLaceholder"
 libraries = {
 "": SubResource("AnimationLibrary_1vg63")
 }
+
+[node name="DemoOpenable" parent="SubViewportContainer/SubViewport/World/Plane" instance=ExtResource("6_sot4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2547, 0.179921, 30.4185)
 
 [node name="Cubes" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(2.855, 0, 0, 0, 2.855, 0, 0, 0, 2.855, 55.8822, 0, 112.978)
@@ -690,5 +695,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17047, -119.44, 323.852)
 
 [node name="DemoShip2" parent="." instance=ExtResource("13_h4u2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7947, -115.442, 312.334)
+
+[node name="DemoOpenableManual" parent="." instance=ExtResource("15_n2ehj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1021, -119.44, 323.643)
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]
