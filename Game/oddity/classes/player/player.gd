@@ -19,6 +19,10 @@ func _process(delta: float) -> void:
 	if (Input.is_anything_pressed() and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	if (Input.is_action_just_released("ui_cancel")):
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")
+	
 	if control_entity == null:
 		return
 	

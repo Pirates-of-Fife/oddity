@@ -8,5 +8,5 @@ var started : bool = false
 func _process(delta: float) -> void:
 	if Input.is_anything_pressed() and started == false:
 		$AnimationPlayer.play("start")
-		started = false
+		started = true
 		animation_started.emit()

@@ -3,11 +3,13 @@ extends Node3D
 @export
 var camera : Camera3D
 
-var tween : Tween
-var orbit_distance : float = 30.0  # Distance from the target
-var orbit_speed : float = 1.0      # Speed of the orbit in radians per second
+
+var orbit_distance : float = 20.0   # Distance from the target
+var orbit_speed : float = 0.1    # Speed of orbit in radians per second
 
 var ship_loaded : bool = false
+var orbit_angle : float = 25.0       # Keeps track of the orbit angle
+
 
 func _on_main_menu_ui_animation_started() -> void:
 	load_last_possessed_starship()
@@ -26,31 +28,41 @@ func load_last_possessed_starship() -> void:
 		if save_data.has("scene_path"):
 			var starship_scene : PackedScene = load(save_data["scene_path"])  # PackedScene
 			if starship_scene:
-				add_child(starship_scene.instantiate())
+				var ship : Node3D = starship_scene.instantiate()
+				add_child(ship)
+				ship.global_position = Vector3(7, -1, -1)
+				
 				ship_loaded = true
 				
-	start_camera_orbit()
+func _process(delta: float) -> void:
+	if ship_loaded:
+		_orbit_camera(delta)
 
-
-func _ready() -> void:
-	# Initialize the tween for smooth camera movement
-	tween = Tween.new()
-
-	# Optionally, start orbiting camera right away
-	start_camera_orbit()
-
-func start_camera_orbit() -> void:
-	#tween.stop_all()
-	_orbit_camera()
-
-func _orbit_camera(delta: float = 0.0) -> void:
+func _orbit_camera(delta: float) -> void:
 	var target_position : Vector3 = Vector3.ZERO  # Point to orbit around
-	var angle : float = orbit_speed * delta
 
-	# Calculate new camera position on a circular path around the target
-	var new_x : float = orbit_distance * cos(angle)
-	var new_z : float = orbit_distance * sin(angle)
-	var new_position : Vector3 = Vector3(new_x, 0, new_z) + target_position
+	# Increment the angle based on orbit speed and delta time
+	orbit_angle += orbit_speed * delta
 
-	# Smoothly move the camera to this new position with the Tween
-	tween.tween_property(camera, "global_transform.origin", new_position, 1.0)
+	# Calculate the new camera position using the orbit angle
+	var target_x : float = orbit_distance * cos(orbit_angle)
+	var target_z : float = orbit_distance * sin(orbit_angle)
+	var target_position_camera : Vector3 = Vector3(target_x, 0, target_z) + target_position
+
+	
+	# Update the camera’s position
+	camera.global_transform.origin = camera.global_transform.origin.lerp(target_position_camera, 0.1)  # Adjust 0.1 for smoothing speed
+	
+	# Make the camera look at the target position for a continuous focus
+	camera.look_at(target_position, Vector3.UP)
+
+
+func _on_start_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://test-scenes/ship-test-scene/ShipTestScene.tscn")
+
+func _on_credits_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
