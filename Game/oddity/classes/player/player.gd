@@ -41,3 +41,15 @@ func possess(control_entity : ControlEntity) -> void:
 	self.control_entity = control_entity
 	self.control_entity.player = self
 	
+	if control_entity is Starship:
+		save_last_possessed_starship(control_entity)
+
+func save_last_possessed_starship(starship : Starship) -> void:
+	var save_data : Dictionary = {}
+	save_data["scene_path"] = starship.scene_file_path  # Store scene path, or use a unique ID if preferred
+
+	var save_file : FileAccess = FileAccess.open("user://last_possessed_starship.save", FileAccess.WRITE)
+	
+	if save_file:
+		save_file.store_var(save_data)
+		save_file.close()

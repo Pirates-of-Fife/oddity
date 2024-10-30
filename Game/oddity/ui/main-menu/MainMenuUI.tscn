@@ -1,0 +1,194 @@
+[gd_scene load_steps=8 format=3 uid="uid://ba5evvevagnhw"]
+
+[ext_resource type="Texture2D" uid="uid://vdqa5pcoa462" path="res://project-images/OddityLogo-04.png" id="1_edjeb"]
+[ext_resource type="Script" path="res://ui/main-menu/main_menu_ui.gd" id="1_wya4y"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_7jeg0"]
+[ext_resource type="Texture2D" uid="uid://b3b4ai1255iue" path="res://ui/main-menu/pirates-of-fife-logo.png" id="4_nsbdi"]
+
+[sub_resource type="Animation" id="Animation_02e8o"]
+resource_name = "start"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Start/Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.933333),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector2(488, 266), Vector2(348, 107)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Start/Sprite2D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.933333),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector2(0.0858776, 0.0834093), Vector2(0.0762575, 0.0740656)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Start/RichTextLabel:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0, 0.933333),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector2(311, 367), Vector2(287, 579)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0, 1.5),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector2(-477, 193), Vector2(-73, 198)]
+}
+
+[sub_resource type="Animation" id="Animation_r183a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Start/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(488, 266)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Start/Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(0.0858776, 0.0834093)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Start/RichTextLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(311, 367)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(-477, 193)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_882nw"]
+_data = {
+"RESET": SubResource("Animation_r183a"),
+"start": SubResource("Animation_02e8o")
+}
+
+[node name="MainMenuUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wya4y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_882nw")
+}
+
+[node name="Start" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Start"]
+position = Vector2(488, 266)
+scale = Vector2(0.0858776, 0.0834093)
+texture = ExtResource("1_edjeb")
+offset = Vector2(0.29, 0)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Start"]
+offset_left = 311.0
+offset_top = 367.0
+offset_right = 682.0
+offset_bottom = 416.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+text = "Press any key to continue"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 750.0
+offset_top = 489.0
+offset_right = 973.0
+offset_bottom = 540.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+text = "Pirates of Fife"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(731, 516)
+texture = ExtResource("4_nsbdi")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -477.0
+offset_top = 193.0
+offset_right = 5.0
+offset_bottom = 427.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -85.0
+offset_right = 116.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+text = "START"
+
+[node name="CreditsButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+text = "CREDITS"
+
+[node name="ExitButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+text = "EXIT
+"
