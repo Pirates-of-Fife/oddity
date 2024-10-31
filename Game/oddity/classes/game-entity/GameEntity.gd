@@ -29,15 +29,55 @@ var relative_linear_velocity : Vector3
 var relative_angular_velocity : Vector3
 var relative_acceleration : Vector3
 
+var freeze_velocity_limit : float = 0.1
+var freeze_timer : Timer = Timer.new()
+var freeze_timer_duration : float = 1
+var timer_started : bool = false
+
+var can_freeze : bool = true
+
+func _physics_process(delta: float) -> void:
+	_default_physics_process(delta)
+		
+func _process(delta: float) -> void:
+	_default_process(delta)
+	
+func _ready() -> void:
+	_default_ready()
+	
 func _default_physics_process(delta : float) -> void:
 	calculate_velocities(delta)
-
+	
+	if active_frame_of_reference != null:
+		if freeze == false and can_freeze == true and active_frame_of_reference.physics_parent != null:
+			if relative_linear_velocity.length() < freeze_velocity_limit:
+				if freeze_timer.is_node_ready():
+					if freeze_timer.is_stopped():
+						freeze_timer.start()
+							
+	
 func _default_process(delta : float) -> void:
 	pass
 
 func _default_ready() -> void:
-	pass 
-
+	add_child(freeze_timer)
+	
+	freeze_timer.wait_time = freeze_timer_duration
+	freeze_timer.one_shot = true
+	freeze_timer.timeout.connect(freeze_timer_timeout)
+		
+	on_interact.connect(on_interact_self)
+	
+func on_interact_self() -> void:
+	unfreeze()
+	
+func freeze_timer_timeout() -> void:
+	if active_frame_of_reference != null:
+		if freeze == false and can_freeze == true and active_frame_of_reference.physics_parent != null and !is_being_held:
+			if relative_linear_velocity.length() < freeze_velocity_limit:
+				freeze_in_reference_frame()
+	
+	
 func evaluate_active_frame_of_reference() -> void:
 	if in_frame_of_references.size() > 0:
 		in_frame_of_references.sort_custom(_sort_frame_of_references)
@@ -55,8 +95,18 @@ func freeze_static() -> void:
 	
 	freeze_mode = FreezeMode.FREEZE_MODE_STATIC
 	freeze = true
+
+func freeze_in_reference_frame() -> void:
+	freeze_static()
+	reparent.call_deferred(active_frame_of_reference)
 	
 func unfreeze() -> void:
+	if freeze == false:
+		return
+	
+	if (get_parent_node_3d() != get_tree().get_first_node_in_group("World")):
+		reparent.call_deferred(get_tree().get_first_node_in_group("World"))
+	
 	collision_layer = original_collision_layer
 	collision_mask = original_collision_mask
 	
@@ -71,7 +121,7 @@ func calculate_velocities(delta : float) -> void:
 		relative_linear_velocity = linear_velocity
 		last_linear_velocity = linear_velocity
 	else:
-		relative_linear_velocity = linear_velocity - active_frame_of_reference.velocity
+		relative_linear_velocity = linear_velocity - active_frame_of_reference.relative_velocity
 		relative_angular_velocity = angular_velocity - active_frame_of_reference.angular_velocity		
 		relative_acceleration = acceleration - active_frame_of_reference.acceleration
 		last_relative_linear_velocity = relative_linear_velocity

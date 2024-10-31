@@ -72,9 +72,10 @@ anchor = NodePath("Anchor")
 
 [node name="DemoShipMesh" parent="." instance=ExtResource("2_h5s4g")]
 
-[node name="GravityGrid" type="Area3D" parent="."]
+[node name="GravityGrid" type="Area3D" parent="." node_paths=PackedStringArray("physics_parent")]
 script = ExtResource("3_lj764")
 frame_of_reference_name = "Demo Ship"
+physics_parent = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0677185, 2.41433, 1.91138)

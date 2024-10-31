@@ -46,9 +46,13 @@ var input_vector : Vector3
 var raycast_helper : RaycastHelper = RaycastHelper.new()
 
 func _ready() -> void:
-	pass
+	_default_ready()
+	
+	can_freeze = false
 
 func _physics_process(delta : float) -> void:
+	_default_physics_process(delta)
+	
 	var multiplier : float = 1
 		
 	var direction : Vector3 = (anchor.twist_pivot.global_transform.basis * input_vector).normalized()

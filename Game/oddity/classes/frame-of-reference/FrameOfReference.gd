@@ -26,11 +26,19 @@ var angular_velocity : Vector3 = Vector3.ZERO
 
 var acceleration : Vector3 = Vector3.ZERO
 
+var relative_velocity : Vector3 = Vector3.ZERO
+
 @export
 var frame_of_reference_name : String = ""
 
 @export
 var size : FrameOfReferenceSize
+
+
+# INFO: Physics parent gets used for game entity freezing. 
+# if a frame of reference has a physics parents, it moves unpredictably, so game entities inside it should freeze so they they remain stable during e.g. a flight on a space ship
+@export
+var physics_parent : GameEntity
 
 enum FrameOfReferenceSize 
 {
@@ -62,12 +70,15 @@ func _enter_tree() -> void:
 func _physics_process(delta: float) -> void:
 	calculate_movement_deltas(delta)
 	move_bodies_in_frame_of_reference()
+	
+	if physics_parent != null:
+		relative_velocity = physics_parent.relative_linear_velocity
 
 func calculate_movement_deltas(delta : float) -> void:
 	velocity = movement_delta / delta
 	velocity_delta = velocity - last_velocity
 	last_velocity = velocity
-	
+		
 	movement_delta = global_position - last_position
 	last_position = global_position
 	
