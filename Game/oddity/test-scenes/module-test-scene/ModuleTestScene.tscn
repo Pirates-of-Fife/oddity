@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://iijrnvpp1762"]
+[gd_scene load_steps=27 format=3 uid="uid://iijrnvpp1762"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_77sa0"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_k7uia"]
@@ -60,20 +60,11 @@ size = Vector3(1.5, 1.5, 3)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2jp5"]
 albedo_color = Color(0.0807833, 0.0807833, 0.0807833, 1)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8yfri"]
-points = PackedVector3Array(0.75, 0.75, 1.5, 0.75, -0.75, 1.5, 0.75, 0.75, -1.5, -0.75, 0.75, 1.5, -0.75, -0.75, 1.5, 0.75, -0.75, -1.5, -0.75, 0.75, -1.5, -0.75, -0.75, -1.5)
-
 [sub_resource type="BoxMesh" id="BoxMesh_l2jul"]
 size = Vector3(0.5, 1, 2)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_732cr"]
-points = PackedVector3Array(-0.25, -0.5, -1, 0.25, -0.5, -1, -0.25, -0.5, 1, -0.25, 0.5, -1, 0.25, 0.5, -1, 0.25, -0.5, 1, -0.25, 0.5, 1, 0.25, 0.5, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_ujwoo"]
 size = Vector3(0.5, 1, 0.5)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jy86g"]
-points = PackedVector3Array(-0.25, -0.5, -0.25, -0.25, -0.5, 0.25, -0.25, 0.5, -0.25, 0.25, -0.5, -0.25, 0.25, -0.5, 0.25, -0.25, 0.5, 0.25, 0.25, 0.5, -0.25, 0.25, 0.5, 0.25)
 
 [node name="ModuleTestScene" type="Node3D"]
 
@@ -172,9 +163,6 @@ can_be_picked_up = true
 mesh = SubResource("BoxMesh_uj7ga")
 surface_material_override/0 = SubResource("StandardMaterial3D_t2jp5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/ShieldGenerator"]
-shape = SubResource("ConvexPolygonShape3D_8yfri")
-
 [node name="Abyss" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77805, 2.17566, 0)
 collision_layer = 537396737
@@ -186,9 +174,6 @@ can_be_picked_up = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Abyss"]
 mesh = SubResource("BoxMesh_l2jul")
 surface_material_override/0 = SubResource("StandardMaterial3D_2rff4")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/Abyss"]
-shape = SubResource("ConvexPolygonShape3D_732cr")
 
 [node name="AlcubierreDrive" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.89244, 1.82805, 0)
@@ -202,6 +187,3 @@ can_be_picked_up = true
 mesh = SubResource("BoxMesh_ujwoo")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_23cem")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AlcubierreDrive"]
-shape = SubResource("ConvexPolygonShape3D_jy86g")

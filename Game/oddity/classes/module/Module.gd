@@ -8,6 +8,9 @@ var module_slot : DynamicModuleSlot
 var is_being_held_after_uninsert : bool  = false
 
 func _ready() -> void:
+	_module_ready()
+
+func _module_ready() -> void:
 	_default_ready()
 	
 	if module_slot != null:
