@@ -72,6 +72,8 @@ var interaction_length : float = 2.5
 var raycast_helper : RaycastHelper = RaycastHelper.new()
 
 func _ready() -> void:
+	_default_ready()
+		
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust
 	pid_up.limit_max = thruster_force.up_thrust
@@ -88,6 +90,9 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
+	
+	if active_control_seat != null and freeze == true:
+		unfreeze()
 	
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
