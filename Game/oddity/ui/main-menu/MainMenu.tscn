@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfq2dmul5f7a8"]
+
+[ext_resource type="Script" path="res://ui/main-menu/main_menu.gd" id="1_74355"]
+[ext_resource type="PackedScene" uid="uid://ba5evvevagnhw" path="res://ui/main-menu/MainMenuUI.tscn" id="1_gwx8j"]
+[ext_resource type="Script" path="res://classes/world/World.gd" id="2_1i8r8"]
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="3_mm0d4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcbll"]
+shader = ExtResource("3_mm0d4")
+shader_parameter/sky_color = Color(0, 0, 0, 1)
+shader_parameter/star_base_color = Color(1, 0.92549, 0.945098, 1)
+shader_parameter/star_hue_offset = 0.918
+shader_parameter/star_intensity = 0.149
+shader_parameter/star_twinkle_speed = 0.627
+shader_parameter/star_twinkle_intensity = 0.138
+shader_parameter/layer_scale = 48.889
+shader_parameter/layer_scale_step = 6.049
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_naasy"]
+sky_material = SubResource("ShaderMaterial_pcbll")
+
+[sub_resource type="Environment" id="Environment_8l6ma"]
+background_mode = 2
+sky = SubResource("Sky_naasy")
+
+[node name="MainMenu" type="Node3D" node_paths=PackedStringArray("camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.57402, -1.64476, -1.94297)
+script = ExtResource("1_74355")
+camera = NodePath("SubViewportContainer/SubViewport/World/Camera3D")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch = true
+stretch_shrink = 3
+
+[node name="MainMenuUi" parent="SubViewportContainer" instance=ExtResource("1_gwx8j")]
+layout_mode = 2
+
+[node name="RichTextLabel" parent="SubViewportContainer/MainMenuUi" index="2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.897
+anchor_top = 0.953
+anchor_right = 0.897
+anchor_bottom = 0.953
+offset_left = -111.12
+offset_top = -25.62
+offset_right = 111.88
+offset_bottom = 25.38
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
+script = ExtResource("2_1i8r8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)
+light_color = Color(1, 0.912596, 0.841761, 1)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/World"]
+environment = SubResource("Environment_8l6ma")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[connection signal="animation_started" from="SubViewportContainer/MainMenuUi" to="." method="_on_main_menu_ui_animation_started"]
+[connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+
+[editable path="SubViewportContainer/MainMenuUi"]
