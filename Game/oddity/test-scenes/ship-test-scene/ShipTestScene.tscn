@@ -29,12 +29,12 @@ shader_parameter/layer_scale = 48.889
 shader_parameter/layer_scale_step = 6.049
 shader_parameter/layers_count = 3
 
-[sub_resource type="Sky" id="Sky_hoxdb"]
+[sub_resource type="Sky" id="Sky_wka6d"]
 sky_material = SubResource("ShaderMaterial_yj070")
 
 [sub_resource type="Environment" id="Environment_68cgj"]
 background_mode = 2
-sky = SubResource("Sky_hoxdb")
+sky = SubResource("Sky_wka6d")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lby4s"]
 size = Vector2(500, 500)
@@ -695,6 +695,7 @@ shape = SubResource("ConvexPolygonShape3D_65ety")
 
 [node name="Test-module" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("12_ugjym")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.232001, -118.346, 309.245)
+size = 0
 
 [node name="DemoShip2" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("13_h4u2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7947, -115.442, 312.334)

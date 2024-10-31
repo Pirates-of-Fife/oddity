@@ -3,11 +3,11 @@ extends DynamicModuleSlot
 class_name AlcubierreDriveSlot
 
 @export
-var size : ModuleSize.AlcubierreDriveSize
+var alcubierre_drive_size : ModuleSize.AlcubierreDriveSize
 
 func _module_fits(module : Module) -> bool:
 	if module is AlcubierreDrive:
-		if module.size == size:
+		if module.size == alcubierre_drive_size:
 			return true
 	return false
 
@@ -26,12 +26,12 @@ func _initialize_area() -> void:
 	
 	var module_size : ModuleSize = ModuleSize.new()
 	
-	box_shape.size = module_size.get_alcubierre_drive_size(size)
+	box_shape.size = module_size.get_alcubierre_drive_size(alcubierre_drive_size)
 	
 	var collision_shape : CollisionShape3D = CollisionShape3D.new()
 	
 	collision_shape.shape = box_shape
-	
+		
 	add_child(area)
 	area.add_child(collision_shape)
 	

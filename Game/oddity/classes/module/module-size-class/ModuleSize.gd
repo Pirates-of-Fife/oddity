@@ -37,7 +37,8 @@ enum HardpointSize {
 
 # Enum for Abyssal Jump Drive Sizes
 enum AbyssalJumpDriveSize {
-	SIZE_1 = 1,  # 1m x 0.5m x 2m
+	SIZE_0 = 0,
+	SIZE_1,      # 1m x 0.5m x 2m
 	SIZE_2,      # 1.5m x 0.75m x 4m
 	SIZE_3,      # 2m x 1m x 6m
 	SIZE_4,      # 2.5m x 1.2m x 8m
@@ -101,29 +102,30 @@ func get_hardpoint_size(size: HardpointSize) -> Vector3:
 
 func get_abyssal_jump_drive_size(size: AbyssalJumpDriveSize) -> Vector3:
 	match size:
-		AbyssalJumpDriveSize.SIZE_1: return Vector3(1, 0.5, 2)
-		AbyssalJumpDriveSize.SIZE_2: return Vector3(1.5, 0.75, 4)
-		AbyssalJumpDriveSize.SIZE_3: return Vector3(2, 1, 6)
-		AbyssalJumpDriveSize.SIZE_4: return Vector3(2.5, 1.2, 8)
-		AbyssalJumpDriveSize.SIZE_5: return Vector3(3, 1.5, 10)
-		AbyssalJumpDriveSize.SIZE_6: return Vector3(4, 2, 12)
-		AbyssalJumpDriveSize.SIZE_7: return Vector3(5, 2.5, 14)
-		AbyssalJumpDriveSize.SIZE_8: return Vector3(6, 3, 16)
-		AbyssalJumpDriveSize.SIZE_9: return Vector3(7, 3.5, 18)
-		AbyssalJumpDriveSize.SIZE_10: return Vector3(8, 4, 20)
+		AbyssalJumpDriveSize.SIZE_0: return Vector3.ZERO
+		AbyssalJumpDriveSize.SIZE_1: return Vector3(0.5, 1, 2)
+		AbyssalJumpDriveSize.SIZE_2: return Vector3(0.75, 1.5, 4)
+		AbyssalJumpDriveSize.SIZE_3: return Vector3(1, 2, 6)
+		AbyssalJumpDriveSize.SIZE_4: return Vector3(1.2, 2.5, 8)
+		AbyssalJumpDriveSize.SIZE_5: return Vector3(1.5, 3, 10)
+		AbyssalJumpDriveSize.SIZE_6: return Vector3(2, 4, 12)
+		AbyssalJumpDriveSize.SIZE_7: return Vector3(2.5, 5, 14)
+		AbyssalJumpDriveSize.SIZE_8: return Vector3(3, 6, 16)
+		AbyssalJumpDriveSize.SIZE_9: return Vector3(3.5, 7, 18)
+		AbyssalJumpDriveSize.SIZE_10: return Vector3(4, 8, 20)
 		_ : return Vector3.ZERO
 
 func get_alcubierre_drive_size(size: AlcubierreDriveSize) -> Vector3:
 	match size:
 		AlcubierreDriveSize.SIZE_0: return Vector3(0.5, 0.5, 0.5)
-		AlcubierreDriveSize.SIZE_1: return Vector3(1, 0.5, 0.5)
-		AlcubierreDriveSize.SIZE_2: return Vector3(1.5, 0.75, 0.75)
-		AlcubierreDriveSize.SIZE_3: return Vector3(2, 1, 1)
-		AlcubierreDriveSize.SIZE_4: return Vector3(2.5, 1.2, 1.2)
-		AlcubierreDriveSize.SIZE_5: return Vector3(3, 1.5, 1.5)
-		AlcubierreDriveSize.SIZE_6: return Vector3(4, 2, 2)
-		AlcubierreDriveSize.SIZE_7: return Vector3(5, 2.5, 2.5)
-		AlcubierreDriveSize.SIZE_8: return Vector3(6, 3, 3)
-		AlcubierreDriveSize.SIZE_9: return Vector3(7, 3.5, 3.5)
-		AlcubierreDriveSize.SIZE_10: return Vector3(8, 4, 4)
+		AlcubierreDriveSize.SIZE_1: return Vector3(0.5, 1, 0.5)
+		AlcubierreDriveSize.SIZE_2: return Vector3(0.75, 1.5, 0.75)
+		AlcubierreDriveSize.SIZE_3: return Vector3(1, 2, 1)
+		AlcubierreDriveSize.SIZE_4: return Vector3(1.2, 2.5, 1.2)
+		AlcubierreDriveSize.SIZE_5: return Vector3(1.5, 3, 1.5)
+		AlcubierreDriveSize.SIZE_6: return Vector3(2, 4,2)
+		AlcubierreDriveSize.SIZE_7: return Vector3(2.5, 5, 2.5)
+		AlcubierreDriveSize.SIZE_8: return Vector3(3, 6, 3)
+		AlcubierreDriveSize.SIZE_9: return Vector3(3.5, 7, 3.5)
+		AlcubierreDriveSize.SIZE_10: return Vector3(4, 8, 4)
 		_ : return Vector3.ZERO

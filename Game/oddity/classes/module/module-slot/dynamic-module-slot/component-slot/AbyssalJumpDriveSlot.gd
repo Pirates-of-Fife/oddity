@@ -3,11 +3,11 @@ extends DynamicModuleSlot
 class_name AbyssalJumpDriveSlot
 
 @export
-var size : ModuleSize.AbyssalJumpDriveSize
+var abyssal_jump_drive_size : ModuleSize.AbyssalJumpDriveSize
 
 func _module_fits(module : Module) -> bool:
 	if module is AbyssalJumpDrive:
-		if module.size == size:
+		if module.size == abyssal_jump_drive_size:
 			return true
 	return false
 
@@ -26,7 +26,11 @@ func _initialize_area() -> void:
 	
 	var module_size : ModuleSize = ModuleSize.new()
 	
-	box_shape.size = module_size.get_abyssal_jump_drive_size(size)
+	box_shape.size = module_size.get_abyssal_jump_drive_size(abyssal_jump_drive_size)
+	
+	print(abyssal_jump_drive_size)
+	print(box_shape.size)
+
 	
 	var collision_shape : CollisionShape3D = CollisionShape3D.new()
 	
