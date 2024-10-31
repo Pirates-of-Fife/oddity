@@ -113,7 +113,7 @@ func get_abyssal_jump_drive_size(size: AbyssalJumpDriveSize) -> Vector3:
 		AbyssalJumpDriveSize.SIZE_10: return Vector3(8, 4, 20)
 		_ : return Vector3.ZERO
 
-func get_alcubierre_drive_size(size: AbyssalJumpDriveSize) -> Vector3:
+func get_alcubierre_drive_size(size: AlcubierreDriveSize) -> Vector3:
 	match size:
 		AlcubierreDriveSize.SIZE_0: return Vector3(0.5, 0.5, 0.5)
 		AlcubierreDriveSize.SIZE_1: return Vector3(1, 0.5, 0.5)
