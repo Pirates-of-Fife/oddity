@@ -24,12 +24,12 @@ shader_parameter/layer_scale = 48.889
 shader_parameter/layer_scale_step = 6.049
 shader_parameter/layers_count = 3
 
-[sub_resource type="Sky" id="Sky_hoxdb"]
+[sub_resource type="Sky" id="Sky_q2gea"]
 sky_material = SubResource("ShaderMaterial_1oi4a")
 
 [sub_resource type="Environment" id="Environment_pp2ta"]
 background_mode = 2
-sky = SubResource("Sky_hoxdb")
+sky = SubResource("Sky_q2gea")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_urnhv"]
 size = Vector2(100, 100)
@@ -78,6 +78,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 stretch = true
 stretch_shrink = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cl1lyeabmrdst"]
+[gd_scene load_steps=24 format=3 uid="uid://cl1lyeabmrdst"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship-2/demo_ship_2.gd" id="1_gtrcu"]
 [ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://scenes/vehicles/starships/demo-ship-2/fighter_gen_7_model.tscn" id="2_qgepc"]
@@ -62,6 +62,14 @@ rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8kr5"]
 albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3ywro"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
 collision_layer = 513
@@ -234,6 +242,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16777, -1.22166, -2.38015)
 
 [node name="InteractionButton" parent="." instance=ExtResource("13_ejv10")]
 transform = Transform3D(-0.0110994, 0, -4.02498, 0, 4.025, 0, 4.02498, 0, -0.0110994, -1.4023, -1.25471, 0.463093)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_3ywro")
+visibility_update_mode = 1
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 

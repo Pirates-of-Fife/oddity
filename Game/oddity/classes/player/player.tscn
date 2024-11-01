@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3ry8dgeqrhg1"]
+[gd_scene load_steps=4 format=3 uid="uid://c3ry8dgeqrhg1"]
 
 [ext_resource type="Script" path="res://classes/player/player.gd" id="1_1lph1"]
 
@@ -12,9 +12,20 @@ dof_blur_near_distance = 0.5
 auto_exposure_min_sensitivity = 50.0
 auto_exposure_max_sensitivity = 500.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vhojx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Player" type="Node3D"]
 script = ExtResource("1_1lph1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 attributes = SubResource("CameraAttributesPractical_genkd")
 far = 1e+06
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_vhojx")

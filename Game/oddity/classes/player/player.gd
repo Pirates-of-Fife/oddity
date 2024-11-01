@@ -6,9 +6,16 @@ class_name Player
 @export
 var control_entity : ControlEntity
 
+var player_name : String
+
 var current_controller : Controller
 
+@onready
+var synchroniser : MultiplayerSynchronizer =  $MultiplayerSynchronizer
+
 func _ready() -> void:
+	synchroniser.set_multiplayer_authority(str(name).to_int())
+	
 	if (control_entity != null):
 		possess(control_entity)
 
@@ -41,10 +48,16 @@ func possess(control_entity : ControlEntity) -> void:
 	
 	current_controller = controller_instance
 	
-	self.control_entity.player = null
+	if (self.control_entity != null):
+		self.control_entity.player = null
+	
 	self.control_entity = control_entity
 	self.control_entity.player = self
 	
+	current_controller.check_multiplayer_authority(synchroniser)
+	
+	print(str(current_controller) + " " + str(current_controller.is_multiplayer_authority))
+
 	if control_entity is Starship:
 		save_last_possessed_starship(control_entity)
 

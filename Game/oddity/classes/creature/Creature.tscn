@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ik0bqvjr0uki"]
+[gd_scene load_steps=7 format=3 uid="uid://ik0bqvjr0uki"]
 
 [ext_resource type="Script" path="res://classes/creature/Creature.gd" id="1_8w455"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="2_2yapl"]
@@ -12,6 +12,14 @@ height = 1.6
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tg1nt"]
 height = 1.6
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7gp6d"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
 collision_layer = 268436993
@@ -38,3 +46,6 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47027, 0)
 enable_pitch_limit = true
 pitch_limit = 90.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7gp6d")

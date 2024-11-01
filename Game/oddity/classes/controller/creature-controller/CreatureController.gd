@@ -17,8 +17,11 @@ var pitch_input : float = 0.0
 func _process(delta: float) -> void:
 	_default_process(delta)
 
+func _ready() -> void:
+	pass
+
 func _default_process(delta : float) -> void:
-	if control_entity is Creature:
+	if control_entity is Creature and is_multiplayer_authority == true:
 		var input_dir : Vector2 = Input.get_vector("player_walk_left", "player_walk_right", "player_walk_forwards", "player_walk_backwards")
 		
 		creature_movement_command.execute(control_entity, CreatureMovementCommand.Params.new(input_dir))

@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.3", "Double Precision", "Forward Plus")
 boot_splash/image="res://project-images/OddityLogo-05.png"
 config/icon="res://project-images/OddityLogo-02.png"
 
+[autoload]
+
+GameManager="*res://classes/multiplayer/GameManager.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2
@@ -78,6 +82,7 @@ Hardpoint="A hardpoint"
 InteriorModuleSlot=""
 ExteriorModuleSlot=""
 ControlSeat="Control seat for a vehicle"
+PlayerSpawnPoint=""
 
 [input]
 

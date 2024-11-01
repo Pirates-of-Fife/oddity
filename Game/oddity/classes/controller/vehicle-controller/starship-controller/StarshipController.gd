@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 	_default_process(delta)
 		
 func _default_process(delta : float) -> void:
-	if control_entity is Starship:
+	if control_entity is Starship and is_multiplayer_authority == true:
 		current_throttle_forwards_axis = starship_last_throttle_value #control_entity.target_thrust_vector.z
 			
 		if (Input.is_action_pressed("starship_throttle_forward")):

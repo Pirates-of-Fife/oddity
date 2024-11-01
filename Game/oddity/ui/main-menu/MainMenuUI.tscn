@@ -5,6 +5,57 @@
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_7jeg0"]
 [ext_resource type="Texture2D" uid="uid://b3b4ai1255iue" path="res://ui/main-menu/pirates-of-fife-logo.png" id="4_nsbdi"]
 
+[sub_resource type="Animation" id="Animation_r183a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Start/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(488, 266)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Start/Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(0.0858776, 0.0834093)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Start/RichTextLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(311, 367)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(-477, 193)]
+}
+
 [sub_resource type="Animation" id="Animation_02e8o"]
 resource_name = "start"
 length = 2.5
@@ -57,57 +108,6 @@ tracks/3/keys = {
 "values": [Vector2(-477, 193), Vector2(-73, 198)]
 }
 
-[sub_resource type="Animation" id="Animation_r183a"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Start/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 0,
-"values": [Vector2(488, 266)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Start/Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 0,
-"values": [Vector2(0.0858776, 0.0834093)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Start/RichTextLabel:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 0,
-"values": [Vector2(311, 367)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Control:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 0,
-"values": [Vector2(-477, 193)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_882nw"]
 _data = {
 "RESET": SubResource("Animation_r183a"),
@@ -145,6 +145,7 @@ theme_override_fonts/normal_font = ExtResource("2_7jeg0")
 text = "Press any key to continue"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 750.0
 offset_top = 489.0
 offset_right = 973.0
@@ -177,15 +178,34 @@ offset_bottom = 85.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="NameEdit" type="LineEdit" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+placeholder_text = "Name"
+alignment = 1
+max_length = 10
+
 [node name="StartButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
 text = "START"
 
-[node name="CreditsButton" type="Button" parent="Control/VBoxContainer"]
+[node name="JoinButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
-text = "CREDITS"
+text = "JOIN"
+
+[node name="HostButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+text = "HOST"
+
+[node name="IpAdress" type="LineEdit" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+placeholder_text = "IP Adress"
+alignment = 1
+max_length = 30
 
 [node name="ExitButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2

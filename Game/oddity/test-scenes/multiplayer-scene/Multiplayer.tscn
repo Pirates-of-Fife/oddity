@@ -1,0 +1,592 @@
+[gd_scene load_steps=20 format=3 uid="uid://cr8ergd0avfvd"]
+
+[ext_resource type="Script" path="res://classes/world/World.gd" id="1_dg08i"]
+[ext_resource type="Script" path="res://test-scenes/multiplayer-scene/MultiplayerScene.gd" id="1_trc7v"]
+[ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/player/player.tscn" id="2_gslaq"]
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_o68hd"]
+[ext_resource type="PackedScene" uid="uid://ik0bqvjr0uki" path="res://classes/creature/Creature.tscn" id="3_g2vwh"]
+[ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="3_i0foj"]
+[ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="5_dvi61"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xrdnv"]
+size = Vector3(20, 20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nj1x"]
+albedo_color = Color(0.34902, 0.792157, 1, 1)
+emission_enabled = true
+emission = Color(1, 0.815686, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_yu3m8"]
+size = Vector3(30, 2, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5p1x6"]
+albedo_color = Color(1, 0.592157, 0.329412, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6pfog"]
+data = PackedVector3Array(-15, 1, 15, 15, 1, 15, -15, -1, 15, 15, 1, 15, 15, -1, 15, -15, -1, 15, 15, 1, -15, -15, 1, -15, 15, -1, -15, -15, 1, -15, -15, -1, -15, 15, -1, -15, 15, 1, 15, 15, 1, -15, 15, -1, 15, 15, 1, -15, 15, -1, -15, 15, -1, 15, -15, 1, -15, -15, 1, 15, -15, -1, -15, -15, 1, 15, -15, -1, 15, -15, -1, -15, 15, 1, 15, -15, 1, 15, 15, 1, -15, -15, 1, 15, -15, 1, -15, 15, 1, -15, -15, -1, 15, 15, -1, 15, -15, -1, -15, 15, -1, 15, 15, -1, -15, -15, -1, -15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n55jf"]
+size = Vector3(30, 30, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjo3f"]
+albedo_color = Color(0.184314, 1, 0.356863, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lv6e5"]
+albedo_color = Color(1, 0.415686, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fa6l5"]
+albedo_color = Color(0.372549, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mchba"]
+shader = ExtResource("2_o68hd")
+shader_parameter/sky_color = Color(0, 0, 0.12549, 1)
+shader_parameter/star_base_color = Color(1, 0.92549, 0.945098, 1)
+shader_parameter/star_hue_offset = 0.918
+shader_parameter/star_intensity = 0.149
+shader_parameter/star_twinkle_speed = 0.627
+shader_parameter/star_twinkle_intensity = 0.138
+shader_parameter/layer_scale = 48.889
+shader_parameter/layer_scale_step = 6.049
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_hoxdb"]
+sky_material = SubResource("ShaderMaterial_mchba")
+
+[sub_resource type="Environment" id="Environment_e0213"]
+background_mode = 2
+sky = SubResource("Sky_hoxdb")
+
+[node name="Multiplayer" type="Node3D"]
+script = ExtResource("1_trc7v")
+player_scene = ExtResource("2_gslaq")
+creature_scene = ExtResource("3_g2vwh")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch = true
+stretch_shrink = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
+script = ExtResource("1_dg08i")
+
+[node name="SpawnPoints" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.42129, 8.19868, 0)
+
+[node name="0" type="Marker3D" parent="SubViewportContainer/SubViewport/World/SpawnPoints" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 131.417, 0, -9.16684)
+gizmo_extents = 10.0
+
+[node name="1" type="Marker3D" parent="SubViewportContainer/SubViewport/World/SpawnPoints" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9578, 0, -82.9162)
+gizmo_extents = 10.0
+
+[node name="2" type="Marker3D" parent="SubViewportContainer/SubViewport/World/SpawnPoints" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -193.57, 0, 0)
+gizmo_extents = 10.0
+
+[node name="3" type="Marker3D" parent="SubViewportContainer/SubViewport/World/SpawnPoints" groups=["PlayerSpawnPoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 135.866)
+gizmo_extents = 10.0
+
+[node name="Cubes" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(2.855, 0, 0, 0, 2.855, 0, 0, 0, 2.855, -235.322, 0, 490.574)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.617, 56.3797, 0)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0961, -42.7225, 196.778)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.7143, 51.6695, 55.533)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -85.741, 212.416)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.617, -29.3612, 212.416)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0961, -128.463, 409.194)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -115.961, -16.8741, 267.949)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, 9.37982, 43.5532, 166.216)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -70.0933, 150.376, 166.216)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -53.2217, 28.7377, 362.994)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -38.0733, 127.786, 221.749)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -31.2676, -31.9405, 378.632)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -110.741, 74.8821, 378.632)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -93.8691, -46.756, 575.409)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -78.7208, 52.2923, 434.165)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="Cubes2" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(2.63076, 0, 1.10911, 0, 2.855, 0, -1.10911, 0, 2.63076, 1370.1, 0, 112.978)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.617, 56.3797, 0)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0961, -42.7225, 196.778)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.7143, 51.6695, 55.533)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -85.741, 212.416)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.617, -29.3612, 212.416)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0961, -128.463, 409.194)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -115.961, -16.8741, 267.949)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, 9.37982, 43.5532, 166.216)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -70.0933, 150.376, 166.216)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -53.2217, 28.7377, 362.994)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -38.0733, 127.786, 221.749)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -31.2676, -31.9405, 378.632)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -110.741, 74.8821, 378.632)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -93.8691, -46.756, 575.409)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes2"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -78.7208, 52.2923, 434.165)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="Cubes3" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(0.367662, 0, -2.83123, 0, 2.855, 0, 2.83123, 0, 0.367662, 915.291, 0, -1014.59)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.617, 56.3797, 0)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0961, -42.7225, 196.778)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.7143, 51.6695, 55.533)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -85.741, 212.416)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.617, -29.3612, 212.416)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0961, -128.463, 409.194)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -115.961, -16.8741, 267.949)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, 9.37982, 43.5532, 166.216)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -70.0933, 150.376, 166.216)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -53.2217, 28.7377, 362.994)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -38.0733, 127.786, 221.749)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -31.2676, -31.9405, 378.632)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -110.741, 74.8821, 378.632)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -93.8691, -46.756, 575.409)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes3"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -78.7208, 52.2923, 434.165)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="Cubes4" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(2.73209, 0, -0.828668, 0, 2.855, 0, 0.828668, 0, 2.73209, -259.429, 0, -666.42)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.617, 56.3797, 0)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0961, -42.7225, 196.778)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.7143, 51.6695, 55.533)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -85.741, 212.416)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.617, -29.3612, 212.416)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0961, -128.463, 409.194)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -115.961, -16.8741, 267.949)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, 9.37982, 43.5532, 166.216)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -70.0933, 150.376, 166.216)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -53.2217, 28.7377, 362.994)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -38.0733, 127.786, 221.749)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -31.2676, -31.9405, 378.632)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -110.741, 74.8821, 378.632)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -93.8691, -46.756, 575.409)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Cubes4"]
+transform = Transform3D(0.880486, 0.474073, 0, -0.474073, 0.880486, 0, 0, 0, 1, -78.7208, 52.2923, 434.165)
+mesh = SubResource("BoxMesh_xrdnv")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
+
+[node name="SpawnStation" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -187.626, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D"]
+mesh = SubResource("BoxMesh_yu3m8")
+surface_material_override/0 = SubResource("StandardMaterial3D_5p1x6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6pfog")
+
+[node name="GravityGrid" type="Area3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D"]
+script = ExtResource("3_i0foj")
+frame_of_reference_name = "Spawn"
+size = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D/GravityGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0168, 0)
+shape = SubResource("BoxShape3D_n55jf")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8585, 0, -90.4587)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D2"]
+mesh = SubResource("BoxMesh_yu3m8")
+surface_material_override/0 = SubResource("StandardMaterial3D_pjo3f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_6pfog")
+
+[node name="GravityGrid" type="Area3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D2"]
+script = ExtResource("3_i0foj")
+frame_of_reference_name = "Spawn"
+size = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D2/GravityGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0168, 0)
+shape = SubResource("BoxShape3D_n55jf")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 129.859)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D3"]
+mesh = SubResource("BoxMesh_yu3m8")
+surface_material_override/0 = SubResource("StandardMaterial3D_lv6e5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_6pfog")
+
+[node name="GravityGrid" type="Area3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D3"]
+script = ExtResource("3_i0foj")
+frame_of_reference_name = "Spawn"
+size = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D3/GravityGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0168, 0)
+shape = SubResource("BoxShape3D_n55jf")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.554, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4"]
+mesh = SubResource("BoxMesh_yu3m8")
+surface_material_override/0 = SubResource("StandardMaterial3D_fa6l5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4"]
+shape = SubResource("ConcavePolygonShape3D_6pfog")
+
+[node name="GravityGrid" type="Area3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4"]
+script = ExtResource("3_i0foj")
+frame_of_reference_name = "Spawn"
+size = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4/GravityGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0168, 0)
+shape = SubResource("BoxShape3D_n55jf")
+
+[node name="DemoShip2" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dvi61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.502, 7.20611, -91.5939)
+
+[node name="DemoShip3" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dvi61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.153, 7.20611, 3.21618)
+
+[node name="DemoShip4" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dvi61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -188.996, 7.20612, 1.53007)
+
+[node name="DemoShip5" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dvi61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185685, 7.20613, 133.098)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)
+light_color = Color(1, 0.912596, 0.841761, 1)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_e0213")
