@@ -61,6 +61,7 @@ sky = SubResource("Sky_hoxdb")
 script = ExtResource("1_trc7v")
 player_scene = ExtResource("2_gslaq")
 creature_scene = ExtResource("3_g2vwh")
+ship_scnee = ExtResource("5_dvi61")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -86,7 +87,7 @@ script = ExtResource("1_dg08i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.42129, 8.19868, 0)
 
 [node name="0" type="Marker3D" parent="SubViewportContainer/SubViewport/World/SpawnPoints" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 131.417, 0, -9.16684)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 133.551, 0, -0.0878256)
 gizmo_extents = 10.0
 
 [node name="1" type="Marker3D" parent="SubViewportContainer/SubViewport/World/SpawnPoints" groups=["PlayerSpawnPoint"]]
@@ -94,11 +95,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7354, 0, -91.2105)
 gizmo_extents = 10.0
 
 [node name="2" type="Marker3D" parent="SubViewportContainer/SubViewport/World/SpawnPoints" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -193.57, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182.569, 0, 0)
 gizmo_extents = 10.0
 
 [node name="3" type="Marker3D" parent="SubViewportContainer/SubViewport/World/SpawnPoints" groups=["PlayerSpawnPoint"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 135.866)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11958, 0, 129.77)
 gizmo_extents = 10.0
 
 [node name="Cubes" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
@@ -570,18 +571,6 @@ size = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4/GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0168, 0)
 shape = SubResource("BoxShape3D_n55jf")
-
-[node name="DemoShip2" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dvi61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.502, 7.20611, -91.5939)
-
-[node name="DemoShip3" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dvi61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.153, 7.20611, 3.21618)
-
-[node name="DemoShip4" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dvi61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -188.996, 7.20612, 1.53007)
-
-[node name="DemoShip5" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dvi61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185685, 7.20613, 133.098)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)

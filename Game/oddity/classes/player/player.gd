@@ -57,6 +57,8 @@ func possess(control_entity : ControlEntity) -> void:
 	self.control_entity = control_entity
 	self.control_entity.player = self
 	
+	print(player_name + " is possessing " + str(control_entity.name))
+	
 	current_controller.check_multiplayer_authority(synchroniser, self)
 	
 	control_entity.synchroniser.set_multiplayer_authority(str(name).to_int())

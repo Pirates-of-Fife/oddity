@@ -63,8 +63,11 @@ func start_game() -> void:
 	
 	get_tree().change_scene_to_file(MainScene)
 	
+	#get_parent().ship_loaded = false
+	
 	#get_tree().root.add_child(scene)
 	#get_parent().remove_child(ui)
+	#get_tree().root.remove_child(get_parent())
 
 @rpc("any_peer")
 func send_player_information(name : String, id : int) -> void:

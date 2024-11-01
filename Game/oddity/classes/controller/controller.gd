@@ -20,17 +20,11 @@ func _default_ready() -> void:
 func check_multiplayer_authority(synchroniser : MultiplayerSynchronizer, player : Player) -> void:
 	if synchroniser == null:
 		return
-	
-	print("Player " + str(player.player_name) + " " + str(synchroniser.get_multiplayer_authority()) + " " + str(multiplayer.get_unique_id()))
-	
+		
 	if (synchroniser.get_multiplayer_authority() != multiplayer.get_unique_id()):
 		is_multiplayer_authority = false
-		
-		print("false")
-		
+				
 		return
 	
 	is_multiplayer_authority = true
-
-	print("true")
 	
