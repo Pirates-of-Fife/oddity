@@ -120,7 +120,7 @@ Alcubierre Drive: 6m x 3m x 3m
 
 ## Size 9
 
-Abyss Drive: 6m x 3.5m x 18m
+Abyss Drive: 7 x 3.5m x 18m
 
 Alcubierre Drive: 7m x 3.5m x 3.5m
 

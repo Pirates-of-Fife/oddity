@@ -1,13 +1,13 @@
 extends DynamicModuleSlot
 
-class_name ComponentSlot
+class_name AbyssalJumpDriveSlot
 
 @export
-var size : ModuleSize.ComponentSize
+var abyssal_jump_drive_size : ModuleSize.AbyssalJumpDriveSize
 
 func _module_fits(module : Module) -> bool:
-	if module is Component and module is not AlcubierreDrive and module is not AbyssalJumpDrive:
-		if module.size == size:
+	if module is AbyssalJumpDrive:
+		if module.size == abyssal_jump_drive_size:
 			return true
 	return false
 
@@ -26,7 +26,7 @@ func _initialize_area() -> void:
 	
 	var module_size : ModuleSize = ModuleSize.new()
 	
-	box_shape.size = module_size.get_component_size(size) * 1.1
+	box_shape.size = module_size.get_abyssal_jump_drive_size(abyssal_jump_drive_size) * 1.1
 	
 	var collision_shape : CollisionShape3D = CollisionShape3D.new()
 	

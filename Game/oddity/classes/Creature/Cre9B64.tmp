@@ -13,7 +13,7 @@ height = 1.6
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tg1nt"]
 height = 1.6
 
-[node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+[node name="Creature" type="RigidBody3D"]
 collision_layer = 268436993
 collision_mask = 268436993
 axis_lock_angular_y = true
@@ -23,8 +23,6 @@ continuous_cd = true
 linear_damp = 5.0
 angular_damp = 10.0
 script = ExtResource("1_8w455")
-controller_reference = "res://classes/controller/creature-controller/CreatureController.tscn"
-anchor = NodePath("Anchor")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
