@@ -71,9 +71,12 @@ var interaction_length : float = 2.5
 
 var raycast_helper : RaycastHelper = RaycastHelper.new()
 
+@onready
+var synchroniser : MultiplayerSynchronizer =  $MultiplayerSynchronizer
+
 func _ready() -> void:
 	_default_ready()
-		
+	
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust
 	pid_up.limit_max = thruster_force.up_thrust

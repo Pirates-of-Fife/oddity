@@ -237,6 +237,9 @@ mesh = SubResource("SphereMesh_ksn18")
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 1.13241, -0.796841)
 target_control_entity = NodePath("..")
 
+[node name="Anchor" parent="DemoControlSeat" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38619e-17, 0.109506, 0.269971)
+
 [node name="Marker3D" parent="DemoControlSeat" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16777, -1.22166, -2.38015)
 

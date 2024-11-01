@@ -10,7 +10,7 @@ const MainScene : String  = "res://test-scenes/multiplayer-scene/Multiplayer.tsc
 var address : String = "127.0.0.1"
 
 @export
-var port : int = 2024
+var port : int = 60000
 
 @export
 var host_button : Button
@@ -55,8 +55,8 @@ func _ready() -> void:
 
 @rpc("any_peer", "call_local")
 func start_game() -> void:
-	if (hosted == false):
-		_on_host()
+	#if (hosted == false):
+	#	_on_host()
 	
 	#camera.current = false
 	#var scene : Node3D = preload(MainScene).instantiate()
@@ -94,7 +94,7 @@ func _connection_failed() -> void:
 
 func _on_host() -> void:
 	peer = ENetMultiplayerPeer.new()
-	var error : Error = peer.create_server(2024, 4)
+	var error : Error = peer.create_server(port, 4)
 	
 	if (error != OK):
 		print("Cannot host: " + str(error))

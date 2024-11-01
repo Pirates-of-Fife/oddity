@@ -16,6 +16,9 @@ var synchroniser : MultiplayerSynchronizer =  $MultiplayerSynchronizer
 func _ready() -> void:
 	synchroniser.set_multiplayer_authority(str(name).to_int())
 	
+	if (synchroniser.get_multiplayer_authority() == multiplayer.get_unique_id()):
+		$Camera3D.current = true
+	
 	if (control_entity != null):
 		possess(control_entity)
 
@@ -35,7 +38,7 @@ func _process(delta: float) -> void:
 	
 	self.global_position = control_entity.anchor.camera_anchor.global_position
 	self.global_rotation = control_entity.anchor.camera_anchor.global_rotation
-
+	
 func possess(control_entity : ControlEntity) -> void:
 	if current_controller != null:
 		current_controller.queue_free()
@@ -54,9 +57,9 @@ func possess(control_entity : ControlEntity) -> void:
 	self.control_entity = control_entity
 	self.control_entity.player = self
 	
-	current_controller.check_multiplayer_authority(synchroniser)
+	current_controller.check_multiplayer_authority(synchroniser, self)
 	
-	print(str(current_controller) + " " + str(current_controller.is_multiplayer_authority))
+	control_entity.synchroniser.set_multiplayer_authority(str(name).to_int())
 
 	if control_entity is Starship:
 		save_last_possessed_starship(control_entity)

@@ -27,7 +27,7 @@ func _default_process(delta : float) -> void:
 		creature_movement_command.execute(control_entity, CreatureMovementCommand.Params.new(input_dir))
 		
 		creature_look_command.execute(control_entity, CreatureLookCommand.Params.new(twist_input, pitch_input))
-		
+				
 		if (Input.is_action_just_pressed("player_jump")):
 			creature_jump_command.execute(control_entity)
 			

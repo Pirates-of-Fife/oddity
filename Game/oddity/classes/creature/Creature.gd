@@ -45,8 +45,14 @@ var input_vector : Vector3
 
 var raycast_helper : RaycastHelper = RaycastHelper.new()
 
+@onready
+var synchroniser : MultiplayerSynchronizer =  $MultiplayerSynchronizer
+
 func _ready() -> void:
 	_default_ready()
+	
+#synchroniser.set_multiplayer_authority(str(name).to_int())
+
 	
 	can_freeze = false
 
