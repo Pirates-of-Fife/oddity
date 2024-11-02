@@ -5,6 +5,12 @@ extends Vehicle
 
 class_name Starship
 
+@export
+var health : int = 2000
+
+@export
+var max_health : int = 2000
+
 @export_category("Target Thrust Vector")
 
 @export
@@ -74,6 +80,35 @@ var raycast_helper : RaycastHelper = RaycastHelper.new()
 @onready
 var synchroniser : MultiplayerSynchronizer =  $MultiplayerSynchronizer
 
+@export_category("Hardpoints")
+
+# Hardcoding here because i don't want to deal with automatically finding hardpoints rn 
+
+@export
+var hardpoint_1 : Hardpoint
+
+@export
+var hardpoint_2 : Hardpoint
+
+@export
+var hardpoint_3 : Hardpoint
+
+@export
+var hardpoint_4 : Hardpoint
+
+var spawn_pos : Vector3 
+
+@export_category("Particles")
+
+@export
+var explosion : GPUParticles3D
+
+@export
+var thruster : GPUParticles3D
+
+@export
+var thruster2 : GPUParticles3D
+
 func _ready() -> void:
 	_default_ready()
 	
@@ -90,9 +125,30 @@ func _ready() -> void:
 	pid_yaw_right.limit_max = thruster_force.yaw_right_thrust
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
+
+func respawn() -> void:	
+	global_position = spawn_pos
 	
+	if active_control_seat != null:
+		active_control_seat.exit_seat()
+		freeze_static()
+	
+	health = max_health
+	
+	unfreeze()
+	
+@rpc("any_peer", "call_local")
+func explode() -> void:
+	
+	explosion.emitting = true
+
+
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
+	
+	if health <= 0:
+		explode.rpc()
+		respawn()
 	
 	if active_control_seat != null and freeze == true:
 		unfreeze()
@@ -196,6 +252,14 @@ func use_interact() -> void:
 		if collider is Interactable:
 			collider.interact(player, self)
 	
+func shoot_primary() -> void:
+	hardpoint_1.module.shoot.rpc()
+	hardpoint_2.module.shoot.rpc()
+	hardpoint_3.module.shoot.rpc()
+	hardpoint_4.module.shoot.rpc()
+
+
+
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO
 	target_rotational_thrust_vector = Vector3.ZERO

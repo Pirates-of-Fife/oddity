@@ -34,7 +34,8 @@ func _ready() -> void:
 				creature.global_position = spawn.global_position + Vector3(10, 0, 0)
 				ship.global_position = spawn.global_position
 				ship.synchroniser.set_multiplayer_authority(str(currentPlayer.name).to_int())
-
+				ship.spawn_pos = spawn.global_position
+				
 				currentPlayer.possess(creature)
 				
 				

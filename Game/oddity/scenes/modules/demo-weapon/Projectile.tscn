@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy564m5exxmbe"]
+
+[ext_resource type="Script" path="res://scenes/modules/demo-weapon/Projectile.gd" id="1_qlrom"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bsj32"]
+size = Vector3(0.5, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2k4ho"]
+albedo_color = Color(0.842635, 2.06962e-06, 5.77569e-07, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j0xo4"]
+points = PackedVector3Array(0.175, 0.175, 1, 0.175, -0.175, 1, 0.175, 0.175, -1, -0.175, 0.175, 1, -0.175, -0.175, 1, 0.175, -0.175, -1, -0.175, 0.175, -1, -0.175, -0.175, -1)
+
+[node name="Projectile" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_qlrom")
+damage = 100.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_bsj32")
+surface_material_override/0 = SubResource("StandardMaterial3D_2k4ho")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_j0xo4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

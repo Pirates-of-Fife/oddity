@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlrhe21mi8cl2"]
+
+[ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="1_fobvb"]
+[ext_resource type="PackedScene" uid="uid://c6s2w5s0vpdhx" path="res://scenes/modules/demo-weapon/weapon.glb" id="2_7m2uo"]
+[ext_resource type="PackedScene" uid="uid://cy564m5exxmbe" path="res://scenes/modules/demo-weapon/Projectile.tscn" id="2_vg4so"]
+
+[node name="DemoWeapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle", "cooldown_timer", "spawner")]
+collision_layer = 537398273
+collision_mask = 537398273
+script = ExtResource("1_fobvb")
+size = 4
+nozzle = NodePath("Marker3D")
+projectile = ExtResource("2_vg4so")
+force = 100.0
+cooldown_timer = NodePath("CooldownTimer")
+spawner = NodePath("MultiplayerSpawner")
+can_be_picked_up = true
+
+[node name="weapon" parent="." instance=ExtResource("2_7m2uo")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.964213)
+
+[node name="CooldownTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

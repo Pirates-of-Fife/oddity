@@ -18,6 +18,8 @@ var starship_thrust_down_command : StarshipThrustDownCommand = StarshipThrustDow
 
 var starship_player_interact_command : StarshipPlayerInteractCommand = StarshipPlayerInteractCommand.new()
 
+var starship_shoot_primary_command : StarshipShootPrimaryCommand = StarshipShootPrimaryCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -123,6 +125,9 @@ func _default_process(delta : float) -> void:
 			
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			vehicle_exit_seat_command.execute(control_entity)
+			
+		if (Input.is_action_pressed("starship_shoot_primary")):
+			starship_shoot_primary_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

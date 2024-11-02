@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cr8ergd0avfvd"]
+[gd_scene load_steps=22 format=3 uid="uid://cr8ergd0avfvd"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_dg08i"]
 [ext_resource type="Script" path="res://test-scenes/multiplayer-scene/MultiplayerScene.gd" id="1_trc7v"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ik0bqvjr0uki" path="res://classes/creature/Creature.tscn" id="3_g2vwh"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="3_i0foj"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="5_dvi61"]
+[ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="7_xtd7q"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xrdnv"]
 size = Vector3(20, 20, 20)
@@ -37,6 +38,9 @@ albedo_color = Color(1, 0.415686, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fa6l5"]
 albedo_color = Color(0.372549, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kxdow"]
+size = Vector3(1, 1, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mchba"]
 shader = ExtResource("2_o68hd")
@@ -498,6 +502,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7nj1x")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -187.626, 0, 0)
+collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D"]
 mesh = SubResource("BoxMesh_yu3m8")
@@ -517,6 +522,7 @@ shape = SubResource("BoxShape3D_n55jf")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8585, 0, -90.4587)
+collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D2"]
 mesh = SubResource("BoxMesh_yu3m8")
@@ -536,6 +542,7 @@ shape = SubResource("BoxShape3D_n55jf")
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 129.859)
+collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D3"]
 mesh = SubResource("BoxMesh_yu3m8")
@@ -555,6 +562,7 @@ shape = SubResource("BoxShape3D_n55jf")
 
 [node name="StaticBody3D4" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.554, 0, 0)
+collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4"]
 mesh = SubResource("BoxMesh_yu3m8")
@@ -571,6 +579,17 @@ size = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4/GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0168, 0)
 shape = SubResource("BoxShape3D_n55jf")
+
+[node name="Weapon" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 134.677, 3.53462, 11.4684)
+collision_layer = 537398273
+collision_mask = 537398273
+script = ExtResource("7_xtd7q")
+size = 4
+can_be_picked_up = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Weapon"]
+mesh = SubResource("BoxMesh_kxdow")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)
