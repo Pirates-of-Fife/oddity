@@ -39,6 +39,10 @@ var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 @export
 var ui : Control
 
+
+@export
+var debug : TextEdit
+
 var hosted : bool = false
 
 func _ready() -> void:
@@ -83,17 +87,23 @@ func send_player_information(name : String, id : int) -> void:
 
 func _peer_connected(id : int) -> void:
 	print("Connected " + str(id) + " as " + name_control.text)
+	debug.text += "\n" + "Connected " + str(id) + " as " + name_control.text
 
 func _peer_disconnected(id : int) -> void:
 	print("Disconnected " + str(id) + " as " + name_control.text)
+	debug.text += "\n" + "Disconnected " + str(id) + " as " + name_control.text
 	
 func _connected_to_server() -> void:
 	print("Connected to server.")
+	
+	debug.text += "\n" + "Connected to server."
 	
 	send_player_information.rpc_id(1, name_control.text, multiplayer.get_unique_id())
 
 func _connection_failed() -> void:
 	print("Connection failed.")
+	debug.text += "\n" + "Connectin failed."
+
 
 func _on_host() -> void:
 	peer = ENetMultiplayerPeer.new()
@@ -101,6 +111,7 @@ func _on_host() -> void:
 	
 	if (error != OK):
 		print("Cannot host: " + str(error))
+		debug.text += "\n" + "Cannot host: " + str(error)
 		return
 		
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
@@ -108,7 +119,8 @@ func _on_host() -> void:
 	multiplayer.set_multiplayer_peer(peer)
 	
 	print("Waiting for Players!")
-	
+	debug.text += "\n" + "Waiting for Players!"
+
 	send_player_information(name_control.text, multiplayer.get_unique_id())
 	
 	hosted = true

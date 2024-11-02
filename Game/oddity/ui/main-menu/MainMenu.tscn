@@ -58,7 +58,7 @@ offset_bottom = 25.38
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(320, 180)
+size = Vector2i(384, 216)
 render_target_update_mode = 4
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
@@ -75,7 +75,7 @@ environment = SubResource("Environment_8l6ma")
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("host_button", "join_button", "start_button", "exit_button", "name_control", "ip_address_control", "camera", "ui")]
+[node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("host_button", "join_button", "start_button", "exit_button", "name_control", "ip_address_control", "camera", "ui", "debug")]
 script = ExtResource("5_ns5qi")
 host_button = NodePath("../SubViewportContainer/MainMenuUi/Control/VBoxContainer/HostButton")
 join_button = NodePath("../SubViewportContainer/MainMenuUi/Control/VBoxContainer/JoinButton")
@@ -85,6 +85,7 @@ name_control = NodePath("../SubViewportContainer/MainMenuUi/Control/VBoxContaine
 ip_address_control = NodePath("../SubViewportContainer/MainMenuUi/Control/VBoxContainer/IpAdress")
 camera = NodePath("../SubViewportContainer/SubViewport/World/Camera3D")
 ui = NodePath("../SubViewportContainer")
+debug = NodePath("../SubViewportContainer/MainMenuUi/Debug")
 
 [connection signal="animation_started" from="SubViewportContainer/MainMenuUi" to="." method="_on_main_menu_ui_animation_started"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
