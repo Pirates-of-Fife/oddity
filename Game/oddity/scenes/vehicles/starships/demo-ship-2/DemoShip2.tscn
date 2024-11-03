@@ -70,6 +70,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("MainParticleFX/SmokeFX:amount_ratio")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("Explosion:emitting")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("hardpoint_1", "hardpoint_2", "hardpoint_3", "hardpoint_4", "explosion", "thruster", "thruster2", "respawn_timer", "anchor")]
 collision_layer = 515
@@ -298,6 +301,7 @@ process_callback = 0
 one_shot = true
 
 [node name="Explosion" parent="." instance=ExtResource("12_ti0ut")]
+lifetime = 5.0
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
