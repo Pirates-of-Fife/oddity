@@ -24,6 +24,8 @@ var spawner : MultiplayerSpawner
 
 var can_shoot : bool = true
 
+var own_ship : Starship
+
 func _ready() -> void:
 	_module_ready()
 	_initialize_collision_shape()
@@ -51,6 +53,7 @@ func shoot() -> void:
 	get_tree().get_first_node_in_group("World").add_child(p)
 	
 	p.hit.connect(hit_ship)
+	p.own_ship = own_ship
 		
 	p.global_position = nozzle.global_position
 	p.global_rotation = nozzle.global_rotation

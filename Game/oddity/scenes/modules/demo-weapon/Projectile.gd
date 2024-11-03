@@ -7,11 +7,13 @@ signal hit(starship : Starship)
 @export
 var damage : float
 
+var own_ship : Starship
+
 func _ready() -> void:
 	$Timer.start()
 
 func _on_body_entered(body: Node) -> void:
-	if body is Projectile:
+	if body is Projectile or body == own_ship:
 		return
 	
 	print("hit " + str(body))
@@ -34,3 +36,5 @@ func _on_timer_timeout() -> void:
 	
 	self.collision_layer = layer_mask  # Set layer
 	self.collision_mask = layer_mask  # Set collision mask
+
+	print(relative_linear_velocity.length())

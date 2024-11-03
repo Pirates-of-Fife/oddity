@@ -119,6 +119,11 @@ func _ready() -> void:
 	hardpoint_3.module.hit.connect(hit_ship)
 	hardpoint_4.module.hit.connect(hit_ship)
 
+	hardpoint_1.module.own_ship = self
+	hardpoint_2.module.own_ship = self
+	hardpoint_3.module.own_ship = self
+	hardpoint_4.module.own_ship = self
+
 	
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust

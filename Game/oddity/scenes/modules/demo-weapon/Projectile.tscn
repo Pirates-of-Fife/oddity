@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy564m5exxmbe"]
+[gd_scene load_steps=5 format=3 uid="uid://cy564m5exxmbe"]
 
 [ext_resource type="Script" path="res://scenes/modules/demo-weapon/Projectile.gd" id="1_qlrom"]
 
@@ -13,11 +13,6 @@ emission_energy_multiplier = 16.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j0xo4"]
 points = PackedVector3Array(0.175, 0.175, 1, 0.175, -0.175, 1, 0.175, 0.175, -1, -0.175, 0.175, 1, -0.175, -0.175, 1, 0.175, -0.175, -1, -0.175, 0.175, -1, -0.175, -0.175, -1)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_210pn"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [node name="Projectile" type="RigidBody3D"]
 collision_layer = 0
@@ -40,9 +35,6 @@ shape = SubResource("ConvexPolygonShape3D_j0xo4")
 wait_time = 0.05
 one_shot = true
 autostart = true
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_210pn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
