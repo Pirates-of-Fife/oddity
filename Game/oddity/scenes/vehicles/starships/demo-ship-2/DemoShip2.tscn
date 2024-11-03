@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cl1lyeabmrdst"]
+[gd_scene load_steps=25 format=3 uid="uid://cl1lyeabmrdst"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship-2/demo_ship_2.gd" id="1_gtrcu"]
 [ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://scenes/vehicles/starships/demo-ship-2/fighter_gen_7_model.tscn" id="2_qgepc"]
@@ -9,8 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="12_2ad4s"]
 [ext_resource type="PackedScene" uid="uid://q7qxuwsn55b5" path="res://scenes/interactable/control-seat/DemoControlSeat.tscn" id="12_17fxx"]
 [ext_resource type="PackedScene" uid="uid://c0uh2hkiwvx7l" path="res://scenes/vehicles/starships/demo-ship-2/ShipUi.tscn" id="12_nqfhp"]
+[ext_resource type="PackedScene" uid="uid://7fnvfm6w6or3" path="res://scenes/vehicles/starships/demo-ship-2/explosion.tscn" id="12_ti0ut"]
+[ext_resource type="Texture2D" uid="uid://ddpa36y8mkpiy" path="res://scenes/vehicles/starships/demo-ship-2/Crosshair/crosshair.png" id="13_cebqm"]
 [ext_resource type="PackedScene" uid="uid://brkik5oaep1vf" path="res://scenes/interactable/interaction-button/InteractionButton.tscn" id="13_ejv10"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/hardpoint/Hardpoint.gd" id="14_318nd"]
+[ext_resource type="PackedScene" uid="uid://dan83b5qrkhdv" path="res://scenes/vehicles/starships/demo-ship-2/MainParticleFX.tscn" id="14_iaa76"]
+[ext_resource type="PackedScene" uid="uid://cxg4i130ut4lm" path="res://scenes/vehicles/starships/demo-ship-2/SmokeFX.tscn" id="15_71jb7"]
 [ext_resource type="PackedScene" uid="uid://dlrhe21mi8cl2" path="res://scenes/modules/demo-weapon/DemoWeapon.tscn" id="15_n2il0"]
 
 [sub_resource type="Resource" id="Resource_8x1bo"]
@@ -60,55 +64,14 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("MainParticleFX:amount_ratio")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("MainParticleFX/SmokeFX:amount_ratio")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_bj0i7"]
-colors = PackedColorArray(1, 0.576471, 0, 1, 0.616328, 0.575909, 0.559659, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7b43q"]
-gradient = SubResource("Gradient_bj0i7")
-
-[sub_resource type="CurveTexture" id="CurveTexture_xi6r6"]
-
-[sub_resource type="Curve" id="Curve_mffjv"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.021978), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_rflu4"]
-curve = SubResource("Curve_mffjv")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d6blf"]
-angle_min = 78.8
-angle_max = 394.0
-spread = 180.0
-initial_velocity_min = 5.0
-initial_velocity_max = 512.44
-gravity = Vector3(0, 0, 0)
-linear_accel_min = -2.23517e-06
-linear_accel_max = 8.96
-radial_accel_min = -2.23517e-06
-radial_accel_max = 11.49
-scale_min = 0.5
-scale_max = 4.0
-scale_curve = SubResource("CurveTexture_rflu4")
-color = Color(1, 0.568627, 0, 1)
-color_ramp = SubResource("GradientTexture1D_7b43q")
-emission_curve = SubResource("CurveTexture_xi6r6")
-turbulence_enabled = true
-turbulence_noise_strength = 6.88
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4xyx"]
-emission_enabled = true
-emission = Color(0.851977, 0.547379, 0, 1)
-emission_energy_multiplier = 16.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_6rljf"]
-material = SubResource("StandardMaterial3D_f4xyx")
-size = Vector3(0.1, 0.1, 0.1)
-
-[node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("hardpoint_1", "hardpoint_2", "hardpoint_3", "hardpoint_4", "explosion", "anchor")]
+[node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("hardpoint_1", "hardpoint_2", "hardpoint_3", "hardpoint_4", "explosion", "thruster", "thruster2", "respawn_timer", "anchor")]
 collision_layer = 515
 collision_mask = 513
 mass = 1200.0
@@ -120,6 +83,9 @@ hardpoint_2 = NodePath("Hardpoint2")
 hardpoint_3 = NodePath("Hardpoint3")
 hardpoint_4 = NodePath("Hardpoint4")
 explosion = NodePath("Explosion")
+thruster = NodePath("MainParticleFX")
+thruster2 = NodePath("MainParticleFX/SmokeFX")
+respawn_timer = NodePath("Timer")
 controller_reference = "res://classes/controller/vehicle-controller/starship-controller/StarshipController.tscn"
 anchor = NodePath("DemoControlSeat/Anchor")
 
@@ -265,7 +231,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07522e-17, 0.109506, 0.8792
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16777, -1.22166, -2.38015)
 
 [node name="InteractionButton" parent="." instance=ExtResource("13_ejv10")]
-transform = Transform3D(-0.0110994, 0, -4.02498, 0, 4.025, 0, 4.02498, 0, -0.0110994, -1.4023, -1.25471, 0.463093)
+transform = Transform3D(-0.239982, 0, -99.3896, 0, 29.16, 0, 87.0247, 0, -0.27408, -1.4023, -2.00205, 0.463093)
+
+[node name="MeshInstance3D" parent="InteractionButton" index="0"]
+transform = Transform3D(1, 0, 1.30104e-18, 0, 1, 0, -1.30104e-18, 0, 1, -7.77602e-05, 0.0148623, -0.0281982)
+visible = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_3ywro")
@@ -303,23 +273,35 @@ module_slot = NodePath("../Hardpoint3")
 [node name="DemoWeapon4" parent="." node_paths=PackedStringArray("module_slot") instance=ExtResource("15_n2il0")]
 module_slot = NodePath("../Hardpoint4")
 
-[node name="Explosion" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0692172, 0, 0)
-emitting = false
-amount = 70000
-lifetime = 10.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-visibility_aabb = AABB(-25, -25, -25, 50, 50, 50)
-process_material = SubResource("ParticleProcessMaterial_d6blf")
-draw_pass_1 = SubResource("BoxMesh_6rljf")
-
 [node name="ShipUi" parent="." node_paths=PackedStringArray("starship") instance=ExtResource("12_nqfhp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29946, 0)
 starship = NodePath("..")
 
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.6292, 0)
+modulate = Color(1, 0.619608, 0, 1)
+pixel_size = 0.001
+billboard = 1
+fixed_size = true
+texture = ExtResource("13_cebqm")
+
+[node name="MainParticleFX" parent="." instance=ExtResource("14_iaa76")]
+transform = Transform3D(-1.75478, 0, -0.135516, 0, 1.76, 0, 0.135516, 0, -1.75478, 0, 0, -5.73549)
+amount_ratio = 0.0
+
+[node name="SmokeFX" parent="MainParticleFX" instance=ExtResource("15_71jb7")]
+transform = Transform3D(1, 0, -1.38778e-17, 0, 1, 0, 1.38778e-17, 0, 1, 0.00222167, 0, -0.0287682)
+amount_ratio = 0.0
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="Explosion" parent="." instance=ExtResource("12_ti0ut")]
+
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="fighterGen7"]
 [editable path="DemoControlSeat"]
+[editable path="InteractionButton"]

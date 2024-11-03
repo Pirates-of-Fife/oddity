@@ -15,9 +15,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body is Projectile or body == own_ship:
 		return
-	
-	print("hit " + str(body))
-	
+		
 	if body is Starship:
 		body.damage.rpc(damage)
 		hit.emit(body)
@@ -36,5 +34,3 @@ func _on_timer_timeout() -> void:
 	
 	self.collision_layer = layer_mask  # Set layer
 	self.collision_mask = layer_mask  # Set collision mask
-
-	print(relative_linear_velocity.length())

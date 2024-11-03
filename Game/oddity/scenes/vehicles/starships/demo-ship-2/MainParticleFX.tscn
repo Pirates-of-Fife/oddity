@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dan83b5qrkhdv"]
+
+[sub_resource type="Curve" id="Curve_v0d0x"]
+_data = [Vector2(0, 0.515789), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.504762, 1), 0.0, 0.0, 0, 0, Vector2(0.756477, 0.621053), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_rd2vx"]
+curve = SubResource("Curve_v0d0x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jxq0y"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 0, 1)
+spread = 1.0
+flatness = 1.0
+initial_velocity_max = 1.5
+angular_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+damping_max = 0.5
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_rd2vx")
+color = Color(0, 0.482353, 1, 1)
+collision_mode = 2
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 32
+sub_emitter_keep_velocity = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6v6u"]
+vertex_color_use_as_albedo = true
+emission_enabled = true
+emission = Color(0, 0.482353, 1, 1)
+emission_energy_multiplier = 10.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_iy85d"]
+material = SubResource("StandardMaterial3D_v6v6u")
+size = Vector3(0.05, 0.05, 0.05)
+
+[node name="MainParticleFX" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5)
+amount = 5120
+lifetime = 5.0
+speed_scale = 24.0
+fixed_fps = 256
+process_material = SubResource("ParticleProcessMaterial_jxq0y")
+draw_pass_1 = SubResource("BoxMesh_iy85d")

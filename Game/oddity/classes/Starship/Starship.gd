@@ -103,13 +103,22 @@ var spawn_pos : Vector3
 @export
 var explosion : GPUParticles3D
 
+var explosion_position : Vector3
+
 @export
 var thruster : GPUParticles3D
 
 @export
 var thruster2 : GPUParticles3D
 
+@export_category("other")
+
+@export
+var respawn_timer : Timer
+
 var enemy_health : int
+
+var exploded : bool = false
 
 func _ready() -> void:
 	_default_ready()
@@ -141,20 +150,28 @@ func _ready() -> void:
 
 @rpc("any_peer", "call_local")
 func respawn() -> void:
+	
 	global_position = spawn_pos
+	linear_velocity = Vector3.ZERO
+	set_target_thrust_forward(0)
 	
 	if active_control_seat != null:
 		active_control_seat.exit_seat()
-		freeze_static()
 	
 	health = max_health
+	exploded = false
 	
-	unfreeze()
 	
 @rpc("any_peer", "call_local")
 func explode() -> void:
+	if exploded:
+		return
 	
+	explosion.global_position = explosion_position
 	explosion.emitting = true
+	
+	exploded = true
+	print("exploded" + str(spawn_pos - explosion.global_position))
 
 @rpc("any_peer", "call_local")
 func damage(dmg : int) -> void:
@@ -167,11 +184,15 @@ func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
 	
 	if health <= 0:
+		explosion_position = global_position
 		explode.rpc()
-		respawn.rpc()
+		
+		if respawn_timer.is_stopped():
+			respawn_timer.start()
 	
 	if active_control_seat != null and freeze == true:
 		unfreeze()
+	
 	
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
@@ -374,6 +395,8 @@ func set_target_thrust_right(thrust : float) -> void:
 
 func set_target_thrust_forward(thrust : float) -> void:
 	target_thrust_vector.z = thrust
+	thruster.amount_ratio = thrust
+	thruster2.amount_ratio = thrust
 
 func set_target_thrust_backward(thrust : float) -> void:
 	target_thrust_vector.z = -thrust

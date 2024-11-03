@@ -109,6 +109,8 @@ func _on_host() -> void:
 	peer = ENetMultiplayerPeer.new()
 	var error : Error = peer.create_server(port, 4)
 	
+	join_button.disabled = true
+	
 	if (error != OK):
 		print("Cannot host: " + str(error))
 		debug.text += "\n" + "Cannot host: " + str(error)

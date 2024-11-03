@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://7fnvfm6w6or3"]
+
+[sub_resource type="Gradient" id="Gradient_bj0i7"]
+colors = PackedColorArray(1, 0.576471, 0, 1, 0.616328, 0.575909, 0.559659, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7b43q"]
+gradient = SubResource("Gradient_bj0i7")
+
+[sub_resource type="CurveTexture" id="CurveTexture_xi6r6"]
+
+[sub_resource type="Curve" id="Curve_mffjv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.021978), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rflu4"]
+curve = SubResource("Curve_mffjv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d6blf"]
+angle_min = 78.8
+angle_max = 394.0
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 512.44
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 8.96
+radial_accel_min = -2.23517e-06
+radial_accel_max = 11.49
+scale_min = 0.5
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_rflu4")
+color = Color(1, 0.568627, 0, 1)
+color_ramp = SubResource("GradientTexture1D_7b43q")
+emission_curve = SubResource("CurveTexture_xi6r6")
+turbulence_enabled = true
+turbulence_noise_strength = 6.88
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4xyx"]
+emission_enabled = true
+emission = Color(0.851977, 0.547379, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6rljf"]
+material = SubResource("StandardMaterial3D_f4xyx")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Explosion" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0692172, 0, 0)
+emitting = false
+amount = 70000
+lifetime = 10.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+visibility_aabb = AABB(-25, -25, -25, 50, 50, 50)
+process_material = SubResource("ParticleProcessMaterial_d6blf")
+draw_pass_1 = SubResource("BoxMesh_6rljf")
