@@ -8,4 +8,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text = str((get_parent_node_3d() as Starship).relative_linear_velocity.length())
+	text = str((get_parent_node_3d().get_parent_node_3d() as Starship).relative_linear_velocity.length())
