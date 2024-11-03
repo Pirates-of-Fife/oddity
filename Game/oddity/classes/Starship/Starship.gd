@@ -126,7 +126,8 @@ func _ready() -> void:
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
 
-func respawn() -> void:	
+@rpc("any_peer", "call_local")
+func respawn() -> void:
 	global_position = spawn_pos
 	
 	if active_control_seat != null:
@@ -142,13 +143,16 @@ func explode() -> void:
 	
 	explosion.emitting = true
 
+@rpc("any_peer", "call_local")
+func damage(dmg : int) -> void:
+	health -= dmg
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
 	
 	if health <= 0:
 		explode.rpc()
-		respawn()
+		respawn.rpc()
 	
 	if active_control_seat != null and freeze == true:
 		unfreeze()

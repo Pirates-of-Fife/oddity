@@ -15,7 +15,7 @@ func _on_body_entered(body: Node) -> void:
 	print("hit " + str(body))
 	
 	if body is Starship:
-		body.health -= damage
+		body.damage.rpc(damage)
 	
 	queue_free()
 	#GameManager.remove_projectile.rpc(self)
