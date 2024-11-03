@@ -162,7 +162,7 @@ func respawn() -> void:
 	exploded = false
 	
 	
-@rpc("any_peer", "call_local")
+#@rpc("any_peer", "call_local")
 func explode() -> void:
 	if exploded:
 		return
@@ -185,7 +185,7 @@ func _physics_process(delta: float) -> void:
 	
 	if health <= 0:
 		explosion_position = global_position
-		explode.rpc()
+		explode()
 		
 		if respawn_timer.is_stopped():
 			respawn_timer.start()
