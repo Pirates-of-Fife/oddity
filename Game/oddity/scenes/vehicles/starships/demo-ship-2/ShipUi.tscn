@@ -11,24 +11,20 @@ bg_color = Color(0.73054, 0.146959, 0.224508, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xls0p"]
 bg_color = Color(0.0576443, 0.678744, 0.669937, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kcf8f"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_asq6w"]
 viewport_path = NodePath("HealthVP")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_y6bqg"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xpvap"]
 viewport_path = NodePath("EnemyVP")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_h8ehj"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_503lf"]
 viewport_path = NodePath("SpeepVP")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ahbsr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_n763p"]
 viewport_path = NodePath("ThrottleVP")
 
-[node name="ShipUi" type="Node3D" node_paths=PackedStringArray("health_bar", "enemy_health_bar", "throttle_bar", "speed_bar", "crosshair")]
+[node name="ShipUi" type="Node3D" node_paths=PackedStringArray("crosshair")]
 script = ExtResource("1_e8edl")
-health_bar = NodePath("HealthVP/Control/ProgressBar")
-enemy_health_bar = NodePath("EnemyVP/Control/ProgressBar")
-throttle_bar = NodePath("ThrottleVP/Control/ProgressBar")
-speed_bar = NodePath("SpeepVP/Control/ProgressBar")
 crosshair = NodePath("Crosshair")
 
 [node name="HealthVP" type="SubViewport" parent="."]
@@ -104,19 +100,20 @@ value = 50.0
 show_percentage = false
 
 [node name="HealthUI" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54552, -0.710946, 0)
-texture = SubResource("ViewportTexture_kcf8f")
+transform = Transform3D(-0.38, 0, -0.166808, 0, 0.415, 0, 0.166808, 0, -0.38, -0.153, -1.443, -0.387)
+texture = SubResource("ViewportTexture_asq6w")
 
 [node name="EnemyUI" type="Sprite3D" parent="HealthUI"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00255757, -0.551865, 0)
-texture = SubResource("ViewportTexture_y6bqg")
+texture = SubResource("ViewportTexture_xpvap")
 
 [node name="SpeedUI" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3912, -0.659807, 0)
-texture = SubResource("ViewportTexture_h8ehj")
+transform = Transform3D(-0.347257, 0, 0.227239, 0, 0.415, 0, -0.227239, 0, -0.347257, -0.954, -1.453, -1.008)
+texture = SubResource("ViewportTexture_503lf")
 
 [node name="ThrottleUI" type="Sprite3D" parent="SpeedUI"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000680571, -0.563149, 0)
-texture = SubResource("ViewportTexture_ahbsr")
+texture = SubResource("ViewportTexture_n763p")
 
 [node name="Crosshair" parent="." instance=ExtResource("4_caj1d")]
+transform = Transform3D(1.775, 0, 0, 0, 1.775, 0, 0, 0, 1.775, 0, -0.069, 0)

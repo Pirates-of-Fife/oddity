@@ -15,7 +15,7 @@
 
 [sub_resource type="Resource" id="Resource_8x1bo"]
 script = ExtResource("2_wijyj")
-max_linear_velocity = 600.0
+max_linear_velocity = 200.0
 max_angular_pitch_velocity = 0.9
 max_angular_yaw_velocity = 0.9
 max_angular_roll_velocity = 2.0
@@ -319,17 +319,7 @@ draw_pass_1 = SubResource("BoxMesh_6rljf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29946, 0)
 starship = NodePath("..")
 
-[node name="HealthUI" parent="ShipUi" index="4"]
-transform = Transform3D(-0.379869, 0, -0.167107, 0, 0.415, 0, 0.167107, 0, -0.379869, -0.152678, -1.44289, -0.386619)
-
-[node name="SpeedUI" parent="ShipUi" index="5"]
-transform = Transform3D(-0.347257, 0, 0.227239, 0, 0.415, 0, -0.227239, 0, -0.347257, -0.953888, -1.45347, -1.00798)
-
-[node name="Crosshair" parent="ShipUi" index="6"]
-transform = Transform3D(1.775, 0, 0, 0, 1.775, 0, 0, 0, 1.775, 0, -0.068533, 0)
-
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 
 [editable path="fighterGen7"]
 [editable path="DemoControlSeat"]
-[editable path="ShipUi"]

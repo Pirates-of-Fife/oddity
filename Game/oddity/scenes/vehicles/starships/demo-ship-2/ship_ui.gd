@@ -3,17 +3,14 @@ extends Node3D
 @export
 var starship : Starship
 
-@export
-var health_bar : ProgressBar
-
-@export
-var enemy_health_bar : ProgressBar
-
-@export
-var throttle_bar : ProgressBar
-
-@export
-var speed_bar : ProgressBar
+@onready
+var health_bar : ProgressBar = $HealthVP/Control/ProgressBar
+@onready
+var enemy_health_bar : ProgressBar = $EnemyVP/Control/ProgressBar
+@onready
+var throttle_bar : ProgressBar = $ThrottleVP/Control/ProgressBar
+@onready
+var speed_bar : ProgressBar = $SpeepVP/Control/ProgressBar
 
 @export
 var crosshair : Node3D
