@@ -109,8 +109,16 @@ var thruster : GPUParticles3D
 @export
 var thruster2 : GPUParticles3D
 
+var enemy_health : int
+
 func _ready() -> void:
 	_default_ready()
+	
+	hardpoint_1.module.hit.connect(hit_ship)
+	hardpoint_2.module.hit.connect(hit_ship)
+	hardpoint_3.module.hit.connect(hit_ship)
+	hardpoint_4.module.hit.connect(hit_ship)
+
 	
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust
@@ -146,6 +154,9 @@ func explode() -> void:
 @rpc("any_peer", "call_local")
 func damage(dmg : int) -> void:
 	health -= dmg
+
+func hit_ship(starship : Starship) -> void:
+	enemy_health = starship.health
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)

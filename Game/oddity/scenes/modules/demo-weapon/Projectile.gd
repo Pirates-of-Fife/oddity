@@ -2,6 +2,8 @@ extends GameEntity
 
 class_name Projectile
 
+signal hit(starship : Starship)
+
 @export
 var damage : float
 
@@ -16,6 +18,7 @@ func _on_body_entered(body: Node) -> void:
 	
 	if body is Starship:
 		body.damage.rpc(damage)
+		hit.emit(body)
 	
 	queue_free()
 	#GameManager.remove_projectile.rpc(self)

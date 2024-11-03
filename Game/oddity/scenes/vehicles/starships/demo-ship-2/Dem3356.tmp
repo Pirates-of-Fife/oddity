@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cl1lyeabmrdst"]
+[gd_scene load_steps=33 format=3 uid="uid://cl1lyeabmrdst"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship-2/demo_ship_2.gd" id="1_gtrcu"]
 [ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://scenes/vehicles/starships/demo-ship-2/fighter_gen_7_model.tscn" id="2_qgepc"]
@@ -107,6 +107,18 @@ emission_energy_multiplier = 16.0
 [sub_resource type="BoxMesh" id="BoxMesh_6rljf"]
 material = SubResource("StandardMaterial3D_f4xyx")
 size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l5n4r"]
+viewport_path = NodePath("HealthVP")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_avgff"]
+viewport_path = NodePath("EnemyVP")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_odes3"]
+viewport_path = NodePath("SpeepVP")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6425q"]
+viewport_path = NodePath("ThrottleVP")
 
 [node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("hardpoint_1", "hardpoint_2", "hardpoint_3", "hardpoint_4", "explosion", "anchor")]
 collision_layer = 515
@@ -321,12 +333,20 @@ starship = NodePath("..")
 
 [node name="HealthUI" parent="ShipUi" index="4"]
 transform = Transform3D(-0.379869, 0, -0.167107, 0, 0.415, 0, 0.167107, 0, -0.379869, -0.152678, -1.44289, -0.386619)
+texture = SubResource("ViewportTexture_l5n4r")
+
+[node name="EnemyUI" parent="ShipUi/HealthUI" index="0"]
+texture = SubResource("ViewportTexture_avgff")
 
 [node name="SpeedUI" parent="ShipUi" index="5"]
 transform = Transform3D(-0.347257, 0, 0.227239, 0, 0.415, 0, -0.227239, 0, -0.347257, -0.953888, -1.45347, -1.00798)
+texture = SubResource("ViewportTexture_odes3")
+
+[node name="ThrottleUI" parent="ShipUi/SpeedUI" index="0"]
+texture = SubResource("ViewportTexture_6425q")
 
 [node name="Crosshair" parent="ShipUi" index="6"]
-transform = Transform3D(1.775, 0, 0, 0, 1.775, 0, 0, 0, 1.775, 0, -0.068533, 0)
+transform = Transform3D(1.775, 0, 0, 0, 1.775, 0, 0, 0, 1.775, 0, 0, 0)
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 

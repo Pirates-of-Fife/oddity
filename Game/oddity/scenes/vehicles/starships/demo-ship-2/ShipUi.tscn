@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0uh2hkiwvx7l"]
+
+[ext_resource type="StyleBox" path="res://scenes/vehicles/starships/demo-ship-2/BarBackgroundStyle.tres" id="1_3371h"]
+[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship-2/ship_ui.gd" id="1_e8edl"]
+[ext_resource type="StyleBox" uid="uid://dtmoptgegcf03" path="res://scenes/vehicles/starships/demo-ship-2/BarFillStyle.tres" id="2_yta0p"]
+[ext_resource type="PackedScene" uid="uid://cr7t8smpohmy4" path="res://scenes/vehicles/starships/demo-ship-2/Crosshair/crosshair.tscn" id="4_caj1d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05k77"]
+bg_color = Color(0.73054, 0.146959, 0.224508, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xls0p"]
+bg_color = Color(0.0576443, 0.678744, 0.669937, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kcf8f"]
+viewport_path = NodePath("HealthVP")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_y6bqg"]
+viewport_path = NodePath("EnemyVP")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h8ehj"]
+viewport_path = NodePath("SpeepVP")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ahbsr"]
+viewport_path = NodePath("ThrottleVP")
+
+[node name="ShipUi" type="Node3D" node_paths=PackedStringArray("health_bar", "enemy_health_bar", "throttle_bar", "speed_bar", "crosshair")]
+script = ExtResource("1_e8edl")
+health_bar = NodePath("HealthVP/Control/ProgressBar")
+enemy_health_bar = NodePath("EnemyVP/Control/ProgressBar")
+throttle_bar = NodePath("ThrottleVP/Control/ProgressBar")
+speed_bar = NodePath("SpeepVP/Control/ProgressBar")
+crosshair = NodePath("Crosshair")
+
+[node name="HealthVP" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Control" type="Control" parent="HealthVP"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthVP/Control"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 50.0
+theme_override_styles/background = ExtResource("1_3371h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_05k77")
+value = 50.0
+show_percentage = false
+
+[node name="EnemyVP" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Control" type="Control" parent="EnemyVP"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="EnemyVP/Control"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 10.0
+theme_override_styles/background = ExtResource("1_3371h")
+theme_override_styles/fill = ExtResource("2_yta0p")
+value = 50.0
+show_percentage = false
+
+[node name="ThrottleVP" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Control" type="Control" parent="ThrottleVP"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="ThrottleVP/Control"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 10.0
+theme_override_styles/background = ExtResource("1_3371h")
+theme_override_styles/fill = ExtResource("2_yta0p")
+value = 50.0
+show_percentage = false
+
+[node name="SpeepVP" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Control" type="Control" parent="SpeepVP"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="SpeepVP/Control"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 50.0
+theme_override_styles/background = ExtResource("1_3371h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xls0p")
+value = 50.0
+show_percentage = false
+
+[node name="HealthUI" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54552, -0.710946, 0)
+texture = SubResource("ViewportTexture_kcf8f")
+
+[node name="EnemyUI" type="Sprite3D" parent="HealthUI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00255757, -0.551865, 0)
+texture = SubResource("ViewportTexture_y6bqg")
+
+[node name="SpeedUI" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3912, -0.659807, 0)
+texture = SubResource("ViewportTexture_h8ehj")
+
+[node name="ThrottleUI" type="Sprite3D" parent="SpeedUI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000680571, -0.563149, 0)
+texture = SubResource("ViewportTexture_ahbsr")
+
+[node name="Crosshair" parent="." instance=ExtResource("4_caj1d")]
