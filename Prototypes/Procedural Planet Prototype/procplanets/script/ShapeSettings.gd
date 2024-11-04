@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 class_name ShapeSettings
 
 @export var planet_radius: float = 1.0

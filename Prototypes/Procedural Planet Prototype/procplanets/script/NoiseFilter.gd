@@ -1,14 +1,14 @@
-extends Node
+extends Node3D
 
 class_name NoiseFilter
 
 var settings: NoiseSettings
-var noise: SimplexNoise
+var noise: MyNoise
 
 # Constructor for the NoiseFilter class
 func _init(settings: NoiseSettings):
 	self.settings = settings
-	noise = SimplexNoise.new()  # Create an instance of the SimplexNoise class
+	noise = MyNoise.new()  # Create an instance of the SimplexNoise class
 
 # Evaluate noise based on a 3D point
 func evaluate(point: Vector3) -> float:
