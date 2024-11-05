@@ -13,7 +13,7 @@ height = 1.6
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_tg1nt"]
 height = 1.6
 
-[node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+[node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("grounded_marker", "anchor")]
 collision_layer = 268436993
 collision_mask = 268436993
 axis_lock_angular_y = true
@@ -23,6 +23,8 @@ continuous_cd = true
 linear_damp = 5.0
 angular_damp = 10.0
 script = ExtResource("1_8w455")
+grounded_marker = NodePath("Marker3D")
+valid_ground_layers = 1537
 controller_reference = "res://classes/controller/creature-controller/CreatureController.tscn"
 anchor = NodePath("Anchor")
 
@@ -38,3 +40,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47027, 0)
 enable_pitch_limit = true
 pitch_limit = 90.0
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28881, 0)
+gizmo_extents = 1.06
