@@ -84,20 +84,20 @@ func get_component_size(size: ComponentSize) -> Vector3:
 # Function to get hardpoint size dimensions
 func get_hardpoint_size(size: HardpointSize) -> Vector3:
 	match size:
-		HardpointSize.SIZE_0: return Vector3(0.25, 0.5, 0.25)
-		HardpointSize.SIZE_1: return Vector3(0.35, 0.7, 0.35)
-		HardpointSize.SIZE_2: return Vector3(0.5, 1, 0.5)
-		HardpointSize.SIZE_3: return Vector3(0.7, 1.5, 0.7)
-		HardpointSize.SIZE_4: return Vector3(1, 2, 1)
-		HardpointSize.SIZE_5: return Vector3(2, 4, 2)
-		HardpointSize.SIZE_6: return Vector3(3, 6, 3)
-		HardpointSize.SIZE_7: return Vector3(4, 8, 4)
-		HardpointSize.SIZE_8: return Vector3(5, 10, 5)
-		HardpointSize.SIZE_9: return Vector3(6, 12, 6)
-		HardpointSize.SIZE_10: return Vector3(7, 14, 7)
-		HardpointSize.SIZE_11: return Vector3(8, 16, 8)
-		HardpointSize.SIZE_12: return Vector3(9, 18, 9)
-		HardpointSize.SIZE_13: return Vector3(10, 20, 10)
+		HardpointSize.SIZE_0: return Vector3(0.25, 0.25, 0.5)
+		HardpointSize.SIZE_1: return Vector3(0.35, 0.35, 0.7)
+		HardpointSize.SIZE_2: return Vector3(0.5, 0.5, 1)
+		HardpointSize.SIZE_3: return Vector3(0.7, 0.7, 1.5)
+		HardpointSize.SIZE_4: return Vector3(1, 1, 2)
+		HardpointSize.SIZE_5: return Vector3(2, 2, 4)
+		HardpointSize.SIZE_6: return Vector3(3, 3, 6)
+		HardpointSize.SIZE_7: return Vector3(4, 4, 8)
+		HardpointSize.SIZE_8: return Vector3(5, 5, 10)
+		HardpointSize.SIZE_9: return Vector3(6, 6, 12)
+		HardpointSize.SIZE_10: return Vector3(7, 7, 14)
+		HardpointSize.SIZE_11: return Vector3(8, 8, 16)
+		HardpointSize.SIZE_12: return Vector3(9, 9, 18)
+		HardpointSize.SIZE_13: return Vector3(10, 10, 20)
 		_ : return Vector3.ZERO
 
 func get_abyssal_jump_drive_size(size: AbyssalJumpDriveSize) -> Vector3:
