@@ -36,7 +36,10 @@ func apply_gravity() -> void:
 				body.relative_gravity_direction = gravity_direction * body.global_basis.inverse()
 				body.gravity_strength = gravity
 			
-			body.apply_central_force(gravity_direction * 9.8 * gravity_strength * body.mass)
+			if body is Creature:
+				body.apply_central_force(gravity_direction * 9.8 * gravity_strength * 2 * body.mass)
+			else:
+				body.apply_central_force(gravity_direction * 9.8 * gravity_strength * body.mass)
 
 func set_local_gravity_direction() -> void:
 	gravity_direction = -global_transform.basis.y
