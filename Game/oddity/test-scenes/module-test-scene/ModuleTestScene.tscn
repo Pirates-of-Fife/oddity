@@ -115,6 +115,7 @@ shape = SubResource("BoxShape3D_jmku8")
 
 [node name="Creature" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("3_vf2my")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7802, 1.86205e-07, 2.56697)
+valid_ground_layers = 0
 pick_up_distance = 3.0
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("4_a6xkd")]

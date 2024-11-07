@@ -6,13 +6,16 @@ class_name Creature
 
 @export_category("Movement")
 @export
-var walk_force : float = 1000
+var walk_speed : float = 3
 
 @export
-var run_multiplier : float = 4
+var walk_force : float = 500
 
 @export
-var jump_force : float = 400
+var run_multiplier : float = 2
+
+@export
+var jump_force : float = 500
 
 @export
 var grounded_marker : Marker3D
@@ -69,6 +72,20 @@ var stand_up_shape_cast : ShapeCast3D
 
 var is_on_ground : bool
 
+@export_category("Damping")
+
+@export
+var ground_walk_damp : float = 10
+
+@export
+var fall_damp : float = 0
+
+@export
+var zero_g_damp : float = 0
+
+@export
+var zero_g_overspeed_damp : float = 10
+
 func _ready() -> void:
 	_default_ready()
 	
@@ -77,15 +94,36 @@ func _ready() -> void:
 	ground_shape_cast.add_exception(self)
 	stand_up_shape_cast.add_exception(self)
 
-
 func fall_timer_timeout() -> void:
 	if !is_grounded():
 		is_falling = true
 
 func _physics_process(delta : float) -> void:
+	creature_physics_process(delta)
+
+func creature_physics_process(delta : float) -> void:
 	_default_physics_process(delta)
 	
 	is_on_ground = is_grounded()
+	
+	if !is_in_gravity():
+		is_falling = false
+		linear_damp = fall_damp
+	else:
+		linear_damp = ground_walk_damp
+	
+	if (is_falling):
+		linear_damp = fall_damp
+	elif (!is_on_ground):
+		linear_damp = 0
+	elif is_in_gravity():
+		linear_damp = ground_walk_damp
+	
+	if relative_linear_velocity.length() > walk_speed or input_vector == Vector3.ZERO:
+		if is_on_ground:
+			linear_damp = ground_walk_damp
+	else:
+		linear_damp = fall_damp
 	
 	var multiplier : float = 1
 	
@@ -94,16 +132,16 @@ func _physics_process(delta : float) -> void:
 	
 	var direction : Vector3 = (anchor.twist_pivot.global_transform.basis * input_vector).normalized()
 
-	if !is_falling:
+	if is_on_ground and is_in_gravity():
 		apply_central_force(direction * walk_force * multiplier)
-		
+	
 	keep_upright(delta)
 	
 	if (game_entity_being_picked_up != null):
 		pick_up(game_entity_being_picked_up, delta)
 		
 	is_running = false
-
+	
 func move(input_dir : Vector2) -> void:
 	input_vector = Vector3(input_dir.x, 0, input_dir.y)
 
@@ -183,6 +221,9 @@ func keep_upright(delta: float) -> void:
 		return
 		
 	if is_falling:
+		return
+		
+	if !is_on_ground and !stand_up_shape_cast.is_colliding():
 		return
 	
 	var current_up: Vector3 = global_transform.basis.y

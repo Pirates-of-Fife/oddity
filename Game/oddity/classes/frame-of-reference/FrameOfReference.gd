@@ -133,3 +133,4 @@ func body_exited(body : Node3D) -> void:
 		bodies_in_reference_frame.erase(body)
 		body.in_frame_of_references.erase(self)
 		body.evaluate_active_frame_of_reference()
+		print(body)
