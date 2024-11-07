@@ -30,7 +30,11 @@ var pick_up_distance : float = 1
 
 var game_entity_being_picked_up : GameEntity
 
-@export_category("PID Settings")
+@export_category("Keep Upright")
+
+@export
+var fall_timer : Timer
+
 @export
 var upright_force_p : float = 110.0  # Proportional gain
 
@@ -55,13 +59,33 @@ var raycast_helper : RaycastHelper = RaycastHelper.new()
 
 var is_running : bool = false
 
+var is_falling : bool = false
+
+@export
+var ground_shape_cast : ShapeCast3D
+
+@export
+var stand_up_shape_cast : ShapeCast3D
+
+var is_on_ground : bool
+
 func _ready() -> void:
 	_default_ready()
 	
+	fall_timer.timeout.connect(fall_timer_timeout)
 	can_freeze = false
+	ground_shape_cast.add_exception(self)
+	stand_up_shape_cast.add_exception(self)
+
+
+func fall_timer_timeout() -> void:
+	if !is_grounded():
+		is_falling = true
 
 func _physics_process(delta : float) -> void:
 	_default_physics_process(delta)
+	
+	is_on_ground = is_grounded()
 	
 	var multiplier : float = 1
 	
@@ -70,8 +94,9 @@ func _physics_process(delta : float) -> void:
 	
 	var direction : Vector3 = (anchor.twist_pivot.global_transform.basis * input_vector).normalized()
 
-	apply_central_force(direction * walk_force * multiplier)
-	
+	if !is_falling:
+		apply_central_force(direction * walk_force * multiplier)
+		
 	keep_upright(delta)
 	
 	if (game_entity_being_picked_up != null):
@@ -89,15 +114,27 @@ func run() -> void:
 	is_running = true
 
 func jump() -> void:
-	if is_in_gravity() and is_grounded():
+	if is_in_gravity() and is_on_ground:
 		apply_central_impulse(global_transform.basis.y * jump_force)
 
 func is_grounded() -> bool:
-	var raycast_result : Dictionary = raycast_helper.cast_downwards_raycast(grounded_marker, 0.15, self, valid_ground_layers)
-	
-	if raycast_result.size() > 0:
+	if ground_shape_cast.is_colliding():
+		is_falling = false
 		return true
+	
+	if stand_up_shape_cast.is_colliding():
+		is_falling = false
+		return false
 		
+#	var raycast_result : Dictionary = raycast_helper.cast_downwards_raycast(grounded_marker, 0.15, self, valid_ground_layers)
+	
+	#if raycast_result.size() > 0:
+	#	is_falling = false
+	#	return true
+	
+	if fall_timer.is_stopped():
+		fall_timer.start()
+	
 	return false
 	
 func is_in_gravity() -> bool:
@@ -143,6 +180,9 @@ func drop() -> void:
 	
 func keep_upright(delta: float) -> void:
 	if !is_in_gravity():
+		return
+		
+	if is_falling:
 		return
 	
 	var current_up: Vector3 = global_transform.basis.y
