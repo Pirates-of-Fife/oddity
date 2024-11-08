@@ -86,13 +86,18 @@ var zero_g_damp : float = 0
 @export
 var zero_g_overspeed_damp : float = 10
 
+var orignal_collision_shape : Shape3D
+
 func _ready() -> void:
+	creature_ready()
+
+func creature_ready() -> void:
 	_default_ready()
-	
 	fall_timer.timeout.connect(fall_timer_timeout)
 	can_freeze = false
 	ground_shape_cast.add_exception(self)
 	stand_up_shape_cast.add_exception(self)
+	orignal_collision_shape = $CollisionShape3D.shape
 
 func fall_timer_timeout() -> void:
 	if !is_grounded():
@@ -141,6 +146,12 @@ func creature_physics_process(delta : float) -> void:
 	
 	if (game_entity_being_picked_up != null):
 		pick_up(game_entity_being_picked_up, delta)
+		
+	if !is_in_gravity():
+		$CollisionShape3D.shape = SphereShape3D.new()
+		($CollisionShape3D.shape as SphereShape3D).radius = 0.4
+	else:
+		$CollisionShape3D.shape = orignal_collision_shape
 		
 	is_running = false
 		
