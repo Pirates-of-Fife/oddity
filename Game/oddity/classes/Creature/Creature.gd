@@ -12,10 +12,10 @@ var walk_speed : float = 3
 var walk_force : float = 500
 
 @export
-var run_multiplier : float = 3
+var run_multiplier : float = 1.8
 
 @export
-var jump_force : float = 500
+var jump_force : float = 450
 
 @export
 var grounded_marker : Marker3D
@@ -118,17 +118,19 @@ func creature_physics_process(delta : float) -> void:
 		linear_damp = 0
 	elif is_in_gravity():
 		linear_damp = ground_walk_damp
+		
+	var multiplier : float = 1
 	
-	if relative_linear_velocity.length() > walk_speed or input_vector == Vector3.ZERO:
+	if is_running == true:
+		multiplier = run_multiplier
+		
+	if relative_linear_velocity.length() > walk_speed * multiplier or input_vector == Vector3.ZERO:
 		if is_on_ground:
 			linear_damp = ground_walk_damp
 	else:
 		linear_damp = fall_damp
 	
-	var multiplier : float = 1
-	
-	if is_running == true:
-		multiplier = run_multiplier
+
 	
 	var direction : Vector3 = (anchor.twist_pivot.global_transform.basis * input_vector).normalized()
 	
