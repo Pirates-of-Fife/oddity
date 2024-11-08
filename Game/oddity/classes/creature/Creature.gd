@@ -12,7 +12,7 @@ var walk_speed : float = 3
 var walk_force : float = 500
 
 @export
-var run_multiplier : float = 2
+var run_multiplier : float = 3
 
 @export
 var jump_force : float = 500
@@ -131,7 +131,7 @@ func creature_physics_process(delta : float) -> void:
 		multiplier = run_multiplier
 	
 	var direction : Vector3 = (anchor.twist_pivot.global_transform.basis * input_vector).normalized()
-
+	
 	if is_on_ground and is_in_gravity():
 		apply_central_force(direction * walk_force * multiplier)
 	
@@ -141,9 +141,10 @@ func creature_physics_process(delta : float) -> void:
 		pick_up(game_entity_being_picked_up, delta)
 		
 	is_running = false
-	
+		
 func move(input_dir : Vector2) -> void:
 	input_vector = Vector3(input_dir.x, 0, input_dir.y)
+
 
 func look(twist_input : float, pitch_input : float) -> void:
 	anchor.look(twist_input, pitch_input)
