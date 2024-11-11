@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=40 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/temp-planet.gd" id="10_x2ly6"]
 [ext_resource type="PackedScene" uid="uid://clnked1cnk5p0" path="res://scenes/modules/test-module/test-module.tscn" id="12_ugjym"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="13_h4u2q"]
+[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
 [ext_resource type="PackedScene" uid="uid://behanbk2jf42k" path="res://classes/game-entity/static-game-entity/openable/DemoOpenableManual.tscn" id="15_n2ehj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj070"]
@@ -23,8 +24,8 @@ shader_parameter/sky_color = Color(0, 0, 0, 1)
 shader_parameter/star_base_color = Color(1, 0.92549, 0.945098, 1)
 shader_parameter/star_hue_offset = 0.918
 shader_parameter/star_intensity = 0.149
-shader_parameter/star_twinkle_speed = 0.627
-shader_parameter/star_twinkle_intensity = 0.138
+shader_parameter/star_twinkle_speed = 0.169
+shader_parameter/star_twinkle_intensity = 0.055
 shader_parameter/layer_scale = 48.889
 shader_parameter/layer_scale_step = 6.049
 shader_parameter/layers_count = 3
@@ -162,6 +163,7 @@ transform = Transform3D(34, 0, 0, 0, 34, 0, 0, 0, 34, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_c7r4v")
 
 [node name="GravityGrid" type="Area3D" parent="SubViewportContainer/SubViewport/World/Plane/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58671, 0, 0)
 script = ExtResource("1_q0ntb")
 frame_of_reference_name = "World"
 size = 5
@@ -171,7 +173,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 233.341, 0)
 shape = SubResource("BoxShape3D_42qyo")
 
 [node name="Interactable" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/Plane"]
-transform = Transform3D(0.818832, 0, 0.574034, 0, 1, 0, -0.574034, 0, 0.818832, 0, 0.482468, 16.1805)
+transform = Transform3D(0.818832, 0, 0.574034, 0, 1, 0, -0.574034, 0, 0.818832, 239.155, 0.482468, 16.1805)
 collision_layer = 536870913
 script = ExtResource("3_qr0f7")
 
@@ -187,7 +189,7 @@ billboard = 2
 text = "Press 'F' !"
 
 [node name="Interaction Target" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/Plane"]
-transform = Transform3D(-0.906241, 0, 0.422761, 0, 1, 0, -0.422761, 0, -0.906241, -1.79237, 0.532455, 17.3196)
+transform = Transform3D(-0.906241, 0, 0.422761, 0, 1, 0, -0.422761, 0, -0.906241, 237.363, 0.532455, 17.3196)
 script = ExtResource("4_i5a5r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Plane/Interaction Target"]
@@ -208,7 +210,7 @@ libraries = {
 }
 
 [node name="DemoOpenable" parent="SubViewportContainer/SubViewport/World/Plane" instance=ExtResource("6_sot4v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2547, 0.179921, 30.4185)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224.901, 0.179921, 30.4185)
 
 [node name="Cubes" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(2.855, 0, 0, 0, 2.855, 0, 0, 0, 2.855, 55.8822, 0, 112.978)
@@ -310,10 +312,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_insp3")
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("2_fb43t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07854, -0.609585)
-control_entity = NodePath("../Creature")
+control_entity = NodePath("../Humanoid")
 
 [node name="PickThisBallUp" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88956, -115.849, 307.351)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 236.266, -115.849, 307.351)
 collision_layer = 536872449
 collision_mask = 536872449
 mass = 5.0
@@ -327,7 +329,7 @@ mesh = SubResource("SphereMesh_b3pti")
 shape = SubResource("ConvexPolygonShape3D_65ety")
 
 [node name="PickThisBallUp3" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25201, -115.849, 307.351)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 237.903, -115.849, 307.351)
 collision_layer = 536872449
 collision_mask = 536872449
 mass = 50.0
@@ -657,7 +659,7 @@ skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_insp3")
 
 [node name="Controls" type="Label3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76575, -117.702, 310.097)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240.921, -117.702, 310.097)
 billboard = 2
 text = "Use WASD to move
 Space to jump
@@ -672,15 +674,18 @@ Q - E : Roll
 Mouse : Yaw and Pitch "
 
 [node name="Creature" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("6_nbteu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.17941, -119.44, 312.88)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 233.976, -118.131, 312.88)
 interaction_length = 5.0
 pick_up_distance = 2.235
 
+[node name="Humanoid" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("13_jtbi5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 236.991, -118.131, 310.467)
+
 [node name="DemoOpenableManual" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_n2ehj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1021, -119.44, 323.643)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 218.053, -119.44, 323.643)
 
 [node name="PickThisBallUp2" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.07269, -115.849, 307.351)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 234.083, -115.849, 307.351)
 collision_layer = 536872449
 collision_mask = 536872449
 mass = 5.0
@@ -694,13 +699,12 @@ mesh = SubResource("SphereMesh_b3pti")
 shape = SubResource("ConvexPolygonShape3D_65ety")
 
 [node name="Test-module" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("12_ugjym")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.232001, -118.346, 309.245)
-size = 0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 239.387, -118.346, 309.245)
 
 [node name="DemoShip2" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("13_h4u2q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7947, -115.442, 312.334)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224.361, -115.442, 312.334)
 
 [node name="DemoShip" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("4_efvbd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17047, -119.44, 323.852)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240.326, -119.44, 323.852)
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]

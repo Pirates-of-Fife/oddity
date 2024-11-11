@@ -1,0 +1,3 @@
+extends HumanoidCommand
+
+class_name HumanoidEvaMovementCommand
