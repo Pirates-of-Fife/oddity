@@ -150,9 +150,12 @@ func creature_physics_process(delta : float) -> void:
 	if !is_in_gravity():
 		$CollisionShape3D.shape = SphereShape3D.new()
 		($CollisionShape3D.shape as SphereShape3D).radius = 0.4
+		$CollisionShape3D.position.y = 0.4
 	else:
 		$CollisionShape3D.shape = orignal_collision_shape
-		
+		$CollisionShape3D.position.y = 0
+
+	
 	is_running = false
 		
 func move(input_dir : Vector2) -> void:

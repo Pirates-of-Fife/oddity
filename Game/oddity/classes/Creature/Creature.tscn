@@ -38,7 +38,6 @@ controller_reference = "res://classes/controller/creature-controller/CreatureCon
 anchor = NodePath("Anchor")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_vlfjs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
@@ -46,26 +45,26 @@ mesh = SubResource("CapsuleMesh_tg1nt")
 skeleton = NodePath("../..")
 
 [node name="Anchor" parent="." instance=ExtResource("2_2yapl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47027, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 0)
 enable_pitch_limit = true
 pitch_limit = 90.0
-
-[node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28881, 0)
-gizmo_extents = 1.06
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
 one_shot = true
 
 [node name="ground_cast" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40148, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40148, 0)
 shape = SubResource("SphereShape3D_cpjnt")
 collision_mask = 525825
 debug_shape_custom_color = Color(0, 0.67451, 0, 1)
 
 [node name="stand_up_cast" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.03265, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03265, 0)
 shape = SubResource("CapsuleShape3D_m4mvs")
 collision_mask = 525825
 debug_shape_custom_color = Color(0, 0.67451, 0, 1)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.71119, 0)
+gizmo_extents = 1.06
