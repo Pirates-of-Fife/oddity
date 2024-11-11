@@ -10,3 +10,17 @@ func _process(delta: float) -> void:
 		$AnimationPlayer.play("start")
 		started = true
 		animation_started.emit()
+		$Click2.play()
+
+func press_sound() -> void:
+	$ButtonClick.play()
+
+func _on_start_button_pressed() -> void:
+	press_sound()
+
+func _on_credits_button_pressed() -> void:
+	press_sound()
+
+
+func _on_exit_button_pressed() -> void:
+	press_sound()

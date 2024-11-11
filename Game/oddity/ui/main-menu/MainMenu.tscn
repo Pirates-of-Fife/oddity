@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfq2dmul5f7a8"]
+[gd_scene load_steps=9 format=3 uid="uid://dfq2dmul5f7a8"]
 
 [ext_resource type="Script" path="res://ui/main-menu/main_menu.gd" id="1_74355"]
 [ext_resource type="PackedScene" uid="uid://ba5evvevagnhw" path="res://ui/main-menu/MainMenuUI.tscn" id="1_gwx8j"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="2_1i8r8"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="3_mm0d4"]
+[ext_resource type="AudioStream" uid="uid://dwqa2b7x6amg0" path="res://ui/main-menu/sounds/MainMenu.wav" id="5_ra1n2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pcbll"]
 shader = ExtResource("3_mm0d4")
@@ -73,6 +74,10 @@ environment = SubResource("Environment_8l6ma")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ra1n2")
+autoplay = true
 
 [connection signal="animation_started" from="SubViewportContainer/MainMenuUi" to="." method="_on_main_menu_ui_animation_started"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
