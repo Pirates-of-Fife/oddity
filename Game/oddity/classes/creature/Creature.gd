@@ -2,8 +2,6 @@ extends ControlEntity
 
 class_name Creature
 
-# WARNING: TEMPORARY CODE #
-
 @export_category("Movement")
 @export
 var walk_speed : float = 3
@@ -19,9 +17,6 @@ var jump_force : float = 450
 
 @export
 var grounded_marker : Marker3D
-
-@export_flags_3d_physics
-var valid_ground_layers : int
 
 @export_category("Interaction")
 
@@ -51,18 +46,11 @@ var upright_integral : float = 0.0
 
 var last_tilt_angle : float = 0.0
 
-# Other variables for applying force
 var last_time : float = 0.0
 
 var upright_direction : Vector3 = Vector3.UP
 
 var input_vector : Vector3
-
-var raycast_helper : RaycastHelper = RaycastHelper.new()
-
-var is_running : bool = false
-
-var is_falling : bool = false
 
 @export
 var ground_shape_cast : ShapeCast3D
@@ -85,6 +73,13 @@ var zero_g_damp : float = 0
 
 @export
 var zero_g_overspeed_damp : float = 10
+
+
+var raycast_helper : RaycastHelper = RaycastHelper.new()
+
+var is_running : bool = false
+
+var is_falling : bool = false
 
 var orignal_collision_shape : Shape3D
 
@@ -111,12 +106,16 @@ func creature_physics_process(delta : float) -> void:
 	
 	is_on_ground = is_grounded()
 	
+	# INFO The damping code is a bit confusing and definetely is gonna need an overhaul in the future
+	
+	# reduce damping if not in gravity
 	if !is_in_gravity():
 		is_falling = false
 		linear_damp = fall_damp
 	else:
 		linear_damp = ground_walk_damp
 	
+	# reduce damping if falling or not on the ground
 	if (is_falling):
 		linear_damp = fall_damp
 	elif (!is_on_ground):
@@ -128,14 +127,13 @@ func creature_physics_process(delta : float) -> void:
 	
 	if is_running == true:
 		multiplier = run_multiplier
-		
+	
+	# if on ground and walking use walk damp
 	if relative_linear_velocity.length() > walk_speed * multiplier or input_vector == Vector3.ZERO:
 		if is_on_ground:
 			linear_damp = ground_walk_damp
 	else:
 		linear_damp = fall_damp
-	
-
 	
 	var direction : Vector3 = (anchor.twist_pivot.global_transform.basis * input_vector).normalized()
 	
@@ -146,7 +144,8 @@ func creature_physics_process(delta : float) -> void:
 	
 	if (game_entity_being_picked_up != null):
 		pick_up(game_entity_being_picked_up, delta)
-		
+	
+	# reduce size of collision shape if in zero-g environment
 	if !is_in_gravity():
 		$CollisionShape3D.shape = SphereShape3D.new()
 		($CollisionShape3D.shape as SphereShape3D).radius = 0.4
@@ -180,12 +179,6 @@ func is_grounded() -> bool:
 	if stand_up_shape_cast.is_colliding():
 		is_falling = false
 		return false
-		
-#	var raycast_result : Dictionary = raycast_helper.cast_downwards_raycast(grounded_marker, 0.15, self, valid_ground_layers)
-	
-	#if raycast_result.size() > 0:
-	#	is_falling = false
-	#	return true
 	
 	if fall_timer.is_stopped():
 		fall_timer.start()

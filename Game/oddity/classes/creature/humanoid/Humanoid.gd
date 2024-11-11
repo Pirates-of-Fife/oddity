@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 func humanoid_physics_process(delta : float) -> void:
 	creature_physics_process(delta)
 	
-	if !is_in_gravity() and can_eva:		
+	if !is_in_gravity() and can_eva:
 		if relative_linear_velocity.length() > eva_speed:
 			linear_damp = zero_g_overspeed_damp
 		else:
