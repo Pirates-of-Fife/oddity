@@ -12,8 +12,8 @@ config_version=5
 
 config/name="Oddity"
 config/tags=PackedStringArray("oddity")
-run/main_scene="res://test-scenes/ShipTestScene/ShipTestScene.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="res://ui/main-menu/MainMenu.tscn"
+config/features=PackedStringArray("4.3", "Double Precision", "Forward Plus")
 boot_splash/image="res://project-images/OddityLogo-05.png"
 config/icon="res://project-images/OddityLogo-02.png"
 
@@ -38,14 +38,46 @@ gdscript/warnings/function_used_as_property=2
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/size/mode=3
+window/size/viewport_width=960
+window/size/viewport_height=540
 window/stretch/mode="viewport"
 
 [dotnet]
 
 project/assembly_name="Oddity"
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://classes/": "red",
+"res://classes/command/": "pink",
+"res://classes/controller/": "green",
+"res://classes/creature/": "orange",
+"res://classes/frame-of-reference/": "blue",
+"res://classes/game-entity/": "orange",
+"res://classes/interactable/": "orange",
+"res://classes/module/": "teal",
+"res://classes/pid-controller/": "gray",
+"res://classes/player/": "yellow",
+"res://classes/starship/": "orange",
+"res://classes/vehicle/": "orange",
+"res://project-images/": "blue",
+"res://resources/": "pink",
+"res://scenes/": "purple",
+"res://shaders/": "yellow",
+"res://test-scenes/": "green",
+"res://ui/": "pink"
+}
+
+[global_group]
+
+World=""
+ComponentSlot="A component slot"
+Hardpoint="A hardpoint"
+InteriorModuleSlot=""
+ExteriorModuleSlot=""
+ControlSeat="Control seat for a vehicle"
 
 [input]
 
@@ -142,12 +174,59 @@ starship_rotate_pitch_down={
 "deadzone": 0.5,
 "events": []
 }
+vehicle_exit_seat={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":75,"key_label":0,"unicode":107,"location":0,"echo":false,"script":null)
+]
+}
+humanoid_eva_forwards={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+]
+}
+humanoid_eva_backwards={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+]
+}
+humanoid_eva_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
+]
+}
+humanoid_eva_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
+]
+}
+humanoid_eva_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
+]
+}
+humanoid_eva_down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+humanoid_eva_roll_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":81,"key_label":0,"unicode":113,"location":0,"echo":false,"script":null)
+]
+}
+humanoid_eva_roll_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
 3d_physics/layer_1="Common"
 3d_physics/layer_10="Ship Exterior"
 3d_physics/layer_11="Ship Interior"
+3d_physics/layer_20="Module"
+3d_physics/layer_29="OpenableDetection"
 3d_physics/layer_30="Interactable"
 
 [physics]
@@ -165,6 +244,7 @@ jolt_3d/limits/max_temporary_memory=64
 
 textures/canvas_textures/default_texture_filter=3
 global_illumination/voxel_gi/quality=1
+limits/global_shader_variables/buffer_size=1048576
 anti_aliasing/quality/msaa_2d=3
 anti_aliasing/quality/msaa_3d=3
 anti_aliasing/quality/screen_space_aa=1
