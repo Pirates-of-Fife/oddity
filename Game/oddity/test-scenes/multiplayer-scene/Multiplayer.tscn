@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cr8ergd0avfvd"]
+[gd_scene load_steps=40 format=3 uid="uid://cr8ergd0avfvd"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_dg08i"]
 [ext_resource type="Script" path="res://test-scenes/multiplayer-scene/MultiplayerScene.gd" id="1_trc7v"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="5_dvi61"]
 [ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="7_xtd7q"]
 [ext_resource type="PackedScene" uid="uid://b2tfu5br2gx5u" path="res://test-scenes/multiplayer-scene/ring.tscn" id="8_6rxcf"]
+[ext_resource type="Script" path="res://test-scenes/multiplayer-scene/ring.gd" id="9_w6qws"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xrdnv"]
 size = Vector3(20, 20, 20)
@@ -134,6 +135,9 @@ emission_energy_multiplier = 16.0
 distance_fade_mode = 2
 distance_fade_min_distance = 100.0
 distance_fade_max_distance = 350.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gx43"]
+size = Vector3(19.635, 51.365, 51.935)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mchba"]
 shader = ExtResource("2_o68hd")
@@ -686,6 +690,7 @@ mesh = SubResource("BoxMesh_kxdow")
 
 [node name="ring" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("8_6rxcf")]
 transform = Transform3D(9.78893, 0, 6.94096, 0, 12, 0, -6.94096, 0, 9.78893, 2026.87, 140.556, -1065.28)
+script = ExtResource("9_w6qws")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewportContainer/SubViewport/World/ring"]
 transform = Transform3D(0.00380481, 0, 0.999993, 0, 1, 0, -0.999993, 0, 0.00380481, 0, 0, 0)
@@ -701,6 +706,11 @@ transform = Transform3D(0.00287086, -0.997168, -0.0751499, 0.577263, 0.063017, -
 mesh = SubResource("CylinderMesh_a0sra")
 surface_material_override/0 = SubResource("StandardMaterial3D_vpsh7")
 
+[node name="Area3D" type="Area3D" parent="SubViewportContainer/SubViewport/World/ring"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/ring/Area3D"]
+shape = SubResource("BoxShape3D_3gx43")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)
 light_color = Color(1, 0.912596, 0.841761, 1)
@@ -708,3 +718,5 @@ light_energy = 2.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_e0213")
+
+[connection signal="body_entered" from="SubViewportContainer/SubViewport/World/ring/Area3D" to="SubViewportContainer/SubViewport/World/ring" method="_on_area_3d_body_entered"]

@@ -9,6 +9,9 @@ class_name ThrusterForces
 @export_category("Movement")
 
 @export
+var boost_multiplier : float
+
+@export
 var forward_thrust : float
 
 @export

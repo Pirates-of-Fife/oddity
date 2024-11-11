@@ -20,6 +20,8 @@ var starship_player_interact_command : StarshipPlayerInteractCommand = StarshipP
 
 var starship_shoot_primary_command : StarshipShootPrimaryCommand = StarshipShootPrimaryCommand.new()
 
+var starship_boost_command : StarshipBoostCommand = StarshipBoostCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -96,6 +98,9 @@ func _default_process(delta : float) -> void:
 
 		if (Input.is_action_pressed("starship_rotate_roll_right")):
 			starship_roll_right_command.execute(control_entity, StarshipRollRightCommand.Params.new(Input.get_action_strength("starship_rotate_roll_right")))
+
+		if (Input.is_action_pressed("ship_boost")):
+			starship_boost_command.execute(control_entity)
 
 		# Starship Mouse Pitch
 		

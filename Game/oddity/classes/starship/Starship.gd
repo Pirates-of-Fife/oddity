@@ -5,11 +5,23 @@ extends Vehicle
 
 class_name Starship
 
-@export
-var health : int = 2000
+var can_heal : bool = true
 
 @export
-var max_health : int = 2000
+var health : float = 2000
+
+@export
+var max_health : float = 2000
+
+@export
+var max_heat : float = 200
+
+@export
+var heat : float
+
+var ambiant_heat : float = 30
+
+var heat_decay : float = 3
 
 @export_category("Target Thrust Vector")
 
@@ -120,6 +132,10 @@ var enemy_health : int
 
 var exploded : bool = false
 
+var boosting : bool = false
+
+var current_thrust_multiplier : float = 1
+
 func _ready() -> void:
 	_default_ready()
 	
@@ -158,6 +174,7 @@ func respawn() -> void:
 	if active_control_seat != null:
 		active_control_seat.exit_seat()
 	
+	heat = ambiant_heat
 	health = max_health
 	exploded = false
 	
@@ -174,7 +191,8 @@ func explode() -> void:
 	print("exploded" + str(spawn_pos - explosion.global_position))
 
 @rpc("any_peer", "call_local")
-func damage(dmg : int) -> void:
+func damage(dmg : float) -> void:
+	heat += 0.1
 	health -= dmg
 
 func hit_ship(starship : Starship) -> void:
@@ -182,6 +200,12 @@ func hit_ship(starship : Starship) -> void:
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
+	
+	if global_position.length() > 5000:
+		$Label3D.show()
+		damage.rpc(0.5)
+	else:
+		$Label3D.hide()
 	
 	if health <= 0:
 		explosion_position = global_position
@@ -193,6 +217,11 @@ func _physics_process(delta: float) -> void:
 	if active_control_seat != null and freeze == true:
 		unfreeze()
 	
+	if boosting:
+		heat += 0.9
+		current_thrust_multiplier = thruster_force.boost_multiplier
+	else:
+		current_thrust_multiplier = 1
 	
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
@@ -283,6 +312,11 @@ func _physics_process(delta: float) -> void:
 	reset_thrust_vectors()
 	
 	relative_gravity_vector = Vector3.ZERO
+	
+	boosting = false
+	
+func boost() -> void:
+	boosting = true
 
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
@@ -298,6 +332,7 @@ func shoot_primary() -> void:
 	hardpoint_2.module.shoot.rpc()
 	hardpoint_3.module.shoot.rpc()
 	hardpoint_4.module.shoot.rpc()
+	
 
 
 
@@ -316,6 +351,9 @@ func calculate_local_angular_velocity() -> void:
 	local_angular_velocity = transform.basis.inverse() * angular_velocity
 
 func calculate_target_speed_vector() -> Vector3:
+	if (boosting):
+		return target_thrust_vector * ship_info.max_boost_linear_velocity
+		
 	return target_thrust_vector * ship_info.max_linear_velocity
 
 func calculate_target_rotation_speed_vector() -> Vector3:
@@ -330,51 +368,51 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 #===========================================================================#
 
 func thrust_up(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.up_thrust)  
+	thrust = clampf(thrust, 0, thruster_force.up_thrust) * current_thrust_multiplier
 	actual_thrust_vector.y = thrust
 
 func thrust_down(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.down_thrust)  
+	thrust = clampf(thrust, 0, thruster_force.down_thrust) * current_thrust_multiplier
 	actual_thrust_vector.y = -thrust  
 
 func thrust_forward(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.forward_thrust) 
+	thrust = clampf(thrust, 0, thruster_force.forward_thrust) * current_thrust_multiplier
 	actual_thrust_vector.z = thrust
 
 func thrust_backward(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.backward_thrust) 
+	thrust = clampf(thrust, 0, thruster_force.backward_thrust) * current_thrust_multiplier 
 	actual_thrust_vector.z = -thrust 
 
 func thrust_left(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.left_thrust)  
+	thrust = clampf(thrust, 0, thruster_force.left_thrust) * current_thrust_multiplier  
 	actual_thrust_vector.x = thrust
 
 func thrust_right(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.right_thrust)
+	thrust = clampf(thrust, 0, thruster_force.right_thrust) * current_thrust_multiplier
 	actual_thrust_vector.x = -thrust  
 
 func roll_left(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.roll_left_thrust)  
+	thrust = clampf(thrust, 0, thruster_force.roll_left_thrust) * current_thrust_multiplier  
 	actual_rotation_vector.z = -thrust
 
 func roll_right(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.roll_right_thrust) 
+	thrust = clampf(thrust, 0, thruster_force.roll_right_thrust) * current_thrust_multiplier 
 	actual_rotation_vector.z = thrust
 
 func yaw_left(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.yaw_left_thrust) 
+	thrust = clampf(thrust, 0, thruster_force.yaw_left_thrust) * current_thrust_multiplier 
 	actual_rotation_vector.y = thrust 
 
 func yaw_right(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.yaw_right_thrust)
+	thrust = clampf(thrust, 0, thruster_force.yaw_right_thrust) * current_thrust_multiplier
 	actual_rotation_vector.y = -thrust
 
 func pitch_up(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.pitch_up_thrust)
+	thrust = clampf(thrust, 0, thruster_force.pitch_up_thrust) * current_thrust_multiplier
 	actual_rotation_vector.x = -thrust
 
 func pitch_down(thrust: float) -> void:
-	thrust = clampf(thrust, 0, thruster_force.pitch_down_thrust)
+	thrust = clampf(thrust, 0, thruster_force.pitch_down_thrust) * current_thrust_multiplier
 	actual_rotation_vector.x = thrust
 
 
@@ -382,39 +420,39 @@ func pitch_down(thrust: float) -> void:
 #===========================================================================#
 
 func set_target_thrust_up(thrust : float) -> void:
-	target_thrust_vector.y = thrust
+	target_thrust_vector.y = thrust * current_thrust_multiplier
 
 func set_target_thrust_down(thrust : float) -> void:
-	target_thrust_vector.y = -thrust
+	target_thrust_vector.y = -thrust * current_thrust_multiplier
 	
 func set_target_thrust_left(thrust : float) -> void:
-	target_thrust_vector.x = thrust
+	target_thrust_vector.x = thrust * current_thrust_multiplier
 	
 func set_target_thrust_right(thrust : float) -> void:
-	target_thrust_vector.x = -thrust
+	target_thrust_vector.x = -thrust * current_thrust_multiplier
 
 func set_target_thrust_forward(thrust : float) -> void:
-	target_thrust_vector.z = thrust
+	target_thrust_vector.z = thrust * current_thrust_multiplier
 	thruster.amount_ratio = thrust
 	thruster2.amount_ratio = thrust
 
 func set_target_thrust_backward(thrust : float) -> void:
-	target_thrust_vector.z = -thrust
+	target_thrust_vector.z = -thrust * current_thrust_multiplier
 	
 func set_target_rotation_pitch_up(thrust : float) -> void:
-	target_rotational_thrust_vector.x = thrust
+	target_rotational_thrust_vector.x = thrust * current_thrust_multiplier
 
 func set_target_rotation_pitch_down(thrust : float) -> void:
-	target_rotational_thrust_vector.x = -thrust
+	target_rotational_thrust_vector.x = -thrust * current_thrust_multiplier
 	
 func set_target_rotation_yaw_left(thrust : float) -> void:
-	target_rotational_thrust_vector.y = -thrust
+	target_rotational_thrust_vector.y = -thrust * current_thrust_multiplier
 	
 func set_target_rotation_yaw_right(thrust : float) -> void:
-	target_rotational_thrust_vector.y = thrust
+	target_rotational_thrust_vector.y = thrust * current_thrust_multiplier
 
 func set_target_rotation_roll_left(thrust : float) -> void:
-	target_rotational_thrust_vector.z = -thrust
+	target_rotational_thrust_vector.z = -thrust * current_thrust_multiplier
 
 func set_target_rotation_roll_right(thrust : float) -> void:
-	target_rotational_thrust_vector.z = thrust
+	target_rotational_thrust_vector.z = thrust * current_thrust_multiplier

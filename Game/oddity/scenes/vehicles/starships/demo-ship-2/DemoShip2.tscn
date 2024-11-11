@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cl1lyeabmrdst"]
+[gd_scene load_steps=28 format=3 uid="uid://cl1lyeabmrdst"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship-2/demo_ship_2.gd" id="1_gtrcu"]
 [ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://scenes/vehicles/starships/demo-ship-2/fighter_gen_7_model.tscn" id="2_qgepc"]
@@ -16,10 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://dan83b5qrkhdv" path="res://scenes/vehicles/starships/demo-ship-2/MainParticleFX.tscn" id="14_iaa76"]
 [ext_resource type="PackedScene" uid="uid://cxg4i130ut4lm" path="res://scenes/vehicles/starships/demo-ship-2/SmokeFX.tscn" id="15_71jb7"]
 [ext_resource type="PackedScene" uid="uid://dlrhe21mi8cl2" path="res://scenes/modules/demo-weapon/DemoWeapon.tscn" id="15_n2il0"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="17_o8bky"]
 
 [sub_resource type="Resource" id="Resource_8x1bo"]
 script = ExtResource("2_wijyj")
 max_linear_velocity = 200.0
+max_boost_linear_velocity = 350.0
 max_angular_pitch_velocity = 0.9
 max_angular_yaw_velocity = 0.9
 max_angular_roll_velocity = 2.0
@@ -29,6 +31,7 @@ release_year = "180"
 
 [sub_resource type="Resource" id="Resource_4ayql"]
 script = ExtResource("3_dqaga")
+boost_multiplier = 1.5
 forward_thrust = 200000.0
 backward_thrust = 200000.0
 up_thrust = 200000.0
@@ -74,11 +77,21 @@ properties/4/path = NodePath("Explosion:emitting")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
+[sub_resource type="BoxMesh" id="BoxMesh_8qbes"]
+size = Vector3(0.1, 0.105, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ppsa"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
 [node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("hardpoint_1", "hardpoint_2", "hardpoint_3", "hardpoint_4", "explosion", "thruster", "thruster2", "respawn_timer", "anchor")]
 collision_layer = 515
 collision_mask = 513
 mass = 1200.0
 script = ExtResource("1_gtrcu")
+max_heat = 350.0
+heat = 30.0
 ship_info = SubResource("Resource_8x1bo")
 thruster_force = SubResource("Resource_4ayql")
 hardpoint_1 = NodePath("Hardpoint")
@@ -303,8 +316,30 @@ one_shot = true
 [node name="Explosion" parent="." instance=ExtResource("12_ti0ut")]
 lifetime = 5.0
 
+[node name="HeatTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.2
+autostart = true
+
+[node name="HealingTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.998249, 0, -0.0591496, 0, 1, 0, 0.0591496, 0, -0.998249, 0, 1.53823, 0)
+visible = false
+text = "RETURN!"
+font = ExtResource("17_o8bky")
+
+[node name="CanHeal" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00617018, 0.582177, -0.366465)
+mesh = SubResource("BoxMesh_8qbes")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ppsa")
+
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HeatTimer" to="." method="_on_heat_timer_timeout"]
+[connection signal="timeout" from="HealingTimer" to="." method="_on_timer_2_timeout"]
 
 [editable path="fighterGen7"]
 [editable path="DemoControlSeat"]

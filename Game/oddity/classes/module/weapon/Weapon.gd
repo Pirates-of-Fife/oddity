@@ -48,6 +48,8 @@ func shoot() -> void:
 	if !can_shoot:
 		return
 		
+	own_ship.heat += 2
+		
 	var p : Projectile = projectile.instantiate()
 	
 	get_tree().get_first_node_in_group("World").add_child(p)

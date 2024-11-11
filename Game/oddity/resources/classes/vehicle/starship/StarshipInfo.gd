@@ -6,6 +6,9 @@ class_name StarshipInfo
 var max_linear_velocity : float
 
 @export
+var max_boost_linear_velocity : float
+
+@export
 var max_angular_pitch_velocity : float
 
 @export

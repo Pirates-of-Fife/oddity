@@ -29,6 +29,10 @@ func load_last_possessed_starship() -> void:
 			var starship_scene : PackedScene = load(save_data["scene_path"])  # PackedScene
 			if starship_scene:
 				var ship : Node3D = starship_scene.instantiate()
+				
+				if ship is DemoShip:
+					return
+				
 				get_tree().get_first_node_in_group("World").add_child(ship)
 				ship.global_position = Vector3(7, -1, -1)
 				
