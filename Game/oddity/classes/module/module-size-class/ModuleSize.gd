@@ -69,6 +69,29 @@ enum AlcubierreDriveSize
 	SIZE_10      # 8m x 4m x 4m
 }
 
+# More abstract size class
+enum ThrusterSize
+{
+	SIZE_0 = 0,
+	SIZE_1,    
+	SIZE_2,      
+	SIZE_3,      
+	SIZE_4,    
+	SIZE_5,   
+	SIZE_6,   
+	SIZE_7,    
+	SIZE_8,   
+	SIZE_9,    
+	SIZE_10,
+	SIZE_11,
+	SIZE_12,
+	SIZE_13,
+	SIZE_14,
+	SIZE_15,
+	SIZE_16,
+	SIZE_17
+}
+
 enum UtilityHardpointSize 
 {
 	SIZE_0 = 0
