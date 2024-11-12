@@ -3,7 +3,8 @@ extends Node
 class_name ModuleSize
 
 # Enum for Component Sizes
-enum ComponentSize {
+enum ComponentSize 
+{
 	SIZE_0 = 0,  # 0.25m x 0.25m x 0.5m
 	SIZE_1,      # 0.5m x 0.5m x 1m 
 	SIZE_2,      # 1m x 1m x 2m 
@@ -18,7 +19,8 @@ enum ComponentSize {
 }
 
 # Enum for Hardpoint Sizes
-enum HardpointSize {
+enum HardpointSize 
+{
 	SIZE_0 = 0,  # 0.25m x 0.5m x 0.25m
 	SIZE_1,      # 0.35m x 0.7m x 0.35m
 	SIZE_2,      # 0.5m x 1m x 0.5m
@@ -36,7 +38,8 @@ enum HardpointSize {
 }
 
 # Enum for Abyssal Jump Drive Sizes
-enum AbyssalJumpDriveSize {
+enum AbyssalJumpDriveSize
+{
 	SIZE_0 = 0,
 	SIZE_1,      # 1m x 0.5m x 2m
 	SIZE_2,      # 1.5m x 0.75m x 4m
@@ -51,7 +54,8 @@ enum AbyssalJumpDriveSize {
 }
 
 # Enum for Alcubierre Drive Sizes
-enum AlcubierreDriveSize {
+enum AlcubierreDriveSize 
+{
 	SIZE_0 = 0,  # 0.5m x 0.5m x 0.5m
 	SIZE_1,      # 1m x 0.5m x 0.5m
 	SIZE_2,      # 1.5m x 0.75m x 0.75m
@@ -88,6 +92,11 @@ enum ThrusterSize
 	SIZE_17
 }
 
+enum UtilityHardpointSize 
+{
+	SIZE_0 = 0
+}
+
 # Function to get component size dimensions
 func get_component_size(size: ComponentSize) -> Vector3:
 	match size:
@@ -121,6 +130,10 @@ func get_hardpoint_size(size: HardpointSize) -> Vector3:
 		HardpointSize.SIZE_11: return Vector3(8, 8, 16)
 		HardpointSize.SIZE_12: return Vector3(9, 9, 18)
 		HardpointSize.SIZE_13: return Vector3(10, 10, 20)
+		_ : return Vector3.ZERO
+		
+func get_utility_hardpoint_size(size : UtilityHardpointSize) -> Vector3:
+	match size:
 		_ : return Vector3.ZERO
 
 func get_abyssal_jump_drive_size(size: AbyssalJumpDriveSize) -> Vector3:
