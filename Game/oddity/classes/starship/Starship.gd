@@ -22,30 +22,30 @@ var ship_info : StarshipInfo
 var thruster_force : ThrusterForces
 
 @onready 
-var pid_forward : PIDController = $PIDControllers/PIDForward
+var pid_forward : PIDController = $ShipPidControllers/PIDForward
 @onready
-var pid_backward : PIDController = $PIDControllers/PIDBackward
+var pid_backward : PIDController = $ShipPidControllers/PIDBackward
 @onready
-var pid_up : PIDController = $PIDControllers/PIDUp
+var pid_up : PIDController = $ShipPidControllers/PIDUp
 @onready
-var pid_down : PIDController = $PIDControllers/PIDDown
+var pid_down : PIDController = $ShipPidControllers/PIDDown
 @onready
-var pid_left : PIDController = $PIDControllers/PIDLeft
+var pid_left : PIDController = $ShipPidControllers/PIDLeft
 @onready
-var pid_right : PIDController = $PIDControllers/PIDRight
+var pid_right : PIDController = $ShipPidControllers/PIDRight
 
 @onready 
-var pid_roll_left : PIDController =  $PIDControllers/PIDRollLeft
+var pid_roll_left : PIDController =  $ShipPidControllers/PIDRollLeft
 @onready 
-var pid_roll_right : PIDController =  $PIDControllers/PIDRollRight
+var pid_roll_right : PIDController =  $ShipPidControllers/PIDRollRight
 @onready 
-var pid_yaw_left : PIDController =  $PIDControllers/PIDYawLeft
+var pid_yaw_left : PIDController =  $ShipPidControllers/PIDYawLeft
 @onready 
-var pid_yaw_right : PIDController =  $PIDControllers/PIDYawRight
+var pid_yaw_right : PIDController =  $ShipPidControllers/PIDYawRight
 @onready 
-var pid_pitch_up : PIDController =  $PIDControllers/PIDPitchUp
+var pid_pitch_up : PIDController =  $ShipPidControllers/PIDPitchUp
 @onready 
-var pid_pitch_down : PIDController =  $PIDControllers/PIDPitchDown
+var pid_pitch_down : PIDController =  $ShipPidControllers/PIDPitchDown
 
 var epsilon : float = 0.0001
 
