@@ -81,86 +81,86 @@ physics_parent = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0677185, 2.41433, 1.91138)
 shape = SubResource("BoxShape3D_h4lve")
 
-[node name="PIDControllers" type="Node" parent="."]
+[node name="ShipPidControllers" type="Node" parent="."]
 
-[node name="PIDForward" type="Node" parent="PIDControllers"]
+[node name="PIDForward" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 60000.0
 Ki = 0.3
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDBackward" type="Node" parent="PIDControllers"]
+[node name="PIDBackward" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 60000.0
 Ki = 0.3
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDUp" type="Node" parent="PIDControllers"]
+[node name="PIDUp" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 60000.0
 Ki = 0.3
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDDown" type="Node" parent="PIDControllers"]
+[node name="PIDDown" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 60000.0
 Ki = 0.3
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDLeft" type="Node" parent="PIDControllers"]
+[node name="PIDLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 60000.0
 Ki = 0.3
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDRight" type="Node" parent="PIDControllers"]
+[node name="PIDRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 60000.0
 Ki = 0.3
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDRollLeft" type="Node" parent="PIDControllers"]
+[node name="PIDRollLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 350000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDRollRight" type="Node" parent="PIDControllers"]
+[node name="PIDRollRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 350000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDYawLeft" type="Node" parent="PIDControllers"]
+[node name="PIDYawLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 350000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDYawRight" type="Node" parent="PIDControllers"]
+[node name="PIDYawRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 350000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDPitchUp" type="Node" parent="PIDControllers"]
+[node name="PIDPitchUp" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 350000.0
 Ki = 0.3
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDPitchDown" type="Node" parent="PIDControllers"]
+[node name="PIDPitchDown" type="Node" parent="ShipPidControllers"]
 script = ExtResource("9_xxpud")
 Kp = 350000.0
 Ki = 0.3

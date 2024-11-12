@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlffj8pwwwcfl"]
+
+[ext_resource type="Script" path="res://classes/pid-controller/PIDController.gd" id="1_mflgn"]
+
+[node name="ShipPidControllers" type="Node"]
+
+[node name="PIDForward" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDBackward" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDUp" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDDown" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDLeft" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDRight" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDRollLeft" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDRollRight" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDYawLeft" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDYawRight" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDPitchUp" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true
+
+[node name="PIDPitchDown" type="Node" parent="."]
+script = ExtResource("1_mflgn")
+use_absolute_error = true

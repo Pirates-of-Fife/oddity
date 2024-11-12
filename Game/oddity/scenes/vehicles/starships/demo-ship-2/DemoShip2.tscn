@@ -103,86 +103,86 @@ shape = SubResource("ConvexPolygonShape3D_0otas")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_xw1k0")
 
-[node name="PIDControllers" type="Node" parent="."]
+[node name="ShipPidControllers" type="Node" parent="."]
 
-[node name="PIDForward" type="Node" parent="PIDControllers"]
+[node name="PIDForward" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDBackward" type="Node" parent="PIDControllers"]
+[node name="PIDBackward" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDUp" type="Node" parent="PIDControllers"]
+[node name="PIDUp" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDDown" type="Node" parent="PIDControllers"]
+[node name="PIDDown" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDLeft" type="Node" parent="PIDControllers"]
+[node name="PIDLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDRight" type="Node" parent="PIDControllers"]
+[node name="PIDRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDRollLeft" type="Node" parent="PIDControllers"]
+[node name="PIDRollLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDRollRight" type="Node" parent="PIDControllers"]
+[node name="PIDRollRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDYawLeft" type="Node" parent="PIDControllers"]
+[node name="PIDYawLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDYawRight" type="Node" parent="PIDControllers"]
+[node name="PIDYawRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDPitchUp" type="Node" parent="PIDControllers"]
+[node name="PIDPitchUp" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDPitchDown" type="Node" parent="PIDControllers"]
+[node name="PIDPitchDown" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
