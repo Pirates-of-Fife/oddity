@@ -72,8 +72,8 @@ var interaction_length : float = 2.5
 var raycast_helper : RaycastHelper = RaycastHelper.new()
 
 
-
-var current_max_velocity : float 
+@onready
+var current_max_velocity : float = ship_info.max_linear_velocity
 
 
 func _ready() -> void:
@@ -190,11 +190,18 @@ func _physics_process(delta: float) -> void:
 	relative_gravity_vector = Vector3.ZERO
 
 func increase_max_velocity(velocity : float) -> void:
-	pass
+	if current_max_velocity + velocity > ship_info.max_linear_velocity:
+		current_max_velocity = ship_info.max_linear_velocity
+		return
+	
+	current_max_velocity += velocity
 	
 func decrease_max_velocity(velocity : float) -> void:
-	pass
-
+	if current_max_velocity - velocity < 0:
+		current_max_velocity = 0
+		return
+	
+	current_max_velocity -= velocity
 
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
@@ -220,7 +227,7 @@ func calculate_local_angular_velocity() -> void:
 	local_angular_velocity = transform.basis.inverse() * angular_velocity
 
 func calculate_target_speed_vector() -> Vector3:
-	return target_thrust_vector * ship_info.max_linear_velocity
+	return target_thrust_vector * current_max_velocity
 
 func calculate_target_rotation_speed_vector() -> Vector3:
 	var new_target_vector : Vector3 = target_rotational_thrust_vector

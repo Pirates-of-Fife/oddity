@@ -1,6 +1,6 @@
 extends StarshipCommand
 
-class_name StarshipDecreaseMaxVelocity
+class_name StarshipDecreaseMaxVelocityCommand
 
 class Params:
 	var decrease_velocity : float
