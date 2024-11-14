@@ -71,6 +71,11 @@ var interaction_length : float = 2.5
 
 var raycast_helper : RaycastHelper = RaycastHelper.new()
 
+
+
+var current_max_velocity : float 
+
+
 func _ready() -> void:
 	_default_ready()
 		
@@ -183,6 +188,13 @@ func _physics_process(delta: float) -> void:
 	reset_thrust_vectors()
 	
 	relative_gravity_vector = Vector3.ZERO
+
+func increase_max_velocity(velocity : float) -> void:
+	pass
+	
+func decrease_max_velocity(velocity : float) -> void:
+	pass
+
 
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
