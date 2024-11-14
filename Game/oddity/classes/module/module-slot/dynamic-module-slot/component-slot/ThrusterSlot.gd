@@ -33,9 +33,11 @@ func _module_fits(module : Module) -> bool:
 					return true
 	return false
 
-func _default_ready() -> void:
+func _thruster_slot_ready() -> void:
+	initialize_area_automatically = false
+	_dynamic_module_slot_ready()
 	add_to_group("ComponentSlot")
-	
+		
 	var area : Area3D = $SlotArea
 	
 	area.collision_layer = 524288
@@ -48,3 +50,7 @@ func _default_ready() -> void:
 		printerr("Component Slot area enter failed to connect.")
 	if (error_exit != OK):
 		printerr("Component Slot area exit failed to connect.")
+
+
+func _ready() -> void:
+	_thruster_slot_ready()
