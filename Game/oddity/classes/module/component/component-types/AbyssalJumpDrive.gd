@@ -5,10 +5,17 @@ class_name AbyssalJumpDrive
 @export
 var size : ModuleSize.AbyssalJumpDriveSize
 
-func _ready() -> void:
-	_module_ready()
-	_initialize_collision_shape()
+@export
+var initialize_collision_shape_automatically : bool = true
 
+func _ready() -> void:
+	_abyssal_jump_drive_ready()
+
+func _abyssal_jump_drive_ready() -> void:
+	_module_ready()
+	
+	if initialize_collision_shape_automatically:
+		_initialize_collision_shape()
 	
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()
