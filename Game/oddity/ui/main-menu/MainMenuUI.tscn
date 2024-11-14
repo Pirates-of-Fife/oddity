@@ -16,10 +16,10 @@ tracks/0/path = NodePath("Start/Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0),
+"times": PackedFloat64Array(0.0166667),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector2(488, 266)]
+"values": [Vector2(1013, 539)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -28,10 +28,10 @@ tracks/1/path = NodePath("Start/Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat64Array(0),
+"times": PackedFloat64Array(0.0166667),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector2(0.0858776, 0.0834093)]
+"values": [Vector2(0.169174, 0.164312)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -40,10 +40,10 @@ tracks/2/path = NodePath("Start/RichTextLabel:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat64Array(0),
+"times": PackedFloat64Array(0.0166667),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector2(311, 367)]
+"values": [Vector2(648, 761)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -55,7 +55,7 @@ tracks/3/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector2(-477, 193)]
+"values": [Vector2(-1226, 196)]
 }
 
 [sub_resource type="Animation" id="Animation_02e8o"]
@@ -68,10 +68,10 @@ tracks/0/path = NodePath("Start/Sprite2D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.933333),
+"times": PackedFloat64Array(0.0166667, 1),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector2(488, 266), Vector2(348, 107)]
+"values": [Vector2(1013, 539), Vector2(518, 244)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -80,10 +80,10 @@ tracks/1/path = NodePath("Start/Sprite2D:scale")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat64Array(0, 0.933333),
+"times": PackedFloat64Array(0.0166667, 1),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector2(0.0858776, 0.0834093), Vector2(0.0762575, 0.0740656)]
+"values": [Vector2(0.169174, 0.164312), Vector2(0.109869, 0.106711)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -92,10 +92,10 @@ tracks/2/path = NodePath("Start/RichTextLabel:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat64Array(0, 0.933333),
+"times": PackedFloat64Array(0.0166667, 0.7),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector2(311, 367), Vector2(287, 579)]
+"values": [Vector2(648, 761), Vector2(600, 1167)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -104,10 +104,10 @@ tracks/3/path = NodePath("Control:position")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat64Array(0, 1.5),
+"times": PackedFloat64Array(0, 1.26667),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector2(-477, 193), Vector2(-73, 198)]
+"values": [Vector2(-1226, 196), Vector2(-480, 250)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_882nw"]
@@ -133,38 +133,50 @@ libraries = {
 [node name="Start" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Start"]
-position = Vector2(488, 266)
-scale = Vector2(0.0858776, 0.0834093)
+position = Vector2(1013, 539)
+scale = Vector2(0.169174, 0.164312)
 texture = ExtResource("1_edjeb")
 offset = Vector2(0.29, 0)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Start"]
-offset_left = 311.0
-offset_top = 367.0
-offset_right = 682.0
-offset_bottom = 416.0
+offset_left = 648.0
+offset_top = 761.0
+offset_right = 1019.0
+offset_bottom = 810.0
+scale = Vector2(1.97, 1.97)
 theme_override_fonts/normal_font = ExtResource("2_7jeg0")
 text = "Press any key to continue"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Logo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1433.0
+offset_top = 979.0
+offset_right = 2122.0
+offset_bottom = 1120.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Logo"]
 layout_mode = 0
-offset_left = 747.0
-offset_top = 486.0
-offset_right = 970.0
-offset_bottom = 537.0
+offset_left = 20.0
+offset_top = -25.0
+offset_right = 238.865
+offset_bottom = 26.0
+scale = Vector2(2.205, 2.205)
 theme_override_fonts/normal_font = ExtResource("2_7jeg0")
 text = "Pirates of Fife"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(731, 516)
+[node name="Sprite2D" type="Sprite2D" parent="Logo"]
+position = Vector2(-69, 29)
+scale = Vector2(4.655, 4.655)
 texture = ExtResource("4_nsbdi")
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
-offset_left = -477.0
-offset_top = 193.0
-offset_right = 5.0
-offset_bottom = 427.0
+offset_left = -1226.0
+offset_top = 196.0
+offset_right = -429.0
+offset_bottom = 583.0
+scale = Vector2(1.975, 1.975)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
