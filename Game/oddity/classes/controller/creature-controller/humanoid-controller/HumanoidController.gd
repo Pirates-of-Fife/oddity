@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 
 
 func _humanoid_process(delta : float) -> void:
-	_default_process(delta)
+	_creature_process(delta)
 	
 	if control_entity is Humanoid:
 		if Input.is_action_pressed("humanoid_eva_forwards"):
