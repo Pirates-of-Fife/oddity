@@ -101,15 +101,11 @@ func fall_timer_timeout() -> void:
 func _physics_process(delta : float) -> void:
 	creature_physics_process(delta)
 
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	if is_on_ground:
-		rotation_degrees.y = 0
-
 func creature_physics_process(delta : float) -> void:
 	_default_physics_process(delta)
 	
 	is_on_ground = is_grounded()
-	
+			
 	# INFO The damping code is a bit confusing and definetely is gonna need an overhaul in the future
 	
 	# reduce damping if not in gravity
