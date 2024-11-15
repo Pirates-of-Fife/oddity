@@ -101,6 +101,10 @@ func fall_timer_timeout() -> void:
 func _physics_process(delta : float) -> void:
 	creature_physics_process(delta)
 
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if is_on_ground:
+		rotation_degrees.y = 0
+
 func creature_physics_process(delta : float) -> void:
 	_default_physics_process(delta)
 	

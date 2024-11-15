@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cqfonknridwp7"]
+[gd_scene load_steps=21 format=3 uid="uid://cqfonknridwp7"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/DemoShip.gd" id="1_5hdip"]
 [ext_resource type="Resource" uid="uid://25ljcxn4nxy0" path="res://resources/resources/vehicles/starships/demo-ship/DemoShip.tres" id="2_gep6i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="3_jnc0e"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="3_lj764"]
 [ext_resource type="Script" path="res://classes/pid-controller/PIDController.gd" id="9_xxpud"]
+[ext_resource type="PackedScene" uid="uid://l76da1sleber" path="res://addons/godot_plush/godot_plush_sitting.glb" id="11_jtekr"]
 [ext_resource type="PackedScene" uid="uid://q7qxuwsn55b5" path="res://scenes/interactable/control-seat/DemoControlSeat.tscn" id="13_3chp0"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="13_qeu3b"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ComponentSlot.gd" id="13_udpm1"]
@@ -253,4 +254,7 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 1.9
 target_control_entity = NodePath("..")
 
 [node name="VelocityMfd3d" parent="." instance=ExtResource("14_gcovj")]
-transform = Transform3D(-0.0999085, 0, 0.0042765, 0, 0.1, 0, -0.0042765, 0, -0.0999085, 0.486246, 1.60121, 10.1261)
+transform = Transform3D(-0.0999085, 0, 0.0042765, 0, 0.1, 0, -0.0042765, 0, -0.0999085, 0.315648, 1.46084, 10.0416)
+
+[node name="godot_plush_sitting" parent="." instance=ExtResource("11_jtekr")]
+transform = Transform3D(1.78639, 0, 0.865462, 0, 1.985, 0, -0.865462, 0, 1.78639, 1.08395, 1.405, 10.1865)
