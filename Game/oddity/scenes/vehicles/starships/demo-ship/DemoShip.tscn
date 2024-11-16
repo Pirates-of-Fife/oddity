@@ -1,18 +1,18 @@
-[gd_scene load_steps=23 format=3 uid="uid://cqfonknridwp7"]
+[gd_scene load_steps=24 format=3 uid="uid://cqfonknridwp7"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/DemoShip.gd" id="1_5hdip"]
 [ext_resource type="Resource" uid="uid://25ljcxn4nxy0" path="res://resources/resources/vehicles/starships/demo-ship/DemoShip.tres" id="2_gep6i"]
 [ext_resource type="PackedScene" uid="uid://hfwqp0yy2khv" path="res://scenes/vehicles/starships/demo-ship/assets/DemoShipMesh.tscn" id="2_h5s4g"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="3_jnc0e"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="3_lj764"]
-[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/thrust_vector_label.gd" id="5_lejdu"]
-[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/rotation_vector_label.gd" id="6_d1bcb"]
+[ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AbyssalJumpDriveSlot.gd" id="7_odh77"]
+[ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AlcubierreDriveSlot.gd" id="8_8usdo"]
 [ext_resource type="Script" path="res://classes/pid-controller/PIDController.gd" id="9_xxpud"]
-[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/speed_label.gd" id="10_n2mvt"]
-[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/thrust_vectors.gd" id="11_h7835"]
 [ext_resource type="PackedScene" uid="uid://q7qxuwsn55b5" path="res://scenes/interactable/control-seat/DemoControlSeat.tscn" id="13_3chp0"]
+[ext_resource type="PackedScene" uid="uid://bk417jw4gd0w" path="res://classes/multi-function-display/crosshair/Crosshair3d.tscn" id="13_mdyxh"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="13_qeu3b"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ComponentSlot.gd" id="13_udpm1"]
+[ext_resource type="PackedScene" uid="uid://covp2c4kn7g6k" path="res://classes/multi-function-display/velocity-mfd/VelocityMFD_3D.tscn" id="14_gcovj"]
 
 [sub_resource type="Resource" id="Resource_xuaf6"]
 script = ExtResource("3_jnc0e")
@@ -45,19 +45,18 @@ size = Vector3(4.10693, 5.12695, 0.5448)
 height = 4.95257
 radius = 2.7792
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_gm6xy"]
-size = Vector2(0.5, 1)
+[sub_resource type="PlaneMesh" id="PlaneMesh_3u6uw"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_t5phk"]
-radius = 0.05
-height = 0.1
-radial_segments = 32
-rings = 16
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_samva"]
+albedo_color = Color(0.0588235, 0.176471, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iu4cg"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1lke6"]
+albedo_color = Color(1, 0.243137, 1, 1)
 
-[node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fh78y"]
+albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
+
+[node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("velocity_mfd", "crosshair", "anchor")]
 collision_layer = 513
 collision_mask = 513
 mass = 5000.0
@@ -65,6 +64,8 @@ continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 100
 script = ExtResource("1_5hdip")
+velocity_mfd = NodePath("VelocityMfd3d")
+crosshair = NodePath("Crosshair3d")
 ship_info = ExtResource("2_gep6i")
 thruster_force = SubResource("Resource_xuaf6")
 controller_reference = "res://classes/controller/vehicle-controller/starship-controller/StarshipController.tscn"
@@ -215,63 +216,47 @@ shape = SubResource("CylinderShape3D_eoiej")
 transform = Transform3D(1, 0, 0, 0, 0.0048694, -0.999988, 0, 0.999988, 0.0048694, -5.30831, 2.33141, -2.35684)
 shape = SubResource("CylinderShape3D_eoiej")
 
-[node name="Labels" type="Node3D" parent="."]
-
-[node name="ThrustVectorLabel" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.43623, 2.00049, 10.5045)
-text = "Placeholder"
-script = ExtResource("5_lejdu")
-
-[node name="RotationVectorLabel" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.45877, 1.77226, 10.5045)
-text = "Placeholder"
-script = ExtResource("6_d1bcb")
-
-[node name="speed label" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, -1.03366, 1.58578, 10.5045)
-text = "Placeholder"
-script = ExtResource("10_n2mvt")
-
-[node name="Thrust Vectors" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, -1.05158, 1.94436, 10.5045)
-text = "Placeholder"
-script = ExtResource("11_h7835")
-
 [node name="Modules" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Modules"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87933, 0.802053, -4.06874)
-mesh = SubResource("PlaneMesh_gm6xy")
-skeleton = NodePath("")
+[node name="AbyssalJumpDriveSlot" type="Node3D" parent="Modules"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28899, 1.27811, 3.7643)
+script = ExtResource("7_odh77")
+abyssal_jump_drive_size = 1
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Modules"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87933, 0.802053, -2.12351)
-mesh = SubResource("PlaneMesh_gm6xy")
-skeleton = NodePath("")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Modules/AbyssalJumpDriveSlot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.903138, 0)
+mesh = SubResource("PlaneMesh_3u6uw")
+surface_material_override/0 = SubResource("StandardMaterial3D_samva")
+
+[node name="AlcubierreDriveSlot" type="Node3D" parent="Modules"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27474, 1.27811, 1.30839)
+script = ExtResource("8_8usdo")
+alcubierre_drive_size = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Modules/AlcubierreDriveSlot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.903138, 0)
+mesh = SubResource("PlaneMesh_3u6uw")
+surface_material_override/0 = SubResource("StandardMaterial3D_1lke6")
 
 [node name="ComponentSlot" type="Node3D" parent="Modules"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82877, 1.26739, -2.16688)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26035, 1.29621, -1.3909)
 script = ExtResource("13_udpm1")
-size = 1
+size = 3
 
-[node name="ComponentSlot2" type="Node3D" parent="Modules"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96454, 1.24004, -4.16371)
-script = ExtResource("13_udpm1")
-size = 1
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Modules/ComponentSlot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.903138, 0)
+mesh = SubResource("PlaneMesh_3u6uw")
+surface_material_override/0 = SubResource("StandardMaterial3D_fh78y")
 
 [node name="Anchor" parent="." instance=ExtResource("13_qeu3b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.96804, 8.83934)
 
-[node name="Center" type="MeshInstance3D" parent="Anchor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
-mesh = SubResource("SphereMesh_t5phk")
-skeleton = NodePath("../../fighterGen7")
-surface_material_override/0 = SubResource("StandardMaterial3D_iu4cg")
-
-[node name="SpaceBall" type="MeshInstance3D" parent="Anchor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
-mesh = SubResource("SphereMesh_t5phk")
-
 [node name="DemoControlSeat" parent="." node_paths=PackedStringArray("target_control_entity") instance=ExtResource("13_3chp0")]
 transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 1.96075, 9.3262)
 target_control_entity = NodePath("..")
+
+[node name="VelocityMfd3d" parent="." instance=ExtResource("14_gcovj")]
+transform = Transform3D(-0.134876, 0, 0.00577328, 0, 0.135, 0, -0.00577328, 0, -0.134876, 0.315648, 1.46084, 10.031)
+
+[node name="Crosshair3d" parent="." instance=ExtResource("13_mdyxh")]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 2.02058, 9.44995)
