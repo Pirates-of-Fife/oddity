@@ -5,9 +5,12 @@ class_name DemoShip
 @export
 var velocity_mfd : VelocityMFD3D
 
+@export
+var crosshair : Crosshair3d
 
 func _process(delta: float) -> void:
-	move_ball()
+	crosshair.yaw = target_rotational_thrust_vector.y
+	crosshair.pitch = -target_rotational_thrust_vector.x
 	
 	velocity_mfd.forwards_velocity = local_linear_velocity.z
 	velocity_mfd.lateral_velocity_right = abs(minf(local_linear_velocity.x, 0))
@@ -18,8 +21,5 @@ func _process(delta: float) -> void:
 	velocity_mfd.current_max_velocity = current_max_velocity
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
-	
-func move_ball() -> void:
-	$Anchor/SpaceBall.position.x = -target_rotational_thrust_vector.y
-	$Anchor/SpaceBall.position.y = -target_rotational_thrust_vector.x
+
 	

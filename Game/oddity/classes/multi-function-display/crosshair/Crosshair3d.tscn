@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk417jw4gd0w"]
+
+[ext_resource type="PackedScene" uid="uid://drmj8faat4xvb" path="res://classes/multi-function-display/crosshair/Crosshair2d.tscn" id="1_1dr63"]
+[ext_resource type="Script" path="res://classes/multi-function-display/crosshair/crosshair_3d.gd" id="1_48wle"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hf8dv"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Crosshair3d" type="Node3D" node_paths=PackedStringArray("crosshair")]
+script = ExtResource("1_48wle")
+crosshair = NodePath("SubViewport/Crosshair2d")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1000, 1000)
+
+[node name="Crosshair2d" parent="SubViewport" instance=ExtResource("1_1dr63")]
+offset_left = 176.669
+offset_top = 131.613
+offset_right = 676.669
+offset_bottom = 631.613
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.722974, -1.18183, 0)
+texture = SubResource("ViewportTexture_hf8dv")
