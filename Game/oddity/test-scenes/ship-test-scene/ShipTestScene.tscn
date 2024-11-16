@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=61 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -158,10 +158,19 @@ points = PackedVector3Array(-0.0213446, -0.00436587, -0.067774, -0.0637214, 0.04
 points = PackedVector3Array(0.0196935, 0.0650606, 0.0695216, -0.0167927, 0.0581975, -0.0500143, -0.0301022, 0.058204, -0.046673, -0.0354536, 0.143967, 0.00992301, 0.0739876, 0.115706, 0.00287888, -0.0664681, 0.0583649, 0.0264949, 0.0663365, 0.0582597, -0.0133342, -0.0354536, 0.140433, 0.0381742, 0.0351377, 0.140433, 0.0381742, -0.0707732, 0.115706, -0.000655631, 0.015495, 0.101377, -0.0339186, 0.0810802, 0.0910051, 0.0240486, -0.0265401, 0.05857, 0.0660213, -0.0707732, 0.115706, 0.0275707, 0.0351377, 0.143967, 0.00992301, 0.0471537, 0.0575687, 0.0538637, 0.0428595, 0.0584635, -0.0396978, -0.0674674, 0.0577403, -0.0102558, -0.00666495, 0.0884169, 0.0685805, -0.0126951, 0.107652, -0.0308634, 0.0322127, 0.0884861, 0.0617419, -0.0390803, 0.0819814, 0.0585791, -0.0771557, 0.0981574, 0.0199633, 0.0704732, 0.115706, 0.0275707, -0.048344, 0.082152, -0.0318477, 0.0668517, 0.0579376, 0.0233243, -0.0559006, 0.0588223, 0.0459951, 0.0319325, 0.0757448, -0.0414472, -0.0563708, 0.0584766, -0.0297634, 0.0126185, 0.0982325, 0.0642692, 0.0376659, 0.104542, -0.0247489, -0.0254126, 0.0919354, -0.0374555)
 
 [sub_resource type="SphereMesh" id="SphereMesh_m3n64"]
+radius = 6e+11
+height = 1.2e+12
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsame"]
+shading_mode = 0
+albedo_color = Color(0.999845, 0.35752, 0.290402, 1)
+albedo_texture = ExtResource("22_ubadb")
+
+[sub_resource type="SphereMesh" id="SphereMesh_tbbks"]
 radius = 6.9634e+08
 height = 1.39268e+09
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsame"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irx23"]
 shading_mode = 0
 albedo_texture = ExtResource("22_ubadb")
 
@@ -821,10 +830,16 @@ shape = SubResource("ConvexPolygonShape3D_7fn3o")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_gydxv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(-0.768625, -0.318375, -0.554844, 0.382683, -0.92388, 0, -0.512609, -0.21233, 0.831954, 0, 1.47e+11, 0)
+[node name="Betelgeuse" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(-0.768625, -0.318375, -0.554844, 0.382683, -0.92388, 0, -0.512609, -0.21233, 0.831954, 0, 1.554e+12, 0)
 mesh = SubResource("SphereMesh_m3n64")
 surface_material_override/0 = SubResource("StandardMaterial3D_hsame")
+script = ExtResource("23_i105l")
+
+[node name="Sun" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(-0.768625, -0.318375, -0.554844, 0.382683, -0.92388, 0, -0.512609, -0.21233, 0.831954, 0, 1e+09, 1.47e+11)
+mesh = SubResource("SphereMesh_tbbks")
+surface_material_override/0 = SubResource("StandardMaterial3D_irx23")
 script = ExtResource("23_i105l")
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]
