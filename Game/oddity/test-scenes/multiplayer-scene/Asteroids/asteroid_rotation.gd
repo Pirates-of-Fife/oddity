@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name Asteroid
+
 # Variable to store the final rotation vector
 var final_rotation: Vector3
 
@@ -11,7 +13,7 @@ func _ready() -> void:
 		rng.randf_range(-1.0, 1.0),
 		rng.randf_range(-1.0, 1.0)
 	).normalized()
-	var rotation_speed: float = rng.randf_range(0.1, 1.5)
+	var rotation_speed: float = rng.randf_range(0.05, 0.4)
 	
 	final_rotation = rotation_direction * rotation_speed
 

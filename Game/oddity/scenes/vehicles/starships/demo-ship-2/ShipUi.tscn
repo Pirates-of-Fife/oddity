@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0uh2hkiwvx7l"]
+[gd_scene load_steps=14 format=3 uid="uid://c0uh2hkiwvx7l"]
 
 [ext_resource type="StyleBox" uid="uid://d1o06fc36eqdq" path="res://scenes/vehicles/starships/demo-ship-2/BarBackgroundStyle.tres" id="1_3371h"]
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship-2/ship_ui.gd" id="1_e8edl"]
 [ext_resource type="StyleBox" uid="uid://dtmoptgegcf03" path="res://scenes/vehicles/starships/demo-ship-2/BarFillStyle.tres" id="2_yta0p"]
 [ext_resource type="PackedScene" uid="uid://cr7t8smpohmy4" path="res://scenes/vehicles/starships/demo-ship-2/Crosshair/crosshair.tscn" id="4_caj1d"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="5_eqmo7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05k77"]
 bg_color = Color(0.73054, 0.146959, 0.224508, 1)
@@ -145,3 +146,10 @@ theme_override_styles/background = ExtResource("1_3371h")
 theme_override_styles/fill = SubResource("StyleBoxFlat_kphfq")
 value = 50.0
 show_percentage = false
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.482533, 0, 0.32181, 0, 0.58, 0, -0.32181, 0, -0.482533, -0.37891, -0.477485, -0.688406)
+modulate = Color(0.615686, 1, 1, 1)
+outline_modulate = Color(1, 1, 1, 0)
+text = "100 m/s"
+font = ExtResource("5_eqmo7")

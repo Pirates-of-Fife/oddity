@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cl1lyeabmrdst"]
+[gd_scene load_steps=31 format=3 uid="uid://cl1lyeabmrdst"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship-2/demo_ship_2.gd" id="1_gtrcu"]
 [ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://scenes/vehicles/starships/demo-ship-2/fighter_gen_7_model.tscn" id="2_qgepc"]
@@ -20,8 +20,8 @@
 
 [sub_resource type="Resource" id="Resource_8x1bo"]
 script = ExtResource("2_wijyj")
-max_linear_velocity = 200.0
-max_boost_linear_velocity = 350.0
+max_linear_velocity = 300.0
+max_boost_linear_velocity = 450.0
 max_angular_pitch_velocity = 0.9
 max_angular_yaw_velocity = 0.9
 max_angular_roll_velocity = 2.0
@@ -85,11 +85,25 @@ albedo_color = Color(0, 1, 0, 1)
 emission_enabled = true
 emission = Color(0, 1, 0, 1)
 
+[sub_resource type="Gradient" id="Gradient_vc8e1"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uye4r"]
+gradient = SubResource("Gradient_vc8e1")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_epgl4"]
+radius = 150.0
+
 [node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("hardpoint_1", "hardpoint_2", "hardpoint_3", "hardpoint_4", "explosion", "thruster", "thruster2", "respawn_timer", "anchor")]
 collision_layer = 515
 collision_mask = 513
 mass = 1200.0
+contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("1_gtrcu")
+health = 1600.0
+max_health = 1600.0
 max_heat = 350.0
 heat = 30.0
 ship_info = SubResource("Resource_8x1bo")
@@ -336,6 +350,58 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00617018, 0.582177, -0.3664
 mesh = SubResource("BoxMesh_8qbes")
 surface_material_override/0 = SubResource("StandardMaterial3D_4ppsa")
 
+[node name="Warning" type="Label3D" parent="."]
+transform = Transform3D(-0.277586, 0, -0.138006, 0, 0.31, 0, 0.138006, 0, -0.277586, 0.4102, 1.31197, -0.726381)
+modulate = Color(1, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "HULL CRITICAL"
+font = ExtResource("17_o8bky")
+
+[node name="Sprite3D" type="Sprite3D" parent="Warning"]
+transform = Transform3D(0.975, 0, 0, 0, 33.92, 0, 0, 0, 1.715, -1.25885e-17, -0.0349525, -0.102793)
+modulate = Color(0.168627, 0, 0, 0.615686)
+texture = SubResource("GradientTexture1D_uye4r")
+
+[node name="Overheat" type="Label3D" parent="."]
+transform = Transform3D(-0.27891, 0, -0.135311, 0, 0.31, 0, 0.135311, 0, -0.27891, 0.422375, 1.14135, -0.637303)
+modulate = Color(0.930239, 2.79158e-05, 0.651602, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "OVERHEAT"
+font = ExtResource("17_o8bky")
+
+[node name="Sprite3D" type="Sprite3D" parent="Overheat"]
+transform = Transform3D(0.975, 0, 0, 0, 33.92, 0, 0, 0, 1.715, -1.25885e-17, -0.0349525, -0.102793)
+modulate = Color(0.168627, 0, 0, 0.615686)
+texture = SubResource("GradientTexture1D_uye4r")
+
+[node name="Boost" type="Label3D" parent="."]
+transform = Transform3D(-0.305827, 0, 0.208254, 0, 0.37, 0, -0.208254, 0, -0.305827, -0.372576, 0.977256, -0.597312)
+modulate = Color(0.198551, 0.512025, 1, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "BOOST"
+font = ExtResource("17_o8bky")
+
+[node name="Sprite3D" type="Sprite3D" parent="Boost"]
+transform = Transform3D(0.41, 0, 0, 0, 30.595, 0, 0, 0, 3.07, -1.25885e-17, -0.0349525, -0.102793)
+modulate = Color(0.0415263, 0.0163505, 0.238577, 0.615686)
+texture = SubResource("GradientTexture1D_uye4r")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_epgl4")
+
+[node name="CollisionAlert" type="Label3D" parent="."]
+transform = Transform3D(-0.120435, 0, 0.097572, 0, 0.155, 0, -0.097572, 0, -0.120435, -0.409163, 1.09188, -0.56006)
+modulate = Color(1, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "COLLISION ALERT"
+font = ExtResource("17_o8bky")
+
+[node name="Sprite3D" type="Sprite3D" parent="CollisionAlert"]
+transform = Transform3D(0.975, 0, 0, 0, 33.92, 0, 0, 0, 1.715, -1.25885e-17, -0.0349525, -0.102793)
+modulate = Color(0.168627, 0, 0, 0.615686)
+texture = SubResource("GradientTexture1D_uye4r")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HeatTimer" to="." method="_on_heat_timer_timeout"]

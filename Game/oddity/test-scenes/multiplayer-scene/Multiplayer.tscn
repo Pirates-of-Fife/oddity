@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cr8ergd0avfvd"]
+[gd_scene load_steps=43 format=3 uid="uid://cr8ergd0avfvd"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_dg08i"]
 [ext_resource type="Script" path="res://test-scenes/multiplayer-scene/MultiplayerScene.gd" id="1_trc7v"]
@@ -7,10 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://ik0bqvjr0uki" path="res://classes/creature/Creature.tscn" id="3_g2vwh"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="3_i0foj"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="5_dvi61"]
-[ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="7_xtd7q"]
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/StaticGameEntity.gd" id="6_5wpdq"]
 [ext_resource type="PackedScene" uid="uid://b2tfu5br2gx5u" path="res://test-scenes/multiplayer-scene/ring.tscn" id="8_6rxcf"]
 [ext_resource type="Script" path="res://test-scenes/multiplayer-scene/ring.gd" id="9_w6qws"]
 [ext_resource type="Script" path="res://test-scenes/multiplayer-scene/asteroids_spawn.gd" id="10_vlrb4"]
+[ext_resource type="PackedScene" uid="uid://ceilc28yahn5i" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid-Assets/Asteroid1.tscn" id="11_4cfhx"]
+[ext_resource type="PackedScene" uid="uid://clic1klo04v3l" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid-Assets/Asteroid2.tscn" id="12_n06nr"]
+[ext_resource type="PackedScene" uid="uid://dhbnisnk21ada" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid-Assets/Asteroid3.tscn" id="13_x2yie"]
+[ext_resource type="PackedScene" uid="uid://crexu7ilx05ue" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid-Assets/Asteroid4.tscn" id="14_m0s8b"]
+[ext_resource type="PackedScene" uid="uid://dpe4l1tp220ro" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid-Assets/Asteroid5.tscn" id="15_x73sd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_yu3m8"]
 size = Vector3(30, 2, 30)
@@ -32,9 +37,6 @@ albedo_color = Color(1, 0.415686, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fa6l5"]
 albedo_color = Color(0.372549, 1, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_kxdow"]
-size = Vector3(1, 1, 2)
 
 [sub_resource type="Gradient" id="Gradient_pof18"]
 colors = PackedColorArray(0, 0, 1, 1, 0.635294, 1, 1, 1)
@@ -200,6 +202,8 @@ gizmo_extents = 10.0
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -187.626, 0, 0)
 collision_layer = 3
+script = ExtResource("6_5wpdq")
+ignore_collision_damage = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D"]
 mesh = SubResource("BoxMesh_yu3m8")
@@ -220,6 +224,8 @@ shape = SubResource("BoxShape3D_n55jf")
 [node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8585, 0, -90.4587)
 collision_layer = 3
+script = ExtResource("6_5wpdq")
+ignore_collision_damage = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D2"]
 mesh = SubResource("BoxMesh_yu3m8")
@@ -240,6 +246,8 @@ shape = SubResource("BoxShape3D_n55jf")
 [node name="StaticBody3D3" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 129.859)
 collision_layer = 3
+script = ExtResource("6_5wpdq")
+ignore_collision_damage = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D3"]
 mesh = SubResource("BoxMesh_yu3m8")
@@ -260,6 +268,8 @@ shape = SubResource("BoxShape3D_n55jf")
 [node name="StaticBody3D4" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SpawnStation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.554, 0, 0)
 collision_layer = 3
+script = ExtResource("6_5wpdq")
+ignore_collision_damage = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4"]
 mesh = SubResource("BoxMesh_yu3m8")
@@ -276,17 +286,6 @@ size = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SpawnStation/StaticBody3D4/GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0168, 0)
 shape = SubResource("BoxShape3D_n55jf")
-
-[node name="Weapon" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 134.677, 3.53462, 11.4684)
-collision_layer = 537398273
-collision_mask = 537398273
-script = ExtResource("7_xtd7q")
-size = 4
-can_be_picked_up = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Weapon"]
-mesh = SubResource("BoxMesh_kxdow")
 
 [node name="ring" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("8_6rxcf")]
 transform = Transform3D(9.78893, 0, 6.94096, 0, 12, 0, -6.94096, 0, 9.78893, 2026.87, 140.556, -1065.28)
@@ -313,6 +312,15 @@ shape = SubResource("BoxShape3D_3gx43")
 
 [node name="Asteroids" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
 script = ExtResource("10_vlrb4")
+asteroid_1 = ExtResource("11_4cfhx")
+asteroid_2 = ExtResource("12_n06nr")
+asteroid_3 = ExtResource("13_x2yie")
+asteroid_4 = ExtResource("14_m0s8b")
+asteroid_5 = ExtResource("15_x73sd")
+asteroid_count = 350
+spawn_radius_min = 500.0
+spawn_radius_max = 6000.0
+random_seed = 69
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)

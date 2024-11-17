@@ -33,3 +33,4 @@ func _process(delta: float) -> void:
 	heat_bar.value = starship.heat
 	crosshair.x_offset = starship.target_rotational_thrust_vector.y * 100
 	crosshair.y_offset = -starship.target_rotational_thrust_vector.x * 100
+	$Label3D.text = str(int(abs(starship.local_linear_velocity.z))) + " m/s"
