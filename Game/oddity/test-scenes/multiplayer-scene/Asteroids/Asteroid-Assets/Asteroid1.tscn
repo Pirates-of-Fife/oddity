@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceilc28yahn5i"]
+
+[ext_resource type="ArrayMesh" uid="uid://dd06g41taspe3" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid_1/OBJ/asteroid_1.obj" id="1_2d64d"]
+[ext_resource type="Script" path="res://test-scenes/multiplayer-scene/Asteroids/asteroid_rotation.gd" id="1_bda6b"]
+[ext_resource type="Texture2D" uid="uid://djf1ldvignfan" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid_1/GLB/asteroid_1_plastered_stone_wall_diff_4k.png" id="2_ywrpm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a354n"]
+albedo_texture = ExtResource("2_ywrpm")
+metallic_specular = 0.0
+roughness = 0.8
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_17pd7"]
+points = PackedVector3Array(1.01007, 1.36558, -0.313883, -1.25652, -0.655286, 0.425633, -1.25731, -0.65575, 0.573611, 1.05665, -1.24416, 0.474481, -0.221373, -0.75127, -0.950069, 0.654028, 0.13285, 1.34149, -0.268212, 1.64549, -0.405605, -0.273306, -1.45076, 0.871623, 1.34735, -0.602126, -0.212065, -0.744477, -0.0595585, 1.14365, 0.615517, 1.02039, -0.905241, 1.31042, -0.461018, 0.970895, 0.838764, 1.08847, 0.659421, -0.80662, 0.866041, -0.455772, -0.172307, -0.849886, 1.45712, -0.452248, 0.75436, 0.89896, 0.52026, -1.3577, -0.367677, -1.0106, -1.04953, -0.11625, -0.171342, 1.35657, -0.897426, 0.915536, -1.05654, 1.21961, -0.996615, 0.619037, 0.277543, 1.33402, 0.520716, 0.422678, 0.702881, -0.738657, -0.690692, 0.621412, 1.7288, -0.469776, -0.952751, -0.697759, -0.455237, -0.621698, -1.35632, -0.0694409, -0.965641, -1.00485, 0.921042, 1.242, 0.667973, -0.403892, 0.316526, 1.39584, 0.325782, 0.620538, -1.46044, 0.726016, 0.0738706, 0.610978, 1.13829, 1.45681, -0.46012, 0.574272)
+
+[node name="Asteroid1" type="Node3D"]
+script = ExtResource("1_bda6b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_2d64d")
+surface_material_override/0 = SubResource("StandardMaterial3D_a354n")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_17pd7")

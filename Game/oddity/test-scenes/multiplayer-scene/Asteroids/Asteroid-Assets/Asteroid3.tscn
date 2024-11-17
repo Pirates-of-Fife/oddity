@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhbnisnk21ada"]
+
+[ext_resource type="Script" path="res://test-scenes/multiplayer-scene/Asteroids/asteroid_rotation.gd" id="1_1qgwd"]
+[ext_resource type="ArrayMesh" uid="uid://cu21y2ddtpb7q" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid_3/OBJ/asteroid_3.obj" id="1_idw7v"]
+[ext_resource type="Texture2D" uid="uid://djf1ldvignfan" path="res://test-scenes/multiplayer-scene/Asteroids/Asteroid_1/GLB/asteroid_1_plastered_stone_wall_diff_4k.png" id="2_pcb6i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26kme"]
+albedo_texture = ExtResource("2_pcb6i")
+metallic_specular = 0.0
+roughness = 0.8
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_80jdn"]
+points = PackedVector3Array(-1.13618, -0.473821, -0.960984, 1.18595, -0.56478, 1.10697, 1.18148, -0.775116, 1.10305, 0.589398, 0.158063, -1.18977, -0.513504, 1.04513, 0.720035, -0.865406, -1.34379, -0.730376, -0.377874, -0.386269, 0.827681, 0.719229, 0.755913, -0.681465, 0.292125, 0.669044, 1.23489, -0.886651, 0.741763, -0.375742, 0.121233, -0.81701, -1.10051, 0.850854, -1.16706, 1.19916, -1.22474, -0.517198, -0.418651, -0.0059216, 0.837317, -0.848173, -0.911322, -0.743605, -1.25092, -0.558614, 0.711095, 0.978968, 0.838873, 0.705351, 0.0434, 0.336489, 0.0312985, 1.41226, 0.707861, -1.23073, 0.54726, 0.78228, -0.0974967, -0.911309, 0.971056, 0.455227, -0.551115, -0.659351, -1.03589, 0.0837813, -0.597717, 0.198974, -1.09805, -1.01796, 0.619865, 0.0851473, 0.0796327, 1.01236, 0.811289, -0.475293, 1.09859, 0.171239, 0.759725, 0.158136, 1.31926, 0.208547, 0.288263, -1.28386, 0.0774217, -1.09973, 0.795369, 0.245122, -0.515683, 1.25722, -1.00445, -0.804477, -0.122616, -1.11907, -1.1674, -0.855705)
+
+[node name="Asteroid3" type="Node3D"]
+script = ExtResource("1_1qgwd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_idw7v")
+surface_material_override/0 = SubResource("StandardMaterial3D_26kme")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_80jdn")
