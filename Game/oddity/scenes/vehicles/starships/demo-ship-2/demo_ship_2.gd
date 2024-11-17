@@ -42,7 +42,7 @@ func _on_heat_timer_timeout() -> void:
 		return
 		
 	if heat > max_heat:
-		damage.rpc(15)
+		damage.rpc(12)
 	
 	heat -= heat_decay
 
@@ -64,4 +64,4 @@ func _on_body_entered(body: Node) -> void:
 			if body.ignore_collision_damage == true:
 				return
 		
-		damage.rpc(local_linear_velocity.length() ** 1.7)
+		damage.rpc(local_linear_velocity.length() ** 1.4)

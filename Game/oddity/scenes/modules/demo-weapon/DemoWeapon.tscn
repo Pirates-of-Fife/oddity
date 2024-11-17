@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlrhe21mi8cl2"]
+[gd_scene load_steps=5 format=3 uid="uid://dlrhe21mi8cl2"]
 
 [ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="1_fobvb"]
 [ext_resource type="PackedScene" uid="uid://c6s2w5s0vpdhx" path="res://scenes/modules/demo-weapon/weapon.glb" id="2_7m2uo"]
 [ext_resource type="PackedScene" uid="uid://cy564m5exxmbe" path="res://scenes/modules/demo-weapon/Projectile.tscn" id="2_vg4so"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kj1kk"]
+size = Vector3(1.53481, 1.33209, 3.54005)
 
 [node name="DemoWeapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle", "cooldown_timer", "spawner")]
 collision_layer = 537398273
@@ -11,22 +14,27 @@ script = ExtResource("1_fobvb")
 size = 4
 nozzle = NodePath("Marker3D")
 projectile = ExtResource("2_vg4so")
-force = 100.0
+force = 250.0
 cooldown_timer = NodePath("CooldownTimer")
 spawner = NodePath("MultiplayerSpawner")
 can_be_picked_up = true
 
 [node name="weapon" parent="." instance=ExtResource("2_7m2uo")]
+transform = Transform3D(1.315, 0, 0, 0, 1.315, 0, 0, 0, 1.315, 0, 0.123747, 0)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.964213)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.138494, 1.32666)
 
 [node name="CooldownTimer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.3
+wait_time = 0.08
 one_shot = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0129544, 0.308217, -0.0523096)
+shape = SubResource("BoxShape3D_kj1kk")
 
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

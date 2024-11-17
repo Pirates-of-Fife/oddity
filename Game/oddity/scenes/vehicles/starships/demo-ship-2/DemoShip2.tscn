@@ -8,13 +8,13 @@
 [ext_resource type="Script" path="res://classes/pid-controller/PIDController.gd" id="7_3qamo"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="12_2ad4s"]
 [ext_resource type="PackedScene" uid="uid://q7qxuwsn55b5" path="res://scenes/interactable/control-seat/DemoControlSeat.tscn" id="12_17fxx"]
-[ext_resource type="PackedScene" uid="uid://c0uh2hkiwvx7l" path="res://scenes/vehicles/starships/demo-ship-2/ShipUi.tscn" id="12_nqfhp"]
-[ext_resource type="PackedScene" uid="uid://7fnvfm6w6or3" path="res://scenes/vehicles/starships/demo-ship-2/explosion.tscn" id="12_ti0ut"]
+[ext_resource type="PackedScene" path="res://scenes/vehicles/starships/demo-ship-2/ShipUi.tscn" id="12_nqfhp"]
+[ext_resource type="PackedScene" path="res://scenes/vehicles/starships/demo-ship-2/explosion.tscn" id="12_ti0ut"]
 [ext_resource type="Texture2D" uid="uid://ddpa36y8mkpiy" path="res://scenes/vehicles/starships/demo-ship-2/Crosshair/crosshair.png" id="13_cebqm"]
 [ext_resource type="PackedScene" uid="uid://brkik5oaep1vf" path="res://scenes/interactable/interaction-button/InteractionButton.tscn" id="13_ejv10"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/hardpoint/Hardpoint.gd" id="14_318nd"]
-[ext_resource type="PackedScene" uid="uid://dan83b5qrkhdv" path="res://scenes/vehicles/starships/demo-ship-2/MainParticleFX.tscn" id="14_iaa76"]
-[ext_resource type="PackedScene" uid="uid://cxg4i130ut4lm" path="res://scenes/vehicles/starships/demo-ship-2/SmokeFX.tscn" id="15_71jb7"]
+[ext_resource type="PackedScene" path="res://scenes/vehicles/starships/demo-ship-2/MainParticleFX.tscn" id="14_iaa76"]
+[ext_resource type="PackedScene" path="res://scenes/vehicles/starships/demo-ship-2/SmokeFX.tscn" id="15_71jb7"]
 [ext_resource type="PackedScene" uid="uid://dlrhe21mi8cl2" path="res://scenes/modules/demo-weapon/DemoWeapon.tscn" id="15_n2il0"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="17_o8bky"]
 
@@ -104,8 +104,8 @@ max_contacts_reported = 5
 script = ExtResource("1_gtrcu")
 health = 1600.0
 max_health = 1600.0
-max_heat = 350.0
-heat = 30.0
+max_heat = 220.0
+heat = 120.0
 ship_info = SubResource("Resource_8x1bo")
 thruster_force = SubResource("Resource_4ayql")
 hardpoint_1 = NodePath("Hardpoint")
@@ -142,23 +142,23 @@ visible = false
 mesh = ExtResource("4_en1wd")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.94, 0, -8.21774e-08, 0, 0.94, 0, 8.21774e-08, 0, -0.94, 0.411504, -0.319628, 0)
 shape = SubResource("ConvexPolygonShape3D_anf07")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.94, 0, -8.21774e-08, 0, 0.94, 0, 8.21774e-08, 0, -0.94, 0.607291, 0.273904, 0)
 shape = SubResource("ConvexPolygonShape3D_filri")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.94, 0, -8.21774e-08, 0, 0.94, 0, 8.21774e-08, 0, -0.94, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_nb6dy")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.94, 0, -8.21774e-08, 0, 0.94, 0, 8.21774e-08, 0, -0.94, -0.64486, -0.416221, 0)
 shape = SubResource("ConvexPolygonShape3D_0otas")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.94, 0, -8.21774e-08, 0, 0.94, 0, 8.21774e-08, 0, -0.94, -1.01075, 0.404778, 0)
 shape = SubResource("ConvexPolygonShape3D_xw1k0")
 
 [node name="PIDControllers" type="Node" parent="."]
@@ -255,7 +255,7 @@ transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 1.1
 target_control_entity = NodePath("..")
 
 [node name="Anchor" parent="DemoControlSeat" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07522e-17, 0.109506, 0.87924)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0.879)
 
 [node name="Marker3D" parent="DemoControlSeat" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16777, -1.22166, -2.38015)
@@ -351,7 +351,7 @@ mesh = SubResource("BoxMesh_8qbes")
 surface_material_override/0 = SubResource("StandardMaterial3D_4ppsa")
 
 [node name="Warning" type="Label3D" parent="."]
-transform = Transform3D(-0.277586, 0, -0.138006, 0, 0.31, 0, 0.138006, 0, -0.277586, 0.4102, 1.31197, -0.726381)
+transform = Transform3D(-0.277586, 0, -0.138006, 0, 0.31, 0, 0.138006, 0, -0.277586, 0.4102, 1.26934, -0.726381)
 modulate = Color(1, 0, 0, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "HULL CRITICAL"

@@ -63,6 +63,12 @@ transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 
 [node name="MainMenuUi" parent="SubViewportContainer" instance=ExtResource("1_gwx8j")]
 layout_mode = 2
 
+[node name="Buttons" parent="SubViewportContainer/MainMenuUi" index="3"]
+offset_left = -477.0
+offset_top = 193.0
+offset_right = 5.0
+offset_bottom = 427.0
+
 [node name="StartButton" parent="SubViewportContainer/MainMenuUi/Buttons/VBoxContainer" index="1"]
 disabled = true
 

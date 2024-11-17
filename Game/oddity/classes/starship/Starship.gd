@@ -14,14 +14,14 @@ var health : float = 2000
 var max_health : float = 2000
 
 @export
-var max_heat : float = 200
+var max_heat : float = 180
 
 @export
 var heat : float
 
 var ambiant_heat : float = 30
 
-var heat_decay : float = 3
+var heat_decay : float = 4
 
 @export_category("Target Thrust Vector")
 
@@ -108,6 +108,8 @@ var hardpoint_3 : Hardpoint
 @export
 var hardpoint_4 : Hardpoint
 
+var spawn_point : Marker3D
+
 var spawn_pos : Vector3 
 
 @export_category("Particles")
@@ -168,6 +170,7 @@ func _ready() -> void:
 func respawn() -> void:
 	
 	global_position = spawn_pos
+	global_rotation = spawn_point.global_rotation
 	linear_velocity = Vector3.ZERO
 	set_target_thrust_forward(0)
 	
@@ -201,6 +204,9 @@ func hit_ship(starship : Starship) -> void:
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
 	
+	if spawn_point != null:
+		spawn_pos = spawn_point.global_position
+	
 	if global_position.length() > 5000:
 		$Label3D.show()
 		damage.rpc(0.5)
@@ -218,7 +224,7 @@ func _physics_process(delta: float) -> void:
 		unfreeze()
 	
 	if boosting:
-		heat += 0.9
+		heat += 0.7
 		current_thrust_multiplier = thruster_force.boost_multiplier
 	else:
 		current_thrust_multiplier = 1
@@ -328,13 +334,17 @@ func use_interact() -> void:
 			collider.interact(player, self)
 	
 func shoot_primary() -> void:
-	hardpoint_1.module.shoot.rpc()
-	hardpoint_2.module.shoot.rpc()
-	hardpoint_3.module.shoot.rpc()
-	hardpoint_4.module.shoot.rpc()
+	if hardpoint_1.module != null:
+		hardpoint_1.module.shoot.rpc()
+		
+	if hardpoint_2.module != null:
+		hardpoint_2.module.shoot.rpc()
 	
-
-
+	if hardpoint_3.module != null:
+		hardpoint_3.module.shoot.rpc()
+		
+	if hardpoint_4.module != null:
+		hardpoint_4.module.shoot.rpc()
 
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO

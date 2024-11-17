@@ -48,7 +48,7 @@ func shoot() -> void:
 	if !can_shoot:
 		return
 		
-	own_ship.heat += 2
+	own_ship.heat += 1.2
 		
 	var p : Projectile = projectile.instantiate()
 	

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b53v2m13s71da"]
+
+[ext_resource type="Texture2D" uid="uid://bbchg8ovty7i2" path="res://test-scenes/multiplayer-scene/2k_sun.jpg" id="1_tpksu"]
+[ext_resource type="Script" path="res://test-scenes/ship-test-scene/mesh_instance_3d.gd" id="2_h6qbj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_2jj2s"]
+radius = 6.9634e+08
+height = 1.39268e+09
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irx23"]
+shading_mode = 0
+albedo_texture = ExtResource("1_tpksu")
+
+[node name="Sun" type="MeshInstance3D"]
+transform = Transform3D(-0.768625, -0.318375, -0.554844, 0.382683, -0.92388, 0, -0.512609, -0.21233, 0.831954, 0, 0, 0)
+mesh = SubResource("SphereMesh_2jj2s")
+surface_material_override/0 = SubResource("StandardMaterial3D_irx23")
+script = ExtResource("2_h6qbj")

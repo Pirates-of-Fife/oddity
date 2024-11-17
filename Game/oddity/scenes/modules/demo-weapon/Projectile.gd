@@ -11,6 +11,8 @@ var own_ship : Starship
 
 func _ready() -> void:
 	$Timer.start()
+		
+	# Set damage to a random value between 1 and the set damage value
 
 func _on_body_entered(body: Node) -> void:
 	if body is Projectile or body == own_ship:
@@ -19,6 +21,8 @@ func _on_body_entered(body: Node) -> void:
 	if body is Starship:
 		body.damage.rpc(damage)
 		hit.emit(body)
+	
+	print(damage)
 	
 	queue_free()
 	#GameManager.remove_projectile.rpc(self)
@@ -34,3 +38,7 @@ func _on_timer_timeout() -> void:
 	
 	self.collision_layer = layer_mask  # Set layer
 	self.collision_mask = layer_mask  # Set collision mask
+
+
+func _on_delete_timer_timeout() -> void:
+	queue_free()
