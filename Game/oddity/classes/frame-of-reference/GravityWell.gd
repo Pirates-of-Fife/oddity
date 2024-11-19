@@ -73,7 +73,7 @@ func apply_gravity() -> void:
 				body.upright_direction = -gravity_vector
 
 			if (body is Starship):
-				body.relative_gravity_vector = gravity_vector * body.global_basis.inverse() * gravity_strenth
+				body.relative_gravity_vector = gravity_vector * body.global_basis.inverse() * gravity_strenth * body.mass
 				body.relative_gravity_direction = gravity_vector * body.global_basis.inverse()
 				body.gravity_strength = gravity_strenth
 

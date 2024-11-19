@@ -75,9 +75,17 @@ var raycast_helper : RaycastHelper = RaycastHelper.new()
 @onready
 var current_max_velocity : float = ship_info.max_linear_velocity
 
+var lock_timer : Timer = Timer.new()
+
 func _ready() -> void:
 	_default_ready()
-
+	
+	lock_timer.one_shot = true
+	lock_timer.wait_time = 0.5
+	lock_timer.timeout.connect(lock_ship)
+	
+	add_child(lock_timer)
+	
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust
 	pid_up.limit_max = thruster_force.up_thrust
@@ -92,6 +100,13 @@ func _ready() -> void:
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
 
+func lock_ship() -> void:
+	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:		
+		axis_lock_linear_x = true
+		axis_lock_linear_y = true
+		axis_lock_linear_z = true
+		print(str(self) + " is locked")
+
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
 
@@ -102,14 +117,20 @@ func _physics_process(delta: float) -> void:
 	calculate_local_angular_velocity()
 	calculate_acceleration(delta)
 
+	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
+		if lock_timer.is_stopped():
+			lock_timer.start()
+	else:
+		axis_lock_linear_x = false
+		axis_lock_linear_y = false
+		axis_lock_linear_z = false
+
 	target_speed_vector = calculate_target_speed_vector()
 	target_rotation_speed_vector = calculate_target_rotation_speed_vector()
 
 	var velocity_delta : float = 0
 	var thrust : float = 0
-	
-	relative_gravity_vector *= 1.5
-	
+		
 	velocity_delta = local_linear_velocity.z - target_speed_vector.z
 
 	if (velocity_delta < 0):
