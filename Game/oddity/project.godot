@@ -248,6 +248,8 @@ starship_decrease_max_velocity={
 3d/default_linear_damp=0.0
 3d/default_angular_damp=0.0
 common/physics_interpolation=true
+jolt_3d/solver/velocity_iterations=40
+jolt_3d/solver/position_iterations=16
 jolt_3d/limits/max_linear_velocity=1e+15
 jolt_3d/limits/max_temporary_memory=64
 

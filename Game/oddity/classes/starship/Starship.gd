@@ -75,7 +75,6 @@ var raycast_helper : RaycastHelper = RaycastHelper.new()
 @onready
 var current_max_velocity : float = ship_info.max_linear_velocity
 
-
 func _ready() -> void:
 	_default_ready()
 
@@ -108,11 +107,9 @@ func _physics_process(delta: float) -> void:
 
 	var velocity_delta : float = 0
 	var thrust : float = 0
-
-	# forwards axis
-
-	relative_gravity_vector = relative_gravity_vector * mass
-
+	
+	relative_gravity_vector *= 1.5
+	
 	velocity_delta = local_linear_velocity.z - target_speed_vector.z
 
 	if (velocity_delta < 0):
