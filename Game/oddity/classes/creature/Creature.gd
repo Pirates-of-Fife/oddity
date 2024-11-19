@@ -105,6 +105,14 @@ func _physics_process(delta : float) -> void:
 func creature_physics_process(delta : float) -> void:
 	_default_physics_process(delta)
 
+# Stop local angular velocity in the Y axis
+	var local_ang_vel : Vector3 = angular_velocity * basis.inverse()
+	if abs(local_ang_vel.y) > 0.1:
+		local_ang_vel.y = 0
+		angular_velocity = (local_ang_vel * basis)
+
+
+
 	is_on_ground = is_grounded()
 
 	# INFO The damping code is a bit confusing and definetely is gonna need an overhaul in the future
