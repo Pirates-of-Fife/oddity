@@ -4,7 +4,7 @@ class_name  CreatureMovementCommand
 
 class Params:
 	var input : Vector2
-	
+
 	func _init(input : Vector2) -> void:
 		self.input = input
 

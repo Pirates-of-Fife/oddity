@@ -1,6 +1,6 @@
 extends Node3D
 
 func _process(delta: float) -> void:
-	rotate(Vector3(0,0,1), 0.0005 * delta)
-	
+	rotate(Vector3(0,0,1), 0.004 * delta)
+
 	global_position.y += 0.001 * delta
