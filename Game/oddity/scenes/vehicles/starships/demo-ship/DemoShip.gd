@@ -22,8 +22,5 @@ func _process(delta: float) -> void:
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
 	
-	#print(local_linear_velocity.length())
-	print(global_position.length())
-	
 	if Input.is_key_pressed(KEY_U):
 		global_position -= Vector3.FORWARD * global_basis.inverse() * 10000

@@ -143,6 +143,14 @@ func creature_physics_process(delta : float) -> void:
 			linear_damp = ground_walk_damp
 	else:
 		linear_damp = fall_damp
+		physics_material_override.friction = 0.2
+
+	if input_vector == Vector3.ZERO:
+		physics_material_override.friction = 1
+	else:
+		physics_material_override.friction = 0.2
+
+
 
 	var direction : Vector3 = (anchor.twist_pivot.global_transform.basis * input_vector).normalized()
 
