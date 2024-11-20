@@ -839,7 +839,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 198.513, -115.047, 321.713)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240.326, -119.44, 323.852)
 
 [node name="ShieldGenerator" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 238.183, -118.414, 305.326)
+transform = Transform3D(-0.135473, 0, 0.990781, 0, 1, 0, -0.990781, 0, -0.135473, 238.183, -118.414, 305.326)
 collision_layer = 537396737
 collision_mask = 537396737
 script = ExtResource("18_s8fbc")
@@ -847,7 +847,7 @@ size = 3
 can_be_picked_up = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/ShieldGenerator"]
-transform = Transform3D(0.0350042, 0, -0.999387, 0, 1, 0, 0.999387, 0, 0.0350042, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.218955)
 mesh = SubResource("BoxMesh_w8asa")
 surface_material_override/0 = SubResource("StandardMaterial3D_e64nr")
 

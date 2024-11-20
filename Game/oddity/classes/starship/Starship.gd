@@ -105,7 +105,6 @@ func lock_ship() -> void:
 		axis_lock_linear_x = true
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
-		print(str(self) + " is locked")
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
@@ -118,8 +117,10 @@ func _physics_process(delta: float) -> void:
 	calculate_acceleration(delta)
 
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
-		if lock_timer.is_stopped():
-			lock_timer.start()
+		if active_frame_of_reference is GravityGrid or active_frame_of_reference is GravityWell:
+			if active_frame_of_reference.enable_gravity == true:
+				if lock_timer.is_stopped():
+					lock_timer.start()
 	else:
 		axis_lock_linear_x = false
 		axis_lock_linear_y = false
