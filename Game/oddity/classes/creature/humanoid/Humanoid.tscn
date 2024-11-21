@@ -22,7 +22,6 @@ radius = 0.6
 [node name="Humanoid" type="RigidBody3D" node_paths=PackedStringArray("grounded_marker", "fall_timer", "ground_shape_cast", "stand_up_shape_cast", "anchor")]
 collision_layer = 268436993
 collision_mask = 268436993
-axis_lock_angular_y = true
 mass = 60.0
 physics_material_override = SubResource("PhysicsMaterial_nhlgx")
 continuous_cd = true
