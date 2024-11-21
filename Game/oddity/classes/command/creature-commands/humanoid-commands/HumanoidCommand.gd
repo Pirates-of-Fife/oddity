@@ -1,0 +1,3 @@
+extends CreatureCommand
+
+class_name HumanoidCommand
