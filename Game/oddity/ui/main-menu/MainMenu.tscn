@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfq2dmul5f7a8"]
+[gd_scene load_steps=9 format=3 uid="uid://dfq2dmul5f7a8"]
 
 [ext_resource type="Script" path="res://ui/main-menu/main_menu.gd" id="1_74355"]
 [ext_resource type="PackedScene" uid="uid://ba5evvevagnhw" path="res://ui/main-menu/MainMenuUI.tscn" id="1_gwx8j"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="2_1i8r8"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="3_mm0d4"]
+[ext_resource type="AudioStream" uid="uid://dwqa2b7x6amg0" path="res://ui/main-menu/sounds/MainMenu.wav" id="5_ra1n2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pcbll"]
 shader = ExtResource("3_mm0d4")
@@ -35,29 +36,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
 stretch = true
 stretch_shrink = 3
 
 [node name="MainMenuUi" parent="SubViewportContainer" instance=ExtResource("1_gwx8j")]
 layout_mode = 2
 
-[node name="RichTextLabel" parent="SubViewportContainer/MainMenuUi" index="2"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.897
-anchor_top = 0.953
-anchor_right = 0.897
-anchor_bottom = 0.953
-offset_left = -111.12
-offset_top = -25.62
-offset_right = 111.88
-offset_bottom = 25.38
-
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(320, 180)
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
@@ -73,6 +62,10 @@ environment = SubResource("Environment_8l6ma")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ra1n2")
+autoplay = true
 
 [connection signal="animation_started" from="SubViewportContainer/MainMenuUi" to="." method="_on_main_menu_ui_animation_started"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

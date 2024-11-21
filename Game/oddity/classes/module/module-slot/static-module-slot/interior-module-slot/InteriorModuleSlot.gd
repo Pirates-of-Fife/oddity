@@ -7,5 +7,9 @@ func _module_fits(module : StaticModule) -> bool:
 			return true
 	return false
 
-func _default_ready() -> void:
+func _ready() -> void:
+	_interior_module_slot_ready()
+
+func _interior_module_slot_ready() -> void:
+	_static_module_slot_ready()
 	add_to_group("InteriorModuleSlot")

@@ -38,8 +38,9 @@ gdscript/warnings/function_used_as_property=2
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="viewport"
 
 [dotnet]
@@ -219,6 +220,16 @@ humanoid_eva_roll_right={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
 ]
 }
+starship_increase_max_velocity={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":8,"position":Vector2(137, 18),"global_position":Vector2(146, 64),"factor":2.0,"button_index":4,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+starship_decrease_max_velocity={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(120, 20),"global_position":Vector2(129, 66),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -237,6 +248,8 @@ humanoid_eva_roll_right={
 3d/default_linear_damp=0.0
 3d/default_angular_damp=0.0
 common/physics_interpolation=true
+jolt_3d/solver/velocity_iterations=40
+jolt_3d/solver/position_iterations=16
 jolt_3d/limits/max_linear_velocity=1e+15
 jolt_3d/limits/max_temporary_memory=64
 

@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_77sa0"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_k7uia"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="3_t30go"]
-[ext_resource type="PackedScene" uid="uid://ik0bqvjr0uki" path="res://classes/creature/Creature.tscn" id="3_vf2my"]
 [ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/player/player.tscn" id="4_a6xkd"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AbyssalJumpDriveSlot.gd" id="5_ajfvm"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AlcubierreDriveSlot.gd" id="6_ig44c"]
@@ -11,6 +10,7 @@
 [ext_resource type="Script" path="res://classes/module/component/component-types/ShieldGenerator.gd" id="8_vjwdw"]
 [ext_resource type="Script" path="res://classes/module/component/component-types/AbyssalJumpDrive.gd" id="9_j0v68"]
 [ext_resource type="Script" path="res://classes/module/component/component-types/AlcubierreDrive.gd" id="10_62dvc"]
+[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="11_5xb5y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1oi4a"]
 shader = ExtResource("2_k7uia")
@@ -81,7 +81,7 @@ stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(320, 180)
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
@@ -98,6 +98,7 @@ environment = SubResource("Environment_pp2ta")
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/StaticBody3D"]
+layers = 1537
 mesh = SubResource("PlaneMesh_urnhv")
 surface_material_override/0 = SubResource("StandardMaterial3D_kpnjm")
 
@@ -113,14 +114,9 @@ size = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.1673, 0)
 shape = SubResource("BoxShape3D_jmku8")
 
-[node name="Creature" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("3_vf2my")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7802, 1.86205e-07, 2.56697)
-valid_ground_layers = 0
-pick_up_distance = 3.0
-
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("4_a6xkd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.91697, 0, 5.79709)
-control_entity = NodePath("../Creature")
+control_entity = NodePath("../Humanoid")
 
 [node name="AbyssalJumpDriveSlot" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.963928, 5.94667)
@@ -188,3 +184,6 @@ can_be_picked_up = true
 mesh = SubResource("BoxMesh_ujwoo")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_23cem")
+
+[node name="Humanoid" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("11_5xb5y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.685, 38.7321, -8.36226)

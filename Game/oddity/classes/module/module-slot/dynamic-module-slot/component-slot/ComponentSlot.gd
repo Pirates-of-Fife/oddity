@@ -6,12 +6,17 @@ class_name ComponentSlot
 var size : ModuleSize.ComponentSize
 
 func _module_fits(module : Module) -> bool:
-	if module is Component and module is not AlcubierreDrive and module is not AbyssalJumpDrive:
-		if module.size == size:
+	if module is Component and module is not AlcubierreDrive and module is not AbyssalJumpDrive and module is not Radiator:
+		if module.size <= size:
 			return true
+	
 	return false
 
-func _default_ready() -> void:
+func _ready() -> void:
+	_component_slot_ready()
+
+func _component_slot_ready() -> void:
+	_dynamic_module_slot_ready()
 	add_to_group("ComponentSlot")
 
 func _initialize_area() -> void:

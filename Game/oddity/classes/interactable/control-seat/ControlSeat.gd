@@ -33,6 +33,7 @@ func enter_seat(player : Player, control_entity : ControlEntity) -> void:
 	player_using_seat.possess(target_control_entity)
 	entity_using_seat.reparent.call_deferred(self)
 	entity_using_seat.freeze_static()
+	entity_using_seat.hide()
 	
 	if target_control_entity is Vehicle:
 		target_control_entity.active_control_seat = self
@@ -43,7 +44,8 @@ func exit_seat() -> void:
 	player_using_seat.possess(entity_using_seat)
 	
 	entity_using_seat.global_position = spawn_location.global_position
-	
+	entity_using_seat.show()
+
 	if target_control_entity is Vehicle:
 		target_control_entity.active_control_seat = null
 		

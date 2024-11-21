@@ -5,10 +5,17 @@ class_name AlcubierreDrive
 @export
 var size : ModuleSize.AlcubierreDriveSize
 
+@export
+var initialize_collision_shape_automatically : bool = true
 
 func _ready() -> void:
+	_alcubierre_drive_ready()
+
+func _alcubierre_drive_ready() -> void:
 	_module_ready()
-	_initialize_collision_shape()
+	
+	if initialize_collision_shape_automatically:
+		_initialize_collision_shape()
 	
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()
