@@ -11,7 +11,11 @@ func _module_fits(module : Module) -> bool:
 			return true
 	return false
 
-func _default_ready() -> void:
+func _ready() -> void:
+	_alcubierre_drive_slot_ready()
+
+func _alcubierre_drive_slot_ready() -> void:
+	_dynamic_module_slot_ready()
 	add_to_group("ComponentSlot")
 
 func _initialize_area() -> void:

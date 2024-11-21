@@ -18,6 +18,9 @@ var starship_thrust_down_command : StarshipThrustDownCommand = StarshipThrustDow
 
 var starship_player_interact_command : StarshipPlayerInteractCommand = StarshipPlayerInteractCommand.new()
 
+var starship_increase_max_velocity_command : StarshipIncreaseMaxVelocityCommand = StarshipIncreaseMaxVelocityCommand.new()
+var starship_decrease_max_velocity_command : StarshipDecreaseMaxVelocityCommand = StarshipDecreaseMaxVelocityCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -33,6 +36,9 @@ var ship_mouse_controls_sensitivity : float = 0.1
 var keyboard_throttle_sensitivity : float = 0.8
 
 @export
+var velocity_change_on_scroll : float = 10
+
+@export
 var keyboard_throttle_deadzone : float = 0.05
 
 var mouse_yaw : float = 0.0
@@ -42,9 +48,11 @@ var mouse_pitch : float = 0.0
 var throttle_deadzone_reset_timer : Timer = Timer.new()
 
 func _ready() -> void:
-	_default_ready()
+	_starship_controller_ready()
 
-func _default_ready() -> void:
+func _starship_controller_ready() -> void:
+	_vehicle_ready()
+	
 	add_child(throttle_deadzone_reset_timer)
 	
 	throttle_deadzone_reset_timer.wait_time = 0.4
@@ -52,9 +60,9 @@ func _default_ready() -> void:
 	throttle_deadzone_reset_timer.timeout.connect(_on_throttle_deadzone_reset_timer_timeout)
 		
 func _process(delta: float) -> void:
-	_default_process(delta)
+	_starship_controller_process(delta)
 		
-func _default_process(delta : float) -> void:
+func _starship_controller_process(delta : float) -> void:
 	if control_entity is Starship:
 		current_throttle_forwards_axis = starship_last_throttle_value #control_entity.target_thrust_vector.z
 			
@@ -123,6 +131,12 @@ func _default_process(delta : float) -> void:
 			
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			vehicle_exit_seat_command.execute(control_entity)
+			
+		if (Input.is_action_just_pressed("starship_increase_max_velocity")):
+			starship_increase_max_velocity_command.execute(control_entity, StarshipIncreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
+		
+		if (Input.is_action_just_pressed("starship_decrease_max_velocity")):
+			starship_decrease_max_velocity_command.execute(control_entity, StarshipDecreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

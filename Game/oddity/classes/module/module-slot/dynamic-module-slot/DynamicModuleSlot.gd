@@ -5,9 +5,18 @@ class_name DynamicModuleSlot
 @export
 var module : Module
 
+@export
+var initialize_area_automatically : bool = true
+
 func _ready() -> void:
-	_initialize_area()
-	_default_ready()
+	_dynamic_module_slot_ready()
+
+func _dynamic_module_slot_ready() -> void:
+	_module_slot_ready()
+	
+	if initialize_area_automatically:
+		_initialize_area()
+
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Module:

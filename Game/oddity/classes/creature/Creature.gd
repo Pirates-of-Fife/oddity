@@ -105,7 +105,7 @@ func creature_physics_process(delta : float) -> void:
 	_default_physics_process(delta)
 	
 	is_on_ground = is_grounded()
-	
+			
 	# INFO The damping code is a bit confusing and definetely is gonna need an overhaul in the future
 	
 	# reduce damping if not in gravity

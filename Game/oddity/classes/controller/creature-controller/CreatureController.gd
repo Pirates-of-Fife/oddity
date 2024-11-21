@@ -16,9 +16,11 @@ var twist_input : float = 0.0
 var pitch_input : float = 0.0
 
 func _process(delta: float) -> void:
-	_default_process(delta)
+	_creature_process(delta)
 
-func _default_process(delta : float) -> void:
+func _creature_process(delta : float) -> void:
+	_controller_process(delta)
+	
 	if control_entity is Creature:
 		var input_dir : Vector2 = Input.get_vector("player_walk_left", "player_walk_right", "player_walk_forwards", "player_walk_backwards")
 		

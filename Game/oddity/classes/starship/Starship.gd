@@ -22,30 +22,30 @@ var ship_info : StarshipInfo
 var thruster_force : ThrusterForces
 
 @onready 
-var pid_forward : PIDController = $PIDControllers/PIDForward
+var pid_forward : PIDController = $ShipPidControllers/PIDForward
 @onready
-var pid_backward : PIDController = $PIDControllers/PIDBackward
+var pid_backward : PIDController = $ShipPidControllers/PIDBackward
 @onready
-var pid_up : PIDController = $PIDControllers/PIDUp
+var pid_up : PIDController = $ShipPidControllers/PIDUp
 @onready
-var pid_down : PIDController = $PIDControllers/PIDDown
+var pid_down : PIDController = $ShipPidControllers/PIDDown
 @onready
-var pid_left : PIDController = $PIDControllers/PIDLeft
+var pid_left : PIDController = $ShipPidControllers/PIDLeft
 @onready
-var pid_right : PIDController = $PIDControllers/PIDRight
+var pid_right : PIDController = $ShipPidControllers/PIDRight
 
 @onready 
-var pid_roll_left : PIDController =  $PIDControllers/PIDRollLeft
+var pid_roll_left : PIDController =  $ShipPidControllers/PIDRollLeft
 @onready 
-var pid_roll_right : PIDController =  $PIDControllers/PIDRollRight
+var pid_roll_right : PIDController =  $ShipPidControllers/PIDRollRight
 @onready 
-var pid_yaw_left : PIDController =  $PIDControllers/PIDYawLeft
+var pid_yaw_left : PIDController =  $ShipPidControllers/PIDYawLeft
 @onready 
-var pid_yaw_right : PIDController =  $PIDControllers/PIDYawRight
+var pid_yaw_right : PIDController =  $ShipPidControllers/PIDYawRight
 @onready 
-var pid_pitch_up : PIDController =  $PIDControllers/PIDPitchUp
+var pid_pitch_up : PIDController =  $ShipPidControllers/PIDPitchUp
 @onready 
-var pid_pitch_down : PIDController =  $PIDControllers/PIDPitchDown
+var pid_pitch_down : PIDController =  $ShipPidControllers/PIDPitchDown
 
 var epsilon : float = 0.0001
 
@@ -70,6 +70,11 @@ var gravity_strength : float = 0
 var interaction_length : float = 2.5
 
 var raycast_helper : RaycastHelper = RaycastHelper.new()
+
+
+@onready
+var current_max_velocity : float = ship_info.max_linear_velocity
+
 
 func _ready() -> void:
 	_default_ready()
@@ -184,6 +189,20 @@ func _physics_process(delta: float) -> void:
 	
 	relative_gravity_vector = Vector3.ZERO
 
+func increase_max_velocity(velocity : float) -> void:
+	if current_max_velocity + velocity > ship_info.max_linear_velocity:
+		current_max_velocity = ship_info.max_linear_velocity
+		return
+	
+	current_max_velocity += velocity
+	
+func decrease_max_velocity(velocity : float) -> void:
+	if current_max_velocity - velocity < 0:
+		current_max_velocity = 0
+		return
+	
+	current_max_velocity -= velocity
+
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
 	
@@ -208,7 +227,7 @@ func calculate_local_angular_velocity() -> void:
 	local_angular_velocity = transform.basis.inverse() * angular_velocity
 
 func calculate_target_speed_vector() -> Vector3:
-	return target_thrust_vector * ship_info.max_linear_velocity
+	return target_thrust_vector * current_max_velocity
 
 func calculate_target_rotation_speed_vector() -> Vector3:
 	var new_target_vector : Vector3 = target_rotational_thrust_vector

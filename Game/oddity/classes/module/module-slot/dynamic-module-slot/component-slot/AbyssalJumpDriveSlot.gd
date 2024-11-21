@@ -10,8 +10,12 @@ func _module_fits(module : Module) -> bool:
 		if module.size == abyssal_jump_drive_size:
 			return true
 	return false
+	
+func _ready() -> void:
+	_abyssal_jump_drive_slot_ready()
 
-func _default_ready() -> void:
+func _abyssal_jump_drive_slot_ready() -> void:
+	_dynamic_module_slot_ready()
 	add_to_group("ComponentSlot")
 
 func _initialize_area() -> void:

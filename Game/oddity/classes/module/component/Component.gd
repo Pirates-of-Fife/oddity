@@ -5,10 +5,17 @@ class_name Component
 @export
 var size : ModuleSize.ComponentSize
 
-func _ready() -> void:
-	_module_ready()
-	_initialize_collision_shape()
+@export
+var initialize_collision_shape_automatically : bool = true
 
+func _ready() -> void:
+	_component_ready()
+
+func _component_ready() -> void:
+	_module_ready()
+
+	if initialize_collision_shape_automatically:
+		_initialize_collision_shape()
 
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()

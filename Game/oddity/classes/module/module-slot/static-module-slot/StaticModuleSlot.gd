@@ -6,7 +6,10 @@ class_name StaticModuleSlot
 var module : StaticModule
 
 func _ready() -> void:
-	_default_ready()
+	_static_module_slot_ready()
+
+func _static_module_slot_ready() -> void:
+	_module_slot_ready()
 
 func _module_fits(module : StaticModule) -> bool:
 	return false
