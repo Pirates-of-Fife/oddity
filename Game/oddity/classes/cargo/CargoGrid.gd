@@ -46,6 +46,7 @@ func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 
 	cu_x_y_z = Vector3(x_chunks, y_chunks, z_chunks)
 
+
 	# Iterate through chunks
 	for x : float in range(ceilf(-x_chunks / 2.0), ceilf(x_chunks / 2.0)):
 		for y : float in range(ceilf(-y_chunks / 2.0), ceilf(y_chunks / 2.0)):
