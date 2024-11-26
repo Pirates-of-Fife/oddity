@@ -53,6 +53,6 @@ Length **2 CU - 2.5m**
 
 ### 32 CU
 
-Height **4 CU - 5m**
-Width **4 CU - 5m**
+Height **8 CU - 10m**
+Width **2 CU - 2.5m**
 Length **2 CU - 2.5m**

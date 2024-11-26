@@ -79,13 +79,13 @@ var lock_timer : Timer = Timer.new()
 
 func _ready() -> void:
 	_default_ready()
-	
+
 	lock_timer.one_shot = true
 	lock_timer.wait_time = 0.5
 	lock_timer.timeout.connect(lock_ship)
-	
+
 	add_child(lock_timer)
-	
+
 	pid_forward.limit_max = thruster_force.forward_thrust
 	pid_backward.limit_max = thruster_force.backward_thrust
 	pid_up.limit_max = thruster_force.up_thrust
@@ -101,7 +101,7 @@ func _ready() -> void:
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
 
 func lock_ship() -> void:
-	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:		
+	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
 		axis_lock_linear_x = true
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
@@ -131,7 +131,7 @@ func _physics_process(delta: float) -> void:
 
 	var velocity_delta : float = 0
 	var thrust : float = 0
-		
+
 	velocity_delta = local_linear_velocity.z - target_speed_vector.z
 
 	if (velocity_delta < 0):

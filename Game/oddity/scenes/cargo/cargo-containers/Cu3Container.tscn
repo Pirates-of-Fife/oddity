@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqrpitoqb1bsc"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_brqjt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yv02j"]
+size = Vector3(1.25, 1.25, 3.75)
+
+[node name="Cu3Container" type="RigidBody3D"]
+collision_layer = 536872449
+collision_mask = 536872449
+script = ExtResource("1_brqjt")
+container_size = 2
+can_be_picked_up = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_yv02j")
