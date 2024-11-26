@@ -7,8 +7,9 @@ class_name CargoGrid
 var cargo_grid_physical_size : Vector3 :
 	set(value):
 		cargo_grid_physical_size = value
-		$Area3D/CollisionShape3D.shape.size = value
-		generate_grid = true
+		if $Area3D/CollisionShape3D != null:
+			$Area3D/CollisionShape3D.shape.size = value
+		#generate_grid = true
 
 @export
 var total_cu_capacity : int
@@ -16,8 +17,8 @@ var total_cu_capacity : int
 @export
 var cu_x_y_z : Vector3
 
-var thread : Thread = Thread.new()
-
+@export
+var cargo_area : PackedScene
 
 @export
 var generate_grid : bool :
@@ -45,13 +46,9 @@ func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 
 	cu_x_y_z = Vector3(x_chunks, y_chunks, z_chunks)
 
-
-	print(ceilf(x_chunks / 2.0))
-
 	# Iterate through chunks
 	for x : float in range(ceilf(-x_chunks / 2.0), ceilf(x_chunks / 2.0)):
 		for y : float in range(ceilf(-y_chunks / 2.0), ceilf(y_chunks / 2.0)):
-
 			for z : float in range(ceilf(-z_chunks / 2.0), ceilf(z_chunks / 2.0)):
 				# Compute position of the current chunk
 				var chunk_center : Vector3 = area_origin + Vector3(
@@ -87,15 +84,8 @@ func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 
 
 func _add_shape_to_grid(chunk_size : float, chunk_center : Vector3) -> void:
-	var collision_shape : CollisionShape3D = CollisionShape3D.new()
-	var chunk_box : BoxShape3D = BoxShape3D.new()
-	chunk_box.size = Vector3(chunk_size, chunk_size, chunk_size)
+	var area : CargoArea = cargo_area.instantiate()
 
-	collision_shape.shape = chunk_box
-	collision_shape.global_transform.origin = chunk_center
-
-	$Markers.add_child(collision_shape)
-	collision_shape.owner = get_tree().edited_scene_root
-
-func _exit_tree() -> void:
-	thread.wait_to_finish()
+	$Markers.add_child(area)
+	area.global_position = chunk_center
+	area.owner = get_tree().edited_scene_root
