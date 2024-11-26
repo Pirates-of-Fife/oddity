@@ -9,7 +9,6 @@ var cargo_grid_physical_size : Vector3 :
 		cargo_grid_physical_size = value
 		if $Area3D/CollisionShape3D != null:
 			$Area3D/CollisionShape3D.shape.size = value
-		#generate_grid = true
 
 @export
 var total_cu_capacity : int
@@ -28,6 +27,13 @@ var generate_grid : bool :
 			var collision_shape : CollisionShape3D = area.get_node("CollisionShape3D")
 			var shape : Shape3D = collision_shape.shape
 			_generate_box_grid(shape, area)
+
+func find_cargo_area(coordinate : Vector3) -> CargoArea:
+	for c : CargoArea in $Markers.get_children():
+		if c.area_coordinate == coordinate:
+			return c
+	
+	return null
 
 func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 	for m : Node3D in $Markers.get_children():
@@ -58,13 +64,7 @@ func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 					z * chunk_size + chunk_size / 2
 				)
 
-				# Create a Marker3D and defer both adding and setting position
-				#var marker : Marker3D = Marker3D.new()
-				#$Markers.add_child(marker)
-				#marker.call_deferred("set_global_position", chunk_center)
-				#marker.owner = get_tree().edited_scene_root
-
-				_add_shape_to_grid(chunk_size, chunk_center)
+				_add_shape_to_grid(chunk_size, chunk_center, Vector3(x, y, z))
 
 
 	if y_chunks == 1:
@@ -84,9 +84,11 @@ func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 	total_cu_capacity = y_chunks * x_chunks * z_chunks
 
 
-func _add_shape_to_grid(chunk_size : float, chunk_center : Vector3) -> void:
+func _add_shape_to_grid(chunk_size : float, chunk_center : Vector3, coordinate : Vector3) -> void:
 	var area : CargoArea = cargo_area.instantiate()
-
+	area.area_coordinate = coordinate
+	area.cargo_grid = self
+	
 	$Markers.add_child(area)
 	area.global_position = chunk_center
 	area.owner = get_tree().edited_scene_root

@@ -11,9 +11,19 @@ var in_cargo_areas : Array = Array()
 
 var nearest_cargo_area : CargoArea = null
 
+var snapped_to : CargoArea
+
 # INFO Will be replaced by a resource file or something else
 @export
 var contents : String
+
+
+enum CargoContainerDirection
+{
+	X,
+	Y,
+	Z
+}
 
 func _ready() -> void:
 	_cargo_container_ready()
@@ -30,6 +40,24 @@ func _cargo_container_process(delta : float) -> void:
 
 	if is_being_held and in_cargo_areas.size() > 0:
 		find_nearest_cargo_area()
+
+func snap_to_grid(cargo_area : CargoArea) -> void:
+	if snapped_to != null:
+		return
+	
+	freeze_static()
+	reparent.call_deferred(cargo_area)
+	global_position = cargo_area.global_position
+	global_rotation = cargo_area.global_rotation
+	cargo_area.snapped_cargo = self
+	snapped_to = cargo_area
+	
+	print("Cargo " + str(self) + " snapped to " + str(cargo_area))
+
+func unsnap_from_grid() -> void:
+	print("Cargo " + str(self) + " unsnapped from " + str(snapped_to))
+	snapped_to.snapped_cargo = null
+	snapped_to = null
 
 func find_nearest_cargo_area() -> void:
 	var closest_area : CargoArea = null
@@ -48,6 +76,13 @@ func find_nearest_cargo_area() -> void:
 
 	nearest_cargo_area = closest_area
 
+
+func on_interact_self() -> void:
+	if snapped_to != null:
+		unsnap_from_grid()
+		
+	unfreeze()
+	
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()
 

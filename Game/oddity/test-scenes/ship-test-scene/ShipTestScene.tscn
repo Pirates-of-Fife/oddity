@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=71 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/temp-planet.gd" id="10_x2ly6"]
 [ext_resource type="Texture2D" uid="uid://ehsni8niotww" path="res://test-scenes/ship-test-scene/lroc_color_poles_4k.png" id="12_0dl0g"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="13_h4u2q"]
-[ext_resource type="PackedScene" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
+[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
 [ext_resource type="Texture2D" uid="uid://sassmgocpxib" path="res://test-scenes/ship-test-scene/ldem_3_8bit.jpg" id="13_r5amc"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_8crom"]
 [ext_resource type="PackedScene" uid="uid://behanbk2jf42k" path="res://classes/game-entity/static-game-entity/openable/DemoOpenableManual.tscn" id="15_n2ehj"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://b80my2287qjys" path="res://test-scenes/ship-test-scene/2k_sun.jpg" id="22_ubadb"]
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/mesh_instance_3d.gd" id="23_i105l"]
 [ext_resource type="PackedScene" uid="uid://iphon1qo87se" path="res://classes/cargo/CargoGrid.tscn" id="30_x2vgj"]
+[ext_resource type="PackedScene" uid="uid://bp00jj8askcjj" path="res://scenes/cargo/cargo-containers/Cu2Container.tscn" id="32_x0qjo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj070"]
 shader = ExtResource("1_eqyqr")
@@ -918,7 +919,7 @@ shape = SubResource("BoxShape3D_42qyo")
 shape = SubResource("ConcavePolygonShape3D_vyf5x")
 
 [node name="CargoGrid" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("30_x2vgj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.587, -118.127, 305.062)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.587, -116.882, 305.062)
 
 [node name="Cu1Container" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.901, -116.795, 310.537)
@@ -928,5 +929,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.901, -116.795, 312.757)
 
 [node name="Cu1Container3" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.901, -116.795, 308.159)
+
+[node name="Cu1Container4" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.425, -116.795, 308.159)
+
+[node name="Cu1Container5" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.425, -115.08, 308.159)
+
+[node name="Cu1Container6" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.48, -115.08, 308.159)
+
+[node name="Cu1Container7" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.48, -113.266, 308.159)
+
+[node name="Cu1Container8" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.203, -113.266, 308.159)
+
+[node name="Cu1Container9" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.203, -113.266, 311.944)
+
+[node name="Cu1Container10" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 229.484, -113.266, 311.944)
+
+[node name="Cu1Container11" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.222, -113.266, 311.944)
+
+[node name="Cu1Container12" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.222, -113.266, 313.697)
+
+[node name="Cu1Container13" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 229.696, -113.266, 313.697)
+
+[node name="Cu1Container14" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.147, -113.266, 313.697)
+
+[node name="Cu1Container15" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 231.296, -113.266, 313.697)
+
+[node name="Cu2Container" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("32_x0qjo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 229.569, -117.584, 309.433)
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]
