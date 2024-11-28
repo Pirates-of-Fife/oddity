@@ -1,3 +1,4 @@
+@tool
 extends DynamicModuleSlot
 
 class_name ComponentSlot
@@ -6,8 +7,11 @@ class_name ComponentSlot
 var size : ModuleSize.ComponentSize
 
 func _module_fits(module : Module) -> bool:
+	if self.module != null:
+		return false
+
 	if module is Component and module is not AlcubierreDrive and module is not AbyssalJumpDrive and module is not Radiator:
-		if module.size <= size:
+		if module.size == size:
 			return true
 
 	return false
@@ -20,6 +24,14 @@ func _component_slot_ready() -> void:
 	add_to_group("ComponentSlot")
 
 func _initialize_area() -> void:
+	if area_root == null:
+		area_root = Node3D.new()
+		add_child(area_root)
+		area_root.owner = get_tree().edited_scene_root
+	else:
+		for c : Node3D in area_root.get_children():
+			c.queue_free()
+
 	var area : Area3D = Area3D.new()
 
 	area.collision_layer = 524288
@@ -37,8 +49,26 @@ func _initialize_area() -> void:
 
 	collision_shape.shape = box_shape
 
-	add_child(area)
+	area_root.add_child(area)
 	area.add_child(collision_shape)
+	area.owner = get_tree().edited_scene_root
+	collision_shape.owner = get_tree().edited_scene_root
+
+	var mesh_instance : MeshInstance3D = MeshInstance3D.new()
+	var box_mesh : BoxMesh = BoxMesh.new()
+	box_mesh.size = box_shape.size
+	mesh_instance.mesh = box_mesh
+
+	# Assign the highlight material
+	var highlight_material : Material = preload("res://classes/cargo/CargoHighlightMaterial.tres")
+	mesh_instance.material_override = highlight_material
+	mesh_instance.visible = false  # Hide by default
+
+	# Add MeshInstance3D as a child of the Area3D
+	area.add_child(mesh_instance)
+	mesh_instance.owner = get_tree().edited_scene_root
+
+	highlight_box = mesh_instance
 
 	var error_enter : Error = area.body_entered.connect(_on_area_3d_body_entered)
 	var error_exit : Error = area.body_exited.connect(_on_area_3d_body_exited)
