@@ -28,6 +28,23 @@ var generate_grid : bool :
 			var shape : Shape3D = collision_shape.shape
 			_generate_box_grid(shape, area)
 
+func _ready() -> void:
+	if !Engine.is_editor_hint():
+		for c : CargoArea in $CargoAreas.get_children():
+			var lower_cargo : CargoArea = find_cargo_area(c.area_coordinate - Vector3(0, 1, 0))
+			var upper_cargo : CargoArea = find_cargo_area(c.area_coordinate + Vector3(0, 1, 0))
+
+			if lower_cargo != null:
+				c.lower_cargo_area = lower_cargo
+
+			if upper_cargo != null:
+				c.upper_cargo_area = upper_cargo
+
+			if c.lower_cargo_area == null:
+				c.valid = true
+			else:
+				c.valid = false
+
 func find_cargo_area(coordinate : Vector3) -> CargoArea:
 	for c : CargoArea in $CargoAreas.get_children():
 		if c.area_coordinate == coordinate:
@@ -66,22 +83,7 @@ func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 
 				_add_shape_to_grid(chunk_size, chunk_center, Vector3(x, y, z))
 
-	for c : CargoArea in $CargoAreas.get_children():
-		var lower_cargo : CargoArea = find_cargo_area(c.area_coordinate - Vector3(0, 1, 0))
-		var upper_cargo : CargoArea = find_cargo_area(c.area_coordinate + Vector3(0, 1, 0))
 
-		if lower_cargo != null:
-			c.lower_cargo_area = lower_cargo
-
-		if upper_cargo == null:
-			c.upper_cargo_area == null
-		else:
-			c.upper_cargo_area = lower_cargo
-
-		if c.lower_cargo_area == null:
-			c.valid = true
-		else:
-			c.valid = false
 
 	if y_chunks == 1:
 		for m : Node3D in $CargoAreas.get_children():

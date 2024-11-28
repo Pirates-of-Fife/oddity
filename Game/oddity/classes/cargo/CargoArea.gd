@@ -5,8 +5,8 @@ class_name CargoArea
 @export
 var cargo_in_area : CargoContainer
 
-var lower_cargo_area : CargoArea = null
-var upper_cargo_area : CargoArea = null
+var lower_cargo_area : CargoArea
+var upper_cargo_area : CargoArea
 
 @export
 var cargo_grid : CargoGrid
