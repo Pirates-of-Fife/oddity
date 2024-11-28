@@ -80,7 +80,6 @@ func _process(delta: float) -> void:
 
 		frame_skip = 60
 		
-		# Compute the monitoring state once
 		var is_nearby : bool = (player.global_position - self.global_position).length_squared() <= monitoring_distance
 		
 		if is_nearby != player_nearby:
