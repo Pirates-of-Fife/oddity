@@ -209,10 +209,10 @@ data = PackedVector3Array(15, 0, 18.17, -15, 0, 18.17, 15, 0, -18.17, -15, 0, 18
 [sub_resource type="BoxShape3D" id="BoxShape3D_o8xmi"]
 size = Vector3(6, 4, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_83f30"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6fa4"]
 size = Vector3(0.55, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_whnkt"]
+[sub_resource type="BoxMesh" id="BoxMesh_5j0ou"]
 size = Vector3(0.55, 1.1, 2.2)
 
 [node name="ShipTestScene" type="Node3D"]
@@ -1241,16 +1241,16 @@ area_root = NodePath("@Node3D@93362")
 
 [node name="@Node3D@93362" type="Node3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot"]
 
-[node name="@Area3D@96011" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
+[node name="@Area3D@98709" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@96012" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@96011"]
-shape = SubResource("BoxShape3D_83f30")
+[node name="@CollisionShape3D@98710" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@98709"]
+shape = SubResource("BoxShape3D_x6fa4")
 
-[node name="@MeshInstance3D@96013" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@96011"]
+[node name="@MeshInstance3D@98711" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@98709"]
 visible = false
 material_override = ExtResource("35_syj3t")
-mesh = SubResource("BoxMesh_whnkt")
+mesh = SubResource("BoxMesh_5j0ou")
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]
