@@ -17,7 +17,6 @@ var snapped_to : CargoArea
 @export
 var contents : String
 
-
 enum CargoContainerDirection
 {
 	X,
@@ -54,25 +53,19 @@ func snap_to_grid(cargo_area : CargoArea) -> void:
 
 	cargo_area.cargo_added()
 
-	print("Cargo " + str(self) + " snapped to " + str(cargo_area))
-
 func unsnap_from_grid() -> void:
-	print("Cargo " + str(self) + " unsnapped from " + str(snapped_to))
 	snapped_to.cargo_removed()
 	snapped_to.snapped_cargo = null
 	snapped_to = null
 
 func find_nearest_cargo_area() -> void:
 	var closest_area : CargoArea = null
-	var shortest_distance : float = INF  # Start with a very large number (infinity)
+	var shortest_distance : float = INF
 
-	# Loop through all the cargo areas in the container's `in_cargo_areas` list
 	for area : CargoArea in in_cargo_areas:
 		if area != null:
-		# Calculate the distance between the cargo container and this cargo area
 			var distance : float = global_position.distance_to(area.global_position)
 
-			# If this area is closer than the current closest, update
 			if distance < shortest_distance:
 				shortest_distance = distance
 				closest_area = area
