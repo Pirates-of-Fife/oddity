@@ -6,9 +6,10 @@ class_name CargoGrid
 @export
 var cargo_grid_physical_size : Vector3 :
 	set(value):
-		cargo_grid_physical_size = value
-		if $Area3D/CollisionShape3D != null:
-			$Area3D/CollisionShape3D.shape.size = value
+		if Engine.is_editor_hint():
+			cargo_grid_physical_size = value
+			if $Area3D/CollisionShape3D != null:
+				$Area3D/CollisionShape3D.shape.size = value
 
 @export
 var total_cu_capacity : int
@@ -16,8 +17,11 @@ var total_cu_capacity : int
 @export
 var cu_x_y_z : Vector3
 
+@onready
+var cargo_area : PackedScene = preload("res://classes/cargo/CargoArea.tscn")
+
 @export
-var cargo_area : PackedScene
+var cargo_area_root : Node3D
 
 @export
 var generate_grid : bool :
@@ -30,30 +34,34 @@ var generate_grid : bool :
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
-		for c : CargoArea in $CargoAreas.get_children():
+		for c : CargoArea in cargo_area_root.get_children():
 			var lower_cargo : CargoArea = find_cargo_area(c.area_coordinate - Vector3(0, 1, 0))
 			var upper_cargo : CargoArea = find_cargo_area(c.area_coordinate + Vector3(0, 1, 0))
 
 			if lower_cargo != null:
 				c.lower_cargo_area = lower_cargo
+				c.valid = false
+			else:
+				c.valid = true
 
 			if upper_cargo != null:
 				c.upper_cargo_area = upper_cargo
 
-			if c.lower_cargo_area == null:
-				c.valid = true
-			else:
-				c.valid = false
+
+
+		var area : Area3D = $Area3D
+		var collision_shape : CollisionShape3D = area.get_node("CollisionShape3D")
+		var shape : Shape3D = collision_shape.shape
 
 func find_cargo_area(coordinate : Vector3) -> CargoArea:
-	for c : CargoArea in $CargoAreas.get_children():
+	for c : CargoArea in cargo_area_root.get_children():
 		if c.area_coordinate == coordinate:
 			return c
 
 	return null
 
 func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
-	for m : Node3D in $CargoAreas.get_children():
+	for m : Node3D in cargo_area_root.get_children():
 		m.queue_free()
 
 	var chunk_size : float = 1.25  # 1 CU size
@@ -83,20 +91,18 @@ func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 
 				_add_shape_to_grid(chunk_size, chunk_center, Vector3(x, y, z))
 
-
-
 	if y_chunks == 1:
-		for m : Node3D in $CargoAreas.get_children():
+		for m : Node3D in cargo_area_root.get_children():
 			m.position.y -= chunk_size / 2
 
 
 	if x_chunks == 1:
-		for m : Node3D in $CargoAreas.get_children():
+		for m : Node3D in cargo_area_root.get_children():
 			m.position.x -= chunk_size / 2
 
 
 	if z_chunks == 1:
-		for m : Node3D in $CargoAreas.get_children():
+		for m : Node3D in cargo_area_root.get_children():
 			m.position.z -= chunk_size / 2
 
 	total_cu_capacity = y_chunks * x_chunks * z_chunks
@@ -107,6 +113,6 @@ func _add_shape_to_grid(chunk_size : float, chunk_center : Vector3, coordinate :
 	area.area_coordinate = coordinate
 	area.cargo_grid = self
 
-	$CargoAreas.add_child(area)
+	cargo_area_root.add_child(area)
 	area.global_position = chunk_center
 	area.owner = get_tree().edited_scene_root

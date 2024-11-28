@@ -34,6 +34,7 @@ func _ready() -> void:
 	if cargo_in_area != null:
 		valid = false
 
+
 func cargo_added() -> void:
 	valid = false
 
@@ -48,6 +49,8 @@ func cargo_removed() -> void:
 
 	if lower_cargo_area != null:
 		lower_cargo_area.snapped_cargo.can_be_picked_up = true
+	if upper_cargo_area != null:
+		upper_cargo_area.valid = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
