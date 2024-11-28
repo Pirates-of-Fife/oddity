@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=73 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -32,7 +32,6 @@
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/mesh_instance_3d.gd" id="23_i105l"]
 [ext_resource type="PackedScene" uid="uid://beqr0ho6kl081" path="res://classes/cargo/CargoArea.tscn" id="31_ymg47"]
 [ext_resource type="Script" path="res://classes/cargo/CargoGrid.gd" id="32_fyyfg"]
-[ext_resource type="Script" path="res://classes/cargo/CargoArea.gd" id="32_q52st"]
 [ext_resource type="PackedScene" uid="uid://bp00jj8askcjj" path="res://scenes/cargo/cargo-containers/Cu2Container.tscn" id="32_x0qjo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yj070"]
@@ -986,386 +985,242 @@ shape = SubResource("BoxShape3D_o8xmi")
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/World/CargoGrid"]
 
-[node name="CargoArea" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="CargoArea" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, -1, -2)
 
-[node name="@Area3D@45493" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45493" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, -1, -1)
 
-[node name="@Area3D@45494" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45494" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, -1, 0)
 
-[node name="@Area3D@45495" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45495" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, -1, 1)
 
-[node name="@Area3D@45496" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45496" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, 0, -2)
 
-[node name="@Area3D@45497" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45497" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, 0, -1)
 
-[node name="@Area3D@45498" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45498" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, 0, 0)
 
-[node name="@Area3D@45499" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45499" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, 0, 1)
 
-[node name="@Area3D@45500" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45500" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 1.875, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, 1, -2)
 
-[node name="@Area3D@45501" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45501" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, 1, -1)
 
-[node name="@Area3D@45502" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45502" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, 1, 0)
 
-[node name="@Area3D@45503" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45503" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-2, 1, 1)
 
-[node name="@Area3D@45504" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45504" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, -1, -2)
 
-[node name="@Area3D@45505" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45505" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, -1, -1)
 
-[node name="@Area3D@45506" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45506" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, -1, 0)
 
-[node name="@Area3D@45507" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45507" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, -1, 1)
 
-[node name="@Area3D@45508" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45508" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, 0, -2)
 
-[node name="@Area3D@45509" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45509" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, 0, -1)
 
-[node name="@Area3D@45510" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45510" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, 0, 0)
 
-[node name="@Area3D@45511" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45511" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, 0, 1)
 
-[node name="@Area3D@45512" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45512" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1.875, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, 1, -2)
 
-[node name="@Area3D@45513" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45513" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, 1, -1)
 
-[node name="@Area3D@45514" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45514" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, 1, 0)
 
-[node name="@Area3D@45515" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45515" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(-1, 1, 1)
 
-[node name="@Area3D@45516" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45516" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, -1, -2)
 
-[node name="@Area3D@45517" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45517" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, -1, -1)
 
-[node name="@Area3D@45518" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45518" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, -1, 0)
 
-[node name="@Area3D@45519" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45519" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, -1, 1)
 
-[node name="@Area3D@45520" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45520" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, 0, -2)
 
-[node name="@Area3D@45521" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45521" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, 0, -1)
 
-[node name="@Area3D@45522" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45522" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 
-[node name="@Area3D@45523" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45523" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, 0, 1)
 
-[node name="@Area3D@45524" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45524" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 1.875, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, 1, -2)
 
-[node name="@Area3D@45525" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45525" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, 1, -1)
 
-[node name="@Area3D@45526" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45526" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, 1, 0)
 
-[node name="@Area3D@45527" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45527" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, 1, 1)
 
-[node name="@Area3D@45528" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45528" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, -1, -2)
 
-[node name="@Area3D@45529" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45529" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, -1, -1)
 
-[node name="@Area3D@45530" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45530" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, -1, 0)
 
-[node name="@Area3D@45531" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45531" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, -1, 1)
 
-[node name="@Area3D@45532" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45532" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 0, -2)
 
-[node name="@Area3D@45533" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45533" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 0, -1)
 
-[node name="@Area3D@45534" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45534" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 0, 0)
 
-[node name="@Area3D@45535" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45535" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 0, 1)
 
-[node name="@Area3D@45536" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45536" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 1.875, -1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 1, -2)
 
-[node name="@Area3D@45537" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45537" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 1, -1)
 
-[node name="@Area3D@45538" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45538" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 1, 0)
 
-[node name="@Area3D@45539" type="Area3D" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
+[node name="@Area3D@45539" parent="SubViewportContainer/SubViewport/World/CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("31_ymg47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("32_q52st")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 1, 1)
 
