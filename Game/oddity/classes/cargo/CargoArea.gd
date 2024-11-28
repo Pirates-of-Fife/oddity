@@ -43,7 +43,7 @@ func cargo_added() -> void:
 
 	if lower_cargo_area != null:
 		lower_cargo_area.snapped_cargo.can_be_picked_up = false
-
+		
 func cargo_removed() -> void:
 	valid = true
 
