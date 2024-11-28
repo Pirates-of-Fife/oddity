@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/temp-planet.gd" id="10_x2ly6"]
 [ext_resource type="Texture2D" uid="uid://ehsni8niotww" path="res://test-scenes/ship-test-scene/lroc_color_poles_4k.png" id="12_0dl0g"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="13_h4u2q"]
-[ext_resource type="PackedScene" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
+[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
 [ext_resource type="Texture2D" uid="uid://sassmgocpxib" path="res://test-scenes/ship-test-scene/ldem_3_8bit.jpg" id="13_r5amc"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_8crom"]
 [ext_resource type="PackedScene" uid="uid://behanbk2jf42k" path="res://classes/game-entity/static-game-entity/openable/DemoOpenableManual.tscn" id="15_n2ehj"]
@@ -209,10 +209,10 @@ data = PackedVector3Array(15, 0, 18.17, -15, 0, 18.17, 15, 0, -18.17, -15, 0, 18
 [sub_resource type="BoxShape3D" id="BoxShape3D_o8xmi"]
 size = Vector3(6, 4, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_x6fa4"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_m2h82"]
 size = Vector3(0.55, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_5j0ou"]
+[sub_resource type="BoxMesh" id="BoxMesh_0xuxo"]
 size = Vector3(0.55, 1.1, 2.2)
 
 [node name="ShipTestScene" type="Node3D"]
@@ -1241,17 +1241,17 @@ area_root = NodePath("@Node3D@93362")
 
 [node name="@Node3D@93362" type="Node3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot"]
 
-[node name="@Area3D@98709" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
+[node name="@Area3D@17303" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@98710" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@98709"]
-shape = SubResource("BoxShape3D_x6fa4")
+[node name="@CollisionShape3D@17304" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@17303"]
+shape = SubResource("BoxShape3D_m2h82")
 
-[node name="@MeshInstance3D@98711" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@98709"]
+[node name="@MeshInstance3D@17305" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@17303"]
 visible = false
 material_override = ExtResource("35_syj3t")
-mesh = SubResource("BoxMesh_5j0ou")
+mesh = SubResource("BoxMesh_0xuxo")
 
 [node name="ShieldGenerator2" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 246.122, -118.414, 314.028)

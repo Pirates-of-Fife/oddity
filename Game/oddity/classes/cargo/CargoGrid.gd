@@ -20,6 +20,8 @@ var cu_x_y_z : Vector3
 @onready
 var cargo_area : PackedScene = preload("res://classes/cargo/CargoArea.tscn")
 
+var cargo_area_dictionary : Dictionary = {}
+
 @export
 var cargo_area_root : Node3D
 
@@ -34,6 +36,8 @@ var generate_grid : bool :
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
+		cargo_area_dictionary.clear()
+		
 		for c : CargoArea in cargo_area_root.get_children():
 			var lower_cargo : CargoArea = find_cargo_area(c.area_coordinate - Vector3(0, 1, 0))
 			var upper_cargo : CargoArea = find_cargo_area(c.area_coordinate + Vector3(0, 1, 0))
@@ -46,20 +50,16 @@ func _ready() -> void:
 
 			if upper_cargo != null:
 				c.upper_cargo_area = upper_cargo
-
-
+			
+			cargo_area_dictionary[c.area_coordinate] = c
 
 		var area : Area3D = $Area3D
 		var collision_shape : CollisionShape3D = area.get_node("CollisionShape3D")
 		var shape : Shape3D = collision_shape.shape
 
 func find_cargo_area(coordinate : Vector3) -> CargoArea:
-	for c : CargoArea in cargo_area_root.get_children():
-		if c.area_coordinate == coordinate:
-			return c
-
-	return null
-
+	return cargo_area_dictionary.get(coordinate, null)
+	
 func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 	for m : Node3D in cargo_area_root.get_children():
 		m.queue_free()
