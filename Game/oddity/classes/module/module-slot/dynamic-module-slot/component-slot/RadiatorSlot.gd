@@ -7,6 +7,9 @@ class_name RadiatorSlot
 var size : ModuleSize.ComponentSize
 
 func _module_fits(module : Module) -> bool:
+	if self.module != null:
+		return false
+
 	if module is Radiator:
 		if module.size == size:
 			return true

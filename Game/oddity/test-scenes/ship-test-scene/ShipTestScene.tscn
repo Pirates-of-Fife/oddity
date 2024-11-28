@@ -1253,4 +1253,16 @@ visible = false
 material_override = ExtResource("35_syj3t")
 mesh = SubResource("BoxMesh_5j0ou")
 
+[node name="ShieldGenerator2" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(-0.135473, 0, 0.990781, 0, 1, 0, -0.990781, 0, -0.135473, 242.616, -118.414, 314.028)
+collision_layer = 537396737
+collision_mask = 537396737
+script = ExtResource("18_s8fbc")
+size = 3
+can_be_picked_up = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/ShieldGenerator2"]
+mesh = SubResource("BoxMesh_w8asa")
+surface_material_override/0 = SubResource("StandardMaterial3D_e64nr")
+
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]

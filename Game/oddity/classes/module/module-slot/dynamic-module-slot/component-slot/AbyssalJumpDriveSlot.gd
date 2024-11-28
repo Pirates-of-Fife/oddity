@@ -7,6 +7,9 @@ class_name AbyssalJumpDriveSlot
 var abyssal_jump_drive_size : ModuleSize.AbyssalJumpDriveSize
 
 func _module_fits(module : Module) -> bool:
+	if self.module != null:
+		return false
+
 	if module is AbyssalJumpDrive:
 		if module.size == abyssal_jump_drive_size:
 			return true

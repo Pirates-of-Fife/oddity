@@ -17,6 +17,9 @@ enum ThrusterType
 }
 
 func _module_fits(module : Module) -> bool:
+	if self.module != null:
+		return false
+
 	if module is Thruster:
 		if module.size == size:
 			if type == ThrusterType.MAIN:

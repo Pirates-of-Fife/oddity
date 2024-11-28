@@ -7,6 +7,9 @@ class_name ComponentSlot
 var size : ModuleSize.ComponentSize
 
 func _module_fits(module : Module) -> bool:
+	if self.module != null:
+		return false
+
 	if module is Component and module is not AlcubierreDrive and module is not AbyssalJumpDrive and module is not Radiator:
 		if module.size == size:
 			return true
