@@ -44,18 +44,21 @@ func _cargo_container_process(delta : float) -> void:
 func snap_to_grid(cargo_area : CargoArea) -> void:
 	if snapped_to != null:
 		return
-	
+
 	freeze_static()
 	reparent.call_deferred(cargo_area)
 	global_position = cargo_area.global_position
 	global_rotation = cargo_area.global_rotation
 	cargo_area.snapped_cargo = self
 	snapped_to = cargo_area
-	
+
+	cargo_area.cargo_added()
+
 	print("Cargo " + str(self) + " snapped to " + str(cargo_area))
 
 func unsnap_from_grid() -> void:
 	print("Cargo " + str(self) + " unsnapped from " + str(snapped_to))
+	snapped_to.cargo_removed()
 	snapped_to.snapped_cargo = null
 	snapped_to = null
 
@@ -80,9 +83,9 @@ func find_nearest_cargo_area() -> void:
 func on_interact_self() -> void:
 	if snapped_to != null:
 		unsnap_from_grid()
-		
+
 	unfreeze()
-	
+
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()
 

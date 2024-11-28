@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://classes/cargo/CargoGrid.gd" id="1_gme8x"]
 [ext_resource type="PackedScene" uid="uid://beqr0ho6kl081" path="res://classes/cargo/CargoArea.tscn" id="2_dcyxw"]
-[ext_resource type="Script" path="res://classes/cargo/CargoArea.gd" id="3_0pada"]
+[ext_resource type="Script" path="res://classes/cargo/CargoArea.gd" id="3_x4a60"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4svmg"]
-size = Vector3(5, 5, 3.75)
+size = Vector3(2, 3.75, 2)
 
 [node name="CargoGrid" type="Node3D"]
 script = ExtResource("1_gme8x")
-cargo_grid_physical_size = Vector3(5, 5, 3.75)
-total_cu_capacity = 48
-cu_x_y_z = Vector3(4, 4, 3)
+cargo_grid_physical_size = Vector3(2, 3.75, 2)
+total_cu_capacity = 3
+cu_x_y_z = Vector3(1, 3, 1)
 cargo_area = ExtResource("2_dcyxw")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -19,387 +19,27 @@ cargo_area = ExtResource("2_dcyxw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_4svmg")
 
-[node name="Markers" type="Node3D" parent="."]
+[node name="CargoAreas" type="Node3D" parent="."]
 
-[node name="CargoArea" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, -2, -1)
-
-[node name="@Area3D@19805" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, -2, 0)
-
-[node name="@Area3D@19806" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, -2, 1)
-
-[node name="@Area3D@19807" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, -1, -1)
-
-[node name="@Area3D@19808" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, -1, 0)
-
-[node name="@Area3D@19809" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, -1, 1)
-
-[node name="@Area3D@19810" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, 0, -1)
-
-[node name="@Area3D@19811" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, 0, 0)
-
-[node name="@Area3D@19812" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, 0, 1)
-
-[node name="@Area3D@19813" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, 1, -1)
-
-[node name="@Area3D@19814" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, 1, 0)
-
-[node name="@Area3D@19815" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-2, 1, 1)
-
-[node name="@Area3D@19816" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, -2, -1)
-
-[node name="@Area3D@19817" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, -2, 0)
-
-[node name="@Area3D@19818" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, -2, 1)
-
-[node name="@Area3D@19819" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, -1, -1)
-
-[node name="@Area3D@19820" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, -1, 0)
-
-[node name="@Area3D@19821" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, -1, 1)
-
-[node name="@Area3D@19822" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, 0, -1)
-
-[node name="@Area3D@19823" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, 0, 0)
-
-[node name="@Area3D@19824" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, 0, 1)
-
-[node name="@Area3D@19825" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, 1, -1)
-
-[node name="@Area3D@19826" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, 1, 0)
-
-[node name="@Area3D@19827" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(-1, 1, 1)
-
-[node name="@Area3D@19828" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, -2, -1)
-
-[node name="@Area3D@19829" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, -2, 0)
-
-[node name="@Area3D@19830" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, -2, 1)
-
-[node name="@Area3D@19831" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, -1, -1)
-
-[node name="@Area3D@19832" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
+[node name="CargoArea" type="Area3D" parent="CargoAreas" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, 0.625)
 collision_layer = 1048576
 collision_mask = 1048576
-script = ExtResource("3_0pada")
+script = ExtResource("3_x4a60")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, -1, 0)
 
-[node name="@Area3D@19833" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, -1, 1)
-
-[node name="@Area3D@19834" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, 0, -1)
-
-[node name="@Area3D@19835" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
+[node name="@Area3D@23254" type="Area3D" parent="CargoAreas" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, 0.625)
 collision_layer = 1048576
 collision_mask = 1048576
-script = ExtResource("3_0pada")
+script = ExtResource("3_x4a60")
 cargo_grid = NodePath("../..")
 
-[node name="@Area3D@19836" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, 0, 1)
-
-[node name="@Area3D@19837" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, 1, -1)
-
-[node name="@Area3D@19838" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
+[node name="@Area3D@23255" type="Area3D" parent="CargoAreas" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 1.875, 0.625)
 collision_layer = 1048576
 collision_mask = 1048576
-script = ExtResource("3_0pada")
+script = ExtResource("3_x4a60")
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(0, 1, 0)
-
-[node name="@Area3D@19839" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(0, 1, 1)
-
-[node name="@Area3D@19840" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, -2, -1)
-
-[node name="@Area3D@19841" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, -2, 0)
-
-[node name="@Area3D@19842" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, -2, 1)
-
-[node name="@Area3D@19843" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, -1, -1)
-
-[node name="@Area3D@19844" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, -1, 0)
-
-[node name="@Area3D@19845" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, -1, 1)
-
-[node name="@Area3D@19846" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, 0, -1)
-
-[node name="@Area3D@19847" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, 0, 0)
-
-[node name="@Area3D@19848" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, 0, 1)
-
-[node name="@Area3D@19849" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 1.875, -0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, 1, -1)
-
-[node name="@Area3D@19850" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 1.875, 0.625)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, 1, 0)
-
-[node name="@Area3D@19851" type="Area3D" parent="Markers" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("2_dcyxw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 1.875, 1.875)
-collision_layer = 1048576
-collision_mask = 1048576
-script = ExtResource("3_0pada")
-cargo_grid = NodePath("../..")
-area_coordinate = Vector3(1, 1, 1)

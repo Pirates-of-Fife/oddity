@@ -5,11 +5,8 @@ class_name CargoArea
 @export
 var cargo_in_area : CargoContainer
 
-@export
-var lower_cargo_area : CargoArea
-
-@export
-var upper_cargo_area : CargoArea
+var lower_cargo_area : CargoArea = null
+var upper_cargo_area : CargoArea = null
 
 @export
 var cargo_grid : CargoGrid
@@ -20,6 +17,7 @@ var area_coordinate : Vector3
 @export
 var snapped_cargo : CargoContainer
 
+@export
 var valid : bool
 
 # Called when the node enters the scene tree for the first time.
@@ -32,30 +30,30 @@ func _ready() -> void:
 
 	if (error_exit != OK):
 		printerr(str(self) + " failed to connect to body_exited.")
-		
-	lower_cargo_area = cargo_grid.find_cargo_area(area_coordinate - Vector3(0, 1, 0))
-	upper_cargo_area = cargo_grid.find_cargo_area(area_coordinate + Vector3(0, 1, 0))
 
+	if cargo_in_area != null:
+		valid = false
+
+func cargo_added() -> void:
+	valid = false
+
+	if upper_cargo_area != null:
+		upper_cargo_area.valid = true
+
+	if lower_cargo_area != null:
+		lower_cargo_area.snapped_cargo.can_be_picked_up = false
+
+func cargo_removed() -> void:
+	valid = true
+
+	if lower_cargo_area != null:
+		lower_cargo_area.snapped_cargo.can_be_picked_up = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if cargo_in_area == null:
 		return
-	
-	if lower_cargo_area != null and lower_cargo_area.snapped_cargo == null:
-		valid = false
-		return
-	
-	if upper_cargo_area != null:
-		if upper_cargo_area.snapped_cargo != null and snapped_cargo != null:
-			snapped_cargo.can_be_picked_up = false
-		elif upper_cargo_area.snapped_cargo == null and snapped_cargo != null:
-			snapped_cargo.can_be_picked_up = true
-		
-	if snapped_cargo != null:
-		valid = false
-		return
-	
+
 	if cargo_in_area.is_being_held and cargo_in_area.nearest_cargo_area == self and valid:
 		$MeshInstance3D.show()
 	else:
@@ -63,8 +61,7 @@ func _process(delta: float) -> void:
 
 	if cargo_in_area.is_being_held == false and cargo_in_area.nearest_cargo_area == self and valid:
 		cargo_in_area.snap_to_grid(self)
-		
-	valid = true
+
 
 
 func body_entered(body: Node3D) -> void:
@@ -77,6 +74,6 @@ func body_exited(body: Node3D) -> void:
 		if cargo_in_area != null:
 			if cargo_in_area.in_cargo_areas.has(self):
 				cargo_in_area.in_cargo_areas.erase(self)
-				
+
 		cargo_in_area = null
 		$MeshInstance3D.hide()

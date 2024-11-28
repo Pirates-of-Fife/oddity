@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/temp-planet.gd" id="10_x2ly6"]
 [ext_resource type="Texture2D" uid="uid://ehsni8niotww" path="res://test-scenes/ship-test-scene/lroc_color_poles_4k.png" id="12_0dl0g"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="13_h4u2q"]
-[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
+[ext_resource type="PackedScene" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
 [ext_resource type="Texture2D" uid="uid://sassmgocpxib" path="res://test-scenes/ship-test-scene/ldem_3_8bit.jpg" id="13_r5amc"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_8crom"]
 [ext_resource type="PackedScene" uid="uid://behanbk2jf42k" path="res://classes/game-entity/static-game-entity/openable/DemoOpenableManual.tscn" id="15_n2ehj"]
@@ -919,7 +919,7 @@ shape = SubResource("BoxShape3D_42qyo")
 shape = SubResource("ConcavePolygonShape3D_vyf5x")
 
 [node name="CargoGrid" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("30_x2vgj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.587, -116.882, 305.062)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.587, -118.124, 305.062)
 
 [node name="Cu1Container" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.901, -116.795, 310.537)

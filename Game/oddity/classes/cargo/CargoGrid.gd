@@ -29,14 +29,14 @@ var generate_grid : bool :
 			_generate_box_grid(shape, area)
 
 func find_cargo_area(coordinate : Vector3) -> CargoArea:
-	for c : CargoArea in $Markers.get_children():
+	for c : CargoArea in $CargoAreas.get_children():
 		if c.area_coordinate == coordinate:
 			return c
-	
+
 	return null
 
 func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
-	for m : Node3D in $Markers.get_children():
+	for m : Node3D in $CargoAreas.get_children():
 		m.queue_free()
 
 	var chunk_size : float = 1.25  # 1 CU size
@@ -66,29 +66,45 @@ func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 
 				_add_shape_to_grid(chunk_size, chunk_center, Vector3(x, y, z))
 
+	for c : CargoArea in $CargoAreas.get_children():
+		var lower_cargo : CargoArea = find_cargo_area(c.area_coordinate - Vector3(0, 1, 0))
+		var upper_cargo : CargoArea = find_cargo_area(c.area_coordinate + Vector3(0, 1, 0))
+
+		if lower_cargo != null:
+			c.lower_cargo_area = lower_cargo
+
+		if upper_cargo == null:
+			c.upper_cargo_area == null
+		else:
+			c.upper_cargo_area = lower_cargo
+
+		if c.lower_cargo_area == null:
+			c.valid = true
+		else:
+			c.valid = false
 
 	if y_chunks == 1:
-		for m : Node3D in $Markers.get_children():
+		for m : Node3D in $CargoAreas.get_children():
 			m.position.y -= chunk_size / 2
 
 
 	if x_chunks == 1:
-		for m : Node3D in $Markers.get_children():
+		for m : Node3D in $CargoAreas.get_children():
 			m.position.x -= chunk_size / 2
 
 
 	if z_chunks == 1:
-		for m : Node3D in $Markers.get_children():
+		for m : Node3D in $CargoAreas.get_children():
 			m.position.z -= chunk_size / 2
 
 	total_cu_capacity = y_chunks * x_chunks * z_chunks
 
-
 func _add_shape_to_grid(chunk_size : float, chunk_center : Vector3, coordinate : Vector3) -> void:
 	var area : CargoArea = cargo_area.instantiate()
+
 	area.area_coordinate = coordinate
 	area.cargo_grid = self
-	
-	$Markers.add_child(area)
+
+	$CargoAreas.add_child(area)
 	area.global_position = chunk_center
 	area.owner = get_tree().edited_scene_root
