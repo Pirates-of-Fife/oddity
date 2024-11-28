@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cqfonknridwp7"]
+[gd_scene load_steps=28 format=3 uid="uid://cqfonknridwp7"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/DemoShip.gd" id="1_5hdip"]
 [ext_resource type="Resource" uid="uid://25ljcxn4nxy0" path="res://resources/resources/vehicles/starships/demo-ship/DemoShip.tres" id="2_gep6i"]
@@ -12,7 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://bk417jw4gd0w" path="res://classes/multi-function-display/crosshair/Crosshair3d.tscn" id="13_mdyxh"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="13_qeu3b"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ComponentSlot.gd" id="13_udpm1"]
+[ext_resource type="Script" path="res://classes/cargo/CargoGrid.gd" id="14_11k2k"]
 [ext_resource type="PackedScene" uid="uid://covp2c4kn7g6k" path="res://classes/multi-function-display/velocity-mfd/VelocityMFD_3D.tscn" id="14_gcovj"]
+[ext_resource type="PackedScene" uid="uid://beqr0ho6kl081" path="res://classes/cargo/CargoArea.tscn" id="15_lf4ku"]
+[ext_resource type="Script" path="res://classes/cargo/CargoArea.gd" id="16_vrf51"]
 
 [sub_resource type="Resource" id="Resource_xuaf6"]
 script = ExtResource("3_jnc0e")
@@ -55,6 +58,9 @@ albedo_color = Color(1, 0.243137, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fh78y"]
 albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k2r7s"]
+size = Vector3(1.25, 2.5, 5)
 
 [node name="DemoShip" type="RigidBody3D" node_paths=PackedStringArray("velocity_mfd", "crosshair", "anchor")]
 collision_layer = 513
@@ -217,6 +223,7 @@ transform = Transform3D(1, 0, 0, 0, 0.0048694, -0.999988, 0, 0.999988, 0.0048694
 shape = SubResource("CylinderShape3D_eoiej")
 
 [node name="Modules" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03958, 0, 0)
 
 [node name="AbyssalJumpDriveSlot" type="Node3D" parent="Modules"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28899, 1.27811, 3.7643)
@@ -264,5 +271,85 @@ transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 2.02058, 9.449
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
+
+[node name="CargoGrid" type="Node3D" parent="." node_paths=PackedStringArray("cargo_area_root")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3678, 1.77149, -2.90124)
+script = ExtResource("14_11k2k")
+cargo_grid_physical_size = Vector3(1.25, 2.5, 5)
+total_cu_capacity = 8
+cu_x_y_z = Vector3(1, 2, 4)
+cargo_area_root = NodePath("Node3D")
+
+[node name="Area3D" type="Area3D" parent="CargoGrid"]
+collision_layer = 1048576
+collision_mask = 1048576
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CargoGrid/Area3D"]
+shape = SubResource("BoxShape3D_k2r7s")
+
+[node name="Node3D" type="Node3D" parent="CargoGrid"]
+
+[node name="CargoArea" type="Area3D" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("15_lf4ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.625, -1.875)
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("16_vrf51")
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, -1, -2)
+
+[node name="@Area3D@40069" type="Area3D" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("15_lf4ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.625, -0.625)
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("16_vrf51")
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, -1, -1)
+
+[node name="@Area3D@40070" type="Area3D" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("15_lf4ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.625, 0.625)
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("16_vrf51")
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, -1, 0)
+
+[node name="@Area3D@40071" type="Area3D" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("15_lf4ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.625, 1.875)
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("16_vrf51")
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, -1, 1)
+
+[node name="@Area3D@40072" type="Area3D" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("15_lf4ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, -1.875)
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("16_vrf51")
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, 0, -2)
+
+[node name="@Area3D@40073" type="Area3D" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("15_lf4ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, -0.625)
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("16_vrf51")
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, 0, -1)
+
+[node name="@Area3D@40074" type="Area3D" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("15_lf4ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0.625)
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("16_vrf51")
+cargo_grid = NodePath("../..")
+
+[node name="@Area3D@40075" type="Area3D" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("15_lf4ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 1.875)
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("16_vrf51")
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, 0, 1)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
