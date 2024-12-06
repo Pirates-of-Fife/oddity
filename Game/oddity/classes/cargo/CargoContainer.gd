@@ -12,6 +12,9 @@ var container_cu_shape : Vector3
 @export
 var max_internal_freight_volume : int
 
+@export
+var cargo_units : int
+
 var in_cargo_areas : Array = Array()
 
 var nearest_cargo_area : CargoArea = null
@@ -48,9 +51,9 @@ func _cargo_container_ready() -> void:
 func _cargo_container_process(delta : float) -> void:
 	_default_process(delta)
 
-	if is_being_held and in_cargo_areas.size() > 0:
-		find_nearest_cargo_area()
-		print("Nearest: " + str(nearest_cargo_area.area_coordinate))
+	#if is_being_held and in_cargo_areas.size() > 0:
+	#	find_nearest_cargo_area()
+		#print("Nearest: " + str(nearest_cargo_area.area_coordinate))
 
 func snap_to_grid(cargo_areas: Array) -> void:
 	if snapped_to != null or cargo_areas.is_empty():
@@ -110,13 +113,16 @@ func find_nearest_cargo_area() -> void:
 	var closest_area : CargoArea = null
 	var shortest_distance : float = INF
 
+	#print(in_cargo_areas)
+
 	for area : CargoArea in in_cargo_areas:
 		if area != null:
-			var distance : float = global_position.distance_to(area.global_position)
+			if area.valid:
+				var distance : float = global_position.distance_to(area.global_position)
 
-			if distance < shortest_distance:
-				shortest_distance = distance
-				closest_area = area
+				if distance < shortest_distance:
+					shortest_distance = distance
+					closest_area = area
 
 	nearest_cargo_area = closest_area
 
