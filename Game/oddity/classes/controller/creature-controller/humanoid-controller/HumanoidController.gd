@@ -11,6 +11,7 @@ var humanoid_eva_move_right_command : HumanoidEvaMoveRightCommand = HumanoidEvaM
 var humanoid_eva_move_up_command : HumanoidEvaMoveUpCommand = HumanoidEvaMoveUpCommand.new()
 var humanoid_eva_roll_left_command : HumanoidEvaRollLeftCommand = HumanoidEvaRollLeftCommand.new()
 var humanoid_eva_roll_right_command : HumanoidEvaRollRightCommand = HumanoidEvaRollRightCommand.new()
+var humanoid_rotate_cargo_command : HumanoidRotateCargoCommand = HumanoidRotateCargoCommand.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -19,11 +20,11 @@ func _process(delta: float) -> void:
 
 func _humanoid_process(delta : float) -> void:
 	_creature_process(delta)
-	
+
 	if control_entity is Humanoid:
 		if Input.is_action_pressed("humanoid_eva_forwards"):
 			humanoid_eva_move_forwards_command.execute(control_entity)
-			
+
 		if Input.is_action_pressed("humanoid_eva_backwards"):
 			humanoid_eva_move_backwards_command.execute(control_entity)
 
@@ -44,3 +45,6 @@ func _humanoid_process(delta : float) -> void:
 
 		if Input.is_action_pressed("humanoid_eva_roll_right"):
 			humanoid_eva_roll_right_command.execute(control_entity)
+
+		if Input.is_action_just_pressed("humanoid_rotate_cargo"):
+			humanoid_rotate_cargo_command.execute(control_entity)

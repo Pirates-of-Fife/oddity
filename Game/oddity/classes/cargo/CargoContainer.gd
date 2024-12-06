@@ -98,20 +98,38 @@ func unsnap_from_grid() -> void:
 	# Clear the snapped areas and reset the state
 	snapped_areas.clear()
 
+var rotation_index: int = 0 # Tracks the current rotation orientation
+var rotation_axes: Array = [Vector3.UP, Vector3.RIGHT, Vector3.FORWARD] # Rotation directions
+
+func rotate_cargo() -> void:
+	print("ROTATE")
+
+	container_cu_shape = abs(container_cu_shape.rotated(rotation_axes[rotation_index], deg_to_rad(90)))
+
+
+	print(container_cu_shape)
+
+	# Step 4: Increment the rotation index (cycle through 0, 1, 2)
+	rotation_index = (rotation_index + 1) % rotation_axes.size()
+
 
 func find_nearest_cargo_area() -> void:
 	var closest_area : CargoArea = null
 	var shortest_distance : float = INF
 
+	if nearest_cargo_area != null:
+		nearest_cargo_area.highlight_off_cargo_areas(nearest_cargo_area.cargo_areas_for_container)
+
 	#print(in_cargo_areas)
 
 	for area : CargoArea in in_cargo_areas:
 		if area != null:
-			var distance : float = global_position.distance_to(area.global_position)
+			if area.valid:
+				var distance : float = global_position.distance_to(area.global_position)
 
-			if distance < shortest_distance:
-				shortest_distance = distance
-				closest_area = area
+				if distance < shortest_distance:
+					shortest_distance = distance
+					closest_area = area
 
 	nearest_cargo_area = closest_area
 	if nearest_cargo_area != null:

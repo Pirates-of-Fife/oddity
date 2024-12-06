@@ -143,7 +143,7 @@ func body_entered(body: Node3D) -> void:
 		cargo_in_area = body
 		cargo_in_area.in_cargo_areas.append(self)
 		cargo_in_area.find_nearest_cargo_area()
-
+		print("Cargo entered")
 		cargo_areas_for_container = find_cargo_areas_from_shape(cargo_in_area.container_cu_shape)
 
 		highlight_cargo()
@@ -157,6 +157,5 @@ func body_exited(body: Node3D) -> void:
 				cargo_in_area.in_cargo_areas.erase(self)
 				cargo_in_area.find_nearest_cargo_area()
 				cargo_in_area = null
-
-		#highlight_off_cargo_areas(cargo_areas_for_container)
+				highlight_off_cargo_areas(cargo_areas_for_container)
 		#$MeshInstance3D.hide()
