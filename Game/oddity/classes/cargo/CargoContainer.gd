@@ -61,14 +61,13 @@ func snap_to_grid(cargo_areas: Array) -> void:
 
 	# Calculate the average global position and rotation
 	var total_position: Vector3 = Vector3()
-	var total_rotation: Vector3 = Vector3()
 
 	for cargo_area : CargoArea in cargo_areas:
 		total_position += cargo_area.global_position
-		total_rotation += cargo_area.global_rotation
 
 	var center_position: Vector3 = total_position / cargo_areas.size()
-	var center_rotation: Vector3 = total_rotation / cargo_areas.size()
+	var center_rotation: Vector3 = cargo_areas[0].global_rotation + rotations[rotation_index]
+	print(center_rotation)
 
 	# Update global position and rotation to the center
 	global_position = center_position
@@ -98,19 +97,56 @@ func unsnap_from_grid() -> void:
 	# Clear the snapped areas and reset the state
 	snapped_areas.clear()
 
-var rotation_index: int = 0 # Tracks the current rotation orientation
-var rotation_axes: Array = [Vector3.UP, Vector3.RIGHT, Vector3.FORWARD] # Rotation directions
+var rotation_index: int = 3 # Tracks the current rotation orientation
+
+var rotations : Array = [Vector3(0, deg_to_rad(90), 0), Vector3(0, 0, deg_to_rad(90)), Vector3(deg_to_rad(90), 0, 0), Vector3.ZERO]
 
 func rotate_cargo() -> void:
-	print("ROTATE")
+	rotation_index = (rotation_index + 1) % rotations.size()
 
-	container_cu_shape = abs(container_cu_shape.rotated(rotation_axes[rotation_index], deg_to_rad(90)))
+	print("ROTATE " + str(rotation_index) + " " + str(rotations[rotation_index]))
+	
+	#angular_velocity = Vector3.ZERO
+	
+	
+	#$MeshInstance3D.rotation = rotations[rotation_index]
+	#$CollisionShape3D.rotation = rotations[rotation_index]
+	
+	#var rotation_difference : Vector3 = global_rotation + $MeshInstance3D.global_rotation
+	
+	#print(rotation_difference)
+	
+	#global_rotation -= rotation_difference
+	#print(str(global_rotation) + " " + str($MeshInstance3D.global_rotation) + " --- " + str(global_rotation == $MeshInstance3D.global_rotation))
 
+	var container_cu : Vector3 = (CargoUnit.new()).get_container_size(container_size)
 
+	match rotation_index:
+		0:
+					# Rotation around Y-axis
+			container_cu_shape = Vector3(container_cu.z, container_cu.y, container_cu.x) * 0.8
+		1:
+		# Rotation around Z-axis
+			container_cu_shape = Vector3(container_cu.y, container_cu.x, container_cu.z) * 0.8
+		2:
+		# Rotation around X-axis
+			container_cu_shape = Vector3(container_cu.x, container_cu.z, container_cu.y) * 0.8
+		3:
+		# No rotation
+			container_cu_shape = container_cu * 0.8
+
+	if nearest_cargo_area != null:
+		nearest_cargo_area.highlight_off_cargo_areas(nearest_cargo_area.cargo_areas_for_container)
+		nearest_cargo_area.search_cargo_areas_for_container()
+		nearest_cargo_area.highlight_cargo()
+		
 	print(container_cu_shape)
+	
+	#container_cu_shape = abs(container_cu_shape.rotated(rotation_axes[rotation_index], deg_to_rad(90)))
 
-	# Step 4: Increment the rotation index (cycle through 0, 1, 2)
-	rotation_index = (rotation_index + 1) % rotation_axes.size()
+
+	#print(container_cu_shape)
+
 
 
 func find_nearest_cargo_area() -> void:
@@ -152,5 +188,7 @@ func _initialize_collision_shape() -> void:
 	var collision_shape : CollisionShape3D = CollisionShape3D.new()
 
 	collision_shape.shape = box_shape
+	
+	collision_shape.name = "CollisionShape3D"
 
 	add_child(collision_shape)
