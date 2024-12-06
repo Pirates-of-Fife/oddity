@@ -67,7 +67,6 @@ func snap_to_grid(cargo_areas: Array) -> void:
 
 	var center_position: Vector3 = total_position / cargo_areas.size()
 	var center_rotation: Vector3 = cargo_areas[0].global_rotation + rotations[rotation_index]
-	print(center_rotation)
 
 	# Update global position and rotation to the center
 	global_position = center_position
