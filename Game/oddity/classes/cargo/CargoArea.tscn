@@ -1,29 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://beqr0ho6kl081"]
+[gd_scene load_steps=5 format=3 uid="uid://beqr0ho6kl081"]
 
 [ext_resource type="Script" path="res://classes/cargo/CargoArea.gd" id="1_236ri"]
 [ext_resource type="Material" uid="uid://b6xwyx8uah1e6" path="res://classes/cargo/CargoHighlightMaterial.tres" id="2_vkbun"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_klcrn"]
+[sub_resource type="BoxMesh" id="BoxMesh_vfxhs"]
 size = Vector3(1.25, 1.25, 1.25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_06ksl"]
 size = Vector3(1.25, 1.25, 1.25)
-
-[sub_resource type="BoxMesh" id="BoxMesh_vfxhs"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rlkoa"]
-transparency = 1
-albedo_color = Color(1, 0, 1, 0.219608)
-
-[sub_resource type="TorusMesh" id="TorusMesh_lef40"]
-inner_radius = 0.245
-outer_radius = 0.117
-rings = 10
-ring_segments = 12
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx8sn"]
-albedo_color = Color(0, 1, 0, 1)
 
 [node name="CargoArea" type="Area3D"]
 collision_layer = 1048576
@@ -32,17 +16,8 @@ script = ExtResource("1_236ri")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
-mesh = SubResource("BoxMesh_klcrn")
+mesh = SubResource("BoxMesh_vfxhs")
 surface_material_override/0 = ExtResource("2_vkbun")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_06ksl")
-
-[node name="ValidDebugMesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_vfxhs")
-surface_material_override/0 = SubResource("StandardMaterial3D_rlkoa")
-
-[node name="ActiveCargo" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("TorusMesh_lef40")
-surface_material_override/0 = SubResource("StandardMaterial3D_bx8sn")
