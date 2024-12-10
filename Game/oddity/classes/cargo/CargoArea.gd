@@ -68,19 +68,24 @@ func _process(delta: float) -> void:
 			if lower_cargo_area.cargo_in_area != null:
 				valid = false
 
-#	if cargo_in_area != null:
+	if cargo_in_area != null:
 
+		if cargo_in_area.is_being_held and valid:
+			if cargo_in_area.nearest_cargo_area == self:
+				$ActiveCargo.show()
+				if cargo_areas_for_container.size() == cargo_in_area.cargo_units:
+					highlight_cargo_areas(cargo_areas_for_container)
 
 	#if cargo_in_area :
 	#	highlight_off_cargo_areas(cargo_areas_for_container)
 
-	#highlight_off()
-#	$ActiveCargo.hide()
+	highlight_off()
+	$ActiveCargo.hide()
 
-	#if cargo_in_area != null:
-	#	if cargo_in_area.is_being_held == false and cargo_in_area.nearest_cargo_area != null:
-	#		if cargo_in_area.nearest_cargo_area == self and valid:
-	#			cargo_in_area.snap_to_grid(cargo_areas_for_container)
+	if cargo_in_area != null:
+		if cargo_in_area.is_being_held == false and cargo_in_area.nearest_cargo_area != null:
+			if cargo_in_area.nearest_cargo_area == self and valid:
+				cargo_in_area.snap_to_grid(cargo_areas_for_container)
 
 	#highlight_off()
 
@@ -97,6 +102,8 @@ func highlight_off_cargo_areas(areas : Array) -> void:
 	for c : CargoArea in areas:
 		c.highlight_off()
 		#print("highlight " + str(c.area_coordinate))
+
+
 
 func find_cargo_areas_from_shape(shape: Vector3) -> Array:
 	# Array to store the cargo areas that the container will snap to
@@ -131,12 +138,6 @@ func highlight_on() -> void:
 func highlight_off() -> void:
 	$MeshInstance3D.hide()
 
-func highlight_cargo() -> void:
-	if cargo_in_area.is_being_held and valid:
-		if cargo_in_area.nearest_cargo_area == self:
-			$ActiveCargo.show()
-			if cargo_areas_for_container.size() == cargo_in_area.cargo_units:
-				highlight_cargo_areas(cargo_areas_for_container)
 
 func body_entered(body: Node3D) -> void:
 	if body is CargoContainer:
@@ -145,9 +146,6 @@ func body_entered(body: Node3D) -> void:
 		cargo_in_area.find_nearest_cargo_area()
 
 		cargo_areas_for_container = find_cargo_areas_from_shape(cargo_in_area.container_cu_shape)
-
-		highlight_cargo()
-
 		#print(cargo_areas_for_container)
 
 func body_exited(body: Node3D) -> void:

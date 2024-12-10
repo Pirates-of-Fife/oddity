@@ -21,8 +21,7 @@ var nearest_cargo_area : CargoArea = null
 
 var snapped_to : CargoArea
 
-signal container_snapped
-signal container_unsnapped
+
 
 # INFO Will be replaced by a resource file or something else
 @export
@@ -30,6 +29,13 @@ var contents : String
 
 # Add this variable to the CargoContainer class
 var snapped_areas: Array = []
+
+enum CargoContainerDirection
+{
+	X,
+	Y,
+	Z
+}
 
 func _ready() -> void:
 	_cargo_container_ready()
@@ -45,10 +51,11 @@ func _cargo_container_ready() -> void:
 func _cargo_container_process(delta : float) -> void:
 	_default_process(delta)
 
-func snap_to_grid(cargo_areas: Array) -> void:
-	if cargo_areas.size() != cargo_units:
-		return
+	#if is_being_held and in_cargo_areas.size() > 0:
+	#	find_nearest_cargo_area()
+		#print("Nearest: " + str(nearest_cargo_area.area_coordinate))
 
+func snap_to_grid(cargo_areas: Array) -> void:
 	if snapped_to != null or cargo_areas.is_empty():
 		return
 
@@ -85,6 +92,9 @@ func snap_to_grid(cargo_areas: Array) -> void:
 	for cargo_area : CargoArea in cargo_areas:
 		cargo_area.cargo_added()
 
+
+
+
 # Updated `unsnap_from_grid` function
 func unsnap_from_grid() -> void:
 	if snapped_areas.is_empty():
@@ -107,15 +117,14 @@ func find_nearest_cargo_area() -> void:
 
 	for area : CargoArea in in_cargo_areas:
 		if area != null:
-			var distance : float = global_position.distance_to(area.global_position)
+			if area.valid:
+				var distance : float = global_position.distance_to(area.global_position)
 
-			if distance < shortest_distance:
-				shortest_distance = distance
-				closest_area = area
+				if distance < shortest_distance:
+					shortest_distance = distance
+					closest_area = area
 
 	nearest_cargo_area = closest_area
-	if nearest_cargo_area != null:
-		nearest_cargo_area.highlight_cargo()
 
 
 func on_interact_self() -> void:
