@@ -5,14 +5,17 @@
 [sub_resource type="BoxMesh" id="BoxMesh_yv02j"]
 size = Vector3(1.25, 1.25, 2.5)
 
-[node name="Cu2Container" type="RigidBody3D"]
+[node name="Cu2Container" type="RigidBody3D" node_paths=PackedStringArray("snapping_point")]
 collision_layer = 537921025
 collision_mask = 537921025
 script = ExtResource("1_5knbi")
 container_size = 1
 cargo_units = 2
+snapping_point = NodePath("Marker3D")
 can_be_picked_up = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("BoxMesh_yv02j")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.625)

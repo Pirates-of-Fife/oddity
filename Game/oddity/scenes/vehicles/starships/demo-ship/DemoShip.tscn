@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cqfonknridwp7"]
+[gd_scene load_steps=27 format=3 uid="uid://cqfonknridwp7"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/DemoShip.gd" id="1_5hdip"]
 [ext_resource type="Resource" uid="uid://25ljcxn4nxy0" path="res://resources/resources/vehicles/starships/demo-ship/DemoShip.tres" id="2_gep6i"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="3_lj764"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AbyssalJumpDriveSlot.gd" id="7_odh77"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AlcubierreDriveSlot.gd" id="8_8usdo"]
-[ext_resource type="Material" uid="uid://b6xwyx8uah1e6" path="res://classes/cargo/CargoHighlightMaterial.tres" id="8_pu71t"]
 [ext_resource type="Script" path="res://classes/pid-controller/PIDController.gd" id="9_xxpud"]
 [ext_resource type="PackedScene" uid="uid://q7qxuwsn55b5" path="res://scenes/interactable/control-seat/DemoControlSeat.tscn" id="13_3chp0"]
 [ext_resource type="PackedScene" uid="uid://bk417jw4gd0w" path="res://classes/multi-function-display/crosshair/Crosshair3d.tscn" id="13_mdyxh"]
@@ -53,29 +52,11 @@ radius = 2.7792
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_samva"]
 albedo_color = Color(0.0588235, 0.176471, 1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wqkfk"]
-size = Vector3(0.55, 1.1, 2.2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_h2bv0"]
-size = Vector3(0.55, 1.1, 2.2)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1lke6"]
 albedo_color = Color(1, 0.243137, 1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_deive"]
-size = Vector3(0.55, 1.1, 0.55)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wibog"]
-size = Vector3(0.55, 1.1, 0.55)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fh78y"]
 albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_uuui2"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_in746"]
-size = Vector3(1.65, 1.65, 3.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k2r7s"]
 size = Vector3(1.25, 2.5, 5)
@@ -256,18 +237,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_samva")
 
 [node name="@Node3D@96029" type="Node3D" parent="Modules/AbyssalJumpDriveSlot"]
 
-[node name="@Area3D@17287" type="Area3D" parent="Modules/AbyssalJumpDriveSlot/@Node3D@96029"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@17288" type="CollisionShape3D" parent="Modules/AbyssalJumpDriveSlot/@Node3D@96029/@Area3D@17287"]
-shape = SubResource("BoxShape3D_wqkfk")
-
-[node name="@MeshInstance3D@17289" type="MeshInstance3D" parent="Modules/AbyssalJumpDriveSlot/@Node3D@96029/@Area3D@17287"]
-visible = false
-material_override = ExtResource("8_pu71t")
-mesh = SubResource("BoxMesh_h2bv0")
-
 [node name="AlcubierreDriveSlot" type="Node3D" parent="Modules" node_paths=PackedStringArray("area_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03532, 1.27811, 1.30839)
 script = ExtResource("8_8usdo")
@@ -281,18 +250,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1lke6")
 
 [node name="@Node3D@97472" type="Node3D" parent="Modules/AlcubierreDriveSlot"]
 
-[node name="@Area3D@17290" type="Area3D" parent="Modules/AlcubierreDriveSlot/@Node3D@97472"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@17291" type="CollisionShape3D" parent="Modules/AlcubierreDriveSlot/@Node3D@97472/@Area3D@17290"]
-shape = SubResource("BoxShape3D_deive")
-
-[node name="@MeshInstance3D@17292" type="MeshInstance3D" parent="Modules/AlcubierreDriveSlot/@Node3D@97472/@Area3D@17290"]
-visible = false
-material_override = ExtResource("8_pu71t")
-mesh = SubResource("BoxMesh_wibog")
-
 [node name="ComponentSlot" type="Node3D" parent="Modules" node_paths=PackedStringArray("area_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47645, 1.29621, -1.3909)
 script = ExtResource("13_udpm1")
@@ -305,18 +262,6 @@ mesh = SubResource("PlaneMesh_3u6uw")
 surface_material_override/0 = SubResource("StandardMaterial3D_fh78y")
 
 [node name="@Node3D@97476" type="Node3D" parent="Modules/ComponentSlot"]
-
-[node name="@Area3D@17293" type="Area3D" parent="Modules/ComponentSlot/@Node3D@97476"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@17294" type="CollisionShape3D" parent="Modules/ComponentSlot/@Node3D@97476/@Area3D@17293"]
-shape = SubResource("BoxShape3D_uuui2")
-
-[node name="@MeshInstance3D@17295" type="MeshInstance3D" parent="Modules/ComponentSlot/@Node3D@97476/@Area3D@17293"]
-visible = false
-material_override = ExtResource("8_pu71t")
-mesh = SubResource("BoxMesh_in746")
 
 [node name="Anchor" parent="." instance=ExtResource("13_qeu3b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.96804, 8.83934)

@@ -32,6 +32,8 @@ var player : Player
 
 var player_nearby : bool = false
 
+signal highlight_off
+
 @export
 var generate_grid : bool :
 	set(value):
@@ -49,6 +51,7 @@ func _ready() -> void:
 
 		for c : CargoArea in cargo_area_root.get_children():
 			cargo_area_dictionary[c.area_coordinate] = c
+			highlight_off.connect(c.highlight_off)
 
 		for c : CargoArea in cargo_area_root.get_children():
 			var lower_cargo : CargoArea = find_cargo_area(c.area_coordinate - Vector3(0, 1, 0))
@@ -62,6 +65,8 @@ func _ready() -> void:
 
 			if upper_cargo != null:
 				c.upper_cargo_area = upper_cargo
+
+
 
 		var area : Area3D = $Area3D
 		var collision_shape : CollisionShape3D = area.get_node("CollisionShape3D")
@@ -144,3 +149,11 @@ func _add_shape_to_grid(chunk_size : float, chunk_center : Vector3, coordinate :
 	cargo_area_root.add_child(area)
 	area.global_position = chunk_center
 	area.owner = get_tree().edited_scene_root
+
+func highlight_cargo_areas(areas : Array) -> void:
+	for c : CargoArea in areas:
+		c.highlight_on()
+
+func highlight_off_cargo_areas(areas : Array) -> void:
+	for c : CargoArea in areas:
+		c.highlight_off()
