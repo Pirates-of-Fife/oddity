@@ -5,15 +5,12 @@
 [sub_resource type="BoxMesh" id="BoxMesh_yv02j"]
 size = Vector3(1.25, 1.25, 1.25)
 
-[node name="Cu1Container" type="RigidBody3D" node_paths=PackedStringArray("snapping_point")]
+[node name="Cu1Container" type="RigidBody3D"]
 collision_layer = 537921025
 collision_mask = 537921025
 script = ExtResource("1_pb6ev")
 cargo_units = 1
-snapping_point = NodePath("Marker3D")
 can_be_picked_up = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_yv02j")
-
-[node name="Marker3D" type="Marker3D" parent="."]
