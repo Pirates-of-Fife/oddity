@@ -19,11 +19,11 @@ func _process(delta: float) -> void:
 
 func _humanoid_process(delta : float) -> void:
 	_creature_process(delta)
-	
+
 	if control_entity is Humanoid:
 		if Input.is_action_pressed("humanoid_eva_forwards"):
 			humanoid_eva_move_forwards_command.execute(control_entity)
-			
+
 		if Input.is_action_pressed("humanoid_eva_backwards"):
 			humanoid_eva_move_backwards_command.execute(control_entity)
 

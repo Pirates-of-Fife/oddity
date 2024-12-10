@@ -28,7 +28,7 @@ var cargo_area_dictionary : Dictionary = {}
 @export
 var cargo_area_root : Node3D
 
-var player : Player 
+var player : Player
 
 var player_nearby : bool = false
 
@@ -44,9 +44,9 @@ var generate_grid : bool :
 func _ready() -> void:
 	if !Engine.is_editor_hint():
 		cargo_area_dictionary.clear()
-		
+
 		player = get_tree().get_first_node_in_group("Player")
-		
+
 		for c : CargoArea in cargo_area_root.get_children():
 			cargo_area_dictionary[c.area_coordinate] = c
 
@@ -62,34 +62,13 @@ func _ready() -> void:
 
 			if upper_cargo != null:
 				c.upper_cargo_area = upper_cargo
-			
+
 		var area : Area3D = $Area3D
 		var collision_shape : CollisionShape3D = area.get_node("CollisionShape3D")
 		var shape : Shape3D = collision_shape.shape
 
 func find_cargo_area(coordinate : Vector3) -> CargoArea:
 	return cargo_area_dictionary.get(coordinate, null)
-	
-var frame_skip: int = 0
-
-func _process(delta: float) -> void:
-	if !Engine.is_editor_hint():
-		if frame_skip > 0:
-			frame_skip -= 1
-			return
-
-		frame_skip = 60
-		
-		var is_nearby : bool = (player.global_position - self.global_position).length_squared() <= monitoring_distance
-		
-		if is_nearby != player_nearby:
-			player_nearby = is_nearby
-
-			for c : CargoArea in cargo_area_root.get_children():
-				c.monitoring = is_nearby
-				if is_nearby:
-					print_debug("Monitoring enabled for: ", c.name, " at position: ", c.global_position)
-
 
 func _generate_box_grid(box_shape: BoxShape3D, area: Area3D) -> void:
 	for m : Node3D in cargo_area_root.get_children():
