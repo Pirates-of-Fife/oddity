@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://beqr0ho6kl081"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoArea.gd" id="1_236ri"]
+[ext_resource type="Material" uid="uid://b6xwyx8uah1e6" path="res://classes/cargo/CargoHighlightMaterial.tres" id="2_vkbun"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vfxhs"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_06ksl"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[node name="CargoArea" type="Area3D"]
+collision_layer = 1048576
+collision_mask = 1048576
+script = ExtResource("1_236ri")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_vfxhs")
+surface_material_override/0 = ExtResource("2_vkbun")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_06ksl")

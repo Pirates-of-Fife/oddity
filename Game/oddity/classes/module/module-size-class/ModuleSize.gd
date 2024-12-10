@@ -3,15 +3,15 @@ extends Node
 class_name ModuleSize
 
 # Enum for Component Sizes
-enum ComponentSize 
+enum ComponentSize
 {
 	SIZE_0 = 0,  # 0.25m x 0.25m x 0.5m
-	SIZE_1,      # 0.5m x 0.5m x 1m 
-	SIZE_2,      # 1m x 1m x 2m 
+	SIZE_1,      # 0.5m x 0.5m x 1m
+	SIZE_2,      # 1m x 1m x 2m
 	SIZE_3,      # 1.5m x 1.5m x 3m
-	SIZE_4,      # 2m x 2m x 4m 
-	SIZE_5,      # 3m x 3m x 6m 
-	SIZE_6,      # 4m x 4m x 8m 
+	SIZE_4,      # 2m x 2m x 4m
+	SIZE_5,      # 3m x 3m x 6m
+	SIZE_6,      # 4m x 4m x 8m
 	SIZE_7,      # 5m x 5m x 10m
 	SIZE_8,      # 6m x 6m x 12m
 	SIZE_9,      # 7m x 7m x 14m
@@ -19,7 +19,7 @@ enum ComponentSize
 }
 
 # Enum for Hardpoint Sizes
-enum HardpointSize 
+enum HardpointSize
 {
 	SIZE_0 = 0,  # 0.25m x 0.5m x 0.25m
 	SIZE_1,      # 0.35m x 0.7m x 0.35m
@@ -34,7 +34,8 @@ enum HardpointSize
 	SIZE_10,     # 7m x 14m x 7m
 	SIZE_11,     # 8m x 16m x 8m
 	SIZE_12,     # 9m x 18m x 9m
-	SIZE_13      # 10m x 20m x 10m
+	SIZE_13,      # 10m x 20m x 10m
+	SIZE_14
 }
 
 # Enum for Abyssal Jump Drive Sizes
@@ -54,7 +55,7 @@ enum AbyssalJumpDriveSize
 }
 
 # Enum for Alcubierre Drive Sizes
-enum AlcubierreDriveSize 
+enum AlcubierreDriveSize
 {
 	SIZE_0 = 0,  # 0.5m x 0.5m x 0.5m
 	SIZE_1,      # 1m x 0.5m x 0.5m
@@ -73,15 +74,15 @@ enum AlcubierreDriveSize
 enum ThrusterSize
 {
 	SIZE_0 = 0,
-	SIZE_1,    
-	SIZE_2,      
-	SIZE_3,      
-	SIZE_4,    
-	SIZE_5,   
-	SIZE_6,   
-	SIZE_7,    
-	SIZE_8,   
-	SIZE_9,    
+	SIZE_1,
+	SIZE_2,
+	SIZE_3,
+	SIZE_4,
+	SIZE_5,
+	SIZE_6,
+	SIZE_7,
+	SIZE_8,
+	SIZE_9,
 	SIZE_10,
 	SIZE_11,
 	SIZE_12,
@@ -92,7 +93,7 @@ enum ThrusterSize
 	SIZE_17
 }
 
-enum UtilityHardpointSize 
+enum UtilityHardpointSize
 {
 	SIZE_0 = 0
 }
@@ -121,17 +122,18 @@ func get_hardpoint_size(size: HardpointSize) -> Vector3:
 		HardpointSize.SIZE_2: return Vector3(0.5, 0.5, 1)
 		HardpointSize.SIZE_3: return Vector3(0.7, 0.7, 1.5)
 		HardpointSize.SIZE_4: return Vector3(1, 1, 2)
-		HardpointSize.SIZE_5: return Vector3(2, 2, 4)
-		HardpointSize.SIZE_6: return Vector3(3, 3, 6)
-		HardpointSize.SIZE_7: return Vector3(4, 4, 8)
-		HardpointSize.SIZE_8: return Vector3(5, 5, 10)
-		HardpointSize.SIZE_9: return Vector3(6, 6, 12)
-		HardpointSize.SIZE_10: return Vector3(7, 7, 14)
-		HardpointSize.SIZE_11: return Vector3(8, 8, 16)
-		HardpointSize.SIZE_12: return Vector3(9, 9, 18)
-		HardpointSize.SIZE_13: return Vector3(10, 10, 20)
+		HardpointSize.SIZE_5: return Vector3(1.5, 1.5, 3)
+		HardpointSize.SIZE_6: return Vector3(2, 2, 4)
+		HardpointSize.SIZE_7: return Vector3(3, 3, 6)
+		HardpointSize.SIZE_8: return Vector3(4, 4, 8)
+		HardpointSize.SIZE_9: return Vector3(5, 5, 10)
+		HardpointSize.SIZE_10: return Vector3(6, 6, 12)
+		HardpointSize.SIZE_11: return Vector3(7, 7, 14)
+		HardpointSize.SIZE_12: return Vector3(8, 8, 16)
+		HardpointSize.SIZE_13: return Vector3(9, 9, 18)
+		HardpointSize.SIZE_14: return Vector3(10, 10, 20)
 		_ : return Vector3.ZERO
-		
+
 func get_utility_hardpoint_size(size : UtilityHardpointSize) -> Vector3:
 	match size:
 		_ : return Vector3.ZERO

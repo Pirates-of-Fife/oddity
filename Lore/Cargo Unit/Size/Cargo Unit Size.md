@@ -2,11 +2,7 @@
 
 ## **1 CU = 1.25m x 1.25m x 1.25m = ~1.95m³**
 
-2 CU => 2.5m x 2.5m x 1.25m
-
-4 CU => 2.5m x 2.5m x 2.5m
-
-...
+CU Containers usually have 12.5 cm walls
 
 ## Containers
 
@@ -53,6 +49,16 @@ Length **2 CU - 2.5m**
 
 ### 32 CU
 
-Height **4 CU - 5m**
-Width **4 CU - 5m**
+Height **8 CU - 10m**
+Width **2 CU - 2.5m**
 Length **2 CU - 2.5m**
+
+# Internal Freight Volume
+
+1 IFV = 0.01m³
+1 kIFV = 10m³
+
+measures internal volume of a cargo Containers
+
+"Ivies" or "Kivies" often used as slang for IFV
+
