@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=77 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/temp-planet.gd" id="10_x2ly6"]
 [ext_resource type="Texture2D" uid="uid://ehsni8niotww" path="res://test-scenes/ship-test-scene/lroc_color_poles_4k.png" id="12_0dl0g"]
 [ext_resource type="PackedScene" uid="uid://cl1lyeabmrdst" path="res://scenes/vehicles/starships/demo-ship-2/DemoShip2.tscn" id="13_h4u2q"]
-[ext_resource type="PackedScene" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
+[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="13_jtbi5"]
 [ext_resource type="Texture2D" uid="uid://sassmgocpxib" path="res://test-scenes/ship-test-scene/ldem_3_8bit.jpg" id="13_r5amc"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_8crom"]
 [ext_resource type="PackedScene" uid="uid://behanbk2jf42k" path="res://classes/game-entity/static-game-entity/openable/DemoOpenableManual.tscn" id="15_n2ehj"]
@@ -32,6 +32,7 @@
 [ext_resource type="Script" path="res://test-scenes/ship-test-scene/mesh_instance_3d.gd" id="23_i105l"]
 [ext_resource type="PackedScene" uid="uid://beqr0ho6kl081" path="res://classes/cargo/CargoArea.tscn" id="31_ymg47"]
 [ext_resource type="Script" path="res://classes/cargo/CargoGrid.gd" id="32_fyyfg"]
+[ext_resource type="PackedScene" uid="uid://bp00jj8askcjj" path="res://scenes/cargo/cargo-containers/Cu2Container.tscn" id="32_x0qjo"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AbyssalJumpDriveSlot.gd" id="34_swl67"]
 [ext_resource type="Material" uid="uid://b6xwyx8uah1e6" path="res://classes/cargo/CargoHighlightMaterial.tres" id="35_syj3t"]
 
@@ -206,12 +207,12 @@ data = PackedVector3Array(0, 500, 0, 0, 500, 0, 0, 499.416, 24.1567, 0, 500, 0, 
 data = PackedVector3Array(15, 0, 18.17, -15, 0, 18.17, 15, 0, -18.17, -15, 0, 18.17, -15, 0, -18.17, 15, 0, -18.17)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o8xmi"]
-size = Vector3(20, 20, 20)
+size = Vector3(6, 4, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mc6k5"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_aaun5"]
 size = Vector3(0.55, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_f4hdi"]
+[sub_resource type="BoxMesh" id="BoxMesh_srap3"]
 size = Vector3(0.55, 1.1, 2.2)
 
 [node name="ShipTestScene" type="Node3D"]
@@ -974,10 +975,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.147, -113.266, 313.697)
 [node name="Cu1Container15" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 231.296, -113.266, 313.697)
 
+[node name="Cu2Container" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("32_x0qjo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 229.569, -117.584, 309.433)
+
 [node name="CargoGrid" type="Node3D" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("cargo_area_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.165, -118.168, 303.59)
 script = ExtResource("32_fyyfg")
-monitoring_distance = 25.0
 cargo_grid_physical_size = Vector3(6, 4, 6)
 total_cu_capacity = 48
 cu_x_y_z = Vector3(4, 3, 4)
@@ -1238,17 +1241,17 @@ area_root = NodePath("@Node3D@93362")
 
 [node name="@Node3D@93362" type="Node3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot"]
 
-[node name="@Area3D@23152" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
+[node name="@Area3D@20777" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@23153" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@23152"]
-shape = SubResource("BoxShape3D_mc6k5")
+[node name="@CollisionShape3D@20778" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@20777"]
+shape = SubResource("BoxShape3D_aaun5")
 
-[node name="@MeshInstance3D@23154" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@23152"]
+[node name="@MeshInstance3D@20779" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@20777"]
 visible = false
 material_override = ExtResource("35_syj3t")
-mesh = SubResource("BoxMesh_f4hdi")
+mesh = SubResource("BoxMesh_srap3")
 
 [node name="ShieldGenerator2" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 246.122, -118.414, 314.028)
