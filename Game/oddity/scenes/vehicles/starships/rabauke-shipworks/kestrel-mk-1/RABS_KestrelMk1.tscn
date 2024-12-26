@@ -1,12 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://24n0p54vbhsm"]
+[gd_scene load_steps=21 format=3 uid="uid://24n0p54vbhsm"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.gd" id="1_pouwl"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/StarshipInfo.gd" id="2_2go0d"]
 [ext_resource type="PackedScene" uid="uid://dty6bx5o55wu1" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Hull.glb" id="2_m517r"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="3_0ng4q"]
-[ext_resource type="PackedScene" uid="uid://cy0bq8dkovqn8" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/BrigeExterior.glb" id="3_58v17"]
+[ext_resource type="PackedScene" uid="uid://4joqwk3i6fix" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/BridgeExterior.glb" id="3_5cpt0"]
 [ext_resource type="PackedScene" uid="uid://v8cuqmxt2h1h" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/BridgeGlass.glb" id="4_o2fwp"]
 [ext_resource type="PackedScene" uid="uid://d3y1lxms167le" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/CargoBayRoom.glb" id="5_shgu2"]
+[ext_resource type="PackedScene" uid="uid://pqeloigswxxo" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/EngineeringRoom.glb" id="8_i6afd"]
+[ext_resource type="PackedScene" uid="uid://dlbmk7sdllifn" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/MainCorridor.glb" id="9_u3iuy"]
+[ext_resource type="PackedScene" uid="uid://58hj13j3pcv6" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/EVARoom.glb" id="10_i7em6"]
+[ext_resource type="PackedScene" uid="uid://b4rqahov545kg" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/MessHall.glb" id="11_l2b67"]
+[ext_resource type="PackedScene" uid="uid://wfs078fox115" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Hab1.glb" id="12_h4mt8"]
+[ext_resource type="PackedScene" uid="uid://6ib6v4jvjbur" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Hab2.glb" id="13_pnnkk"]
+[ext_resource type="PackedScene" uid="uid://dytfrand400vv" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Hab3.glb" id="14_p2bqi"]
+[ext_resource type="PackedScene" uid="uid://bj4h3xcm0660f" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Bridge.glb" id="15_veyvc"]
+[ext_resource type="PackedScene" uid="uid://rbmug8u7g64c" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/GlassShip.glb" id="16_ichhl"]
+[ext_resource type="PackedScene" uid="uid://dlffj8pwwwcfl" path="res://classes/pid-controller/ShipPidControllers.tscn" id="17_b7orv"]
 
 [sub_resource type="Resource" id="Resource_wl0cc"]
 script = ExtResource("2_2go0d")
@@ -42,11 +52,33 @@ thruster_force = SubResource("Resource_xtefc")
 
 [node name="Hull2" parent="." instance=ExtResource("2_m517r")]
 
-[node name="BrigeExterior" parent="." instance=ExtResource("3_58v17")]
-
 [node name="BridgeGlass" parent="." instance=ExtResource("4_o2fwp")]
 
 [node name="CargoBayRoom" parent="." instance=ExtResource("5_shgu2")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qly6b")
+
+[node name="BridgeExterior" parent="." instance=ExtResource("3_5cpt0")]
+
+[node name="EngineeringRoom" parent="." instance=ExtResource("8_i6afd")]
+
+[node name="MainCorridor" parent="." instance=ExtResource("9_u3iuy")]
+
+[node name="EVARoom" parent="." instance=ExtResource("10_i7em6")]
+
+[node name="MessHall" parent="." instance=ExtResource("11_l2b67")]
+
+[node name="Hab1" parent="." instance=ExtResource("12_h4mt8")]
+
+[node name="Hab2" parent="." instance=ExtResource("13_pnnkk")]
+
+[node name="Hab3" parent="." instance=ExtResource("14_p2bqi")]
+
+[node name="Bridge2" parent="." instance=ExtResource("15_veyvc")]
+
+[node name="GlassShip" parent="." instance=ExtResource("16_ichhl")]
+
+[node name="ShipPidControllers" parent="." instance=ExtResource("17_b7orv")]
+
+[editable path="ShipPidControllers"]
