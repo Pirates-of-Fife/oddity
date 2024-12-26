@@ -1,0 +1,105 @@
+[gd_scene load_steps=13 format=3 uid="uid://ct86vf5q71mfl"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_0asnh"]
+[ext_resource type="PackedScene" uid="uid://nmrwr3gw1ae0" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/thin-door/ThinDoor.glb" id="2_4haa7"]
+[ext_resource type="PackedScene" uid="uid://bq5ik2fuv66u5" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/thin-door/ThinDoorFrame.glb" id="3_whchj"]
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/OpenableDetectionArea.gd" id="4_l50e8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gn43n"]
+size = Vector3(0.309055, 2.05521, 0.109628)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xx7ls"]
+size = Vector3(1.16668, 2.07414, 0.108169)
+
+[sub_resource type="Animation" id="Animation_babgl"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorCollider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 1),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0.873842, 0.999365, 0.00533572), Vector3(1.98051, 0.999365, 0.00533572)]
+}
+
+[sub_resource type="Animation" id="Animation_j6ral"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorCollider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.4, 0.466667, 1),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.98051, 0.999365, 0.00533572), Vector3(1.43805, 0.999365, 0.00533572), Vector3(1.39519, 0.999365, 0.00533572), Vector3(0.873842, 0.999365, 0.00533572)]
+}
+
+[sub_resource type="Animation" id="Animation_atofi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorCollider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.863642, 1.01327, 0.0121469)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tlfme"]
+_data = {
+"RESET": SubResource("Animation_atofi"),
+"close": SubResource("Animation_j6ral"),
+"open": SubResource("Animation_babgl")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cwpv2"]
+size = Vector3(1.19265, 1.99722, 1.56676)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_365i5"]
+size = Vector3(1.10849, 2.01364, 0.0970612)
+
+[node name="RabsThinDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "detection_area")]
+script = ExtResource("1_0asnh")
+animation_player = NodePath("AnimationPlayer")
+type = 1
+detection_area = NodePath("OpenableDetectionArea")
+
+[node name="ThinDoorFrame" parent="." instance=ExtResource("3_whchj")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.156867, 1.04875, 0.000620699)
+shape = SubResource("BoxShape3D_gn43n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00104, 1.03156, 0.000794262)
+shape = SubResource("BoxShape3D_xx7ls")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tlfme")
+}
+
+[node name="OpenableDetectionArea" type="Area3D" parent="."]
+script = ExtResource("4_l50e8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenableDetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.898046, 1.019, -0.00334311)
+shape = SubResource("BoxShape3D_cwpv2")
+
+[node name="DoorCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.863642, 1.01327, 0.0121469)
+shape = SubResource("BoxShape3D_365i5")
+
+[node name="ThinDoor" parent="DoorCollider" instance=ExtResource("2_4haa7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.863642, -1.01327, -0.0121469)

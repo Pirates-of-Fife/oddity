@@ -1,0 +1,3 @@
+extends MainThruster
+
+class_name RABS_KestrelMk1_MainThruster

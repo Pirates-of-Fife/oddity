@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddvpx7ldofuyc"]
+
+[ext_resource type="Script" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.gd" id="1_rxy08"]
+[ext_resource type="PackedScene" uid="uid://be1lhilrvjun7" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/KestrelMk1MainThruster.glb" id="2_38npm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oj6mv"]
+size = Vector3(4.7547, 3.72179, 11.4831)
+
+[node name="RabsKestrelMk1MainThruster" type="RigidBody3D"]
+mass = 15000.0
+script = ExtResource("1_rxy08")
+size = 5
+can_be_picked_up = true
+
+[node name="KestrelMk1MainThruster" parent="." instance=ExtResource("2_38npm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140154, -1.77636e-15, 0.0986767)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123499, -0.0113469, 0.113469)
+shape = SubResource("BoxShape3D_oj6mv")

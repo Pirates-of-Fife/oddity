@@ -51,7 +51,7 @@ func _thruster_slot_ready() -> void:
 
 		var mesh_instance : MeshInstance3D = MeshInstance3D.new()
 		var box_mesh : BoxMesh = BoxMesh.new()
-		box_mesh.size = area.get_child(0).size
+		box_mesh.size = area.get_child(0).shape.size
 		mesh_instance.mesh = box_mesh
 
 		# Assign the highlight material

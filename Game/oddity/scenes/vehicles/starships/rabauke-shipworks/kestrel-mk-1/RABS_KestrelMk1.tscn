@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://24n0p54vbhsm"]
+[gd_scene load_steps=31 format=3 uid="uid://24n0p54vbhsm"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.gd" id="1_pouwl"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/StarshipInfo.gd" id="2_2go0d"]
-[ext_resource type="PackedScene" uid="uid://dty6bx5o55wu1" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Hull.glb" id="2_m517r"]
+[ext_resource type="PackedScene" uid="uid://d3olfrvhs8vvu" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Hull.glb" id="2_m517r"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="3_0ng4q"]
 [ext_resource type="PackedScene" uid="uid://4joqwk3i6fix" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/BridgeExterior.glb" id="3_5cpt0"]
 [ext_resource type="PackedScene" uid="uid://v8cuqmxt2h1h" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/BridgeGlass.glb" id="4_o2fwp"]
@@ -17,6 +17,14 @@
 [ext_resource type="PackedScene" uid="uid://bj4h3xcm0660f" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Bridge.glb" id="15_veyvc"]
 [ext_resource type="PackedScene" uid="uid://rbmug8u7g64c" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/GlassShip.glb" id="16_ichhl"]
 [ext_resource type="PackedScene" uid="uid://dlffj8pwwwcfl" path="res://classes/pid-controller/ShipPidControllers.tscn" id="17_b7orv"]
+[ext_resource type="PackedScene" uid="uid://c4edxhfqsax0l" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/doors/main-door/RABS_Main_Door.tscn" id="17_c77uw"]
+[ext_resource type="PackedScene" uid="uid://dw71syxggai1k" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/doors/thin-door/RABS_Thin_Door_Manual.tscn" id="19_0smne"]
+[ext_resource type="PackedScene" uid="uid://crt017bsrobyp" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/doors/secondary-door/RABS_Secondary_Door_Manual.tscn" id="19_85108"]
+[ext_resource type="PackedScene" uid="uid://bxdkumdfiftmg" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/RABS_Button.tscn" id="20_4bqti"]
+[ext_resource type="PackedScene" uid="uid://y8e6ui18agf" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThrusterSlot.tscn" id="22_4vcqb"]
+[ext_resource type="PackedScene" uid="uid://ddvpx7ldofuyc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.tscn" id="23_f074u"]
+[ext_resource type="PackedScene" uid="uid://dk70da87nuyae" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Turret.glb" id="24_bdg14"]
+[ext_resource type="PackedScene" uid="uid://cec562st3a42l" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Hardpoints.glb" id="25_fuojb"]
 
 [sub_resource type="Resource" id="Resource_wl0cc"]
 script = ExtResource("2_2go0d")
@@ -45,18 +53,24 @@ pitch_down_thrust = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qly6b"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_7l1se"]
+size = Vector3(2.095, 0.49, 0.095)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gldmp"]
+albedo_color = Color(0.570785, 0.545434, 0.461458, 1)
+
 [node name="RabsKestrelMk1" type="RigidBody3D"]
+mass = 1.2e+06
 script = ExtResource("1_pouwl")
 ship_info = SubResource("Resource_wl0cc")
 thruster_force = SubResource("Resource_xtefc")
-
-[node name="Hull2" parent="." instance=ExtResource("2_m517r")]
 
 [node name="BridgeGlass" parent="." instance=ExtResource("4_o2fwp")]
 
 [node name="CargoBayRoom" parent="." instance=ExtResource("5_shgu2")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.96327, 0)
 shape = SubResource("BoxShape3D_qly6b")
 
 [node name="BridgeExterior" parent="." instance=ExtResource("3_5cpt0")]
@@ -80,5 +94,104 @@ shape = SubResource("BoxShape3D_qly6b")
 [node name="GlassShip" parent="." instance=ExtResource("16_ichhl")]
 
 [node name="ShipPidControllers" parent="." instance=ExtResource("17_b7orv")]
+
+[node name="RabsMainDoor" parent="." instance=ExtResource("17_c77uw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0731371, 1.01483, -4.06412)
+
+[node name="Hull2" parent="." instance=ExtResource("2_m517r")]
+
+[node name="RabsMainDoor2" parent="." instance=ExtResource("17_c77uw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0731371, 1.01483, -14.2847)
+
+[node name="RabsMainDoor3" parent="." instance=ExtResource("17_c77uw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0731371, 1.01483, -23.1916)
+
+[node name="RabsThinDoor" parent="." instance=ExtResource("19_0smne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46916, 0.973246, -22.31)
+interactables = [NodePath("RabsButton4"), NodePath("RabsButton5")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RabsThinDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04094, 2.3129, -0.00396155)
+mesh = SubResource("BoxMesh_7l1se")
+surface_material_override/0 = SubResource("StandardMaterial3D_gldmp")
+
+[node name="RabsButton4" parent="RabsThinDoor" instance=ExtResource("20_4bqti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64331, 1.32674, 0.0691013)
+
+[node name="RabsButton5" parent="RabsThinDoor" instance=ExtResource("20_4bqti")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 1.55943, 1.24877, -0.0429717)
+
+[node name="RabsSecondaryDoor" parent="." instance=ExtResource("19_85108")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 1.32327, 0.995326, -20.5485)
+interactables = [NodePath("RabsButton4"), NodePath("RabsButton5")]
+
+[node name="RabsButton4" parent="RabsSecondaryDoor" instance=ExtResource("20_4bqti")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0.0905629, 1.06559, -0.231749)
+
+[node name="RabsButton5" parent="RabsSecondaryDoor" instance=ExtResource("20_4bqti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.117162, 1.06559, 0.190165)
+
+[node name="RabsSecondaryDoor2" parent="." instance=ExtResource("19_85108")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -1.27217, 0.99069, -23.1529)
+interactables = [NodePath("RabsButton"), NodePath("RabsButton2")]
+
+[node name="RabsButton" parent="RabsSecondaryDoor2" instance=ExtResource("20_4bqti")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 1.58706, 1.15532, -0.215068)
+
+[node name="RabsButton2" parent="RabsSecondaryDoor2" instance=ExtResource("20_4bqti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6181, 1.15532, 0.255839)
+
+[node name="RabsSecondaryDoor3" parent="." instance=ExtResource("19_85108")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -1.28992, 0.999381, -20.5689)
+interactables = [NodePath("RabsButton2"), NodePath("RabsButton3")]
+
+[node name="RabsButton2" parent="RabsSecondaryDoor3" instance=ExtResource("20_4bqti")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0.175743, 1.14663, -0.232814)
+
+[node name="RabsButton3" parent="RabsSecondaryDoor3" instance=ExtResource("20_4bqti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175743, 1.14663, 0.261501)
+
+[node name="RabsSecondaryDoor4" parent="." instance=ExtResource("19_85108")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -1.71652, 1.00854, -16.4396)
+interactables = [NodePath("RabsButton3"), NodePath("RabsButton4")]
+
+[node name="RabsButton3" parent="RabsSecondaryDoor4" instance=ExtResource("20_4bqti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.150316, 1.13747, 0.239133)
+
+[node name="RabsButton4" parent="RabsSecondaryDoor4" instance=ExtResource("20_4bqti")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0.14825, 1.13747, -0.238494)
+
+[node name="RabsSecondaryDoor5" parent="." instance=ExtResource("19_85108")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 1.2916, 0.995326, -14.6443)
+interactables = [NodePath("RabsButton4"), NodePath("RabsButton5")]
+
+[node name="RabsButton4" parent="RabsSecondaryDoor5" instance=ExtResource("20_4bqti")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0.155204, 1.06559, -0.231749)
+
+[node name="RabsButton5" parent="RabsSecondaryDoor5" instance=ExtResource("20_4bqti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.181803, 1.06559, 0.190165)
+
+[node name="RabsKestrelMk1MainThrusterSlot" parent="." node_paths=PackedStringArray("module") instance=ExtResource("22_4vcqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.61302, 2.00417, 9.00631)
+size = 5
+module = NodePath("RabsKestrelMk1MainThruster")
+
+[node name="RabsKestrelMk1MainThruster" parent="RabsKestrelMk1MainThrusterSlot" node_paths=PackedStringArray("module_slot") instance=ExtResource("23_f074u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00141501, 0.0762753, -0.0146954)
+module_slot = NodePath("..")
+
+[node name="RabsKestrelMk1MainThrusterSlot2" parent="." node_paths=PackedStringArray("module") instance=ExtResource("22_4vcqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.61954, 2.05433, 8.97976)
+size = 5
+module = NodePath("RabsKestrelMk1MainThruster")
+
+[node name="RabsKestrelMk1MainThruster" parent="RabsKestrelMk1MainThrusterSlot2" node_paths=PackedStringArray("module_slot") instance=ExtResource("23_f074u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00141501, 0.0762753, -0.0146954)
+module_slot = NodePath("..")
+
+[node name="Turret2" parent="." instance=ExtResource("24_bdg14")]
+
+[node name="Hardpoints" parent="." instance=ExtResource("25_fuojb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0325503, 0.0528574, 0.00256177)
 
 [editable path="ShipPidControllers"]
