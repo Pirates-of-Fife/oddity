@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://24n0p54vbhsm"]
+
+[ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.gd" id="1_pouwl"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/StarshipInfo.gd" id="2_2go0d"]
+[ext_resource type="PackedScene" uid="uid://dty6bx5o55wu1" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Hull.glb" id="2_m517r"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="3_0ng4q"]
+[ext_resource type="PackedScene" uid="uid://cy0bq8dkovqn8" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/BrigeExterior.glb" id="3_58v17"]
+[ext_resource type="PackedScene" uid="uid://v8cuqmxt2h1h" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/BridgeGlass.glb" id="4_o2fwp"]
+[ext_resource type="PackedScene" uid="uid://d3y1lxms167le" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/CargoBayRoom.glb" id="5_shgu2"]
+
+[sub_resource type="Resource" id="Resource_wl0cc"]
+script = ExtResource("2_2go0d")
+max_linear_velocity = 0.0
+max_angular_pitch_velocity = 0.0
+max_angular_yaw_velocity = 0.0
+max_angular_roll_velocity = 0.0
+manufacturer = ""
+model_name = ""
+release_year = ""
+
+[sub_resource type="Resource" id="Resource_xtefc"]
+script = ExtResource("3_0ng4q")
+forward_thrust = 0.0
+backward_thrust = 0.0
+up_thrust = 0.0
+down_thrust = 0.0
+left_thrust = 0.0
+right_thrust = 0.0
+roll_left_thrust = 0.0
+roll_right_thrust = 0.0
+yaw_left_thrust = 0.0
+yaw_right_thrust = 0.0
+pitch_up_thrust = 0.0
+pitch_down_thrust = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qly6b"]
+
+[node name="RabsKestrelMk1" type="RigidBody3D"]
+script = ExtResource("1_pouwl")
+ship_info = SubResource("Resource_wl0cc")
+thruster_force = SubResource("Resource_xtefc")
+
+[node name="Hull2" parent="." instance=ExtResource("2_m517r")]
+
+[node name="BrigeExterior" parent="." instance=ExtResource("3_58v17")]
+
+[node name="BridgeGlass" parent="." instance=ExtResource("4_o2fwp")]
+
+[node name="CargoBayRoom" parent="." instance=ExtResource("5_shgu2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qly6b")
