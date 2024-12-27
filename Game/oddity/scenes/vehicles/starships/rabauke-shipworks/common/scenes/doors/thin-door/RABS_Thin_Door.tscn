@@ -11,8 +11,8 @@ size = Vector3(0.309055, 2.05521, 0.109628)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xx7ls"]
 size = Vector3(1.16668, 2.07414, 0.108169)
 
-[sub_resource type="Animation" id="Animation_babgl"]
-resource_name = "open"
+[sub_resource type="Animation" id="Animation_atofi"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -20,10 +20,10 @@ tracks/0/path = NodePath("DoorCollider:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0, 1),
-"transitions": PackedFloat64Array(1, 1),
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(0.873842, 0.999365, 0.00533572), Vector3(1.98051, 0.999365, 0.00533572)]
+"values": [Vector3(0.863642, 1.01327, 0.0121469)]
 }
 
 [sub_resource type="Animation" id="Animation_j6ral"]
@@ -41,8 +41,8 @@ tracks/0/keys = {
 "values": [Vector3(1.98051, 0.999365, 0.00533572), Vector3(1.43805, 0.999365, 0.00533572), Vector3(1.39519, 0.999365, 0.00533572), Vector3(0.873842, 0.999365, 0.00533572)]
 }
 
-[sub_resource type="Animation" id="Animation_atofi"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_babgl"]
+resource_name = "open"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -50,10 +50,10 @@ tracks/0/path = NodePath("DoorCollider:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
+"times": PackedFloat64Array(0, 1),
+"transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector3(0.863642, 1.01327, 0.0121469)]
+"values": [Vector3(0.873842, 0.999365, 0.00533572), Vector3(1.98051, 0.999365, 0.00533572)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tlfme"]
@@ -70,6 +70,8 @@ size = Vector3(1.19265, 1.99722, 1.56676)
 size = Vector3(1.10849, 2.01364, 0.0970612)
 
 [node name="RabsThinDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "detection_area")]
+collision_layer = 1024
+collision_mask = 1024
 script = ExtResource("1_0asnh")
 animation_player = NodePath("AnimationPlayer")
 type = 1

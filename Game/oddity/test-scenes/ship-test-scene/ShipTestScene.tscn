@@ -211,10 +211,10 @@ data = PackedVector3Array(15, 0, 18.17, -15, 0, 18.17, 15, 0, -18.17, -15, 0, 18
 [sub_resource type="BoxShape3D" id="BoxShape3D_o8xmi"]
 size = Vector3(20, 20, 20)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_313k0"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_42pi4"]
 size = Vector3(0.55, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_iac1t"]
+[sub_resource type="BoxMesh" id="BoxMesh_iuj8s"]
 size = Vector3(0.55, 1.1, 2.2)
 
 [node name="ShipTestScene" type="Node3D"]
@@ -803,6 +803,8 @@ width = 1200.0
 
 [node name="Humanoid" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("13_jtbi5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 236.991, -118.131, 310.467)
+interaction_length = 30.0
+pick_up_distance = 3.0
 
 [node name="DemoOpenableManual" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_n2ehj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 223.51, -119.44, 321.554)
@@ -1240,24 +1242,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 1.875, 1.875)
 cargo_grid = NodePath("../..")
 area_coordinate = Vector3(1, 1, 1)
 
-[node name="AbyssalJumpDriveSlot" type="Node3D" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("area_root")]
+[node name="AbyssalJumpDriveSlot" type="Node3D" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("highlight_box", "area_root")]
 script = ExtResource("34_swl67")
 abyssal_jump_drive_size = 1
+highlight_box = NodePath("@Node3D@93362/@Area3D@185940/@MeshInstance3D@185942")
 area_root = NodePath("@Node3D@93362")
 
 [node name="@Node3D@93362" type="Node3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot"]
 
-[node name="@Area3D@205667" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
+[node name="@Area3D@185940" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@205668" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@205667"]
-shape = SubResource("BoxShape3D_313k0")
+[node name="@CollisionShape3D@185941" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@185940"]
+shape = SubResource("BoxShape3D_42pi4")
 
-[node name="@MeshInstance3D@205669" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@205667"]
+[node name="@MeshInstance3D@185942" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@185940"]
 visible = false
 material_override = ExtResource("35_syj3t")
-mesh = SubResource("BoxMesh_iac1t")
+mesh = SubResource("BoxMesh_iuj8s")
+
+[node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("35_itimp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 273.63, -122.404, 307.085)
 
 [node name="ShieldGenerator2" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 246.122, -118.414, 314.028)
@@ -1271,7 +1277,10 @@ can_be_picked_up = true
 mesh = SubResource("BoxMesh_w8asa")
 surface_material_override/0 = SubResource("StandardMaterial3D_e64nr")
 
-[node name="RabsKestrelMk1" parent="." instance=ExtResource("35_itimp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 269.124, -119.44, 307.085)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(1.28469, 0, 0, 0, 1, 0, 0, 0, 1.944, 274.55, -125.087, 297.46)
+mesh = SubResource("PlaneMesh_lby4s")
+skeleton = NodePath("../../DirectionalLight3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_2e3mx")
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]

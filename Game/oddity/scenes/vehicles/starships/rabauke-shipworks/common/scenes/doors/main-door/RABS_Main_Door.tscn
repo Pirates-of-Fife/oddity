@@ -6,34 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cnv8q12rrd8og" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/main-door/DoorSide.glb" id="4_o1vd0"]
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/OpenableDetectionArea.gd" id="5_doljf"]
 
-[sub_resource type="Animation" id="Animation_skd3i"]
-resource_name = "open"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DoorRCollider:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.3, 0.433333, 1.5),
-"transitions": PackedFloat64Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.146801, 1.34239, 0), Vector3(-0.202, 1.342, 0), Vector3(-0.171976, 1.342, 0), Vector3(-1.35135, 1.342, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DoorSideCollider:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 0.1, 1.5),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.460008, 0.997796, -0.172115), Vector3(0.460008, 0.997796, -0.172115), Vector3(1.5584, 0.997796, -0.172115)]
-}
-
 [sub_resource type="Animation" id="Animation_nod2o"]
 length = 0.001
 tracks/0/type = "value"
@@ -89,6 +61,34 @@ tracks/1/keys = {
 "values": [Vector3(1.5584, 0.997796, -0.172115), Vector3(1.5584, 0.997796, -0.172115), Vector3(0.460008, 0.997796, -0.172115)]
 }
 
+[sub_resource type="Animation" id="Animation_skd3i"]
+resource_name = "open"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorRCollider:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.3, 0.433333, 1.5),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.146801, 1.34239, 0), Vector3(-0.202, 1.342, 0), Vector3(-0.171976, 1.342, 0), Vector3(-1.35135, 1.342, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorSideCollider:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.1, 1.5),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.460008, 0.997796, -0.172115), Vector3(0.460008, 0.997796, -0.172115), Vector3(1.5584, 0.997796, -0.172115)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jutdv"]
 _data = {
 "RESET": SubResource("Animation_nod2o"),
@@ -112,6 +112,8 @@ data = PackedVector3Array(-0.636, 0.9952, 0.15, -0.636, 1, -0.15, -0.636, 1, 0.1
 size = Vector3(2.07848, 1.86898, 2.66212)
 
 [node name="RabsMainDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "detection_area")]
+collision_layer = 1024
+collision_mask = 1024
 script = ExtResource("1_c4sj4")
 animation_player = NodePath("AnimationPlayer")
 type = 1
