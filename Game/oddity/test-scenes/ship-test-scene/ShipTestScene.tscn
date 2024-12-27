@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://b5pa2t3odvm1g"]
+[gd_scene load_steps=80 format=3 uid="uid://b5pa2t3odvm1g"]
 
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_eqyqr"]
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_h6a5r"]
@@ -58,7 +58,7 @@ background_mode = 2
 sky = SubResource("Sky_wka6d")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lby4s"]
-size = Vector2(30, 36.34)
+size = Vector2(60, 60)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2e3mx"]
 albedo_color = Color(0.895553, 0.26155, 4.23551e-05, 1)
@@ -211,11 +211,14 @@ data = PackedVector3Array(15, 0, 18.17, -15, 0, 18.17, 15, 0, -18.17, -15, 0, 18
 [sub_resource type="BoxShape3D" id="BoxShape3D_o8xmi"]
 size = Vector3(20, 20, 20)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cs5jv"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5etuv"]
 size = Vector3(0.55, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_lkk8f"]
+[sub_resource type="BoxMesh" id="BoxMesh_d1m1i"]
 size = Vector3(0.55, 1.1, 2.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_61gt7"]
+size = Vector3(63.0291, 50, 58.3852)
 
 [node name="ShipTestScene" type="Node3D"]
 
@@ -941,49 +944,49 @@ shape = SubResource("BoxShape3D_42qyo")
 shape = SubResource("ConcavePolygonShape3D_vyf5x")
 
 [node name="Cu1Container" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.901, -116.795, 310.537)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 298.446, -116.795, 284.631)
 
 [node name="Cu1Container2" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.901, -116.795, 312.757)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 298.446, -116.795, 286.851)
 
 [node name="Cu1Container3" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.901, -116.795, 308.159)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 298.446, -116.795, 282.253)
 
 [node name="Cu1Container4" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.425, -116.795, 308.159)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296.97, -116.795, 282.253)
 
 [node name="Cu1Container5" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.425, -115.08, 308.159)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296.97, -115.08, 282.253)
 
 [node name="Cu1Container6" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.48, -115.08, 308.159)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 299.025, -115.08, 282.253)
 
 [node name="Cu1Container7" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.48, -113.266, 308.159)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 299.025, -113.266, 282.253)
 
 [node name="Cu1Container8" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.203, -113.266, 308.159)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296.748, -113.266, 282.253)
 
 [node name="Cu1Container9" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.203, -113.266, 311.944)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296.748, -113.266, 286.038)
 
 [node name="Cu1Container10" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 229.484, -113.266, 311.944)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300.029, -113.266, 286.038)
 
 [node name="Cu1Container11" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.222, -113.266, 311.944)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 298.767, -113.266, 286.038)
 
 [node name="Cu1Container12" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.222, -113.266, 313.697)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 298.767, -113.266, 287.791)
 
 [node name="Cu1Container13" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 229.696, -113.266, 313.697)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300.241, -113.266, 287.791)
 
 [node name="Cu1Container14" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226.147, -113.266, 313.697)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296.692, -113.266, 287.791)
 
 [node name="Cu1Container15" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("15_uhdq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 231.296, -113.266, 313.697)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 301.841, -113.266, 287.791)
 
 [node name="CargoGrid" type="Node3D" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("cargo_area_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.165, -118.168, 303.59)
@@ -1245,25 +1248,25 @@ area_coordinate = Vector3(1, 1, 1)
 [node name="AbyssalJumpDriveSlot" type="Node3D" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("highlight_box", "area_root")]
 script = ExtResource("34_swl67")
 abyssal_jump_drive_size = 1
-highlight_box = NodePath("@Node3D@93362/@Area3D@452020/@MeshInstance3D@452022")
+highlight_box = NodePath("@Node3D@93362/@Area3D@594788/@MeshInstance3D@594790")
 area_root = NodePath("@Node3D@93362")
 
 [node name="@Node3D@93362" type="Node3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot"]
 
-[node name="@Area3D@452020" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
+[node name="@Area3D@594788" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@452021" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@452020"]
-shape = SubResource("BoxShape3D_cs5jv")
+[node name="@CollisionShape3D@594789" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@594788"]
+shape = SubResource("BoxShape3D_5etuv")
 
-[node name="@MeshInstance3D@452022" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@452020"]
+[node name="@MeshInstance3D@594790" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@594788"]
 visible = false
 material_override = ExtResource("35_syj3t")
-mesh = SubResource("BoxMesh_lkk8f")
+mesh = SubResource("BoxMesh_d1m1i")
 
 [node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("35_itimp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 273.63, -122.404, 307.085)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300.816, -116.753, 319.964)
 
 [node name="ShieldGenerator2" type="RigidBody3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 246.122, -118.414, 314.028)
@@ -1277,10 +1280,29 @@ can_be_picked_up = true
 mesh = SubResource("BoxMesh_w8asa")
 surface_material_override/0 = SubResource("StandardMaterial3D_e64nr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(1.28469, 0, 0, 0, 1, 0, 0, 0, 1.944, 274.55, -125.087, 297.46)
+[node name="Plane3" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7255, -119.44, 295.61)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Plane3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 285.289, 0, 16.7726)
 mesh = SubResource("PlaneMesh_lby4s")
 skeleton = NodePath("../../DirectionalLight3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_2e3mx")
+
+[node name="GravityGrid" type="Area3D" parent="SubViewportContainer/SubViewport/World/Plane3/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58671, 0, 0)
+script = ExtResource("1_q0ntb")
+frame_of_reference_name = "World"
+size = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/Plane3/MeshInstance3D/GravityGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.93997, 14.3237, -1.94999)
+shape = SubResource("BoxShape3D_61gt7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/Plane3/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/Plane3/MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1.66, 0, 0, 0, 1.66, 0, 0, 0, 1.66, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_vyf5x")
 
 [connection signal="interacted" from="SubViewportContainer/SubViewport/World/Plane/Interactable" to="SubViewportContainer/SubViewport/World/Plane/Interaction Target" method="_on_interactable_interacted"]

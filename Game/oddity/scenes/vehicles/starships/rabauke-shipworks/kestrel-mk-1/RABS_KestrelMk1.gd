@@ -21,6 +21,8 @@ func _process(delta: float) -> void:
 	velocity_mfd.current_max_velocity = current_max_velocity
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
+	
+	print(actual_rotation_vector)
 
 func toggle_landing_gear() -> void:
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear.toggle_open_state()
