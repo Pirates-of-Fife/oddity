@@ -18,6 +18,8 @@ var starship_thrust_down_command : StarshipThrustDownCommand = StarshipThrustDow
 
 var starship_player_interact_command : StarshipPlayerInteractCommand = StarshipPlayerInteractCommand.new()
 
+var starship_toggle_landing_gear_command : StarshipToggleLandingGearCommand = StarshipToggleLandingGearCommand.new()
+
 var starship_increase_max_velocity_command : StarshipIncreaseMaxVelocityCommand = StarshipIncreaseMaxVelocityCommand.new()
 var starship_decrease_max_velocity_command : StarshipDecreaseMaxVelocityCommand = StarshipDecreaseMaxVelocityCommand.new()
 
@@ -138,6 +140,9 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_just_pressed("starship_decrease_max_velocity")):
 			starship_decrease_max_velocity_command.execute(control_entity, StarshipDecreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
+			
+		if (Input.is_action_just_pressed("starship_toggle_landing_gear")):
+			starship_toggle_landing_gear_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

@@ -1,0 +1,4 @@
+@tool
+extends RadiatorSlot
+
+class_name RABS_KestrelMk1_RightRadiatorSlot
