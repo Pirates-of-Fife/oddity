@@ -22,9 +22,13 @@ func _process(delta: float) -> void:
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
 	
-	print(actual_rotation_vector)
+
 
 func toggle_landing_gear() -> void:
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear.toggle_open_state()
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear2.toggle_open_state()
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear3.toggle_open_state()
+	
+	$LandingCollision.disabled = !$LandingCollision.disabled
+	$LandingCollision2.disabled = !$LandingCollision2.disabled
+	$LandingCollision3.disabled = !$LandingCollision3.disabled
