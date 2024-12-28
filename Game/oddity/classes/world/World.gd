@@ -8,6 +8,9 @@ var abyss_scene : PackedScene = preload("res://classes/abyss/abyss/Abyss.tscn")
 @onready
 var abyssal_tunnel_scene : PackedScene = preload("res://classes/abyss/abyssal-tunnel/AbyssalTunnel.tscn")
 
+@export
+var star_systems : Array
+
 func _ready() -> void:
 	add_to_group("World")
 	
@@ -19,6 +22,8 @@ func enter_abyss(destination_star_system : PackedScene, starship : Starship, por
 	
 	var new_star_system : StarSystem = destination_star_system.instantiate()
 	var spawn_location : Vector3 = new_star_system.player_spawn_marker.global_position
+	new_star_system.queue_free.call_deferred()
+
 	
 	print("old system unloaded")
 	

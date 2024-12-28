@@ -8,6 +8,9 @@ var velocity_mfd : VelocityMFD3D
 @export
 var crosshair : Crosshair3d
 
+@export
+var abyssal_mfd : AbyssalMFD3D
+
 func update_ui() -> void:
 	crosshair.yaw = -target_rotational_thrust_vector.y
 	crosshair.pitch = -target_rotational_thrust_vector.x
@@ -21,6 +24,10 @@ func update_ui() -> void:
 	velocity_mfd.current_max_velocity = current_max_velocity
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
+	
+	abyssal_mfd.abyssal_mfd.set_current_system(current_star_system.name)
+	abyssal_mfd.abyssal_mfd.set_selected_system(selected_starsystem_name)
+
 	
 func toggle_landing_gear() -> void:
 	if $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 0 and $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 1:

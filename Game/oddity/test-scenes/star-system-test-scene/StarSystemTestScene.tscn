@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1dqbkkil0eb6"]
+[gd_scene load_steps=9 format=3 uid="uid://b1dqbkkil0eb6"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
+[ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
 [ext_resource type="PackedScene" uid="uid://b52ipcjo5n8ik" path="res://test-scenes/star-system-test-scene/SystemA.tscn" id="2_spmg2"]
+[ext_resource type="Resource" uid="uid://bhhiitluon2c7" path="res://test-scenes/star-system-test-scene/SystemB.tres" id="3_ejcto"]
 [ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/player/player.tscn" id="3_n2a02"]
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
@@ -27,6 +29,7 @@ render_target_update_mode = 4
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
 script = ExtResource("1_bvu6x")
+star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto")]
 
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
 

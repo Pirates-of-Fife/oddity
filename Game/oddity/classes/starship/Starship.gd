@@ -79,6 +79,9 @@ var alcubierre_drive_slot : AlcubierreDriveSlot
 
 var abyssal_portal_active : bool
 var current_abyss_portal : AbyssalPortal
+var current_star_system : StarSystem
+var selected_system : PackedScene
+var selected_system_name : StringName
 
 @export_category("Interaction")
 
@@ -115,6 +118,16 @@ func _ready() -> void:
 	pid_yaw_right.limit_max = thruster_force.yaw_right_thrust
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
+	
+	current_star_system = get_tree().get_first_node_in_group("StarSystem")
+
+var i : int = 0
+
+func cycle_selected_system() -> void:
+	var world : World = get_tree().get_first_node_in_group("World")
+	selected_system = world.star_systems[i % 2].scene_file
+	selected_system_name = world.star_systems[i % 2].name
+	i += 1
 
 func lock_ship() -> void:
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:

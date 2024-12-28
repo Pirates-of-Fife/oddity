@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqdrlgwfdvjp0"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/abyssal-navigation/abyssal_mfd_3d.gd" id="1_3rf24"]
+[ext_resource type="PackedScene" uid="uid://cabsyyyuxl75t" path="res://classes/multi-function-display/abyssal-navigation/AbyssalMFD.tscn" id="2_7qnfy"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m6aqv"]
+viewport_path = NodePath("SubViewport")
+
+[node name="AbyssalMFD3d" type="Node3D" node_paths=PackedStringArray("abyssal_mfd")]
+script = ExtResource("1_3rf24")
+abyssal_mfd = NodePath("SubViewport/AbyssalMFD")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(757, 480)
+
+[node name="AbyssalMFD" parent="SubViewport" instance=ExtResource("2_7qnfy")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_m6aqv")
