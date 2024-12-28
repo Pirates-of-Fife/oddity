@@ -24,4 +24,4 @@ func insert(slot : StaticModuleSlot) -> void:
 func uninsert() -> void:
 	module_slot.module = null
 	module_slot = null
-	reparent.call_deferred(get_tree().get_first_node_in_group("World"))
+	reparent.call_deferred(get_tree().get_first_node_in_group("StarSystem"))

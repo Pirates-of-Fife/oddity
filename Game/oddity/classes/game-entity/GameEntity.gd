@@ -107,8 +107,8 @@ func unfreeze() -> void:
 	if freeze == false:
 		return
 
-	if (get_parent_node_3d() != get_tree().get_first_node_in_group("World")):
-		reparent.call_deferred(get_tree().get_first_node_in_group("World"))
+	if (get_parent_node_3d() != get_tree().get_first_node_in_group("StarSystem")):
+		reparent.call_deferred(get_tree().get_first_node_in_group("StarSystem"))
 
 	collision_layer = original_collision_layer
 	collision_mask = original_collision_mask

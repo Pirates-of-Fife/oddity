@@ -25,7 +25,7 @@ sky_material = SubResource("ShaderMaterial_pcbll")
 background_mode = 2
 sky = SubResource("Sky_naasy")
 
-[node name="MainMenu" type="Node3D" node_paths=PackedStringArray("camera")]
+[node name="MainMenu" type="Node3D" node_paths=PackedStringArray("camera") groups=["StarSystem"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.57402, -1.64476, -1.94297)
 script = ExtResource("1_74355")
 camera = NodePath("SubViewportContainer/SubViewport/World/Camera3D")
