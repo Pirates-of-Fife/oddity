@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1dqbkkil0eb6"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
-[ext_resource type="PackedScene" uid="uid://b52ipcjo5n8ik" path="res://test-scenes/star-system-test-scene/SystemA.tscn" id="2_spmg2"]
 [ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/player/player.tscn" id="3_n2a02"]
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
 [ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="6_awn7r"]
+[ext_resource type="PackedScene" uid="uid://ckexaicwfduvd" path="res://test-scenes/star-system-test-scene/SystemB.tscn" id="6_elrp0"]
 
 [node name="StarSystemTestScene" type="Node3D"]
 
@@ -28,19 +28,19 @@ render_target_update_mode = 4
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
 script = ExtResource("1_bvu6x")
 
-[node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
-
-[node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
+[node name="Humanoid" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("4_qf4c0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -229.762, 675.565)
 interaction_length = 5.0
 pick_up_distance = 3.0
 
-[node name="GodotPlushie" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("6_awn7r")]
+[node name="GodotPlushie" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("6_awn7r")]
 transform = Transform3D(-0.689229, 0, 0.724545, 0, 1, 0, -0.724545, 0, -0.689229, 104797, -230.177, 677.939)
 
-[node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+[node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_2sr1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -231.575, 657.756)
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
-control_entity = NodePath("../SystemA/Humanoid")
+control_entity = NodePath("../Humanoid")
+
+[node name="SystemB" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("6_elrp0")]

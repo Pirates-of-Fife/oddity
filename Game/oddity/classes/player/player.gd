@@ -47,8 +47,8 @@ func possess(control_entity : ControlEntity) -> void:
 	self.control_entity.player = self
 	
 	
-	#self.global_position = self.control_entity.anchor.camera_anchor.global_position
-	#self.global_rotation = self.control_entity.anchor.camera_anchor.global_rotation
+	self.global_position = self.control_entity.anchor.camera_anchor.global_position
+	self.global_rotation = self.control_entity.anchor.camera_anchor.global_rotation
 	
 	reparent.call_deferred(control_entity.anchor.camera_anchor)
 
