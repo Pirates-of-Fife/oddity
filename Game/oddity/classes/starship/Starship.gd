@@ -77,6 +77,9 @@ var abyssal_portal_spawn_point : Marker3D
 @export
 var alcubierre_drive_slot : AlcubierreDriveSlot
 
+var abyssal_portal_active : bool
+var current_abyss_portal : AbyssalPortal
+
 @export_category("Interaction")
 
 @export
@@ -123,8 +126,20 @@ func toggle_landing_gear() -> void:
 	pass
 
 func initiate_abyssal_travel() -> void:
+	if abyss_drive_slot.module == null:
+		return
+		
+	if abyssal_portal_active:
+		current_abyss_portal.close()
+		current_abyss_portal = null
+		abyssal_portal_active = false
+		return
+	
 	var abyssal_portal_scene : PackedScene = preload("res://classes/abyss/abyssal-portal/AbyssalPortal.tscn")
 	var abyssal_portal : AbyssalPortal = abyssal_portal_scene.instantiate()
+	
+	current_abyss_portal = abyssal_portal
+	abyssal_portal_active = true
 	
 	get_tree().get_first_node_in_group("StarSystem").add_child(abyssal_portal)
 	abyssal_portal.global_position = abyssal_portal_spawn_point.global_position
