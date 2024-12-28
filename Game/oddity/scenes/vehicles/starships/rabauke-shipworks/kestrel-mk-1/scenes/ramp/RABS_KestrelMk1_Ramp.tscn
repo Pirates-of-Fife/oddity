@@ -4,34 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://d3gggk22a5tty" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Ramp.glb" id="2_slpdt"]
 [ext_resource type="PackedScene" uid="uid://0dgidlq5ylvb" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/RampSmall.glb" id="3_chmtv"]
 
-[sub_resource type="Animation" id="Animation_lsgv6"]
-resource_name = "open"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape3D2:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.266667, 0.366667, 0.466667, 1.26667, 10),
-"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.767945, 0, 0), Vector3(-0.713526, 0, 0), Vector3(-0.747856, 0, 0), Vector3(-0.694484, 0, 0), Vector3(-0.669473, 0, 0), Vector3(0.20944, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3D2/Ramp/SmallRamp:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 3.9, 10),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 4.36116, 4.51599)]
-}
-
 [sub_resource type="Animation" id="Animation_ctx6s"]
 length = 0.001
 tracks/0/type = "value"
@@ -69,7 +41,7 @@ tracks/0/path = NodePath("CollisionShape3D2:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0, 9.3, 9.43333, 9.56667, 9.66667, 9.76667, 10),
+"times": PackedFloat64Array(0, 8.43333, 9.43333, 9.56667, 9.66667, 9.76667, 10),
 "transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.20944, 0, 0), Vector3(-0.669473, 0, 0), Vector3(-0.767945, 0, 0), Vector3(-0.713526, 0, 0), Vector3(-0.747856, 0, 0), Vector3(-0.694484, 0, 0), Vector3(-0.767945, 0, 0)]
@@ -85,6 +57,34 @@ tracks/1/keys = {
 "transitions": PackedFloat64Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 4.36116, 4.51599), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lsgv6"]
+resource_name = "open"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D2:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.266667, 0.366667, 0.466667, 1.26667, 10),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.767945, 0, 0), Vector3(-0.713526, 0, 0), Vector3(-0.747856, 0, 0), Vector3(-0.694484, 0, 0), Vector3(-0.669473, 0, 0), Vector3(0.20944, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D2/Ramp/SmallRamp:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 3.9, 10),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 4.36116, 4.51599)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kyxw3"]
