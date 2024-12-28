@@ -64,6 +64,16 @@ var relative_gravity_vector : Vector3 = Vector3.ZERO
 var relative_gravity_direction : Vector3 = Vector3.ZERO
 var gravity_strength : float = 0
 
+@export_category("Modules")
+
+@export_subgroup("FTL")
+
+@export
+var abyss_drive_slot : AbyssalJumpDriveSlot
+
+@export
+var alcubierre_drive_slot : AlcubierreDriveSlot
+
 @export_category("Interaction")
 
 @export
