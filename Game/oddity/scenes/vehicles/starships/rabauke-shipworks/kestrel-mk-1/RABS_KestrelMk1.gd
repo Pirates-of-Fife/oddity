@@ -25,8 +25,6 @@ func _process(delta: float) -> void:
 
 func toggle_landing_gear() -> void:
 	if $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 0 and $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 1:
-		print($Exterior/LandingGear/RabsKestrelMk1LandingGear.state)
-		print("wrong")
 		return
 	
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear.toggle_open_state()

@@ -211,10 +211,10 @@ data = PackedVector3Array(15, 0, 18.17, -15, 0, 18.17, 15, 0, -18.17, -15, 0, 18
 [sub_resource type="BoxShape3D" id="BoxShape3D_o8xmi"]
 size = Vector3(20, 20, 20)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kb4uh"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xci7b"]
 size = Vector3(0.55, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_rl1tf"]
+[sub_resource type="BoxMesh" id="BoxMesh_eyygn"]
 size = Vector3(0.55, 1.1, 2.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_61gt7"]
@@ -1254,22 +1254,22 @@ area_coordinate = Vector3(1, 1, 1)
 [node name="AbyssalJumpDriveSlot" type="Node3D" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("highlight_box", "area_root")]
 script = ExtResource("34_swl67")
 abyssal_jump_drive_size = 1
-highlight_box = NodePath("@Node3D@93362/@Area3D@45821/@MeshInstance3D@45823")
+highlight_box = NodePath("@Node3D@93362/@Area3D@47032/@MeshInstance3D@47034")
 area_root = NodePath("@Node3D@93362")
 
 [node name="@Node3D@93362" type="Node3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot"]
 
-[node name="@Area3D@45821" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
+[node name="@Area3D@47032" type="Area3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@45822" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@45821"]
-shape = SubResource("BoxShape3D_kb4uh")
+[node name="@CollisionShape3D@47033" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@47032"]
+shape = SubResource("BoxShape3D_xci7b")
 
-[node name="@MeshInstance3D@45823" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@45821"]
+[node name="@MeshInstance3D@47034" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/AbyssalJumpDriveSlot/@Node3D@93362/@Area3D@47032"]
 visible = false
 material_override = ExtResource("35_syj3t")
-mesh = SubResource("BoxMesh_rl1tf")
+mesh = SubResource("BoxMesh_eyygn")
 
 [node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("35_itimp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300.816, -116.753, 319.964)
