@@ -25,8 +25,9 @@ func update_ui() -> void:
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
 	
-	abyssal_mfd.abyssal_mfd.set_current_system(current_star_system.name)
-	abyssal_mfd.abyssal_mfd.set_selected_system(selected_starsystem_name)
+	if (current_star_system != null):
+		abyssal_mfd.abyssal_mfd.set_current_system(current_star_system.name)
+		abyssal_mfd.abyssal_mfd.set_selected_system(selected_system_name)
 
 	
 func toggle_landing_gear() -> void:

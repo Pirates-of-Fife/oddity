@@ -25,6 +25,8 @@ var starship_decrease_max_velocity_command : StarshipDecreaseMaxVelocityCommand 
 
 var starship_initiate_abyssal_travel_command : StarshipInitiateAbyssalTravelCommand = StarshipInitiateAbyssalTravelCommand.new()
 
+var starship_cycle_system_command : StarshipCycleSelectedSystemCommand = StarshipCycleSelectedSystemCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -148,6 +150,9 @@ func _starship_controller_process(delta : float) -> void:
 			
 		if (Input.is_action_just_pressed("starship_abyssal_travel")):
 			starship_initiate_abyssal_travel_command.execute(control_entity)
+			
+		if (Input.is_action_just_pressed("starship_cycle_selected_system")):
+			starship_cycle_system_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

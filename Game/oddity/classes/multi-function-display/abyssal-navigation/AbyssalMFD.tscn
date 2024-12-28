@@ -6,7 +6,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_400cp"]
 bg_color = Color(0, 0.470848, 0.856842, 1)
 
-[node name="AbyssalMFD" type="Control"]
+[node name="AbyssalMFD" type="Control" node_paths=PackedStringArray("current_system", "selected_system", "gateway_open", "gateway_closed")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lij5t")
+current_system = NodePath("CurrentSystem")
+selected_system = NodePath("SelectedSystem")
+gateway_open = NodePath("GatwayOpen")
+gateway_closed = NodePath("GatwayCLosed")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 2
