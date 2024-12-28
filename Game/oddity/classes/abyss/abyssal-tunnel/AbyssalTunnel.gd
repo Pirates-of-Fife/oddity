@@ -21,9 +21,10 @@ func _ready() -> void:
 	tunnel_material = tunnel_mesh.get_active_material(0)
 
 func _process(delta: float) -> void:
-	tunnel_material.uv1_offset.x += offset_velocity * delta
+	tunnel_material.uv1_offset.z += offset_velocity * delta
 	tunnel_material.uv1_offset.y += offset_velocity / 6 * delta
 
+func _physics_process(delta: float) -> void:
 	if starship != null:
 		starship.global_transform.origin += starship.global_transform.basis.z * starship_movement_step * delta
 		print("move")

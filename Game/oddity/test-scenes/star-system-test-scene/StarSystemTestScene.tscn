@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1dqbkkil0eb6"]
+[gd_scene load_steps=7 format=3 uid="uid://b1dqbkkil0eb6"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="PackedScene" uid="uid://b52ipcjo5n8ik" path="res://test-scenes/star-system-test-scene/SystemA.tscn" id="2_spmg2"]
@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
 [ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="6_awn7r"]
-[ext_resource type="PackedScene" uid="uid://s0w2g33xr8l6" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.tscn" id="7_jybgp"]
-[ext_resource type="PackedScene" uid="uid://blrj8jl743g4l" path="res://classes/abyss/abyssal-portal/AbyssalPortal.tscn" id="7_yc08d"]
 
 [node name="StarSystemTestScene" type="Node3D"]
 
@@ -46,9 +44,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -231.575, 657.756)
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
 control_entity = NodePath("../SystemA/Humanoid")
-
-[node name="AbyssalPortal" parent="." instance=ExtResource("7_yc08d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104506, 1055.62, 930.052)
-
-[node name="AbyssalTunnel" parent="." instance=ExtResource("7_jybgp")]
-transform = Transform3D(-0.0189182, 0, 0.999821, 0, 1, 0, -0.999821, 0, -0.0189182, 104506, -31.4514, 930.052)

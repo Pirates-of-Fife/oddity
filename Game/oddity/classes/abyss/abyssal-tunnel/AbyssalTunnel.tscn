@@ -14,8 +14,8 @@ radius = 160.0
 [node name="AbyssalTunnel" type="Node3D" node_paths=PackedStringArray("tunnel_mesh")]
 script = ExtResource("1_vc68i")
 tunnel_mesh = NodePath("StaticBody3D/AbyssalTunnel/Tunnel")
-offset_velocity = -0.4
-starship_movement_step = 100.0
+offset_velocity = 1.0
+starship_movement_step = 60.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(3.74621e-17, 0.611803, 0.79101, -1, 6.12323e-17, -3.61554e-33, -4.84354e-17, -0.79101, 0.611803, 714.381, 0, -1124.19)

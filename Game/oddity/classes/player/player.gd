@@ -9,7 +9,7 @@ var control_entity : ControlEntity
 var current_controller : Controller
 
 func _ready() -> void:
-	if (control_entity != null):
+	if (control_entity != null):		
 		possess(control_entity)
 
 func _process(delta: float) -> void:
@@ -26,9 +26,9 @@ func _process(delta: float) -> void:
 	if control_entity == null:
 		return
 
-func _physics_process(delta: float) -> void:
-	self.global_position = control_entity.anchor.camera_anchor.global_position
-	self.global_rotation = control_entity.anchor.camera_anchor.global_rotation
+#func _physics_process(delta: float) -> void:
+#	self.global_position = control_entity.anchor.camera_anchor.global_position
+#	self.global_rotation = control_entity.anchor.camera_anchor.global_rotation
 
 func possess(control_entity : ControlEntity) -> void:
 	if current_controller != null:
@@ -41,10 +41,16 @@ func possess(control_entity : ControlEntity) -> void:
 	add_child(controller_instance)
 
 	current_controller = controller_instance
-
+	
 	self.control_entity.player = null
 	self.control_entity = control_entity
 	self.control_entity.player = self
+	
+	
+	#self.global_position = self.control_entity.anchor.camera_anchor.global_position
+	#self.global_rotation = self.control_entity.anchor.camera_anchor.global_rotation
+	
+	reparent.call_deferred(control_entity.anchor.camera_anchor)
 
 	if control_entity is Starship:
 		save_last_possessed_starship(control_entity)
