@@ -11,7 +11,9 @@ var module_held_in_slot : Module
 @export
 var initialize_area_automatically : bool = true
 
+@export
 var highlight_box : Node3D
+
 @export
 var area_root : Node3D
 

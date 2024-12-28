@@ -1,0 +1,3 @@
+extends Radiator
+
+class_name RABS_KestrelMk1_RightRadiator

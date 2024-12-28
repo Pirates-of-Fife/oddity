@@ -105,6 +105,9 @@ func lock_ship() -> void:
 		axis_lock_linear_x = true
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
+		
+func toggle_landing_gear() -> void:
+	pass
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)

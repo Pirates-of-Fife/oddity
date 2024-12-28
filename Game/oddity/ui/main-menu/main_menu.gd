@@ -4,7 +4,7 @@ extends Node3D
 var camera : Camera3D
 
 
-var orbit_distance : float = 20.0   # Distance from the target
+var orbit_distance : float = 80.0   # Distance from the target
 var orbit_speed : float = 0.1    # Speed of orbit in radians per second
 
 var ship_loaded : bool = false

@@ -1,0 +1,3 @@
+extends RetroThruster
+
+class_name RABS_KestrelMk1_RetroThruster
