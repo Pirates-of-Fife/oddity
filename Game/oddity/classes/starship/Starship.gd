@@ -72,6 +72,9 @@ var gravity_strength : float = 0
 var abyss_drive_slot : AbyssalJumpDriveSlot
 
 @export
+var abyssal_portal_spawn_point : Marker3D
+
+@export
 var alcubierre_drive_slot : AlcubierreDriveSlot
 
 @export_category("Interaction")
@@ -120,7 +123,15 @@ func toggle_landing_gear() -> void:
 	pass
 
 func initiate_abyssal_travel() -> void:
-	pass
+	var abyssal_portal_scene : PackedScene = preload("res://classes/abyss/abyssal-portal/AbyssalPortal.tscn")
+	var abyssal_portal : AbyssalPortal = abyssal_portal_scene.instantiate()
+	
+	get_tree().get_first_node_in_group("StarSystem").add_child(abyssal_portal)
+	abyssal_portal.global_position = abyssal_portal_spawn_point.global_position
+	abyssal_portal.global_rotation = abyssal_portal_spawn_point.global_rotation
+	abyssal_portal.destination_star_system = preload("res://test-scenes/star-system-test-scene/SystemB.tscn")
+	abyssal_portal.starship = self
+	
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)

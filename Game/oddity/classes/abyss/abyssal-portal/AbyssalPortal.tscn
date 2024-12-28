@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://blrj8jl743g4l"]
+
+[ext_resource type="Script" path="res://classes/abyss/abyssal-portal/AbyssalPortal.gd" id="1_hywtj"]
+[ext_resource type="Material" uid="uid://qkyd6a5rceox" path="res://classes/abyss/abyssal-portal/AbyssalPortalMaterial.tres" id="2_d63xj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_crcga"]
+material = ExtResource("2_d63xj")
+radius = 150.0
+height = 200.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vdyw0"]
+height = 166.667
+radius = 150.0
+
+[node name="AbyssalPortal" type="Node3D"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
+script = ExtResource("1_hywtj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_crcga")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(6.12323e-17, -1, 6.12323e-17, 1, 6.12323e-17, -6.12323e-17, 6.12323e-17, 6.12323e-17, 1, 1.23271, 0, -7.54815e-17)
+shape = SubResource("CylinderShape3D_vdyw0")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
