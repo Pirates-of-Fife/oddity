@@ -11,7 +11,7 @@ var crosshair : Crosshair3d
 func _process(delta: float) -> void:
 	crosshair.yaw = target_rotational_thrust_vector.y
 	crosshair.pitch = -target_rotational_thrust_vector.x
-	
+
 	velocity_mfd.forwards_velocity = local_linear_velocity.z
 	velocity_mfd.lateral_velocity_right = abs(minf(local_linear_velocity.x, 0))
 	velocity_mfd.lateral_velocity_left = maxf(local_linear_velocity.x, 0)
@@ -22,4 +22,5 @@ func _process(delta: float) -> void:
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
 
-	
+	if Input.is_key_pressed(KEY_U):
+		global_position -= Vector3.FORWARD * global_basis.inverse() * 10000

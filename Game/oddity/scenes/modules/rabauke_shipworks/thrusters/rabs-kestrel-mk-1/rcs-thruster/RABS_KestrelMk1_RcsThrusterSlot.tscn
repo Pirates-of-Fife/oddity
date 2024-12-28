@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://jvcs8e2d0yal"]
+
+[ext_resource type="Script" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/rcs-thruster/RABS_KestrelMk1_RcsThrusterSlot.gd" id="1_wcxcg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6nbw5"]
+size = Vector3(0.706493, 0.343999, 1.79583)
+
+[node name="RabsKestrelMk1RcsThrusterSlot" type="Node3D"]
+script = ExtResource("1_wcxcg")
+size = 2
+type = 1
+
+[node name="SlotArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="SlotArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00184946, 0.00369892, 0.000924736)
+shape = SubResource("BoxShape3D_6nbw5")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://djfe1fokbb2rm"]
+
+[ext_resource type="Script" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiatorSlot.gd" id="1_01q6e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hgdm"]
+size = Vector3(2.32865, 0.437696, 9.17139)
+
+[node name="RabsKestrelMk1LeftRadiatorSlot" type="Node3D"]
+script = ExtResource("1_01q6e")
+size = 3
+initialize_area_automatically = false
+
+[node name="SlotArea" type="Area3D" parent="."]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SlotArea"]
+transform = Transform3D(0.993959, 0, -0.109752, 0.00792912, 0.997387, 0.0718096, 0.109465, -0.072246, 0.991362, 0.0560094, 0.0849798, -0.0400114)
+shape = SubResource("BoxShape3D_7hgdm")

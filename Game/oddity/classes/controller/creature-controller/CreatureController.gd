@@ -20,23 +20,23 @@ func _process(delta: float) -> void:
 
 func _creature_process(delta : float) -> void:
 	_controller_process(delta)
-	
+
 	if control_entity is Creature:
 		var input_dir : Vector2 = Input.get_vector("player_walk_left", "player_walk_right", "player_walk_forwards", "player_walk_backwards")
-		
+
 		creature_movement_command.execute(control_entity, CreatureMovementCommand.Params.new(input_dir))
-		
+
 		creature_look_command.execute(control_entity, CreatureLookCommand.Params.new(twist_input, pitch_input))
-		
+
 		if (Input.is_action_just_pressed("player_jump")):
 			creature_jump_command.execute(control_entity)
-			
+
 		if (Input.is_action_just_pressed("player_interact")):
 			creature_interact_command.execute(control_entity)
-		
+
 		if (Input.is_action_pressed("player_run")):
 			creature_run_command.execute(control_entity)
-			
+
 	pitch_input = 0
 	twist_input = 0
 

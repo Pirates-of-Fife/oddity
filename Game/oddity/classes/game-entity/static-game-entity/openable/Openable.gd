@@ -22,6 +22,9 @@ var animation_player : AnimationPlayer
 var state : State
 
 @export
+var starting_state : State = State.CLOSED
+
+@export
 var type : Type
 
 @export
@@ -34,7 +37,7 @@ func _ready() -> void:
 	animation_player.animation_finished.connect(on_animation_player_animation_finished)
 	animation_player.animation_changed.connect(on_animation_player_animation_changed)
 	
-	state = State.CLOSED
+	state = starting_state
 	
 	if interactables.size() > 0:
 		for i : NodePath in interactables:

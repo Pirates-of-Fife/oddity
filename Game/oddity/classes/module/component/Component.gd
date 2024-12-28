@@ -19,14 +19,13 @@ func _component_ready() -> void:
 
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()
-	
+
 	var module_size : ModuleSize = ModuleSize.new()
-	
+
 	box_shape.size = module_size.get_component_size(size)
-	
+
 	var collision_shape : CollisionShape3D = CollisionShape3D.new()
-	
+
 	collision_shape.shape = box_shape
-		
+
 	add_child(collision_shape)
-	

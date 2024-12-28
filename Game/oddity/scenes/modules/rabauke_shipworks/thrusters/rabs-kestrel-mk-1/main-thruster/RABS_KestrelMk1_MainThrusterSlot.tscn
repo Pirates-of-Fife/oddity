@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://y8e6ui18agf"]
+
+[ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ThrusterSlot.gd" id="1_2dfqx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r6qph"]
+size = Vector3(4.75398, 3.78651, 11.5263)
+
+[node name="RabsKestrelMk1MainThrusterSlot" type="Node3D"]
+script = ExtResource("1_2dfqx")
+
+[node name="SlotArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SlotArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141785, -0.0166806, 0.125105)
+shape = SubResource("BoxShape3D_r6qph")
