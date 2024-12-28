@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://s0w2g33xr8l6"]
+[gd_scene load_steps=7 format=3 uid="uid://s0w2g33xr8l6"]
 
 [ext_resource type="Script" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.gd" id="1_vc68i"]
 [ext_resource type="PackedScene" uid="uid://dimtdo55dlp8e" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.glb" id="2_htjgk"]
@@ -10,6 +10,10 @@ data = PackedVector3Array(83.147, -1358.76, 83.8773, 92.388, -1322.82, 73.5352, 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6royw"]
 height = 30.0
 radius = 160.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hshlu"]
+height = 100.0
+radius = 100.0
 
 [node name="AbyssalTunnel" type="Node3D" node_paths=PackedStringArray("tunnel_mesh")]
 script = ExtResource("1_vc68i")
@@ -33,6 +37,8 @@ surface_material_override/0 = ExtResource("3_n2qc7")
 
 [node name="Exit" type="Area3D" parent="StaticBody3D"]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 193.154, 8634.78, -422.041)
+collision_layer = 256
+collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Exit"]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
@@ -47,10 +53,20 @@ collision_mask = 256
 transform = Transform3D(6.11272e-17, -0.998284, 0.0585572, 1, 6.12323e-17, 0, -3.58559e-18, 0.0585572, 0.998284, 0.0263293, 0, -21.3086)
 shape = SubResource("CylinderShape3D_6royw")
 
+[node name="MidPoint" type="Area3D" parent="StaticBody3D"]
+transform = Transform3D(3.74621e-17, -1, -4.84354e-17, 0.611803, 6.12323e-17, -0.79101, 0.79101, -2.73052e-23, 0.611803, 3.37195e-13, 5506.82, -374.429)
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/MidPoint"]
+transform = Transform3D(1, -4.29629e-17, 2.03589e-17, 4.29629e-17, 0.633246, -0.773951, 2.03589e-17, 0.773951, 0.633246, 40.505, -105.435, 0)
+shape = SubResource("CylinderShape3D_hshlu")
+
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1389.41, 6.10008, 149.613)
 
 [connection signal="body_entered" from="StaticBody3D/Exit" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="StaticBody3D/Entrance" to="." method="_on_entrance_body_entered"]
+[connection signal="body_entered" from="StaticBody3D/MidPoint" to="." method="_on_mid_point_body_entered"]
 
 [editable path="StaticBody3D/AbyssalTunnel"]

@@ -9,6 +9,6 @@ var starship : Starship
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Starship and body == starship:
-		get_tree().get_first_node_in_group("World").load_star_system(destination_star_system, starship, self)
+		(get_tree().get_first_node_in_group("World") as World).enter_abyss(destination_star_system, starship, self)
 		$Area3D.monitoring = false
 		queue_free()

@@ -12,13 +12,18 @@ var tunnel_mesh : MeshInstance3D
 @export
 var offset_velocity : float = 0.1
 
+var destination_star_system : PackedScene
 var starship : Starship
 
 @export
 var starship_movement_step : float = 1
 
+var world : World
+
+
 func _ready() -> void:
 	tunnel_material = tunnel_mesh.get_active_material(0)
+	world = get_tree().get_first_node_in_group("World")
 
 func _process(delta: float) -> void:
 	tunnel_material.uv1_offset.z += offset_velocity * delta
@@ -30,10 +35,13 @@ func _physics_process(delta: float) -> void:
 		print("move")
 		
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	pass # Replace with function body.
-
+	world.unload_tunnel(self)
 
 func _on_entrance_body_entered(body: Node3D) -> void:
 	if body is Starship:
 		starship = body
-		print(starship)
+
+func _on_mid_point_body_entered(body: Node3D) -> void:
+	world.load_new_system(destination_star_system, starship)
+	
+	$StaticBody3D/MidPoint.monitoring = false

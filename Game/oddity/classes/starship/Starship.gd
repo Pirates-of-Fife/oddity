@@ -229,11 +229,16 @@ func _physics_process(delta: float) -> void:
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 
 	apply_torque(actual_rotation_vector * global_basis.inverse())
+	
+	update_ui()
 
 	# reset thrust vector
 	reset_thrust_vectors()
 
 	relative_gravity_vector = Vector3.ZERO
+
+func update_ui() -> void:
+	pass
 
 func increase_max_velocity(velocity : float) -> void:
 	if current_max_velocity + velocity > ship_info.max_linear_velocity:

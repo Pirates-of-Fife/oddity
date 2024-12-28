@@ -8,7 +8,7 @@ var velocity_mfd : VelocityMFD3D
 @export
 var crosshair : Crosshair3d
 
-func _process(delta: float) -> void:
+func update_ui() -> void:
 	crosshair.yaw = -target_rotational_thrust_vector.y
 	crosshair.pitch = -target_rotational_thrust_vector.x
 
@@ -21,8 +21,7 @@ func _process(delta: float) -> void:
 	velocity_mfd.current_max_velocity = current_max_velocity
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
-
-
+	
 func toggle_landing_gear() -> void:
 	if $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 0 and $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 1:
 		return
