@@ -119,6 +119,9 @@ func lock_ship() -> void:
 func toggle_landing_gear() -> void:
 	pass
 
+func initiate_abyssal_travel() -> void:
+	pass
+
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
 
