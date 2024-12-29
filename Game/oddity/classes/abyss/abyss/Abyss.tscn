@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://classes/abyss/abyss/abyss.gd" id="1_uskup"]
 [ext_resource type="Environment" uid="uid://cjn2onsi1vcnl" path="res://classes/abyss/abyss/AbyssEnvironment.tres" id="2_dwi45"]
 
-[node name="Abyss" type="Node3D"]
+[node name="Abyss" type="Node3D" groups=["Abyss", "StarSystem"]]
 script = ExtResource("1_uskup")
+system_name = &"The Abyss"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(6.12323e-17, 0, -0.999999, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)

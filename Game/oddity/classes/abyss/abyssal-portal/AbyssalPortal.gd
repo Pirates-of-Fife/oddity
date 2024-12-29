@@ -20,8 +20,10 @@ var offset_velocity : float = 0.1
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Starship and body == starship:
-		(get_tree().get_first_node_in_group("World") as World).enter_abyss(destination_star_system, starship, self)
+		(get_tree().get_first_node_in_group("World") as World).enter_abyss(destination_star_system, starship, global_rotation)
+		print("THIS SHOULD ONLY APPEAR ONCE " + str(self) + " " + str(body))
 		$Openable/Area3D.monitoring = false
+		starship.abyssal_portal_active = false
 		queue_free()
 
 func _process(delta: float) -> void:
@@ -40,7 +42,9 @@ func _ready() -> void:
 
 func _on_openable_openable_closed() -> void:
 	queue_free()
+	starship.abyssal_mfd.set_gateway_closed()
 
 
 func _on_openable_openable_opened() -> void:
 	$Openable/Area3D.monitoring = true
+	starship.abyssal_mfd.set_gateway_open()

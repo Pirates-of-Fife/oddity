@@ -18,7 +18,7 @@ func set_current_system(system : String) -> void:
 	current_system.text = "Current: " + system
 	
 func set_selected_system(system : String) -> void:
-	current_system.text = "Selected: " + system
+	selected_system.text = "Selected: " + system
 	
 func set_gateway_closed() -> void:
 	gateway_closed.show()

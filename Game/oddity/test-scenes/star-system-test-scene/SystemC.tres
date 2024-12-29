@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StarSystemResource" load_steps=3 format=3 uid="uid://bfa4l2rtgwpr1"]
+
+[ext_resource type="PackedScene" uid="uid://bmbsh0aewcv8" path="res://test-scenes/star-system-test-scene/SystemC.tscn" id="1_olbmp"]
+[ext_resource type="Script" path="res://classes/star-system/StarSystemResource.gd" id="2_gyrxu"]
+
+[resource]
+script = ExtResource("2_gyrxu")
+name = &"SystemC"
+scene_file = ExtResource("1_olbmp")

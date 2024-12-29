@@ -25,10 +25,10 @@ func update_ui() -> void:
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
 	
-	if (current_star_system != null):
-		abyssal_mfd.abyssal_mfd.set_current_system(current_star_system.name)
-		abyssal_mfd.abyssal_mfd.set_selected_system(selected_system_name)
 
+func update_abyssal_mfd() -> void:	
+	abyssal_mfd.set_current_system(current_star_system.system_name)
+	abyssal_mfd.set_selected_system(selected_system.name)
 	
 func toggle_landing_gear() -> void:
 	if $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 0 and $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 1:
