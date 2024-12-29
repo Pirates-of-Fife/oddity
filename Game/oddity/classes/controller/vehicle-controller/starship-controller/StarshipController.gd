@@ -57,6 +57,8 @@ var throttle_deadzone_reset_timer : Timer = Timer.new()
 @onready
 var supercruise_initialization_timer : Timer = Timer.new()
 
+var starship_has_alcubierre_drive : bool
+
 func _ready() -> void:
 	_starship_controller_ready()
 
@@ -64,6 +66,7 @@ func _starship_controller_ready() -> void:
 	_vehicle_ready()
 
 	add_child(throttle_deadzone_reset_timer)
+	add_child(supercruise_initialization_timer)
 
 	throttle_deadzone_reset_timer.wait_time = 0.4
 	throttle_deadzone_reset_timer.one_shot = true
@@ -72,9 +75,21 @@ func _starship_controller_ready() -> void:
 	supercruise_initialization_timer.wait_time = 1
 	supercruise_initialization_timer.one_shot = true
 	supercruise_initialization_timer.timeout.connect(_on_supercruise_initialization_timer_timeout)
+	
+	if control_entity is Starship:
+		control_entity.alcubierre_drive_inserted.connect(on_alcubierre_drive_inserted)
+		control_entity.alcubierre_drive_removed.connect(on_alcubierre_drive_removed)
 
 func _process(delta: float) -> void:
 	_starship_controller_process(delta)
+	
+func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
+	starship_has_alcubierre_drive = false
+	
+func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
+	starship_has_alcubierre_drive = true
+	supercruise_initialization_timer.wait_time = (alcubierre_drive as AlcubierreDrive).module_resource.spool_time
+
 
 func _starship_controller_process(delta : float) -> void:
 	if control_entity is Starship:
@@ -165,6 +180,12 @@ func _starship_controller_process(delta : float) -> void:
 			
 		if (Input.is_action_just_pressed("starship_cycle_selected_system")):
 			starship_cycle_system_command.execute(control_entity)
+						
+		if (Input.is_action_just_pressed("starship_initiate_super_cruise")):
+			supercruise_initialization_timer.start()
+		
+		if (Input.is_action_just_released("starship_initiate_super_cruise")):
+			supercruise_initialization_timer.stop()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -183,4 +204,5 @@ func _on_throttle_deadzone_reset_timer_timeout() -> void:
 			starship_last_throttle_value = 0
 			
 func _on_supercruise_initialization_timer_timeout() -> void:
-	pass
+	if control_entity is Starship:
+		control_entity.initiate_super_cruise()

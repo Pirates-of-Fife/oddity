@@ -2,6 +2,13 @@ extends GameEntity
 
 class_name Module
 
+@export_category("Module Resource")
+
+@export
+var module_resource : ModuleResource
+
+
+@export_category("Module Slot")
 @export
 var module_slot : DynamicModuleSlot
 
@@ -31,6 +38,8 @@ func insert(slot : DynamicModuleSlot) -> void:
 
 	if get_parent_node_3d() != module_slot:
 		reparent.call_deferred(module_slot)
+	
+	module_slot.module_inserted.emit(self)
 
 
 func uninsert() -> void:
@@ -38,6 +47,8 @@ func uninsert() -> void:
 	module_slot = null
 	reparent.call_deferred(get_tree().get_first_node_in_group("StarSystem"))
 	can_freeze = true
+	module_slot.module_removed.emit(self)
+
 
 
 func _on_interact() -> void:

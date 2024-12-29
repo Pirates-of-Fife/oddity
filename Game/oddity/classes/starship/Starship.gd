@@ -66,7 +66,7 @@ var gravity_strength : float = 0
 
 @export_category("Modules")
 
-@export_subgroup("FTL")
+@export_subgroup("Abyss")
 
 @export
 var abyss_drive_slot : AbyssalJumpDriveSlot
@@ -74,15 +74,24 @@ var abyss_drive_slot : AbyssalJumpDriveSlot
 @export
 var abyssal_portal_spawn_point : Marker3D
 
-@export
-var alcubierre_drive_slot : AlcubierreDriveSlot
-
 var abyssal_portal_active : bool
 var current_abyss_portal : AbyssalPortal
 var current_star_system : StarSystem
 var selected_system : StarSystemResource
 
 var is_in_abyss : bool = false
+
+@export_subgroup("Super Cruise")
+
+signal alcubierre_drive_removed
+signal alcubierre_drive_inserted
+
+@export
+var alcubierre_drive_slot : AlcubierreDriveSlot
+
+var alcubierre_drive_spool_time : float
+var alcubierre_drive_accelleration : float
+var alcubierre_drive_max_speed : float
 
 
 @export_category("Interaction")
@@ -121,10 +130,19 @@ func _ready() -> void:
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
 	
+	alcubierre_drive_slot.module_removed.connect(on_alcubierre_drive_removed)
+	alcubierre_drive_slot.module_inserted.connect(on_alcubierre_drive_inserted)
+	
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
 
+
+func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
+	alcubierre_drive_removed.emit(alcubierre_drive)
+	
+func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
+	alcubierre_drive_inserted.emit(alcubierre_drive)
 
 func cycle_selected_system() -> void:
 	if is_in_abyss:
@@ -173,7 +191,9 @@ func initiate_abyssal_travel() -> void:
 	abyssal_portal.global_rotation = abyssal_portal_spawn_point.global_rotation
 	abyssal_portal.destination_star_system = selected_system.scene_file
 	abyssal_portal.starship = self
-	
+
+func initiate_super_cruise() -> void:
+	print("super_cruising")
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
