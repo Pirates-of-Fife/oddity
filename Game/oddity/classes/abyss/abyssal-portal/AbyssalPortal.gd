@@ -22,7 +22,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Starship and body == starship:
 		(get_tree().get_first_node_in_group("World") as World).enter_abyss(destination_star_system, starship, global_rotation)
 		print("THIS SHOULD ONLY APPEAR ONCE " + str(self) + " " + str(body))
-		$Openable/Area3D.monitoring = false
+		$Openable/Area3D.set_deferred("monitoring", false)
 		starship.abyssal_portal_active = false
 		queue_free()
 
@@ -46,5 +46,5 @@ func _on_openable_openable_closed() -> void:
 
 
 func _on_openable_openable_opened() -> void:
-	$Openable/Area3D.monitoring = true
+	$Openable/Area3D.set_deferred("monitoring", true)
 	starship.abyssal_mfd.set_gateway_open()

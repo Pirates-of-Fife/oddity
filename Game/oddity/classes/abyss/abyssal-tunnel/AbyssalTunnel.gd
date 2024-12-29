@@ -35,14 +35,14 @@ func _physics_process(delta: float) -> void:
 		
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	world.unload_tunnel(self)
-	$StaticBody3D/Exit.monitoring = false
+	$StaticBody3D/Exit.set_deferred("monitoring", false)
 
 func _on_entrance_body_entered(body: Node3D) -> void:
 	if body is Starship:
 		starship = body
-		$StaticBody3D/Entrance.monitoring = false
+		$StaticBody3D/Entrance.set_deferred("monitoring", false)
 
 func _on_mid_point_body_entered(body: Node3D) -> void:
 	world.load_new_system(destination_star_system, starship)
 	
-	$StaticBody3D/MidPoint.monitoring = false
+	$StaticBody3D/MidPoint.set_deferred("monitoring", false)
