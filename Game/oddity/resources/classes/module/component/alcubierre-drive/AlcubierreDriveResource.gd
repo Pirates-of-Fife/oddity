@@ -11,4 +11,10 @@ var spool_time : float
 var accelleration : float
 
 @export
+var deaccelleration : float
+
+@export
 var max_speed : float
+
+@export
+var max_turn_speed : float

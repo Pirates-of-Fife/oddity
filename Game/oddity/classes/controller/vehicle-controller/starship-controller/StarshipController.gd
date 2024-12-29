@@ -101,7 +101,7 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_pressed("starship_throttle_backward")):
 			current_throttle_forwards_axis += keyboard_throttle_sensitivity * delta
 			
-		if control_entity.is_in_abyss:
+		if control_entity.is_in_abyss or control_entity.travel_mode == (StarshipTravelModes.TravelMode.SUPER_CRUISE):
 			if current_throttle_forwards_axis > 0:
 				current_throttle_forwards_axis = 0
 

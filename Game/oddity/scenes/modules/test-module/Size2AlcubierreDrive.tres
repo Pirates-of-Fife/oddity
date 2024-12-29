@@ -5,8 +5,10 @@
 [resource]
 script = ExtResource("1_pcsd4")
 spool_time = 1.0
-accelleration = 10.0
-max_speed = 0.5
+accelleration = 50000.0
+deaccelleration = 3000.0
+max_speed = 10000.0
+max_turn_speed = 0.03
 type = &"Alcubierre Drive"
 manufacturer = &"Test"
 model = &"Alcubierre Drive"

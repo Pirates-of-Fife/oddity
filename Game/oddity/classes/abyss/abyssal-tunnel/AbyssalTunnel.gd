@@ -31,7 +31,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if starship != null:
-		starship.global_transform.origin += starship.global_transform.basis.z * starship_movement_step * delta
+		starship.global_position += starship.global_transform.basis.z * starship_movement_step * delta
+		#starship.global_transform.origin 
 		
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	world.unload_tunnel(self)
