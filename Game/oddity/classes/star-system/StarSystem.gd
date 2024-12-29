@@ -2,6 +2,9 @@ extends Node3D
 
 class_name StarSystem
 
+@export
+var system_name : StringName = "Star System"
+
 @export_category("System Bodies")
 
 @export

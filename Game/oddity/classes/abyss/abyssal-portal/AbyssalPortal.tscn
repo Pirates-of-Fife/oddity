@@ -1,0 +1,159 @@
+[gd_scene load_steps=13 format=3 uid="uid://blrj8jl743g4l"]
+
+[ext_resource type="Script" path="res://classes/abyss/abyssal-portal/AbyssalPortal.gd" id="1_hywtj"]
+[ext_resource type="Material" uid="uid://qkyd6a5rceox" path="res://classes/abyss/abyssal-portal/AbyssalPortalMaterial.tres" id="2_d63xj"]
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="3_e5fqd"]
+[ext_resource type="PackedScene" uid="uid://dlb8gn1owid73" path="res://classes/abyss/abyssal-portal/AbyssalPortal.glb" id="3_qi30m"]
+[ext_resource type="PackedScene" uid="uid://k08g2jtx2tb8" path="res://classes/abyss/abyssal-portal/AbyssalParticles.tscn" id="4_rq8un"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_crcga"]
+material = ExtResource("2_d63xj")
+radius = 150.0
+height = 200.0
+
+[sub_resource type="Animation" id="Animation_hjt08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Openable/Portal:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Openable/Particles:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ji405"]
+resource_name = "close"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Openable/Portal:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 2.1, 4.26667),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Openable/Particles:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0.0333333, 3.86667),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_87kmk"]
+resource_name = "open"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Openable/Portal:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 2, 10),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Openable/Particles:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 5.93333),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4krqy"]
+_data = {
+"RESET": SubResource("Animation_hjt08"),
+"close": SubResource("Animation_ji405"),
+"open": SubResource("Animation_87kmk")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_llfn0"]
+size = Vector3(136.943, 261.506, 259.672)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vdyw0"]
+height = 112.317
+radius = 81.875
+
+[node name="AbyssalPortal" type="Node3D" node_paths=PackedStringArray("openable", "tunnel_mesh")]
+script = ExtResource("1_hywtj")
+openable = NodePath("Openable")
+tunnel_mesh = NodePath("Openable/Portal/AbyssalPortal/Tunnel")
+offset_velocity = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_crcga")
+
+[node name="Openable" type="StaticBody3D" parent="." node_paths=PackedStringArray("animation_player")]
+script = ExtResource("3_e5fqd")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Openable"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_4krqy")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Openable"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 53.6172, 13.5276, 48.9164)
+shape = SubResource("BoxShape3D_llfn0")
+
+[node name="Portal" type="Node3D" parent="Openable"]
+
+[node name="AbyssalPortal" parent="Openable/Portal" instance=ExtResource("3_qi30m")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 16.8146, 0, -1.0296e-15)
+
+[node name="Particles" type="Node3D" parent="Openable"]
+
+[node name="GPUParticles3D" parent="Openable/Particles" instance=ExtResource("4_rq8un")]
+transform = Transform3D(-3.44, 0, 2.15302e-16, 0, 3.44, 0, -4.21278e-16, 0, -1.75807, 14.5676, 7.16144, 13.5442)
+
+[node name="Area3D" type="Area3D" parent="Openable"]
+collision_layer = 256
+collision_mask = 256
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Openable/Area3D"]
+transform = Transform3D(-6.12323e-17, -1.22465e-16, -1, 1, 6.12323e-17, -6.12323e-17, 6.12323e-17, -1, 1.22465e-16, 19.2419, 0, -44.4225)
+shape = SubResource("CylinderShape3D_vdyw0")
+
+[connection signal="openable_closed" from="Openable" to="." method="_on_openable_openable_closed"]
+[connection signal="openable_opened" from="Openable" to="." method="_on_openable_openable_opened"]
+[connection signal="body_entered" from="Openable/Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="Openable/Portal/AbyssalPortal"]

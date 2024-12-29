@@ -64,6 +64,27 @@ var relative_gravity_vector : Vector3 = Vector3.ZERO
 var relative_gravity_direction : Vector3 = Vector3.ZERO
 var gravity_strength : float = 0
 
+@export_category("Modules")
+
+@export_subgroup("FTL")
+
+@export
+var abyss_drive_slot : AbyssalJumpDriveSlot
+
+@export
+var abyssal_portal_spawn_point : Marker3D
+
+@export
+var alcubierre_drive_slot : AlcubierreDriveSlot
+
+var abyssal_portal_active : bool
+var current_abyss_portal : AbyssalPortal
+var current_star_system : StarSystem
+var selected_system : StarSystemResource
+
+var is_in_abyss : bool = false
+
+
 @export_category("Interaction")
 
 @export
@@ -99,6 +120,22 @@ func _ready() -> void:
 	pid_yaw_right.limit_max = thruster_force.yaw_right_thrust
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
+	
+	current_star_system = get_tree().get_first_node_in_group("StarSystem")
+	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
+	update_abyssal_mfd()
+
+
+func cycle_selected_system() -> void:
+	if is_in_abyss:
+		return
+	
+	var world : World = get_tree().get_first_node_in_group("World")
+	selected_system = world.cycle_system()
+	update_abyssal_mfd()
+
+func update_abyssal_mfd() -> void:
+	pass
 
 func lock_ship() -> void:
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
@@ -109,9 +146,38 @@ func lock_ship() -> void:
 func toggle_landing_gear() -> void:
 	pass
 
+func initiate_abyssal_travel() -> void:
+	if abyss_drive_slot.module == null:
+		return
+		
+	if is_in_abyss:
+		return
+	
+	if selected_system == null:
+		return
+		
+	if abyssal_portal_active:
+		current_abyss_portal.close()
+		current_abyss_portal = null
+		abyssal_portal_active = false
+		return
+	
+	var abyssal_portal_scene : PackedScene = preload("res://classes/abyss/abyssal-portal/AbyssalPortal.tscn")
+	var abyssal_portal : AbyssalPortal = abyssal_portal_scene.instantiate()
+	
+	current_abyss_portal = abyssal_portal
+	abyssal_portal_active = true
+	
+	get_tree().get_first_node_in_group("StarSystem").add_child(abyssal_portal)
+	abyssal_portal.global_position = abyssal_portal_spawn_point.global_position
+	abyssal_portal.global_rotation = abyssal_portal_spawn_point.global_rotation
+	abyssal_portal.destination_star_system = selected_system.scene_file
+	abyssal_portal.starship = self
+	
+
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
-
+	
 	if active_control_seat != null and freeze == true:
 		unfreeze()
 
@@ -205,11 +271,16 @@ func _physics_process(delta: float) -> void:
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 
 	apply_torque(actual_rotation_vector * global_basis.inverse())
+	
+	update_ui()
 
 	# reset thrust vector
 	reset_thrust_vectors()
 
 	relative_gravity_vector = Vector3.ZERO
+
+func update_ui() -> void:
+	pass
 
 func increase_max_velocity(velocity : float) -> void:
 	if current_max_velocity + velocity > ship_info.max_linear_velocity:
@@ -248,7 +319,7 @@ func calculate_local_linear_velocity() -> void:
 func calculate_local_angular_velocity() -> void:
 	local_angular_velocity = transform.basis.inverse() * angular_velocity
 
-func calculate_target_speed_vector() -> Vector3:
+func calculate_target_speed_vector() -> Vector3:		
 	return target_thrust_vector * current_max_velocity
 
 func calculate_target_rotation_speed_vector() -> Vector3:

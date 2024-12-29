@@ -4,6 +4,9 @@ extends StaticGameEntity
 
 class_name Openable
 
+signal openable_opened
+signal openable_closed
+
 enum State {
 	OPEN,
 	CLOSED,
@@ -82,8 +85,10 @@ func creature_exited(body : Node3D) -> void:
 func on_animation_player_animation_finished(anim_name : String) -> void:
 	if anim_name == "open":
 		state = State.OPEN
+		openable_opened.emit()
 	elif anim_name == "close":
 		state = State.CLOSED
+		openable_closed.emit()
 		
 func on_animation_player_animation_changed(old_name : String, new_name : String) -> void:
 	if new_name == "open" and old_name == "close":
