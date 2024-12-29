@@ -319,7 +319,7 @@ func calculate_local_linear_velocity() -> void:
 func calculate_local_angular_velocity() -> void:
 	local_angular_velocity = transform.basis.inverse() * angular_velocity
 
-func calculate_target_speed_vector() -> Vector3:
+func calculate_target_speed_vector() -> Vector3:		
 	return target_thrust_vector * current_max_velocity
 
 func calculate_target_rotation_speed_vector() -> Vector3:
