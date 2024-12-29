@@ -24,6 +24,7 @@ var starship_increase_max_velocity_command : StarshipIncreaseMaxVelocityCommand 
 var starship_decrease_max_velocity_command : StarshipDecreaseMaxVelocityCommand = StarshipDecreaseMaxVelocityCommand.new()
 
 var starship_initiate_abyssal_travel_command : StarshipInitiateAbyssalTravelCommand = StarshipInitiateAbyssalTravelCommand.new()
+var starship_initiate_super_cruise_command : StarshipInitiateSuperCruiseCommand =StarshipInitiateSuperCruiseCommand.new()
 
 var starship_cycle_system_command : StarshipCycleSelectedSystemCommand = StarshipCycleSelectedSystemCommand.new()
 
@@ -53,6 +54,9 @@ var mouse_pitch : float = 0.0
 @onready
 var throttle_deadzone_reset_timer : Timer = Timer.new()
 
+@onready
+var supercruise_initialization_timer : Timer = Timer.new()
+
 func _ready() -> void:
 	_starship_controller_ready()
 
@@ -64,6 +68,10 @@ func _starship_controller_ready() -> void:
 	throttle_deadzone_reset_timer.wait_time = 0.4
 	throttle_deadzone_reset_timer.one_shot = true
 	throttle_deadzone_reset_timer.timeout.connect(_on_throttle_deadzone_reset_timer_timeout)
+	
+	supercruise_initialization_timer.wait_time = 1
+	supercruise_initialization_timer.one_shot = true
+	supercruise_initialization_timer.timeout.connect(_on_supercruise_initialization_timer_timeout)
 
 func _process(delta: float) -> void:
 	_starship_controller_process(delta)
@@ -173,3 +181,6 @@ func _on_throttle_deadzone_reset_timer_timeout() -> void:
 			starship_thrust_forward_command.execute(control_entity, StarshipThrustForwardCommand.Params.new(0))
 			current_throttle_forwards_axis = 0
 			starship_last_throttle_value = 0
+			
+func _on_supercruise_initialization_timer_timeout() -> void:
+	pass
