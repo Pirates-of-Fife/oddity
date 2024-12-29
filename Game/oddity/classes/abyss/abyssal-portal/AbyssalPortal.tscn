@@ -120,6 +120,8 @@ visible = false
 mesh = SubResource("SphereMesh_crcga")
 
 [node name="Openable" type="StaticBody3D" parent="." node_paths=PackedStringArray("animation_player")]
+collision_layer = 256
+collision_mask = 256
 script = ExtResource("3_e5fqd")
 animation_player = NodePath("AnimationPlayer")
 

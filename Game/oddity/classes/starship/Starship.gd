@@ -64,9 +64,14 @@ var relative_gravity_vector : Vector3 = Vector3.ZERO
 var relative_gravity_direction : Vector3 = Vector3.ZERO
 var gravity_strength : float = 0
 
+@onready
+var starship_travel_modes : StarshipTravelModes = StarshipTravelModes.new()
+
+var travel_mode : StarshipTravelModes.TravelMode
+
 @export_category("Modules")
 
-@export_subgroup("FTL")
+@export_subgroup("Abyss")
 
 @export
 var abyss_drive_slot : AbyssalJumpDriveSlot
@@ -74,15 +79,29 @@ var abyss_drive_slot : AbyssalJumpDriveSlot
 @export
 var abyssal_portal_spawn_point : Marker3D
 
-@export
-var alcubierre_drive_slot : AlcubierreDriveSlot
-
 var abyssal_portal_active : bool
 var current_abyss_portal : AbyssalPortal
 var current_star_system : StarSystem
 var selected_system : StarSystemResource
 
 var is_in_abyss : bool = false
+
+@export_subgroup("Super Cruise")
+
+signal alcubierre_drive_removed
+signal alcubierre_drive_inserted
+
+@export
+var alcubierre_drive_slot : AlcubierreDriveSlot
+
+var alcubierre_drive_spool_time : float
+var alcubierre_drive_accelleration : float
+var alcubierre_drive_max_speed : float
+var current_super_cruise_speed : float
+var current_super_cruise_speed_in_c : float
+
+signal super_cruise_engaged
+signal super_cruise_disengaged
 
 
 @export_category("Interaction")
@@ -99,7 +118,12 @@ var current_max_velocity : float = ship_info.max_linear_velocity
 var lock_timer : Timer = Timer.new()
 
 func _ready() -> void:
+	_starship_ready()
+	
+func _starship_ready() -> void:
 	_default_ready()
+
+	travel_mode = starship_travel_modes.TravelMode.CRUISE
 
 	lock_timer.one_shot = true
 	lock_timer.wait_time = 0.5
@@ -121,9 +145,22 @@ func _ready() -> void:
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
 	
+	alcubierre_drive_slot.module_removed.connect(on_alcubierre_drive_removed)
+	alcubierre_drive_slot.module_inserted.connect(on_alcubierre_drive_inserted)
+	
+	if alcubierre_drive_slot.module != null:
+		on_alcubierre_drive_inserted(alcubierre_drive_slot.module)
+	
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
+
+
+func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
+	alcubierre_drive_removed.emit(alcubierre_drive)
+	
+func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
+	alcubierre_drive_inserted.emit(alcubierre_drive)
 
 
 func cycle_selected_system() -> void:
@@ -156,6 +193,9 @@ func initiate_abyssal_travel() -> void:
 	if selected_system == null:
 		return
 		
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+		
 	if abyssal_portal_active:
 		current_abyss_portal.close()
 		current_abyss_portal = null
@@ -173,18 +213,36 @@ func initiate_abyssal_travel() -> void:
 	abyssal_portal.global_rotation = abyssal_portal_spawn_point.global_rotation
 	abyssal_portal.destination_star_system = selected_system.scene_file
 	abyssal_portal.starship = self
-	
 
-func _physics_process(delta: float) -> void:
-	_default_physics_process(delta)
+func initiate_super_cruise() -> void:
+	if alcubierre_drive_slot.module == null:
+		return
 	
-	if active_control_seat != null and freeze == true:
-		unfreeze()
+	current_super_cruise_speed = 0
+	travel_mode = StarshipTravelModes.TravelMode.SUPER_CRUISE
+	
+	freeze_mode = FREEZE_MODE_KINEMATIC
+	freeze = true
+	
+	super_cruise_engaged.emit()
 
+func exit_super_cruise() -> void:
+	if current_super_cruise_speed > 50:
+		return
+	
+	travel_mode =  StarshipTravelModes.TravelMode.CRUISE
+	
+	freeze = false
+	collision_layer = 1 << 8
+	collision_mask = 1 << 8
+	
+	super_cruise_disengaged.emit()
+
+func cruise_travel(delta : float) -> void:
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
 	calculate_acceleration(delta)
-
+	
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
 		if active_frame_of_reference is GravityGrid or active_frame_of_reference is GravityWell:
 			if active_frame_of_reference.enable_gravity == true:
@@ -271,6 +329,56 @@ func _physics_process(delta: float) -> void:
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 
 	apply_torque(actual_rotation_vector * global_basis.inverse())
+
+var last_position : Vector3 = Vector3.ZERO
+
+func super_cruise_travel(delta : float) -> void:
+	calculate_local_linear_velocity()
+	calculate_local_angular_velocity()
+	calculate_acceleration(delta)
+	
+	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed
+	
+	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
+	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
+	
+	
+	
+	if current_super_cruise_speed > target_velocity:
+		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale
+	if current_super_cruise_speed < target_velocity:
+		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale
+	
+	
+	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_slot.module.module_resource.max_speed)
+	
+	global_position += global_transform.basis.z * current_super_cruise_speed
+	
+	#print("dif: " + str(velocity_diff) + " scale: " + str(acceleration_scale) + " aceel: " + str( alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale ) + " deaceel: " + str( alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale ) + " speed: " + str(current_super_cruise_speed))
+	current_super_cruise_speed_in_c = ((((global_position - last_position) / delta) / 299_792_458.0) * 1000).length()
+		
+	last_position = global_position
+	
+	#print(target_rotational_thrust_vector)
+	
+	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed)
+	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed)
+	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed)
+
+
+	
+	
+func _physics_process(delta: float) -> void:
+	_default_physics_process(delta)
+	
+	if active_control_seat != null and freeze == true:
+		unfreeze()
+	
+	if travel_mode == starship_travel_modes.TravelMode.CRUISE or travel_mode == starship_travel_modes.TravelMode.ABYSSAL_TRAVEL:
+		cruise_travel(delta)
+	elif travel_mode == starship_travel_modes.TravelMode.SUPER_CRUISE:
+		super_cruise_travel(delta)
+	
 	
 	update_ui()
 
