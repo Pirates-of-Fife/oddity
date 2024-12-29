@@ -98,6 +98,10 @@ var alcubierre_drive_spool_time : float
 var alcubierre_drive_accelleration : float
 var alcubierre_drive_max_speed : float
 var current_super_cruise_speed : float
+var current_super_cruise_speed_in_c : float
+
+signal super_cruise_engaged
+signal super_cruise_disengaged
 
 
 @export_category("Interaction")
@@ -114,8 +118,11 @@ var current_max_velocity : float = ship_info.max_linear_velocity
 var lock_timer : Timer = Timer.new()
 
 func _ready() -> void:
-	_default_ready()
+	_starship_ready()
 	
+func _starship_ready() -> void:
+	_default_ready()
+
 	travel_mode = starship_travel_modes.TravelMode.CRUISE
 
 	lock_timer.one_shot = true
@@ -154,9 +161,6 @@ func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
 	
 func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
 	alcubierre_drive_inserted.emit(alcubierre_drive)
-	alcubierre_drive_max_speed = alcubierre_drive.module_resource.max_speed
-	alcubierre_drive_accelleration = alcubierre_drive.module_resource.accelleration
-	alcubierre_drive_spool_time = alcubierre_drive.module_resource.spool_time
 
 
 func cycle_selected_system() -> void:
@@ -189,6 +193,9 @@ func initiate_abyssal_travel() -> void:
 	if selected_system == null:
 		return
 		
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+		
 	if abyssal_portal_active:
 		current_abyss_portal.close()
 		current_abyss_portal = null
@@ -208,10 +215,28 @@ func initiate_abyssal_travel() -> void:
 	abyssal_portal.starship = self
 
 func initiate_super_cruise() -> void:
-	print("super_cruising")
+	if alcubierre_drive_slot.module == null:
+		return
+	
 	current_super_cruise_speed = 0
 	travel_mode = StarshipTravelModes.TravelMode.SUPER_CRUISE
 	
+	freeze_mode = FREEZE_MODE_KINEMATIC
+	freeze = true
+	
+	super_cruise_engaged.emit()
+
+func exit_super_cruise() -> void:
+	if current_super_cruise_speed > 50:
+		return
+	
+	travel_mode =  StarshipTravelModes.TravelMode.CRUISE
+	
+	freeze = false
+	collision_layer = 1 << 8
+	collision_mask = 1 << 8
+	
+	super_cruise_disengaged.emit()
 
 func cruise_travel(delta : float) -> void:
 	calculate_local_linear_velocity()
@@ -305,6 +330,8 @@ func cruise_travel(delta : float) -> void:
 
 	apply_torque(actual_rotation_vector * global_basis.inverse())
 
+var last_position : Vector3 = Vector3.ZERO
+
 func super_cruise_travel(delta : float) -> void:
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
@@ -312,16 +339,25 @@ func super_cruise_travel(delta : float) -> void:
 	
 	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed
 	
+	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
+	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
+	
+	
+	
 	if current_super_cruise_speed > target_velocity:
-		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.accelleration * delta
+		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale
 	if current_super_cruise_speed < target_velocity:
-		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.deaccelleration * delta
+		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale
 	
-	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_max_speed)
 	
-	global_position += global_transform.basis.z * current_super_cruise_speed * delta
+	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_slot.module.module_resource.max_speed)
 	
-	print(current_super_cruise_speed * delta)
+	global_position += global_transform.basis.z * current_super_cruise_speed
+	
+	#print("dif: " + str(velocity_diff) + " scale: " + str(acceleration_scale) + " aceel: " + str( alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale ) + " deaceel: " + str( alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale ) + " speed: " + str(current_super_cruise_speed))
+	current_super_cruise_speed_in_c = ((((global_position - last_position) / delta) / 299_792_458.0) * 1000).length()
+		
+	last_position = global_position
 	
 	#print(target_rotational_thrust_vector)
 	

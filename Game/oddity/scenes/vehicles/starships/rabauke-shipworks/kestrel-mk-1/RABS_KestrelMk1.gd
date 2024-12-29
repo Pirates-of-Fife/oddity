@@ -11,6 +11,26 @@ var crosshair : Crosshair3d
 @export
 var abyssal_mfd : AbyssalMFD3D
 
+@export
+var super_cruise_mfd : SuperCruiseMFD3D
+
+func _ready() -> void:
+	RABS_Kestrel_Mk1_ready()
+
+func RABS_Kestrel_Mk1_ready() -> void:
+	_starship_ready()
+	
+	super_cruise_engaged.connect(on_supercruise_engaged)
+	super_cruise_disengaged.connect(on_supercruise_disengaged)
+	
+func on_supercruise_engaged() -> void:
+	velocity_mfd.hide()
+	super_cruise_mfd.show()
+	
+func on_supercruise_disengaged() -> void:
+	velocity_mfd.show()
+	super_cruise_mfd.hide()
+
 func update_ui() -> void:
 	crosshair.yaw = -target_rotational_thrust_vector.y
 	crosshair.pitch = -target_rotational_thrust_vector.x
@@ -24,6 +44,12 @@ func update_ui() -> void:
 	velocity_mfd.current_max_velocity = current_max_velocity
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
+	
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		super_cruise_mfd.velocity = current_super_cruise_speed
+		super_cruise_mfd.velocity_c = current_super_cruise_speed_in_c
+		super_cruise_mfd.throttle = target_thrust_vector.z
+		super_cruise_mfd.max_velocity = alcubierre_drive_slot.module.module_resource.max_speed
 	
 
 func update_abyssal_mfd() -> void:	

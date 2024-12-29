@@ -163,7 +163,7 @@ func _starship_controller_process(delta : float) -> void:
 			starship_player_interact_command.execute(control_entity)
 
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
-			if control_entity.relative_linear_velocity.length() < 10:
+			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				vehicle_exit_seat_command.execute(control_entity)
 
 		if (Input.is_action_just_pressed("starship_increase_max_velocity")):
@@ -182,7 +182,10 @@ func _starship_controller_process(delta : float) -> void:
 			starship_cycle_system_command.execute(control_entity)
 						
 		if (Input.is_action_just_pressed("starship_initiate_super_cruise")):
-			supercruise_initialization_timer.start()
+			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+				control_entity.exit_super_cruise()
+			else:
+				supercruise_initialization_timer.start()
 		
 		if (Input.is_action_just_released("starship_initiate_super_cruise")):
 			supercruise_initialization_timer.stop()

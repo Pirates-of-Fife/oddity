@@ -8,10 +8,10 @@ class_name AlcubierreDriveResource
 var spool_time : float
 
 @export
-var accelleration : float
+var acceleration : float
 
 @export
-var deaccelleration : float
+var deacceleration : float
 
 @export
 var max_speed : float
