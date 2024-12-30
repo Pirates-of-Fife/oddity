@@ -103,6 +103,12 @@ var current_super_cruise_speed_in_c : float
 signal super_cruise_engaged
 signal super_cruise_disengaged
 
+@export_subgroup("Weapons")
+@export
+var primary_hardpoints : Array
+
+@export
+var secondary_hardpoints : Array
 
 @export_category("Interaction")
 
@@ -154,7 +160,34 @@ func _starship_ready() -> void:
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
+		
+	var i : int = 0
+	for path : NodePath in primary_hardpoints:
+		primary_hardpoints[i] = get_node(path)
+		i += 1
+		
+	i = 0
+	for path : NodePath in secondary_hardpoints:
+		secondary_hardpoints[i] = get_node(path)
+		i += 1
+	
 
+
+func shoot_primary() -> void:
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+		
+	for hardpoint : Hardpoint in primary_hardpoints:
+		if hardpoint.module != null:
+			hardpoint.module.shoot()
+	
+func shoot_secondary() -> void:
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+	
+	for hardpoint : Hardpoint in secondary_hardpoints:
+		if hardpoint.module != null:
+			hardpoint.module.shoot()
 
 func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
 	alcubierre_drive_removed.emit(alcubierre_drive)

@@ -39,25 +39,32 @@ func _weapon_ready() -> void:
 func on_weapon_cooldown_timer_timeout() -> void:
 	weapon_cooldown_complete.emit()
 	cooldown_complete = true
-	pass
+	
+	print("cooldown finished")
 
 func shoot() -> void:
 	# check if cooldown complete
 	if cooldown_complete == false:
 		return
 	
+	print("Shoot : " + str(self))
+
+	
 	# spawn projectile
 	
 	var projectile_scene : PackedScene = (module_resource as WeaponResource).projectile.projectile_scene_file
 	var projectile : Projectile = projectile_scene.instantiate()
+
+	add_child(projectile)
+	
 	projectile.global_position = nozzle.global_position
 	projectile.linear_velocity = module_slot.vehicle.linear_velocity
-	
-	add_child(projectile)
 	
 	# apply force
 	
 	projectile.apply_central_impulse(Vector3(0, 0, (module_resource as WeaponResource).weapon_force) * global_basis.inverse())
+	
+	audio.pitch_scale = randf_range(0.7, 1.3)
 	
 	audio.play()
 	
@@ -65,3 +72,7 @@ func shoot() -> void:
 	cooldown_complete = false
 	weapon_cooldown_timer.start()
 	
+
+
+func _on_audio_stream_player_3d_finished() -> void:
+	print("audio")
