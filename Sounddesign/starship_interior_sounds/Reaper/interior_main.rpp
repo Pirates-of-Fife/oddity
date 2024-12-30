@@ -1,4 +1,4 @@
-<REAPER_PROJECT 0.1 "7.06/win64" 1735554420
+<REAPER_PROJECT 0.1 "7.06/win64" 1735557126
   <NOTES 0 2
   >
   RIPPLE 0
@@ -16,8 +16,8 @@
   TIMEMODE 1 5 -1 30 0 0 -1
   VIDEO_CONFIG 0 0 256
   PANMODE 3
-  CURSOR 80
-  ZOOM 100 7681 0
+  CURSOR 7
+  ZOOM 100 0 0
   VZOOMEX 6 0
   USE_REC_CFG 0
   RECMODE 1
@@ -30,10 +30,10 @@
   >
   <APPLYFX_CFG
   >
-  RENDER_FILE "C:\Users\Juhltz\Documents\GitHub\oddity_08\Sounddesign\starshop_interior_sounds\interior_main.wav"
+  RENDER_FILE "C:\Users\Juhltz\Documents\GitHub\oddity_08\Sounddesign\starship_interior_sounds\interior_main.wav"
   RENDER_FMT 0 2 44100
   RENDER_1X 0
-  RENDER_RANGE 1 0 0 18 1000
+  RENDER_RANGE 2 0 0 18 1000
   RENDER_RESAMPLE 3 0 1
   RENDER_ADDTOPROJ 0
   RENDER_STEMS 0
@@ -59,8 +59,8 @@
   GLOBAL_AUTO -1
   TEMPO 120 4 4
   PLAYRATE 1 0 0.25 4
-  SELECTION 0 0
-  SELECTION2 0 0
+  SELECTION 120 0
+  SELECTION2 120 0
   MASTERAUTOMODE 0
   MASTERTRACKHEIGHT 0 0
   MASTERPEAKCOL 16576
@@ -141,11 +141,33 @@
     <ITEM
       POSITION 0
       SNAPOFFS 0
+      LENGTH 1
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1.1 0.01 0.5 1 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {AE5F8BC5-AB91-45DB-B0D9-155872B3A452}
+      IID 1
+      NAME 326428__mickfire__machine-running-large-loud-machine-buzz-sfx.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 39.036375
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {CE9F1A3D-5854-45DA-A29C-FBF32942310D}
+      <SOURCE WAVE
+        FILE "Media\326428__mickfire__machine-running-large-loud-machine-buzz-sfx.wav"
+      >
+    >
+    <ITEM
+      POSITION 0.5
+      SNAPOFFS 0
       LENGTH 119
       LOOP 1
       ALLTAKES 0
-      FADEIN 1 0 0 1 0 0 0
-      FADEOUT 1 0.01 0 1 0 0 0
+      FADEIN 1.1 0 0.5 1 1 0 0
+      FADEOUT 1.1 0.01 0.5 1 1 0 0
       MUTE 0 0
       SEL 0
       IGUID {E71C0A4E-3CF7-40E7-A4F6-3B393FEB4115}
@@ -166,7 +188,7 @@
       LENGTH 1
       LOOP 1
       ALLTAKES 0
-      FADEIN 1 0.01 0 1 0 0 0
+      FADEIN 1.1 0.01 0.5 1 1 0 0
       FADEOUT 1 0.01 0 1 0 0 0
       MUTE 0 0
       SEL 0
@@ -338,7 +360,7 @@
     BUSCOMP 0 0 0 0 0
     SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
     FIXEDLANES 9 0 0
-    SEL 0
+    SEL 1
     REC 0 0 1 0 0 0 0 0
     VU 2
     TRACKHEIGHT 0 0 0 0 0 0 0
@@ -442,11 +464,11 @@
     <ITEM
       POSITION 115
       SNAPOFFS 0
-      LENGTH 5
+      LENGTH 3
       LOOP 1
       ALLTAKES 0
       FADEIN 1.1 2.47 0.55 1 1 0 0
-      FADEOUT 1 0 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
       MUTE 0 0
       SEL 0
       IGUID {DB69E185-243C-4794-BD6F-B1E44FBCCAA3}
@@ -461,13 +483,35 @@
         FILE "Media\412882__klankbeeld__pump-noise-apartment.wav"
       >
     >
+    <ITEM
+      POSITION 118
+      SNAPOFFS 0
+      LENGTH 2
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {4B77C389-61B6-4B8F-B68D-62F6881E59BE}
+      IID 14
+      NAME 412882__klankbeeld__pump-noise-apartment.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 13
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {DA4EA39F-96E6-42A8-96C2-DC46253913BA}
+      <SOURCE WAVE
+        FILE "Media\412882__klankbeeld__pump-noise-apartment.wav"
+      >
+    >
   >
   <TRACK {B618AFE0-B565-4C04-B411-4E9DEA1A9B94}
     NAME "energy shield"
     PEAKCOL 16576
     BEAT -1
     AUTOMODE 0
-    VOLPAN 0.20224078858311 0 -1 -1 1
+    VOLPAN 0.3697141270412 0 -1 -1 1
     MUTESOLO 0 0 0
     IPHASE 0
     PLAYOFFS 0 1
@@ -522,7 +566,7 @@
     BUSCOMP 0 0 0 0 0
     SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
     FIXEDLANES 9 0 0
-    SEL 1
+    SEL 0
     REC 0 0 1 0 0 0 0 0
     VU 2
     TRACKHEIGHT 0 0 0 0 0 0 0
