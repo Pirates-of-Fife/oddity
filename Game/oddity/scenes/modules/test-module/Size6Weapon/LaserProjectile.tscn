@@ -6,10 +6,8 @@
 size = Vector3(0.3, 0.3, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20qt2"]
+shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 16.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8833c"]
 points = PackedVector3Array(0.15, 0.15, 1, 0.15, -0.15, 1, 0.15, 0.15, -1, -0.15, 0.15, 1, -0.15, -0.15, 1, 0.15, -0.15, -1, -0.15, 0.15, -1, -0.15, -0.15, -1)
@@ -24,6 +22,7 @@ script = ExtResource("1_3doe2")
 timeout = 20.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.01, 0, 0, 0, 2.01, 0, 0, 0, 2.01, 0, 0, 0)
 mesh = SubResource("BoxMesh_c1boy")
 surface_material_override/0 = SubResource("StandardMaterial3D_20qt2")
 

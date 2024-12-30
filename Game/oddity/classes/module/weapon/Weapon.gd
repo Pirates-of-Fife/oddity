@@ -46,7 +46,7 @@ func shoot() -> void:
 		return
 	
 	# spawn projectile
-	
+		
 	var projectile_scene : PackedScene = (module_resource as WeaponResource).projectile.projectile_scene_file
 	var projectile : Projectile = projectile_scene.instantiate()
 
