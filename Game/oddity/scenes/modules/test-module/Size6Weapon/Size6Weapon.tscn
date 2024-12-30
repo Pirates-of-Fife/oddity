@@ -3,13 +3,15 @@
 [ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="1_6y1sr"]
 [ext_resource type="Resource" uid="uid://d0swmobju4op7" path="res://scenes/modules/test-module/Size6Weapon/Size6WeaponResource.tres" id="2_ys687"]
 [ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="3_tq2k2"]
-[ext_resource type="PackedScene" uid="uid://p0y1f3bv2d13" path="res://scenes/modules/test-module/Size6Weapon/LaserProjectile.tscn" id="4_qusah"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m17s5"]
 size = Vector3(1.56, 1.68, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ft30"]
 albedo_color = Color(0.176419, 0.176419, 0.176419, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_77j7d"]
+points = PackedVector3Array(-0.78, -0.84, -3, 0.78, -0.84, -3, -0.78, -0.84, 3, -0.78, 0.84, -3, 0.779847, 0.84, -3, 0.78, 0.84, 3, 0.78, -0.84, 3, -0.78, 0.84, 3)
 
 [node name="Size6Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle", "audio")]
 collision_layer = 537396737
@@ -36,7 +38,8 @@ playback_type = 1
 mesh = SubResource("BoxMesh_m17s5")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ft30")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_77j7d")
+
 [node name="Nozzle" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.16569)
-
-[node name="LaserProjectile" parent="Nozzle" instance=ExtResource("4_qusah")]

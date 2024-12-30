@@ -134,3 +134,11 @@ func calculate_velocities(delta : float) -> void:
 		relative_angular_velocity = angular_velocity - active_frame_of_reference.angular_velocity
 		relative_acceleration = acceleration - active_frame_of_reference.acceleration
 		last_relative_linear_velocity = relative_linear_velocity
+
+func load_nodes(node_paths: Array) -> Array:
+	var nodes : Array = []
+	for node_path : NodePath in node_paths:
+		var node : Node = get_node(node_path)
+		if node != null:
+			nodes.append(node)
+	return nodes

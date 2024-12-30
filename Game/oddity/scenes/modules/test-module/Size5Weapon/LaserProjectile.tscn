@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://p0y1f3bv2d13"]
+[gd_scene load_steps=5 format=3 uid="uid://b5j2xg2psrbxd"]
 
-[ext_resource type="Script" path="res://classes/projectile/Projectile.gd" id="1_3doe2"]
+[ext_resource type="Script" path="res://classes/projectile/Projectile.gd" id="1_hck61"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c1boy"]
 size = Vector3(0.3, 0.3, 2)
@@ -17,11 +17,7 @@ points = PackedVector3Array(0.15, 0.15, 1, 0.15, -0.15, 1, 0.15, 0.15, -1, -0.15
 [node name="LaserProjectile" type="RigidBody3D"]
 collision_layer = 2097152
 collision_mask = 2097152
-continuous_cd = true
-contact_monitor = true
-max_contacts_reported = 2
-script = ExtResource("1_3doe2")
-timeout = 20.0
+script = ExtResource("1_hck61")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_c1boy")

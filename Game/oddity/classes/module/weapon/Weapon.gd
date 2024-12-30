@@ -40,15 +40,10 @@ func on_weapon_cooldown_timer_timeout() -> void:
 	weapon_cooldown_complete.emit()
 	cooldown_complete = true
 	
-	print("cooldown finished")
-
 func shoot() -> void:
 	# check if cooldown complete
 	if cooldown_complete == false:
 		return
-	
-	print("Shoot : " + str(self))
-
 	
 	# spawn projectile
 	
@@ -57,6 +52,8 @@ func shoot() -> void:
 
 	add_child(projectile)
 	
+	projectile.hit.connect(on_hit)
+	projectile.damage = module_resource.damage
 	projectile.global_position = nozzle.global_position
 	projectile.linear_velocity = module_slot.vehicle.linear_velocity
 	
@@ -71,8 +68,7 @@ func shoot() -> void:
 	# start cooldown
 	cooldown_complete = false
 	weapon_cooldown_timer.start()
-	
 
-
-func _on_audio_stream_player_3d_finished() -> void:
-	print("audio")
+func on_hit(game_entity : GameEntity) -> void:
+	pass
+	#print(game_entity)

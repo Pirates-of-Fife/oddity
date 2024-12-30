@@ -44,8 +44,11 @@ pick_up_distance = 3.0
 [node name="GodotPlushie" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("6_awn7r")]
 transform = Transform3D(-0.689229, 0, 0.724545, 0, 1, 0, -0.724545, 0, -0.689229, 104797, -230.177, 677.939)
 
-[node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+[node name="Ship1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -231.575, 657.756)
+
+[node name="Ship2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+transform = Transform3D(-0.995778, 0, 0.0917971, -0.0694575, 0.65383, -0.753447, -0.0600197, -0.756641, -0.651069, 104796, -231.575, 886.882)
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
