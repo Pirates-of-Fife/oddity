@@ -11,13 +11,14 @@ size = Vector3(1.56, 1.68, 6)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ft30"]
 albedo_color = Color(0.176419, 0.176419, 0.176419, 1)
 
-[node name="Size6Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
+[node name="Size6Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle", "audio")]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 100.0
 script = ExtResource("1_6y1sr")
 size = 6
 nozzle = NodePath("Nozzle")
+audio = NodePath("AudioStreamPlayer3D")
 module_resource = ExtResource("2_ys687")
 can_be_picked_up = true
 

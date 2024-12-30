@@ -12,6 +12,9 @@ var size : ModuleSize.HardpointSize
 @export
 var nozzle : Marker3D
 
+@export
+var audio : AudioStreamPlayer3D
+
 var weapon_cooldown_timer : Timer
 var cooldown_complete : bool = true
 
@@ -30,6 +33,8 @@ func _weapon_ready() -> void:
 	weapon_cooldown_timer.one_shot = true
 	weapon_cooldown_timer.timeout.connect(on_weapon_cooldown_timer_timeout)
 	weapon_cooldown_timer.wait_time = (module_resource as WeaponResource).cooldown
+	
+	audio.stream = (module_resource as WeaponResource).sound
 
 func on_weapon_cooldown_timer_timeout() -> void:
 	weapon_cooldown_complete.emit()
@@ -53,6 +58,8 @@ func shoot() -> void:
 	# apply force
 	
 	projectile.apply_central_impulse(Vector3(0, 0, (module_resource as WeaponResource).weapon_force) * global_basis.inverse())
+	
+	audio.play()
 	
 	# start cooldown
 	cooldown_complete = false

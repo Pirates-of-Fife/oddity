@@ -14,6 +14,9 @@ var damage : float
 var penetration : float
 
 @export
+var sound : AudioStreamWAV
+
+@export
 var weapon_force : float
 
 @export
