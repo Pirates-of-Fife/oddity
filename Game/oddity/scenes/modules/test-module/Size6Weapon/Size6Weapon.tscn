@@ -20,7 +20,6 @@ size = 6
 nozzle = NodePath("Nozzle")
 module_resource = ExtResource("2_ys687")
 can_be_picked_up = true
-is_being_held = null
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_tq2k2")
@@ -32,4 +31,4 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0ft30")
 [node name="Nozzle" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.16569)
 
-[node name="LaserProjectile" parent="." instance=ExtResource("4_qusah")]
+[node name="LaserProjectile" parent="Nozzle" instance=ExtResource("4_qusah")]

@@ -46,13 +46,15 @@ func shoot() -> void:
 	var projectile_scene : PackedScene = (module_resource as WeaponResource).projectile.projectile_scene_file
 	var projectile : Projectile = projectile_scene.instantiate()
 	projectile.global_position = nozzle.global_position
-	#projectile.linear_velocity = module_slot.
+	projectile.linear_velocity = module_slot.vehicle.linear_velocity
 	
 	add_child(projectile)
-
 	
 	# apply force
 	
-	# start cooldown
+	projectile.apply_central_impulse(Vector3(0, 0, (module_resource as WeaponResource).weapon_force) * global_basis.inverse())
 	
-	pass
+	# start cooldown
+	cooldown_complete = false
+	weapon_cooldown_timer.start()
+	

@@ -15,8 +15,13 @@ func _module_fits(module : Module) -> bool:
 			return true
 	return false
 
-func _default_ready() -> void:
+func _ready() -> void:
+	_hardpoint_ready()
+
+func _hardpoint_ready() -> void:
+	_dynamic_module_slot_ready()
 	add_to_group("Hardpoint")
+	
 
 func _initialize_area() -> void:
 	if area_root == null:
