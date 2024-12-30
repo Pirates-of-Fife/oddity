@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://d0swmobju4op7"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/WeaponResource.gd" id="1_8eubq"]
+[ext_resource type="Resource" uid="uid://coukollifi3g1" path="res://scenes/modules/test-module/Size6Weapon/LaserProjectile.tres" id="1_633y6"]
+
+[resource]
+script = ExtResource("1_8eubq")
+projectile = ExtResource("1_633y6")
+damage = 100.0
+penetration = 10.0
+weapon_force = 100.0
+cooldown = 1.5

@@ -6,6 +6,8 @@ signal on_interact
 
 signal on_game_entity_drop_request
 
+signal on_damage_taken(damage : float)
+
 @export_category("Interaction")
 
 @export
@@ -44,6 +46,10 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	_default_ready()
+	
+# WARNING: temporary, damage will depend on penetration and armour values
+func take_damage(damage : float) -> void:
+	on_damage_taken.emit(damage)
 
 func _default_physics_process(delta : float) -> void:
 	calculate_velocities(delta)

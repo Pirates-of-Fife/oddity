@@ -34,8 +34,7 @@ enum HardpointSize
 	SIZE_10,     # 7m x 14m x 7m
 	SIZE_11,     # 8m x 16m x 8m
 	SIZE_12,     # 9m x 18m x 9m
-	SIZE_13,      # 10m x 20m x 10m
-	SIZE_14
+	SIZE_13      # 10m x 20m x 10m
 }
 
 # Enum for Abyssal Jump Drive Sizes
@@ -117,22 +116,22 @@ func get_component_size(size: ComponentSize) -> Vector3:
 # Function to get hardpoint size dimensions
 func get_hardpoint_size(size: HardpointSize) -> Vector3:
 	match size:
-		HardpointSize.SIZE_0: return Vector3(0.25, 0.25, 0.5)
-		HardpointSize.SIZE_1: return Vector3(0.35, 0.35, 0.7)
-		HardpointSize.SIZE_2: return Vector3(0.5, 0.5, 1)
-		HardpointSize.SIZE_3: return Vector3(0.7, 0.7, 1.5)
-		HardpointSize.SIZE_4: return Vector3(1, 1, 2)
-		HardpointSize.SIZE_5: return Vector3(1.5, 1.5, 3)
-		HardpointSize.SIZE_6: return Vector3(2, 2, 4)
-		HardpointSize.SIZE_7: return Vector3(3, 3, 6)
-		HardpointSize.SIZE_8: return Vector3(4, 4, 8)
-		HardpointSize.SIZE_9: return Vector3(5, 5, 10)
-		HardpointSize.SIZE_10: return Vector3(6, 6, 12)
-		HardpointSize.SIZE_11: return Vector3(7, 7, 14)
-		HardpointSize.SIZE_12: return Vector3(8, 8, 16)
-		HardpointSize.SIZE_13: return Vector3(9, 9, 18)
-		HardpointSize.SIZE_14: return Vector3(10, 10, 20)
+		HardpointSize.SIZE_0: return Vector3(0.13, 0.14, 0.5) # width, height, length
+		HardpointSize.SIZE_1: return Vector3(0.18, 0.20, 0.7)
+		HardpointSize.SIZE_2: return Vector3(0.34, 0.36, 1.3)
+		HardpointSize.SIZE_3: return Vector3(0.52, 0.56, 2.0)
+		HardpointSize.SIZE_4: return Vector3(0.78, 0.84, 3.0)
+		HardpointSize.SIZE_5: return Vector3(1.04, 1.12, 4.0)
+		HardpointSize.SIZE_6: return Vector3(1.56, 1.68, 6.0)
+		HardpointSize.SIZE_7: return Vector3(2.08, 2.24, 8.0)
+		HardpointSize.SIZE_8: return Vector3(2.60, 2.80, 10.0)
+		HardpointSize.SIZE_9: return Vector3(3.12, 3.36, 12.0)
+		HardpointSize.SIZE_10: return Vector3(3.64, 3.92, 14.0)
+		HardpointSize.SIZE_11: return Vector3(4.16, 4.48, 16.0)
+		HardpointSize.SIZE_12: return Vector3(4.68, 5.04, 18.0)
+		HardpointSize.SIZE_13: return Vector3(5.20, 5.60, 20.0)
 		_ : return Vector3.ZERO
+
 
 func get_utility_hardpoint_size(size : UtilityHardpointSize) -> Vector3:
 	match size:

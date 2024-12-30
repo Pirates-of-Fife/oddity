@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkvastwu4s12v"]
+
+[ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="1_6y1sr"]
+[ext_resource type="Resource" uid="uid://d0swmobju4op7" path="res://scenes/modules/test-module/Size6Weapon/Size6WeaponResource.tres" id="2_ys687"]
+[ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="3_tq2k2"]
+[ext_resource type="PackedScene" uid="uid://p0y1f3bv2d13" path="res://scenes/modules/test-module/Size6Weapon/LaserProjectile.tscn" id="4_qusah"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m17s5"]
+size = Vector3(1.56, 1.68, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ft30"]
+albedo_color = Color(0.176419, 0.176419, 0.176419, 1)
+
+[node name="Size6Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 100.0
+script = ExtResource("1_6y1sr")
+size = 6
+nozzle = NodePath("Nozzle")
+module_resource = ExtResource("2_ys687")
+can_be_picked_up = true
+is_being_held = null
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_tq2k2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_m17s5")
+surface_material_override/0 = SubResource("StandardMaterial3D_0ft30")
+
+[node name="Nozzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.16569)
+
+[node name="LaserProjectile" parent="." instance=ExtResource("4_qusah")]
