@@ -4,7 +4,7 @@ extends Node3D
 var camera : Camera3D
 
 
-var orbit_distance : float = 80.0   # Distance from the target
+var orbit_distance : float = 50.0   # Distance from the target
 var orbit_speed : float = 0.1    # Speed of orbit in radians per second
 
 var ship_loaded : bool = false
@@ -58,7 +58,7 @@ func _orbit_camera(delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://test-scenes/ship-test-scene/ShipTestScene.tscn")
+	get_tree().change_scene_to_file("res://test-scenes/star-system-test-scene/StarSystemTestScene.tscn")
 
 func _on_credits_button_pressed() -> void:
 	pass # Replace with function body.

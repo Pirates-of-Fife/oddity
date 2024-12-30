@@ -28,6 +28,10 @@ var starship_initiate_super_cruise_command : StarshipInitiateSuperCruiseCommand 
 
 var starship_cycle_system_command : StarshipCycleSelectedSystemCommand = StarshipCycleSelectedSystemCommand.new()
 
+var starship_shoot_primary_command : StarshipShootPrimaryCommand = StarshipShootPrimaryCommand.new()
+var starship_shoot_secondary_command : StarshipShootSecondaryCommand = StarshipShootSecondaryCommand.new()
+
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -189,6 +193,12 @@ func _starship_controller_process(delta : float) -> void:
 		
 		if (Input.is_action_just_released("starship_initiate_super_cruise")):
 			supercruise_initialization_timer.stop()
+			
+		if (Input.is_action_pressed("starship_shoot_primary_weapons")):
+			starship_shoot_primary_command.execute(control_entity)
+		
+		if (Input.is_action_pressed("starship_shoot_secondary_weapons")):
+				starship_shoot_secondary_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
