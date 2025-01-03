@@ -576,32 +576,23 @@ func super_cruise_travel(delta : float) -> void:
 	
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
 	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
-	
-	
-	
+		
 	if current_super_cruise_speed > target_velocity:
 		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale
 	if current_super_cruise_speed < target_velocity:
 		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale
 	
-	
 	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_slot.module.module_resource.max_speed)
 	
 	global_position += global_transform.basis.z * current_super_cruise_speed
 	
-	#print("dif: " + str(velocity_diff) + " scale: " + str(acceleration_scale) + " aceel: " + str( alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale ) + " deaceel: " + str( alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale ) + " speed: " + str(current_super_cruise_speed))
 	current_super_cruise_speed_in_c = ((((global_position - last_position) / delta) / 299_792_458.0) * 1000).length()
 		
 	last_position = global_position
-	
-	#print(target_rotational_thrust_vector)
-	
+		
 	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed)
 	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed)
 	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed)
-
-
-	
 	
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
