@@ -54,10 +54,11 @@ ship = NodePath("Ship2")
 
 [node name="Ship2" parent="SubViewportContainer/SubViewport/World/SystemA/Node3D" instance=ExtResource("5_2sr1o")]
 transform = Transform3D(-0.990085, 0.133805, 0.0427422, 0.0199034, 0.434856, -0.90028, -0.139049, -0.890504, -0.433208, 104796, -231.575, 1021.57)
+debug = true
 
 [node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/World/SystemA/Node3D"]
 process_callback = 0
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]

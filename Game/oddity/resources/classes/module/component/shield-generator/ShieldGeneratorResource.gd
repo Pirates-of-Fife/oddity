@@ -15,3 +15,12 @@ var cooldown_time_after_break : float
 
 @export
 var cooldown_time_after_hit : float
+
+@export
+var charge_time : float
+
+@export
+var shield_color : Color
+
+@export
+var shield_offline_color : Color

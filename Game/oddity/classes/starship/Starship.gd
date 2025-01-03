@@ -125,6 +125,7 @@ var secondary_hardpoints : Array = load_nodes(secondary_hardpoints_node_path)
 @export_subgroup("Shield")
 
 signal shield_broken
+signal shield_online
 
 @export
 var shield : Shield
@@ -142,9 +143,24 @@ var shield_charge_rate : float
 var shield_cooldown_after_break : float
 
 @export
+var shield_charge_time : float
+
+@export
 var shield_cooldown_after_hit : float
 
 var shield_generators : Array = Array()
+
+@onready
+var shield_cooldown_after_break_timer : Timer = Timer.new()
+
+@onready
+var shield_cooldown_after_hit_timer : Timer = Timer.new()
+
+@onready
+var shield_charge_timer : Timer = Timer.new()
+
+var shield_hit_cooldown_complete : bool = true
+var shield_break_cooldown_complete : bool = true
 
 @export_category("Interaction")
 
@@ -202,6 +218,28 @@ func _starship_ready() -> void:
 	
 	shield.shield_hit.connect(shield_damage)
 	
+	add_child(shield_cooldown_after_break_timer)
+	add_child(shield_cooldown_after_hit_timer)
+	add_child(shield_charge_timer)
+
+	shield_cooldown_after_break_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	shield_cooldown_after_break_timer.one_shot = true
+	
+	shield_cooldown_after_hit_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	shield_cooldown_after_hit_timer.one_shot = true
+	
+	shield_charge_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	shield_charge_timer.one_shot = false
+	shield_charge_timer.start()
+	
+	shield_broken.connect(on_shield_broken)
+	shield_cooldown_after_break_timer.timeout.connect(shield_break_cooldown_finished)
+	shield_cooldown_after_hit_timer.timeout.connect(shield_hit_cooldown_finished)
+	shield_charge_timer.timeout.connect(shield_charge_cooldown_finished)
+	
+	shield_broken.connect(shield.on_shield_broken)
+	shield_online.connect(shield.on_shield_online)
+	
 	if module_node != null:
 		for node : Node in module_node.get_children():
 			for n : Node in node.get_children():
@@ -221,9 +259,48 @@ func _starship_ready() -> void:
 				shield_generators.append(module_slot.module)
 	
 	update_module_stats()
+	
+	shield_current_health = shield_max_health
 
 func shield_damage(damage : float) -> void:
 	shield_current_health -= damage
+
+	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
+	
+	if shield_current_health <= 0:
+		shield_broken.emit()
+		
+	shield_hit_cooldown_complete = false
+	shield_cooldown_after_hit_timer.start()
+
+func on_shield_broken() -> void:
+	shield_break_cooldown_complete = false
+	shield_cooldown_after_break_timer.start()
+	debug_log("Shield Broken")
+
+func shield_break_cooldown_finished() -> void:
+	shield_break_cooldown_complete = true
+	shield_online.emit()
+
+func shield_hit_cooldown_finished() -> void:
+	shield_hit_cooldown_complete = true
+
+func shield_charge_cooldown_finished() -> void:
+	if !shield_break_cooldown_complete or !shield_hit_cooldown_complete:
+		return
+	
+	if shield_generators.size() == 0:
+		return
+	
+	shield_current_health += shield_charge_rate
+	
+	debug_log("shield charged: " + str(shield_charge_rate))
+	
+	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
+	
+	debug_log("Current shield: " + str(shield_current_health))
+
+		
 
 func _on_module_insert(module : Module) -> void:
 	if module is ShieldGenerator:
@@ -240,8 +317,19 @@ func update_shield_stats() -> void:
 	shield_charge_rate = 0
 	shield_cooldown_after_break = 0
 	shield_cooldown_after_hit = 0
-
+	
 	var shield_generator_count : int = shield_generators.size()
+	
+	if shield_generator_count == 0:
+		return
+		
+	var total_red : float = 0.0
+	var total_green : float = 0.0
+	var total_blue : float = 0.0
+	
+	var total_red_offline : float = 0.0
+	var total_green_offline : float = 0.0
+	var total_blue_offline : float = 0.0
 	
 	for shield_generator : ShieldGenerator in shield_generators:
 		var shield_resource : ShieldGeneratorResource = shield_generator.module_resource
@@ -251,15 +339,46 @@ func update_shield_stats() -> void:
 		
 		shield_cooldown_after_break += shield_resource.cooldown_time_after_break
 		shield_cooldown_after_hit += shield_resource.cooldown_time_after_hit
+		shield_charge_time += shield_resource.charge_time
+		
+		var color : Color = shield_resource.shield_color
+		total_red += color.r
+		total_green += color.g
+		total_blue += color.b
+		
+		var color_offline : Color = shield_resource.shield_offline_color
+		total_red_offline += color_offline.r
+		total_green_offline += color_offline.g
+		total_blue_offline += color_offline.b
 	
 	shield_cooldown_after_break /= shield_generator_count
 	shield_cooldown_after_hit /= shield_generator_count
+	shield_charge_rate /= shield_generator_count
 	
-	print("Updated Shield Stats:")
-	print("Max Health:", shield_max_health)
-	print("Charge Rate:", shield_charge_rate)
-	print("Cooldown After Break (Avg):", shield_cooldown_after_break)
-	print("Cooldown After Hit (Avg):", shield_cooldown_after_hit)
+	shield_cooldown_after_hit_timer.wait_time = shield_cooldown_after_hit
+	shield_cooldown_after_break_timer.wait_time = shield_cooldown_after_break
+	shield_charge_timer.wait_time = shield_charge_time
+	
+	if shield_current_health > shield_max_health:
+		shield_current_health = shield_max_health
+		
+	var avg_red : float = total_red / shield_generator_count
+	var avg_green : float = total_green / shield_generator_count
+	var avg_blue : float = total_blue / shield_generator_count
+	var averaged_color : Color = Color(avg_red, avg_green, avg_blue)
+	
+	var avg_red_offline : float = total_red_offline / shield_generator_count
+	var avg_green_offline : float = total_green_offline / shield_generator_count
+	var avg_blue_offline : float = total_blue_offline / shield_generator_count
+	var averaged_color_offline : Color = Color(avg_red_offline, avg_green_offline, avg_blue_offline)
+	
+	# Assign averaged color
+	shield.shield_color = averaged_color
+	shield.shield_offline_color = averaged_color_offline # Slightly darkened for offline
+	
+	shield.set_color(averaged_color)
+	
+	debug_log(str(averaged_color))
 
 func shoot_primary() -> void:
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
@@ -499,8 +618,7 @@ func _physics_process(delta: float) -> void:
 		cruise_travel(delta)
 	elif travel_mode == starship_travel_modes.TravelMode.SUPER_CRUISE:
 		super_cruise_travel(delta)
-	
-	
+		
 	update_ui()
 
 	# reset thrust vector

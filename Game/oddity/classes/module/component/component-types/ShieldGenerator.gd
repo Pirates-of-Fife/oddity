@@ -5,9 +5,6 @@ class_name ShieldGenerator
 @export_category("Shield")
 
 @export
-var current_health : float
-
-@export
 var ship_shield_static_body : Shield
 
 func _ready() -> void:
