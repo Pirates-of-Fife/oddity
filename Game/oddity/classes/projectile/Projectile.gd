@@ -23,7 +23,7 @@ func _projectile_ready() -> void:
 	timer.one_shot = true
 	timer.timeout.connect(_on_timerout)
 	timer.start()
-
+	
 func _on_timerout() -> void:
 	queue_free()
 

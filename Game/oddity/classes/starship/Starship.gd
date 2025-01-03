@@ -71,6 +71,12 @@ var travel_mode : StarshipTravelModes.TravelMode
 
 @export_category("Modules")
 
+@export
+var module_node : Node3D
+
+@export
+var module_slots : Array = Array()
+
 @export_subgroup("Abyss")
 
 @export
@@ -116,6 +122,30 @@ var secondary_hardpoints_node_path : Array
 @onready
 var secondary_hardpoints : Array = load_nodes(secondary_hardpoints_node_path)
 
+@export_subgroup("Shield")
+
+signal shield_broken
+
+@export
+var shield : Shield
+
+@export
+var shield_current_health : float
+
+@export
+var shield_max_health : float
+
+@export
+var shield_charge_rate : float
+
+@export
+var shield_cooldown_after_break : float
+
+@export
+var shield_cooldown_after_hit : float
+
+var shield_generators : Array = Array()
+
 @export_category("Interaction")
 
 @export
@@ -131,7 +161,10 @@ var lock_timer : Timer = Timer.new()
 
 func _ready() -> void:
 	_starship_ready()
-	
+
+func update_module_stats() -> void:
+	update_shield_stats()
+
 func _starship_ready() -> void:
 	_default_ready()
 
@@ -166,6 +199,67 @@ func _starship_ready() -> void:
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
+	
+	shield.shield_hit.connect(shield_damage)
+	
+	if module_node != null:
+		for node : Node in module_node.get_children():
+			for n : Node in node.get_children():
+				if n is ModuleSlot:
+					module_slots.append(n)
+					n.module_inserted.connect(_on_module_insert)
+					n.module_removed.connect(_on_module_uninserted)
+		
+			if node is ModuleSlot:
+				module_slots.append(node)
+				node.module_inserted.connect(_on_module_insert)
+				node.module_removed.connect(_on_module_uninserted)
+	
+	for module_slot : ModuleSlot in module_slots:
+		if module_slot is DynamicModuleSlot:
+			if module_slot.module is ShieldGenerator:
+				shield_generators.append(module_slot.module)
+	
+	update_module_stats()
+
+func shield_damage(damage : float) -> void:
+	shield_current_health -= damage
+
+func _on_module_insert(module : Module) -> void:
+	if module is ShieldGenerator:
+		shield_generators.append(module)
+		update_shield_stats()
+	
+func _on_module_uninserted(module : Module) -> void:
+	if module is ShieldGenerator:
+		shield_generators.erase(module)
+		update_shield_stats()
+
+func update_shield_stats() -> void:
+	shield_max_health = 0
+	shield_charge_rate = 0
+	shield_cooldown_after_break = 0
+	shield_cooldown_after_hit = 0
+
+	var shield_generator_count : int = shield_generators.size()
+	
+	for shield_generator : ShieldGenerator in shield_generators:
+		var shield_resource : ShieldGeneratorResource = shield_generator.module_resource
+				
+		shield_max_health += shield_resource.max_shield_health
+		shield_charge_rate += shield_resource.charge_rate
+		
+		shield_cooldown_after_break += shield_resource.cooldown_time_after_break
+		shield_cooldown_after_hit += shield_resource.cooldown_time_after_hit
+	
+	shield_cooldown_after_break /= shield_generator_count
+	shield_cooldown_after_hit /= shield_generator_count
+	
+	print("Updated Shield Stats:")
+	print("Max Health:", shield_max_health)
+	print("Charge Rate:", shield_charge_rate)
+	print("Cooldown After Break (Avg):", shield_cooldown_after_break)
+	print("Cooldown After Hit (Avg):", shield_cooldown_after_hit)
 
 func shoot_primary() -> void:
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:

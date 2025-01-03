@@ -2,11 +2,7 @@ extends StaticBody3D
 
 class_name Shield
 
-@export_category("Shield Health")
-@export
-var shield_health : float
-
-var shield_broken : bool = false
+signal shield_hit(damage : float)
 
 @export_category("Technical Stuff")
 
@@ -41,8 +37,7 @@ func _physics_process(delta: float) -> void:
 
 
 func take_damage(damage : float) -> void:
-	if shield_broken:
-		return
+
 	
 	shield_material.albedo_color.a += 0.02
 	shield_material.albedo_color.a = clampf(shield_material.albedo_color.a, 0, alpha_max)
@@ -50,13 +45,7 @@ func take_damage(damage : float) -> void:
 	var hit_sound : AudioStreamPlayer3D = hit_sound_scene.instantiate()
 	add_child.call_deferred(hit_sound)
 	
-	shield_health -= damage
-	
-	print(shield_health)
-	
-	if shield_health <= 0 and shield_broken == false:
-		shield_break_sound.play()
-		shield_broken = true
+	shield_hit.emit(damage)
 	
 	
 	
