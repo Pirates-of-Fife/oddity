@@ -14,6 +14,9 @@ var abyssal_mfd : AbyssalMFD3D
 @export
 var super_cruise_mfd : SuperCruiseMFD3D
 
+@export
+var shield_and_health_ui : ShieldAndHullUi3D
+
 func _ready() -> void:
 	RABS_Kestrel_Mk1_ready()
 
@@ -50,6 +53,16 @@ func update_ui() -> void:
 		super_cruise_mfd.velocity_c = current_super_cruise_speed_in_c
 		super_cruise_mfd.throttle = target_thrust_vector.z
 		super_cruise_mfd.max_velocity = alcubierre_drive_slot.module.module_resource.max_speed
+		
+	shield_and_health_ui.max_hull_health = 100
+	shield_and_health_ui.current_hull_health = 100
+	
+	shield_and_health_ui.current_shield_health = shield_current_health
+	shield_and_health_ui.max_shield_health = shield_max_health
+	
+	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
+	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
+
 	
 
 func update_abyssal_mfd() -> void:	

@@ -13,8 +13,8 @@ albedo_color = Color(1, 0, 0, 1)
 points = PackedVector3Array(0.15, 0.15, 1, 0.15, -0.15, 1, 0.15, 0.15, -1, -0.15, 0.15, 1, -0.15, -0.15, 1, 0.15, -0.15, -1, -0.15, 0.15, -1, -0.15, -0.15, -1)
 
 [node name="LaserProjectile" type="RigidBody3D"]
-collision_layer = 2097152
-collision_mask = 2097152
+collision_layer = 6291456
+collision_mask = 6291456
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 2

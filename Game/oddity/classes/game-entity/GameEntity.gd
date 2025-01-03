@@ -38,6 +38,10 @@ var timer_started : bool = false
 
 var can_freeze : bool = true
 
+@export_category("Debug")
+@export
+var debug : bool
+
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
 
@@ -61,6 +65,9 @@ func _default_physics_process(delta : float) -> void:
 					if freeze_timer.is_stopped():
 						freeze_timer.start()
 
+func debug_log(msg : String) -> void:
+	if debug:
+		print(str(self) + str(" Debug: ") + msg)
 
 func _default_process(delta : float) -> void:
 	pass

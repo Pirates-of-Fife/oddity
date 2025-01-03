@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6extimnsa826"]
+
+[ext_resource type="AudioStream" uid="uid://bb108sh5wcw47" path="res://classes/module/component/component-types/shield/sounds/shield_hit.wav" id="1_jpbh0"]
+[ext_resource type="Script" path="res://classes/module/component/component-types/shield/shield_hit_sound.gd" id="2_w76bp"]
+
+[node name="HitSound" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_jpbh0")
+pitch_scale = 2.0
+autoplay = true
+max_polyphony = 10
+script = ExtResource("2_w76bp")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -2,6 +2,9 @@ extends GameEntity
 
 class_name Module
 
+signal inserted(slot : ModuleSlot)
+signal uninserted(slot : ModuleSlot)
+
 @export_category("Module Resource")
 
 @export
@@ -24,6 +27,14 @@ func _module_ready() -> void:
 		insert(module_slot)
 
 	on_interact.connect(_on_interact)
+	inserted.connect(_on_insert)
+	uninserted.connect(_on_uninsert)
+
+func _on_insert(slot : ModuleSlot) -> void:
+	pass
+
+func _on_uninsert(slot : ModuleSlot) -> void:
+	pass
 
 func insert(slot : DynamicModuleSlot) -> void:
 	can_freeze = false
@@ -40,9 +51,11 @@ func insert(slot : DynamicModuleSlot) -> void:
 		reparent.call_deferred(module_slot)
 	
 	module_slot.module_inserted.emit(self)
+	inserted.emit(module_slot)
 
 
 func uninsert() -> void:
+	uninserted.emit(module_slot)
 	module_slot.module_removed.emit(self)
 	module_slot.module = null
 	module_slot = null

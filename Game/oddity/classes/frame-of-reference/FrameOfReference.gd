@@ -1,7 +1,7 @@
-# @class FrameOfReference
-# This class handles a localized physics system for bodies within a specific reference frame.
-# It tracks and updates the position, velocity, and rotation of objects relative to the reference frame.
-# This allows objects to behave according to local physics while the reference frame itself is in motion.
+## @class FrameOfReference
+## This class handles a localized physics system for bodies within a specific reference frame.
+## It tracks and updates the position, velocity, and rotation of objects relative to the reference frame.
+## This allows objects to behave according to local physics while the reference frame itself is in motion.
 
 @icon("res://classes/frame-of-reference/icons/FrameOfReference.svg")
 
