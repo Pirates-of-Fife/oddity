@@ -2,6 +2,8 @@ extends ComponentResource
 
 class_name ShieldGeneratorResource
 
+
+
 @export_category("Shield Generator Information")
 
 @export

@@ -1,3 +1,5 @@
+@icon("res://classes/multi-function-display/shield_and_hull_ui/ShieldIcon.svg")
+
 extends Component
 
 class_name ShieldGenerator

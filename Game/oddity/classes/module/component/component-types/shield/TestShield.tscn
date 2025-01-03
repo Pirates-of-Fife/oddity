@@ -3,13 +3,19 @@
 [ext_resource type="Script" path="res://classes/module/component/component-types/shield/Shield.gd" id="1_2f8lq"]
 [ext_resource type="AudioStream" uid="uid://cau75jmv5cnic" path="res://classes/module/component/component-types/shield/sounds/shield_break-002.wav" id="3_8vpjl"]
 
-[node name="Shield" type="StaticBody3D" node_paths=PackedStringArray("shield_break_sound")]
+[node name="Shield" type="StaticBody3D" node_paths=PackedStringArray("shield_break_sound", "shield_online_sound")]
 collision_layer = 0
 collision_mask = 4194304
 script = ExtResource("1_2f8lq")
 shield_break_sound = NodePath("BreakSound")
+shield_online_sound = NodePath("ShieldOnlineSound")
 
 [node name="BreakSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_8vpjl")
 unit_size = 20.0
 max_distance = 1000.0
+
+[node name="ShieldOnlineSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_8vpjl")
+unit_size = 7.16
+pitch_scale = 0.4

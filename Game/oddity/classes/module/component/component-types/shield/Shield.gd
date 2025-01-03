@@ -1,3 +1,4 @@
+@icon("res://classes/multi-function-display/shield_and_hull_ui/ShieldIcon.svg")
 extends StaticBody3D
 
 class_name Shield
@@ -34,6 +35,9 @@ var layer_mask_offline : int
 
 @export
 var shield_break_sound : AudioStreamPlayer3D
+
+@export
+var shield_online_sound : AudioStreamPlayer3D
 
 @onready
 var shield_material_resource : StandardMaterial3D = preload("res://classes/module/component/component-types/shield/ShieldMaterial.tres")
@@ -84,3 +88,6 @@ func on_shield_online() -> void:
 	shield_material.albedo_color = shield_color
 	shield_material.albedo_color.a = 0.6
 	collision_mask = layer_mask_online
+	
+	shield_online_sound.play()
+	

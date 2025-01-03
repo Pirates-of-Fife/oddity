@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://dynh8g426n3gq"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldAndHullUi.gd" id="1_ddf0y"]
+[ext_resource type="Texture2D" uid="uid://idh2x2dvxvt" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldIcon.svg" id="2_squ0k"]
+[ext_resource type="Texture2D" uid="uid://bu2kbxefxdcae" path="res://classes/multi-function-display/shield_and_hull_ui/HeartIcon.svg" id="3_c1u6k"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="4_wmscu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvm3n"]
+bg_color = Color(1, 0, 0.164706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mf5m"]
+bg_color = Color(1.92523e-05, 0.911912, 0.998518, 1)
+
+[node name="ShieldAndHullUi" type="Control" node_paths=PackedStringArray("hull_health_bar", "shield_health_bar", "shield_charge", "shield_health_label", "hull_health_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ddf0y")
+hull_health_bar = NodePath("HullHealthBar")
+shield_health_bar = NodePath("ShieldHealthBar")
+shield_charge = NodePath("ShieldCharge")
+shield_health_label = NodePath("ShieldHealthLabel")
+hull_health_label = NodePath("HullHealthLabel")
+
+[node name="HullHealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -806.0
+offset_top = -30.0
+offset_right = 806.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_kvm3n")
+max_value = 0.0
+show_percentage = false
+
+[node name="ShieldHealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -806.0
+offset_top = -110.0
+offset_right = 806.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_8mf5m")
+max_value = 0.0
+show_percentage = false
+
+[node name="ShieldIcon" type="Sprite2D" parent="."]
+position = Vector2(1800, 461)
+scale = Vector2(0.156, 0.156)
+texture = ExtResource("2_squ0k")
+
+[node name="HeartIcon" type="Sprite2D" parent="."]
+position = Vector2(1803, 544)
+scale = Vector2(0.151, 0.151)
+texture = ExtResource("3_c1u6k")
+
+[node name="ShieldCharge" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 418.0
+offset_right = 493.0
+offset_bottom = 918.0
+scale = Vector2(0.34, 0.34)
+max_value = 0.0
+step = 0.01
+fill_mode = 4
+texture_progress = ExtResource("2_squ0k")
+
+[node name="ShieldHealthLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 177.0
+offset_top = 392.0
+offset_right = 647.0
+offset_bottom = 586.0
+scale = Vector2(2.585, 2.585)
+theme_override_fonts/normal_font = ExtResource("4_wmscu")
+text = "10000 / 10000"
+
+[node name="HullHealthLabel" type="RichTextLabel" parent="."]
+offset_left = 174.0
+offset_top = 471.0
+offset_right = 646.0
+offset_bottom = 571.0
+scale = Vector2(2.585, 2.585)
+theme_override_fonts/normal_font = ExtResource("4_wmscu")
+text = "10000 / 10000"
