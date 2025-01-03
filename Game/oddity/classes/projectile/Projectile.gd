@@ -27,10 +27,14 @@ func _projectile_ready() -> void:
 func _on_timerout() -> void:
 	queue_free()
 
-func _on_body_entered(body : Node) -> void:	
+func _on_body_entered(body : Node) -> void:
 	if body is GameEntity:
 		body.take_damage(damage)
 		hit.emit(body)
+	
+	if body is Shield:
+		body.take_damage(damage)
+		hit.emit(body.game_entity)
 	
 	queue_free()
 	
