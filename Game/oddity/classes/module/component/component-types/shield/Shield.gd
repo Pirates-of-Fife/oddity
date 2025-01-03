@@ -77,6 +77,9 @@ func take_damage(damage : float) -> void:
 	shield_hit.emit(damage)
 	
 func on_shield_broken() -> void:
+	if (game_entity as Starship).shield_max_health <= 0:
+		return
+	
 	var last_a : float = shield_material.albedo_color.a
 	shield_material.albedo_color = shield_offline_color
 	shield_material.albedo_color.a = last_a
@@ -85,6 +88,9 @@ func on_shield_broken() -> void:
 	shield_break_sound.play()
 
 func on_shield_online() -> void:
+	if (game_entity as Starship).shield_max_health <= 0:
+		return
+	
 	shield_material.albedo_color = shield_color
 	shield_material.albedo_color.a = 0.6
 	collision_mask = layer_mask_online

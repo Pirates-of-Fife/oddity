@@ -47,6 +47,7 @@ transform = Transform3D(-0.689229, 0, 0.724545, 0, 1, 0, -0.724545, 0, -0.689229
 
 [node name="Ship1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -231.575, 657.756)
+debug = true
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/World/SystemA" node_paths=PackedStringArray("ship")]
 script = ExtResource("9_yfpyy")
@@ -54,7 +55,6 @@ ship = NodePath("Ship2")
 
 [node name="Ship2" parent="SubViewportContainer/SubViewport/World/SystemA/Node3D" instance=ExtResource("5_2sr1o")]
 transform = Transform3D(-0.990085, 0.133805, 0.0427422, 0.0199034, 0.434856, -0.90028, -0.139049, -0.890504, -0.433208, 104796, -231.575, 1021.57)
-debug = true
 
 [node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/World/SystemA/Node3D"]
 process_callback = 0

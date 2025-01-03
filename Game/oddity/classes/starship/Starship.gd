@@ -276,7 +276,6 @@ func shield_damage(damage : float) -> void:
 func on_shield_broken() -> void:
 	shield_break_cooldown_complete = false
 	shield_cooldown_after_break_timer.start()
-	debug_log("Shield Broken")
 
 func shield_break_cooldown_finished() -> void:
 	shield_break_cooldown_complete = true
@@ -293,14 +292,11 @@ func shield_charge_cooldown_finished() -> void:
 		return
 	
 	shield_current_health += shield_charge_rate
-	
-	debug_log("shield charged: " + str(shield_charge_rate))
-	
-	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
-	
-	debug_log("Current shield: " + str(shield_current_health))
-
 		
+	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
+		
+	if shield.collision_mask == shield.layer_mask_offline and shield_current_health > 0:
+		shield.collision_mask = shield.layer_mask_online
 
 func _on_module_insert(module : Module) -> void:
 	if module is ShieldGenerator:
@@ -321,6 +317,7 @@ func update_shield_stats() -> void:
 	var shield_generator_count : int = shield_generators.size()
 	
 	if shield_generator_count == 0:
+		shield.collision_mask = shield.layer_mask_offline
 		return
 		
 	var total_red : float = 0.0
@@ -378,8 +375,6 @@ func update_shield_stats() -> void:
 	
 	shield.set_color(averaged_color)
 	
-	debug_log(str(averaged_color))
-
 func shoot_primary() -> void:
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
