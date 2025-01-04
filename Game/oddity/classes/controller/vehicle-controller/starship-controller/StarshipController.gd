@@ -31,6 +31,7 @@ var starship_cycle_system_command : StarshipCycleSelectedSystemCommand = Starshi
 var starship_shoot_primary_command : StarshipShootPrimaryCommand = StarshipShootPrimaryCommand.new()
 var starship_shoot_secondary_command : StarshipShootSecondaryCommand = StarshipShootSecondaryCommand.new()
 
+var starship_cycle_power_state_command : StarshipCyclePowerStateCommand = StarshipCyclePowerStateCommand.new()
 
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
@@ -111,6 +112,20 @@ func _on_supercruise_exit_timer_timeout() -> void:
 
 func _starship_controller_process(delta : float) -> void:
 	if control_entity is Starship:
+		
+		if (Input.is_action_just_pressed("player_interact")):
+			starship_player_interact_command.execute(control_entity)
+			
+		if (Input.is_action_just_pressed("vehicle_exit_seat")):
+			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
+				vehicle_exit_seat_command.execute(control_entity)
+				
+		if (Input.is_action_just_pressed("starship_cycle_power_state")):
+			starship_cycle_power_state_command.execute(control_entity)
+			
+		if !control_entity.is_powered_on():
+			return
+			
 		current_throttle_forwards_axis = starship_last_throttle_value #control_entity.target_thrust_vector.z
 
 		if (Input.is_action_pressed("starship_throttle_forward")):
@@ -177,13 +192,6 @@ func _starship_controller_process(delta : float) -> void:
 		else:
 			starship_yaw_right_command.execute(control_entity, StarshipYawRightCommand.Params.new(abs(deadzoned_yaw)))
 
-		if (Input.is_action_just_pressed("player_interact")):
-			starship_player_interact_command.execute(control_entity)
-
-		if (Input.is_action_just_pressed("vehicle_exit_seat")):
-			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
-				vehicle_exit_seat_command.execute(control_entity)
-
 		if (Input.is_action_just_pressed("starship_increase_max_velocity")):
 			starship_increase_max_velocity_command.execute(control_entity, StarshipIncreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
 
@@ -200,6 +208,9 @@ func _starship_controller_process(delta : float) -> void:
 			starship_cycle_system_command.execute(control_entity)
 						
 		if (Input.is_action_just_pressed("starship_initiate_super_cruise")):
+			if control_entity.is_in_abyss:
+				return
+				
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				control_entity.exit_super_cruise()
 				supercruise_exit_timer.start()
@@ -211,9 +222,10 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_just_released("starship_initiate_super_cruise")):
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				return
-			
-			print(starship_ready_to_supercruise)
-			
+				
+			if control_entity.is_in_abyss:
+				return
+						
 			if starship_ready_to_supercruise:
 				supercruise_initialization_timer.stop()
 				control_entity.alcubierre_drive_charge_end()
@@ -222,7 +234,9 @@ func _starship_controller_process(delta : float) -> void:
 			starship_shoot_primary_command.execute(control_entity)
 		
 		if (Input.is_action_pressed("starship_shoot_secondary_weapons")):
-				starship_shoot_secondary_command.execute(control_entity)
+			starship_shoot_secondary_command.execute(control_entity)
+				
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

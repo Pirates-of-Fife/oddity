@@ -26,6 +26,8 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	
 	super_cruise_engaged.connect(on_supercruise_engaged)
 	super_cruise_disengaged.connect(on_supercruise_disengaged)
+	state_changed_to_power_on.connect(on_power_on)
+	state_changed_to_power_off.connect(on_power_off)
 	
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
@@ -64,7 +66,12 @@ func update_ui() -> void:
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
 
+func on_power_on() -> void:
+	power_on_sound_player.play()
 	
+func on_power_off() -> void:
+	power_off_sound_player.play()
+	power_off()
 
 func update_abyssal_mfd() -> void:	
 	abyssal_mfd.set_current_system(current_star_system.system_name)
@@ -73,7 +80,7 @@ func update_abyssal_mfd() -> void:
 func toggle_landing_gear() -> void:
 	if $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 0 and $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 1:
 		return
-	
+			
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear.toggle_open_state()
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear2.toggle_open_state()
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear3.toggle_open_state()
@@ -84,5 +91,7 @@ func toggle_landing_gear() -> void:
 	
 	if $Interior/Bridge/LandingGearLabel.visible:
 		$Interior/Bridge/LandingGearLabel.hide()
+		landing_gear_on = false
 	else:
 		$Interior/Bridge/LandingGearLabel.show()
+		landing_gear_on = true
