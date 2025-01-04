@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbxrj3tj7aot2"]
+
+[ext_resource type="Script" path="res://OrbitManager.gd" id="1_klxxm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kxov3"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ldedd"]
+sky_material = SubResource("ProceduralSkyMaterial_kxov3")
+
+[sub_resource type="Environment" id="Environment_my8pe"]
+background_mode = 2
+sky = SubResource("Sky_ldedd")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_50arg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e7fn"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_w1fe8"]
+material = SubResource("StandardMaterial3D_3e7fn")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uyxp5"]
+
+[node name="SolarSystem" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_my8pe")
+
+[node name="Origin" type="Node3D" parent="."]
+
+[node name="OriginMesh" type="MeshInstance3D" parent="Origin"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("SphereMesh_50arg")
+
+[node name="Planet" type="RigidBody3D" parent="Origin" node_paths=PackedStringArray("center_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.87918, 0.72177, -0.426749)
+script = ExtResource("1_klxxm")
+center_node = NodePath("..")
+center_mass = 0.835
+semi_minor_axis = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Origin/Planet"]
+mesh = SubResource("SphereMesh_w1fe8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Origin/Planet"]
+shape = SubResource("SphereShape3D_uyxp5")
+
+[node name="OrbitPath" type="Node3D" parent="Origin"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0537828, 0.998553, 0, -0.998553, -0.0537828, 0, 15.2379, 0.042517)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
