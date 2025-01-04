@@ -68,16 +68,14 @@ process_callback = 0
 wait_time = 2.0
 autostart = true
 
-[node name="LunaCube" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SystemA"]
+[node name="StaticGameEntity" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SystemA"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104771, -226.917, 885.059)
-collision_layer = 2097409
-collision_mask = 2097409
 script = ExtResource("10_n1lue")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/LunaCube"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/StaticGameEntity"]
 mesh = SubResource("BoxMesh_6nxkv")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/LunaCube"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/StaticGameEntity"]
 shape = SubResource("ConcavePolygonShape3D_1ichr")
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]

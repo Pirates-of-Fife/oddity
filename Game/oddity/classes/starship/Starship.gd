@@ -162,6 +162,15 @@ var shield_charge_timer : Timer = Timer.new()
 var shield_hit_cooldown_complete : bool = true
 var shield_break_cooldown_complete : bool = true
 
+@export_category("Sounds")
+
+@export_subgroup("Collision")
+@export
+var hull_collision_sounds : Array = Array()
+
+@export
+var hull_collision_player : AudioStreamPlayer3D
+
 @export_category("Interaction")
 
 @export
@@ -183,7 +192,10 @@ func update_module_stats() -> void:
 
 func _starship_ready() -> void:
 	_default_ready()
-
+	
+	body_entered.connect(on_collision)
+	on_damage_taken.connect(ship_take_damage)
+	
 	travel_mode = starship_travel_modes.TravelMode.CRUISE
 
 	lock_timer.one_shot = true
@@ -406,6 +418,22 @@ func cycle_selected_system() -> void:
 	selected_system = world.cycle_system()
 	update_abyssal_mfd()
 
+func ship_take_damage(damage : float) -> void:
+	pass
+
+func on_collision(body : Node3D) -> void:
+	if body is Projectile:
+		return
+	
+	var current_sound : AudioStream = hull_collision_sounds.pick_random()
+	
+	debug_log(str(current_sound))
+	
+	if !hull_collision_player.playing:
+		hull_collision_player.stream = current_sound
+		hull_collision_player.play()
+		debug_log("Play")
+	
 func update_abyssal_mfd() -> void:
 	pass
 

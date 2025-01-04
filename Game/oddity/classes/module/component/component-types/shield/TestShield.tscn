@@ -14,8 +14,10 @@ shield_online_sound = NodePath("ShieldOnlineSound")
 stream = ExtResource("3_8vpjl")
 unit_size = 20.0
 max_distance = 1000.0
+bus = &"Shield"
 
 [node name="ShieldOnlineSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_8vpjl")
 unit_size = 7.16
 pitch_scale = 0.4
+bus = &"Shield"
