@@ -162,6 +162,13 @@ var shield_charge_timer : Timer = Timer.new()
 var shield_hit_cooldown_complete : bool = true
 var shield_break_cooldown_complete : bool = true
 
+@export_subgroup("Hull")
+@export
+var max_hull_health : float
+
+@export
+var current_hull_health : float
+
 @export_category("Sounds")
 
 @export_subgroup("Collision")
@@ -419,20 +426,24 @@ func cycle_selected_system() -> void:
 	update_abyssal_mfd()
 
 func ship_take_damage(damage : float) -> void:
-	pass
+	current_hull_health -= damage
+	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
 
 func on_collision(body : Node3D) -> void:
 	if body is Projectile:
 		return
 	
+	if shield_current_health > 0:
+		shield.take_damage(pow(relative_linear_velocity.length(), 2) * 0.1)
+		return
+	
 	var current_sound : AudioStream = hull_collision_sounds.pick_random()
 	
-	debug_log(str(current_sound))
-	
+	take_damage(pow(relative_linear_velocity.length(), 2) * 0.06)
+		
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound
 		hull_collision_player.play()
-		debug_log("Play")
 	
 func update_abyssal_mfd() -> void:
 	pass

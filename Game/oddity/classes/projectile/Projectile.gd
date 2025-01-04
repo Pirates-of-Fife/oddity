@@ -31,7 +31,7 @@ func _on_timerout() -> void:
 	queue_free()
 
 func _on_body_entered(body : Node) -> void:
-	if body is GameEntity:
+	if body is GameEntity or body is StaticGameEntity:
 		body.take_damage(damage)
 		hit.emit(body)
 		
