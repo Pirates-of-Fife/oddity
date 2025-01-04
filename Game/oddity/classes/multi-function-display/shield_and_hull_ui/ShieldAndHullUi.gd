@@ -55,8 +55,8 @@ func _process(delta: float) -> void:
 	shield_charge.max_value = cooldown_time
 	shield_charge.value = cooldown_time - current_cooldown
 	
-	shield_health_label.text = str(current_shield_health) + " / " + str(max_shield_health)
-	hull_health_label.text = str(current_hull_health) + " / " + str(max_hull_health)
+	shield_health_label.text = str(roundf(current_shield_health)) + " / " + str(roundf(max_shield_health))
+	hull_health_label.text = str(roundf(current_hull_health)) + " / " + str(roundf(max_hull_health))
 	
 	if (max_shield_health == 0):
 		shield_health_bar.hide()

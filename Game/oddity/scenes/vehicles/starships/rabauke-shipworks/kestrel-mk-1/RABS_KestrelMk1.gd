@@ -17,6 +17,7 @@ var super_cruise_mfd : SuperCruiseMFD3D
 @export
 var shield_and_health_ui : ShieldAndHullUi3D
 
+
 func _ready() -> void:
 	RABS_Kestrel_Mk1_ready()
 
