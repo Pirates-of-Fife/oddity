@@ -24,58 +24,6 @@ size = Vector3(0.24, 1.105, 0.07)
 albedo_color = Color(0.314316, 0.314316, 0.314316, 1)
 metallic = 0.93
 
-[sub_resource type="Animation" id="Animation_yg165"]
-resource_name = "open"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Door:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(1.06667, 2.53333),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(-2.62617, -0.3818, -15.5647), Vector3(-2.62617, -0.3818, -17.4644)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Elevator:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 1.76667, 2.16667, 5),
-"transitions": PackedFloat64Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 2.79231, -18.6585), Vector3(0, 1.51959, -18.6585), Vector3(0, 1.51959, -18.6585), Vector3(0, -0.788, -18.659)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ElevatorShafts/ThickShaftLeft/MediumShaftLeft:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat64Array(0, 1.76667, 2.16667, 3.33333),
-"transitions": PackedFloat64Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, -0.0158281, 0.00673676), Vector3(0, -1.31114, 0.00673676), Vector3(0, -1.31114, 0.00673676), Vector3(0, -2.1757, 0.00673676)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ElevatorShafts/ThickShaftLeft/MediumShaftLeft/ThinShaftLeft:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat64Array(0, 3.16667, 5),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0.00858235, -0.0101032), Vector3(0, 0.00858235, -0.0101032), Vector3(0, -1.20075, -0.0101032)]
-}
-
 [sub_resource type="Animation" id="Animation_n4fdd"]
 length = 0.001
 tracks/0/type = "value"
@@ -179,6 +127,58 @@ tracks/3/keys = {
 "values": [Vector3(0, -1.20075, -0.0101032), Vector3(0, 0.00858235, -0.0101032), Vector3(0, 0.00858235, -0.0101032)]
 }
 
+[sub_resource type="Animation" id="Animation_yg165"]
+resource_name = "open"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(1.06667, 2.53333),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(-2.62617, -0.3818, -15.5647), Vector3(-2.62617, -0.3818, -17.4644)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Elevator:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 1.76667, 2.16667, 5),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.79231, -18.6585), Vector3(0, 1.51959, -18.6585), Vector3(0, 1.51959, -18.6585), Vector3(0, -0.788, -18.659)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ElevatorShafts/ThickShaftLeft/MediumShaftLeft:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0, 1.76667, 2.16667, 3.33333),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.0158281, 0.00673676), Vector3(0, -1.31114, 0.00673676), Vector3(0, -1.31114, 0.00673676), Vector3(0, -2.1757, 0.00673676)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ElevatorShafts/ThickShaftLeft/MediumShaftLeft/ThinShaftLeft:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0, 3.16667, 5),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.00858235, -0.0101032), Vector3(0, 0.00858235, -0.0101032), Vector3(0, -1.20075, -0.0101032)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q50c1"]
 _data = {
 "RESET": SubResource("Animation_n4fdd"),
@@ -201,6 +201,12 @@ shape = SubResource("ConvexPolygonShape3D_6iqsc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62617, 0.3818, 15.5647)
 
 [node name="ElevatorShafts" parent="." instance=ExtResource("3_hb60d")]
+
+[node name="MediumShaftLeft" parent="ElevatorShafts/ThickShaftLeft" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1.18337, 0, 0, 0, 1, 0, -0.0158281, 0.00673676)
+
+[node name="ThinShaftLeft" parent="ElevatorShafts/ThickShaftLeft/MediumShaftLeft" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1.2329, 0, 0, 0, 0.41818, 0, 0.00858235, -0.0101032)
 
 [node name="AirShields" parent="." instance=ExtResource("4_ki75o")]
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnndwmtqt7vxt"]
+
+[ext_resource type="Script" path="res://classes/projectile/ProjectileCollisionAudioStreamPlayer3D.gd" id="1_sljet"]
+[ext_resource type="AudioStream" uid="uid://cy4g8ihpwqfhi" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/hull-hit-sound/hull_hit_1.wav" id="2_1ophx"]
+[ext_resource type="AudioStream" uid="uid://cu8mf5s4ctx7w" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/hull-hit-sound/hull_hit_2.wav" id="3_0v6b5"]
+[ext_resource type="AudioStream" uid="uid://cx4vw365v6g0t" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/hull-hit-sound/hull_hit_3.wav" id="4_a6tgc"]
+
+[node name="LaserProjectileHitSound" type="AudioStreamPlayer3D"]
+pitch_scale = 2.0
+autoplay = true
+bus = &"Weapon"
+script = ExtResource("1_sljet")
+sounds = [ExtResource("2_1ophx"), ExtResource("3_0v6b5"), ExtResource("4_a6tgc")]

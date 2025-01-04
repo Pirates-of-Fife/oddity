@@ -3,15 +3,13 @@
 [ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="1_f7gut"]
 [ext_resource type="Resource" uid="uid://c5ty3dn338c3x" path="res://scenes/modules/test-module/Size5Weapon/Size5WeaponResource.tres" id="2_p70ds"]
 [ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="3_fwayv"]
+[ext_resource type="PackedScene" uid="uid://cbysuhn5p35if" path="res://scenes/modules/test-module/Size5Weapon/size-5.glb" id="4_n3pji"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_m17s5"]
-size = Vector3(1.04, 1.12, 4)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_08hxi"]
+points = PackedVector3Array(1.6533, 0.145038, 0.3653, 0.142276, -0.3417, -0.500483, 0.360243, -0.504758, -0.3367, -0.0241548, 0.223944, 0.456933, 1.44319, 0.34135, -0.423367, 1.3308, -0.498391, 0.311547, 1.50296, -0.3417, -0.500483, -0.0241548, 0.223944, -0.482105, -0.0241548, -0.362996, 0.456933, 1.44319, -0.186841, 0.574409, -0.200333, -0.24559, -0.188526, 1.50796, 0.2045, 0.482614, 1.6802, -0.277973, -0.269763, -0.259059, 0.106537, 0.163463, 1.50796, 0.2045, -0.504003, 1.3308, -0.498391, -0.33153, 1.2817, 0.363155, -0.280613, 1.6802, -0.277973, 0.303317, 0.355516, -0.5098, 0.31939, 0.340136, 0.283, 0.344022, 1.6802, 0.13892, -0.269763, -0.0241548, -0.362996, -0.482105, 1.34734, 0.283, 0.344022, -0.259059, 0.106537, -0.188526, 1.44319, 0.0478802, 0.574409, 1.50296, -0.3417, 0.479464, -0.200333, -0.24559, 0.222092, 0.340136, 0.283, -0.360868, 0.138016, 0.2045, -0.504003, 0.138016, 0.2045, 0.482614, 0.142276, -0.3417, 0.479464, 1.63874, -0.28056, -0.3788)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ft30"]
-albedo_color = Color(0.176419, 0.176419, 0.176419, 1)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h785l"]
-points = PackedVector3Array(-0.52, -0.56, -2, 0.52, -0.56, -2, -0.52, -0.56, 2, -0.52, 0.56, -2, 0.519898, 0.56, -2, 0.52, 0.56, 2, 0.52, -0.56, 2, -0.52, 0.56, 2)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ltfh3"]
+points = PackedVector3Array(-0.435198, 0.0478802, 0.163487, -0.376541, -0.186933, -0.188733, -0.376541, 0.0478802, -0.188733, -1.96145, -0.186933, -0.130018, -0.25906, -0.186933, 0.163487, -1.96145, 0.0478802, 0.104772, -1.96145, -0.186933, 0.104772, -1.96145, 0.0478802, -0.130018, -0.25906, 0.0478802, -0.188733, -0.25906, 0.0478802, 0.163487, -0.25906, -0.186933, -0.188733, -0.435198, -0.186933, 0.163487)
 
 [node name="Size5Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle", "audio")]
 collision_layer = 537396737
@@ -34,12 +32,16 @@ panning_strength = 2.0
 bus = &"Weapon"
 playback_type = 1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_m17s5")
-surface_material_override/0 = SubResource("StandardMaterial3D_0ft30")
+[node name="Nozzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.114789, 1.74712)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -0.0481765, -0.227118)
+shape = SubResource("ConvexPolygonShape3D_08hxi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_h785l")
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -0.0481765, -0.227118)
+shape = SubResource("ConvexPolygonShape3D_ltfh3")
 
-[node name="Nozzle" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.17075)
+[node name="size-5" parent="." instance=ExtResource("4_n3pji")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -0.0481765, -0.227118)

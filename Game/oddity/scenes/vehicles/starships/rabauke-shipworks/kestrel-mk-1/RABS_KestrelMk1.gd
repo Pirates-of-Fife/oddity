@@ -17,6 +17,7 @@ var super_cruise_mfd : SuperCruiseMFD3D
 @export
 var shield_and_health_ui : ShieldAndHullUi3D
 
+
 func _ready() -> void:
 	RABS_Kestrel_Mk1_ready()
 
@@ -54,8 +55,8 @@ func update_ui() -> void:
 		super_cruise_mfd.throttle = target_thrust_vector.z
 		super_cruise_mfd.max_velocity = alcubierre_drive_slot.module.module_resource.max_speed
 		
-	shield_and_health_ui.max_hull_health = 100
-	shield_and_health_ui.current_hull_health = 100
+	shield_and_health_ui.max_hull_health = max_hull_health
+	shield_and_health_ui.current_hull_health = current_hull_health
 	
 	shield_and_health_ui.current_shield_health = shield_current_health
 	shield_and_health_ui.max_shield_health = shield_max_health

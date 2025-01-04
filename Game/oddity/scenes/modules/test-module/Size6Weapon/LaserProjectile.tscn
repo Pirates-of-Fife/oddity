@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://p0y1f3bv2d13"]
+[gd_scene load_steps=6 format=3 uid="uid://p0y1f3bv2d13"]
 
 [ext_resource type="Script" path="res://classes/projectile/Projectile.gd" id="1_3doe2"]
+[ext_resource type="PackedScene" uid="uid://cnndwmtqt7vxt" path="res://scenes/modules/test-module/Size6Weapon/LaserProjectileHitSound.tscn" id="2_xfbk8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c1boy"]
 size = Vector3(0.3, 0.3, 2)
@@ -20,6 +21,7 @@ contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_3doe2")
 timeout = 20.0
+on_hit_sound = ExtResource("2_xfbk8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.01, 0, 0, 0, 2.01, 0, 0, 0, 2.01, 0, 0, 0)
