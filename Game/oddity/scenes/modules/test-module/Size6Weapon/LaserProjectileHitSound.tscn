@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cx4vw365v6g0t" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/hull-hit-sound/hull_hit_3.wav" id="4_a6tgc"]
 
 [node name="LaserProjectileHitSound" type="AudioStreamPlayer3D"]
+volume_db = -6.0
 pitch_scale = 2.0
 autoplay = true
 bus = &"Weapon"

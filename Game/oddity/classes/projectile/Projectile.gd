@@ -33,7 +33,8 @@ func _on_timerout() -> void:
 func _on_body_entered(body : Node) -> void:
 	if body is GameEntity or body is StaticGameEntity:
 		body.take_damage(damage)
-		hit.emit(body)
+		if body is GameEntity:
+			hit.emit(body)
 		
 		var hit_sound : AudioStreamPlayer3D = on_hit_sound.instantiate()
 		get_tree().get_first_node_in_group("StarSystem").add_child(hit_sound)

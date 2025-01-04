@@ -34,7 +34,7 @@ func on_supercruise_engaged() -> void:
 func on_supercruise_disengaged() -> void:
 	velocity_mfd.show()
 	super_cruise_mfd.hide()
-
+	
 func update_ui() -> void:
 	crosshair.yaw = -target_rotational_thrust_vector.y
 	crosshair.pitch = -target_rotational_thrust_vector.x

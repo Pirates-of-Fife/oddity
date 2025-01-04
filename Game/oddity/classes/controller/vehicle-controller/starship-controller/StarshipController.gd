@@ -61,6 +61,10 @@ var throttle_deadzone_reset_timer : Timer = Timer.new()
 @onready
 var supercruise_initialization_timer : Timer = Timer.new()
 
+@onready
+var supercruise_exit_timer : Timer = Timer.new()
+
+var starship_ready_to_supercruise : bool = true
 var starship_has_alcubierre_drive : bool
 
 func _ready() -> void:
@@ -71,14 +75,20 @@ func _starship_controller_ready() -> void:
 
 	add_child(throttle_deadzone_reset_timer)
 	add_child(supercruise_initialization_timer)
+	add_child(supercruise_exit_timer)
 
 	throttle_deadzone_reset_timer.wait_time = 0.4
 	throttle_deadzone_reset_timer.one_shot = true
 	throttle_deadzone_reset_timer.timeout.connect(_on_throttle_deadzone_reset_timer_timeout)
 	
-	supercruise_initialization_timer.wait_time = 1
+	on_alcubierre_drive_inserted(control_entity.alcubierre_drive_slot.module)
 	supercruise_initialization_timer.one_shot = true
 	supercruise_initialization_timer.timeout.connect(_on_supercruise_initialization_timer_timeout)
+	
+	
+	supercruise_exit_timer.wait_time = 1
+	supercruise_exit_timer.one_shot = true
+	supercruise_exit_timer.timeout.connect(_on_supercruise_exit_timer_timeout)
 	
 	if control_entity is Starship:
 		control_entity.alcubierre_drive_inserted.connect(on_alcubierre_drive_inserted)
@@ -91,9 +101,13 @@ func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
 	starship_has_alcubierre_drive = false
 	
 func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
+	if alcubierre_drive == null:
+		return
 	starship_has_alcubierre_drive = true
 	supercruise_initialization_timer.wait_time = (alcubierre_drive as AlcubierreDrive).module_resource.spool_time
 
+func _on_supercruise_exit_timer_timeout() -> void:
+	starship_ready_to_supercruise = true
 
 func _starship_controller_process(delta : float) -> void:
 	if control_entity is Starship:
@@ -188,11 +202,21 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_just_pressed("starship_initiate_super_cruise")):
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				control_entity.exit_super_cruise()
+				supercruise_exit_timer.start()
 			else:
-				supercruise_initialization_timer.start()
+				if starship_ready_to_supercruise:
+					supercruise_initialization_timer.start()
+					control_entity.alcubierre_drive_charge_start()
 		
 		if (Input.is_action_just_released("starship_initiate_super_cruise")):
-			supercruise_initialization_timer.stop()
+			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+				return
+			
+			print(starship_ready_to_supercruise)
+			
+			if starship_ready_to_supercruise:
+				supercruise_initialization_timer.stop()
+				control_entity.alcubierre_drive_charge_end()
 			
 		if (Input.is_action_pressed("starship_shoot_primary_weapons")):
 			starship_shoot_primary_command.execute(control_entity)
@@ -218,4 +242,5 @@ func _on_throttle_deadzone_reset_timer_timeout() -> void:
 			
 func _on_supercruise_initialization_timer_timeout() -> void:
 	if control_entity is Starship:
+		starship_ready_to_supercruise = false
 		control_entity.initiate_super_cruise()

@@ -18,3 +18,17 @@ var max_speed : float
 
 @export
 var max_turn_speed : float
+
+@export_subgroup("Sounds")
+
+@export
+var charging_start : AudioStream
+
+@export
+var charging_sound : AudioStream
+
+@export
+var charging_end : AudioStream
+
+@export
+var travelling_sound : AudioStream

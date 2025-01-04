@@ -178,6 +178,13 @@ var hull_collision_sounds : Array = Array()
 @export
 var hull_collision_player : AudioStreamPlayer3D
 
+@export_subgroup("Super Cruise")
+@export
+var super_cruise_enter : AudioStreamPlayer3D
+
+@export
+var super_cruise_exit : AudioStreamPlayer3D
+
 @export_category("Interaction")
 
 @export
@@ -416,6 +423,17 @@ func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
 func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
 	alcubierre_drive_inserted.emit(alcubierre_drive)
 
+func alcubierre_drive_charge_start() -> void:
+	if alcubierre_drive_slot.module == null:
+		return
+		
+	alcubierre_drive_slot.module.start_charging()
+
+func alcubierre_drive_charge_end() -> void:
+	if alcubierre_drive_slot.module == null:
+		return
+		
+	alcubierre_drive_slot.module.stop_charging()
 
 func cycle_selected_system() -> void:
 	if is_in_abyss:
@@ -492,6 +510,10 @@ func initiate_super_cruise() -> void:
 	if alcubierre_drive_slot.module == null:
 		return
 	
+	alcubierre_drive_charge_end()
+	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_start()
+	super_cruise_enter.play()
+	
 	current_super_cruise_speed = 0
 	travel_mode = StarshipTravelModes.TravelMode.SUPER_CRUISE
 	
@@ -501,8 +523,12 @@ func initiate_super_cruise() -> void:
 	super_cruise_engaged.emit()
 
 func exit_super_cruise() -> void:
-	if current_super_cruise_speed > 50:
+	if current_super_cruise_speed > 500:
 		return
+	
+	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_end()
+	
+	super_cruise_exit.play()
 	
 	travel_mode =  StarshipTravelModes.TravelMode.CRUISE
 	
@@ -611,7 +637,7 @@ func super_cruise_travel(delta : float) -> void:
 	calculate_local_angular_velocity()
 	calculate_acceleration(delta)
 	
-	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed
+	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed + 250
 	
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
 	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
@@ -623,6 +649,8 @@ func super_cruise_travel(delta : float) -> void:
 	
 	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_slot.module.module_resource.max_speed)
 	
+	(alcubierre_drive_slot.module as AlcubierreDrive).travelling_sound.pitch_scale = lerpf(0.7, 4, current_super_cruise_speed / alcubierre_drive_slot.module.module_resource.max_speed)
+	 
 	global_position += global_transform.basis.z * current_super_cruise_speed
 	
 	current_super_cruise_speed_in_c = ((((global_position - last_position) / delta) / 299_792_458.0) * 1000).length()
