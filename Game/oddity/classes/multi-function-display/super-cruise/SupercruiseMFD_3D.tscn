@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bba4s6youxdl8"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/super-cruise/super_cruise_mfd_3d.gd" id="1_pcj54"]
+[ext_resource type="PackedScene" uid="uid://bmfdqfo736y4y" path="res://classes/multi-function-display/super-cruise/SupercruiseMFD.tscn" id="2_eehqw"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h3cd7"]
+viewport_path = NodePath("SubViewport")
+
+[node name="SuperCruiseMfd3d" type="Node3D" node_paths=PackedStringArray("super_cruise_mfd")]
+script = ExtResource("1_pcj54")
+super_cruise_mfd = NodePath("SubViewport/SuperCruiseMfd")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(757, 480)
+
+[node name="SuperCruiseMfd" parent="SubViewport" instance=ExtResource("2_eehqw")]
+offset_right = -757.0
+offset_bottom = -480.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_h3cd7")

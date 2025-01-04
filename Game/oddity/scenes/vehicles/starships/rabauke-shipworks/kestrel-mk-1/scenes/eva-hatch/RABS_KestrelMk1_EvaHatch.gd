@@ -1,0 +1,3 @@
+extends Openable
+
+class_name RABS_KestrelMk1_EvaHatch

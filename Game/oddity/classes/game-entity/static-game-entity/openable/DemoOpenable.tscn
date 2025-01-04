@@ -3,16 +3,15 @@
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_5jb5p"]
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/OpenableDetectionArea.gd" id="2_okp4e"]
 
-[sub_resource type="Animation" id="Animation_vja80"]
-resource_name = "open"
-length = 2.0
+[sub_resource type="Animation" id="Animation_4v72r"]
+length = 0.001
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("CollisionShape3D")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat64Array(0, 1, 0, 0.724017, 0, 2, 1, 0, 2.72213, 0)
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 0.724017, 0)
 
 [sub_resource type="Animation" id="Animation_tkxfs"]
 resource_name = "close"
@@ -25,15 +24,16 @@ tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat64Array(0, 1, 0, 2.72213, 0, 2, 1, 0, 0.724, 0)
 
-[sub_resource type="Animation" id="Animation_4v72r"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_vja80"]
+resource_name = "open"
+length = 2.0
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("CollisionShape3D")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat64Array(0, 1, 0, 0.724017, 0)
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 0.724017, 0, 2, 1, 0, 2.72213, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7n5in"]
 _data = {

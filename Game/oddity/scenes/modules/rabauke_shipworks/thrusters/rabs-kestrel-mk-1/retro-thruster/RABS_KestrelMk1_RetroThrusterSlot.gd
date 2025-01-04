@@ -1,0 +1,3 @@
+extends ThrusterSlot
+
+class_name RABS_KestrelMk1_RetroThrusterSlot

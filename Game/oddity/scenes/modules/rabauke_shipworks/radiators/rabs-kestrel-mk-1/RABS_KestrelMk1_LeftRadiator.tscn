@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs4i4q3qx5qyk"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/Radiator.gd" id="1_ldcyo"]
+[ext_resource type="PackedScene" uid="uid://bfmmpr82g23n6" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/LeftRadiator.glb" id="2_455hm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7s5wn"]
+size = Vector3(2.32865, 0.437696, 9.17139)
+
+[node name="RabsKestrelMk1LeftRadiator" type="RigidBody3D"]
+collision_layer = 537395201
+collision_mask = 537395201
+mass = 1000.0
+script = ExtResource("1_ldcyo")
+size = 3
+can_be_picked_up = true
+
+[node name="LeftRadiator" parent="." instance=ExtResource("2_455hm")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.993959, 0, -0.109752, 0.00792912, 0.997387, 0.0718096, 0.109465, -0.072246, 0.991362, 0.0560094, 0.0849798, -0.0400114)
+shape = SubResource("BoxShape3D_7s5wn")
+
+[editable path="LeftRadiator"]
