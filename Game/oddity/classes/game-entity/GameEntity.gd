@@ -6,6 +6,8 @@ signal on_interact
 
 signal on_game_entity_drop_request
 
+signal on_damage_taken(damage : float)
+
 @export_category("Interaction")
 
 @export
@@ -36,6 +38,10 @@ var timer_started : bool = false
 
 var can_freeze : bool = true
 
+@export_category("Debug")
+@export
+var debug : bool
+
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
 
@@ -44,6 +50,10 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	_default_ready()
+	
+# WARNING: temporary, damage will depend on penetration and armour values
+func take_damage(damage : float) -> void:
+	on_damage_taken.emit(damage)
 
 func _default_physics_process(delta : float) -> void:
 	calculate_velocities(delta)
@@ -55,6 +65,9 @@ func _default_physics_process(delta : float) -> void:
 					if freeze_timer.is_stopped():
 						freeze_timer.start()
 
+func debug_log(msg : String) -> void:
+	if debug:
+		print(str(self) + str(" Debug: ") + msg)
 
 func _default_process(delta : float) -> void:
 	pass
@@ -128,3 +141,11 @@ func calculate_velocities(delta : float) -> void:
 		relative_angular_velocity = angular_velocity - active_frame_of_reference.angular_velocity
 		relative_acceleration = acceleration - active_frame_of_reference.acceleration
 		last_relative_linear_velocity = relative_linear_velocity
+
+func load_nodes(node_paths: Array) -> Array:
+	var nodes : Array = []
+	for node_path : NodePath in node_paths:
+		var node : Node = get_node(node_path)
+		if node != null:
+			nodes.append(node)
+	return nodes

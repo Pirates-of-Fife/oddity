@@ -71,6 +71,12 @@ var travel_mode : StarshipTravelModes.TravelMode
 
 @export_category("Modules")
 
+@export
+var module_node : Node3D
+
+@export
+var module_slots : Array = Array()
+
 @export_subgroup("Abyss")
 
 @export
@@ -103,6 +109,58 @@ var current_super_cruise_speed_in_c : float
 signal super_cruise_engaged
 signal super_cruise_disengaged
 
+@export_subgroup("Weapons")
+@export
+var primary_hardpoints_node_path : Array
+
+@onready
+var primary_hardpoints : Array = load_nodes(primary_hardpoints_node_path)
+
+@export
+var secondary_hardpoints_node_path : Array
+
+@onready
+var secondary_hardpoints : Array = load_nodes(secondary_hardpoints_node_path)
+
+@export_subgroup("Shield")
+
+signal shield_broken
+signal shield_online
+
+@export
+var shield : Shield
+
+@export
+var shield_current_health : float
+
+@export
+var shield_max_health : float
+
+@export
+var shield_charge_rate : float
+
+@export
+var shield_cooldown_after_break : float
+
+@export
+var shield_charge_time : float
+
+@export
+var shield_cooldown_after_hit : float
+
+var shield_generators : Array = Array()
+
+@onready
+var shield_cooldown_after_break_timer : Timer = Timer.new()
+
+@onready
+var shield_cooldown_after_hit_timer : Timer = Timer.new()
+
+@onready
+var shield_charge_timer : Timer = Timer.new()
+
+var shield_hit_cooldown_complete : bool = true
+var shield_break_cooldown_complete : bool = true
 
 @export_category("Interaction")
 
@@ -119,7 +177,10 @@ var lock_timer : Timer = Timer.new()
 
 func _ready() -> void:
 	_starship_ready()
-	
+
+func update_module_stats() -> void:
+	update_shield_stats()
+
 func _starship_ready() -> void:
 	_default_ready()
 
@@ -154,7 +215,181 @@ func _starship_ready() -> void:
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
+	
+	shield.shield_hit.connect(shield_damage)
+	
+	add_child(shield_cooldown_after_break_timer)
+	add_child(shield_cooldown_after_hit_timer)
+	add_child(shield_charge_timer)
 
+	shield_cooldown_after_break_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	shield_cooldown_after_break_timer.one_shot = true
+	
+	shield_cooldown_after_hit_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	shield_cooldown_after_hit_timer.one_shot = true
+	
+	shield_charge_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	shield_charge_timer.one_shot = false
+	shield_charge_timer.start()
+	
+	shield_broken.connect(on_shield_broken)
+	shield_cooldown_after_break_timer.timeout.connect(shield_break_cooldown_finished)
+	shield_cooldown_after_hit_timer.timeout.connect(shield_hit_cooldown_finished)
+	shield_charge_timer.timeout.connect(shield_charge_cooldown_finished)
+	
+	shield_broken.connect(shield.on_shield_broken)
+	shield_online.connect(shield.on_shield_online)
+	
+	if module_node != null:
+		for node : Node in module_node.get_children():
+			for n : Node in node.get_children():
+				if n is ModuleSlot:
+					module_slots.append(n)
+					n.module_inserted.connect(_on_module_insert)
+					n.module_removed.connect(_on_module_uninserted)
+		
+			if node is ModuleSlot:
+				module_slots.append(node)
+				node.module_inserted.connect(_on_module_insert)
+				node.module_removed.connect(_on_module_uninserted)
+	
+	for module_slot : ModuleSlot in module_slots:
+		if module_slot is DynamicModuleSlot:
+			if module_slot.module is ShieldGenerator:
+				shield_generators.append(module_slot.module)
+	
+	update_module_stats()
+	
+	shield_current_health = shield_max_health
+
+func shield_damage(damage : float) -> void:
+	shield_current_health -= damage
+
+	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
+	
+	if shield_current_health <= 0:
+		shield_broken.emit()
+		
+	shield_hit_cooldown_complete = false
+	shield_cooldown_after_hit_timer.start()
+
+func on_shield_broken() -> void:
+	shield_break_cooldown_complete = false
+	shield_cooldown_after_break_timer.start()
+
+func shield_break_cooldown_finished() -> void:
+	shield_break_cooldown_complete = true
+	shield_online.emit()
+
+func shield_hit_cooldown_finished() -> void:
+	shield_hit_cooldown_complete = true
+
+func shield_charge_cooldown_finished() -> void:
+	if !shield_break_cooldown_complete or !shield_hit_cooldown_complete:
+		return
+	
+	if shield_generators.size() == 0:
+		return
+	
+	shield_current_health += shield_charge_rate
+		
+	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
+		
+	if shield.collision_mask == shield.layer_mask_offline and shield_current_health > 0:
+		shield.collision_mask = shield.layer_mask_online
+
+func _on_module_insert(module : Module) -> void:
+	if module is ShieldGenerator:
+		shield_generators.append(module)
+		update_shield_stats()
+	
+func _on_module_uninserted(module : Module) -> void:
+	if module is ShieldGenerator:
+		shield_generators.erase(module)
+		update_shield_stats()
+
+func update_shield_stats() -> void:
+	shield_max_health = 0
+	shield_charge_rate = 0
+	shield_cooldown_after_break = 0
+	shield_cooldown_after_hit = 0
+	
+	var shield_generator_count : int = shield_generators.size()
+	
+	if shield_generator_count == 0:
+		shield.collision_mask = shield.layer_mask_offline
+		return
+		
+	var total_red : float = 0.0
+	var total_green : float = 0.0
+	var total_blue : float = 0.0
+	
+	var total_red_offline : float = 0.0
+	var total_green_offline : float = 0.0
+	var total_blue_offline : float = 0.0
+	
+	for shield_generator : ShieldGenerator in shield_generators:
+		var shield_resource : ShieldGeneratorResource = shield_generator.module_resource
+				
+		shield_max_health += shield_resource.max_shield_health
+		shield_charge_rate += shield_resource.charge_rate
+		
+		shield_cooldown_after_break += shield_resource.cooldown_time_after_break
+		shield_cooldown_after_hit += shield_resource.cooldown_time_after_hit
+		shield_charge_time += shield_resource.charge_time
+		
+		var color : Color = shield_resource.shield_color
+		total_red += color.r
+		total_green += color.g
+		total_blue += color.b
+		
+		var color_offline : Color = shield_resource.shield_offline_color
+		total_red_offline += color_offline.r
+		total_green_offline += color_offline.g
+		total_blue_offline += color_offline.b
+	
+	shield_cooldown_after_break /= shield_generator_count
+	shield_cooldown_after_hit /= shield_generator_count
+	shield_charge_rate /= shield_generator_count
+	
+	shield_cooldown_after_hit_timer.wait_time = shield_cooldown_after_hit
+	shield_cooldown_after_break_timer.wait_time = shield_cooldown_after_break
+	shield_charge_timer.wait_time = shield_charge_time
+	
+	if shield_current_health > shield_max_health:
+		shield_current_health = shield_max_health
+		
+	var avg_red : float = total_red / shield_generator_count
+	var avg_green : float = total_green / shield_generator_count
+	var avg_blue : float = total_blue / shield_generator_count
+	var averaged_color : Color = Color(avg_red, avg_green, avg_blue)
+	
+	var avg_red_offline : float = total_red_offline / shield_generator_count
+	var avg_green_offline : float = total_green_offline / shield_generator_count
+	var avg_blue_offline : float = total_blue_offline / shield_generator_count
+	var averaged_color_offline : Color = Color(avg_red_offline, avg_green_offline, avg_blue_offline)
+	
+	# Assign averaged color
+	shield.shield_color = averaged_color
+	shield.shield_offline_color = averaged_color_offline # Slightly darkened for offline
+	
+	shield.set_color(averaged_color)
+	
+func shoot_primary() -> void:
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+		
+	for hardpoint : Hardpoint in primary_hardpoints:
+		if hardpoint.module != null:
+			hardpoint.module.shoot()
+	
+func shoot_secondary() -> void:
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+			
+	for hardpoint : Hardpoint in secondary_hardpoints:
+		if hardpoint.module != null:
+			hardpoint.module.shoot()
 
 func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
 	alcubierre_drive_removed.emit(alcubierre_drive)
@@ -341,32 +576,23 @@ func super_cruise_travel(delta : float) -> void:
 	
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
 	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
-	
-	
-	
+		
 	if current_super_cruise_speed > target_velocity:
 		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale
 	if current_super_cruise_speed < target_velocity:
 		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale
 	
-	
 	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_slot.module.module_resource.max_speed)
 	
 	global_position += global_transform.basis.z * current_super_cruise_speed
 	
-	#print("dif: " + str(velocity_diff) + " scale: " + str(acceleration_scale) + " aceel: " + str( alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale ) + " deaceel: " + str( alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale ) + " speed: " + str(current_super_cruise_speed))
 	current_super_cruise_speed_in_c = ((((global_position - last_position) / delta) / 299_792_458.0) * 1000).length()
 		
 	last_position = global_position
-	
-	#print(target_rotational_thrust_vector)
-	
+		
 	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed)
 	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed)
 	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed)
-
-
-	
 	
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
@@ -378,8 +604,7 @@ func _physics_process(delta: float) -> void:
 		cruise_travel(delta)
 	elif travel_mode == starship_travel_modes.TravelMode.SUPER_CRUISE:
 		super_cruise_travel(delta)
-	
-	
+		
 	update_ui()
 
 	# reset thrust vector

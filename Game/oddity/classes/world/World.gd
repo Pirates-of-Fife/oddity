@@ -18,6 +18,10 @@ var new_system_loaded : bool = false
 
 func cycle_system() -> StarSystemResource:
 	var size : int = star_systems.size()
+	
+	if size == 0:
+		return
+	
 	var system : StarSystemResource = star_systems[index]
 	
 	index += 1
