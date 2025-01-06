@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 
 class_name StarSystem
@@ -15,5 +16,9 @@ var main_star : Node3D
 @export
 var player_spawn_marker : Marker3D
 
+@export
+var player_spawn_position : Vector3
+
 func _ready() -> void:
 	add_to_group("StarSystem")
+	player_spawn_position = player_spawn_marker.global_position

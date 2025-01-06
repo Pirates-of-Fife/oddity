@@ -532,10 +532,14 @@ func ship_take_damage(damage : float) -> void:
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
 
 func on_collision(body : Node3D) -> void:
+	
 	if body is Projectile:
 		return
 	
-		
+	if body is AbyssalTunnelCollider:
+		take_damage(pow(relative_linear_velocity.length(), 3) * 0.03)
+
+	
 	if landing_gear_on and relative_linear_velocity.length() <= 50:
 		return
 			

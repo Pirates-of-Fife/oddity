@@ -43,6 +43,7 @@ script = ExtResource("1_bvu6x")
 star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_dfuqd")]
 
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
+player_spawn_position = Vector3(104049, 0, 0)
 
 [node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -229.762, 675.565)
