@@ -21,4 +21,5 @@ var player_spawn_position : Vector3
 
 func _ready() -> void:
 	add_to_group("StarSystem")
-	player_spawn_position = player_spawn_marker.global_position
+	if player_spawn_marker != null:
+		player_spawn_position = player_spawn_marker.global_position
