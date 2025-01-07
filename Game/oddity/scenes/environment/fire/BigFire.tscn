@@ -1,6 +1,5 @@
 [gd_scene load_steps=14 format=3 uid="uid://bkcjtkhnjpavu"]
 
-[ext_resource type="Texture2D" uid="uid://b87m3c3f6ij63" path="res://scenes/environment/fire/particle_sprite_smoke.webp" id="1_xm13r"]
 [ext_resource type="AudioStream" uid="uid://c3vlduhq7cen2" path="res://scenes/environment/fire/fire.wav" id="2_sha51"]
 
 [sub_resource type="Curve" id="Curve_ixb8s"]
@@ -31,7 +30,7 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_u0wik"]
 curve = SubResource("Curve_osaq2")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2or8y"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5y0yc"]
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
@@ -51,39 +50,57 @@ emission_curve = SubResource("CurveTexture_d1mbn")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sj38k"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfxa5"]
 transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_xm13r")
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 8
-particles_anim_v_frames = 8
-particles_anim_loop = false
+albedo_color = Color(1, 1, 1, 0.345098)
 
-[sub_resource type="QuadMesh" id="QuadMesh_3xomb"]
-material = SubResource("StandardMaterial3D_sj38k")
-size = Vector2(10, 10)
+[sub_resource type="SphereMesh" id="SphereMesh_fbsy6"]
+material = SubResource("StandardMaterial3D_wfxa5")
+radius = 2.0
+height = 4.0
 
-[node name="Fire" type="GPUParticles3D"]
+[sub_resource type="GDScript" id="GDScript_jshh1"]
+resource_name = "Fire"
+script/source = "extends GPUParticles3D
+
+func _ready() -> void:
+	#emitting = false
+	pass
+
+func start_fire() -> void:
+	emitting = true
+	$OmniLight3D.show()
+	$AudioStreamPlayer3D.play()
+
+func stop_art() -> void:
+	emitting = false
+	$OmniLight3D.hide()
+	$AudioStreamPlayer3D.stop()
+"
+
+[node name="BigFire" type="GPUParticles3D"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+emitting = false
 amount = 300
 lifetime = 3.0
-process_material = SubResource("ParticleProcessMaterial_2or8y")
-draw_pass_1 = SubResource("QuadMesh_3xomb")
+process_material = SubResource("ParticleProcessMaterial_5y0yc")
+draw_pass_1 = SubResource("SphereMesh_fbsy6")
+script = SubResource("GDScript_jshh1")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386298, 0)
+visible = false
 light_color = Color(1, 0.584314, 0.137255, 1)
 light_energy = 16.0
 light_indirect_energy = 0.675
 light_volumetric_fog_energy = 0.675
-shadow_enabled = true
 omni_range = 18.851
 omni_attenuation = 1.321
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_sha51")
 volume_db = -6.0
-autoplay = true
-bus = &"Environment"

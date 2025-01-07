@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	_default_ready()
-	
+
 # WARNING: temporary, damage will depend on penetration and armour values
 func take_damage(damage : float) -> void:
 	on_damage_taken.emit(damage)

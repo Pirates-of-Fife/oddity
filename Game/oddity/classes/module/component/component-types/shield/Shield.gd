@@ -56,7 +56,7 @@ func _ready() -> void:
 	shield_material.albedo_color = shield_color
 	shield_material.albedo_color.a = 0
 	shield_offline_color.a = 0
-	
+
 func _physics_process(delta: float) -> void:
 	shield_material.albedo_color.a -= shield_alpha_down_per_physics_tick
 	shield_material.albedo_color.a = clampf(shield_material.albedo_color.a, 0, alpha_max)
@@ -70,30 +70,32 @@ func set_color(color : Color) -> void:
 func take_damage(damage : float) -> void:
 	shield_material.albedo_color.a += shield_alpha_up_per_projectile
 	shield_material.albedo_color.a = clampf(shield_material.albedo_color.a, 0, alpha_max)
-	
+
 	var hit_sound : AudioStreamPlayer3D = hit_sound_scene.instantiate()
 	add_child.call_deferred(hit_sound)
-	
+
 	shield_hit.emit(damage)
-	
+
 func on_shield_broken() -> void:
 	if (game_entity as Starship).shield_max_health <= 0:
 		return
-	
+
 	var last_a : float = shield_material.albedo_color.a
 	shield_material.albedo_color = shield_offline_color
 	shield_material.albedo_color.a = last_a
 	collision_mask = layer_mask_offline
-	
+
 	shield_break_sound.play()
 
 func on_shield_online() -> void:
 	if (game_entity as Starship).shield_max_health <= 0:
 		return
-	
+
+	if !(game_entity as Starship).is_powered_on():
+		return
+
 	shield_material.albedo_color = shield_color
 	shield_material.albedo_color.a = 0.6
 	collision_mask = layer_mask_online
-	
+
 	shield_online_sound.play()
-	

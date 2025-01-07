@@ -17,26 +17,43 @@ var super_cruise_mfd : SuperCruiseMFD3D
 @export
 var shield_and_health_ui : ShieldAndHullUi3D
 
+@export
+var damaged_label : Label3D
+
+@export
+var interior_lights : Node3D
+
+@export
+var damaged_fires : Node3D
+
+@export
+var destroyed_fires : Node3D
+
+
 
 func _ready() -> void:
 	RABS_Kestrel_Mk1_ready()
 
 func RABS_Kestrel_Mk1_ready() -> void:
 	_starship_ready()
-	
+
 	super_cruise_engaged.connect(on_supercruise_engaged)
 	super_cruise_disengaged.connect(on_supercruise_disengaged)
 	state_changed_to_power_on.connect(on_power_on)
 	state_changed_to_power_off.connect(on_power_off)
-	
+
+	state_changed_to_destroyed.connect(on_destroyed)
+	change_to_damaged_state.connect(on_damaged)
+	repaired.connect(on_repaired)
+
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
 	super_cruise_mfd.show()
-	
+
 func on_supercruise_disengaged() -> void:
 	velocity_mfd.show()
 	super_cruise_mfd.hide()
-	
+
 func update_ui() -> void:
 	crosshair.yaw = -target_rotational_thrust_vector.y
 	crosshair.pitch = -target_rotational_thrust_vector.x
@@ -50,45 +67,79 @@ func update_ui() -> void:
 	velocity_mfd.current_max_velocity = current_max_velocity
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
-	
+
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		super_cruise_mfd.velocity = current_super_cruise_speed
 		super_cruise_mfd.velocity_c = current_super_cruise_speed_in_c
 		super_cruise_mfd.throttle = target_thrust_vector.z
 		super_cruise_mfd.max_velocity = alcubierre_drive_slot.module.module_resource.max_speed
-		
+
 	shield_and_health_ui.max_hull_health = max_hull_health
 	shield_and_health_ui.current_hull_health = current_hull_health
-	
+
 	shield_and_health_ui.current_shield_health = shield_current_health
 	shield_and_health_ui.max_shield_health = shield_max_health
-	
+
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
 
 func on_power_on() -> void:
 	power_on_sound_player.play()
-	
+
 func on_power_off() -> void:
 	power_off_sound_player.play()
 	power_off()
 
-func update_abyssal_mfd() -> void:	
+func update_abyssal_mfd() -> void:
 	abyssal_mfd.set_current_system(current_star_system.system_name)
 	abyssal_mfd.set_selected_system(selected_system.name)
-	
+
+func on_destroyed() -> void:
+	for fire : GPUParticles3D in destroyed_fires.get_children():
+		fire.start_fire()
+
+	velocity_mfd.hide()
+	crosshair.hide()
+	abyssal_mfd.hide()
+	super_cruise_mfd.hide()
+	shield_and_health_ui.hide()
+	damaged_label.hide()
+
+func on_repaired() -> void:
+	for light : Node3D in interior_lights.get_children():
+		if light is OmniLight3D:
+			light.light_color = interior_lights.default_color
+
+	for fire : GPUParticles3D in damaged_fires.get_children():
+		fire.stop_fire()
+
+	for fire : GPUParticles3D in destroyed_fires.get_children():
+		fire.stop_fire()
+
+	damaged_label.hide()
+
+func on_damaged() -> void:
+	for light : Node3D in interior_lights.get_children():
+		if light is OmniLight3D:
+			light.light_color = interior_lights.red_color
+
+	for fire : GPUParticles3D in damaged_fires.get_children():
+		fire.start_fire()
+
+	damaged_label.show()
+
 func toggle_landing_gear() -> void:
 	if $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 0 and $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 1:
 		return
-			
+
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear.toggle_open_state()
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear2.toggle_open_state()
 	$Exterior/LandingGear/RabsKestrelMk1LandingGear3.toggle_open_state()
-	
+
 	$LandingCollision.disabled = !$LandingCollision.disabled
 	$LandingCollision2.disabled = !$LandingCollision2.disabled
 	$LandingCollision3.disabled = !$LandingCollision3.disabled
-	
+
 	if $Interior/Bridge/LandingGearLabel.visible:
 		$Interior/Bridge/LandingGearLabel.hide()
 		landing_gear_on = false
