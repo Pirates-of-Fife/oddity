@@ -32,6 +32,9 @@ var damaged_fires : Node3D
 @export
 var destroyed_fires : Node3D
 
+@export
+var alarm_sound_player : AudioStreamPlayer3D
+
 
 
 func _ready() -> void:
@@ -44,8 +47,6 @@ func on_super_cruise_charging_stopped() -> void:
 	super_cruise_label.hide()
 
 func RABS_Kestrel_Mk1_ready() -> void:
-	_starship_ready()
-
 	super_cruise_engaged.connect(on_supercruise_engaged)
 	super_cruise_disengaged.connect(on_supercruise_disengaged)
 	state_changed_to_power_on.connect(on_power_on)
@@ -57,6 +58,8 @@ func RABS_Kestrel_Mk1_ready() -> void:
 
 	alcubierre_drive_charging_started.connect(on_super_cruise_charging)
 	alcubierre_drive_charging_ended.connect(on_super_cruise_charging_stopped)
+	
+	_starship_ready()
 
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
@@ -110,6 +113,17 @@ func on_destroyed() -> void:
 	for fire : GPUParticles3D in destroyed_fires.get_children():
 		fire.start_fire()
 
+	for light : Node3D in interior_lights.get_children():
+		if light is OmniLight3D:
+			light.light_color = interior_lights.red_color
+			light.light_energy = interior_lights.dim_light_energy
+
+	for fire : GPUParticles3D in damaged_fires.get_children():
+		fire.start_fire()
+		
+	alarm_sound_player.play()
+
+
 	velocity_mfd.hide()
 	crosshair.hide()
 	abyssal_mfd.hide()
@@ -121,6 +135,7 @@ func on_repaired() -> void:
 	for light : Node3D in interior_lights.get_children():
 		if light is OmniLight3D:
 			light.light_color = interior_lights.default_color
+			light.light_energy = interior_lights.default_light_energy
 
 	for fire : GPUParticles3D in damaged_fires.get_children():
 		fire.stop_fire()
@@ -129,14 +144,20 @@ func on_repaired() -> void:
 		fire.stop_fire()
 
 	damaged_label.hide()
+	
+	alarm_sound_player.stop()
 
 func on_damaged() -> void:
 	for light : Node3D in interior_lights.get_children():
 		if light is OmniLight3D:
 			light.light_color = interior_lights.red_color
+			light.light_energy = interior_lights.dim_light_energy
+
 
 	for fire : GPUParticles3D in damaged_fires.get_children():
 		fire.start_fire()
+
+	alarm_sound_player.play()
 
 	damaged_label.show()
 
