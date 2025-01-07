@@ -382,6 +382,8 @@ func destroyed() -> void:
 	axis_lock_linear_y = false
 	axis_lock_linear_z = false
 	state_changed_to_destroyed.emit()
+	linear_damp = 1
+	angular_damp = 1
 
 
 func shield_damage(damage : float) -> void:
