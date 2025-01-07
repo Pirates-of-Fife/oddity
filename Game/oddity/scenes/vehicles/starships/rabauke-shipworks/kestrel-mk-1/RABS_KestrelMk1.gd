@@ -21,6 +21,9 @@ var shield_and_health_ui : ShieldAndHullUi3D
 var damaged_label : Label3D
 
 @export
+var super_cruise_label : Label3D
+
+@export
 var interior_lights : Node3D
 
 @export
@@ -34,6 +37,12 @@ var destroyed_fires : Node3D
 func _ready() -> void:
 	RABS_Kestrel_Mk1_ready()
 
+func on_super_cruise_charging() -> void:
+	super_cruise_label.show()
+
+func on_super_cruise_charging_stopped() -> void:
+	super_cruise_label.hide()
+
 func RABS_Kestrel_Mk1_ready() -> void:
 	_starship_ready()
 
@@ -45,6 +54,9 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	state_changed_to_destroyed.connect(on_destroyed)
 	change_to_damaged_state.connect(on_damaged)
 	repaired.connect(on_repaired)
+
+	alcubierre_drive_charging_started.connect(on_super_cruise_charging)
+	alcubierre_drive_charging_ended.connect(on_super_cruise_charging_stopped)
 
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()

@@ -123,6 +123,9 @@ var current_super_cruise_speed_in_c : float
 signal super_cruise_engaged
 signal super_cruise_disengaged
 
+signal alcubierre_drive_charging_started
+signal alcubierre_drive_charging_ended
+
 @export_subgroup("Weapons")
 @export
 var primary_hardpoints_node_path : Array
@@ -535,12 +538,15 @@ func alcubierre_drive_charge_start() -> void:
 		return
 
 	alcubierre_drive_slot.module.start_charging()
+	alcubierre_drive_charging_started.emit()
 
 func alcubierre_drive_charge_end() -> void:
 	if alcubierre_drive_slot.module == null:
 		return
 
 	alcubierre_drive_slot.module.stop_charging()
+
+	alcubierre_drive_charging_ended.emit()
 
 func cycle_selected_system() -> void:
 	if is_in_abyss:
