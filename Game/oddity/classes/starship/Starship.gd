@@ -21,6 +21,20 @@ var ship_info : StarshipInfo
 @export
 var thruster_force : ThrusterForces
 
+@export
+var current_state : State = State.POWER_OFF
+
+signal state_changed_to_power_off
+signal state_changed_to_power_on
+signal state_changed_to_destroyed
+signal repaired
+signal change_to_damaged_state
+
+var power_state_change_complete : bool = true
+
+@export
+var landing_gear_on : bool = false
+
 @onready
 var pid_forward : PIDController = $ShipPidControllers/PIDForward
 @onready
@@ -109,6 +123,9 @@ var current_super_cruise_speed_in_c : float
 signal super_cruise_engaged
 signal super_cruise_disengaged
 
+signal alcubierre_drive_charging_started
+signal alcubierre_drive_charging_ended
+
 @export_subgroup("Weapons")
 @export
 var primary_hardpoints_node_path : Array
@@ -169,6 +186,9 @@ var max_hull_health : float
 @export
 var current_hull_health : float
 
+@export
+var hull_health_damaged_state : float
+
 @export_category("Sounds")
 
 @export_subgroup("Collision")
@@ -177,6 +197,27 @@ var hull_collision_sounds : Array = Array()
 
 @export
 var hull_collision_player : AudioStreamPlayer3D
+
+@export_subgroup("Super Cruise")
+@export
+var super_cruise_enter : AudioStreamPlayer3D
+
+@export
+var super_cruise_exit : AudioStreamPlayer3D
+
+@export_subgroup("Explosions")
+@export
+var explosion_sounds : Array = Array()
+
+@export
+var explosion_sound_player : AudioStreamPlayer3D
+
+@export_subgroup("Power State")
+@export
+var power_on_sound_player : AudioStreamPlayer3D
+
+@export
+var power_off_sound_player : AudioStreamPlayer3D
 
 @export_category("Interaction")
 
@@ -191,18 +232,52 @@ var current_max_velocity : float = ship_info.max_linear_velocity
 
 var lock_timer : Timer = Timer.new()
 
+enum State
+{
+	POWER_ON,
+	POWER_OFF,
+	DESTROYED
+}
+
 func _ready() -> void:
 	_starship_ready()
 
 func update_module_stats() -> void:
 	update_shield_stats()
 
+func sound_power_state_change_complete() -> void:
+	if current_state == State.POWER_OFF and power_state_change_complete == false:
+		power_on()
+
+	power_state_change_complete = true
+
+func toggle_power_state() -> void:
+	if !power_state_change_complete:
+		return
+
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE or travel_mode == StarshipTravelModes.TravelMode.ABYSSAL_TRAVEL:
+		return
+
+	if current_state == State.POWER_OFF:
+		power_state_change_complete = false
+		state_changed_to_power_on.emit()
+	elif current_state == State.POWER_ON:
+		power_state_change_complete = false
+		state_changed_to_power_off.emit()
+
+
 func _starship_ready() -> void:
 	_default_ready()
-	
+
 	body_entered.connect(on_collision)
 	on_damage_taken.connect(ship_take_damage)
-	
+
+	power_off_sound_player.finished.connect(sound_power_state_change_complete)
+	power_on_sound_player.finished.connect(sound_power_state_change_complete)
+
+	if !landing_gear_on:
+		toggle_landing_gear()
+
 	travel_mode = starship_travel_modes.TravelMode.CRUISE
 
 	lock_timer.one_shot = true
@@ -224,41 +299,41 @@ func _starship_ready() -> void:
 	pid_yaw_right.limit_max = thruster_force.yaw_right_thrust
 	pid_pitch_up.limit_max = thruster_force.pitch_up_thrust
 	pid_pitch_down.limit_max = thruster_force.pitch_down_thrust
-	
+
 	alcubierre_drive_slot.module_removed.connect(on_alcubierre_drive_removed)
 	alcubierre_drive_slot.module_inserted.connect(on_alcubierre_drive_inserted)
-	
+
 	if alcubierre_drive_slot.module != null:
 		on_alcubierre_drive_inserted(alcubierre_drive_slot.module)
-	
+
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
-	
+
 	shield.shield_hit.connect(shield_damage)
-	
+
 	add_child(shield_cooldown_after_break_timer)
 	add_child(shield_cooldown_after_hit_timer)
 	add_child(shield_charge_timer)
 
 	shield_cooldown_after_break_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	shield_cooldown_after_break_timer.one_shot = true
-	
+
 	shield_cooldown_after_hit_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	shield_cooldown_after_hit_timer.one_shot = true
-	
+
 	shield_charge_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	shield_charge_timer.one_shot = false
 	shield_charge_timer.start()
-	
+
 	shield_broken.connect(on_shield_broken)
 	shield_cooldown_after_break_timer.timeout.connect(shield_break_cooldown_finished)
 	shield_cooldown_after_hit_timer.timeout.connect(shield_hit_cooldown_finished)
 	shield_charge_timer.timeout.connect(shield_charge_cooldown_finished)
-	
+
 	shield_broken.connect(shield.on_shield_broken)
 	shield_online.connect(shield.on_shield_online)
-	
+
 	if module_node != null:
 		for node : Node in module_node.get_children():
 			for n : Node in node.get_children():
@@ -266,29 +341,65 @@ func _starship_ready() -> void:
 					module_slots.append(n)
 					n.module_inserted.connect(_on_module_insert)
 					n.module_removed.connect(_on_module_uninserted)
-		
+
 			if node is ModuleSlot:
 				module_slots.append(node)
 				node.module_inserted.connect(_on_module_insert)
 				node.module_removed.connect(_on_module_uninserted)
-	
+
 	for module_slot : ModuleSlot in module_slots:
 		if module_slot is DynamicModuleSlot:
 			if module_slot.module is ShieldGenerator:
 				shield_generators.append(module_slot.module)
-	
+
 	update_module_stats()
-	
+
 	shield_current_health = shield_max_health
+
+	if current_state == State.DESTROYED:
+		destroyed()
+
+func is_powered_on() -> bool:
+	return current_state == State.POWER_ON
+
+func power_on() -> void:
+	current_state = State.POWER_ON
+
+	if shield_current_health == 0:
+		shield_online.emit()
+
+func power_off() -> void:
+	current_state = State.POWER_OFF
+	power_state_change_complete = true
+	axis_lock_linear_x = false
+	axis_lock_linear_y = false
+	axis_lock_linear_z = false
+
+func repair() -> void:
+	current_hull_health = max_hull_health
+	repaired.emit()
+
+func destroyed() -> void:
+	current_state = State.DESTROYED
+	axis_lock_linear_x = false
+	axis_lock_linear_y = false
+	axis_lock_linear_z = false
+	state_changed_to_destroyed.emit()
+	linear_damp = 1
+	angular_damp = 1
+
+	explosion_sound_player.stream = explosion_sounds.pick_random()
+	explosion_sound_player.play()
+
 
 func shield_damage(damage : float) -> void:
 	shield_current_health -= damage
 
 	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
-	
+
 	if shield_current_health <= 0:
 		shield_broken.emit()
-		
+
 	shield_hit_cooldown_complete = false
 	shield_cooldown_after_hit_timer.start()
 
@@ -304,16 +415,19 @@ func shield_hit_cooldown_finished() -> void:
 	shield_hit_cooldown_complete = true
 
 func shield_charge_cooldown_finished() -> void:
+	if !is_powered_on():
+		return
+
 	if !shield_break_cooldown_complete or !shield_hit_cooldown_complete:
 		return
-	
+
 	if shield_generators.size() == 0:
 		return
-	
+
 	shield_current_health += shield_charge_rate
-		
+
 	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
-		
+
 	if shield.collision_mask == shield.layer_mask_offline and shield_current_health > 0:
 		shield.collision_mask = shield.layer_mask_online
 
@@ -321,7 +435,7 @@ func _on_module_insert(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.append(module)
 		update_shield_stats()
-	
+
 func _on_module_uninserted(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
@@ -332,95 +446,115 @@ func update_shield_stats() -> void:
 	shield_charge_rate = 0
 	shield_cooldown_after_break = 0
 	shield_cooldown_after_hit = 0
-	
+
 	var shield_generator_count : int = shield_generators.size()
-	
+
 	if shield_generator_count == 0:
 		shield.collision_mask = shield.layer_mask_offline
 		return
-		
+
 	var total_red : float = 0.0
 	var total_green : float = 0.0
 	var total_blue : float = 0.0
-	
+
 	var total_red_offline : float = 0.0
 	var total_green_offline : float = 0.0
 	var total_blue_offline : float = 0.0
-	
+
 	for shield_generator : ShieldGenerator in shield_generators:
 		var shield_resource : ShieldGeneratorResource = shield_generator.module_resource
-				
+
 		shield_max_health += shield_resource.max_shield_health
 		shield_charge_rate += shield_resource.charge_rate
-		
+
 		shield_cooldown_after_break += shield_resource.cooldown_time_after_break
 		shield_cooldown_after_hit += shield_resource.cooldown_time_after_hit
 		shield_charge_time += shield_resource.charge_time
-		
+
 		var color : Color = shield_resource.shield_color
 		total_red += color.r
 		total_green += color.g
 		total_blue += color.b
-		
+
 		var color_offline : Color = shield_resource.shield_offline_color
 		total_red_offline += color_offline.r
 		total_green_offline += color_offline.g
 		total_blue_offline += color_offline.b
-	
+
 	shield_cooldown_after_break /= shield_generator_count
 	shield_cooldown_after_hit /= shield_generator_count
 	shield_charge_rate /= shield_generator_count
-	
+
 	shield_cooldown_after_hit_timer.wait_time = shield_cooldown_after_hit
 	shield_cooldown_after_break_timer.wait_time = shield_cooldown_after_break
 	shield_charge_timer.wait_time = shield_charge_time
-	
+
 	if shield_current_health > shield_max_health:
 		shield_current_health = shield_max_health
-		
+
 	var avg_red : float = total_red / shield_generator_count
 	var avg_green : float = total_green / shield_generator_count
 	var avg_blue : float = total_blue / shield_generator_count
 	var averaged_color : Color = Color(avg_red, avg_green, avg_blue)
-	
+
 	var avg_red_offline : float = total_red_offline / shield_generator_count
 	var avg_green_offline : float = total_green_offline / shield_generator_count
 	var avg_blue_offline : float = total_blue_offline / shield_generator_count
 	var averaged_color_offline : Color = Color(avg_red_offline, avg_green_offline, avg_blue_offline)
-	
+
 	# Assign averaged color
 	shield.shield_color = averaged_color
 	shield.shield_offline_color = averaged_color_offline # Slightly darkened for offline
-	
+
 	shield.set_color(averaged_color)
-	
+
 func shoot_primary() -> void:
+	if !is_powered_on():
+		return
+
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
-		
+
 	for hardpoint : Hardpoint in primary_hardpoints:
 		if hardpoint.module != null:
 			hardpoint.module.shoot()
-	
+
 func shoot_secondary() -> void:
+	if !is_powered_on():
+		return
+
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
-			
+
 	for hardpoint : Hardpoint in secondary_hardpoints:
 		if hardpoint.module != null:
 			hardpoint.module.shoot()
 
 func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
 	alcubierre_drive_removed.emit(alcubierre_drive)
-	
+
 func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
 	alcubierre_drive_inserted.emit(alcubierre_drive)
 
+func alcubierre_drive_charge_start() -> void:
+	if alcubierre_drive_slot.module == null:
+		return
+
+	alcubierre_drive_slot.module.start_charging()
+	alcubierre_drive_charging_started.emit()
+
+func alcubierre_drive_charge_end() -> void:
+	if alcubierre_drive_slot.module == null:
+		return
+
+	alcubierre_drive_slot.module.stop_charging()
+
+	alcubierre_drive_charging_ended.emit()
 
 func cycle_selected_system() -> void:
 	if is_in_abyss:
 		return
-	
+
 	var world : World = get_tree().get_first_node_in_group("World")
 	selected_system = world.cycle_system()
 	update_abyssal_mfd()
@@ -429,59 +563,76 @@ func ship_take_damage(damage : float) -> void:
 	current_hull_health -= damage
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
 
+	if current_hull_health <= hull_health_damaged_state:
+		change_to_damaged_state.emit()
+
+	if current_hull_health <= 0:
+		destroyed()
+
 func on_collision(body : Node3D) -> void:
+
 	if body is Projectile:
 		return
-	
+
+	if body is AbyssalTunnelCollider:
+		take_damage(pow(relative_linear_velocity.length(), 3) * 0.03)
+
+
+	if landing_gear_on and relative_linear_velocity.length() <= 50:
+		return
+
 	if shield_current_health > 0:
 		shield.take_damage(pow(relative_linear_velocity.length(), 2) * 0.1)
 		return
-	
+
 	var current_sound : AudioStream = hull_collision_sounds.pick_random()
-	
+
 	take_damage(pow(relative_linear_velocity.length(), 2) * 0.06)
-		
+
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound
 		hull_collision_player.play()
-	
+
 func update_abyssal_mfd() -> void:
 	pass
 
 func lock_ship() -> void:
+	if !is_powered_on():
+		return
+
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
 		axis_lock_linear_x = true
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
-		
+
 func toggle_landing_gear() -> void:
 	pass
 
 func initiate_abyssal_travel() -> void:
 	if abyss_drive_slot.module == null:
 		return
-		
+
 	if is_in_abyss:
 		return
-	
+
 	if selected_system == null:
 		return
-		
+
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
-		
+
 	if abyssal_portal_active:
 		current_abyss_portal.close()
 		current_abyss_portal = null
 		abyssal_portal_active = false
 		return
-	
+
 	var abyssal_portal_scene : PackedScene = preload("res://classes/abyss/abyssal-portal/AbyssalPortal.tscn")
 	var abyssal_portal : AbyssalPortal = abyssal_portal_scene.instantiate()
-	
+
 	current_abyss_portal = abyssal_portal
 	abyssal_portal_active = true
-	
+
 	get_tree().get_first_node_in_group("StarSystem").add_child(abyssal_portal)
 	abyssal_portal.global_position = abyssal_portal_spawn_point.global_position
 	abyssal_portal.global_rotation = abyssal_portal_spawn_point.global_rotation
@@ -491,32 +642,36 @@ func initiate_abyssal_travel() -> void:
 func initiate_super_cruise() -> void:
 	if alcubierre_drive_slot.module == null:
 		return
-	
+
+	alcubierre_drive_charge_end()
+	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_start()
+	super_cruise_enter.play()
+
 	current_super_cruise_speed = 0
 	travel_mode = StarshipTravelModes.TravelMode.SUPER_CRUISE
-	
+
 	freeze_mode = FREEZE_MODE_KINEMATIC
 	freeze = true
-	
+
 	super_cruise_engaged.emit()
 
 func exit_super_cruise() -> void:
-	if current_super_cruise_speed > 50:
+	if current_super_cruise_speed > 500:
 		return
-	
+
+	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_end()
+
+	super_cruise_exit.play()
+
 	travel_mode =  StarshipTravelModes.TravelMode.CRUISE
-	
+
 	freeze = false
 	collision_layer = 1 << 8
 	collision_mask = 1 << 8
-	
+
 	super_cruise_disengaged.emit()
 
 func cruise_travel(delta : float) -> void:
-	calculate_local_linear_velocity()
-	calculate_local_angular_velocity()
-	calculate_acceleration(delta)
-	
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
 		if active_frame_of_reference is GravityGrid or active_frame_of_reference is GravityWell:
 			if active_frame_of_reference.enable_gravity == true:
@@ -607,46 +762,49 @@ func cruise_travel(delta : float) -> void:
 var last_position : Vector3 = Vector3.ZERO
 
 func super_cruise_travel(delta : float) -> void:
-	calculate_local_linear_velocity()
-	calculate_local_angular_velocity()
-	calculate_acceleration(delta)
-	
-	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed
-	
+	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed + 250
+
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
 	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
-		
+
 	if current_super_cruise_speed > target_velocity:
 		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale
 	if current_super_cruise_speed < target_velocity:
 		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale
-	
+
 	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_slot.module.module_resource.max_speed)
-	
+
+	(alcubierre_drive_slot.module as AlcubierreDrive).travelling_sound.pitch_scale = lerpf(0.7, 4, current_super_cruise_speed / alcubierre_drive_slot.module.module_resource.max_speed)
+
 	global_position += global_transform.basis.z * current_super_cruise_speed
-	
+
 	current_super_cruise_speed_in_c = ((((global_position - last_position) / delta) / 299_792_458.0) * 1000).length()
-		
+
 	last_position = global_position
-		
+
 	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed)
 	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed)
 	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed)
-	
+
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
-	
+
+	calculate_local_linear_velocity()
+	calculate_local_angular_velocity()
+	calculate_acceleration(delta)
+
 	if active_control_seat != null and freeze == true:
 		unfreeze()
-	
-	if travel_mode == starship_travel_modes.TravelMode.CRUISE or travel_mode == starship_travel_modes.TravelMode.ABYSSAL_TRAVEL:
-		cruise_travel(delta)
-	elif travel_mode == starship_travel_modes.TravelMode.SUPER_CRUISE:
-		super_cruise_travel(delta)
-		
+
+	if is_powered_on():
+		if travel_mode == starship_travel_modes.TravelMode.CRUISE or travel_mode == starship_travel_modes.TravelMode.ABYSSAL_TRAVEL:
+			cruise_travel(delta)
+		elif travel_mode == starship_travel_modes.TravelMode.SUPER_CRUISE:
+			super_cruise_travel(delta)
+
 	update_ui()
 
-	# reset thrust vector
+		# reset thrust vector
 	reset_thrust_vectors()
 
 	relative_gravity_vector = Vector3.ZERO
@@ -691,7 +849,7 @@ func calculate_local_linear_velocity() -> void:
 func calculate_local_angular_velocity() -> void:
 	local_angular_velocity = transform.basis.inverse() * angular_velocity
 
-func calculate_target_speed_vector() -> Vector3:		
+func calculate_target_speed_vector() -> Vector3:
 	return target_thrust_vector * current_max_velocity
 
 func calculate_target_rotation_speed_vector() -> Vector3:

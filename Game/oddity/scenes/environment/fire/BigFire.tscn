@@ -1,0 +1,107 @@
+[gd_scene load_steps=14 format=3 uid="uid://bkcjtkhnjpavu"]
+
+[ext_resource type="AudioStream" uid="uid://c3vlduhq7cen2" path="res://scenes/environment/fire/fire.wav" id="2_sha51"]
+
+[sub_resource type="Curve" id="Curve_ixb8s"]
+_data = [Vector2(0, 0), 0.0, 3.90472, 0, 0, Vector2(0.116766, 0.869693), -2.86134, -2.86134, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_682p2"]
+curve = SubResource("Curve_ixb8s")
+
+[sub_resource type="Gradient" id="Gradient_yptbt"]
+offsets = PackedFloat32Array(0, 0.205882, 0.405229)
+colors = PackedColorArray(0.968627, 0.894118, 0, 1, 0.668095, 0.22367, 0.0636529, 1, 0, 0, 0, 0.572549)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s7cvl"]
+gradient = SubResource("Gradient_yptbt")
+
+[sub_resource type="Curve" id="Curve_16m75"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d1mbn"]
+curve = SubResource("Curve_16m75")
+
+[sub_resource type="Curve" id="Curve_osaq2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.991018, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u0wik"]
+curve = SubResource("Curve_osaq2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5y0yc"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.2
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_u0wik")
+color_ramp = SubResource("GradientTexture1D_s7cvl")
+alpha_curve = SubResource("CurveTexture_682p2")
+emission_curve = SubResource("CurveTexture_d1mbn")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfxa5"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.345098)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fbsy6"]
+material = SubResource("StandardMaterial3D_wfxa5")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="GDScript" id="GDScript_jshh1"]
+resource_name = "Fire"
+script/source = "extends GPUParticles3D
+
+func _ready() -> void:
+	#emitting = false
+	pass
+
+func start_fire() -> void:
+	emitting = true
+	$OmniLight3D.show()
+	$AudioStreamPlayer3D.play()
+
+func stop_art() -> void:
+	emitting = false
+	$OmniLight3D.hide()
+	$AudioStreamPlayer3D.stop()
+"
+
+[node name="BigFire" type="GPUParticles3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+emitting = false
+amount = 300
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_5y0yc")
+draw_pass_1 = SubResource("SphereMesh_fbsy6")
+script = SubResource("GDScript_jshh1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386298, 0)
+visible = false
+light_color = Color(1, 0.584314, 0.137255, 1)
+light_energy = 16.0
+light_indirect_energy = 0.675
+light_volumetric_fog_energy = 0.675
+omni_range = 18.851
+omni_attenuation = 1.321
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_sha51")
+volume_db = -8.0
+max_distance = 100.0

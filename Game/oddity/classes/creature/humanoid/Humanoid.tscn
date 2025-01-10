@@ -41,6 +41,7 @@ anchor = NodePath("Anchor")
 shape = SubResource("CapsuleShape3D_7syud")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+visible = false
 mesh = SubResource("CapsuleMesh_8wi0c")
 skeleton = NodePath("../..")
 

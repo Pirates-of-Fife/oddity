@@ -49,7 +49,7 @@ func enter_abyss(destination_star_system : PackedScene, starship : Starship, por
 
 	print("new star system instanced")
 	var new_star_system : StarSystem = destination_star_system.instantiate()
-	var spawn_location : Vector3 = new_star_system.player_spawn_marker.global_position
+	var spawn_location : Vector3 = new_star_system.player_spawn_position
 	new_star_system.queue_free()
 	print("new star system unloaded")
 
