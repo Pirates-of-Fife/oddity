@@ -3,14 +3,14 @@
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_77sa0"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_k7uia"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="3_t30go"]
-[ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/player/player.tscn" id="4_a6xkd"]
+[ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/mind/player/player.tscn" id="4_a6xkd"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AbyssalJumpDriveSlot.gd" id="5_ajfvm"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/AlcubierreDriveSlot.gd" id="6_ig44c"]
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/ComponentSlot.gd" id="7_ntel4"]
 [ext_resource type="Script" path="res://classes/module/component/component-types/ShieldGenerator.gd" id="8_vjwdw"]
 [ext_resource type="Script" path="res://classes/module/component/component-types/AbyssalJumpDrive.gd" id="9_j0v68"]
 [ext_resource type="Script" path="res://classes/module/component/component-types/AlcubierreDrive.gd" id="10_62dvc"]
-[ext_resource type="PackedScene" path="res://classes/creature/humanoid/Humanoid.tscn" id="11_5xb5y"]
+[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="11_5xb5y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1oi4a"]
 shader = ExtResource("2_k7uia")

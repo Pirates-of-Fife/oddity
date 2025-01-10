@@ -2,7 +2,7 @@ extends GameEntity
 
 class_name ControlEntity
 
-var player : Player = null
+var player : Mind = null
 
 @export_category("Controller")
 
