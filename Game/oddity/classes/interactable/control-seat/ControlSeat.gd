@@ -20,11 +20,15 @@ var spawn_location : Marker3D
 func _ready() -> void:
 	add_to_group("ControlSeat")
 
-func interact(player : Player, control_entity : ControlEntity) -> void:
+func interact(player : Mind, control_entity : ControlEntity) -> void:
 	enter_seat(player, control_entity)
 	interacted.emit(player, control_entity)
 
-func enter_seat(player : Player, control_entity : ControlEntity) -> void:
+func enter_seat(player : Mind, control_entity : ControlEntity) -> void:
+	if target_control_entity.player != null:
+		print(target_control_entity.player)
+		return
+	
 	entity_parent = control_entity.get_parent_node_3d()
 	entity_using_seat = control_entity
 	player_using_seat = player
@@ -37,6 +41,7 @@ func enter_seat(player : Player, control_entity : ControlEntity) -> void:
 	
 	if target_control_entity is Vehicle:
 		target_control_entity.active_control_seat = self
+		print(target_control_entity.active_control_seat)
 	
 func exit_seat() -> void:
 	entity_using_seat.unfreeze()

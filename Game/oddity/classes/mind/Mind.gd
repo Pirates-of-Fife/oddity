@@ -22,10 +22,18 @@ func _physics_process(delta: float) -> void:
 	self.global_rotation = control_entity.anchor.camera_anchor.global_rotation
 
 func possess(control_entity : ControlEntity) -> void:
+	if control_entity.player != null:
+		return
+			
 	if current_controller != null:
 		current_controller.queue_free()
 
-	var controller_script : PackedScene = load(control_entity.controller_reference)
+	var controller_script : PackedScene
+
+	if self is Player:
+		controller_script = load(control_entity.controller_reference)
+	elif self is Ai:
+		controller_script = load(control_entity.ai_controller_reference)
 
 	var controller_instance : Controller = controller_script.instantiate()
 	controller_instance.control_entity = control_entity
@@ -41,5 +49,5 @@ func possess(control_entity : ControlEntity) -> void:
 
 	self.position = self.control_entity.anchor.camera_anchor.global_position
 	self.rotation = self.control_entity.anchor.camera_anchor.global_rotation
-
+		
 	posses.emit(self.control_entity)

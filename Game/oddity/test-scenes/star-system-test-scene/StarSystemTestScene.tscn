@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
 [ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="6_awn7r"]
-[ext_resource type="Script" path="res://test-scenes/star-system-test-scene/starshipTestShoot.gd" id="9_yfpyy"]
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/StaticGameEntity.gd" id="10_n1lue"]
+[ext_resource type="PackedScene" uid="uid://dvxlyhxqe58j7" path="res://classes/mind/ai/Ai.tscn" id="11_3xqyr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6nxkv"]
 size = Vector3(30, 30, 30)
@@ -57,18 +57,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -231.575, 657.756)
 current_state = 0
 debug = true
 
-[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/World/SystemA" node_paths=PackedStringArray("ship")]
-script = ExtResource("9_yfpyy")
-ship = NodePath("Ship2")
-
-[node name="Ship2" parent="SubViewportContainer/SubViewport/World/SystemA/Node3D" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(-0.990085, 0.133805, 0.0427422, 0.0199034, 0.434856, -0.90028, -0.139049, -0.890504, -0.433208, 104796, -231.575, 1021.57)
+[node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -231.575, 759.042)
 current_state = 0
-
-[node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/World/SystemA/Node3D"]
-process_callback = 0
-wait_time = 2.0
-autostart = true
+debug = true
 
 [node name="LunaCube" type="StaticBody3D" parent="SubViewportContainer/SubViewport/World/SystemA"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104771, -226.917, 885.059)
@@ -86,4 +78,5 @@ shape = SubResource("ConcavePolygonShape3D_1ichr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
 control_entity = NodePath("../SystemA/Humanoid")
 
-[connection signal="timeout" from="SubViewportContainer/SubViewport/World/SystemA/Node3D/Timer" to="SubViewportContainer/SubViewport/World/SystemA/Node3D" method="_on_timer_timeout"]
+[node name="Ai" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("11_3xqyr")]
+control_entity = NodePath("../SystemA/RabsKestrelMk1")
