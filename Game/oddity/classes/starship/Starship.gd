@@ -180,8 +180,8 @@ var shield_hit_cooldown_complete : bool = true
 var shield_break_cooldown_complete : bool = true
 
 @export_subgroup("Hull")
-@export
-var max_hull_health : float
+@onready
+var max_hull_health : float = ship_info.max_health
 
 @export
 var current_hull_health : float
@@ -229,6 +229,9 @@ var raycast_helper : RaycastHelper = RaycastHelper.new()
 
 @onready
 var current_max_velocity : float = ship_info.max_linear_velocity
+
+
+var damaged : bool = false
 
 var lock_timer : Timer = Timer.new()
 
@@ -377,6 +380,7 @@ func power_off() -> void:
 
 func repair() -> void:
 	current_hull_health = max_hull_health
+	damaged = false
 	repaired.emit()
 
 func destroyed() -> void:
@@ -385,8 +389,8 @@ func destroyed() -> void:
 	axis_lock_linear_y = false
 	axis_lock_linear_z = false
 	state_changed_to_destroyed.emit()
-	linear_damp = 1
-	angular_damp = 1
+	linear_damp = 0.3
+	angular_damp = 0.3
 
 	explosion_sound_player.stream = explosion_sounds.pick_random()
 	explosion_sound_player.play()
@@ -560,10 +564,16 @@ func cycle_selected_system() -> void:
 	update_abyssal_mfd()
 
 func ship_take_damage(damage : float) -> void:
+	if current_state == State.DESTROYED:
+		return
+	
+	if shield_current_health > 0:
+		return
+	
 	current_hull_health -= damage
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
 
-	if current_hull_health <= hull_health_damaged_state:
+	if current_hull_health <= hull_health_damaged_state and damaged == false:
 		change_to_damaged_state.emit()
 
 	if current_hull_health <= 0:
@@ -575,19 +585,20 @@ func on_collision(body : Node3D) -> void:
 		return
 
 	if body is AbyssalTunnelCollider:
-		take_damage(pow(relative_linear_velocity.length(), 3) * 0.03)
+		shield.take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
+		take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
 
 
 	if landing_gear_on and relative_linear_velocity.length() <= 50:
 		return
 
 	if shield_current_health > 0:
-		shield.take_damage(pow(relative_linear_velocity.length(), 2) * 0.1)
+		shield.take_damage(pow(relative_linear_velocity.length(), 3) * 0.2)
 		return
 
 	var current_sound : AudioStream = hull_collision_sounds.pick_random()
 
-	take_damage(pow(relative_linear_velocity.length(), 2) * 0.06)
+	take_damage(pow(relative_linear_velocity.length(), 2) * 0.15)
 
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound

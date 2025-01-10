@@ -81,26 +81,26 @@ func _starship_controller_ready() -> void:
 	throttle_deadzone_reset_timer.wait_time = 0.4
 	throttle_deadzone_reset_timer.one_shot = true
 	throttle_deadzone_reset_timer.timeout.connect(_on_throttle_deadzone_reset_timer_timeout)
-	
+
 	on_alcubierre_drive_inserted(control_entity.alcubierre_drive_slot.module)
 	supercruise_initialization_timer.one_shot = true
 	supercruise_initialization_timer.timeout.connect(_on_supercruise_initialization_timer_timeout)
-	
-	
+
+
 	supercruise_exit_timer.wait_time = 1
 	supercruise_exit_timer.one_shot = true
 	supercruise_exit_timer.timeout.connect(_on_supercruise_exit_timer_timeout)
-	
+
 	if control_entity is Starship:
 		control_entity.alcubierre_drive_inserted.connect(on_alcubierre_drive_inserted)
 		control_entity.alcubierre_drive_removed.connect(on_alcubierre_drive_removed)
 
 func _process(delta: float) -> void:
 	_starship_controller_process(delta)
-	
+
 func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
 	starship_has_alcubierre_drive = false
-	
+
 func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
 	if alcubierre_drive == null:
 		return
@@ -112,20 +112,20 @@ func _on_supercruise_exit_timer_timeout() -> void:
 
 func _starship_controller_process(delta : float) -> void:
 	if control_entity is Starship:
-		
+
 		if (Input.is_action_just_pressed("player_interact")):
 			starship_player_interact_command.execute(control_entity)
-			
+
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				vehicle_exit_seat_command.execute(control_entity)
-				
+
 		if (Input.is_action_just_pressed("starship_cycle_power_state")):
 			starship_cycle_power_state_command.execute(control_entity)
-			
+
 		if !control_entity.is_powered_on():
 			return
-			
+
 		current_throttle_forwards_axis = starship_last_throttle_value #control_entity.target_thrust_vector.z
 
 		if (Input.is_action_pressed("starship_throttle_forward")):
@@ -133,7 +133,7 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_pressed("starship_throttle_backward")):
 			current_throttle_forwards_axis += keyboard_throttle_sensitivity * delta
-			
+
 		if control_entity.is_in_abyss or control_entity.travel_mode == (StarshipTravelModes.TravelMode.SUPER_CRUISE):
 			if current_throttle_forwards_axis > 0:
 				current_throttle_forwards_axis = 0
@@ -197,20 +197,20 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_just_pressed("starship_decrease_max_velocity")):
 			starship_decrease_max_velocity_command.execute(control_entity, StarshipDecreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
-			
+
 		if (Input.is_action_just_pressed("starship_toggle_landing_gear")):
 			starship_toggle_landing_gear_command.execute(control_entity)
-			
+
 		if (Input.is_action_just_pressed("starship_abyssal_travel")):
 			starship_initiate_abyssal_travel_command.execute(control_entity)
-			
+
 		if (Input.is_action_just_pressed("starship_cycle_selected_system")):
 			starship_cycle_system_command.execute(control_entity)
-						
+
 		if (Input.is_action_just_pressed("starship_initiate_super_cruise")):
 			if control_entity.is_in_abyss:
 				return
-				
+
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				control_entity.exit_super_cruise()
 				supercruise_exit_timer.start()
@@ -218,24 +218,24 @@ func _starship_controller_process(delta : float) -> void:
 				if starship_ready_to_supercruise:
 					supercruise_initialization_timer.start()
 					control_entity.alcubierre_drive_charge_start()
-		
+
 		if (Input.is_action_just_released("starship_initiate_super_cruise")):
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				return
-				
+
 			if control_entity.is_in_abyss:
 				return
-						
+
 			if starship_ready_to_supercruise:
 				supercruise_initialization_timer.stop()
 				control_entity.alcubierre_drive_charge_end()
-			
+
 		if (Input.is_action_pressed("starship_shoot_primary_weapons")):
 			starship_shoot_primary_command.execute(control_entity)
-		
+
 		if (Input.is_action_pressed("starship_shoot_secondary_weapons")):
 			starship_shoot_secondary_command.execute(control_entity)
-				
+
 
 
 func _input(event: InputEvent) -> void:
@@ -253,7 +253,7 @@ func _on_throttle_deadzone_reset_timer_timeout() -> void:
 			starship_thrust_forward_command.execute(control_entity, StarshipThrustForwardCommand.Params.new(0))
 			current_throttle_forwards_axis = 0
 			starship_last_throttle_value = 0
-			
+
 func _on_supercruise_initialization_timer_timeout() -> void:
 	if control_entity is Starship:
 		starship_ready_to_supercruise = false
