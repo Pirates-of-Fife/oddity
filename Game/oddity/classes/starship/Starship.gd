@@ -388,6 +388,9 @@ func destroyed() -> void:
 	linear_damp = 1
 	angular_damp = 1
 
+	explosion_sound_player.stream = explosion_sounds.pick_random()
+	explosion_sound_player.play()
+
 
 func shield_damage(damage : float) -> void:
 	shield_current_health -= damage
