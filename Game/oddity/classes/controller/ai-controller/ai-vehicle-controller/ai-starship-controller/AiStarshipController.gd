@@ -34,8 +34,25 @@ var evade_change_time : float = 15
 @onready
 var timer : Timer = Timer.new()
 
+@onready
+var roll_timer : Timer = Timer.new()
+
+@onready
+var roll_exit_timer : Timer = Timer.new()
+
+var current_roll : RollManouver = RollManouver.NONE
+
+enum RollManouver
+{
+	NONE,
+	LEFT,
+	RIGHT
+}
+
+
 var player : Player
 var distance_to_player : float
+
 
 enum EvasionDirection
 {
@@ -68,6 +85,15 @@ func _ai_starship_controller_ready() -> void:
 	timer.autostart = true
 	timer.timeout.connect(change_evasion)
 	
+	roll_timer.one_shot = true
+	roll_timer.wait_time = randf_range(5, 60)
+	roll_timer.autostart = true
+	roll_timer.timeout.connect(start_roll)
+	
+	roll_exit_timer.one_shot = true
+	roll_exit_timer.autostart = false
+	roll_exit_timer.timeout.connect(stop_roll)
+	
 	add_child(timer)
 	
 	change_evasion()
@@ -80,6 +106,16 @@ func _ai_starship_controller_ready() -> void:
 	
 	evade_change_time = randf_range(0, 60)
 
+
+func start_roll() -> void:
+	current_roll = randi_range(1, 2)
+	roll_exit_timer.wait_time = randf_range(1, 3)
+	roll_exit_timer.start()
+	
+func stop_roll() -> void:
+	current_roll = RollManouver.NONE
+	roll_timer.wait_time = randf_range(10, 30)
+	roll_timer.start()
 
 func change_evasion() -> void:
 	current_evasion = get_random_evasion()
@@ -126,7 +162,12 @@ func _ai_starship_controller_process(delta : float) -> void:
 		rotate_towards_player()
 		evade()
 		shoot_player() 
-
+		
+		match current_roll:
+			RollManouver.LEFT:
+				starship_roll_left_command.execute(control_entity, StarshipRollLeftCommand.Params.new(1))
+			RollManouver.RIGHT:
+				starship_roll_right_command.execute(control_entity, StarshipRollRightCommand.Params.new(1))
 
 func rotate_away_from_player() -> void:
 	var direction_to_player : Vector3 = (player.global_position - control_entity.global_position) * control_entity.global_basis.inverse()
