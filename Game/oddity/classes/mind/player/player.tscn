@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3ry8dgeqrhg1"]
+[gd_scene load_steps=4 format=3 uid="uid://c3ry8dgeqrhg1"]
 
 [ext_resource type="Script" path="res://classes/mind/player/player.gd" id="1_1lph1"]
 
@@ -12,6 +12,9 @@ dof_blur_near_distance = 0.5
 auto_exposure_min_sensitivity = 50.0
 auto_exposure_max_sensitivity = 500.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_al7kd"]
+radius = 50.0
+
 [node name="Player" type="Node3D" groups=["Player"]]
 script = ExtResource("1_1lph1")
 
@@ -21,3 +24,13 @@ far = 1e+14
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_al7kd")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

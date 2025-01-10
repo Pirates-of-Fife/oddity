@@ -47,6 +47,16 @@ func on_super_cruise_charging() -> void:
 func on_super_cruise_charging_stopped() -> void:
 	super_cruise_label.hide()
 
+func hide_interior() -> void:
+	$Interior.hide()
+	$Mesh/Interior.hide()
+	$Modules/Components.hide()
+
+func show_interior() -> void:
+	$Interior.show()
+	$Mesh/Interior.show()
+	$Modules/Components.show()
+
 func RABS_Kestrel_Mk1_ready() -> void:
 	super_cruise_engaged.connect(on_supercruise_engaged)
 	super_cruise_disengaged.connect(on_supercruise_disengaged)
@@ -182,3 +192,8 @@ func toggle_landing_gear() -> void:
 	else:
 		$Interior/Bridge/LandingGearLabel.show()
 		landing_gear_on = true
+
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body is Projectile:
+		body.activate_collision()

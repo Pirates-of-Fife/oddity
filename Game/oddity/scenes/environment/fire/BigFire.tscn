@@ -85,8 +85,9 @@ func stop_art() -> void:
 [node name="BigFire" type="GPUParticles3D"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 emitting = false
-amount = 300
+amount = 50
 lifetime = 3.0
+fixed_fps = 15
 process_material = SubResource("ParticleProcessMaterial_5y0yc")
 draw_pass_1 = SubResource("SphereMesh_fbsy6")
 script = SubResource("GDScript_jshh1")
@@ -98,6 +99,7 @@ light_color = Color(1, 0.584314, 0.137255, 1)
 light_energy = 16.0
 light_indirect_energy = 0.675
 light_volumetric_fog_energy = 0.675
+distance_fade_enabled = true
 omni_range = 18.851
 omni_attenuation = 1.321
 
