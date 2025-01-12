@@ -2,8 +2,20 @@ extends Mind
 
 class_name Player
 
+signal credits_added(credits : int)
+signal credits_removed(credits : int)
+
+@export
+var credits : int 
+
 func _ready() -> void:
 	_player_ready()
+
+func add_credits() -> void:
+	pass
+	
+func remove_credits() -> void:
+	pass
 
 func _player_ready() -> void:
 	_mind_ready()

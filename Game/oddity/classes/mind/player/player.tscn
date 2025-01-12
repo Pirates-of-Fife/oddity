@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3ry8dgeqrhg1"]
+[gd_scene load_steps=5 format=3 uid="uid://c3ry8dgeqrhg1"]
 
 [ext_resource type="Script" path="res://classes/mind/player/player.gd" id="1_1lph1"]
+[ext_resource type="PackedScene" uid="uid://f2enjgidilcu" path="res://classes/mind/player/CreditHud.tscn" id="2_gevx3"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_genkd"]
 auto_exposure_enabled = true
@@ -31,6 +32,8 @@ collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_al7kd")
+
+[node name="HeadsUpDisplay" parent="." instance=ExtResource("2_gevx3")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

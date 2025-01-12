@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://f2enjgidilcu"]
+
+[ext_resource type="Texture2D" uid="uid://dhp7516jv0rqq" path="res://classes/mind/player/Credit.png" id="1_x5dls"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_72wck"]
+
+[node name="CreditHud" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="CreditSprite" type="Sprite2D" parent="Container"]
+texture_filter = 1
+position = Vector2(632.172, 7.82813)
+scale = Vector2(1.02148, 1.02148)
+texture = ExtResource("1_x5dls")
+
+[node name="CreditLabel" type="Label" parent="Container"]
+layout_mode = 2
+offset_left = 522.0
+offset_top = -8.0
+offset_right = 626.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("2_72wck")
+theme_override_font_sizes/font_size = 10
+text = "1500"
+horizontal_alignment = 2
+
+[node name="CreditChangeLabel" type="Label" parent="Container"]
+offset_left = 522.0
+offset_top = 6.0
+offset_right = 626.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("2_72wck")
+theme_override_font_sizes/font_size = 10
+text = "+ 1500"
+horizontal_alignment = 2
