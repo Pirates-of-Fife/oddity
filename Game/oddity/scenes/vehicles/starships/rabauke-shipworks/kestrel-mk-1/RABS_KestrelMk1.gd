@@ -54,13 +54,11 @@ func hide_interior() -> void:
 	$Interior.hide()
 	$Mesh/Interior.hide()
 	$Modules/Components.hide()
-	print("hide")
 
 func show_interior() -> void:
 	$Interior.show()
 	$Mesh/Interior.show()
 	$Modules/Components.show()
-	print("show")
 
 func _process(delta: float) -> void:
 	_RABS_Kestrel_Mk1_process(delta)
