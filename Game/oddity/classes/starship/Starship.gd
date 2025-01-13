@@ -474,6 +474,9 @@ func _on_module_uninserted(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
 		update_shield_stats()
+		
+func _starship_process(delta: float) -> void:
+	_vehicle_process(delta)
 
 func update_shield_stats() -> void:
 	shield_max_health = 0

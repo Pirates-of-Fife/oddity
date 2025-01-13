@@ -21,3 +21,6 @@ func set_active_anchor(new_anchor : Anchor) -> void:
 	anchor.active = false
 	anchor = new_anchor
 	new_anchor.active = true
+
+func _control_entity_process(delta : float) -> void:
+	_default_process(delta)
