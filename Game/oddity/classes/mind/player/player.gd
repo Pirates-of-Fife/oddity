@@ -23,6 +23,7 @@ func remove_credits(credits : int) -> void:
 func _player_ready() -> void:
 	_mind_ready()
 	posses.connect(on_posses)
+
 	
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_cancel"):

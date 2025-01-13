@@ -242,6 +242,23 @@ enum State
 	DESTROYED
 }
 
+@export_category("Bounty Information")
+@export
+var is_bounty_target : bool = false
+
+@export
+var difficulty : BountyDifficulty
+
+var reward : int = 0
+
+enum BountyDifficulty
+{
+	LOW,
+	MEDIUM,
+	HIGH
+}
+
+
 func _ready() -> void:
 	_starship_ready()
 
@@ -361,6 +378,16 @@ func _starship_ready() -> void:
 
 	if current_state == State.DESTROYED:
 		destroyed()
+		
+	if is_bounty_target:
+		match difficulty:
+			BountyDifficulty.LOW:
+				reward = randi_range(1000, 6000)
+			BountyDifficulty.MEDIUM:
+				reward = randi_range(12000, 25000)
+			BountyDifficulty.HIGH:
+				reward = randi_range(60000, 120000)
+	
 
 func is_powered_on() -> bool:
 	return current_state == State.POWER_ON
@@ -394,6 +421,9 @@ func destroyed() -> void:
 
 	explosion_sound_player.stream = explosion_sounds.pick_random()
 	explosion_sound_player.play()
+	
+	if is_bounty_target:
+		get_tree().get_first_node_in_group("Player").add_credits(reward)
 
 
 func shield_damage(damage : float) -> void:

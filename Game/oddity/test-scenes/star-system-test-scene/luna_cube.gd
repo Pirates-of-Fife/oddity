@@ -11,7 +11,7 @@ func on_damaged(damage : float) -> void:
 	
 	var player : Player = get_tree().get_first_node_in_group("Player")
 	
-	var random : int = randi_range(-20000, 20000)
+	var random : int = randi_range(-5000, 20000)
 	
 	if random >= 0:
 		player.add_credits(random)

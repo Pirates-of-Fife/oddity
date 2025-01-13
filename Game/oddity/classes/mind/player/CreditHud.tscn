@@ -7,8 +7,7 @@
 [node name="CreditHud" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_2afpm")
-current_credits = 1668061
-test = 120000
+displayed_credits = null
 
 [node name="Container" type="Control" parent="."]
 layout_mode = 3
@@ -30,7 +29,8 @@ offset_right = 626.0
 offset_bottom = 20.0
 theme_override_fonts/font = ExtResource("2_72wck")
 theme_override_font_sizes/font_size = 10
-text = "1.7M"
+text = "0
+"
 horizontal_alignment = 2
 
 [node name="Queue" type="Control" parent="Container"]
@@ -40,8 +40,6 @@ offset_right = 40.0
 offset_bottom = 46.0
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
-autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
