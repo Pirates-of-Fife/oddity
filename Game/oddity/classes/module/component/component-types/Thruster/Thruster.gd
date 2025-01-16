@@ -27,8 +27,6 @@ func _process(delta: float) -> void:
 	_default_process(delta)
 
 	thruster_particles.process_material.set("direction", initial_direction * global_basis.inverse())
-	debug_log(initial_direction * global_basis.inverse())
-	debug_log(thruster_particles.process_material.get("direction"))
 
 func _ready() -> void:
 	_thruster_ready()

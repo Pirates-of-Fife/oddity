@@ -139,6 +139,27 @@ var secondary_hardpoints_node_path : Array
 @onready
 var secondary_hardpoints : Array = load_nodes(secondary_hardpoints_node_path)
 
+@export_subgroup("Thrusters")
+
+@export
+var thruster_slots_root : Node3D
+
+var up_thrusters : Array = Array()
+var down_thrusters : Array = Array()
+var forward_thrusters : Array = Array()
+var backward_thrusters : Array = Array()
+var left_thrusters : Array = Array()
+var right_thrusters : Array = Array()
+
+var roll_left_thrusters : Array = Array()
+var roll_right_thrusters : Array = Array()
+
+var yaw_left_thrusters : Array = Array()
+var yaw_right_thrusters : Array = Array()
+
+var pitch_up_thrusters : Array = Array()
+var pitch_down_thrusters : Array = Array()
+
 @export_subgroup("Shield")
 
 signal shield_broken
@@ -378,7 +399,7 @@ func _starship_ready() -> void:
 
 	if current_state == State.DESTROYED:
 		destroyed()
-		
+
 	if is_bounty_target:
 		match difficulty:
 			BountyDifficulty.LOW:
@@ -387,7 +408,14 @@ func _starship_ready() -> void:
 				reward = randi_range(12000, 25000)
 			BountyDifficulty.HIGH:
 				reward = randi_range(60000, 120000)
-	
+
+
+func get_thrusters() -> void:
+	for c : Node3D in thruster_slots_root.get_children():
+		if c is ThrusterSlot:
+			match c.primary_direction:
+				c.Directions.
+
 
 func is_powered_on() -> bool:
 	return current_state == State.POWER_ON
@@ -421,7 +449,7 @@ func destroyed() -> void:
 
 	explosion_sound_player.stream = explosion_sounds.pick_random()
 	explosion_sound_player.play()
-	
+
 	if is_bounty_target:
 		get_tree().get_first_node_in_group("Player").add_credits(reward)
 
@@ -474,7 +502,7 @@ func _on_module_uninserted(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
 		update_shield_stats()
-		
+
 func _starship_process(delta: float) -> void:
 	_vehicle_process(delta)
 
@@ -599,10 +627,10 @@ func cycle_selected_system() -> void:
 func ship_take_damage(damage : float) -> void:
 	if current_state == State.DESTROYED:
 		return
-	
+
 	if shield_current_health > 0:
 		return
-	
+
 	current_hull_health -= damage
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
 
