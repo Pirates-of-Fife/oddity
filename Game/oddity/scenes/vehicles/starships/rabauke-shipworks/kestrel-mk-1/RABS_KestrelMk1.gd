@@ -38,6 +38,9 @@ var alarm_sound_player : AudioStreamPlayer3D
 @export
 var explosion_partcle : GPUParticles3D
 
+var interior_shown : bool = true
+var player_reference : Player
+
 func _ready() -> void:
 	RABS_Kestrel_Mk1_ready()
 
@@ -57,6 +60,25 @@ func show_interior() -> void:
 	$Mesh/Interior.show()
 	$Modules/Components.show()
 
+func _process(delta: float) -> void:
+	_RABS_Kestrel_Mk1_process(delta)
+
+func _RABS_Kestrel_Mk1_process(delta : float) -> void:
+	_starship_process(delta)
+	
+	var distance_to_player : float = (global_position - player_reference.global_position).length_squared()
+	
+	if distance_to_player < 625:
+		if !interior_shown:
+			show_interior()
+			interior_shown = true
+	else:
+		if interior_shown:
+			hide_interior()
+			interior_shown = false 
+	
+	
+
 func RABS_Kestrel_Mk1_ready() -> void:
 	super_cruise_engaged.connect(on_supercruise_engaged)
 	super_cruise_disengaged.connect(on_supercruise_disengaged)
@@ -71,6 +93,8 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	alcubierre_drive_charging_ended.connect(on_super_cruise_charging_stopped)
 
 	_starship_ready()
+	
+	player_reference = get_tree().get_first_node_in_group("Player")
 
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
