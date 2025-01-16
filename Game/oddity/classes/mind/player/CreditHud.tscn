@@ -1,14 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://f2enjgidilcu"]
+[gd_scene load_steps=8 format=3 uid="uid://f2enjgidilcu"]
 
 [ext_resource type="Script" path="res://classes/mind/player/credit_hud.gd" id="1_2afpm"]
 [ext_resource type="Texture2D" uid="uid://dhp7516jv0rqq" path="res://classes/mind/player/Credit.png" id="1_x5dls"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_72wck"]
+[ext_resource type="Shader" path="res://classes/mind/player/OnFootCrosshair.gdshader" id="2_hvy2c"]
+[ext_resource type="Texture2D" uid="uid://diar662cum67" path="res://classes/mind/player/OnFootCrosshair.svg" id="5_7irg0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3und"]
+shader = ExtResource("2_hvy2c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbc7h"]
+shader = ExtResource("2_hvy2c")
 
 [node name="CreditHud" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_2afpm")
 
 [node name="Container" type="Control" parent="."]
+material = SubResource("ShaderMaterial_r3und")
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
@@ -37,6 +46,12 @@ anchors_preset = 0
 offset_top = 6.0
 offset_right = 40.0
 offset_bottom = 46.0
+
+[node name="OnFootCrosshair" type="Sprite2D" parent="Container"]
+material = SubResource("ShaderMaterial_dbc7h")
+position = Vector2(320, 180)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_7irg0")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
