@@ -68,11 +68,26 @@ var local_angular_velocity : Vector3 = Vector3.ZERO
 
 var local_linear_velocity_last_frame : Vector3 = Vector3.ZERO
 
+
+## Target Speed
 var target_speed_vector : Vector3
+
+## Target Rotation Speed
 var target_rotation_speed_vector : Vector3
 
+## Target Thrust
 var actual_thrust_vector : Vector3 = Vector3.ZERO
+var actual_thrust_vector_unit : Vector3 = Vector3.ZERO
+
+## Target Torque
 var actual_rotation_vector : Vector3 = Vector3.ZERO
+var actual_rotation_vector_unit : Vector3 = Vector3.ZERO
+
+## Actual Thrust being applied
+var current_thrust_vector : Vector3 = Vector3.ZERO
+
+## Actal Torque being applied
+var current_rotation_vector : Vector3 = Vector3.ZERO
 
 var relative_gravity_vector : Vector3 = Vector3.ZERO
 var relative_gravity_direction : Vector3 = Vector3.ZERO
@@ -408,13 +423,61 @@ func _starship_ready() -> void:
 				reward = randi_range(12000, 25000)
 			BountyDifficulty.HIGH:
 				reward = randi_range(60000, 120000)
+				
+	get_thrusters()
 
+enum Directions
+{
+	NONE = 0,
+	FORWARDS,
+	BACKWARDS,
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	ROLL_LEFT,
+	ROLL_RIGHT,
+	YAW_LEFT,
+	YAW_RIGHT,
+	PITCH_UP,
+	PITCH_DOWN
+}
 
 func get_thrusters() -> void:
-	for c : Node3D in thruster_slots_root.get_children():
-		if c is ThrusterSlot:
-			match c.primary_direction:
-				c.Directions.
+	for slot : Node3D in thruster_slots_root.get_children():
+		if slot is ThrusterSlot:
+			var directions : Array = [slot.primary_direction, slot.secondary_direction, slot.tertiary_direction]
+			
+			for direction : Directions in directions:
+				match direction:
+					Directions.UP:
+						up_thrusters.append(slot)
+					Directions.DOWN:
+						down_thrusters.append(slot)
+					Directions.FORWARDS:
+						forward_thrusters.append(slot)
+					Directions.BACKWARDS:
+						backward_thrusters.append(slot)
+					Directions.LEFT:
+						left_thrusters.append(slot)
+					Directions.RIGHT:
+						right_thrusters.append(slot)
+					Directions.ROLL_LEFT:
+						roll_left_thrusters.append(slot)
+					Directions.ROLL_RIGHT:
+						roll_right_thrusters.append(slot)
+					Directions.YAW_LEFT:
+						yaw_left_thrusters.append(slot)
+					Directions.YAW_RIGHT:
+						yaw_right_thrusters.append(slot)
+					Directions.PITCH_UP:
+						pitch_up_thrusters.append(slot)
+					Directions.PITCH_DOWN:
+						pitch_down_thrusters.append(slot)
+
+					_:
+						print_debug("Unknown direction for thruster: " + str(slot))
+
 
 
 func is_powered_on() -> bool:
@@ -827,6 +890,8 @@ func cruise_travel(delta : float) -> void:
 		thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
 		roll_left(thrust)
 
+	debug_log(actual_thrust_vector)
+
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 
 	apply_torque(actual_rotation_vector * global_basis.inverse())
@@ -938,6 +1003,7 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 func thrust_up(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.up_thrust)
 	actual_thrust_vector.y = thrust
+	actual_thrust_vector_unit.y = thrust / thruster_force.up_thrust
 
 func thrust_down(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.down_thrust)

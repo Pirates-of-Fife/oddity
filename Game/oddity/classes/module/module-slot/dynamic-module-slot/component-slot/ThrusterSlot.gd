@@ -35,7 +35,7 @@ enum ThrusterType
 
 enum Directions
 {
-	NONE,
+	NONE = 0,
 	FORWARDS,
 	BACKWARDS,
 	LEFT,

@@ -2,9 +2,9 @@ extends Resource
 
 class_name ThrusterForces
 
-#============================================================================#
-# Temporary resource class for thruster forces until modules get implemented #
-#============================================================================#
+#=======================================================================================#
+# Temporary resource class for thruster forces until thrusters get properly implemented #
+#=======================================================================================#
 
 @export_category("Movement")
 
@@ -45,3 +45,79 @@ var pitch_up_thrust : float
 
 @export
 var pitch_down_thrust : float
+
+@export_category("Accelerations")
+
+@export
+var forward_acceleration : float
+
+@export
+var backward_acceleration : float
+
+@export
+var up_acceleration : float
+
+@export
+var down_acceleration : float
+
+@export
+var left_acceleration : float
+
+@export
+var right_acceleration : float
+
+@export
+var roll_left_acceleration : float
+
+@export
+var roll_right_acceleration : float
+
+@export
+var yaw_left_acceleration : float
+
+@export
+var yaw_right_acceleration : float
+
+@export
+var pitch_up_acceleration : float
+
+@export
+var pitch_down_acceleration : float
+
+@export_category("Decelerations")
+
+@export
+var forward_deceleration : float
+
+@export
+var backward_deceleration : float
+
+@export
+var up_deceleration : float
+
+@export
+var down_deceleration : float
+
+@export
+var left_deceleration : float
+
+@export
+var right_deceleration : float
+
+@export
+var roll_left_deceleration : float
+
+@export
+var roll_right_deceleration : float
+
+@export
+var yaw_left_deceleration : float
+
+@export
+var yaw_right_deceleration : float
+
+@export
+var pitch_up_deceleration : float
+
+@export
+var pitch_down_deceleration : float
