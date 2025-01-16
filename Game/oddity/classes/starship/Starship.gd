@@ -83,12 +83,6 @@ var actual_thrust_vector_unit : Vector3 = Vector3.ZERO
 var actual_rotation_vector : Vector3 = Vector3.ZERO
 var actual_rotation_vector_unit : Vector3 = Vector3.ZERO
 
-## Actual Thrust being applied
-var current_thrust_vector : Vector3 = Vector3.ZERO
-
-## Actal Torque being applied
-var current_rotation_vector : Vector3 = Vector3.ZERO
-
 var relative_gravity_vector : Vector3 = Vector3.ZERO
 var relative_gravity_direction : Vector3 = Vector3.ZERO
 var gravity_strength : float = 0
@@ -158,6 +152,9 @@ var secondary_hardpoints : Array = load_nodes(secondary_hardpoints_node_path)
 
 @export
 var thruster_slots_root : Node3D
+
+@export
+var thruster_animation_player : AnimationPlayer
 
 var up_thrusters : Array = Array()
 var down_thrusters : Array = Array()
@@ -446,7 +443,7 @@ enum Directions
 func get_thrusters() -> void:
 	for slot : Node3D in thruster_slots_root.get_children():
 		if slot is ThrusterSlot:
-			var directions : Array = [slot.primary_direction, slot.secondary_direction, slot.tertiary_direction]
+			var directions : Array = [slot.primary_direction as Directions, slot.secondary_direction as Directions, slot.tertiary_direction as Directions]
 			
 			for direction : Directions in directions:
 				match direction:
@@ -474,9 +471,10 @@ func get_thrusters() -> void:
 						pitch_up_thrusters.append(slot)
 					Directions.PITCH_DOWN:
 						pitch_down_thrusters.append(slot)
-
+					Directions.NONE:
+						pass
 					_:
-						print_debug("Unknown direction for thruster: " + str(slot))
+						debug_log("Unknown direction for thruster: " + str(slot))
 
 
 
@@ -888,9 +886,8 @@ func cruise_travel(delta : float) -> void:
 
 	if (velocity_delta > 0):
 		thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
-		roll_left(thrust)
-
-	debug_log(actual_thrust_vector)
+		roll_left(thrust)	
+	
 
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 
@@ -1002,54 +999,67 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 
 func thrust_up(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.up_thrust)
+	
 	actual_thrust_vector.y = thrust
 	actual_thrust_vector_unit.y = thrust / thruster_force.up_thrust
+	
+	
 
 func thrust_down(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.down_thrust)
+	
 	actual_thrust_vector.y = -thrust
+	actual_thrust_vector_unit.y = -thrust / thruster_force.down_thrust
 
 func thrust_forward(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.forward_thrust)
 	actual_thrust_vector.z = thrust
+	actual_thrust_vector_unit.z = thrust / thruster_force.forward_thrust
 
 func thrust_backward(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.backward_thrust)
 	actual_thrust_vector.z = -thrust
+	actual_thrust_vector_unit.z = -thrust / thruster_force.backward_thrust
 
 func thrust_left(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.left_thrust)
 	actual_thrust_vector.x = thrust
+	actual_thrust_vector_unit.x = thrust / thruster_force.left_thrust
 
 func thrust_right(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.right_thrust)
 	actual_thrust_vector.x = -thrust
+	actual_thrust_vector_unit.x = -thrust / thruster_force.right_thrust
 
 func roll_left(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.roll_left_thrust)
 	actual_rotation_vector.z = -thrust
+	actual_rotation_vector_unit.z = -thrust / thruster_force.roll_left_thrust
 
 func roll_right(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.roll_right_thrust)
 	actual_rotation_vector.z = thrust
+	actual_rotation_vector_unit.z = thrust / thruster_force.roll_right_thrust
 
 func yaw_left(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.yaw_left_thrust)
 	actual_rotation_vector.y = thrust
+	actual_rotation_vector_unit.y = thrust / thruster_force.yaw_left_thrust
 
 func yaw_right(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.yaw_right_thrust)
 	actual_rotation_vector.y = -thrust
+	actual_rotation_vector_unit.y = -thrust / thruster_force.yaw_right_thrust
 
 func pitch_up(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.pitch_up_thrust)
 	actual_rotation_vector.x = -thrust
+	actual_rotation_vector_unit.x = -thrust / thruster_force.pitch_up_thrust
 
 func pitch_down(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.pitch_down_thrust)
 	actual_rotation_vector.x = thrust
-
-
+	actual_rotation_vector_unit.x = thrust / thruster_force.pitch_down_thrust
 
 #===========================================================================#
 

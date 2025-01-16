@@ -1,0 +1,149 @@
+[gd_scene load_steps=37 format=3 uid="uid://bxqf1dxwfvcbt"]
+
+[ext_resource type="Script" path="res://classes/starship/ThrusterAnimationTool.gd" id="2_w7ubs"]
+
+[sub_resource type="Animation" id="Animation_3xh5u"]
+
+[sub_resource type="Animation" id="Animation_rebmx"]
+
+[sub_resource type="Animation" id="Animation_6ros2"]
+
+[sub_resource type="Animation" id="Animation_tirum"]
+
+[sub_resource type="Animation" id="Animation_xyrgu"]
+
+[sub_resource type="Animation" id="Animation_wome8"]
+
+[sub_resource type="Animation" id="Animation_ekbdi"]
+
+[sub_resource type="Animation" id="Animation_540yr"]
+
+[sub_resource type="Animation" id="Animation_dd7u6"]
+
+[sub_resource type="Animation" id="Animation_81rkq"]
+
+[sub_resource type="Animation" id="Animation_icgfg"]
+
+[sub_resource type="Animation" id="Animation_f0ycy"]
+
+[sub_resource type="Animation" id="Animation_06j0l"]
+
+[sub_resource type="Animation" id="Animation_jijsw"]
+
+[sub_resource type="Animation" id="Animation_dcnx2"]
+
+[sub_resource type="Animation" id="Animation_aqeax"]
+
+[sub_resource type="Animation" id="Animation_mycth"]
+
+[sub_resource type="Animation" id="Animation_qff13"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbcdq"]
+_data = {
+"fly_backwards": SubResource("Animation_3xh5u"),
+"fly_down": SubResource("Animation_rebmx"),
+"fly_forwards": SubResource("Animation_6ros2"),
+"fly_left": SubResource("Animation_tirum"),
+"fly_right": SubResource("Animation_xyrgu"),
+"fly_up": SubResource("Animation_wome8"),
+"not_firing_forwards": SubResource("Animation_ekbdi"),
+"not_firing_lateral": SubResource("Animation_540yr"),
+"not_firing_yaw": SubResource("Animation_dd7u6"),
+"not_flying_pitch": SubResource("Animation_81rkq"),
+"not_flying_roll": SubResource("Animation_icgfg"),
+"not_flying_vertical": SubResource("Animation_f0ycy"),
+"pitch_down": SubResource("Animation_06j0l"),
+"pitch_up": SubResource("Animation_jijsw"),
+"roll_left": SubResource("Animation_dcnx2"),
+"roll_right": SubResource("Animation_aqeax"),
+"yaw_left": SubResource("Animation_mycth"),
+"yaw_right": SubResource("Animation_qff13")
+}
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_r00ih"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_ki8rp"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_0e2sp"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_qjj4t"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_k60yk"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_y2khy"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_05yds"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5y7vk"]
+animation = &"not_flying_pitch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lfam6"]
+animation = &"pitch_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kvbua"]
+animation = &"pitch_up"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_dep4y"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dkgis"]
+graph_offset = Vector2(-378.633, -44.8912)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_kvbua")
+nodes/Animation/position = Vector2(17.2592, 113.067)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5y7vk")
+"nodes/Animation 2/position" = Vector2(23.8095, 343.266)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_lfam6")
+"nodes/Animation 3/position" = Vector2(39.5304, 537.905)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_dep4y")
+nodes/Blend3/position = Vector2(303.114, 342.649)
+nodes/output/position = Vector2(560, 380)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_x1dqq"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dvo2w"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2ca22"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vtgna"]
+graph_offset = Vector2(-743.289, -41.3526)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_k60yk")
+nodes/Add2/position = Vector2(280, 40)
+"nodes/Add2 3/node" = SubResource("AnimationNodeAdd2_r00ih")
+"nodes/Add2 3/position" = Vector2(-20, 400)
+"nodes/Add2 4/node" = SubResource("AnimationNodeAdd2_ki8rp")
+"nodes/Add2 4/position" = Vector2(-140, 620)
+"nodes/Add2 5/node" = SubResource("AnimationNodeAdd2_0e2sp")
+"nodes/Add2 5/position" = Vector2(-280, 820)
+"nodes/Add2 6/node" = SubResource("AnimationNodeAdd2_qjj4t")
+"nodes/Add2 6/position" = Vector2(-440, 1000)
+nodes/Forwards/node = SubResource("AnimationNodeBlendTree_y2khy")
+nodes/Forwards/position = Vector2(-1200, 460)
+nodes/Lateral/node = SubResource("AnimationNodeBlendTree_05yds")
+nodes/Lateral/position = Vector2(-1200, 1120)
+nodes/Pitch/node = SubResource("AnimationNodeBlendTree_dkgis")
+nodes/Pitch/position = Vector2(-1140, 60)
+nodes/Roll/node = SubResource("AnimationNodeBlendTree_x1dqq")
+nodes/Roll/position = Vector2(-1180, 940)
+nodes/Vertical/node = SubResource("AnimationNodeBlendTree_dvo2w")
+nodes/Vertical/position = Vector2(-1180, 260)
+nodes/Yaw/node = SubResource("AnimationNodeBlendTree_2ca22")
+nodes/Yaw/position = Vector2(-1220, 700)
+nodes/output/position = Vector2(500, 120)
+node_connections = [&"Add2", 0, &"Pitch", &"Add2", 1, &"Add2 3", &"Add2 3", 0, &"Vertical", &"Add2 3", 1, &"Add2 4", &"Add2 4", 0, &"Forwards", &"Add2 4", 1, &"Add2 5", &"Add2 5", 0, &"Yaw", &"Add2 5", 1, &"Add2 6", &"Add2 6", 0, &"Roll", &"Add2 6", 1, &"Lateral", &"output", 0, &"Add2"]
+
+[node name="ThrusterAnimationPlayer" type="AnimationPlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_tbcdq")
+}
+script = ExtResource("2_w7ubs")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeBlendTree_vtgna")
+anim_player = NodePath("..")
+parameters/Add2/add_amount = 0.5
+"parameters/Add2 3/add_amount" = 0.5
+"parameters/Add2 4/add_amount" = 0.5
+"parameters/Add2 5/add_amount" = 0.5
+"parameters/Add2 6/add_amount" = 0.5
+parameters/Pitch/Blend3/blend_amount = 0
