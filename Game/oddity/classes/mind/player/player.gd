@@ -6,7 +6,7 @@ signal credits_added(credits : int)
 signal credits_removed(credits : int)
 
 @export
-var credits : int 
+var credits : int
 
 
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _ready() -> void:
 func add_credits(credits : int) -> void:
 	self.credits += abs(credits)
 	credits_added.emit(abs(credits))
-	
+
 func remove_credits(credits : int) -> void:
 	self.credits -= abs(credits)
 	credits_removed.emit(abs(credits))
@@ -24,7 +24,7 @@ func _player_ready() -> void:
 	_mind_ready()
 	posses.connect(on_posses)
 
-	
+
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ba5evvevagnhw"]
+[gd_scene load_steps=12 format=3 uid="uid://ba5evvevagnhw"]
 
 [ext_resource type="Texture2D" uid="uid://vdqa5pcoa462" path="res://project-images/OddityLogo-04.png" id="1_edjeb"]
 [ext_resource type="Script" path="res://ui/main-menu/main_menu_ui.gd" id="1_wya4y"]
@@ -116,6 +116,38 @@ _data = {
 "start": SubResource("Animation_02e8o")
 }
 
+[sub_resource type="GDScript" id="GDScript_lnw6i"]
+resource_name = "creature_sensitivity"
+script/source = "extends HSlider
+
+func _ready() -> void:
+	value = Globals.creature_controller_sensitivity
+
+func _on_value_changed(value: float) -> void:
+	Globals.creature_controller_sensitivity = value
+	tooltip_text = \"Sensitivity: \" + str(value)
+
+
+func _on_drag_ended(value_changed: bool) -> void:
+	Globals.save_settings()
+"
+
+[sub_resource type="GDScript" id="GDScript_chui5"]
+resource_name = "starship_sensitivity"
+script/source = "extends HSlider
+
+func _ready() -> void:
+	value = Globals.starship_controller_sensitity
+
+func _on_value_changed(value: float) -> void:
+	Globals.starship_controller_sensitity = value
+	tooltip_text = \"Sensitivity: \" + str(value)
+
+
+func _on_drag_ended(value_changed: bool) -> void:
+	Globals.save_settings()
+"
+
 [node name="MainMenuUi" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -208,6 +240,44 @@ theme_override_fonts/font = ExtResource("2_7jeg0")
 text = "EXIT
 "
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
+text = "Player"
+
+[node name="CreatureSensitivity" type="HSlider" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.001
+max_value = 0.05
+step = 0.001
+value = 0.001
+tick_count = 10
+script = SubResource("GDScript_lnw6i")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
+text = "Ship"
+
+[node name="StarshipSensitivity" type="HSlider" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.05
+max_value = 0.5
+step = 0.01
+value = 0.05
+tick_count = 10
+script = SubResource("GDScript_chui5")
+
 [node name="ButtonClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_l73e1")
 volume_db = 16.0
@@ -218,3 +288,7 @@ stream = ExtResource("6_6sojb")
 [connection signal="pressed" from="Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="drag_ended" from="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" to="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" method="_on_drag_ended"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" to="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" method="_on_value_changed"]
+[connection signal="drag_ended" from="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" to="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" method="_on_drag_ended"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" to="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" method="_on_value_changed"]

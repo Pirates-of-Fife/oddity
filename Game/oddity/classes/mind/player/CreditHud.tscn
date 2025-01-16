@@ -7,7 +7,6 @@
 [node name="CreditHud" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("1_2afpm")
-displayed_credits = null
 
 [node name="Container" type="Control" parent="."]
 layout_mode = 3
@@ -40,6 +39,7 @@ offset_right = 40.0
 offset_bottom = 46.0
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

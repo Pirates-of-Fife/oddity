@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.3", "Double Precision", "Forward Plus")
 boot_splash/image="res://project-images/OddityLogo-05.png"
 config/icon="res://project-images/OddityLogo-02.png"
 
+[autoload]
+
+Globals="*res://globals/globals.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2

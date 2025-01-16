@@ -73,6 +73,11 @@ transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 
 [node name="StarSystem" type="Node3D" parent="SubViewportContainer/SubViewport/World" groups=["StarSystem"]]
 script = ExtResource("5_r66er")
 
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(-0.491862, 0.683612, -0.539209, -0.324792, 0.430537, 0.842109, 0.807825, 0.589332, 0.0102665, 0, 243.68, -335.826)
+light_color = Color(1, 0.912596, 0.841761, 1)
+light_energy = 0.5
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ra1n2")
 autoplay = true
