@@ -245,6 +245,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
 text = "Player"
 
 [node name="CreatureSensitivity" type="HSlider" parent="Control/VBoxContainer/HBoxContainer"]
@@ -262,6 +264,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
 text = "Ship"
 
 [node name="StarshipSensitivity" type="HSlider" parent="Control/VBoxContainer/HBoxContainer2"]

@@ -4,7 +4,7 @@ extends Node3D
 var camera : Camera3D
 
 
-var orbit_distance : float = 50.0   # Distance from the target
+var orbit_distance : float = 35.0   # Distance from the target
 var orbit_speed : float = 0.1    # Speed of orbit in radians per second
 
 var ship_loaded : bool = false
@@ -47,7 +47,7 @@ func _orbit_camera(delta: float) -> void:
 	# Calculate the new camera position using the orbit angle
 	var target_x : float = orbit_distance * cos(orbit_angle)
 	var target_z : float = orbit_distance * sin(orbit_angle)
-	var target_position_camera : Vector3 = Vector3(target_x, 0, target_z) + target_position
+	var target_position_camera : Vector3 = Vector3(target_x, 7, target_z) + target_position
 
 
 	# Update the camera’s position

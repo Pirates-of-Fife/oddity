@@ -27,25 +27,25 @@ func add_to_queue(label : CreditChangeLabel) -> void:
 	label.position.x = 48
 	label.position.y = queue_length * 14
 	queue_length += 1
-	
+
 	$Timer.start()
-	
+
 func remove_from_queue() -> void:
 	if queue_length == 0:
 		return
-	
+
 	var label : CreditChangeLabel = queue.get_child(0)
-	
+
 	current_credits += label.credits
 	#credit_label.text = convert_to_human_readable(current_credits)
-	
+
 	label.queue_free()
 
 	queue_length -= 1
-	
+
 	for l : CreditChangeLabel in queue.get_children():
 		l.position.y -= 14
-		
+
 	if queue_length == 0:
 		$Timer.stop()
 	else:
@@ -55,7 +55,7 @@ func convert_to_human_readable(credits : int) -> String:
 	var suffixes : Array = ["", "k", "M", "B", "T", "P"] # Add more if needed
 	var index : int = 0
 	var value : float = float(credits)
-	
+
 	if credits < 1000:
 		return str(credits)
 
@@ -84,15 +84,15 @@ func _process(delta: float) -> void:
 func on_credits_added(credits : int) -> void:
 	var label : CreditChangeLabel = credit_change_label.instantiate()
 	label.credits = credits
-	
+
 	label.text = "+ " + convert_to_human_readable(credits)
-	
+
 	add_to_queue(label)
-	
+
 func on_credits_removed(credits : int) -> void:
 	var label : CreditChangeLabel = credit_change_label.instantiate()
 	label.credits = -credits
-	
+
 	label.text = "- " + convert_to_human_readable(credits)
 
 	add_to_queue(label)
