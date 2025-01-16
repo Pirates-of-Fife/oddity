@@ -42,7 +42,7 @@ var current_throttle_forwards_axis : float = 0
 var mouse_joystick_deadzone : float = 0.04
 
 @export
-var ship_mouse_controls_sensitivity : float = 0.1
+var ship_mouse_controls_sensitivity : float = Globals.starship_controller_sensitity
 
 @export
 var keyboard_throttle_sensitivity : float = 0.8
