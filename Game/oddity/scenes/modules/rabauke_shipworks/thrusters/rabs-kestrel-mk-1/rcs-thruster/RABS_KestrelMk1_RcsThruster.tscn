@@ -69,7 +69,8 @@ shape = SubResource("BoxShape3D_0otn4")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0662971, -0.0873393)
-amount = 20
+amount = 40
+amount_ratio = 0.0
 lifetime = 0.15
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_anxn1")

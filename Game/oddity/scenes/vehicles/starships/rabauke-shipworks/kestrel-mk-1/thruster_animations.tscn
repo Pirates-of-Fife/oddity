@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://rjiktde1j51m"]
+[gd_scene load_steps=56 format=3 uid="uid://dg3rtf3yvju3g"]
 
 [sub_resource type="Animation" id="Animation_ui28b"]
 resource_name = "fly_backwards"
@@ -1361,14 +1361,13 @@ nodes/output/position = Vector2(1200, 60)
 node_connections = [&"Add2", 0, &"Pitch", &"Add2", 1, &"Add2 2", &"Add2 2", 0, &"Vertical", &"Add2 2", 1, &"Add2 3", &"Add2 3", 0, &"Forwards", &"Add2 3", 1, &"Add2 4", &"Add2 4", 0, &"Yaw", &"Add2 4", 1, &"Add2 5", &"Add2 5", 0, &"Roll", &"Add2 5", 1, &"Lateral", &"output", 0, &"Add2"]
 
 [node name="ThrusterAnimations" type="AnimationPlayer"]
-root_node = NodePath("../ShipBody")
 libraries = {
 "": SubResource("AnimationLibrary_rrndt")
 }
 
 [node name="ThrusterAnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
-root_node = NodePath("%ShipBody")
+root_node = NodePath("%ThrusterAnimationTree/../..")
 tree_root = SubResource("AnimationNodeBlendTree_cg3fd")
 anim_player = NodePath("..")
 parameters/Add2/add_amount = 0.5

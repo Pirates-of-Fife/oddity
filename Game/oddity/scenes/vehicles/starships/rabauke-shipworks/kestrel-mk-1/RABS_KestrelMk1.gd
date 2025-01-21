@@ -80,6 +80,13 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 		if interior_shown:
 			hide_interior()
 			interior_shown = false
+	
+	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Pitch/Blend3/blend_amount", actual_rotation_vector_unit.x )
+	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Vertical/Blend3/blend_amount", -actual_thrust_vector_unit.y)
+	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Forwards/Blend3/blend_amount", -actual_thrust_vector_unit.z)
+	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Lateral/Blend3/blend_amount", -actual_thrust_vector_unit.x)
+	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Yaw/Blend3/blend_amount", -actual_rotation_vector_unit.y)
+	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Roll/Blend3/blend_amount", -actual_rotation_vector_unit.z)
 
 
 
@@ -99,6 +106,7 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	_starship_ready()
 
 	player_reference = get_tree().get_first_node_in_group("Player")
+
 
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()

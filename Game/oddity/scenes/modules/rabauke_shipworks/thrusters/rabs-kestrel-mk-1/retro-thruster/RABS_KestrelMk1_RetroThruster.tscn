@@ -68,6 +68,7 @@ shape = SubResource("ConvexPolygonShape3D_pe7na")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.932175, -0.187925, -2.42456)
 amount = 100
+amount_ratio = 0.0
 lifetime = 0.4
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_7unsp")

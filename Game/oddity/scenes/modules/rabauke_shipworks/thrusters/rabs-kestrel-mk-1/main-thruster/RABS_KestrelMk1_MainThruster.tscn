@@ -68,6 +68,7 @@ shape = SubResource("BoxShape3D_oj6mv")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.16869)
 amount = 100
+amount_ratio = 0.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_6yadg")
 draw_pass_1 = SubResource("SphereMesh_tlo6e")
