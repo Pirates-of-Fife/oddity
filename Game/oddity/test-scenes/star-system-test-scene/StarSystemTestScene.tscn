@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://b1dqbkkil0eb6"]
+[gd_scene load_steps=61 format=3 uid="uid://bteqskba0aasp"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
@@ -12,291 +12,148 @@
 [ext_resource type="Material" uid="uid://b6xwyx8uah1e6" path="res://classes/cargo/CargoHighlightMaterial.tres" id="9_ix3kk"]
 [ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/Size4ShieldGenerator.tscn" id="10_ktqa0"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_teb1i"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_4kfl8"]
 size = Vector3(2.2, 2.2, 4.4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_0geou"]
+[sub_resource type="BoxMesh" id="BoxMesh_cep4o"]
 size = Vector3(2.2, 2.2, 4.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_evw2g"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_31pr3"]
 size = Vector3(2.2, 2.2, 4.4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_rk23r"]
+[sub_resource type="BoxMesh" id="BoxMesh_uv38e"]
 size = Vector3(2.2, 2.2, 4.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_grp2k"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o44t1"]
 size = Vector3(1.1, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_cqjny"]
+[sub_resource type="BoxMesh" id="BoxMesh_horie"]
 size = Vector3(1.1, 1.1, 2.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jnrls"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_l8fxj"]
 size = Vector3(1.1, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_7ureg"]
+[sub_resource type="BoxMesh" id="BoxMesh_jqp75"]
 size = Vector3(1.1, 1.1, 2.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_n3xvx"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_4pier"]
 size = Vector3(1.65, 1.65, 3.3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_hwbor"]
+[sub_resource type="BoxMesh" id="BoxMesh_sydbn"]
 size = Vector3(1.65, 1.65, 3.3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_81swq"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_uhgld"]
 size = Vector3(1.1, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_afq82"]
+[sub_resource type="BoxMesh" id="BoxMesh_l8yw4"]
 size = Vector3(1.1, 1.1, 2.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cqcth"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_apgk0"]
 size = Vector3(1.1, 1.1, 2.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_1ib7o"]
+[sub_resource type="BoxMesh" id="BoxMesh_lpycl"]
 size = Vector3(1.1, 1.1, 2.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_re5xf"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xtn13"]
 size = Vector3(1.65, 1.65, 3.3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_otk7d"]
+[sub_resource type="BoxMesh" id="BoxMesh_j40pe"]
 size = Vector3(1.65, 1.65, 3.3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wcqoc"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_8qauk"]
 size = Vector3(1.65, 1.65, 3.3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_srwtl"]
+[sub_resource type="BoxMesh" id="BoxMesh_5k0lu"]
 size = Vector3(1.65, 1.65, 3.3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_15vem"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_6j5xe"]
 size = Vector3(1.65, 1.65, 3.3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_rrcae"]
+[sub_resource type="BoxMesh" id="BoxMesh_e332u"]
 size = Vector3(1.65, 1.65, 3.3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_u87wk"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_r4s6x"]
 size = Vector3(0.55, 0.55, 1.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_x5nof"]
+[sub_resource type="BoxMesh" id="BoxMesh_11nfp"]
 size = Vector3(0.55, 0.55, 1.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wxo34"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_44b27"]
 size = Vector3(0.55, 0.55, 1.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_6ehl4"]
+[sub_resource type="BoxMesh" id="BoxMesh_mcpk1"]
 size = Vector3(0.55, 0.55, 1.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ea350"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_tfw25"]
 size = Vector3(0.55, 0.55, 1.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_bj2rw"]
+[sub_resource type="BoxMesh" id="BoxMesh_8nxea"]
 size = Vector3(0.55, 0.55, 1.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_s6ryl"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gssbr"]
 size = Vector3(0.55, 0.55, 1.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_t62ao"]
+[sub_resource type="BoxMesh" id="BoxMesh_7nglk"]
 size = Vector3(0.55, 0.55, 1.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_uebu4"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jc4vl"]
 size = Vector3(3.3, 3.3, 6.6)
 
-[sub_resource type="BoxMesh" id="BoxMesh_oh1gr"]
+[sub_resource type="BoxMesh" id="BoxMesh_u17el"]
 size = Vector3(3.3, 3.3, 6.6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yhfyl"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_qgacs"]
 size = Vector3(3.3, 3.3, 6.6)
 
-[sub_resource type="BoxMesh" id="BoxMesh_6g8e2"]
+[sub_resource type="BoxMesh" id="BoxMesh_uh1qd"]
 size = Vector3(3.3, 3.3, 6.6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_u1ckp"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_uyjjh"]
 size = Vector3(0.825, 1.65, 0.825)
 
-[sub_resource type="BoxMesh" id="BoxMesh_tsarm"]
+[sub_resource type="BoxMesh" id="BoxMesh_3q2j1"]
 size = Vector3(0.825, 1.65, 0.825)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jce0r"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_s7afb"]
 size = Vector3(0.825, 1.65, 4.4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ml5nn"]
+[sub_resource type="BoxMesh" id="BoxMesh_kr74c"]
 size = Vector3(0.825, 1.65, 4.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1dqvc"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_snhfw"]
 size = Vector3(1.56, 1.68, 6)
 
-[sub_resource type="BoxMesh" id="BoxMesh_p0203"]
+[sub_resource type="BoxMesh" id="BoxMesh_rawjj"]
 size = Vector3(1.56, 1.68, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kg4x5"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_plby3"]
 size = Vector3(1.56, 1.68, 6)
 
-[sub_resource type="BoxMesh" id="BoxMesh_1swld"]
+[sub_resource type="BoxMesh" id="BoxMesh_gohl6"]
 size = Vector3(1.56, 1.68, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_h321n"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_fwx3k"]
 size = Vector3(1.56, 1.68, 6)
 
-[sub_resource type="BoxMesh" id="BoxMesh_p7uvr"]
+[sub_resource type="BoxMesh" id="BoxMesh_yffq4"]
 size = Vector3(1.56, 1.68, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dgp2v"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2bi16"]
 size = Vector3(1.56, 1.68, 6)
 
-[sub_resource type="BoxMesh" id="BoxMesh_s1six"]
+[sub_resource type="BoxMesh" id="BoxMesh_bqavq"]
 size = Vector3(1.56, 1.68, 6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lwe7h"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jqex5"]
 size = Vector3(1.04, 1.12, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_8r603"]
+[sub_resource type="BoxMesh" id="BoxMesh_meol7"]
 size = Vector3(1.04, 1.12, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mith5"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ef8yb"]
 size = Vector3(1.04, 1.12, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_gsdb1"]
-=======
-[sub_resource type="BoxShape3D" id="BoxShape3D_7te0g"]
-size = Vector3(2.2, 2.2, 4.4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_reux0"]
-size = Vector3(2.2, 2.2, 4.4)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_03rwi"]
-size = Vector3(2.2, 2.2, 4.4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_akamf"]
-size = Vector3(2.2, 2.2, 4.4)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_muvi5"]
-size = Vector3(1.1, 1.1, 2.2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_sr1qd"]
-size = Vector3(1.1, 1.1, 2.2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1ujg1"]
-size = Vector3(1.1, 1.1, 2.2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4r8of"]
-size = Vector3(1.1, 1.1, 2.2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6ah3c"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7uhdq"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_epyrr"]
-size = Vector3(1.1, 1.1, 2.2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_rladd"]
-size = Vector3(1.1, 1.1, 2.2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6m75n"]
-size = Vector3(1.1, 1.1, 2.2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ksm20"]
-size = Vector3(1.1, 1.1, 2.2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_isyyh"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_naagx"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_7xpcy"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_q1m1r"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_068vr"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_j8bng"]
-size = Vector3(1.65, 1.65, 3.3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_omh0o"]
-size = Vector3(0.55, 0.55, 1.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_k0s6o"]
-size = Vector3(0.55, 0.55, 1.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jau86"]
-size = Vector3(0.55, 0.55, 1.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7ag1n"]
-size = Vector3(0.55, 0.55, 1.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_rmp41"]
-size = Vector3(0.55, 0.55, 1.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_e4057"]
-size = Vector3(0.55, 0.55, 1.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_incrv"]
-size = Vector3(0.55, 0.55, 1.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_6rtvb"]
-size = Vector3(0.55, 0.55, 1.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_f43st"]
-size = Vector3(3.3, 3.3, 6.6)
-
-[sub_resource type="BoxMesh" id="BoxMesh_rnfnd"]
-size = Vector3(3.3, 3.3, 6.6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_75jer"]
-size = Vector3(3.3, 3.3, 6.6)
-
-[sub_resource type="BoxMesh" id="BoxMesh_5rjoo"]
-size = Vector3(3.3, 3.3, 6.6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_e3gyc"]
-size = Vector3(0.825, 1.65, 0.825)
-
-[sub_resource type="BoxMesh" id="BoxMesh_0mydg"]
-size = Vector3(0.825, 1.65, 0.825)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xv1dv"]
-size = Vector3(0.825, 1.65, 4.4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_vcw61"]
-size = Vector3(0.825, 1.65, 4.4)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wupkv"]
-size = Vector3(1.56, 1.68, 6)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qkidu"]
-size = Vector3(1.56, 1.68, 6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_q5j5q"]
-size = Vector3(1.56, 1.68, 6)
-
-[sub_resource type="BoxMesh" id="BoxMesh_n7iyp"]
-size = Vector3(1.56, 1.68, 6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_i845m"]
-size = Vector3(1.56, 1.68, 6)
-
-[sub_resource type="BoxMesh" id="BoxMesh_yfi0f"]
-size = Vector3(1.56, 1.68, 6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_g527a"]
-size = Vector3(1.56, 1.68, 6)
-
-[sub_resource type="BoxMesh" id="BoxMesh_avrut"]
-size = Vector3(1.56, 1.68, 6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qps5n"]
-size = Vector3(1.04, 1.12, 4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_jfluk"]
-size = Vector3(1.04, 1.12, 4)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_u4ci6"]
-size = Vector3(1.04, 1.12, 4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3v3be"]
+[sub_resource type="BoxMesh" id="BoxMesh_m4bok"]
 size = Vector3(1.04, 1.12, 4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s558k"]
@@ -347,739 +204,374 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, 167687, -174680)
 debug = true
 
 [node name="ComponentSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="0" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@148361/@Area3D@58982/@MeshInstance3D@58984")
+highlight_box = NodePath("@Node3D@148361/@Area3D@85118/@MeshInstance3D@85120")
 
-[node name="@Area3D@58982" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361" index="0"]
+[node name="@Area3D@85118" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@58983" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361/@Area3D@58982"]
-shape = SubResource("BoxShape3D_teb1i")
+[node name="@CollisionShape3D@85119" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361/@Area3D@85118"]
+shape = SubResource("BoxShape3D_4kfl8")
 
-[node name="@MeshInstance3D@58984" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361/@Area3D@58982"]
+[node name="@MeshInstance3D@85120" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361/@Area3D@85118"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_0geou")
+mesh = SubResource("BoxMesh_cep4o")
 
 [node name="ComponentSlot2" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="1" node_paths=PackedStringArray("module", "highlight_box")]
 module = NodePath("ShieldGenerator")
-highlight_box = NodePath("@Node3D@156391/@Area3D@58985/@MeshInstance3D@58987")
+highlight_box = NodePath("@Node3D@156391/@Area3D@85121/@MeshInstance3D@85123")
 
-[node name="@Area3D@58985" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391" index="0"]
+[node name="@Area3D@85121" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@58986" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391/@Area3D@58985"]
-shape = SubResource("BoxShape3D_evw2g")
+[node name="@CollisionShape3D@85122" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391/@Area3D@85121"]
+shape = SubResource("BoxShape3D_31pr3")
 
-[node name="@MeshInstance3D@58987" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391/@Area3D@58985"]
+[node name="@MeshInstance3D@85123" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391/@Area3D@85121"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_rk23r")
-=======
-highlight_box = NodePath("@Node3D@148361/@Area3D@57508/@MeshInstance3D@57510")
-
-[node name="@Area3D@57508" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57509" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361/@Area3D@57508"]
-shape = SubResource("BoxShape3D_7te0g")
-
-[node name="@MeshInstance3D@57510" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot/@Node3D@148361/@Area3D@57508"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_reux0")
-
-[node name="ComponentSlot2" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="1" node_paths=PackedStringArray("module", "highlight_box")]
-module = NodePath("ShieldGenerator")
-highlight_box = NodePath("@Node3D@156391/@Area3D@57511/@MeshInstance3D@57513")
-
-[node name="@Area3D@57511" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57512" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391/@Area3D@57511"]
-shape = SubResource("BoxShape3D_03rwi")
-
-[node name="@MeshInstance3D@57513" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2/@Node3D@156391/@Area3D@57511"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_akamf")
+mesh = SubResource("BoxMesh_uv38e")
 
 [node name="ShieldGenerator" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot2" index="2" node_paths=PackedStringArray("module_slot") instance=ExtResource("10_ktqa0")]
 module_slot = NodePath("..")
 
 [node name="ComponentSlot3" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="2" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@150794/@Area3D@58988/@MeshInstance3D@58990")
+highlight_box = NodePath("@Node3D@150794/@Area3D@85124/@MeshInstance3D@85126")
 
-[node name="@Area3D@58988" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794" index="0"]
+[node name="@Area3D@85124" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@58989" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794/@Area3D@58988"]
-shape = SubResource("BoxShape3D_grp2k")
+[node name="@CollisionShape3D@85125" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794/@Area3D@85124"]
+shape = SubResource("BoxShape3D_o44t1")
 
-[node name="@MeshInstance3D@58990" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794/@Area3D@58988"]
+[node name="@MeshInstance3D@85126" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794/@Area3D@85124"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_cqjny")
+mesh = SubResource("BoxMesh_horie")
 
 [node name="ComponentSlot4" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="3" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@156398/@Area3D@58991/@MeshInstance3D@58993")
+highlight_box = NodePath("@Node3D@156398/@Area3D@85127/@MeshInstance3D@85129")
 
-[node name="@Area3D@58991" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398" index="0"]
+[node name="@Area3D@85127" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@58992" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398/@Area3D@58991"]
-shape = SubResource("BoxShape3D_jnrls")
+[node name="@CollisionShape3D@85128" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398/@Area3D@85127"]
+shape = SubResource("BoxShape3D_l8fxj")
 
-[node name="@MeshInstance3D@58993" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398/@Area3D@58991"]
+[node name="@MeshInstance3D@85129" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398/@Area3D@85127"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_7ureg")
+mesh = SubResource("BoxMesh_jqp75")
 
 [node name="ComponentSlot11" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="4" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@156426/@Area3D@58994/@MeshInstance3D@58996")
+highlight_box = NodePath("@Node3D@156426/@Area3D@85130/@MeshInstance3D@85132")
 
-[node name="@Area3D@58994" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426" index="0"]
+[node name="@Area3D@85130" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@58995" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426/@Area3D@58994"]
-shape = SubResource("BoxShape3D_n3xvx")
+[node name="@CollisionShape3D@85131" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426/@Area3D@85130"]
+shape = SubResource("BoxShape3D_4pier")
 
-[node name="@MeshInstance3D@58996" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426/@Area3D@58994"]
+[node name="@MeshInstance3D@85132" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426/@Area3D@85130"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_hwbor")
+mesh = SubResource("BoxMesh_sydbn")
 
 [node name="ComponentSlot5" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="5" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@175925/@Area3D@58997/@MeshInstance3D@58999")
+highlight_box = NodePath("@Node3D@175925/@Area3D@85133/@MeshInstance3D@85135")
 
-[node name="@Area3D@58997" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925" index="0"]
+[node name="@Area3D@85133" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@58998" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925/@Area3D@58997"]
-shape = SubResource("BoxShape3D_81swq")
+[node name="@CollisionShape3D@85134" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925/@Area3D@85133"]
+shape = SubResource("BoxShape3D_uhgld")
 
-[node name="@MeshInstance3D@58999" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925/@Area3D@58997"]
+[node name="@MeshInstance3D@85135" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925/@Area3D@85133"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_afq82")
+mesh = SubResource("BoxMesh_l8yw4")
 
 [node name="ComponentSlot6" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="6" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@175929/@Area3D@59000/@MeshInstance3D@59002")
+highlight_box = NodePath("@Node3D@175929/@Area3D@85136/@MeshInstance3D@85138")
 
-[node name="@Area3D@59000" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929" index="0"]
+[node name="@Area3D@85136" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59001" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929/@Area3D@59000"]
-shape = SubResource("BoxShape3D_cqcth")
+[node name="@CollisionShape3D@85137" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929/@Area3D@85136"]
+shape = SubResource("BoxShape3D_apgk0")
 
-[node name="@MeshInstance3D@59002" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929/@Area3D@59000"]
+[node name="@MeshInstance3D@85138" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929/@Area3D@85136"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_1ib7o")
+mesh = SubResource("BoxMesh_lpycl")
 
 [node name="ComponentSlot15" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="7" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@175933/@Area3D@59003/@MeshInstance3D@59005")
+highlight_box = NodePath("@Node3D@175933/@Area3D@85139/@MeshInstance3D@85141")
 
-[node name="@Area3D@59003" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933" index="0"]
+[node name="@Area3D@85139" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59004" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933/@Area3D@59003"]
-shape = SubResource("BoxShape3D_re5xf")
+[node name="@CollisionShape3D@85140" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933/@Area3D@85139"]
+shape = SubResource("BoxShape3D_xtn13")
 
-[node name="@MeshInstance3D@59005" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933/@Area3D@59003"]
+[node name="@MeshInstance3D@85141" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933/@Area3D@85139"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_otk7d")
+mesh = SubResource("BoxMesh_j40pe")
 
 [node name="ComponentSlot16" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="8" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@175937/@Area3D@59006/@MeshInstance3D@59008")
+highlight_box = NodePath("@Node3D@175937/@Area3D@85142/@MeshInstance3D@85144")
 
-[node name="@Area3D@59006" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937" index="0"]
+[node name="@Area3D@85142" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59007" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937/@Area3D@59006"]
-shape = SubResource("BoxShape3D_wcqoc")
+[node name="@CollisionShape3D@85143" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937/@Area3D@85142"]
+shape = SubResource("BoxShape3D_8qauk")
 
-[node name="@MeshInstance3D@59008" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937/@Area3D@59006"]
+[node name="@MeshInstance3D@85144" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937/@Area3D@85142"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_srwtl")
+mesh = SubResource("BoxMesh_5k0lu")
 
 [node name="ComponentSlot17" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="9" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@179146/@Area3D@59009/@MeshInstance3D@59011")
+highlight_box = NodePath("@Node3D@179146/@Area3D@85145/@MeshInstance3D@85147")
 
-[node name="@Area3D@59009" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146" index="0"]
+[node name="@Area3D@85145" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59010" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146/@Area3D@59009"]
-shape = SubResource("BoxShape3D_15vem")
+[node name="@CollisionShape3D@85146" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146/@Area3D@85145"]
+shape = SubResource("BoxShape3D_6j5xe")
 
-[node name="@MeshInstance3D@59011" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146/@Area3D@59009"]
+[node name="@MeshInstance3D@85147" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146/@Area3D@85145"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_rrcae")
+mesh = SubResource("BoxMesh_e332u")
 
 [node name="ComponentSlot18" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="10" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@179150/@Area3D@59012/@MeshInstance3D@59014")
+highlight_box = NodePath("@Node3D@179150/@Area3D@85148/@MeshInstance3D@85150")
 
-[node name="@Area3D@59012" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150" index="0"]
+[node name="@Area3D@85148" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59013" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150/@Area3D@59012"]
-shape = SubResource("BoxShape3D_u87wk")
+[node name="@CollisionShape3D@85149" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150/@Area3D@85148"]
+shape = SubResource("BoxShape3D_r4s6x")
 
-[node name="@MeshInstance3D@59014" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150/@Area3D@59012"]
+[node name="@MeshInstance3D@85150" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150/@Area3D@85148"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_x5nof")
+mesh = SubResource("BoxMesh_11nfp")
 
 [node name="ComponentSlot19" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="11" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@183563/@Area3D@59015/@MeshInstance3D@59017")
+highlight_box = NodePath("@Node3D@183563/@Area3D@85151/@MeshInstance3D@85153")
 
-[node name="@Area3D@59015" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563" index="0"]
+[node name="@Area3D@85151" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59016" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563/@Area3D@59015"]
-shape = SubResource("BoxShape3D_wxo34")
+[node name="@CollisionShape3D@85152" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563/@Area3D@85151"]
+shape = SubResource("BoxShape3D_44b27")
 
-[node name="@MeshInstance3D@59017" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563/@Area3D@59015"]
+[node name="@MeshInstance3D@85153" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563/@Area3D@85151"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_6ehl4")
+mesh = SubResource("BoxMesh_mcpk1")
 
 [node name="ComponentSlot20" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="12" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@183567/@Area3D@59018/@MeshInstance3D@59020")
+highlight_box = NodePath("@Node3D@183567/@Area3D@85154/@MeshInstance3D@85156")
 
-[node name="@Area3D@59018" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567" index="0"]
+[node name="@Area3D@85154" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59019" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567/@Area3D@59018"]
-shape = SubResource("BoxShape3D_ea350")
+[node name="@CollisionShape3D@85155" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567/@Area3D@85154"]
+shape = SubResource("BoxShape3D_tfw25")
 
-[node name="@MeshInstance3D@59020" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567/@Area3D@59018"]
+[node name="@MeshInstance3D@85156" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567/@Area3D@85154"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_bj2rw")
+mesh = SubResource("BoxMesh_8nxea")
 
 [node name="ComponentSlot21" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="13" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@183571/@Area3D@59021/@MeshInstance3D@59023")
+highlight_box = NodePath("@Node3D@183571/@Area3D@85157/@MeshInstance3D@85159")
 
-[node name="@Area3D@59021" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571" index="0"]
+[node name="@Area3D@85157" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59022" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571/@Area3D@59021"]
-shape = SubResource("BoxShape3D_s6ryl")
+[node name="@CollisionShape3D@85158" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571/@Area3D@85157"]
+shape = SubResource("BoxShape3D_gssbr")
 
-[node name="@MeshInstance3D@59023" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571/@Area3D@59021"]
+[node name="@MeshInstance3D@85159" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571/@Area3D@85157"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_t62ao")
+mesh = SubResource("BoxMesh_7nglk")
 
 [node name="ComponentSlot7" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="14" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@202154/@Area3D@59024/@MeshInstance3D@59026")
+highlight_box = NodePath("@Node3D@202154/@Area3D@85160/@MeshInstance3D@85162")
 
-[node name="@Area3D@59024" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154" index="0"]
+[node name="@Area3D@85160" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59025" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154/@Area3D@59024"]
-shape = SubResource("BoxShape3D_uebu4")
+[node name="@CollisionShape3D@85161" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154/@Area3D@85160"]
+shape = SubResource("BoxShape3D_jc4vl")
 
-[node name="@MeshInstance3D@59026" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154/@Area3D@59024"]
+[node name="@MeshInstance3D@85162" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154/@Area3D@85160"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_oh1gr")
+mesh = SubResource("BoxMesh_u17el")
 
 [node name="ComponentSlot8" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="15" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@202501/@Area3D@59027/@MeshInstance3D@59029")
+highlight_box = NodePath("@Node3D@202501/@Area3D@85163/@MeshInstance3D@85165")
 
-[node name="@Area3D@59027" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501" index="0"]
+[node name="@Area3D@85163" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59028" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501/@Area3D@59027"]
-shape = SubResource("BoxShape3D_yhfyl")
+[node name="@CollisionShape3D@85164" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501/@Area3D@85163"]
+shape = SubResource("BoxShape3D_qgacs")
 
-[node name="@MeshInstance3D@59029" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501/@Area3D@59027"]
+[node name="@MeshInstance3D@85165" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501/@Area3D@85163"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_6g8e2")
+mesh = SubResource("BoxMesh_uh1qd")
 
 [node name="AlcubierreDriveSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL" index="0" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@182446/@Area3D@59030/@MeshInstance3D@59032")
+highlight_box = NodePath("@Node3D@182446/@Area3D@85166/@MeshInstance3D@85168")
 
-[node name="@Area3D@59030" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446" index="0"]
+[node name="@Area3D@85166" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59031" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446/@Area3D@59030"]
-shape = SubResource("BoxShape3D_u1ckp")
+[node name="@CollisionShape3D@85167" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446/@Area3D@85166"]
+shape = SubResource("BoxShape3D_uyjjh")
 
-[node name="@MeshInstance3D@59032" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446/@Area3D@59030"]
+[node name="@MeshInstance3D@85168" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446/@Area3D@85166"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_tsarm")
+mesh = SubResource("BoxMesh_3q2j1")
 
 [node name="AbyssalJumpDriveSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL" index="1" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@182793/@Area3D@59033/@MeshInstance3D@59035")
+highlight_box = NodePath("@Node3D@182793/@Area3D@85169/@MeshInstance3D@85171")
 
-[node name="@Area3D@59033" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793" index="0"]
+[node name="@Area3D@85169" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59034" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793/@Area3D@59033"]
-shape = SubResource("BoxShape3D_jce0r")
+[node name="@CollisionShape3D@85170" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793/@Area3D@85169"]
+shape = SubResource("BoxShape3D_s7afb")
 
-[node name="@MeshInstance3D@59035" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793/@Area3D@59033"]
+[node name="@MeshInstance3D@85171" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793/@Area3D@85169"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_ml5nn")
+mesh = SubResource("BoxMesh_kr74c")
 
 [node name="ExternalHardpoint" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="0" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@23213/@Area3D@59036/@MeshInstance3D@59038")
+highlight_box = NodePath("@Node3D@23213/@Area3D@85172/@MeshInstance3D@85174")
 
-[node name="@Area3D@59036" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213" index="0"]
+[node name="@Area3D@85172" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59037" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213/@Area3D@59036"]
-shape = SubResource("BoxShape3D_1dqvc")
+[node name="@CollisionShape3D@85173" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213/@Area3D@85172"]
+shape = SubResource("BoxShape3D_snhfw")
 
-[node name="@MeshInstance3D@59038" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213/@Area3D@59036"]
+[node name="@MeshInstance3D@85174" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213/@Area3D@85172"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_p0203")
+mesh = SubResource("BoxMesh_rawjj")
 
 [node name="ExternalHardpoint2" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="1" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@17422/@Area3D@59039/@MeshInstance3D@59041")
+highlight_box = NodePath("@Node3D@17422/@Area3D@85175/@MeshInstance3D@85177")
 
-[node name="@Area3D@59039" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422" index="0"]
+[node name="@Area3D@85175" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59040" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422/@Area3D@59039"]
-shape = SubResource("BoxShape3D_kg4x5")
+[node name="@CollisionShape3D@85176" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422/@Area3D@85175"]
+shape = SubResource("BoxShape3D_plby3")
 
-[node name="@MeshInstance3D@59041" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422/@Area3D@59039"]
+[node name="@MeshInstance3D@85177" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422/@Area3D@85175"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_1swld")
+mesh = SubResource("BoxMesh_gohl6")
 
 [node name="ExternalHardpoint3" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="2" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@17426/@Area3D@59042/@MeshInstance3D@59044")
+highlight_box = NodePath("@Node3D@17426/@Area3D@85178/@MeshInstance3D@85180")
 
-[node name="@Area3D@59042" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426" index="0"]
+[node name="@Area3D@85178" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59043" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426/@Area3D@59042"]
-shape = SubResource("BoxShape3D_h321n")
+[node name="@CollisionShape3D@85179" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426/@Area3D@85178"]
+shape = SubResource("BoxShape3D_fwx3k")
 
-[node name="@MeshInstance3D@59044" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426/@Area3D@59042"]
+[node name="@MeshInstance3D@85180" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426/@Area3D@85178"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_p7uvr")
+mesh = SubResource("BoxMesh_yffq4")
 
 [node name="ExternalHardpoint4" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="3" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@17430/@Area3D@59045/@MeshInstance3D@59047")
+highlight_box = NodePath("@Node3D@17430/@Area3D@85181/@MeshInstance3D@85183")
 
-[node name="@Area3D@59045" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430" index="0"]
+[node name="@Area3D@85181" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59046" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430/@Area3D@59045"]
-shape = SubResource("BoxShape3D_dgp2v")
+[node name="@CollisionShape3D@85182" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430/@Area3D@85181"]
+shape = SubResource("BoxShape3D_2bi16")
 
-[node name="@MeshInstance3D@59047" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430/@Area3D@59045"]
+[node name="@MeshInstance3D@85183" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430/@Area3D@85181"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_s1six")
+mesh = SubResource("BoxMesh_bqavq")
 
 [node name="ExternalHardpoint5" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="4" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@26293/@Area3D@59048/@MeshInstance3D@59050")
+highlight_box = NodePath("@Node3D@26293/@Area3D@85184/@MeshInstance3D@85186")
 
-[node name="@Area3D@59048" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293" index="0"]
+[node name="@Area3D@85184" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59049" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293/@Area3D@59048"]
-shape = SubResource("BoxShape3D_lwe7h")
+[node name="@CollisionShape3D@85185" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293/@Area3D@85184"]
+shape = SubResource("BoxShape3D_jqex5")
 
-[node name="@MeshInstance3D@59050" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293/@Area3D@59048"]
+[node name="@MeshInstance3D@85186" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293/@Area3D@85184"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_8r603")
+mesh = SubResource("BoxMesh_meol7")
 
 [node name="ExternalHardpoint6" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="5" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@17437/@Area3D@59051/@MeshInstance3D@59053")
+highlight_box = NodePath("@Node3D@17437/@Area3D@85187/@MeshInstance3D@85189")
 
-[node name="@Area3D@59051" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437" index="0"]
+[node name="@Area3D@85187" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437" index="0"]
 collision_layer = 524288
 collision_mask = 524288
 
-[node name="@CollisionShape3D@59052" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437/@Area3D@59051"]
-shape = SubResource("BoxShape3D_mith5")
+[node name="@CollisionShape3D@85188" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437/@Area3D@85187"]
+shape = SubResource("BoxShape3D_ef8yb")
 
-[node name="@MeshInstance3D@59053" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437/@Area3D@59051"]
+[node name="@MeshInstance3D@85189" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437/@Area3D@85187"]
 visible = false
 material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_gsdb1")
+mesh = SubResource("BoxMesh_m4bok")
 
 [node name="RabsKestrelMk1RightRadiatorSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Radiators" index="0" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("SlotArea/@MeshInstance3D@59054")
+highlight_box = NodePath("SlotArea/@MeshInstance3D@85190")
 
 [node name="RabsKestrelMk1LeftRadiatorSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Radiators" index="1" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("SlotArea/@MeshInstance3D@59055")
-=======
-highlight_box = NodePath("@Node3D@150794/@Area3D@57514/@MeshInstance3D@57516")
-
-[node name="@Area3D@57514" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57515" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794/@Area3D@57514"]
-shape = SubResource("BoxShape3D_muvi5")
-
-[node name="@MeshInstance3D@57516" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot3/@Node3D@150794/@Area3D@57514"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_sr1qd")
-
-[node name="ComponentSlot4" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="3" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@156398/@Area3D@57517/@MeshInstance3D@57519")
-
-[node name="@Area3D@57517" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57518" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398/@Area3D@57517"]
-shape = SubResource("BoxShape3D_1ujg1")
-
-[node name="@MeshInstance3D@57519" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot4/@Node3D@156398/@Area3D@57517"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_4r8of")
-
-[node name="ComponentSlot11" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="4" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@156426/@Area3D@57520/@MeshInstance3D@57522")
-
-[node name="@Area3D@57520" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57521" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426/@Area3D@57520"]
-shape = SubResource("BoxShape3D_6ah3c")
-
-[node name="@MeshInstance3D@57522" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot11/@Node3D@156426/@Area3D@57520"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_7uhdq")
-
-[node name="ComponentSlot5" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="5" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@175925/@Area3D@57523/@MeshInstance3D@57525")
-
-[node name="@Area3D@57523" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57524" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925/@Area3D@57523"]
-shape = SubResource("BoxShape3D_epyrr")
-
-[node name="@MeshInstance3D@57525" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot5/@Node3D@175925/@Area3D@57523"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_rladd")
-
-[node name="ComponentSlot6" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="6" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@175929/@Area3D@57526/@MeshInstance3D@57528")
-
-[node name="@Area3D@57526" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57527" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929/@Area3D@57526"]
-shape = SubResource("BoxShape3D_6m75n")
-
-[node name="@MeshInstance3D@57528" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot6/@Node3D@175929/@Area3D@57526"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_ksm20")
-
-[node name="ComponentSlot15" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="7" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@175933/@Area3D@57529/@MeshInstance3D@57531")
-
-[node name="@Area3D@57529" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57530" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933/@Area3D@57529"]
-shape = SubResource("BoxShape3D_isyyh")
-
-[node name="@MeshInstance3D@57531" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot15/@Node3D@175933/@Area3D@57529"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_naagx")
-
-[node name="ComponentSlot16" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="8" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@175937/@Area3D@57532/@MeshInstance3D@57534")
-
-[node name="@Area3D@57532" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57533" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937/@Area3D@57532"]
-shape = SubResource("BoxShape3D_7xpcy")
-
-[node name="@MeshInstance3D@57534" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot16/@Node3D@175937/@Area3D@57532"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_q1m1r")
-
-[node name="ComponentSlot17" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="9" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@179146/@Area3D@57535/@MeshInstance3D@57537")
-
-[node name="@Area3D@57535" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57536" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146/@Area3D@57535"]
-shape = SubResource("BoxShape3D_068vr")
-
-[node name="@MeshInstance3D@57537" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot17/@Node3D@179146/@Area3D@57535"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_j8bng")
-
-[node name="ComponentSlot18" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="10" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@179150/@Area3D@57538/@MeshInstance3D@57540")
-
-[node name="@Area3D@57538" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57539" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150/@Area3D@57538"]
-shape = SubResource("BoxShape3D_omh0o")
-
-[node name="@MeshInstance3D@57540" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot18/@Node3D@179150/@Area3D@57538"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_k0s6o")
-
-[node name="ComponentSlot19" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="11" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@183563/@Area3D@57541/@MeshInstance3D@57543")
-
-[node name="@Area3D@57541" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57542" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563/@Area3D@57541"]
-shape = SubResource("BoxShape3D_jau86")
-
-[node name="@MeshInstance3D@57543" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot19/@Node3D@183563/@Area3D@57541"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_7ag1n")
-
-[node name="ComponentSlot20" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="12" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@183567/@Area3D@57544/@MeshInstance3D@57546")
-
-[node name="@Area3D@57544" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57545" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567/@Area3D@57544"]
-shape = SubResource("BoxShape3D_rmp41")
-
-[node name="@MeshInstance3D@57546" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot20/@Node3D@183567/@Area3D@57544"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_e4057")
-
-[node name="ComponentSlot21" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="13" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@183571/@Area3D@57547/@MeshInstance3D@57549")
-
-[node name="@Area3D@57547" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57548" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571/@Area3D@57547"]
-shape = SubResource("BoxShape3D_incrv")
-
-[node name="@MeshInstance3D@57549" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot21/@Node3D@183571/@Area3D@57547"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_6rtvb")
-
-[node name="ComponentSlot7" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="14" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@202154/@Area3D@57550/@MeshInstance3D@57552")
-
-[node name="@Area3D@57550" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57551" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154/@Area3D@57550"]
-shape = SubResource("BoxShape3D_f43st")
-
-[node name="@MeshInstance3D@57552" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot7/@Node3D@202154/@Area3D@57550"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_rnfnd")
-
-[node name="ComponentSlot8" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components" index="15" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@202501/@Area3D@57553/@MeshInstance3D@57555")
-
-[node name="@Area3D@57553" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57554" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501/@Area3D@57553"]
-shape = SubResource("BoxShape3D_75jer")
-
-[node name="@MeshInstance3D@57555" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Components/ComponentSlot8/@Node3D@202501/@Area3D@57553"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_5rjoo")
-
-[node name="AlcubierreDriveSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL" index="0" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@182446/@Area3D@57556/@MeshInstance3D@57558")
-
-[node name="@Area3D@57556" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57557" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446/@Area3D@57556"]
-shape = SubResource("BoxShape3D_e3gyc")
-
-[node name="@MeshInstance3D@57558" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AlcubierreDriveSlot/@Node3D@182446/@Area3D@57556"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_0mydg")
-
-[node name="AbyssalJumpDriveSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL" index="1" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@182793/@Area3D@57559/@MeshInstance3D@57561")
-
-[node name="@Area3D@57559" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57560" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793/@Area3D@57559"]
-shape = SubResource("BoxShape3D_xv1dv")
-
-[node name="@MeshInstance3D@57561" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793/@Area3D@57559"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_vcw61")
-
-[node name="ExternalHardpoint" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="0" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@23213/@Area3D@57562/@MeshInstance3D@57564")
-
-[node name="@Area3D@57562" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57563" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213/@Area3D@57562"]
-shape = SubResource("BoxShape3D_wupkv")
-
-[node name="@MeshInstance3D@57564" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/@Node3D@23213/@Area3D@57562"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_qkidu")
-
-[node name="ExternalHardpoint2" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="1" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@17422/@Area3D@57565/@MeshInstance3D@57567")
-
-[node name="@Area3D@57565" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57566" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422/@Area3D@57565"]
-shape = SubResource("BoxShape3D_q5j5q")
-
-[node name="@MeshInstance3D@57567" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint2/@Node3D@17422/@Area3D@57565"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_n7iyp")
-
-[node name="ExternalHardpoint3" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="2" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@17426/@Area3D@57568/@MeshInstance3D@57570")
-
-[node name="@Area3D@57568" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57569" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426/@Area3D@57568"]
-shape = SubResource("BoxShape3D_i845m")
-
-[node name="@MeshInstance3D@57570" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint3/@Node3D@17426/@Area3D@57568"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_yfi0f")
-
-[node name="ExternalHardpoint4" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="3" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@17430/@Area3D@57571/@MeshInstance3D@57573")
-
-[node name="@Area3D@57571" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57572" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430/@Area3D@57571"]
-shape = SubResource("BoxShape3D_g527a")
-
-[node name="@MeshInstance3D@57573" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint4/@Node3D@17430/@Area3D@57571"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_avrut")
-
-[node name="ExternalHardpoint5" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="4" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@26293/@Area3D@57574/@MeshInstance3D@57576")
-
-[node name="@Area3D@57574" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57575" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293/@Area3D@57574"]
-shape = SubResource("BoxShape3D_qps5n")
-
-[node name="@MeshInstance3D@57576" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint5/@Node3D@26293/@Area3D@57574"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_jfluk")
-
-[node name="ExternalHardpoint6" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints" index="5" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("@Node3D@17437/@Area3D@57577/@MeshInstance3D@57579")
-
-[node name="@Area3D@57577" type="Area3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437" index="0"]
-collision_layer = 524288
-collision_mask = 524288
-
-[node name="@CollisionShape3D@57578" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437/@Area3D@57577"]
-shape = SubResource("BoxShape3D_u4ci6")
-
-[node name="@MeshInstance3D@57579" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint6/@Node3D@17437/@Area3D@57577"]
-visible = false
-material_override = ExtResource("9_ix3kk")
-mesh = SubResource("BoxMesh_3v3be")
-
-[node name="RabsKestrelMk1RightRadiatorSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Radiators" index="0" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("SlotArea/@MeshInstance3D@57580")
-
-[node name="RabsKestrelMk1LeftRadiatorSlot" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Radiators" index="1" node_paths=PackedStringArray("highlight_box")]
-highlight_box = NodePath("SlotArea/@MeshInstance3D@57581")
+highlight_box = NodePath("SlotArea/@MeshInstance3D@85191")
 
 [node name="Cube_025" parent="SubViewportContainer/SubViewport/World/SystemA/Ship1/TestShield/KestrelMk1ShieldMesh" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_s558k")
@@ -1088,10 +580,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_s558k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
 control_entity = NodePath("../SystemA/Humanoid")
 
+[connection signal="finished" from="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/Size6Weapon/AudioStreamPlayer3D" to="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/Size6Weapon" method="_on_audio_stream_player_3d_finished"]
+
 [editable path="SubViewportContainer/SubViewport/World/SystemA/Ship1"]
 [editable path="SubViewportContainer/SubViewport/World/SystemA/Ship1/ShipPidControllers"]
 [editable path="SubViewportContainer/SubViewport/World/SystemA/Ship1/Mesh/Exterior/Hull2"]
-[editable path="SubViewportContainer/SubViewport/World/SystemA/Ship1/Interior/Bridge/RabsControlSeat3"]
 [editable path="SubViewportContainer/SubViewport/World/SystemA/Ship1/Modules/Hardpoints/ExternalHardpoint/Size6Weapon"]
 [editable path="SubViewportContainer/SubViewport/World/SystemA/Ship1/TestShield/KestrelMk1ShieldMesh"]
 [editable path="SubViewportContainer/SubViewport/World/SystemA/Ship1/ThrusterAnimationPlayer"]

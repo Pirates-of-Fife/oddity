@@ -1,6 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bxqf1dxwfvcbt"]
-
-[ext_resource type="Script" path="res://classes/starship/ThrusterAnimationTool.gd" id="2_w7ubs"]
+[gd_scene load_steps=56 format=3 uid="uid://bxqf1dxwfvcbt"]
 
 [sub_resource type="Animation" id="Animation_3xh5u"]
 
@@ -243,7 +241,6 @@ node_connections = [&"Add2", 0, &"Pitch", &"Add2", 1, &"Add2 3", &"Add2 3", 0, &
 libraries = {
 "": SubResource("AnimationLibrary_tbcdq")
 }
-script = ExtResource("2_w7ubs")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../..")
