@@ -49,7 +49,7 @@ func insert(slot : DynamicModuleSlot) -> void:
 
 	if get_parent_node_3d() != module_slot:
 		reparent.call_deferred(module_slot)
-	
+
 	module_slot.module_inserted.emit(self)
 	inserted.emit(module_slot)
 
