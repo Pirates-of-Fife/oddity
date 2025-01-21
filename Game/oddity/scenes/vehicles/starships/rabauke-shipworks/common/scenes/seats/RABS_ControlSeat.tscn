@@ -13,6 +13,8 @@ collision_mask = 536871936
 script = ExtResource("1_8wvia")
 control_seat_anchor = NodePath("Anchor")
 spawn_location = NodePath("Marker3D")
+min_distance = 25.0
+max_distance = 500.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15409, 0)

@@ -17,6 +17,14 @@ var entity_parent : Node3D
 @export
 var spawn_location : Marker3D 
 
+@export_category("Third Person")
+
+@export
+var min_distance : float = 10
+
+@export
+var max_distance : float = 100
+
 func _ready() -> void:
 	add_to_group("ControlSeat")
 
@@ -32,6 +40,8 @@ func enter_seat(player : Mind, control_entity : ControlEntity) -> void:
 	entity_parent = control_entity.get_parent_node_3d()
 	entity_using_seat = control_entity
 	player_using_seat = player
+	
+	print(control_seat_anchor)
 	
 	target_control_entity.set_active_anchor(control_seat_anchor)
 	player_using_seat.possess(target_control_entity)
@@ -53,4 +63,19 @@ func exit_seat() -> void:
 
 	if target_control_entity is Vehicle:
 		target_control_entity.active_control_seat = null
-		
+	
+	reset_view()
+
+func enter_third_person_view() -> void:
+	control_seat_anchor.camera_anchor.position.z = min_distance
+	
+func reset_view() -> void:
+	control_seat_anchor.camera_anchor.position = Vector3.ZERO
+
+func increase_distance(distance : float) -> void:
+	control_seat_anchor.camera_anchor.position.z += distance
+	control_seat_anchor.camera_anchor.position.z = clampf(control_seat_anchor.camera_anchor.position.z, min_distance, max_distance)
+
+func decrease_distance(distance : float) -> void:
+	control_seat_anchor.camera_anchor.position.z -= distance
+	control_seat_anchor.camera_anchor.position.z = clampf(control_seat_anchor.camera_anchor.position.z, min_distance, max_distance)
