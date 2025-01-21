@@ -13,6 +13,8 @@ collision_mask = 536871936
 script = ExtResource("1_8wvia")
 control_seat_anchor = NodePath("Anchor")
 spawn_location = NodePath("Marker3D")
+min_distance = 25.0
+max_distance = 500.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15409, 0)
@@ -26,3 +28,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0464789, 0.761728, 1.3198)
 
 [node name="Anchor" parent="." instance=ExtResource("3_xokpb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02091, 0)
+enable_twist_limit = true
+twist_limit = 179.0
+enable_pitch_limit = true
+pitch_limit = 90.0

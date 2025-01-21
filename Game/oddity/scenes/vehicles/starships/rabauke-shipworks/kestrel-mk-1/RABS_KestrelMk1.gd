@@ -229,7 +229,6 @@ func toggle_landing_gear() -> void:
 		$Interior/Bridge/LandingGearLabel.show()
 		landing_gear_on = true
 
-
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is Projectile:
 		body.activate_collision()

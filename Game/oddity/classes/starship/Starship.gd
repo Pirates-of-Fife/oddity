@@ -318,10 +318,28 @@ func toggle_power_state() -> void:
 		power_state_change_complete = false
 		state_changed_to_power_off.emit()
 
+func on_third_person() -> void:
+	if third_person:
+		active_control_seat.reset_view()
+		third_person = false
+	else:
+		active_control_seat.enter_third_person_view()
+		third_person = true
+
+func on_increase_distance() -> void:
+	active_control_seat.increase_distance(third_person_distance_change_sensitivity)
+
+func on_decrease_distance() -> void:
+	active_control_seat.decrease_distance(third_person_distance_change_sensitivity)
+
 
 func _starship_ready() -> void:
 	_default_ready()
-
+	
+	toggle_third_person_view.connect(on_third_person)
+	increase_third_person_distance.connect(on_increase_distance)
+	decrease_third_person_distance.connect(on_decrease_distance)
+	
 	body_entered.connect(on_collision)
 	on_damage_taken.connect(ship_take_damage)
 

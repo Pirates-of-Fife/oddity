@@ -21,7 +21,8 @@ var tertiary_direction : Directions
 var current_thrust : float :
 	set(value):
 		current_thrust = clampf(value, 0, 1)
-		(module as Thruster).current_thrust = current_thrust
+		if module != null:
+			(module as Thruster).current_thrust = current_thrust
 	get:
 		return current_thrust
 

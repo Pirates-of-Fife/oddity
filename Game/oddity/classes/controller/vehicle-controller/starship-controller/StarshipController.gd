@@ -45,6 +45,9 @@ var mouse_joystick_deadzone : float = 0.04
 var ship_mouse_controls_sensitivity : float = Globals.starship_controller_sensitity
 
 @export
+var look_around_sensitivity : float = Globals.creature_controller_sensitivity
+
+@export
 var keyboard_throttle_sensitivity : float = 0.8
 
 @export
@@ -119,9 +122,39 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				vehicle_exit_seat_command.execute(control_entity)
+				
+				if control_entity is RABS_KestrelMk1:
+					control_entity.show_interior()
 
 		if (Input.is_action_just_pressed("starship_cycle_power_state")):
 			starship_cycle_power_state_command.execute(control_entity)
+				
+		if (Input.is_action_just_pressed("general_third_person")):
+			general_toggle_third_person_command.execute(control_entity)
+			third_person = !third_person
+		
+		if (Input.is_action_just_pressed("general_toogle_look_around")):
+			mouse_yaw = 0
+			mouse_pitch = 0
+			general_toggle_look_around_command.execute(control_entity)
+			look_around = !look_around
+
+		if look_around:
+			if control_entity.active_control_seat != null:
+				control_entity.active_control_seat.control_seat_anchor.look(mouse_yaw, mouse_pitch)
+			
+			if (Input.is_action_just_pressed("general_third_person_increase_distance")):
+				general_increase_third_person_distance_command.execute(control_entity)
+			
+			if (Input.is_action_just_pressed("general_third_person_decrease_distance")):
+				general_decrease_third_person_distance_command.execute(control_entity)
+			
+			mouse_yaw = 0
+			mouse_pitch = 0
+		else:
+			if !third_person:
+				if control_entity.active_control_seat != null:
+					control_entity.active_control_seat.control_seat_anchor.reset()
 
 		if !control_entity.is_powered_on():
 			return
@@ -171,32 +204,33 @@ func _starship_controller_process(delta : float) -> void:
 
 		# Starship Mouse Pitch
 
-		var deadzoned_yaw : float = mouse_yaw
-		var deazoned_pitch : float = mouse_pitch
+		if !look_around:
+			var deadzoned_yaw : float = mouse_yaw
+			var deazoned_pitch : float = mouse_pitch
 
-		if abs(mouse_yaw) < mouse_joystick_deadzone:
-			deadzoned_yaw = 0
+			if abs(mouse_yaw) < mouse_joystick_deadzone:
+				deadzoned_yaw = 0
 
-		if abs(mouse_pitch) < mouse_joystick_deadzone:
-			deazoned_pitch = 0
+			if abs(mouse_pitch) < mouse_joystick_deadzone:
+				deazoned_pitch = 0
 
-		if (mouse_pitch > 0):
-			starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(abs(deazoned_pitch)))
-		else:
-			starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(abs(deazoned_pitch)))
+			if (mouse_pitch > 0):
+				starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(abs(deazoned_pitch)))
+			else:
+				starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(abs(deazoned_pitch)))
 
-		# Starship Mouse Yaw
+			# Starship Mouse Yaw
 
-		if (mouse_yaw > 0):
-			starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(abs(deadzoned_yaw)))
-		else:
-			starship_yaw_right_command.execute(control_entity, StarshipYawRightCommand.Params.new(abs(deadzoned_yaw)))
+			if (mouse_yaw > 0):
+				starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(abs(deadzoned_yaw)))
+			else:
+				starship_yaw_right_command.execute(control_entity, StarshipYawRightCommand.Params.new(abs(deadzoned_yaw)))
 
-		if (Input.is_action_just_pressed("starship_increase_max_velocity")):
-			starship_increase_max_velocity_command.execute(control_entity, StarshipIncreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
+			if (Input.is_action_just_pressed("starship_increase_max_velocity")):
+				starship_increase_max_velocity_command.execute(control_entity, StarshipIncreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
 
-		if (Input.is_action_just_pressed("starship_decrease_max_velocity")):
-			starship_decrease_max_velocity_command.execute(control_entity, StarshipDecreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
+			if (Input.is_action_just_pressed("starship_decrease_max_velocity")):
+				starship_decrease_max_velocity_command.execute(control_entity, StarshipDecreaseMaxVelocityCommand.Params.new(velocity_change_on_scroll))
 
 		if (Input.is_action_just_pressed("starship_toggle_landing_gear")):
 			starship_toggle_landing_gear_command.execute(control_entity)
@@ -237,15 +271,18 @@ func _starship_controller_process(delta : float) -> void:
 			starship_shoot_secondary_command.execute(control_entity)
 
 
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			mouse_yaw += lerp(0,1,clamp(event.relative.x * get_process_delta_time(),-1,1)) * ship_mouse_controls_sensitivity
-			mouse_pitch += lerp(0,1,clamp(event.relative.y * get_process_delta_time(),-1,1)) * ship_mouse_controls_sensitivity
+			if look_around:
+				mouse_yaw = - event.relative.x * look_around_sensitivity
+				mouse_pitch = - event.relative.y * look_around_sensitivity
+			else:
+				mouse_yaw += lerp(0,1,clamp(event.relative.x * get_process_delta_time(),-1,1)) * ship_mouse_controls_sensitivity
+				mouse_pitch += lerp(0,1,clamp(event.relative.y * get_process_delta_time(),-1,1)) * ship_mouse_controls_sensitivity
 
-			mouse_yaw = clamp(mouse_yaw, -1, 1)
-			mouse_pitch = clamp(mouse_pitch, -1, 1)
+				mouse_yaw = clamp(mouse_yaw, -1, 1)
+				mouse_pitch = clamp(mouse_pitch, -1, 1)
 
 func _on_throttle_deadzone_reset_timer_timeout() -> void:
 	if (abs(current_throttle_forwards_axis) < keyboard_throttle_deadzone):
