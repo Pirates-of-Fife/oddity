@@ -28,3 +28,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0464789, 0.761728, 1.3198)
 
 [node name="Anchor" parent="." instance=ExtResource("3_xokpb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02091, 0)
+enable_twist_limit = true
+twist_limit = 179.0
+enable_pitch_limit = true
+pitch_limit = 90.0

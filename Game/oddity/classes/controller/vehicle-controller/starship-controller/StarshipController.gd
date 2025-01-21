@@ -122,6 +122,9 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				vehicle_exit_seat_command.execute(control_entity)
+				
+				if control_entity is RABS_KestrelMk1:
+					control_entity.show_interior()
 
 		if (Input.is_action_just_pressed("starship_cycle_power_state")):
 			starship_cycle_power_state_command.execute(control_entity)
@@ -135,7 +138,6 @@ func _starship_controller_process(delta : float) -> void:
 			mouse_pitch = 0
 			general_toggle_look_around_command.execute(control_entity)
 			look_around = !look_around
-
 
 		if look_around:
 			if control_entity.active_control_seat != null:
@@ -151,7 +153,8 @@ func _starship_controller_process(delta : float) -> void:
 			mouse_pitch = 0
 		else:
 			if !third_person:
-				control_entity.active_control_seat.control_seat_anchor.reset()
+				if control_entity.active_control_seat != null:
+					control_entity.active_control_seat.control_seat_anchor.reset()
 
 		if !control_entity.is_powered_on():
 			return

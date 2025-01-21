@@ -54,6 +54,8 @@ func enter_seat(player : Mind, control_entity : ControlEntity) -> void:
 		print(target_control_entity.active_control_seat)
 	
 func exit_seat() -> void:
+	reset_view()
+	
 	entity_using_seat.unfreeze()
 	entity_using_seat.reparent.call_deferred(entity_parent)
 	player_using_seat.possess(entity_using_seat)
@@ -64,10 +66,9 @@ func exit_seat() -> void:
 	if target_control_entity is Vehicle:
 		target_control_entity.active_control_seat = null
 	
-	reset_view()
 
 func enter_third_person_view() -> void:
-	control_seat_anchor.camera_anchor.position.z = min_distance
+	control_seat_anchor.camera_anchor.position.z = 50
 	
 func reset_view() -> void:
 	control_seat_anchor.camera_anchor.position = Vector3.ZERO
