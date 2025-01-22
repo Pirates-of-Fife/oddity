@@ -30,6 +30,11 @@ var starship_cycle_system_command : StarshipCycleSelectedSystemCommand = Starshi
 
 var starship_shoot_primary_command : StarshipShootPrimaryCommand = StarshipShootPrimaryCommand.new()
 var starship_shoot_secondary_command : StarshipShootSecondaryCommand = StarshipShootSecondaryCommand.new()
+var starship_shoot_tertiary_command : StarshipShootTertiaryCommand = StarshipShootTertiaryCommand.new()
+
+var starship_stop_shooting_primary_command : StarshipStopShootingPrimaryCommand = StarshipStopShootingPrimaryCommand.new()
+var starship_stop_shooting_secondary_command : StarshipStopShootingSecondaryCommand = StarshipStopShootingSecondaryCommand.new()
+var starship_stop_shooting_tertiary_command : StarshipStopShootingTertiaryCommand = StarshipStopShootingTertiaryCommand.new()
 
 var starship_cycle_power_state_command : StarshipCyclePowerStateCommand = StarshipCyclePowerStateCommand.new()
 
@@ -266,10 +271,21 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_pressed("starship_shoot_primary_weapons")):
 			starship_shoot_primary_command.execute(control_entity)
-
+		
 		if (Input.is_action_pressed("starship_shoot_secondary_weapons")):
 			starship_shoot_secondary_command.execute(control_entity)
+		
+		if (Input.is_action_pressed("starship_shoot_tertiary_weapons")):
+			starship_shoot_tertiary_command.execute(control_entity)
 
+		if (Input.is_action_just_released("starship_shoot_primary_weapons")):
+			starship_stop_shooting_primary_command.execute(control_entity)
+		
+		if (Input.is_action_just_released("starship_shoot_secondary_weapons")):
+			starship_stop_shooting_secondary_command.execute(control_entity)
+		
+		if (Input.is_action_just_released("starship_shoot_tertiary_weapons")):
+			starship_stop_shooting_tertiary_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
