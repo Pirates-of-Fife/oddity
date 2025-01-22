@@ -137,16 +137,10 @@ signal alcubierre_drive_charging_ended
 
 @export_subgroup("Weapons")
 @export
-var primary_hardpoints_node_path : Array
+var hardpoints_root : Node3D
 
 @onready
-var primary_hardpoints : Array = load_nodes(primary_hardpoints_node_path)
-
-@export
-var secondary_hardpoints_node_path : Array
-
-@onready
-var secondary_hardpoints : Array = load_nodes(secondary_hardpoints_node_path)
+var hardpoints : Array
 
 @export_subgroup("Thrusters")
 
@@ -440,6 +434,10 @@ func _starship_ready() -> void:
 				reward = randi_range(60000, 120000)
 				
 	get_thrusters()
+	
+	for c : Node3D in hardpoints_root.get_children():
+		if c is Hardpoint:
+			hardpoints.append(c)
 
 enum Directions
 {
@@ -658,10 +656,11 @@ func shoot_primary() -> void:
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
-
-	for hardpoint : Hardpoint in primary_hardpoints:
-		if hardpoint.module != null:
-			hardpoint.module.shoot()
+	
+	for hardpoint : Hardpoint in hardpoints:
+		if hardpoint.assignment == Hardpoint.HardpointAssignment.PRIMARY:
+			if hardpoint.module != null:
+				hardpoint.module.shoot()
 
 func shoot_secondary() -> void:
 	if !is_powered_on():
@@ -670,9 +669,58 @@ func shoot_secondary() -> void:
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
 
-	for hardpoint : Hardpoint in secondary_hardpoints:
-		if hardpoint.module != null:
-			hardpoint.module.shoot()
+	for hardpoint : Hardpoint in hardpoints:
+		if hardpoint.assignment == Hardpoint.HardpointAssignment.SECONDARY:
+			if hardpoint.module != null:
+				hardpoint.module.shoot()
+			
+func shoot_tertiary() -> void:
+	if !is_powered_on():
+		return
+
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+
+	for hardpoint : Hardpoint in hardpoints:
+		if hardpoint.assignment == Hardpoint.HardpointAssignment.TERTIARY:
+			if hardpoint.module != null:
+				hardpoint.module.shoot()
+
+func stop_shooting_primary() -> void:
+	if !is_powered_on():
+		return
+
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+
+	for hardpoint : Hardpoint in hardpoints:
+		if hardpoint.assignment == Hardpoint.HardpointAssignment.PRIMARY:
+			if hardpoint.module != null:
+				hardpoint.module.stop_shooting()
+
+func stop_shooting_secondary() -> void:
+	if !is_powered_on():
+		return
+
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+
+	for hardpoint : Hardpoint in hardpoints:
+		if hardpoint.assignment == Hardpoint.HardpointAssignment.SECONDARY:
+			if hardpoint.module != null:
+				hardpoint.module.stop_shooting()
+			
+func stop_shooting_tertiary() -> void:
+	if !is_powered_on():
+		return
+
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		return
+
+	for hardpoint : Hardpoint in hardpoints:
+		if hardpoint.assignment == Hardpoint.HardpointAssignment.TERTIARY:
+			if hardpoint.module != null:
+				hardpoint.module.stop_shooting()
 
 func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
 	alcubierre_drive_removed.emit(alcubierre_drive)

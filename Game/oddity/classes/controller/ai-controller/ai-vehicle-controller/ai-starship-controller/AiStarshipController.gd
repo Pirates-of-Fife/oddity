@@ -20,6 +20,8 @@ var starship_toggle_landing_gear_command : StarshipToggleLandingGearCommand = St
 
 var starship_shoot_primary_command : StarshipShootPrimaryCommand = StarshipShootPrimaryCommand.new()
 var starship_shoot_secondary_command : StarshipShootSecondaryCommand = StarshipShootSecondaryCommand.new()
+var starship_shoot_tertiary_command : StarshipShootTertiaryCommand = StarshipShootTertiaryCommand.new()
+
 
 @export_category("AI Settings")
 
@@ -220,6 +222,7 @@ func thrust_towards() -> void:
 func shoot_player() -> void:
 	starship_shoot_primary_command.execute(control_entity)
 	starship_shoot_secondary_command.execute(control_entity)
+	starship_shoot_tertiary_command.execute(control_entity)
 	
 func evade() -> void:
 	var evasion_amount : float = randf_range(0.1, 0.5)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bkvastwu4s12v"]
 
-[ext_resource type="Script" path="res://classes/module/weapon/Weapon.gd" id="1_6y1sr"]
+[ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeapon.gd" id="1_sl6ec"]
 [ext_resource type="Resource" uid="uid://d0swmobju4op7" path="res://scenes/modules/test-module/Size6Weapon/Size6WeaponResource.tres" id="2_ys687"]
 [ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="3_tq2k2"]
 [ext_resource type="PackedScene" uid="uid://pjimcldb2p2a" path="res://scenes/modules/test-module/Size6Weapon/size-6.glb" id="4_n0yfi"]
@@ -15,7 +15,7 @@ points = PackedVector3Array(-0.659806, -0.00366032, 0.247827, -0.570881, -0.3596
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 100.0
-script = ExtResource("1_6y1sr")
+script = ExtResource("1_sl6ec")
 size = 6
 nozzle = NodePath("Nozzle")
 audio = NodePath("AudioStreamPlayer3D")
