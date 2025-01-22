@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfvksrbt0dyo2"]
+
+[ext_resource type="PackedScene" uid="uid://0nhva35fq5ge" path="res://classes/multi-function-display/hardpoint-assignment-screen/ShipOutlineSelectionUi.tscn" id="2_46kkq"]
+[ext_resource type="PackedScene" uid="uid://djulhrtweiemd" path="res://classes/multi-function-display/hardpoint-assignment-screen/AssignmentButton.tscn" id="4_jqi23"]
+
+[sub_resource type="GDScript" id="GDScript_l3j65"]
+resource_name = "HardpointAssignmentDisplay"
+script/source = "extends Node3D
+
+@export
+var upper_left : Hardpoint
+
+@export
+var lower_left : Hardpoint
+
+@export
+var lower_right : Hardpoint
+
+@export
+var upper_right : Hardpoint
+
+@export
+var turret_left : Hardpoint
+
+@export
+var turret_right : Hardpoint
+
+func _ready() -> void:
+	$UpperLeft.hardpoint = upper_left
+	$LowerLeft.hardpoint = lower_left
+	$LowerRight.hardpoint = lower_right
+	$UpperRight.hardpoint = upper_right
+	$TurretLeft.hardpoint = turret_left
+	$TurretRight.hardpoint = turret_right
+	
+	$UpperLeft.set_ready()
+	$LowerLeft.set_ready()
+	$LowerRight.set_ready()
+	$UpperRight.set_ready()
+	$TurretLeft.set_ready()
+	$TurretRight.set_ready()
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_86sre"]
+viewport_path = NodePath("SubViewport2")
+
+[node name="HardpointAssignmentDisplay" type="Node3D"]
+script = SubResource("GDScript_l3j65")
+
+[node name="UpperLeft" parent="." instance=ExtResource("4_jqi23")]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, -2.56313, 2.6923, 0)
+
+[node name="LowerLeft" parent="." instance=ExtResource("4_jqi23")]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 1.68878, 2.6923, 0)
+
+[node name="LowerRight" parent="." instance=ExtResource("4_jqi23")]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 1.97146, 1.32697, 0)
+
+[node name="UpperRight" parent="." instance=ExtResource("4_jqi23")]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, -3.01505, 0.173061, 0)
+
+[node name="TurretLeft" parent="." instance=ExtResource("4_jqi23")]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, -3.29891, -1.489, 0)
+
+[node name="TurretRight" parent="." instance=ExtResource("4_jqi23")]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.67175, -1.34661, 0)
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="Control" parent="SubViewport2" instance=ExtResource("2_46kkq")]
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_86sre")

@@ -1,0 +1,125 @@
+[gd_scene load_steps=4 format=3 uid="uid://0nhva35fq5ge"]
+
+[ext_resource type="Texture2D" uid="uid://3lfknxwae4ax" path="res://classes/multi-function-display/hardpoint-assignment-screen/ShipOutline.svg" id="1_fp5ii"]
+[ext_resource type="Texture2D" uid="uid://ctq66e34y8pu7" path="res://classes/multi-function-display/hardpoint-assignment-screen/O.svg" id="2_t4vvy"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_7883g"]
+
+[node name="SelectionUi" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1922.0
+offset_bottom = 1081.0
+
+[node name="Starship" type="Sprite2D" parent="."]
+position = Vector2(972, 550)
+scale = Vector2(1.468, 1.468)
+texture = ExtResource("1_fp5ii")
+
+[node name="Ring" type="Sprite2D" parent="."]
+position = Vector2(953, 364)
+scale = Vector2(0.143443, 0.143443)
+texture = ExtResource("2_t4vvy")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(946, 350, 897, 198, 688, 199)
+width = 5.0
+default_color = Color(0, 0.435294, 1, 1)
+
+[node name="Ring2" type="Sprite2D" parent="."]
+position = Vector2(998, 364)
+scale = Vector2(0.143443, 0.143443)
+texture = ExtResource("2_t4vvy")
+
+[node name="Ring3" type="Sprite2D" parent="."]
+position = Vector2(945, 705)
+scale = Vector2(0.143443, 0.143443)
+texture = ExtResource("2_t4vvy")
+
+[node name="Ring4" type="Sprite2D" parent="."]
+position = Vector2(1012, 706)
+scale = Vector2(0.143443, 0.143443)
+texture = ExtResource("2_t4vvy")
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2(271, 4)
+points = PackedVector2Array(732, 375, 865, 335, 1033, 336)
+width = 5.0
+default_color = Color(0, 0.435294, 1, 1)
+
+[node name="Line2D3" type="Line2D" parent="."]
+position = Vector2(290, 341)
+points = PackedVector2Array(733, 351, 808, 263, 1084, 265)
+width = 5.0
+default_color = Color(0, 0.435294, 1, 1)
+
+[node name="Line2D4" type="Line2D" parent="."]
+position = Vector2(101, 316)
+points = PackedVector2Array(829, 381, 742, 310, 519, 310)
+width = 5.0
+default_color = Color(0, 0.435294, 1, 1)
+
+[node name="UpperLeft" type="Label" parent="."]
+layout_mode = 0
+offset_left = 689.0
+offset_top = 191.0
+offset_right = 912.0
+offset_bottom = 237.0
+theme_override_fonts/font = ExtResource("3_7883g")
+text = "Upper Left"
+
+[node name="UpperRight" type="Label" parent="."]
+layout_mode = 0
+offset_left = 637.0
+offset_top = 446.0
+offset_right = 860.0
+offset_bottom = 492.0
+theme_override_fonts/font = ExtResource("3_7883g")
+text = "Upper Right"
+
+[node name="LowerLeft" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1118.0
+offset_top = 187.0
+offset_right = 1341.0
+offset_bottom = 233.0
+theme_override_fonts/font = ExtResource("3_7883g")
+text = "Lower Left"
+
+[node name="LowerRight" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1143.0
+offset_top = 332.0
+offset_right = 1366.0
+offset_bottom = 378.0
+theme_override_fonts/font = ExtResource("3_7883g")
+text = "Lower Right"
+
+[node name="TurretLeft" type="Label" parent="."]
+layout_mode = 0
+offset_left = 623.0
+offset_top = 617.0
+offset_right = 846.0
+offset_bottom = 663.0
+theme_override_fonts/font = ExtResource("3_7883g")
+text = "Turret Left"
+
+[node name="TurretRight" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1202.0
+offset_top = 601.0
+offset_right = 1425.0
+offset_bottom = 647.0
+theme_override_fonts/font = ExtResource("3_7883g")
+text = "Turret Right"
+
+[node name="Line2D5" type="Line2D" parent="."]
+position = Vector2(-3, -3)
+points = PackedVector2Array(991, 380, 838, 456, 643, 457)
+width = 5.0
+default_color = Color(0, 0.435294, 1, 1)
+
+[node name="Line2D6" type="Line2D" parent="."]
+position = Vector2(271, 4)
+points = PackedVector2Array(694, 350, 803, 188, 1002, 189)
+width = 5.0
+default_color = Color(0, 0.435294, 1, 1)
