@@ -17,6 +17,9 @@ var snapped_to : CargoArea
 @export
 var contents : String
 
+@export
+var initialize_collision_shape_automatically : bool = true
+
 enum CargoContainerDirection
 {
 	X,
@@ -32,7 +35,9 @@ func _process(delta: float) -> void:
 
 func _cargo_container_ready() -> void:
 	_default_ready()
-	_initialize_collision_shape()
+	
+	if initialize_collision_shape_automatically:
+		_initialize_collision_shape()
 
 func _cargo_container_process(delta : float) -> void:
 	_default_process(delta)
