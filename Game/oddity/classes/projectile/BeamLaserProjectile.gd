@@ -49,8 +49,6 @@ func _on_timer_timeout() -> void:
 		return
 	
 	var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * damage
-
-	print(damage_at_distance)
 		
 	if last_hit is GameEntity:
 		last_hit.take_damage(damage_at_distance)
