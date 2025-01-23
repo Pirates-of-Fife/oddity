@@ -22,11 +22,19 @@ var raycast : RayCast3D
 @export
 var beam_mesh : MeshInstance3D
 
+@export
+var mining_efficiency : float
+
+@export
+var can_extract_resources : bool = false
+
 var timer : Timer = Timer.new()
 
 var is_started : bool = false
 var last_hit : Node3D
 var hit_distance : float
+var hit_position : Vector3
+var hit_normal : Vector3
 
 func _ready() -> void:
 	_beam_laser_projectile_ready()
@@ -60,8 +68,14 @@ func _on_timer_timeout() -> void:
 	if last_hit is StaticGameEntity:
 		last_hit.take_damage(damage_at_distance)
 		hit.emit(last_hit)
-
+	
 	# Mining Stuff here later
+	
+	if can_extract_resources:
+		if last_hit is Minable:
+			var mining_efficiency_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * mining_efficiency
+			last_hit.mine(mining_efficiency_at_distance, hit_position, hit_normal)
+			hit.emit(last_hit)
 
 func _process(delta: float) -> void:
 	_beam_laser_projectile_process(delta)
@@ -92,9 +106,11 @@ func _beam_laser_projectile_process(delta: float) -> void:
 	if raycast.is_colliding():
 		cast_point = to_local(raycast.get_collision_point())
 		last_hit = raycast.get_collider()
+		hit_normal = raycast.get_collision_normal()
 		beam_mesh.mesh.height = cast_point.z
 		beam_mesh.position.z = cast_point.z / 2
 		hit_distance = cast_point.z
+		hit_position = raycast.get_collision_point()
 		particles.position = cast_point
 		particles.emitting = true
 	else:
