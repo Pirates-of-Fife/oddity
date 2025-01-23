@@ -5,12 +5,16 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_6nbw5"]
 size = Vector3(0.706493, 0.343999, 1.79583)
 
-[node name="RabsKestrelMk1RcsThrusterSlot" type="Node3D"]
+[node name="RabsKestrelMk1RcsThrusterSlot" type="Node3D" node_paths=PackedStringArray("highlight_box", "area_root")]
 script = ExtResource("1_wcxcg")
 size = 2
 type = 1
+highlight_box = NodePath("")
+area_root = NodePath("SlotArea")
 
 [node name="SlotArea" type="Area3D" parent="."]
+collision_layer = 524288
+collision_mask = 524288
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="SlotArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00184946, 0.00369892, 0.000924736)
