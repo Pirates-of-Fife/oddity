@@ -25,18 +25,25 @@ func mine(damage : float, mining_position : Vector3) -> void:
 	current_resource_health -= damage
 	current_resource_health = clampf(current_resource_health, 0, max_resource_health)
 	
+	print(current_resource_health)
+	
 	if current_resource_health == 0 and resource_count > 0:
 		release_extractable(mining_position)
 		current_resource_health = max_resource_health
 		resource_count -= 1
 
 func release_extractable(pos : Vector3) -> void:
+	print("extract")
+	
 	var selected_extractable : PackedScene = extractable_resources.pick_random()
 	
 	var extractable : GameEntity = selected_extractable.instantiate()
 	
-	var force : Vector3 = Vector3(randf(), randf(), randf()) * 15
+	var force : Vector3 = Vector3(randf(), randf(), randf()) * 150
+	
 	
 	get_tree().get_first_node_in_group("StarSystem").add_child(extractable)
+	extractable.global_position = pos
 	extractable.apply_central_impulse(force)
+	
 	

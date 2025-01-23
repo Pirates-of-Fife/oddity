@@ -237,6 +237,7 @@ func pick_up(game_entity : GameEntity, delta : float) -> void:
 	var entity_goal_position : Vector3 = anchor.camera_anchor.global_position + Vector3(0, 0, -pick_up_distance) * anchor.camera_anchor.global_basis.inverse()
 
 	game_entity.global_position = entity_goal_position
+	game_entity.angular_velocity = Vector3.ZERO
 
 func drop() -> void:
 	game_entity_being_picked_up.on_game_entity_drop_request.disconnect(drop)
