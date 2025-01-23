@@ -5,8 +5,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_r6qph"]
 size = Vector3(4.75398, 3.78651, 11.5263)
 
-[node name="RabsKestrelMk1MainThrusterSlot" type="Node3D"]
+[node name="RabsKestrelMk1MainThrusterSlot" type="Node3D" node_paths=PackedStringArray("area_root")]
 script = ExtResource("1_2dfqx")
+area_root = NodePath("SlotArea")
 
 [node name="SlotArea" type="Area3D" parent="."]
 

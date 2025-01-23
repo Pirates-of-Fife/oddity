@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://ihvpv2v8cshv"]
+
+[ext_resource type="Script" path="res://classes/module/weapon/MiningLaser.gd" id="1_y74wc"]
+[ext_resource type="PackedScene" uid="uid://bfu75jklswq17" path="res://scenes/modules/test-module/mining-laser/size-6/mining_laser_6.glb" id="2_jw6kf"]
+[ext_resource type="Resource" uid="uid://crqu6riygyp6f" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tres" id="2_vjpma"]
+[ext_resource type="PackedScene" uid="uid://cfn6xc5cqonls" path="res://scenes/modules/test-module/mining-laser/mining-laser/MiningLaser.tscn" id="3_auwlm"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ubqe3"]
+points = PackedVector3Array(-0.841929, -0.437068, -0.563802, 2.38141, 0.668449, 0.256902, -2.81369, 0.33554, 0.273293, 2.31737, -0.48814, 0.706869, 2.45648, -0.323083, -0.76196, -2.81369, -0.417278, 0.367487, -2.81369, 0.241346, -0.291283, 1.8922, -0.79376, -0.573719, 2.45648, 0.523781, 0.555729, 2.45648, 0.71217, -0.479525, -0.930982, -0.323083, 0.649776, -2.81369, -0.417278, -0.385478, 1.64528, -0.711456, 0.494, -1.01606, 0.527208, -0.333678, 1.23298, -0.417278, -0.76196, -3.37856, 0.0531043, -0.103042, -1.01606, 0.527208, 0.315687, 2.45648, -0.229036, 0.74397, 2.26838, 0.523781, -0.573719, 2.52706, -0.312015, 0.443084, 2.08029, 0.523781, 0.555729, -3.37856, -0.134842, 0.0850517, 2.39, -0.485388, -0.542591, -2.71935, -0.134842, -0.385478, -0.67973, -0.511445, 0.540035, 1.32732, -0.323083, 0.74397, 2.23086, 0.651995, 0.423931, -2.81369, -0.134842, 0.367487, 2.50984, -0.3104, -0.458384, -0.67973, -0.511445, -0.558026, 2.48854, 0.583578, 0.169457, 2.39, -0.485388, 0.5246)
+
+[node name="Size6MiningLaser" type="RigidBody3D" node_paths=PackedStringArray("beam_laser", "nozzle", "audio")]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 60.0
+script = ExtResource("1_y74wc")
+beam_laser = NodePath("MiningLaser")
+size = 6
+nozzle = NodePath("Nozzle")
+audio = NodePath("AudioStreamPlayer3D")
+module_resource = ExtResource("2_vjpma")
+can_be_picked_up = true
+
+[node name="mining_laser_6" parent="." instance=ExtResource("2_jw6kf")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="Nozzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0776803, 3.34908)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ubqe3")
+
+[node name="MiningLaser" parent="." instance=ExtResource("3_auwlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.37609)

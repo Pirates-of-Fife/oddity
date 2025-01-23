@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MiningLaserResource" load_steps=3 format=3 uid="uid://blt132nd84dk1"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/MiningLaserResource.gd" id="1_dl71s"]
+
+[sub_resource type="Curve" id="Curve_8douu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.762846, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("1_dl71s")
+mining_efficiency = 0.0
+max_beam_length = 0.0
+damage_fall_off = SubResource("Curve_8douu")
+damage = 0.0
+penetration = 0.0

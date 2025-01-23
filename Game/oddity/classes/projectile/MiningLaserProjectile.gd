@@ -1,0 +1,3 @@
+extends BeamLaserProjectile
+
+class_name MiningLaserProjectile
