@@ -34,6 +34,7 @@ var is_started : bool = false
 var last_hit : Node3D
 var hit_distance : float
 var hit_position : Vector3
+var hit_normal : Vector3
 
 func _ready() -> void:
 	_beam_laser_projectile_ready()
@@ -73,7 +74,7 @@ func _on_timer_timeout() -> void:
 	if can_extract_resources:
 		if last_hit is Minable:
 			var mining_efficiency_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * mining_efficiency
-			last_hit.mine(mining_efficiency_at_distance, hit_position)
+			last_hit.mine(mining_efficiency_at_distance, hit_position, hit_normal)
 			hit.emit(last_hit)
 
 func _process(delta: float) -> void:
@@ -105,6 +106,7 @@ func _beam_laser_projectile_process(delta: float) -> void:
 	if raycast.is_colliding():
 		cast_point = to_local(raycast.get_collision_point())
 		last_hit = raycast.get_collider()
+		hit_normal = raycast.get_collision_normal()
 		beam_mesh.mesh.height = cast_point.z
 		beam_mesh.position.z = cast_point.z / 2
 		hit_distance = cast_point.z

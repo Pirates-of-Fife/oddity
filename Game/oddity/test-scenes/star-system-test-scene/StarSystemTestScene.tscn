@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bteqskba0aasp"]
+[gd_scene load_steps=10 format=3 uid="uid://bteqskba0aasp"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
 [ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="6_awn7r"]
-[ext_resource type="PackedScene" uid="uid://b8pfc523il15h" path="res://scenes/minables/asteroids/asteroid1/MinableAsteroid1.tscn" id="9_41vgb"]
 
 [node name="StarSystemTestScene" type="Node3D"]
 
@@ -47,9 +46,6 @@ interaction_length = 2.0
 
 [node name="GodotPlushie" parent="SubViewportContainer/SubViewport/World/SystemA/Humanoid" instance=ExtResource("6_awn7r")]
 transform = Transform3D(-0.689229, 0, 0.724545, 0, 1, 0, -0.724545, 0, -0.689229, 1.04774, -0.371952, 2.44038)
-
-[node name="MinableAsteroid1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("9_41vgb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104401, 48.565, 131.187)
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
