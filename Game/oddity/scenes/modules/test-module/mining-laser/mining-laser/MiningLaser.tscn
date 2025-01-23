@@ -9,9 +9,8 @@ specular_mode = 1
 albedo_color = Color(0.388235, 0.333333, 1, 1)
 emission_enabled = true
 emission = Color(0.388235, 0.333333, 1, 1)
-emission_energy_multiplier = 5.33
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_b3e28"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_x0mj8"]
 material = SubResource("StandardMaterial3D_t011a")
 top_radius = 0.1
 bottom_radius = 0.1
@@ -26,14 +25,15 @@ beam_mesh = NodePath("MeshInstance3D")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false
-target_position = Vector3(0, 0, 4.57)
-collision_mask = 2097152
+target_position = Vector3(0, 0, 12.405)
+collision_mask = 23068672
+hit_back_faces = false
 debug_shape_custom_color = Color(0.800805, 0.789137, 0.727161, 1)
 debug_shape_thickness = 5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
-visible = false
-mesh = SubResource("CylinderMesh_b3e28")
+mesh = SubResource("CylinderMesh_x0mj8")
 
 [node name="LaserHitPartcle" parent="." instance=ExtResource("2_x8j23")]
+emitting = false

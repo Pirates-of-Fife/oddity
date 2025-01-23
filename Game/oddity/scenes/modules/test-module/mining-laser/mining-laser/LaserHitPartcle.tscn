@@ -8,7 +8,7 @@ colors = PackedColorArray(0.435294, 0.298039, 0.941176, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_nfajq")
 
 [sub_resource type="Curve" id="Curve_mobd2"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.648352), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_mc63o"]
@@ -18,7 +18,8 @@ curve = SubResource("Curve_mobd2")
 angle_min = -720.0
 angle_max = 1120.5
 spread = 180.0
-initial_velocity_max = 10.0
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_mc63o")
 color_ramp = SubResource("GradientTexture1D_sp4jy")
@@ -33,7 +34,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_i6wwy"]
 material = SubResource("StandardMaterial3D_vk5mh")
-size = Vector2(0.32, 0.62)
+size = Vector2(0.755, 1.085)
 
 [sub_resource type="GDScript" id="GDScript_s5lcp"]
 resource_name = "ProjectileHitParticle"
@@ -47,9 +48,8 @@ func _on_finished() -> void:
 "
 
 [node name="LaserHitPartcle" type="GPUParticles3D"]
-emitting = false
-amount = 20
-lifetime = 0.14
+amount = 50
+lifetime = 0.15
 explosiveness = 1.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_58ddx")

@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://resources/classes/module/component/weapon/MiningLaserResource.gd" id="1_23pyy"]
 
 [sub_resource type="Curve" id="Curve_nj276"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.581028, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.581028, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0769231), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [resource]
 script = ExtResource("1_23pyy")
 mining_efficiency = 70.0
-max_beam_length = 100.0
+max_beam_length = 2500.0
 damage_fall_off = SubResource("Curve_nj276")
-damage = 0.0
-penetration = 0.0
+damage = 780.0
+penetration = 10.0
