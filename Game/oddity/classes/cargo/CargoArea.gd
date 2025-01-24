@@ -2,6 +2,9 @@ extends Area3D
 
 class_name CargoArea
 
+signal cargo_removed_from_area(cargo_area : CargoArea,cargo : CargoContainer)
+signal cargo_added_to_area(cargo_area : CargoArea, cargo : CargoContainer)
+
 @export
 var cargo_in_area : CargoContainer
 

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0d3hia8voe4y"]
+
+[ext_resource type="Script" path="res://classes/cargo/cargo-selling-ui/cargo_selling_ui.gd" id="1_ihbg8"]
+[ext_resource type="PackedScene" uid="uid://dng30pjufice1" path="res://classes/cargo/cargo-selling-ui/CargoSellingUi2d.tscn" id="1_n5hjm"]
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="2_g1v5y"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_q13eg"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ly2wj"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7irg8"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0.585201, 0.909972, 1)
+metallic = 1.0
+roughness = 0.44
+
+[sub_resource type="BoxMesh" id="BoxMesh_1whna"]
+material = SubResource("StandardMaterial3D_7irg8")
+size = Vector3(5.085, 1.105, 0.215)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3jsm2"]
+data = PackedVector3Array(-2.5425, 0.5525, 0.1075, 2.5425, 0.5525, 0.1075, -2.5425, -0.5525, 0.1075, 2.5425, 0.5525, 0.1075, 2.5425, -0.5525, 0.1075, -2.5425, -0.5525, 0.1075, 2.5425, 0.5525, -0.1075, -2.5425, 0.5525, -0.1075, 2.5425, -0.5525, -0.1075, -2.5425, 0.5525, -0.1075, -2.5425, -0.5525, -0.1075, 2.5425, -0.5525, -0.1075, 2.5425, 0.5525, 0.1075, 2.5425, 0.5525, -0.1075, 2.5425, -0.5525, 0.1075, 2.5425, 0.5525, -0.1075, 2.5425, -0.5525, -0.1075, 2.5425, -0.5525, 0.1075, -2.5425, 0.5525, -0.1075, -2.5425, 0.5525, 0.1075, -2.5425, -0.5525, -0.1075, -2.5425, 0.5525, 0.1075, -2.5425, -0.5525, 0.1075, -2.5425, -0.5525, -0.1075, 2.5425, 0.5525, 0.1075, -2.5425, 0.5525, 0.1075, 2.5425, 0.5525, -0.1075, -2.5425, 0.5525, 0.1075, -2.5425, 0.5525, -0.1075, 2.5425, 0.5525, -0.1075, -2.5425, -0.5525, 0.1075, 2.5425, -0.5525, 0.1075, -2.5425, -0.5525, -0.1075, 2.5425, -0.5525, 0.1075, 2.5425, -0.5525, -0.1075, -2.5425, -0.5525, -0.1075)
+
+[node name="CargoSellingUi" type="Node3D"]
+script = ExtResource("1_ihbg8")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(777, 702)
+
+[node name="CargoSellingUi2d" parent="SubViewport" instance=ExtResource("1_n5hjm")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_ly2wj")
+
+[node name="InteractionButton" type="StaticBody3D" parent="."]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_g1v5y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30428, 1.20918, 0)
+mesh = SubResource("BoxMesh_1whna")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30428, 1.20918, 0)
+shape = SubResource("ConcavePolygonShape3D_3jsm2")
+
+[node name="Label3D" type="Label3D" parent="InteractionButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.182, 1.25196, 0.122715)
+outline_modulate = Color(0, 0, 0, 0)
+text = "SELL CARGO"
+font = ExtResource("3_q13eg")
+font_size = 42
+
+[connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
