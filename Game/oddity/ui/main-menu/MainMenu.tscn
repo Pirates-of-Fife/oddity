@@ -86,5 +86,6 @@ autoplay = true
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
 
 [editable path="SubViewportContainer/MainMenuUi"]
