@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://qgv0a1p812wm"]
+
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="1_dvxdk"]
+[ext_resource type="Script" path="res://classes/cargo/cargo-selling-ui/cargo_label.gd" id="2_oohcf"]
+
+[node name="CargoLabel" type="Label"]
+theme_override_fonts/font = ExtResource("1_dvxdk")
+theme_override_font_sizes/font_size = 5
+text = "TestCargo : 5 Credits"
+script = ExtResource("2_oohcf")

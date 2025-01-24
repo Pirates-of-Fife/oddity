@@ -1,0 +1,235 @@
+[gd_scene load_steps=12 format=3 uid="uid://bd0sfb5d6j4v5"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/StaticGameEntity.gd" id="1_3hxxr"]
+[ext_resource type="Script" path="res://classes/cargo/CargoGrid.gd" id="2_a1wj7"]
+[ext_resource type="PackedScene" uid="uid://beqr0ho6kl081" path="res://classes/cargo/CargoArea.tscn" id="3_a5yj2"]
+[ext_resource type="PackedScene" uid="uid://c0d3hia8voe4y" path="res://classes/cargo/cargo-selling-ui/CargoSellingUi.tscn" id="5_apcc5"]
+[ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="5_qysf3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxc6x"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.396078, 0.388235, 1, 1)
+metallic = 1.0
+metallic_specular = 0.21
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ga8x8"]
+material = SubResource("StandardMaterial3D_nxc6x")
+size = Vector3(100, 2.5, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_u8c5e"]
+data = PackedVector3Array(-50, 1.25, 50, 50, 1.25, 50, -50, -1.25, 50, 50, 1.25, 50, 50, -1.25, 50, -50, -1.25, 50, 50, 1.25, -50, -50, 1.25, -50, 50, -1.25, -50, -50, 1.25, -50, -50, -1.25, -50, 50, -1.25, -50, 50, 1.25, 50, 50, 1.25, -50, 50, -1.25, 50, 50, 1.25, -50, 50, -1.25, -50, 50, -1.25, 50, -50, 1.25, -50, -50, 1.25, 50, -50, -1.25, -50, -50, 1.25, 50, -50, -1.25, 50, -50, -1.25, -50, 50, 1.25, 50, -50, 1.25, 50, 50, 1.25, -50, -50, 1.25, 50, -50, 1.25, -50, 50, 1.25, -50, -50, -1.25, 50, 50, -1.25, 50, -50, -1.25, -50, 50, -1.25, 50, 50, -1.25, -50, -50, -1.25, -50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_885dg"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cm4ke"]
+size = Vector3(5, 2.51, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tmw35"]
+size = Vector3(100, 20, 100)
+
+[node name="CargoSellingTestArea" type="Node3D"]
+
+[node name="StaticGameEntity" type="StaticBody3D" parent="."]
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("1_3hxxr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGameEntity"]
+mesh = SubResource("BoxMesh_ga8x8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGameEntity"]
+shape = SubResource("ConcavePolygonShape3D_u8c5e")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.0569, 1.18142, -18.6006)
+mesh = SubResource("BoxMesh_885dg")
+
+[node name="CargoGrid" type="Node3D" parent="." node_paths=PackedStringArray("cargo_area_root")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.054, 2.95971, -18.5767)
+script = ExtResource("2_a1wj7")
+monitoring_distance = 150.0
+cargo_grid_physical_size = Vector3(5, 2.51, 5)
+total_cu_capacity = 32
+cu_x_y_z = Vector3(4, 2, 4)
+cargo_area_root = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="CargoGrid"]
+
+[node name="CargoArea" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, -1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-2, -1, -2)
+
+[node name="@Area3D@198192" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, -0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-2, -1, -1)
+
+[node name="@Area3D@198193" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, 0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-2, -1, 0)
+
+[node name="@Area3D@198194" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, -0.625, 1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-2, -1, 1)
+
+[node name="@Area3D@198195" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, -1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-2, 0, -2)
+
+[node name="@Area3D@198196" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, -0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-2, 0, -1)
+
+[node name="@Area3D@198197" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, 0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-2, 0, 0)
+
+[node name="@Area3D@198198" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.875, 0.625, 1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-2, 0, 1)
+
+[node name="@Area3D@198199" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, -1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-1, -1, -2)
+
+[node name="@Area3D@198200" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, -0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-1, -1, -1)
+
+[node name="@Area3D@198201" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, 0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-1, -1, 0)
+
+[node name="@Area3D@198202" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, -0.625, 1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-1, -1, 1)
+
+[node name="@Area3D@198203" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, -1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-1, 0, -2)
+
+[node name="@Area3D@198204" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, -0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-1, 0, -1)
+
+[node name="@Area3D@198205" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, 0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-1, 0, 0)
+
+[node name="@Area3D@198206" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.625, 1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(-1, 0, 1)
+
+[node name="@Area3D@198207" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, -1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, -1, -2)
+
+[node name="@Area3D@198208" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, -0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, -1, -1)
+
+[node name="@Area3D@198209" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, 0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, -1, 0)
+
+[node name="@Area3D@198210" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, -0.625, 1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, -1, 1)
+
+[node name="@Area3D@198211" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, -1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, 0, -2)
+
+[node name="@Area3D@198212" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, -0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, 0, -1)
+
+[node name="@Area3D@198213" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, 0.625)
+cargo_grid = NodePath("../..")
+
+[node name="@Area3D@198214" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.625, 1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(0, 0, 1)
+
+[node name="@Area3D@198215" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, -1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(1, -1, -2)
+
+[node name="@Area3D@198216" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, -0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(1, -1, -1)
+
+[node name="@Area3D@198217" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, 0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(1, -1, 0)
+
+[node name="@Area3D@198218" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, -0.625, 1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(1, -1, 1)
+
+[node name="@Area3D@198219" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, -1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(1, 0, -2)
+
+[node name="@Area3D@198220" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, -0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(1, 0, -1)
+
+[node name="@Area3D@198221" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, 0.625)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(1, 0, 0)
+
+[node name="@Area3D@198222" parent="CargoGrid/Node3D" node_paths=PackedStringArray("cargo_grid") instance=ExtResource("3_a5yj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 0.625, 1.875)
+cargo_grid = NodePath("../..")
+area_coordinate = Vector3(1, 0, 1)
+
+[node name="Area3D" type="Area3D" parent="CargoGrid"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CargoGrid/Area3D"]
+shape = SubResource("BoxShape3D_cm4ke")
+
+[node name="CargoSellingUi" parent="." node_paths=PackedStringArray("connected_cargo_grid") instance=ExtResource("5_apcc5")]
+transform = Transform3D(2.32683e-17, 0, 0.38, 0, 0.38, 0, -0.38, 0, 2.32683e-17, -37.6104, 2.95434, -13.7004)
+connected_cargo_grid = NodePath("../CargoGrid")
+
+[node name="GravityGrid" type="Area3D" parent="."]
+script = ExtResource("5_qysf3")
+size = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GravityGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.0569, 0)
+shape = SubResource("BoxShape3D_tmw35")
