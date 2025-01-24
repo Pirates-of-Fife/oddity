@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7mjyhgb60j0v"]
+
+[ext_resource type="Shader" path="res://classes/mind/player/OnFootCrosshair.gdshader" id="1_ekttp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_agjhn"]
+shader = ExtResource("1_ekttp")
+
+[node name="DeathHud" type="CanvasLayer"]
+
+[node name="Container" type="Control" parent="."]
+material = SubResource("ShaderMaterial_agjhn")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ColorRect" type="ColorRect" parent="Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -4.0
+offset_right = 12.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

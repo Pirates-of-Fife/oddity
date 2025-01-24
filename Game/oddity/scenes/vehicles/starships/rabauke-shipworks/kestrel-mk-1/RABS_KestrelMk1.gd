@@ -204,8 +204,9 @@ func on_damaged() -> void:
 
 	for fire : GPUParticles3D in damaged_fires.get_children():
 		fire.start_fire()
-
-	alarm_sound_player.play()
+	
+	if alarm_sound_player.playing == false:
+		alarm_sound_player.play()
 
 	damaged_label.show()
 

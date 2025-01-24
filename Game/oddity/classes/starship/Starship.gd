@@ -33,6 +33,9 @@ signal change_to_damaged_state
 var power_state_change_complete : bool = true
 
 @export
+var blast_radius : float
+
+@export
 var landing_gear_on : bool = false
 
 @onready
@@ -544,10 +547,17 @@ func destroyed() -> void:
 	actual_thrust_vector = Vector3.ZERO
 	actual_thrust_vector_unit = Vector3.ZERO
 	
-
 	explosion_sound_player.stream = explosion_sounds.pick_random()
 	explosion_sound_player.play()
-
+	
+	if player != null:
+		player.die()
+	else:
+		var p : Player = get_tree().get_first_node_in_group("Player")
+		if (p.global_position - global_position).length() <= blast_radius:
+			p.die()
+	
+	
 	if is_bounty_target:
 		get_tree().get_first_node_in_group("Player").add_credits(reward)
 

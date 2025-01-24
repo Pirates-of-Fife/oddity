@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://ba5evvevagnhw"]
+[gd_scene load_steps=18 format=3 uid="uid://ba5evvevagnhw"]
 
 [ext_resource type="Texture2D" uid="uid://vdqa5pcoa462" path="res://project-images/OddityLogo-04.png" id="1_edjeb"]
 [ext_resource type="Script" path="res://ui/main-menu/main_menu_ui.gd" id="1_wya4y"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_7jeg0"]
-[ext_resource type="Texture2D" uid="uid://b3b4ai1255iue" path="res://ui/main-menu/pirates-of-fife-logo.png" id="4_nsbdi"]
+[ext_resource type="Texture2D" uid="uid://blx1ve3e5tnix" path="res://ui/main-menu/logo_pirates_of_fife_transparent.png" id="4_s5c1x"]
+[ext_resource type="Texture2D" uid="uid://38xfxy0pupdp" path="res://ui/main-menu/LogoTextWhite.svg" id="5_dhhx1"]
 [ext_resource type="AudioStream" uid="uid://xc5f4vvul0a6" path="res://ui/main-menu/sounds/button_click.wav" id="5_l73e1"]
 [ext_resource type="AudioStream" uid="uid://xvrrxr8w73j8" path="res://ui/main-menu/sounds/after_start_click.wav" id="6_6sojb"]
+[ext_resource type="Texture2D" uid="uid://d3swk0fy83bl" path="res://ui/main-menu/OddityLogo-02.png" id="6_slygv"]
 
 [sub_resource type="Animation" id="Animation_r183a"]
 length = 0.001
@@ -116,6 +118,22 @@ _data = {
 "start": SubResource("Animation_02e8o")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmehw"]
+bg_color = Color(0.0627451, 0.0588235, 0.54902, 0.741176)
+skew = Vector2(0.33, 0.03)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1gip"]
+bg_color = Color(0.0627451, 0.0588235, 0.478431, 0.933333)
+skew = Vector2(0.33, 0.03)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sddlw"]
+bg_color = Color(0.0152652, 0.0395471, 0.130003, 1)
+skew = Vector2(0.33, 0.03)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ga7k"]
+bg_color = Color(0.063083, 0.0573695, 0.479214, 0.498039)
+skew = Vector2(0.33, 0.03)
+
 [sub_resource type="GDScript" id="GDScript_lnw6i"]
 resource_name = "creature_sensitivity"
 script/source = "extends HSlider
@@ -187,20 +205,20 @@ offset_top = 979.0
 offset_right = 2122.0
 offset_bottom = 1120.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Logo"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = -25.0
-offset_right = 238.865
-offset_bottom = 26.0
-scale = Vector2(2.205, 2.205)
-theme_override_fonts/normal_font = ExtResource("2_7jeg0")
-text = "Pirates of Fife"
-
 [node name="Sprite2D" type="Sprite2D" parent="Logo"]
-position = Vector2(-69, 29)
-scale = Vector2(4.655, 4.655)
-texture = ExtResource("4_nsbdi")
+position = Vector2(348, 47)
+scale = Vector2(0.010922, 0.010922)
+texture = ExtResource("4_s5c1x")
+
+[node name="LogoTextWhite" type="Sprite2D" parent="Logo"]
+position = Vector2(432, 48)
+scale = Vector2(0.0541018, 0.0541018)
+texture = ExtResource("5_dhhx1")
+
+[node name="OddityLogo-02" type="Sprite2D" parent="Logo"]
+position = Vector2(256, 49)
+scale = Vector2(0.0104692, 0.0104692)
+texture = ExtResource("6_slygv")
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
@@ -227,16 +245,28 @@ grow_vertical = 2
 [node name="StartButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kmehw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g1gip")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sddlw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ga7k")
 text = "START"
 
 [node name="CreditsButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kmehw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g1gip")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sddlw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ga7k")
 text = "CREDITS"
 
 [node name="ExitButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kmehw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g1gip")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sddlw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ga7k")
 text = "EXIT
 "
 

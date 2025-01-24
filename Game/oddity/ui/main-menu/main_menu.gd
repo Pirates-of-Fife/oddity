@@ -66,3 +66,7 @@ func _on_credits_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_background_music_finished() -> void:
+	$BackgroundMusic.play()
