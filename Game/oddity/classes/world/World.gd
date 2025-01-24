@@ -59,7 +59,6 @@ func enter_abyss(destination_star_system : PackedScene, starship : Starship, por
 	
 	var abyss : Abyss = abyss_scene.instantiate()
 	add_child.call_deferred(abyss)
-	print("abyss instanced")
 	
 	starship.reparent.call_deferred(abyss)
 	
@@ -70,9 +69,7 @@ func enter_abyss(destination_star_system : PackedScene, starship : Starship, por
 
 	var abyssal_tunnel : AbyssalTunnel = abyssal_tunnel_scene.instantiate()
 	add_child(abyssal_tunnel)
-	
-	print("abyssal tunnel loaded")
-	
+		
 	abyssal_tunnel.destination_star_system = destination_star_system
 	abyssal_tunnel.global_position = spawn_location
 	abyssal_tunnel.global_rotation = portal_global_rotation + Vector3(deg_to_rad(180), 0, 0)
@@ -83,20 +80,16 @@ func load_new_system(destination_star_system : PackedScene, starship : Starship)
 	
 	new_system_loaded = true
 	
-	print("new system loaded")
 	var new_star_system : StarSystem = destination_star_system.instantiate()
 	add_child(new_star_system)
 	
 	starship.reparent.call_deferred(new_star_system)
 	
 	var abyss :Abyss = get_tree().get_first_node_in_group("Abyss")
-	print(abyss)
 	abyss.queue_free()
-	print("abyss unloaded")
 	
 
 func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
-	print("tunnel exited")
 	abyssal_tunnel.starship.is_in_abyss = false
 
 	abyssal_tunnel.starship.current_star_system = get_tree().get_first_node_in_group("StarSystem")
@@ -112,5 +105,20 @@ func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	abyssal_tunnel.queue_free()
 	
 	
-	print("abyssal tunnel unloaded")
+func respawn_player() -> void:
+	var player : Player = get_tree().get_first_node_in_group("Player")
+	var player_body : Creature = player.respawn_body.instantiate()
+	add_child(player_body)
+	player.possess(player_body)
+	
+	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
+	star_system.queue_free()
+	
+	var new_star_system : StarSystem = player.respawn_star_system.instantiate()
+	add_child(new_star_system)
+	player_body.reparent(new_star_system)
+	player_body.global_position = new_star_system.player_respawn_position
+	
+
+	
 	

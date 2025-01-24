@@ -19,7 +19,16 @@ var player_spawn_marker : Marker3D
 @export
 var player_spawn_position : Vector3
 
+@export
+var player_respawn_marker : Marker3D
+
+@export
+var player_respawn_position : Vector3
+
 func _ready() -> void:
 	add_to_group("StarSystem")
 	if player_spawn_marker != null:
 		player_spawn_position = player_spawn_marker.global_position
+
+	if player_respawn_marker != null:
+		player_respawn_position = player_respawn_marker.global_position

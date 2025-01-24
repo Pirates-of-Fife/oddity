@@ -21,6 +21,9 @@ func _physics_process(delta: float) -> void:
 	self.global_position = control_entity.anchor.camera_anchor.global_position
 	self.global_rotation = control_entity.anchor.camera_anchor.global_rotation
 
+func die() -> void:
+	pass
+
 func possess(control_entity : ControlEntity) -> void:
 	if control_entity.player != null:
 		return

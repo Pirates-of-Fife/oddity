@@ -5,9 +5,23 @@ class_name Player
 signal credits_added(credits : int)
 signal credits_removed(credits : int)
 
+signal died
+signal respawned
+
 @export
 var credits : int
 
+@export
+var respawn_star_system : PackedScene
+
+@export
+var respawn_body : PackedScene
+
+@export
+var respawn_cost : int = 1000
+
+@export
+var respawn_hud : CanvasLayer
 
 func _ready() -> void:
 	_player_ready()
@@ -24,6 +38,32 @@ func _player_ready() -> void:
 	_mind_ready()
 	posses.connect(on_posses)
 
+func die() -> void:
+	current_controller.queue_free()
+	
+	respawn_hud.show()
+	
+	var low_pass_filter : AudioEffectLowPassFilter  = AudioEffectLowPassFilter.new()
+	low_pass_filter.cutoff_hz = 500  # Set cutoff frequency (Hz) for muffling
+
+	# Add the effect to the Master Audio Bus
+	AudioServer.add_bus_effect(AudioServer.get_bus_index("Master"), low_pass_filter, 0)  # Add at index 0
+	
+	var tween : Tween = get_tree().create_tween()
+	tween.tween_property(low_pass_filter, "cutoff_hz", 0, 14)
+	tween.play()
+	
+	await get_tree().create_timer(15).timeout
+	
+	remove_credits(respawn_cost)
+	
+	respawn()
+
+func respawn() -> void:
+	var world : World = get_tree().get_first_node_in_group("World")
+	world.respawn_player()
+	respawn_hud.hide()
+	AudioServer.remove_bus_effect(AudioServer.get_bus_index("Master"), 0)  # Remove effect at index 0
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_cancel"):

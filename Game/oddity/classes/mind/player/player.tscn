@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3ry8dgeqrhg1"]
+[gd_scene load_steps=8 format=3 uid="uid://c3ry8dgeqrhg1"]
 
 [ext_resource type="Script" path="res://classes/mind/player/player.gd" id="1_1lph1"]
 [ext_resource type="PackedScene" uid="uid://f2enjgidilcu" path="res://classes/mind/player/CreditHud.tscn" id="2_gevx3"]
+[ext_resource type="PackedScene" uid="uid://b52ipcjo5n8ik" path="res://test-scenes/star-system-test-scene/SystemA.tscn" id="2_vmb60"]
+[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="3_lx58o"]
+[ext_resource type="PackedScene" uid="uid://c7mjyhgb60j0v" path="res://classes/mind/player/death-hud/DeathHud.tscn" id="5_xduys"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_genkd"]
 auto_exposure_enabled = true
@@ -14,8 +17,12 @@ dof_blur_near_distance = 0.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_al7kd"]
 radius = 50.0
 
-[node name="Player" type="Node3D" groups=["Player"]]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("respawn_hud") groups=["Player"]]
 script = ExtResource("1_1lph1")
+credits = 1000
+respawn_star_system = ExtResource("2_vmb60")
+respawn_body = ExtResource("3_lx58o")
+respawn_hud = NodePath("DeathHud")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 attributes = SubResource("CameraAttributesPractical_genkd")
@@ -33,6 +40,9 @@ shape = SubResource("SphereShape3D_al7kd")
 
 [node name="HeadsUpDisplay" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_gevx3")]
 player = NodePath("..")
+
+[node name="DeathHud" parent="." instance=ExtResource("5_xduys")]
+visible = false
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

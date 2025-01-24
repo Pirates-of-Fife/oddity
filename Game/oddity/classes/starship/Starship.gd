@@ -544,10 +544,12 @@ func destroyed() -> void:
 	actual_thrust_vector = Vector3.ZERO
 	actual_thrust_vector_unit = Vector3.ZERO
 	
-
 	explosion_sound_player.stream = explosion_sounds.pick_random()
 	explosion_sound_player.play()
-
+	
+	if player != null:
+		player.die()
+	
 	if is_bounty_target:
 		get_tree().get_first_node_in_group("Player").add_credits(reward)
 
