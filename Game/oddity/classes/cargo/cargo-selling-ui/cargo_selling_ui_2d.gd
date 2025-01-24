@@ -40,7 +40,7 @@ func calculate_credit_total() -> void:
 	for c : CargoContainer in current_cargo:
 		total_credits += c.value
 	
-	var c : CreditHud
+	var c : CreditHud = CreditHud.new()
 	total_credits_label.text = c.convert_to_human_readable(total_credits) + " Credits"
 
 func update_inventory_container() -> void:

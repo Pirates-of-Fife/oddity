@@ -5,6 +5,7 @@ class_name CargoGrid
 
 signal cargo_has_been_added_to_grid(cargo_area : CargoArea, cargo : CargoContainer)
 signal cargo_has_been_removed_from_grid(cargo_area : CargoArea, cargo : CargoContainer)
+signal cargo_sold
 
 @export
 var monitoring_distance : float
@@ -75,6 +76,10 @@ func _ready() -> void:
 		var area : Area3D = $Area3D
 		var collision_shape : CollisionShape3D = area.get_node("CollisionShape3D")
 		var shape : Shape3D = collision_shape.shape
+
+	for i : CargoArea in cargo_area_root.get_children():
+		i.cargo_added_to_area.connect(cargo_added_to_grid)
+		i.cargo_removed_from_area.connect(cargo_removed_from_grid)
 	
 func cargo_added_to_grid(cargo_area : CargoArea, cargo : CargoContainer) -> void:
 	current_value += cargo.value
@@ -88,10 +93,15 @@ func cargo_removed_from_grid(cargo_area : CargoArea, cargo : CargoContainer) -> 
 
 	
 func sell_cargo() -> void:
+	for c : CargoArea in cargo_area_root.get_children():
+		c.snapped_cargo = null
+		c.valid = true
+	
 	for c : CargoContainer in current_cargo_in_grid:
-		c.unsnap_from_grid()
 		player.add_credits(c.value)
 		c.queue_free()
+	
+	cargo_sold.emit()
 
 func find_cargo_area(coordinate : Vector3) -> CargoArea:
 	return cargo_area_dictionary.get(coordinate, null)
@@ -152,6 +162,3 @@ func _add_shape_to_grid(chunk_size : float, chunk_center : Vector3, coordinate :
 	cargo_area_root.add_child(area)
 	area.global_position = chunk_center
 	area.owner = get_tree().edited_scene_root
-	
-	area.cargo_added_to_area.connect(cargo_added_to_grid)
-	area.cargo_removed_from_area.connect(cargo_removed_from_grid)
