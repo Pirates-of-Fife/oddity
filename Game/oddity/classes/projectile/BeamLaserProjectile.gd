@@ -111,8 +111,9 @@ func _beam_laser_projectile_process(delta: float) -> void:
 		beam_mesh.position.z = cast_point.z / 2
 		hit_distance = cast_point.z
 		hit_position = raycast.get_collision_point()
-		particles.position = cast_point
+		particles.position = cast_point + Vector3(0, 0, -1)
 		particles.emitting = true
+		particles.global_rotation = Vector3.ZERO
 	else:
 		last_hit = null
 		cast_point = raycast.target_position

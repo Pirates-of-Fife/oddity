@@ -36,4 +36,4 @@ transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
 mesh = SubResource("CylinderMesh_x0mj8")
 
 [node name="LaserHitPartcle" parent="." instance=ExtResource("2_x8j23")]
-emitting = false
+transform = Transform3D(1, 0, 0, 0, 0.83708, 0.547081, 0, -0.547081, 0.83708, 0, 0, 0)

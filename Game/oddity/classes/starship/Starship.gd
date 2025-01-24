@@ -511,6 +511,15 @@ func power_off() -> void:
 	axis_lock_linear_x = false
 	axis_lock_linear_y = false
 	axis_lock_linear_z = false
+	
+	actual_rotation_vector = Vector3.ZERO
+	actual_rotation_vector_unit = Vector3.ZERO
+	actual_thrust_vector = Vector3.ZERO
+	actual_thrust_vector_unit = Vector3.ZERO
+	
+	stop_shooting_primary()
+	stop_shooting_secondary()
+	stop_shooting_tertiary()
 
 func repair() -> void:
 	current_hull_health = max_hull_health
@@ -518,6 +527,10 @@ func repair() -> void:
 	repaired.emit()
 
 func destroyed() -> void:
+	stop_shooting_primary()
+	stop_shooting_secondary()
+	stop_shooting_tertiary()
+	
 	current_state = State.DESTROYED
 	axis_lock_linear_x = false
 	axis_lock_linear_y = false
@@ -525,6 +538,12 @@ func destroyed() -> void:
 	state_changed_to_destroyed.emit()
 	linear_damp = 0.3
 	angular_damp = 0.3
+
+	actual_rotation_vector = Vector3.ZERO
+	actual_rotation_vector_unit = Vector3.ZERO
+	actual_thrust_vector = Vector3.ZERO
+	actual_thrust_vector_unit = Vector3.ZERO
+	
 
 	explosion_sound_player.stream = explosion_sounds.pick_random()
 	explosion_sound_player.play()
