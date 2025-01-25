@@ -36,19 +36,13 @@ func _on_starship_destroyed() -> void:
 func _check_landing_status() -> void:
 	if starship.current_state == Starship.State.POWER_OFF and starship.landing_gear_on == true:
 		starship_landed.emit(starship)
-		print("starship_landed")
 	else:
 		starship_took_off.emit(starship)
-		print("starship_took_offü")
 	
-func _on_body_entered(body : Node3D) -> void:
-	print(body)
-	
+func _on_body_entered(body : Node3D) -> void:	
 	if body is Starship:
 		if starship != null:
 			return
-		
-		print("starship entered")
 		
 		starship = body
 		
