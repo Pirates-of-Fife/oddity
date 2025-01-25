@@ -16,6 +16,12 @@ var target_rotational_thrust_vector : Vector3 = Vector3.ZERO
 @export_category("Info")
 
 @export
+var ship_name : StringName = "Default Starship"
+
+@export
+var name_label : Label3D
+
+@export
 var ship_info : StarshipInfo
 
 @export
@@ -350,6 +356,8 @@ func _starship_ready() -> void:
 
 	if !landing_gear_on:
 		toggle_landing_gear()
+
+	name_label.text = ship_name
 
 	travel_mode = starship_travel_modes.TravelMode.CRUISE
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://tvngb5vet6rl"]
+[gd_scene load_steps=19 format=3 uid="uid://tvngb5vet6rl"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/scenes/elevator/RABS_KestrelMk1_Elevator.gd" id="1_qh0kc"]
 [ext_resource type="PackedScene" uid="uid://djn3nj2e5hm8j" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/ElevatorDoor.glb" id="2_0jfci"]
@@ -186,6 +186,18 @@ _data = {
 "open": SubResource("Animation_yg165")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_heqg5"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0.180392, 0.847059, 1)
+distance_fade_mode = 2
+distance_fade_max_distance = 20.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_hl8ha"]
+material = SubResource("StandardMaterial3D_heqg5")
+size = Vector3(0.035, 2.3, 1.485)
+
 [node name="RabsKestrelMk1Elevator" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
 collision_layer = 1024
 collision_mask = 1024
@@ -236,5 +248,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ehp1e")
 libraries = {
 "": SubResource("AnimationLibrary_q50c1")
 }
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17461, 2.0975, -15.5564)
+mesh = SubResource("BoxMesh_hl8ha")
 
 [editable path="ElevatorShafts"]

@@ -78,7 +78,7 @@ func start_fire() -> void:
 	$OmniLight3D.show()
 	$AudioStreamPlayer3D.play()
 
-func stop_art() -> void:
+func stop_fire() -> void:
 	emitting = false
 	$OmniLight3D.hide()
 	$AudioStreamPlayer3D.stop()

@@ -12,7 +12,7 @@ func _ready() -> void:
 	_landing_pad_ready()
 
 func _landing_pad_ready() -> void:
-	body_entered.connect(_on_body_exited)
+	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	
 func _on_starship_landing_gear_retracted() -> void:
@@ -33,13 +33,19 @@ func _on_starship_destroyed() -> void:
 func _check_landing_status() -> void:
 	if starship.current_state == Starship.State.POWER_OFF and starship.landing_gear_on == true:
 		starship_landed.emit(starship)
+		print("starship_landed")
 	else:
 		starship_took_off.emit(starship)
+		print("starship_took_offü")
 	
 func _on_body_entered(body : Node3D) -> void:
+	print(body)
+	
 	if body is Starship:
 		if starship != null:
 			return
+		
+		print("starship entered")
 		
 		starship = body
 		

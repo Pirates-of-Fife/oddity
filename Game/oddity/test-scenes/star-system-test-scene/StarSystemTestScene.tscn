@@ -40,8 +40,10 @@ star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_d
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
 
 [node name="RabsKestrelMk2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102679, 2210.9, -192.124)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101684, -377.667, 3480.69)
+ship_name = &"The Kestrel"
 current_state = 0
+current_hull_health = 15000.0
 
 [node name="AsteroidChunk1" parent="SubViewportContainer/SubViewport/World/SystemA/RabsKestrelMk2" instance=ExtResource("9_507dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75097, 1.39849, -7.93033)
@@ -62,9 +64,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.74028, 1.39849, -6.87571)
 transform = Transform3D(-0.689229, 0, 0.724545, 0, 1, 0, -0.724545, 0, -0.689229, 1.04774, 1.65505, 19.9844)
 
 [node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
-transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 102679, 2212.87, -174.291)
+transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 101684, -375.697, 3498.52)
 interaction_length = 2.0
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
+credits = 10000
 control_entity = NodePath("../SystemA/Humanoid")

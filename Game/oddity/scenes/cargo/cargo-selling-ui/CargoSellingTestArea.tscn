@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd0sfb5d6j4v5"]
+[gd_scene load_steps=15 format=3 uid="uid://bd0sfb5d6j4v5"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/StaticGameEntity.gd" id="1_3hxxr"]
 [ext_resource type="Script" path="res://classes/cargo/CargoGrid.gd" id="2_a1wj7"]
 [ext_resource type="PackedScene" uid="uid://beqr0ho6kl081" path="res://classes/cargo/CargoArea.tscn" id="3_a5yj2"]
 [ext_resource type="PackedScene" uid="uid://c0d3hia8voe4y" path="res://classes/cargo/cargo-selling-ui/CargoSellingUi.tscn" id="5_apcc5"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="5_qysf3"]
+[ext_resource type="Script" path="res://classes/landing-pad/LandingPad.gd" id="6_pdlod"]
+[ext_resource type="PackedScene" uid="uid://b1bi6doj50har" path="res://classes/landing-pad/repair-ui/RepairUi.tscn" id="7_6g5ty"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxc6x"]
 diffuse_mode = 3
@@ -29,6 +31,9 @@ size = Vector3(5, 2.51, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tmw35"]
 size = Vector3(100, 20, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dym5r"]
+size = Vector3(100, 48.8493, 100)
 
 [node name="CargoSellingTestArea" type="Node3D"]
 
@@ -223,7 +228,7 @@ area_coordinate = Vector3(1, 0, 1)
 shape = SubResource("BoxShape3D_cm4ke")
 
 [node name="CargoSellingUi" parent="." node_paths=PackedStringArray("connected_cargo_grid") instance=ExtResource("5_apcc5")]
-transform = Transform3D(2.32683e-17, 0, 0.38, 0, 0.38, 0, -0.38, 0, 2.32683e-17, -37.6104, 2.95434, -13.7004)
+transform = Transform3D(2.32683e-17, 0, 0.38, 0, 0.38, 0, -0.38, 0, 2.32683e-17, -37.6104, 1.98898, -13.7004)
 connected_cargo_grid = NodePath("../CargoGrid")
 
 [node name="GravityGrid" type="Area3D" parent="."]
@@ -233,3 +238,16 @@ size = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.0569, 0)
 shape = SubResource("BoxShape3D_tmw35")
+
+[node name="LandingPad" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("6_pdlod")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LandingPad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.4815, 0)
+shape = SubResource("BoxShape3D_dym5r")
+
+[node name="RepairUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("7_6g5ty")]
+transform = Transform3D(1.74512e-17, 0, 0.285, 0, 0.285, 0, -0.285, 0, 1.74512e-17, -37.78, 2.03897, -11.4695)
+landing_pad = NodePath("../LandingPad")

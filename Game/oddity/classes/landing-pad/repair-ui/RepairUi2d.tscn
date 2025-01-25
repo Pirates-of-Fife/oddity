@@ -1,0 +1,121 @@
+[gd_scene load_steps=6 format=3 uid="uid://b06fofkojjj37"]
+
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="1_a7nro"]
+[ext_resource type="Script" path="res://classes/landing-pad/repair-ui/RepairUi2d.gd" id="1_wfxd7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1q5ux"]
+font = ExtResource("1_a7nro")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_7qp6s"]
+font = ExtResource("1_a7nro")
+font_size = 25
+font_color = Color(0.94902, 0, 0.160784, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2bnv"]
+font = ExtResource("1_a7nro")
+font_size = 25
+font_color = Color(0.209399, 0.607089, 3.85046e-07, 1)
+
+[node name="RepairUi2d" type="Control" node_paths=PackedStringArray("ship_landed_ui", "ship_not_landed_ui", "ship_repaired_ui", "ship_name", "cost_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wfxd7")
+ship_landed_ui = NodePath("ShipLandedUi")
+ship_not_landed_ui = NodePath("NoShipLandedUi")
+ship_repaired_ui = NodePath("ShipRepaired")
+ship_name = NodePath("ShipLandedUi/Ship")
+cost_label = NodePath("ShipLandedUi/Cost")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 547.0
+offset_bottom = 310.0
+color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[node name="ShipLandedUi" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Repair" type="Label" parent="ShipLandedUi"]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 2.0
+offset_right = 294.0
+offset_bottom = 72.0
+text = "Repair"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Ship" type="Label" parent="ShipLandedUi"]
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "Ship Name"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="CostLabel" type="Label" parent="ShipLandedUi"]
+offset_left = 24.0
+offset_top = 114.0
+offset_right = 224.0
+offset_bottom = 184.0
+text = "Costs:"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Cost" type="Label" parent="ShipLandedUi"]
+offset_left = 250.0
+offset_top = 115.0
+offset_right = 495.0
+offset_bottom = 185.0
+text = "25k Credits"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="NoShipLandedUi" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Repair" type="Label" parent="NoShipLandedUi"]
+offset_left = 159.0
+offset_top = 2.0
+offset_right = 294.0
+offset_bottom = 72.0
+text = "Repair"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Ship" type="Label" parent="NoShipLandedUi"]
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "No Ship Landed"
+label_settings = SubResource("LabelSettings_7qp6s")
+
+[node name="ShipRepaired" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Repair" type="Label" parent="ShipRepaired"]
+offset_left = 159.0
+offset_top = 2.0
+offset_right = 294.0
+offset_bottom = 72.0
+text = "Repair"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Ship" type="Label" parent="ShipRepaired"]
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "Ship Repaired :3"
+label_settings = SubResource("LabelSettings_f2bnv")
