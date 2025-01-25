@@ -30,6 +30,9 @@ signal state_changed_to_destroyed
 signal repaired
 signal change_to_damaged_state
 
+signal landing_gear_deployed
+signal landing_gear_retracted
+
 var power_state_change_complete : bool = true
 
 @export
