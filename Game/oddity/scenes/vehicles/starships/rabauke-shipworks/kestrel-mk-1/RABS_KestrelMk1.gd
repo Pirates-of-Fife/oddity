@@ -225,9 +225,11 @@ func toggle_landing_gear() -> void:
 	if $Interior/Bridge/LandingGearLabel.visible:
 		$Interior/Bridge/LandingGearLabel.hide()
 		landing_gear_on = false
+		landing_gear_retracted.emit()
 	else:
 		$Interior/Bridge/LandingGearLabel.show()
 		landing_gear_on = true
+		landing_gear_deployed.emit()
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is Projectile:
