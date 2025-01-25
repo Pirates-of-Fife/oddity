@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bd0sfb5d6j4v5"]
+[gd_scene load_steps=16 format=3 uid="uid://bd0sfb5d6j4v5"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/StaticGameEntity.gd" id="1_3hxxr"]
 [ext_resource type="Script" path="res://classes/cargo/CargoGrid.gd" id="2_a1wj7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="5_qysf3"]
 [ext_resource type="Script" path="res://classes/landing-pad/LandingPad.gd" id="6_pdlod"]
 [ext_resource type="PackedScene" uid="uid://b1bi6doj50har" path="res://classes/landing-pad/repair-ui/RepairUi.tscn" id="7_6g5ty"]
+[ext_resource type="PackedScene" uid="uid://bfxi85byqr0ku" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi.tscn" id="8_xqxfe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxc6x"]
 diffuse_mode = 3
@@ -239,15 +240,23 @@ size = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.0569, 0)
 shape = SubResource("BoxShape3D_tmw35")
 
-[node name="LandingPad" type="Area3D" parent="."]
+[node name="LandingPad" type="Area3D" parent="." node_paths=PackedStringArray("starship_spawn_marker")]
 collision_layer = 256
 collision_mask = 256
 script = ExtResource("6_pdlod")
+starship_spawn_marker = NodePath("Marker3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LandingPad"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.4815, 0)
 shape = SubResource("BoxShape3D_dym5r")
 
+[node name="Marker3D" type="Marker3D" parent="LandingPad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3891, 0)
+
 [node name="RepairUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("7_6g5ty")]
 transform = Transform3D(1.74512e-17, 0, 0.285, 0, 0.285, 0, -0.285, 0, 1.74512e-17, -37.78, 2.03897, -11.4695)
+landing_pad = NodePath("../LandingPad")
+
+[node name="SpawnShipUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("8_xqxfe")]
+transform = Transform3D(9.18485e-18, 0, 0.15, 0, 0.15, 0, -0.15, 0, 9.18485e-18, -37.8109, 2.42274, -9.72647)
 landing_pad = NodePath("../LandingPad")

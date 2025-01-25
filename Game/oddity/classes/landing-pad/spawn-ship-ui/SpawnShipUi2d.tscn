@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjbws8qmgqwac"]
+
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="1_a0ndc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q0njx"]
+font = ExtResource("1_a0ndc")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_6vber"]
+font = ExtResource("1_a0ndc")
+font_color = Color(1, 0.376471, 0.235294, 1)
+
+[node name="SpawnShipUi2d" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1019.0
+offset_bottom = 310.0
+color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[node name="Claim Ship" type="Label" parent="."]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 2.0
+offset_right = 614.0
+offset_bottom = 72.0
+text = "Claim Ship"
+label_settings = SubResource("LabelSettings_q0njx")
+
+[node name="saved" type="Label" parent="."]
+offset_left = 80.0
+offset_top = 90.0
+offset_right = 415.0
+offset_bottom = 160.0
+text = "Claim saved ship"
+label_settings = SubResource("LabelSettings_q0njx")
+
+[node name="new ship" type="Label" parent="."]
+offset_left = 598.0
+offset_top = 91.0
+offset_right = 958.0
+offset_bottom = 161.0
+text = "Request new Ship
+"
+label_settings = SubResource("LabelSettings_q0njx")
+
+[node name="new ship2" type="Label" parent="."]
+offset_left = 531.0
+offset_top = 72.0
+offset_right = 980.0
+offset_bottom = 142.0
+text = "Info : doesn't clear old saved ship"
+label_settings = SubResource("LabelSettings_6vber")

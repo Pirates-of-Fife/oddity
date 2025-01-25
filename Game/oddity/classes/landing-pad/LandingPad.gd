@@ -8,6 +8,9 @@ signal starship_took_off(starship : Starship)
 @export
 var starship : Starship
 
+@export
+var starship_spawn_marker : Marker3D
+
 func _ready() -> void:
 	_landing_pad_ready()
 
