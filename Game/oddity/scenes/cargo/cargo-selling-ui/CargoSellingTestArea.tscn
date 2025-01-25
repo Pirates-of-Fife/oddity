@@ -262,5 +262,6 @@ landing_pad = NodePath("../LandingPad")
 transform = Transform3D(9.18485e-18, 0, 0.15, 0, 0.15, 0, -0.15, 0, 9.18485e-18, -37.8109, 2.42274, -9.72647)
 landing_pad = NodePath("../LandingPad")
 
-[node name="SaveShipUi" parent="." instance=ExtResource("9_43vom")]
+[node name="SaveShipUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("9_43vom")]
 transform = Transform3D(8.87869e-18, 0, 0.145, 0, 0.145, 0, -0.145, 0, 8.87869e-18, -37.8317, 2.51723, -8.46469)
+landing_pad = NodePath("../LandingPad")
