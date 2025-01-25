@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwqdle0evw1pn"]
+
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/LoadoutGenerator.gd" id="1_5us3b"]
+[ext_resource type="Resource" uid="uid://dryumn61chwql" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres" id="2_el8kl"]
+[ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="3_66qam"]
+
+[node name="Test" type="Node3D"]
+
+[node name="LoadoutGenerator" type="Node" parent="." node_paths=PackedStringArray("starship")]
+script = ExtResource("1_5us3b")
+starship = NodePath("../RabsKestrelMk1")
+clear_load_out = null
+load_loadout_editor = ExtResource("2_el8kl")
+output = ExtResource("2_el8kl")
+
+[node name="RabsKestrelMk1" parent="." instance=ExtResource("3_66qam")]

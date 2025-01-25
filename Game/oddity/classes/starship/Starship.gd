@@ -22,6 +22,11 @@ var ship_name : StringName = "Default Starship"
 var name_label : Label3D
 
 @export
+var default_loadout : StarshipLoadout
+
+var loadout_tools : LoadoutGenerator = LoadoutGenerator.new()
+
+@export
 var ship_info : StarshipInfo
 
 @export
@@ -432,7 +437,9 @@ func _starship_ready() -> void:
 		if module_slot is DynamicModuleSlot:
 			if module_slot.module is ShieldGenerator:
 				shield_generators.append(module_slot.module)
-
+	
+	loadout_tools.load_loadout(self, default_loadout)
+	
 	update_module_stats()
 
 	shield_current_health = shield_max_health
