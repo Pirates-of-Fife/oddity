@@ -1,14 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnmimguacwwbb"]
+[gd_scene load_steps=5 format=3 uid="uid://dnmimguacwwbb"]
 
 [ext_resource type="Script" path="res://classes/module/module-slot/dynamic-module-slot/component-slot/RadiatorSlot.gd" id="1_m4a8c"]
+[ext_resource type="Material" uid="uid://b6xwyx8uah1e6" path="res://classes/cargo/CargoHighlightMaterial.tres" id="2_8se4h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c8g0p"]
 size = Vector3(2.32865, 0.437696, 9.17139)
 
-[node name="RabsKestrelMk1RightRadiatorSlot" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_vtb4d"]
+size = Vector3(2.32865, 0.437696, 9.17139)
+
+[node name="RabsKestrelMk1RightRadiatorSlot" type="Node3D" node_paths=PackedStringArray("highlight_box", "area_root")]
 script = ExtResource("1_m4a8c")
 size = 3
 initialize_area_automatically = false
+highlight_box = NodePath("SlotArea/@MeshInstance3D@42187")
+area_root = NodePath("SlotArea")
 
 [node name="SlotArea" type="Area3D" parent="."]
 collision_layer = 524288
@@ -17,3 +23,8 @@ collision_mask = 524288
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SlotArea"]
 transform = Transform3D(0.993855, -0.0165193, 0.109453, 0.0087042, 0.997403, 0.0714974, -0.11035, -0.0701054, 0.991417, 0.0560094, 0.0849798, -0.0400114)
 shape = SubResource("BoxShape3D_c8g0p")
+
+[node name="@MeshInstance3D@42187" type="MeshInstance3D" parent="SlotArea"]
+visible = false
+material_override = ExtResource("2_8se4h")
+mesh = SubResource("BoxMesh_vtb4d")

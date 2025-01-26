@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=57 format=3 uid="uid://dryumn61chwql"]
+[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=65 format=3 uid="uid://dryumn61chwql"]
 
 [ext_resource type="PackedScene" uid="uid://ddvpx7ldofuyc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.tscn" id="1_cph7c"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ThrusterSlotLoadoutResource.gd" id="1_h71oa"]
@@ -7,11 +7,17 @@
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AlcubierreDriveSlotLoadoutResource.gd" id="3_8l2u1"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="4_ab8lg"]
 [ext_resource type="PackedScene" uid="uid://v6gv82xubo7h" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RABS_KestrelMk1_RetroThruster.tscn" id="4_iiatx"]
+[ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/Size4ShieldGenerator.tscn" id="5_1k84y"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="5_h3fdl"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="6_7bqi6"]
 [ext_resource type="PackedScene" uid="uid://cfbal0ceng7tn" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="6_ss1c4"]
 [ext_resource type="PackedScene" uid="uid://fabmgwjbqisa" path="res://scenes/modules/test-module/Size2AbyssDrive.tscn" id="8_r3ijb"]
 [ext_resource type="PackedScene" uid="uid://bkvastwu4s12v" path="res://scenes/modules/test-module/Size6Weapon/Size6Weapon.tscn" id="10_717bt"]
+[ext_resource type="PackedScene" uid="uid://b4yftdtjyvs6p" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_RightRadiator.tscn" id="12_p3li7"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="12_tqy46"]
+[ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="13_5s5ad"]
+[ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="14_f538g"]
+[ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="14_rlbhv"]
 
 [sub_resource type="Resource" id="Resource_p5tfs"]
 script = ExtResource("1_h71oa")
@@ -157,12 +163,14 @@ id = 20
 script = ExtResource("2_0ogyp")
 size = 4
 name = &"ComponentSlot"
+module = ExtResource("5_1k84y")
 id = 21
 
 [sub_resource type="Resource" id="Resource_a7ivi"]
 script = ExtResource("2_0ogyp")
 size = 4
 name = &"ComponentSlot2"
+module = ExtResource("5_1k84y")
 id = 22
 
 [sub_resource type="Resource" id="Resource_lnceq"]
@@ -274,32 +282,51 @@ id = 39
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint2"
+module = ExtResource("10_717bt")
 id = 40
 
 [sub_resource type="Resource" id="Resource_vp0ww"]
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint3"
+module = ExtResource("13_5s5ad")
 id = 41
 
 [sub_resource type="Resource" id="Resource_7mqbg"]
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint4"
+module = ExtResource("13_5s5ad")
 id = 42
 
 [sub_resource type="Resource" id="Resource_d4e1k"]
 script = ExtResource("5_h3fdl")
 size = 5
 name = &"ExternalHardpoint5"
+module = ExtResource("14_f538g")
 id = 43
 
 [sub_resource type="Resource" id="Resource_psoki"]
 script = ExtResource("5_h3fdl")
 size = 5
 name = &"ExternalHardpoint6"
+module = ExtResource("14_f538g")
 id = 44
+
+[sub_resource type="Resource" id="Resource_n4lv3"]
+script = ExtResource("12_tqy46")
+size = 3
+name = &"RabsKestrelMk1RightRadiatorSlot"
+module = ExtResource("12_p3li7")
+id = 45
+
+[sub_resource type="Resource" id="Resource_wpvw1"]
+script = ExtResource("12_tqy46")
+size = 3
+name = &"RabsKestrelMk1LeftRadiatorSlot"
+module = ExtResource("14_rlbhv")
+id = 46
 
 [resource]
 script = ExtResource("6_7bqi6")
-module_slots = [SubResource("Resource_p5tfs"), SubResource("Resource_350rj"), SubResource("Resource_8c2df"), SubResource("Resource_iselx"), SubResource("Resource_6wn54"), SubResource("Resource_mkint"), SubResource("Resource_a00r7"), SubResource("Resource_w5ogr"), SubResource("Resource_y2hro"), SubResource("Resource_sboi4"), SubResource("Resource_6oi1a"), SubResource("Resource_tisgo"), SubResource("Resource_rgapb"), SubResource("Resource_7h3mv"), SubResource("Resource_28sgm"), SubResource("Resource_dlscg"), SubResource("Resource_imnww"), SubResource("Resource_xg1x0"), SubResource("Resource_c5ohs"), SubResource("Resource_2foug"), SubResource("Resource_6dgny"), SubResource("Resource_a7ivi"), SubResource("Resource_lnceq"), SubResource("Resource_7ai1a"), SubResource("Resource_wi6ej"), SubResource("Resource_5u38n"), SubResource("Resource_ufa64"), SubResource("Resource_it1g5"), SubResource("Resource_i84pk"), SubResource("Resource_xd8a6"), SubResource("Resource_lckmn"), SubResource("Resource_5f82o"), SubResource("Resource_g77d6"), SubResource("Resource_n7vgl"), SubResource("Resource_i8dmf"), SubResource("Resource_pt4br"), SubResource("Resource_g3gl0"), SubResource("Resource_jacr6"), SubResource("Resource_btol5"), SubResource("Resource_dev3m"), SubResource("Resource_vp0ww"), SubResource("Resource_7mqbg"), SubResource("Resource_d4e1k"), SubResource("Resource_psoki")]
+module_slots = [SubResource("Resource_p5tfs"), SubResource("Resource_350rj"), SubResource("Resource_8c2df"), SubResource("Resource_iselx"), SubResource("Resource_6wn54"), SubResource("Resource_mkint"), SubResource("Resource_a00r7"), SubResource("Resource_w5ogr"), SubResource("Resource_y2hro"), SubResource("Resource_sboi4"), SubResource("Resource_6oi1a"), SubResource("Resource_tisgo"), SubResource("Resource_rgapb"), SubResource("Resource_7h3mv"), SubResource("Resource_28sgm"), SubResource("Resource_dlscg"), SubResource("Resource_imnww"), SubResource("Resource_xg1x0"), SubResource("Resource_c5ohs"), SubResource("Resource_2foug"), SubResource("Resource_6dgny"), SubResource("Resource_a7ivi"), SubResource("Resource_lnceq"), SubResource("Resource_7ai1a"), SubResource("Resource_wi6ej"), SubResource("Resource_5u38n"), SubResource("Resource_ufa64"), SubResource("Resource_it1g5"), SubResource("Resource_i84pk"), SubResource("Resource_xd8a6"), SubResource("Resource_lckmn"), SubResource("Resource_5f82o"), SubResource("Resource_g77d6"), SubResource("Resource_n7vgl"), SubResource("Resource_i8dmf"), SubResource("Resource_pt4br"), SubResource("Resource_g3gl0"), SubResource("Resource_jacr6"), SubResource("Resource_btol5"), SubResource("Resource_dev3m"), SubResource("Resource_vp0ww"), SubResource("Resource_7mqbg"), SubResource("Resource_d4e1k"), SubResource("Resource_psoki"), SubResource("Resource_n4lv3"), SubResource("Resource_wpvw1")]
