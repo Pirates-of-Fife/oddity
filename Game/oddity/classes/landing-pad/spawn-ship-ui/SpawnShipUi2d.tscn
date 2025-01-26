@@ -19,6 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 1019.0
 offset_bottom = 310.0
 color = Color(0.0768358, 0.0768358, 0.0768358, 1)
@@ -33,6 +34,7 @@ text = "Claim Ship"
 label_settings = SubResource("LabelSettings_q0njx")
 
 [node name="saved" type="Label" parent="."]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 90.0
 offset_right = 415.0
@@ -41,6 +43,7 @@ text = "Claim saved ship"
 label_settings = SubResource("LabelSettings_q0njx")
 
 [node name="new ship" type="Label" parent="."]
+layout_mode = 0
 offset_left = 598.0
 offset_top = 91.0
 offset_right = 958.0
@@ -50,6 +53,7 @@ text = "Request new Ship
 label_settings = SubResource("LabelSettings_q0njx")
 
 [node name="new ship2" type="Label" parent="."]
+layout_mode = 0
 offset_left = 531.0
 offset_top = 72.0
 offset_right = 980.0

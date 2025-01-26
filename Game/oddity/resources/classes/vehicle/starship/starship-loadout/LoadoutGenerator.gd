@@ -65,6 +65,8 @@ func save_loadout(starship : Starship) -> void:
 			loadout.module_slots.append(generate_alcubierre_slot_entry(node))
 		if node is AbyssalJumpDriveSlot:
 			loadout.module_slots.append(generate_abyss_slot_entry(node))
+		if node is RadiatorSlot:
+			loadout.module_slots.append(generate_radiator_slot_entry(node))
 
 	var err : Error = ResourceSaver.save(loadout, "user://saved_loadout.tres")
 	if err == OK:
@@ -106,6 +108,8 @@ func editor_save_current_load_out() -> void:
 			loadout.module_slots.append(generate_alcubierre_slot_entry(node))
 		if node is AbyssalJumpDriveSlot:
 			loadout.module_slots.append(generate_abyss_slot_entry(node))
+		if node is RadiatorSlot:
+			loadout.module_slots.append(generate_radiator_slot_entry(node))
 		
 	output = loadout
 	
@@ -128,6 +132,8 @@ func generate_empty_loadout_resource() -> void:
 			loadout.module_slots.append(generate_alcubierre_slot_entry(node, false))
 		if node is AbyssalJumpDriveSlot:
 			loadout.module_slots.append(generate_abyss_slot_entry(node, false))
+		if node is RadiatorSlot:
+			loadout.module_slots.append(generate_radiator_slot_entry(node, false))
 		
 	output = loadout
 	
@@ -144,6 +150,19 @@ func generate_thruster_slot_entry(slot : ThrusterSlot, save_module : bool = true
 		
 	return slot_entry
 	
+func generate_radiator_slot_entry(slot : RadiatorSlot, save_module : bool = true) -> RadiatorSlotLoadoutResource:
+	var slot_entry : RadiatorSlotLoadoutResource = RadiatorSlotLoadoutResource.new()
+	
+	slot_entry.size = slot.size
+	slot_entry.id = slot.id
+	slot_entry.name = slot.name
+	
+	if save_module:
+		if slot.module != null:
+			slot_entry.module = load(slot.module.scene_file_path)
+		
+	return slot_entry
+
 func generate_component_slot_entry(slot : ComponentSlot, save_module : bool = true) -> ComponentSlotLoadoutResource:
 	var slot_entry : ComponentSlotLoadoutResource = ComponentSlotLoadoutResource.new()
 	
