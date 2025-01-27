@@ -19,7 +19,8 @@ var target_rotational_thrust_vector : Vector3 = Vector3.ZERO
 var ship_name : StringName = "Default Starship" : 
 	set(value):
 		ship_name = value
-		name_label.text = value
+		if name_label != null:
+			name_label.text = value
 	get:
 		return ship_name
 
