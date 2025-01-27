@@ -96,15 +96,32 @@ func cargo_removed_from_grid(cargo_area : CargoArea, cargo : CargoContainer) -> 
 
 	
 func sell_cargo() -> void:
+	var total : int = 0
+	
 	for c : CargoArea in cargo_area_root.get_children():
 		c.snapped_cargo = null
 		c.valid = true
 	
 	for c : CargoContainer in current_cargo_in_grid:
-		player.add_credits(c.value)
+		total += c.value
 		c.queue_free()
 	
+	player.add_credits(total)
+
 	cargo_sold.emit()
+
+func clear_cargo() -> void:
+	for c : CargoArea in cargo_area_root.get_children():
+		c.snapped_cargo = null
+		c.valid = true
+	
+	for c : CargoContainer in current_cargo_in_grid:
+		c.queue_free()
+		
+func add_cargo_container(cargo_container : CargoContainer) -> void:
+	for cargo_area : CargoArea in cargo_area_root.get_children():
+		if cargo_area.valid:
+			cargo_container.snap_to_grid(cargo_area)
 
 func find_cargo_area(coordinate : Vector3) -> CargoArea:
 	return cargo_area_dictionary.get(coordinate, null)

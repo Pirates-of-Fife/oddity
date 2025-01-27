@@ -49,7 +49,7 @@ func clear_modules(starship : Starship) -> void:
 				module.queue_free()
 			
 		
-func save_loadout(starship : Starship) -> void:
+func save_loadout(starship : Starship, save_cargo : bool = false, save_entities : bool = false) -> void:
 	var loadout : StarshipLoadout = StarshipLoadout.new()
 	
 	var children : Array = starship.find_children("*", "", true, false)
@@ -67,7 +67,22 @@ func save_loadout(starship : Starship) -> void:
 			loadout.module_slots.append(generate_abyss_slot_entry(node))
 		if node is RadiatorSlot:
 			loadout.module_slots.append(generate_radiator_slot_entry(node))
-
+	
+	if save_cargo:
+		for cargo_grid : CargoGrid in starship.cargo_grids:
+			for cargo : CargoContainer in cargo_grid.current_cargo_in_grid:
+				loadout.cargo.append(generate_cargo_container_entry(cargo))
+	
+	if save_entities:
+		var frame_of_references : Array = starship.find_children("*", "FrameOfReference", true, false)
+		
+		for frame_of_reference : FrameOfReference in frame_of_references:
+			for child : Node in frame_of_reference.get_children():
+				if child is GameEntity:
+					loadout.entities.append(generate_game_entity_entry(child, starship))
+	
+	loadout.ship_name = starship.ship_name
+	
 	var err : Error = ResourceSaver.save(loadout, "user://saved_loadout.tres")
 	if err == OK:
 		print("Loadout saved successfully")
@@ -78,7 +93,9 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout) -> void:
 	clear_modules(starship)
 	
 	var children : Array = starship.find_children("*", "", true, false)
-		
+	
+	starship.ship_name = loadout.ship_name
+	
 	for node : Node in children:
 		if node is DynamicModuleSlot:
 			var module_scene : PackedScene = loadout.get_module_by_id(node.id)
@@ -87,7 +104,24 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout) -> void:
 				var module : Module = module_scene.instantiate()
 				starship.add_child(module)
 				module.insert(node)
-			
+	
+	for cargo_resource : CargoContainerLoadoutResource in loadout.cargo:
+		var cargo_grid : CargoGrid = null
+		
+		for grid : CargoGrid in starship.cargo_grids:
+			if grid.id == cargo_resource.cargo_grid_id:
+				cargo_grid = grid
+		
+		if cargo_grid != null:
+			var cargo : CargoContainer = cargo_resource.cargo_container.instantiate()
+			starship.add_child(cargo)
+			cargo_grid.add_cargo_container(cargo)
+	
+	for entity : GameEntityLoadoutResource in loadout.entities:
+		var game_entity : GameEntity = entity.game_entity.instantiate()
+		starship.add_child(game_entity)
+		game_entity.position = entity.position
+		game_entity.rotation = entity.rotation
 
 func editor_save_current_load_out() -> void:
 	if starship == null:
@@ -136,6 +170,23 @@ func generate_empty_loadout_resource() -> void:
 			loadout.module_slots.append(generate_radiator_slot_entry(node, false))
 		
 	output = loadout
+	
+func generate_cargo_container_entry(cargo : CargoContainer) -> CargoContainerLoadoutResource:
+	var container_entry : CargoContainerLoadoutResource = CargoContainerLoadoutResource.new()
+	
+	container_entry.cargo_container = load(cargo.scene_file_path)
+	container_entry.cargo_grid_id = cargo.snapped_to.cargo_grid.id
+	
+	return container_entry
+
+func generate_game_entity_entry(entity : GameEntity, starship : Starship) -> GameEntityLoadoutResource:
+	var game_entity_entry : GameEntityLoadoutResource = GameEntityLoadoutResource.new()
+	
+	game_entity_entry.game_entity = load(entity.scene_file_path)
+	game_entity_entry.position = starship.to_local(entity.global_position)
+	game_entity_entry.rotation = entity.rotation
+	
+	return game_entity_entry
 	
 func generate_thruster_slot_entry(slot : ThrusterSlot, save_module : bool = true) -> ThrusterSlotLoadoutResource:
 	var slot_entry : ThrusterSlotLoadoutResource = ThrusterSlotLoadoutResource.new()

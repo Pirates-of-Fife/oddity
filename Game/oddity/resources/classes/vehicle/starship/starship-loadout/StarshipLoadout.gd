@@ -9,7 +9,14 @@ var module_slots : Array = Array()
 var cargo : Array = Array()
 
 @export
-var objects : Array = Array()
+var entities : Array = Array()
+
+@export
+var ship_name : StringName
+
+## not implemented yet
+@export
+var ship_color : Color
 
 func get_module_by_id(id : int) -> PackedScene:
 	for slot : ModuleSlotLoadoutResource in module_slots:

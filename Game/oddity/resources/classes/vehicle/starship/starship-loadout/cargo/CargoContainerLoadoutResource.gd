@@ -1,5 +1,7 @@
 extends Resource
 
+class_name CargoContainerLoadoutResource
+
 @export
 var cargo_container : PackedScene
 

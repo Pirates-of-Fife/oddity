@@ -16,7 +16,12 @@ var target_rotational_thrust_vector : Vector3 = Vector3.ZERO
 @export_category("Info")
 
 @export
-var ship_name : StringName = "Default Starship"
+var ship_name : StringName = "Default Starship" : 
+	set(value):
+		ship_name = value
+		name_label.text = value
+	get:
+		return ship_name
 
 @export
 var name_label : Label3D

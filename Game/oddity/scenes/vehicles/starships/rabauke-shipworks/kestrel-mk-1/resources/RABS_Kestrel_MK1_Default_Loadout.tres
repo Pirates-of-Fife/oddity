@@ -1,12 +1,17 @@
-[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=65 format=3 uid="uid://dryumn61chwql"]
+[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=73 format=3 uid="uid://dryumn61chwql"]
 
 [ext_resource type="PackedScene" uid="uid://ddvpx7ldofuyc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.tscn" id="1_cph7c"]
+[ext_resource type="PackedScene" uid="uid://dnn6ul2cu7f2j" path="res://scenes/cargo/cargo-containers/Cu1Container.tscn" id="1_grnyv"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ThrusterSlotLoadoutResource.gd" id="1_h71oa"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ComponentSlotLoadoutResource.gd" id="2_0ogyp"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/cargo/CargoContainerLoadoutResource.gd" id="2_qgev0"]
 [ext_resource type="PackedScene" uid="uid://1ebgimexp8aj" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/rcs-thruster/RABS_KestrelMk1_RcsThruster.tscn" id="3_7m2lc"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AlcubierreDriveSlotLoadoutResource.gd" id="3_8l2u1"]
+[ext_resource type="PackedScene" uid="uid://bwky3jn0doc0y" path="res://scenes/minables/asteroids/asteroid_chunks/AsteroidChunk1.tscn" id="3_fgmt1"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/objects/GameEntityLoadoutResource.gd" id="4_3be4i"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="4_ab8lg"]
 [ext_resource type="PackedScene" uid="uid://v6gv82xubo7h" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RABS_KestrelMk1_RetroThruster.tscn" id="4_iiatx"]
+[ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="4_xdl2b"]
 [ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/Size4ShieldGenerator.tscn" id="5_1k84y"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="5_h3fdl"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="6_7bqi6"]
@@ -18,6 +23,22 @@
 [ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="13_5s5ad"]
 [ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="14_f538g"]
 [ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="14_rlbhv"]
+
+[sub_resource type="Resource" id="Resource_rev50"]
+script = ExtResource("2_qgev0")
+cargo_container = ExtResource("1_grnyv")
+cargo_grid_id = 1
+
+[sub_resource type="Resource" id="Resource_nghml"]
+script = ExtResource("2_qgev0")
+cargo_container = ExtResource("3_fgmt1")
+cargo_grid_id = 1
+
+[sub_resource type="Resource" id="Resource_l0i7w"]
+script = ExtResource("4_3be4i")
+game_entity = ExtResource("4_xdl2b")
+position = Vector3(1.04774, 1.65505, 19.9844)
+rotation = Vector3(0, 2.33122, 0)
 
 [sub_resource type="Resource" id="Resource_p5tfs"]
 script = ExtResource("1_h71oa")
@@ -330,5 +351,7 @@ id = 46
 [resource]
 script = ExtResource("6_7bqi6")
 module_slots = [SubResource("Resource_p5tfs"), SubResource("Resource_350rj"), SubResource("Resource_8c2df"), SubResource("Resource_iselx"), SubResource("Resource_6wn54"), SubResource("Resource_mkint"), SubResource("Resource_a00r7"), SubResource("Resource_w5ogr"), SubResource("Resource_y2hro"), SubResource("Resource_sboi4"), SubResource("Resource_6oi1a"), SubResource("Resource_tisgo"), SubResource("Resource_rgapb"), SubResource("Resource_7h3mv"), SubResource("Resource_28sgm"), SubResource("Resource_dlscg"), SubResource("Resource_imnww"), SubResource("Resource_xg1x0"), SubResource("Resource_c5ohs"), SubResource("Resource_2foug"), SubResource("Resource_6dgny"), SubResource("Resource_a7ivi"), SubResource("Resource_lnceq"), SubResource("Resource_7ai1a"), SubResource("Resource_wi6ej"), SubResource("Resource_5u38n"), SubResource("Resource_ufa64"), SubResource("Resource_it1g5"), SubResource("Resource_i84pk"), SubResource("Resource_xd8a6"), SubResource("Resource_lckmn"), SubResource("Resource_5f82o"), SubResource("Resource_g77d6"), SubResource("Resource_n7vgl"), SubResource("Resource_i8dmf"), SubResource("Resource_pt4br"), SubResource("Resource_g3gl0"), SubResource("Resource_jacr6"), SubResource("Resource_btol5"), SubResource("Resource_dev3m"), SubResource("Resource_vp0ww"), SubResource("Resource_7mqbg"), SubResource("Resource_d4e1k"), SubResource("Resource_psoki"), SubResource("Resource_n4lv3"), SubResource("Resource_wpvw1")]
-cargo = null
-objects = null
+cargo = [SubResource("Resource_rev50"), SubResource("Resource_nghml"), SubResource("Resource_nghml"), SubResource("Resource_nghml")]
+entities = [SubResource("Resource_l0i7w")]
+ship_name = &"RABS_Kestrel_Mk1"
+ship_color = Color(0, 0, 0, 1)
