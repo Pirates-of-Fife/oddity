@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bteqskba0aasp"]
+[gd_scene load_steps=9 format=3 uid="uid://bteqskba0aasp"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
@@ -8,10 +8,6 @@
 [ext_resource type="Resource" uid="uid://bfa4l2rtgwpr1" path="res://test-scenes/star-system-test-scene/SystemC.tres" id="4_dfuqd"]
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
-[ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="6_awn7r"]
-[ext_resource type="PackedScene" uid="uid://bwky3jn0doc0y" path="res://scenes/minables/asteroids/asteroid_chunks/AsteroidChunk1.tscn" id="9_507dy"]
-[ext_resource type="PackedScene" uid="uid://de1xbftiaxibp" path="res://scenes/minables/asteroids/asteroid_chunks/AsteroidChunk2.tscn" id="10_t4sgm"]
-[ext_resource type="PackedScene" uid="uid://b26er7jfxs4vt" path="res://scenes/minables/asteroids/asteroid_chunks/AsteroidChunk3.tscn" id="11_utu2s"]
 
 [node name="StarSystemTestScene" type="Node3D"]
 
@@ -43,24 +39,6 @@ star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_d
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101684, 8010.32, 3480.69)
 ship_name = &"The Kestrel"
 current_state = 0
-
-[node name="AsteroidChunk1" parent="SubViewportContainer/SubViewport/World/SystemA/RabsKestrelMk2" instance=ExtResource("9_507dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75097, 1.39849, -7.93033)
-
-[node name="AsteroidChunk2" parent="SubViewportContainer/SubViewport/World/SystemA/RabsKestrelMk2" instance=ExtResource("9_507dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.641263, 1.39849, -6.86452)
-
-[node name="AsteroidChunk3" parent="SubViewportContainer/SubViewport/World/SystemA/RabsKestrelMk2" instance=ExtResource("10_t4sgm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.17222, 1.39849, -6.20928)
-
-[node name="AsteroidChunk4" parent="SubViewportContainer/SubViewport/World/SystemA/RabsKestrelMk2" instance=ExtResource("10_t4sgm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.727692, 1.39849, -6.07975)
-
-[node name="AsteroidChunk5" parent="SubViewportContainer/SubViewport/World/SystemA/RabsKestrelMk2" instance=ExtResource("11_utu2s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.74028, 1.39849, -6.87571)
-
-[node name="GodotPlushie" parent="SubViewportContainer/SubViewport/World/SystemA/RabsKestrelMk2" instance=ExtResource("6_awn7r")]
-transform = Transform3D(-0.689229, 0, 0.724545, 0, 1, 0, -0.724545, 0, -0.689229, 1.04774, 1.65505, 19.9844)
 
 [node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
 transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 101684, 8012.29, 3498.52)
