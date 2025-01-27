@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cku7uxj7tx0gd"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/HullReinforcement.gd" id="1_xh1kg"]
+[ext_resource type="Resource" uid="uid://wlfjr8g1hd6s" path="res://scenes/modules/test-module/hull-reinforcement/size-1/Size1HullReinforcement.tres" id="2_7d66b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_an33l"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.241156, 0.241156, 0.241156, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wwaot"]
+material = SubResource("StandardMaterial3D_an33l")
+size = Vector3(0.5, 0.5, 1)
+
+[node name="Size1HullReinforcement" type="RigidBody3D"]
+collision_layer = 537396225
+collision_mask = 537396225
+mass = 100.0
+script = ExtResource("1_xh1kg")
+size = 1
+module_resource = ExtResource("2_7d66b")
+can_be_picked_up = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wwaot")

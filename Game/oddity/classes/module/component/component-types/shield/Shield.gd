@@ -106,3 +106,5 @@ func on_shield_online() -> void:
 	collision_layer = layer_collision_online
 
 	shield_online_sound.play()
+	
+	
