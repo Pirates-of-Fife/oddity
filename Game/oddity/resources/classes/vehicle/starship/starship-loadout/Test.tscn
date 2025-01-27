@@ -10,10 +10,10 @@
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AlcubierreDriveSlotLoadoutResource.gd" id="5_svyd7"]
 [ext_resource type="PackedScene" uid="uid://v6gv82xubo7h" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RABS_KestrelMk1_RetroThruster.tscn" id="6_7i5ws"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="6_mp4i6"]
-[ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/Size4ShieldGenerator.tscn" id="7_i0krm"]
+[ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/size-4/Size4ShieldGenerator.tscn" id="7_i0krm"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="7_xojos"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="8_k3v30"]
-[ext_resource type="PackedScene" uid="uid://c8q0kmhpluwao" path="res://scenes/modules/test-module/ShieldGenerator/ShieldGenerator.tscn" id="9_6sj5x"]
+[ext_resource type="PackedScene" uid="uid://c8q0kmhpluwao" path="res://scenes/modules/test-module/ShieldGenerator/size-3/Size3ShieldGenerator.tscn" id="9_6sj5x"]
 [ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="12_45cnw"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="14_6ext1"]
 
@@ -323,6 +323,8 @@ script = ExtResource("8_k3v30")
 module_slots = [SubResource("Resource_2misd"), SubResource("Resource_7xgg8"), SubResource("Resource_aq45b"), SubResource("Resource_d7xvy"), SubResource("Resource_bfytx"), SubResource("Resource_eb4nn"), SubResource("Resource_ep8ix"), SubResource("Resource_htpkr"), SubResource("Resource_utp1j"), SubResource("Resource_wrp77"), SubResource("Resource_b3ld3"), SubResource("Resource_wy82g"), SubResource("Resource_p32wv"), SubResource("Resource_aaprc"), SubResource("Resource_l82c7"), SubResource("Resource_3g7uu"), SubResource("Resource_8ivqq"), SubResource("Resource_ujnyd"), SubResource("Resource_pu0gn"), SubResource("Resource_ccq6h"), SubResource("Resource_3u1q1"), SubResource("Resource_t73ai"), SubResource("Resource_8kseu"), SubResource("Resource_kjdhd"), SubResource("Resource_ldfhx"), SubResource("Resource_r3767"), SubResource("Resource_3uvb6"), SubResource("Resource_ew6iw"), SubResource("Resource_342eb"), SubResource("Resource_d6aj0"), SubResource("Resource_5npdu"), SubResource("Resource_w6hh4"), SubResource("Resource_ed1nl"), SubResource("Resource_h4jps"), SubResource("Resource_c5b7k"), SubResource("Resource_etoi3"), SubResource("Resource_f8rto"), SubResource("Resource_1083o"), SubResource("Resource_ifl8j"), SubResource("Resource_ft0ap"), SubResource("Resource_8ooeu"), SubResource("Resource_6gxmy"), SubResource("Resource_gp3fe"), SubResource("Resource_hec12"), SubResource("Resource_lm8cd"), SubResource("Resource_igpk1")]
 cargo = null
 entities = null
+ship_name = &""
+ship_color = Color(0, 0, 0, 1)
 
 [node name="Test" type="Node3D"]
 

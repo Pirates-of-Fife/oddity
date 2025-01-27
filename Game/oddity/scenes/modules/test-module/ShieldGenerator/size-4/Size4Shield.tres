@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="ShieldGeneratorResource" load_steps=2 format=3 uid="uid://bag82uoxr3dx3"]
 
-[ext_resource type="Script" path="res://resources/classes/module/component/shield-generator/ShieldGeneratorResource.gd" id="1_mt8q7"]
+[ext_resource type="Script" path="res://resources/classes/module/component/shield-generator/ShieldGeneratorResource.gd" id="1_gf12h"]
 
 [resource]
-script = ExtResource("1_mt8q7")
-max_shield_health = 5000.0
-charge_rate = 800.0
-cooldown_time_after_break = 20.0
-cooldown_time_after_hit = 5.0
-charge_time = 0.7
+script = ExtResource("1_gf12h")
+max_shield_health = 9000.0
+charge_rate = 1500.0
+cooldown_time_after_break = 30.0
+cooldown_time_after_hit = 6.0
+charge_time = 1.0
 shield_color = Color(7.70092e-07, 0.903724, 0.395146, 1)
 shield_offline_color = Color(0.718647, 0.332897, 0.625443, 1)
 type = &"Shield Generator"

@@ -308,7 +308,8 @@ enum BountyDifficulty
 {
 	LOW,
 	MEDIUM,
-	HIGH
+	HIGH,
+	EXTREME
 }
 
 
@@ -467,6 +468,8 @@ func _starship_ready() -> void:
 				reward = randi_range(12000, 25000)
 			BountyDifficulty.HIGH:
 				reward = randi_range(60000, 120000)
+			BountyDifficulty.EXTREME:
+				reward = randi_range(290000, 1100000)
 				
 	get_thrusters()
 	
