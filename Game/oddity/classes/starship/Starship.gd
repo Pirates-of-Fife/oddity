@@ -233,6 +233,10 @@ var current_hull_health : float
 @export
 var hull_health_damaged_state : float
 
+@export_category("Cargo")
+@export
+var cargo_grids : Array = Array()
+
 @export_category("Sounds")
 
 @export_subgroup("Collision")
@@ -395,7 +399,10 @@ func _starship_ready() -> void:
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
+	
+	get_cargo_grids()
 
+	
 	shield.shield_hit.connect(shield_damage)
 
 	add_child(shield_cooldown_after_break_timer)
@@ -478,6 +485,13 @@ enum Directions
 	PITCH_UP,
 	PITCH_DOWN
 }
+
+func get_cargo_grids() -> void:
+	var children : Array = find_children("*", "", true, false)
+	
+	for node : Node in children:
+		if node is CargoGrid:
+			cargo_grids.append(node)
 
 func get_thrusters() -> void:
 	for slot : Node3D in thruster_slots_root.get_children():

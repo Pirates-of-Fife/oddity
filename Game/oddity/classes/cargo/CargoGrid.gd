@@ -8,6 +8,9 @@ signal cargo_has_been_removed_from_grid(cargo_area : CargoArea, cargo : CargoCon
 signal cargo_sold
 
 @export
+var id : int = 0
+
+@export
 var monitoring_distance : float
 
 @export
