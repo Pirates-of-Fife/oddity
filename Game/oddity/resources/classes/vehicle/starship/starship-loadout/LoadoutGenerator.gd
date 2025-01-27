@@ -81,6 +81,15 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 				if child is GameEntity:
 					loadout.entities.append(generate_game_entity_entry(child, starship))
 	
+	loadout.value = 0
+	
+	for i : ModuleSlotLoadoutResource in loadout.module_slots:
+		loadout.value += i.value
+	for i : CargoContainerLoadoutResource in loadout.cargo:
+		loadout.value += i.value
+	for i : GameEntityLoadoutResource in loadout.entities:
+		loadout.value += i.value
+	
 	loadout.ship_name = starship.ship_name
 	
 	var err : Error = ResourceSaver.save(loadout, "user://saved_loadout.tres")
@@ -176,6 +185,7 @@ func generate_cargo_container_entry(cargo : CargoContainer) -> CargoContainerLoa
 	
 	container_entry.cargo_container = load(cargo.scene_file_path)
 	container_entry.cargo_grid_id = cargo.snapped_to.cargo_grid.id
+	container_entry.value = cargo.value
 	
 	return container_entry
 
@@ -185,6 +195,7 @@ func generate_game_entity_entry(entity : GameEntity, starship : Starship) -> Gam
 	game_entity_entry.game_entity = load(entity.scene_file_path)
 	game_entity_entry.position = starship.to_local(entity.global_position)
 	game_entity_entry.rotation = entity.rotation
+	game_entity_entry.value = entity.value
 	
 	return game_entity_entry
 	
@@ -198,6 +209,7 @@ func generate_thruster_slot_entry(slot : ThrusterSlot, save_module : bool = true
 	if save_module:
 		if slot.module != null:
 			slot_entry.module = load(slot.module.scene_file_path)
+			slot_entry.value = slot.module.value
 		
 	return slot_entry
 	
@@ -207,11 +219,12 @@ func generate_radiator_slot_entry(slot : RadiatorSlot, save_module : bool = true
 	slot_entry.size = slot.size
 	slot_entry.id = slot.id
 	slot_entry.name = slot.name
-	
+
 	if save_module:
 		if slot.module != null:
 			slot_entry.module = load(slot.module.scene_file_path)
-		
+			slot_entry.value = slot.module.value
+
 	return slot_entry
 
 func generate_component_slot_entry(slot : ComponentSlot, save_module : bool = true) -> ComponentSlotLoadoutResource:
@@ -220,11 +233,13 @@ func generate_component_slot_entry(slot : ComponentSlot, save_module : bool = tr
 	slot_entry.size = slot.size
 	slot_entry.id = slot.id
 	slot_entry.name = slot.name
+
 	
 	if save_module:
 		if slot.module != null:
 			slot_entry.module = load(slot.module.scene_file_path)
-	
+			slot_entry.value = slot.module.value
+
 	return slot_entry
 	
 func generate_hardpoint_slot_entry(slot : Hardpoint, save_module : bool = true) -> HardpointLoadoutResource:
@@ -234,10 +249,12 @@ func generate_hardpoint_slot_entry(slot : Hardpoint, save_module : bool = true) 
 	slot_entry.id = slot.id
 	slot_entry.name = slot.name
 	
+	
 	if save_module:
 		if slot.module != null:
 			slot_entry.module = load(slot.module.scene_file_path)
-	
+			slot_entry.value = slot.module.value
+
 	
 	return slot_entry
 	
@@ -251,6 +268,8 @@ func generate_alcubierre_slot_entry(slot : AlcubierreDriveSlot, save_module : bo
 	if save_module:
 		if slot.module != null:
 			slot_entry.module = load(slot.module.scene_file_path)
+			slot_entry.value = slot.module.value
+
 	
 	return slot_entry
 	
@@ -264,5 +283,6 @@ func generate_abyss_slot_entry(slot : AbyssalJumpDriveSlot, save_module : bool =
 	if save_module:
 		if slot.module != null:
 			slot_entry.module = load(slot.module.scene_file_path)
+			slot_entry.value = slot.module.value
 	
 	return slot_entry

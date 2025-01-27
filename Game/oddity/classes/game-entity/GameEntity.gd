@@ -8,6 +8,11 @@ signal on_game_entity_drop_request
 
 signal on_damage_taken(damage : float)
 
+@export_category("Value")
+
+@export
+var value : int
+
 @export_category("Interaction")
 
 @export

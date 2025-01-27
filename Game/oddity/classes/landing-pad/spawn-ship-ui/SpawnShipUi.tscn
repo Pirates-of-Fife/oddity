@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfxi85byqr0ku"]
+[gd_scene load_steps=14 format=3 uid="uid://bfxi85byqr0ku"]
 
 [ext_resource type="Script" path="res://classes/landing-pad/spawn-ship-ui/spawn_ship_ui.gd" id="1_jhslh"]
 [ext_resource type="PackedScene" uid="uid://cjbws8qmgqwac" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi2d.tscn" id="1_s0u3q"]
@@ -30,6 +30,15 @@ albedo_color = Color(1, 0, 0.227451, 1)
 material = SubResource("StandardMaterial3D_g0x14")
 size = Vector3(2.005, 0.85, 0.035)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d67fv"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.433188, 0.60442, 0.0669715, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m7yb3"]
+material = SubResource("StandardMaterial3D_d67fv")
+size = Vector3(1.845, 0.415, 0.01)
+
 [node name="SpawnShipUi" type="Node3D"]
 script = ExtResource("1_jhslh")
 ship_scene = ExtResource("2_k281c")
@@ -59,7 +68,7 @@ shape = SubResource("ConcavePolygonShape3D_c3jfg")
 [node name="Label3D" type="Label3D" parent="ClaimShip"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.60344, -0.199535, 0.0222267)
 outline_modulate = Color(0, 0, 0, 0)
-text = "Claim (10k)"
+text = "Claim "
 font = ExtResource("3_3l2da")
 font_size = 44
 
@@ -85,5 +94,34 @@ text = "Request
 font = ExtResource("3_3l2da")
 font_size = 44
 
+[node name="RequestNewShip2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57769, -0.204802, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_2l8jx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RequestNewShip2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53282, -0.21738, 0)
+mesh = SubResource("BoxMesh_m7yb3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RequestNewShip2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59397, -0.21738, 0)
+shape = SubResource("ConcavePolygonShape3D_c3jfg")
+
+[node name="Label3D" type="Label3D" parent="RequestNewShip2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48102, -0.199535, 0.0222267)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Refresh Price"
+font = ExtResource("3_3l2da")
+font_size = 24
+
+[node name="Price" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0753992, 0.110087, 0.0628491)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Claim "
+font = ExtResource("3_3l2da")
+font_size = 24
+
 [connection signal="interacted" from="ClaimShip" to="." method="_on_claim_ship_interacted"]
 [connection signal="interacted" from="RequestNewShip" to="." method="_on_request_new_ship_interacted"]
+[connection signal="interacted" from="RequestNewShip2" to="." method="_on_request_new_ship_2_interacted"]

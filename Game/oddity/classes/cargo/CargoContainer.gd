@@ -21,9 +21,6 @@ var snapped_to : CargoArea
 var contents : String
 
 @export
-var value : int
-
-@export
 var initialize_collision_shape_automatically : bool = true
 
 enum CargoContainerDirection
