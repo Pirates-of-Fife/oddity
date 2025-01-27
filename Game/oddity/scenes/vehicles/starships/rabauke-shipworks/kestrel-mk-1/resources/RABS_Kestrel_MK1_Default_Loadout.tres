@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=73 format=3 uid="uid://dryumn61chwql"]
+[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=75 format=3 uid="uid://dryumn61chwql"]
 
 [ext_resource type="PackedScene" uid="uid://ddvpx7ldofuyc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.tscn" id="1_cph7c"]
 [ext_resource type="PackedScene" uid="uid://dnn6ul2cu7f2j" path="res://scenes/cargo/cargo-containers/Cu1Container.tscn" id="1_grnyv"]
@@ -18,9 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://cfbal0ceng7tn" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="6_ss1c4"]
 [ext_resource type="PackedScene" uid="uid://fabmgwjbqisa" path="res://scenes/modules/test-module/Size2AbyssDrive.tscn" id="8_r3ijb"]
 [ext_resource type="PackedScene" uid="uid://bkvastwu4s12v" path="res://scenes/modules/test-module/Size6Weapon/Size6Weapon.tscn" id="10_717bt"]
+[ext_resource type="PackedScene" uid="uid://b3x2bgp6b0ev6" path="res://scenes/modules/test-module/ShieldGenerator/size-2/Size2ShieldGenerator.tscn" id="12_2l8t1"]
 [ext_resource type="PackedScene" uid="uid://b4yftdtjyvs6p" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_RightRadiator.tscn" id="12_p3li7"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="12_tqy46"]
 [ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="13_5s5ad"]
+[ext_resource type="PackedScene" uid="uid://dgpwqm2dpuubj" path="res://scenes/modules/test-module/hull-reinforcement/size-2/Size2HullReinforcement.tscn" id="13_6kdb8"]
 [ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="14_f538g"]
 [ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="14_rlbhv"]
 
@@ -198,6 +200,7 @@ id = 22
 script = ExtResource("2_0ogyp")
 size = 2
 name = &"ComponentSlot3"
+module = ExtResource("12_2l8t1")
 id = 23
 
 [sub_resource type="Resource" id="Resource_7ai1a"]
@@ -216,12 +219,14 @@ id = 25
 script = ExtResource("2_0ogyp")
 size = 2
 name = &"ComponentSlot5"
+module = ExtResource("13_6kdb8")
 id = 26
 
 [sub_resource type="Resource" id="Resource_ufa64"]
 script = ExtResource("2_0ogyp")
 size = 2
 name = &"ComponentSlot6"
+module = ExtResource("13_6kdb8")
 id = 27
 
 [sub_resource type="Resource" id="Resource_it1g5"]

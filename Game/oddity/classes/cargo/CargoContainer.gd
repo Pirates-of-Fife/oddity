@@ -94,6 +94,8 @@ func on_interact_self() -> void:
 		unsnap_from_grid()
 
 	unfreeze()
+	unfreeze_in_frame_of_reference()
+
 
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()
