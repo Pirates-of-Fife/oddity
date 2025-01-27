@@ -224,8 +224,11 @@ var shield_hit_cooldown_complete : bool = true
 var shield_break_cooldown_complete : bool = true
 
 @export_subgroup("Hull")
+
 @onready
 var max_hull_health : float = ship_info.max_health
+
+var hull_reinforcements : Array = Array()
 
 @export
 var current_hull_health : float
@@ -420,6 +423,8 @@ func _starship_ready() -> void:
 	shield_broken.connect(shield.on_shield_broken)
 	shield_online.connect(shield.on_shield_online)
 
+	loadout_tools.load_loadout(self, default_loadout)
+
 	if module_node != null:
 		for node : Node in module_node.get_children():
 			for n : Node in node.get_children():
@@ -432,13 +437,16 @@ func _starship_ready() -> void:
 				module_slots.append(node)
 				node.module_inserted.connect(_on_module_insert)
 				node.module_removed.connect(_on_module_uninserted)
-
+	
+	max_hull_health = ship_info.max_health
+	
 	for module_slot : ModuleSlot in module_slots:
 		if module_slot is DynamicModuleSlot:
 			if module_slot.module is ShieldGenerator:
 				shield_generators.append(module_slot.module)
 	
-	loadout_tools.load_loadout(self, default_loadout)
+			if module_slot.module is HullReinforcement:
+				_on_module_insert(module_slot.module)
 	
 	update_module_stats()
 
@@ -597,7 +605,9 @@ func on_shield_broken() -> void:
 
 func shield_break_cooldown_finished() -> void:
 	shield_break_cooldown_complete = true
+	shield_current_health = shield_max_health / 3
 	shield_online.emit()
+	
 
 func shield_hit_cooldown_finished() -> void:
 	shield_hit_cooldown_complete = true
@@ -623,11 +633,25 @@ func _on_module_insert(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.append(module)
 		update_shield_stats()
+	
+	if module is HullReinforcement:
+		hull_reinforcements.append(module)
+		max_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
+		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 
 func _on_module_uninserted(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
 		update_shield_stats()
+	
+	if module is HullReinforcement:
+		hull_reinforcements.erase(module)
+		max_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
+		current_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
+		
+		if current_hull_health <= 0:
+			current_hull_health = 1
+	
 
 func _starship_process(delta: float) -> void:
 	_vehicle_process(delta)
