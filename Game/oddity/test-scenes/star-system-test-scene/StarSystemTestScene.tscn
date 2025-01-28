@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bteqskba0aasp"]
+[gd_scene load_steps=11 format=3 uid="uid://bteqskba0aasp"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
 [ext_resource type="Resource" uid="uid://b1pldqyejslhf" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_1_Loadout.tres" id="7_ig6r4"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="10_xqrji"]
 
 [node name="StarSystemTestScene" type="Node3D"]
 
@@ -51,3 +52,6 @@ interaction_length = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
 credits = 100000
 control_entity = NodePath("../SystemA/Humanoid")
+
+[node name="BountyHuntingZone" type="Node3D" parent="."]
+script = ExtResource("10_xqrji")
