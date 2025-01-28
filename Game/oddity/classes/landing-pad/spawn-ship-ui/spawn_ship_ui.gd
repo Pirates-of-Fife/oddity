@@ -8,6 +8,8 @@ var landing_pad : LandingPad
 @export
 var ship_scene : PackedScene
 
+@export
+var percentage_of_value : float = 0.4
 
 var loadout_tools : LoadoutGenerator = LoadoutGenerator.new()
 
@@ -28,10 +30,10 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 	if landing_pad.starship != null:
 		return
 
-	if player.credits < loadout.value * 0.2:
+	if player.credits < loadout.value * percentage_of_value:
 		return
 
-	player.remove_credits(loadout.value * 0.2)
+	player.remove_credits(loadout.value * percentage_of_value)
 
 	var starship : Starship = ship_scene.instantiate()
 	starship.current_state = Starship.State.POWER_OFF
@@ -75,7 +77,7 @@ func update_price_information() -> void:
 	print(loadout.value)
 
 	var c : CreditHud = CreditHud.new()
-	$Price.text = c.convert_to_human_readable(loadout.value * 0.2)
+	$Price.text = c.convert_to_human_readable(loadout.value * percentage_of_value)
 
 func _on_request_new_ship_2_interacted(player: Player, control_entity: ControlEntity) -> void:
 	update_price_information()
