@@ -3,15 +3,16 @@
 [ext_resource type="Script" path="res://classes/projectile/MiningLaserProjectile.gd" id="1_elvi0"]
 [ext_resource type="PackedScene" uid="uid://g4p0b74y3usy" path="res://scenes/modules/test-module/mining-laser/mining-laser/LaserHitPartcle.tscn" id="2_x8j23"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t011a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhuw7"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.388235, 0.333333, 1, 1)
 emission_enabled = true
 emission = Color(0.388235, 0.333333, 1, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_x0mj8"]
-material = SubResource("StandardMaterial3D_t011a")
+[sub_resource type="CylinderMesh" id="CylinderMesh_8pvud"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_mhuw7")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.1
@@ -33,7 +34,7 @@ debug_shape_thickness = 5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
-mesh = SubResource("CylinderMesh_x0mj8")
+mesh = SubResource("CylinderMesh_8pvud")
 
 [node name="LaserHitPartcle" parent="." instance=ExtResource("2_x8j23")]
 transform = Transform3D(1, 0, 0, 0, 0.83708, 0.547081, 0, -0.547081, 0.83708, 0, 0, 0)

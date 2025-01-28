@@ -18,19 +18,21 @@ size = 6
 nozzle = NodePath("Nozzle")
 audio = NodePath("AudioStreamPlayer3D")
 module_resource = ExtResource("2_vjpma")
+value = 70000
 can_be_picked_up = true
 
 [node name="mining_laser_6" parent="." instance=ExtResource("2_jw6kf")]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.703248)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.703248)
 
 [node name="Nozzle" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0776803, 3.34908)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0776803, 2.64583)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 0)
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, -0.703248)
 shape = SubResource("ConvexPolygonShape3D_ubqe3")
 
 [node name="MiningLaser" parent="." instance=ExtResource("3_auwlm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0382326, 3.37609)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0382326, 2.67284)

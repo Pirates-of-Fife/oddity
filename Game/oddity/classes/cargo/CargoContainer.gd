@@ -21,9 +21,6 @@ var snapped_to : CargoArea
 var contents : String
 
 @export
-var value : int
-
-@export
 var initialize_collision_shape_automatically : bool = true
 
 enum CargoContainerDirection
@@ -41,7 +38,7 @@ func _process(delta: float) -> void:
 
 func _cargo_container_ready() -> void:
 	_default_ready()
-	
+
 	if initialize_collision_shape_automatically:
 		_initialize_collision_shape()
 
@@ -63,7 +60,7 @@ func snap_to_grid(cargo_area : CargoArea) -> void:
 	snapped_to = cargo_area
 
 	cargo_area.cargo_added()
-	
+
 	snapped_to_grid.emit(cargo_area, cargo_area.cargo_grid)
 	cargo_area.cargo_added_to_area.emit(cargo_area, self)
 
@@ -94,6 +91,8 @@ func on_interact_self() -> void:
 		unsnap_from_grid()
 
 	unfreeze()
+	unfreeze_in_frame_of_reference()
+
 
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()

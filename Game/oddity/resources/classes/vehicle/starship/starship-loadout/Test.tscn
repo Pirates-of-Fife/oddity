@@ -10,10 +10,10 @@
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AlcubierreDriveSlotLoadoutResource.gd" id="5_svyd7"]
 [ext_resource type="PackedScene" uid="uid://v6gv82xubo7h" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RABS_KestrelMk1_RetroThruster.tscn" id="6_7i5ws"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="6_mp4i6"]
-[ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/Size4ShieldGenerator.tscn" id="7_i0krm"]
+[ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/size-4/Size4ShieldGenerator.tscn" id="7_i0krm"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="7_xojos"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="8_k3v30"]
-[ext_resource type="PackedScene" uid="uid://c8q0kmhpluwao" path="res://scenes/modules/test-module/ShieldGenerator/ShieldGenerator.tscn" id="9_6sj5x"]
+[ext_resource type="PackedScene" uid="uid://c8q0kmhpluwao" path="res://scenes/modules/test-module/ShieldGenerator/size-3/Size3ShieldGenerator.tscn" id="9_6sj5x"]
 [ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="12_45cnw"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="14_6ext1"]
 
@@ -22,6 +22,7 @@ script = ExtResource("3_ifwkc")
 size = 5
 name = &"RabsKestrelMk1MainThrusterSlot"
 module = ExtResource("3_d3a3l")
+value = 0
 id = 1
 
 [sub_resource type="Resource" id="Resource_7xgg8"]
@@ -29,6 +30,7 @@ script = ExtResource("3_ifwkc")
 size = 5
 name = &"RabsKestrelMk1MainThrusterSlot2"
 module = ExtResource("3_d3a3l")
+value = 0
 id = 2
 
 [sub_resource type="Resource" id="Resource_aq45b"]
@@ -36,6 +38,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 3
 
 [sub_resource type="Resource" id="Resource_d7xvy"]
@@ -43,6 +46,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot6"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 4
 
 [sub_resource type="Resource" id="Resource_bfytx"]
@@ -50,6 +54,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot4"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 5
 
 [sub_resource type="Resource" id="Resource_eb4nn"]
@@ -57,6 +62,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot7"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 6
 
 [sub_resource type="Resource" id="Resource_ep8ix"]
@@ -64,6 +70,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot5"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 7
 
 [sub_resource type="Resource" id="Resource_htpkr"]
@@ -71,6 +78,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot8"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 8
 
 [sub_resource type="Resource" id="Resource_utp1j"]
@@ -78,6 +86,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot2"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 9
 
 [sub_resource type="Resource" id="Resource_wrp77"]
@@ -85,6 +94,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot9"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 10
 
 [sub_resource type="Resource" id="Resource_b3ld3"]
@@ -92,6 +102,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot3"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 11
 
 [sub_resource type="Resource" id="Resource_wy82g"]
@@ -99,6 +110,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot10"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 12
 
 [sub_resource type="Resource" id="Resource_p32wv"]
@@ -106,6 +118,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot11"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 13
 
 [sub_resource type="Resource" id="Resource_aaprc"]
@@ -113,6 +126,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot12"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 14
 
 [sub_resource type="Resource" id="Resource_l82c7"]
@@ -120,6 +134,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot13"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 15
 
 [sub_resource type="Resource" id="Resource_3g7uu"]
@@ -127,6 +142,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot14"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 16
 
 [sub_resource type="Resource" id="Resource_8ivqq"]
@@ -134,6 +150,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot15"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 17
 
 [sub_resource type="Resource" id="Resource_ujnyd"]
@@ -141,6 +158,7 @@ script = ExtResource("3_ifwkc")
 size = 2
 name = &"RabsKestrelMk1RcsThrusterSlot16"
 module = ExtResource("5_cn6qq")
+value = 0
 id = 18
 
 [sub_resource type="Resource" id="Resource_pu0gn"]
@@ -148,6 +166,7 @@ script = ExtResource("3_ifwkc")
 size = 3
 name = &"RabsKestrelMk1RetroThrusterSlot"
 module = ExtResource("6_7i5ws")
+value = 0
 id = 19
 
 [sub_resource type="Resource" id="Resource_ccq6h"]
@@ -155,6 +174,7 @@ script = ExtResource("3_ifwkc")
 size = 3
 name = &"RabsKestrelMk1RetroThrusterSlot2"
 module = ExtResource("6_7i5ws")
+value = 0
 id = 20
 
 [sub_resource type="Resource" id="Resource_3u1q1"]
@@ -162,42 +182,49 @@ script = ExtResource("4_hvsy5")
 size = 4
 name = &"ComponentSlot"
 module = ExtResource("7_i0krm")
+value = 0
 id = 21
 
 [sub_resource type="Resource" id="Resource_t73ai"]
 script = ExtResource("4_hvsy5")
 size = 4
 name = &"ComponentSlot2"
+value = 0
 id = 22
 
 [sub_resource type="Resource" id="Resource_8kseu"]
 script = ExtResource("4_hvsy5")
 size = 2
 name = &"ComponentSlot3"
+value = 0
 id = 23
 
 [sub_resource type="Resource" id="Resource_kjdhd"]
 script = ExtResource("4_hvsy5")
 size = 2
 name = &"ComponentSlot4"
+value = 0
 id = 24
 
 [sub_resource type="Resource" id="Resource_ldfhx"]
 script = ExtResource("4_hvsy5")
 size = 3
 name = &"ComponentSlot11"
+value = 0
 id = 25
 
 [sub_resource type="Resource" id="Resource_r3767"]
 script = ExtResource("4_hvsy5")
 size = 2
 name = &"ComponentSlot5"
+value = 0
 id = 26
 
 [sub_resource type="Resource" id="Resource_3uvb6"]
 script = ExtResource("4_hvsy5")
 size = 2
 name = &"ComponentSlot6"
+value = 0
 id = 27
 
 [sub_resource type="Resource" id="Resource_ew6iw"]
@@ -205,6 +232,7 @@ script = ExtResource("4_hvsy5")
 size = 3
 name = &"ComponentSlot15"
 module = ExtResource("9_6sj5x")
+value = 0
 id = 28
 
 [sub_resource type="Resource" id="Resource_342eb"]
@@ -212,60 +240,70 @@ script = ExtResource("4_hvsy5")
 size = 3
 name = &"ComponentSlot16"
 module = ExtResource("9_6sj5x")
+value = 0
 id = 29
 
 [sub_resource type="Resource" id="Resource_d6aj0"]
 script = ExtResource("4_hvsy5")
 size = 3
 name = &"ComponentSlot17"
+value = 0
 id = 30
 
 [sub_resource type="Resource" id="Resource_5npdu"]
 script = ExtResource("4_hvsy5")
 size = 1
 name = &"ComponentSlot18"
+value = 0
 id = 31
 
 [sub_resource type="Resource" id="Resource_w6hh4"]
 script = ExtResource("4_hvsy5")
 size = 1
 name = &"ComponentSlot19"
+value = 0
 id = 32
 
 [sub_resource type="Resource" id="Resource_ed1nl"]
 script = ExtResource("4_hvsy5")
 size = 1
 name = &"ComponentSlot20"
+value = 0
 id = 33
 
 [sub_resource type="Resource" id="Resource_h4jps"]
 script = ExtResource("4_hvsy5")
 size = 1
 name = &"ComponentSlot21"
+value = 0
 id = 34
 
 [sub_resource type="Resource" id="Resource_c5b7k"]
 script = ExtResource("4_hvsy5")
 size = 5
 name = &"ComponentSlot7"
+value = 0
 id = 35
 
 [sub_resource type="Resource" id="Resource_etoi3"]
 script = ExtResource("4_hvsy5")
 size = 5
 name = &"ComponentSlot8"
+value = 0
 id = 36
 
 [sub_resource type="Resource" id="Resource_f8rto"]
 script = ExtResource("5_svyd7")
 size = 2
 name = &"AlcubierreDriveSlot"
+value = 0
 id = 37
 
 [sub_resource type="Resource" id="Resource_1083o"]
 script = ExtResource("6_mp4i6")
 size = 2
 name = &"AbyssalJumpDriveSlot"
+value = 0
 id = 38
 
 [sub_resource type="Resource" id="Resource_ifl8j"]
@@ -273,6 +311,7 @@ script = ExtResource("7_xojos")
 size = 6
 name = &"ExternalHardpoint"
 module = ExtResource("12_45cnw")
+value = 0
 id = 39
 
 [sub_resource type="Resource" id="Resource_ft0ap"]
@@ -280,47 +319,59 @@ script = ExtResource("7_xojos")
 size = 6
 name = &"ExternalHardpoint2"
 module = ExtResource("12_45cnw")
+value = 0
 id = 40
 
 [sub_resource type="Resource" id="Resource_8ooeu"]
 script = ExtResource("7_xojos")
 size = 6
 name = &"ExternalHardpoint3"
+value = 0
 id = 41
 
 [sub_resource type="Resource" id="Resource_6gxmy"]
 script = ExtResource("7_xojos")
 size = 6
 name = &"ExternalHardpoint4"
+value = 0
 id = 42
 
 [sub_resource type="Resource" id="Resource_gp3fe"]
 script = ExtResource("7_xojos")
 size = 5
 name = &"ExternalHardpoint5"
+value = 0
 id = 43
 
 [sub_resource type="Resource" id="Resource_hec12"]
 script = ExtResource("7_xojos")
 size = 5
 name = &"ExternalHardpoint6"
+value = 0
 id = 44
 
 [sub_resource type="Resource" id="Resource_lm8cd"]
 script = ExtResource("14_6ext1")
 size = 3
 name = &"RabsKestrelMk1RightRadiatorSlot"
+value = 0
 id = 45
 
 [sub_resource type="Resource" id="Resource_igpk1"]
 script = ExtResource("14_6ext1")
 size = 3
 name = &"RabsKestrelMk1LeftRadiatorSlot"
+value = 0
 id = 46
 
 [sub_resource type="Resource" id="Resource_20igg"]
 script = ExtResource("8_k3v30")
 module_slots = [SubResource("Resource_2misd"), SubResource("Resource_7xgg8"), SubResource("Resource_aq45b"), SubResource("Resource_d7xvy"), SubResource("Resource_bfytx"), SubResource("Resource_eb4nn"), SubResource("Resource_ep8ix"), SubResource("Resource_htpkr"), SubResource("Resource_utp1j"), SubResource("Resource_wrp77"), SubResource("Resource_b3ld3"), SubResource("Resource_wy82g"), SubResource("Resource_p32wv"), SubResource("Resource_aaprc"), SubResource("Resource_l82c7"), SubResource("Resource_3g7uu"), SubResource("Resource_8ivqq"), SubResource("Resource_ujnyd"), SubResource("Resource_pu0gn"), SubResource("Resource_ccq6h"), SubResource("Resource_3u1q1"), SubResource("Resource_t73ai"), SubResource("Resource_8kseu"), SubResource("Resource_kjdhd"), SubResource("Resource_ldfhx"), SubResource("Resource_r3767"), SubResource("Resource_3uvb6"), SubResource("Resource_ew6iw"), SubResource("Resource_342eb"), SubResource("Resource_d6aj0"), SubResource("Resource_5npdu"), SubResource("Resource_w6hh4"), SubResource("Resource_ed1nl"), SubResource("Resource_h4jps"), SubResource("Resource_c5b7k"), SubResource("Resource_etoi3"), SubResource("Resource_f8rto"), SubResource("Resource_1083o"), SubResource("Resource_ifl8j"), SubResource("Resource_ft0ap"), SubResource("Resource_8ooeu"), SubResource("Resource_6gxmy"), SubResource("Resource_gp3fe"), SubResource("Resource_hec12"), SubResource("Resource_lm8cd"), SubResource("Resource_igpk1")]
+cargo = null
+entities = null
+ship_name = &""
+value = 0
+ship_color = Color(0, 0, 0, 1)
 
 [node name="Test" type="Node3D"]
 

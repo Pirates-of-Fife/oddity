@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ShieldGeneratorResource" load_steps=2 format=3 uid="uid://bc1kd34pkv6yg"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/shield-generator/ShieldGeneratorResource.gd" id="1_yr8gj"]
+
+[resource]
+script = ExtResource("1_yr8gj")
+max_shield_health = 3000.0
+charge_rate = 250.0
+cooldown_time_after_break = 10.0
+cooldown_time_after_hit = 2.0
+charge_time = 0.1
+shield_color = Color(0.748778, 0.693382, 0, 1)
+shield_offline_color = Color(0.999857, 0.324302, 0.259137, 1)
+type = &"Shield Generator"
+manufacturer = &"Shield Co."
+model = &"Shield"
+size = &"2"
+release_year = &"222"

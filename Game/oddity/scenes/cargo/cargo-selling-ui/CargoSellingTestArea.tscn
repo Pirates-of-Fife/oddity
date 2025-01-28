@@ -57,6 +57,7 @@ mesh = SubResource("BoxMesh_885dg")
 [node name="CargoGrid" type="Node3D" parent="." node_paths=PackedStringArray("cargo_area_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.054, 2.95971, -18.5767)
 script = ExtResource("2_a1wj7")
+id = null
 monitoring_distance = 150.0
 cargo_grid_physical_size = Vector3(5, 2.51, 5)
 total_cu_capacity = 32

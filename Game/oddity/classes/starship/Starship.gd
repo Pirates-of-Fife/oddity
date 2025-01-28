@@ -16,7 +16,13 @@ var target_rotational_thrust_vector : Vector3 = Vector3.ZERO
 @export_category("Info")
 
 @export
-var ship_name : StringName = "Default Starship"
+var ship_name : StringName = "Default Starship" :
+	set(value):
+		ship_name = value
+		if name_label != null:
+			name_label.text = value
+	get:
+		return ship_name
 
 @export
 var name_label : Label3D
@@ -236,6 +242,10 @@ var current_hull_health : float
 @export
 var hull_health_damaged_state : float
 
+@export_category("Cargo")
+@export
+var cargo_grids : Array = Array()
+
 @export_category("Sounds")
 
 @export_subgroup("Collision")
@@ -302,7 +312,8 @@ enum BountyDifficulty
 {
 	LOW,
 	MEDIUM,
-	HIGH
+	HIGH,
+	EXTREME
 }
 
 
@@ -351,11 +362,11 @@ func on_decrease_distance() -> void:
 
 func _starship_ready() -> void:
 	_default_ready()
-	
+
 	toggle_third_person_view.connect(on_third_person)
 	increase_third_person_distance.connect(on_increase_distance)
 	decrease_third_person_distance.connect(on_decrease_distance)
-	
+
 	body_entered.connect(on_collision)
 	on_damage_taken.connect(ship_take_damage)
 
@@ -399,6 +410,9 @@ func _starship_ready() -> void:
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
 
+	get_cargo_grids()
+
+
 	shield.shield_hit.connect(shield_damage)
 
 	add_child(shield_cooldown_after_break_timer)
@@ -437,17 +451,17 @@ func _starship_ready() -> void:
 				module_slots.append(node)
 				node.module_inserted.connect(_on_module_insert)
 				node.module_removed.connect(_on_module_uninserted)
-	
+
 	max_hull_health = ship_info.max_health
-	
+
 	for module_slot : ModuleSlot in module_slots:
 		if module_slot is DynamicModuleSlot:
 			if module_slot.module is ShieldGenerator:
 				shield_generators.append(module_slot.module)
-	
+
 			if module_slot.module is HullReinforcement:
 				_on_module_insert(module_slot.module)
-	
+
 	update_module_stats()
 
 	shield_current_health = shield_max_health
@@ -458,14 +472,16 @@ func _starship_ready() -> void:
 	if is_bounty_target:
 		match difficulty:
 			BountyDifficulty.LOW:
-				reward = randi_range(1000, 6000)
+				reward = randi_range(15000, 45000)
 			BountyDifficulty.MEDIUM:
-				reward = randi_range(12000, 25000)
-			BountyDifficulty.HIGH:
 				reward = randi_range(60000, 120000)
-				
+			BountyDifficulty.HIGH:
+				reward = randi_range(180000, 350000)
+			BountyDifficulty.EXTREME:
+				reward = randi_range(450000, 1100000)
+
 	get_thrusters()
-	
+
 	for c : Node3D in hardpoints_root.get_children():
 		if c is Hardpoint:
 			hardpoints.append(c)
@@ -487,11 +503,18 @@ enum Directions
 	PITCH_DOWN
 }
 
+func get_cargo_grids() -> void:
+	var children : Array = find_children("*", "", true, false)
+
+	for node : Node in children:
+		if node is CargoGrid:
+			cargo_grids.append(node)
+
 func get_thrusters() -> void:
 	for slot : Node3D in thruster_slots_root.get_children():
 		if slot is ThrusterSlot:
 			var directions : Array = [slot.primary_direction as Directions, slot.secondary_direction as Directions, slot.tertiary_direction as Directions]
-			
+
 			for direction : Directions in directions:
 				match direction:
 					Directions.UP:
@@ -540,12 +563,12 @@ func power_off() -> void:
 	axis_lock_linear_x = false
 	axis_lock_linear_y = false
 	axis_lock_linear_z = false
-	
+
 	actual_rotation_vector = Vector3.ZERO
 	actual_rotation_vector_unit = Vector3.ZERO
 	actual_thrust_vector = Vector3.ZERO
 	actual_thrust_vector_unit = Vector3.ZERO
-	
+
 	stop_shooting_primary()
 	stop_shooting_secondary()
 	stop_shooting_tertiary()
@@ -559,7 +582,7 @@ func destroyed() -> void:
 	stop_shooting_primary()
 	stop_shooting_secondary()
 	stop_shooting_tertiary()
-	
+
 	current_state = State.DESTROYED
 	axis_lock_linear_x = false
 	axis_lock_linear_y = false
@@ -572,18 +595,18 @@ func destroyed() -> void:
 	actual_rotation_vector_unit = Vector3.ZERO
 	actual_thrust_vector = Vector3.ZERO
 	actual_thrust_vector_unit = Vector3.ZERO
-	
+
 	explosion_sound_player.stream = explosion_sounds.pick_random()
 	explosion_sound_player.play()
-	
+
 	if player != null:
 		player.die()
 	else:
 		var p : Player = get_tree().get_first_node_in_group("Player")
 		if (p.global_position - global_position).length() <= blast_radius:
 			p.die()
-	
-	
+
+
 	if is_bounty_target:
 		get_tree().get_first_node_in_group("Player").add_credits(reward)
 
@@ -607,7 +630,7 @@ func shield_break_cooldown_finished() -> void:
 	shield_break_cooldown_complete = true
 	shield_current_health = shield_max_health / 3
 	shield_online.emit()
-	
+
 
 func shield_hit_cooldown_finished() -> void:
 	shield_hit_cooldown_complete = true
@@ -633,7 +656,7 @@ func _on_module_insert(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.append(module)
 		update_shield_stats()
-	
+
 	if module is HullReinforcement:
 		hull_reinforcements.append(module)
 		max_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
@@ -643,15 +666,15 @@ func _on_module_uninserted(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
 		update_shield_stats()
-	
+
 	if module is HullReinforcement:
 		hull_reinforcements.erase(module)
 		max_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
-		
+
 		if current_hull_health <= 0:
 			current_hull_health = 1
-	
+
 
 func _starship_process(delta: float) -> void:
 	_vehicle_process(delta)
@@ -729,7 +752,7 @@ func shoot_primary() -> void:
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
-	
+
 	for hardpoint : Hardpoint in hardpoints:
 		if hardpoint.assignment == Hardpoint.HardpointAssignment.PRIMARY:
 			if hardpoint.module != null:
@@ -746,7 +769,7 @@ func shoot_secondary() -> void:
 		if hardpoint.assignment == Hardpoint.HardpointAssignment.SECONDARY:
 			if hardpoint.module != null:
 				hardpoint.module.shoot()
-			
+
 func shoot_tertiary() -> void:
 	if !is_powered_on():
 		return
@@ -782,7 +805,7 @@ func stop_shooting_secondary() -> void:
 		if hardpoint.assignment == Hardpoint.HardpointAssignment.SECONDARY:
 			if hardpoint.module != null:
 				hardpoint.module.stop_shooting()
-			
+
 func stop_shooting_tertiary() -> void:
 	if !is_powered_on():
 		return
@@ -859,7 +882,14 @@ func on_collision(body : Node3D) -> void:
 
 	var current_sound : AudioStream = hull_collision_sounds.pick_random()
 
+	# If bounty target crashes instead of being killed, reduce the reward
+
+	if (current_hull_health - pow(relative_linear_velocity.length(), 2) * 0.15) <= 0:
+		reward = 10000
+
 	take_damage(pow(relative_linear_velocity.length(), 2) * 0.15)
+
+
 
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound
@@ -927,9 +957,11 @@ func initiate_super_cruise() -> void:
 
 	super_cruise_engaged.emit()
 
-func exit_super_cruise() -> void:
-	if current_super_cruise_speed > 500:
-		return
+func exit_super_cruise(force_exit : bool = false) -> void:
+	
+	if !force_exit:
+		if current_super_cruise_speed > 500:
+			return
 
 	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_end()
 
@@ -1025,8 +1057,8 @@ func cruise_travel(delta : float) -> void:
 
 	if (velocity_delta > 0):
 		thrust = pid_roll_right.update(target_rotation_speed_vector.z, local_angular_velocity.z, delta)
-		roll_left(thrust)	
-	
+		roll_left(thrust)
+
 
 	apply_central_force(actual_thrust_vector * global_basis.inverse())
 
@@ -1138,15 +1170,15 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 
 func thrust_up(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.up_thrust)
-	
+
 	actual_thrust_vector.y = thrust
 	actual_thrust_vector_unit.y = thrust / thruster_force.up_thrust
-	
-	
+
+
 
 func thrust_down(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.down_thrust)
-	
+
 	actual_thrust_vector.y = -thrust
 	actual_thrust_vector_unit.y = -thrust / thruster_force.down_thrust
 
