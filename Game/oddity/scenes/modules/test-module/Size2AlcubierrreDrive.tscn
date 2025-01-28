@@ -15,6 +15,7 @@ charging_sound = NodePath("ChargeLoop")
 charging_end = NodePath("ChargeEnd")
 travelling_sound = NodePath("Travelling")
 module_resource = ExtResource("2_fcs0k")
+value = 20000
 can_be_picked_up = true
 
 [node name="alcubierre_drive" parent="." instance=ExtResource("3_g72co")]

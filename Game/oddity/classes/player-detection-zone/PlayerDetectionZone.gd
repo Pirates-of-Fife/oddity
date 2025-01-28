@@ -16,8 +16,8 @@ var activate_distance : float
 @export_range(0, 100000, 1000, "or_greater")
 var deactivate_distance : float
 
-@export_range(0, 1, 0.1, "or_greater")
-var update_time : float = 0.3
+@export_range(0, 1, 0.05, "or_greater")
+var update_time : float = 0.5
 
 @export
 var one_shot : bool = false
@@ -32,10 +32,13 @@ var active : bool = false
 var use_distance_display : bool = false
 
 @export
-var distant_sprite : Sprite3D
+var distant_sprite : MarkerSprite
 
 @export_range(0, 20000, 100, "or_greater")
 var sprite_distance : float
+
+@export_range(0, 20000, 100, "or_greater")
+var sprite_max_distance : float
 
 func _ready() -> void:
 	_player_detection_zone_ready()
@@ -47,11 +50,24 @@ func _player_detection_zone_ready() -> void:
 	timer.autostart = true
 	timer.process_callback = Timer.TIMER_PROCESS_IDLE
 	timer.timeout.connect(update)
+	add_child(timer)
 
 func update() -> void:
 	var distance : float = get_player_distance()
 
-	#if spr
+	if use_distance_display:
+		if player.control_entity.third_person:
+			distant_sprite.hide()
+		else:
+			distant_sprite.distance = distance
+					
+			if distance > sprite_distance:
+				distant_sprite.show()
+			else:
+				distant_sprite.hide()
+				
+			if distance > sprite_max_distance and sprite_max_distance > 0:
+				distant_sprite.hide()
 
 	if !active:
 		if one_shot:

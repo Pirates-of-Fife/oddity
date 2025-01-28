@@ -68,13 +68,10 @@ func update_price_information() -> void:
 	if f == null:
 		return
 
-
 	var loadout : StarshipLoadout = load("user://saved_loadout.tres")
 
 	if loadout == null:
 		return
-
-	print(loadout.value)
 
 	var c : CreditHud = CreditHud.new()
 	$Price.text = c.convert_to_human_readable(loadout.value * percentage_of_value)

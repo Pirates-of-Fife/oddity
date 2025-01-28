@@ -44,11 +44,11 @@ func spawn_bounty_target() -> void:
 	ship.difficulty = difficulty
 	ship.current_state = Starship.State.POWER_ON
 	ship.landing_gear_on = false
-	add_child(ship)
+	add_child.call_deferred(ship)
 
 	var ai : Ai = ai_scene.instantiate()
 	ai.control_entity = ship
-	add_child(ai)
+	add_child.call_deferred(ai)
 
 	var spawn_position : Vector3 = Vector3(randf_range(0, spawn_radius), randf_range(0, spawn_radius), randf_range(0, spawn_radius))
 

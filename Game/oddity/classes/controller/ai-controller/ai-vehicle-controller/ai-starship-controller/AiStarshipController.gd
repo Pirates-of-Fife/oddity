@@ -102,9 +102,10 @@ func _ai_starship_controller_ready() -> void:
 
 	player = get_tree().get_first_node_in_group("Player")
 
-	(control_entity as Starship).shield_broken.connect(change_state_to_flee)
-	(control_entity as Starship).change_to_damaged_state.connect(change_state_to_flee)
-	(control_entity as Starship).shield_online.connect(change_state_back_to_none)
+	if (control_entity as Starship).shield_max_health > 0:
+		(control_entity as Starship).shield_broken.connect(change_state_to_flee)
+		(control_entity as Starship).change_to_damaged_state.connect(change_state_to_flee)
+		(control_entity as Starship).shield_online.connect(change_state_back_to_none)
 
 	evade_change_time = randf_range(0, 60)
 

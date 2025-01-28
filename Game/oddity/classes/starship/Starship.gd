@@ -472,13 +472,13 @@ func _starship_ready() -> void:
 	if is_bounty_target:
 		match difficulty:
 			BountyDifficulty.LOW:
-				reward = randi_range(1000, 6000)
+				reward = randi_range(15000, 45000)
 			BountyDifficulty.MEDIUM:
-				reward = randi_range(12000, 25000)
-			BountyDifficulty.HIGH:
 				reward = randi_range(60000, 120000)
+			BountyDifficulty.HIGH:
+				reward = randi_range(180000, 350000)
 			BountyDifficulty.EXTREME:
-				reward = randi_range(290000, 1100000)
+				reward = randi_range(450000, 1100000)
 
 	get_thrusters()
 
@@ -957,9 +957,11 @@ func initiate_super_cruise() -> void:
 
 	super_cruise_engaged.emit()
 
-func exit_super_cruise() -> void:
-	if current_super_cruise_speed > 500:
-		return
+func exit_super_cruise(force_exit : bool = false) -> void:
+	
+	if !force_exit:
+		if current_super_cruise_speed > 500:
+			return
 
 	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_end()
 
