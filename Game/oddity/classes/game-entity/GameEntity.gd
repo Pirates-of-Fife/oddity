@@ -94,11 +94,11 @@ func on_interact_self() -> void:
 func unfreeze_in_frame_of_reference() -> void:
 	if get_parent_node_3d() is not FrameOfReference:
 		return
-	
+
 	for body : Node in get_parent_node_3d().get_children():
 		if body == self:
 			continue
-			
+
 		if body is GameEntity:
 			if body.freeze == true:
 				if body.can_be_picked_up == true:
@@ -107,9 +107,9 @@ func unfreeze_in_frame_of_reference() -> void:
 							body.unfreeze()
 					else:
 						body.unfreeze()
-							
 
-							
+
+
 func freeze_timer_timeout() -> void:
 	if active_frame_of_reference != null:
 		if freeze == false and can_freeze == true and active_frame_of_reference.physics_parent != null and !is_being_held:

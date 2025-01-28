@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 
 func _cargo_container_ready() -> void:
 	_default_ready()
-	
+
 	if initialize_collision_shape_automatically:
 		_initialize_collision_shape()
 
@@ -60,7 +60,7 @@ func snap_to_grid(cargo_area : CargoArea) -> void:
 	snapped_to = cargo_area
 
 	cargo_area.cargo_added()
-	
+
 	snapped_to_grid.emit(cargo_area, cargo_area.cargo_grid)
 	cargo_area.cargo_added_to_area.emit(cargo_area, self)
 

@@ -6,7 +6,7 @@ class_name SpawnShipUi
 var landing_pad : LandingPad
 
 @export
-var ship_scene : PackedScene 
+var ship_scene : PackedScene
 
 
 var loadout_tools : LoadoutGenerator = LoadoutGenerator.new()
@@ -27,38 +27,38 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 
 	if landing_pad.starship != null:
 		return
-	
+
 	if player.credits < loadout.value * 0.2:
 		return
-	
+
 	player.remove_credits(loadout.value * 0.2)
-	
+
 	var starship : Starship = ship_scene.instantiate()
 	starship.current_state = Starship.State.POWER_OFF
 	starship.landing_gear_on = true
-	
+
 	get_tree().get_first_node_in_group("StarSystem").add_child(starship)
-	
+
 	starship.global_position = landing_pad.starship_spawn_marker.global_position
 	starship.global_rotation = landing_pad.starship_spawn_marker.global_rotation
-	
+
 	loadout_tools.load_loadout(starship, loadout)
-	
+
 	update_price_information()
 
-	
+
 func _on_request_new_ship_interacted(player: Player, control_entity: ControlEntity) -> void:
 	if landing_pad.starship != null:
 		return
-	
+
 	var starship : Starship = ship_scene.instantiate()
 	starship.current_state = Starship.State.POWER_OFF
 	starship.landing_gear_on = true
 	get_tree().get_first_node_in_group("StarSystem").add_child(starship)
-	
+
 	starship.global_position = landing_pad.starship_spawn_marker.global_position
 	starship.global_rotation = landing_pad.starship_spawn_marker.global_rotation
-	
+
 	update_price_information()
 
 func update_price_information() -> void:
@@ -66,9 +66,9 @@ func update_price_information() -> void:
 	if f == null:
 		return
 
-	
+
 	var loadout : StarshipLoadout = load("user://saved_loadout.tres")
-	
+
 	if loadout == null:
 		return
 

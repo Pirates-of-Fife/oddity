@@ -79,7 +79,7 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 		if interior_shown:
 			hide_interior()
 			interior_shown = false
-	
+
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Pitch/Blend3/blend_amount", actual_rotation_vector_unit.x )
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Vertical/Blend3/blend_amount", -actual_thrust_vector_unit.y)
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Forwards/Blend3/blend_amount", -actual_thrust_vector_unit.z)
@@ -204,7 +204,7 @@ func on_damaged() -> void:
 
 	for fire : GPUParticles3D in damaged_fires.get_children():
 		fire.start_fire()
-	
+
 	if alarm_sound_player.playing == false:
 		alarm_sound_player.play()
 
