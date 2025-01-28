@@ -8,9 +8,9 @@ size = Vector3(1.25, 1.25, 1.25)
 [node name="Cu1Container" type="RigidBody3D"]
 collision_layer = 537921025
 collision_mask = 537921025
+contact_monitor = true
 script = ExtResource("1_pb6ev")
 contents = "Empty"
-value = 500
 can_be_picked_up = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

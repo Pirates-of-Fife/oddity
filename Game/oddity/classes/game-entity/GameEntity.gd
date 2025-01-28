@@ -8,6 +8,11 @@ signal on_game_entity_drop_request
 
 signal on_damage_taken(damage : float)
 
+@export_category("Value")
+
+@export
+var value : int
+
 @export_category("Interaction")
 
 @export
@@ -83,6 +88,27 @@ func _default_ready() -> void:
 
 func on_interact_self() -> void:
 	unfreeze()
+	unfreeze_in_frame_of_reference()
+
+
+func unfreeze_in_frame_of_reference() -> void:
+	if get_parent_node_3d() is not FrameOfReference:
+		return
+
+	for body : Node in get_parent_node_3d().get_children():
+		if body == self:
+			continue
+
+		if body is GameEntity:
+			if body.freeze == true:
+				if body.can_be_picked_up == true:
+					if body is CargoContainer:
+						if (body as CargoContainer).snapped_to == null:
+							body.unfreeze()
+					else:
+						body.unfreeze()
+
+
 
 func freeze_timer_timeout() -> void:
 	if active_frame_of_reference != null:

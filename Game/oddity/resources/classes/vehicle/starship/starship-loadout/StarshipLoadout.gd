@@ -14,6 +14,9 @@ var entities : Array = Array()
 @export
 var ship_name : StringName
 
+@export
+var value : int = 0
+
 ## not implemented yet
 @export
 var ship_color : Color

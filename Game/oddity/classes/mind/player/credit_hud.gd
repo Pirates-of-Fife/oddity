@@ -76,9 +76,9 @@ func _ready() -> void:
 	player.credits_removed.connect(on_credits_removed)
 	current_credits = player.credits
 	displayed_credits = current_credits
-	
+
 	player.posses.connect(on_possess)
-	
+
 func on_possess(control_entity : ControlEntity) -> void:
 	if control_entity is Starship:
 		$Container/OnFootCrosshair.hide()

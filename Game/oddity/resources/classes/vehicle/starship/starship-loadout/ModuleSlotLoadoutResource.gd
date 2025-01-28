@@ -9,4 +9,7 @@ var name : StringName
 var module : PackedScene
 
 @export
+var value : int
+
+@export
 var id : int

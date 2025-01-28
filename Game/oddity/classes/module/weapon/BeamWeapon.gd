@@ -12,9 +12,9 @@ func _ready() -> void:
 
 func _beam_weapon_ready() -> void:
 	_weapon_ready()
-	
+
 	var beam_weapon_resource : BeamWeaponResource = module_resource as BeamWeaponResource
-	
+
 	beam_laser.damage = beam_weapon_resource.damage
 	beam_laser.damage_fall_off = beam_weapon_resource.damage_fall_off
 	beam_laser.max_beam_length = beam_weapon_resource.max_beam_length

@@ -127,17 +127,17 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				vehicle_exit_seat_command.execute(control_entity)
-				
+
 				if control_entity is RABS_KestrelMk1:
 					control_entity.show_interior()
 
 		if (Input.is_action_just_pressed("starship_cycle_power_state")):
 			starship_cycle_power_state_command.execute(control_entity)
-				
+
 		if (Input.is_action_just_pressed("general_third_person")):
 			general_toggle_third_person_command.execute(control_entity)
 			third_person = !third_person
-		
+
 		if (Input.is_action_just_pressed("general_toogle_look_around")):
 			mouse_yaw = 0
 			mouse_pitch = 0
@@ -147,13 +147,13 @@ func _starship_controller_process(delta : float) -> void:
 		if look_around:
 			if control_entity.active_control_seat != null:
 				control_entity.active_control_seat.control_seat_anchor.look(mouse_yaw, mouse_pitch)
-			
+
 			if (Input.is_action_just_pressed("general_third_person_increase_distance")):
 				general_increase_third_person_distance_command.execute(control_entity)
-			
+
 			if (Input.is_action_just_pressed("general_third_person_decrease_distance")):
 				general_decrease_third_person_distance_command.execute(control_entity)
-			
+
 			mouse_yaw = 0
 			mouse_pitch = 0
 		else:
@@ -271,19 +271,19 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_pressed("starship_shoot_primary_weapons")):
 			starship_shoot_primary_command.execute(control_entity)
-		
+
 		if (Input.is_action_pressed("starship_shoot_secondary_weapons")):
 			starship_shoot_secondary_command.execute(control_entity)
-		
+
 		if (Input.is_action_pressed("starship_shoot_tertiary_weapons")):
 			starship_shoot_tertiary_command.execute(control_entity)
 
 		if (Input.is_action_just_released("starship_shoot_primary_weapons")):
 			starship_stop_shooting_primary_command.execute(control_entity)
-		
+
 		if (Input.is_action_just_released("starship_shoot_secondary_weapons")):
 			starship_stop_shooting_secondary_command.execute(control_entity)
-		
+
 		if (Input.is_action_just_released("starship_shoot_tertiary_weapons")):
 			starship_stop_shooting_tertiary_command.execute(control_entity)
 
