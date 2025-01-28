@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://bfa4l2rtgwpr1" path="res://test-scenes/star-system-test-scene/SystemC.tres" id="4_dfuqd"]
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
-[ext_resource type="Resource" uid="uid://hu5gqe83uwsy" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_1_Loadout.tres" id="7_bwyij"]
+[ext_resource type="Resource" uid="uid://b1pldqyejslhf" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_1_Loadout.tres" id="7_ig6r4"]
 
 [node name="StarSystemTestScene" type="Node3D"]
 
@@ -39,7 +39,7 @@ star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_d
 [node name="RabsKestrelMk2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101684, 8010.32, 3480.69)
 ship_name = &"The Kestrel"
-default_loadout = ExtResource("7_bwyij")
+default_loadout = ExtResource("7_ig6r4")
 current_state = 0
 difficulty = 3
 

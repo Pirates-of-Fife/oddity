@@ -882,7 +882,14 @@ func on_collision(body : Node3D) -> void:
 
 	var current_sound : AudioStream = hull_collision_sounds.pick_random()
 
+	# If bounty target crashes instead of being killed, reduce the reward
+
+	if (current_hull_health - pow(relative_linear_velocity.length(), 2) * 0.15) <= 0:
+		reward = 10000
+
 	take_damage(pow(relative_linear_velocity.length(), 2) * 0.15)
+
+
 
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound
