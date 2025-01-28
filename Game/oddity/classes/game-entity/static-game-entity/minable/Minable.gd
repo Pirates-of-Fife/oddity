@@ -19,6 +19,12 @@ var resource_count : int
 @export
 var extractable_resources : Array = Array()
 
+@export
+var resource_value_max : int = 10000
+
+@export
+var resource_value_min : int = 40000
+
 func mine(damage : float, mining_position : Vector3, normal : Vector3) -> void:
 	is_being_mined.emit(damage, mining_position)
 	
@@ -41,5 +47,6 @@ func release_extractable(pos : Vector3, normal : Vector3) -> void:
 	get_tree().get_first_node_in_group("StarSystem").add_child(extractable)
 	extractable.global_position = pos
 	extractable.apply_central_impulse(force)
+	extractable.value = randi_range(resource_value_min, resource_value_max)
 	
 	
