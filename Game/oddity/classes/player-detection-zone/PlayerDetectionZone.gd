@@ -26,6 +26,17 @@ var has_been_activated : bool = false
 
 var active : bool = false
 
+@export_category("Distance Display")
+
+@export
+var use_distance_display : bool = false
+
+@export
+var distant_sprite : Sprite3D
+
+@export_range(0, 20000, 100, "or_greater")
+var sprite_distance : float
+
 func _ready() -> void:
 	_player_detection_zone_ready()
 
@@ -39,6 +50,8 @@ func _player_detection_zone_ready() -> void:
 
 func update() -> void:
 	var distance : float = get_player_distance()
+
+	#if spr
 
 	if !active:
 		if one_shot:
