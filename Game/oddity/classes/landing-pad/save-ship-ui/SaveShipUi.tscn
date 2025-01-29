@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwqnarhy6uxga"]
+[gd_scene load_steps=10 format=3 uid="uid://bwqnarhy6uxga"]
 
 [ext_resource type="Script" path="res://classes/landing-pad/save-ship-ui/save_ship_ui.gd" id="1_odvdi"]
 [ext_resource type="PackedScene" uid="uid://dvrd3tpbify6a" path="res://classes/landing-pad/save-ship-ui/SaveShipUi2d.tscn" id="1_ouk84"]
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="2_pmpdc"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_s1eln"]
+[ext_resource type="AudioStream" uid="uid://cmoi3n1dmx15t" path="res://classes/landing-pad/save-ship-ui/powerUp.wav" id="5_isxhd"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_15m24"]
 viewport_path = NodePath("SubViewport")
@@ -52,5 +53,9 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "Save"
 font = ExtResource("3_s1eln")
 font_size = 44
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_isxhd")
+volume_db = -48.0
 
 [connection signal="interacted" from="SaveShip" to="." method="_on_save_ship_interacted"]

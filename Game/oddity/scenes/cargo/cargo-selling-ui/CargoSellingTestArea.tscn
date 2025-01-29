@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bd0sfb5d6j4v5"]
+[gd_scene load_steps=18 format=3 uid="uid://bd0sfb5d6j4v5"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/StaticGameEntity.gd" id="1_3hxxr"]
 [ext_resource type="Script" path="res://classes/cargo/CargoGrid.gd" id="2_a1wj7"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b1bi6doj50har" path="res://classes/landing-pad/repair-ui/RepairUi.tscn" id="7_6g5ty"]
 [ext_resource type="PackedScene" uid="uid://bfxi85byqr0ku" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi.tscn" id="8_xqxfe"]
 [ext_resource type="PackedScene" uid="uid://bwqnarhy6uxga" path="res://classes/landing-pad/save-ship-ui/SaveShipUi.tscn" id="9_43vom"]
+[ext_resource type="PackedScene" uid="uid://bokp84s0jmkuw" path="res://classes/landing-pad/change-ship-name-ui/ChangeShipNameUi.tscn" id="10_jyu8c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxc6x"]
 diffuse_mode = 3
@@ -57,7 +58,6 @@ mesh = SubResource("BoxMesh_885dg")
 [node name="CargoGrid" type="Node3D" parent="." node_paths=PackedStringArray("cargo_area_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.054, 2.95971, -18.5767)
 script = ExtResource("2_a1wj7")
-id = null
 monitoring_distance = 150.0
 cargo_grid_physical_size = Vector3(5, 2.51, 5)
 total_cu_capacity = 32
@@ -265,4 +265,8 @@ landing_pad = NodePath("../LandingPad")
 
 [node name="SaveShipUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("9_43vom")]
 transform = Transform3D(8.87869e-18, 0, 0.145, 0, 0.145, 0, -0.145, 0, 8.87869e-18, -37.8317, 2.51723, -8.46469)
+landing_pad = NodePath("../LandingPad")
+
+[node name="ChangeShipNameUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("10_jyu8c")]
+transform = Transform3D(-0.15, 0, -1.83697e-17, 0, 0.15, 0, 1.83697e-17, 0, -0.15, -37.7479, 2.47688, -6.95623)
 landing_pad = NodePath("../LandingPad")

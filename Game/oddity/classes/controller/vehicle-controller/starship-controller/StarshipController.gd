@@ -249,6 +249,9 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_just_pressed("starship_initiate_super_cruise")):
 			if control_entity.is_in_abyss:
 				return
+				
+			if control_entity.is_mass_locked:
+				return
 
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				control_entity.exit_super_cruise()

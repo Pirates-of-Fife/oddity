@@ -255,7 +255,6 @@ var hull_collision_sounds : Array = Array()
 @export
 var hull_collision_player : AudioStreamPlayer3D
 
-@export_subgroup("Super Cruise")
 @export
 var super_cruise_enter : AudioStreamPlayer3D
 
@@ -689,6 +688,7 @@ func update_shield_stats() -> void:
 
 	if shield_generator_count == 0:
 		shield.collision_mask = shield.layer_mask_offline
+		shield.collision_layer = shield.layer_mask_offline
 		return
 
 	var total_red : float = 0.0
@@ -958,7 +958,7 @@ func initiate_super_cruise() -> void:
 	super_cruise_engaged.emit()
 
 func exit_super_cruise(force_exit : bool = false) -> void:
-	
+
 	if !force_exit:
 		if current_super_cruise_speed > 500:
 			return

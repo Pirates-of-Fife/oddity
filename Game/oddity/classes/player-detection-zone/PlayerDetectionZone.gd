@@ -56,16 +56,16 @@ func update() -> void:
 	var distance : float = get_player_distance()
 
 	if use_distance_display:
-		if player.control_entity.third_person:
+		if player.control_entity.third_person or player.control_entity is not Starship:
 			distant_sprite.hide()
 		else:
 			distant_sprite.distance = distance
-					
+
 			if distance > sprite_distance:
 				distant_sprite.show()
 			else:
 				distant_sprite.hide()
-				
+
 			if distance > sprite_max_distance and sprite_max_distance > 0:
 				distant_sprite.hide()
 
