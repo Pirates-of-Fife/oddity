@@ -958,7 +958,7 @@ func initiate_super_cruise() -> void:
 	super_cruise_engaged.emit()
 
 func exit_super_cruise(force_exit : bool = false) -> void:
-	
+
 	if !force_exit:
 		if current_super_cruise_speed > 500:
 			return

@@ -1,0 +1,708 @@
+[gd_scene load_steps=6 format=3 uid="uid://bokp84s0jmkuw"]
+
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="1_pns72"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_nhq81"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr0ni"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_dslw2"]
+material = SubResource("StandardMaterial3D_hr0ni")
+size = Vector3(0.14, 0.5, 0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_squbp"]
+data = PackedVector3Array(-0.07, 0.25, 0.25, 0.07, 0.25, 0.25, -0.07, -0.25, 0.25, 0.07, 0.25, 0.25, 0.07, -0.25, 0.25, -0.07, -0.25, 0.25, 0.07, 0.25, -0.25, -0.07, 0.25, -0.25, 0.07, -0.25, -0.25, -0.07, 0.25, -0.25, -0.07, -0.25, -0.25, 0.07, -0.25, -0.25, 0.07, 0.25, 0.25, 0.07, 0.25, -0.25, 0.07, -0.25, 0.25, 0.07, 0.25, -0.25, 0.07, -0.25, -0.25, 0.07, -0.25, 0.25, -0.07, 0.25, -0.25, -0.07, 0.25, 0.25, -0.07, -0.25, -0.25, -0.07, 0.25, 0.25, -0.07, -0.25, 0.25, -0.07, -0.25, -0.25, 0.07, 0.25, 0.25, -0.07, 0.25, 0.25, 0.07, 0.25, -0.25, -0.07, 0.25, 0.25, -0.07, 0.25, -0.25, 0.07, 0.25, -0.25, -0.07, -0.25, 0.25, 0.07, -0.25, 0.25, -0.07, -0.25, -0.25, 0.07, -0.25, 0.25, 0.07, -0.25, -0.25, -0.07, -0.25, -0.25)
+
+[node name="ChangeShipNameUi" type="Node3D"]
+
+[node name="Q" type="StaticBody3D" parent="."]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Q"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Q"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="Q"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Q"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="W" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.545094)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="W"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="W"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="W"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "W
+"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="E" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.09131)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="E"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="E"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="E"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "E
+"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="R" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.64072)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="R"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="R"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="R"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "R"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="T" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.17328)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="T"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="T"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="T"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "T"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="Z" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.75022)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Z"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Z"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="Z"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Z"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="U" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.32716)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="U"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="U"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="U"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "U"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="I" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.88931)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="I"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="I"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="I"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "I"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="O" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.46625)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="O"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="O"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="O"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "O"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="P" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.0136)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="P"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="P"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="P"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "P"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="A" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 0.145721)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="A"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="A"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="A"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "A"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="S" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 0.690815)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="S"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="S"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="S"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "S"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 1.23703)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="D"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="D"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="D"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "D"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="F" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 1.78645)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="F"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="F"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="F"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "F"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="G" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 2.31901)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="G"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="G"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="G"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "G"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="H" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 2.89594)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="H"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="H"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="H"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "H"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="J" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 3.47288)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="J"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="J"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="J"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "J
+"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="K" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 4.03503)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="K"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="K"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="K"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "K"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="L" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 4.61197)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="L"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="L"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="L"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "L"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="Y" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 0.381267)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Y"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Y"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="Y"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Y"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="X" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 0.926361)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="X"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="X"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="X"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "X"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="C" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 1.47257)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="C"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="C"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="C"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "C"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="V" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 2.02199)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="V"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="V"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="V"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "V"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="B" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 2.55455)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="B"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="B"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="B"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "B"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="N" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 3.13149)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="N"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="N"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="N"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "N"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="M" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 3.70843)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="M"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="M"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="M"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "M"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, -0.244009)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="1"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="1"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="1"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 0.301085)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "2"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="E2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 0.847297)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="E2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="E2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="E2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "E
+"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="R2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 1.39672)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="R2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="R2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="R2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "R"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="T2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 1.92927)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="T2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="T2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="T2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "T"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="Z2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 2.50621)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Z2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Z2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="Z2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Z"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="U2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 3.08315)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="U2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="U2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="U2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "U"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="I2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 3.6453)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="I2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="I2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="I2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "I"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="O2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 4.22224)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="O2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="O2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="O2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "O"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="P2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 4.76959)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="P2"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="P2"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="P2"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "P"
+font = ExtResource("2_nhq81")
+font_size = 35

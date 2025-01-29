@@ -60,12 +60,12 @@ func update() -> void:
 			distant_sprite.hide()
 		else:
 			distant_sprite.distance = distance
-					
+
 			if distance > sprite_distance:
 				distant_sprite.show()
 			else:
 				distant_sprite.hide()
-				
+
 			if distance > sprite_max_distance and sprite_max_distance > 0:
 				distant_sprite.hide()
 
