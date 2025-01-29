@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bokp84s0jmkuw"]
+[gd_scene load_steps=11 format=3 uid="uid://bokp84s0jmkuw"]
 
+[ext_resource type="Script" path="res://classes/landing-pad/change-ship-name-ui/change_ship_name_ui.gd" id="1_2ohbc"]
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="1_pns72"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_nhq81"]
 
@@ -18,39 +19,56 @@ size = Vector3(0.14, 0.5, 0.5)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_squbp"]
 data = PackedVector3Array(-0.07, 0.25, 0.25, 0.07, 0.25, 0.25, -0.07, -0.25, 0.25, 0.07, 0.25, 0.25, 0.07, -0.25, 0.25, -0.07, -0.25, 0.25, 0.07, 0.25, -0.25, -0.07, 0.25, -0.25, 0.07, -0.25, -0.25, -0.07, 0.25, -0.25, -0.07, -0.25, -0.25, 0.07, -0.25, -0.25, 0.07, 0.25, 0.25, 0.07, 0.25, -0.25, 0.07, -0.25, 0.25, 0.07, 0.25, -0.25, 0.07, -0.25, -0.25, 0.07, -0.25, 0.25, -0.07, 0.25, -0.25, -0.07, 0.25, 0.25, -0.07, -0.25, -0.25, -0.07, 0.25, 0.25, -0.07, -0.25, 0.25, -0.07, -0.25, -0.25, 0.07, 0.25, 0.25, -0.07, 0.25, 0.25, 0.07, 0.25, -0.25, -0.07, 0.25, 0.25, -0.07, 0.25, -0.25, 0.07, 0.25, -0.25, -0.07, -0.25, 0.25, 0.07, -0.25, 0.25, -0.07, -0.25, -0.25, 0.07, -0.25, 0.25, 0.07, -0.25, -0.25, -0.07, -0.25, -0.25)
 
-[node name="ChangeShipNameUi" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_8sed0"]
+material = SubResource("StandardMaterial3D_hr0ni")
+size = Vector3(0.14, 0.5, 3.675)
 
-[node name="Q" type="StaticBody3D" parent="."]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a15m8"]
+data = PackedVector3Array(-0.07, 0.25, 1.8375, 0.07, 0.25, 1.8375, -0.07, -0.25, 1.8375, 0.07, 0.25, 1.8375, 0.07, -0.25, 1.8375, -0.07, -0.25, 1.8375, 0.07, 0.25, -1.8375, -0.07, 0.25, -1.8375, 0.07, -0.25, -1.8375, -0.07, 0.25, -1.8375, -0.07, -0.25, -1.8375, 0.07, -0.25, -1.8375, 0.07, 0.25, 1.8375, 0.07, 0.25, -1.8375, 0.07, -0.25, 1.8375, 0.07, 0.25, -1.8375, 0.07, -0.25, -1.8375, 0.07, -0.25, 1.8375, -0.07, 0.25, -1.8375, -0.07, 0.25, 1.8375, -0.07, -0.25, -1.8375, -0.07, 0.25, 1.8375, -0.07, -0.25, 1.8375, -0.07, -0.25, -1.8375, 0.07, 0.25, 1.8375, -0.07, 0.25, 1.8375, 0.07, 0.25, -1.8375, -0.07, 0.25, 1.8375, -0.07, 0.25, -1.8375, 0.07, 0.25, -1.8375, -0.07, -0.25, 1.8375, 0.07, -0.25, 1.8375, -0.07, -0.25, -1.8375, 0.07, -0.25, 1.8375, 0.07, -0.25, -1.8375, -0.07, -0.25, -1.8375)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vy0nh"]
+material = SubResource("StandardMaterial3D_hr0ni")
+size = Vector3(0.14, 0.5, 1.735)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7ek5d"]
+data = PackedVector3Array(-0.07, 0.25, 0.8675, 0.07, 0.25, 0.8675, -0.07, -0.25, 0.8675, 0.07, 0.25, 0.8675, 0.07, -0.25, 0.8675, -0.07, -0.25, 0.8675, 0.07, 0.25, -0.8675, -0.07, 0.25, -0.8675, 0.07, -0.25, -0.8675, -0.07, 0.25, -0.8675, -0.07, -0.25, -0.8675, 0.07, -0.25, -0.8675, 0.07, 0.25, 0.8675, 0.07, 0.25, -0.8675, 0.07, -0.25, 0.8675, 0.07, 0.25, -0.8675, 0.07, -0.25, -0.8675, 0.07, -0.25, 0.8675, -0.07, 0.25, -0.8675, -0.07, 0.25, 0.8675, -0.07, -0.25, -0.8675, -0.07, 0.25, 0.8675, -0.07, -0.25, 0.8675, -0.07, -0.25, -0.8675, 0.07, 0.25, 0.8675, -0.07, 0.25, 0.8675, 0.07, 0.25, -0.8675, -0.07, 0.25, 0.8675, -0.07, 0.25, -0.8675, 0.07, 0.25, -0.8675, -0.07, -0.25, 0.8675, 0.07, -0.25, 0.8675, -0.07, -0.25, -0.8675, 0.07, -0.25, 0.8675, 0.07, -0.25, -0.8675, -0.07, -0.25, -0.8675)
+
+[node name="ChangeShipNameUi" type="Node3D"]
+script = ExtResource("1_2ohbc")
+
+[node name="Keyboard" type="Node3D" parent="."]
+
+[node name="Q" type="StaticBody3D" parent="Keyboard"]
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Q"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/Q"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Q"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/Q"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="Q"]
+[node name="Label3D" type="Label3D" parent="Keyboard/Q"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Q"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="W" type="StaticBody3D" parent="."]
+[node name="W" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.545094)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="W"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/W"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="W"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/W"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="W"]
+[node name="Label3D" type="Label3D" parent="Keyboard/W"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "W
@@ -58,19 +76,19 @@ text = "W
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="E" type="StaticBody3D" parent="."]
+[node name="E" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.09131)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="E"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/E"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="E"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/E"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="E"]
+[node name="Label3D" type="Label3D" parent="Keyboard/E"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "E
@@ -78,266 +96,266 @@ text = "E
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="R" type="StaticBody3D" parent="."]
+[node name="R" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.64072)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="R"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/R"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="R"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/R"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="R"]
+[node name="Label3D" type="Label3D" parent="Keyboard/R"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "R"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="T" type="StaticBody3D" parent="."]
+[node name="T" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.17328)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="T"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/T"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="T"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/T"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="T"]
+[node name="Label3D" type="Label3D" parent="Keyboard/T"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "T"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="Z" type="StaticBody3D" parent="."]
+[node name="Z" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.75022)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Z"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/Z"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Z"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/Z"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="Z"]
+[node name="Label3D" type="Label3D" parent="Keyboard/Z"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Z"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="U" type="StaticBody3D" parent="."]
+[node name="U" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.32716)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="U"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/U"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="U"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/U"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="U"]
+[node name="Label3D" type="Label3D" parent="Keyboard/U"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "U"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="I" type="StaticBody3D" parent="."]
+[node name="I" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.88931)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="I"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/I"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="I"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/I"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="I"]
+[node name="Label3D" type="Label3D" parent="Keyboard/I"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "I"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="O" type="StaticBody3D" parent="."]
+[node name="O" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.46625)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="O"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/O"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="O"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/O"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="O"]
+[node name="Label3D" type="Label3D" parent="Keyboard/O"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "O"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="P" type="StaticBody3D" parent="."]
+[node name="P" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.0136)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="P"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/P"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="P"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/P"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="P"]
+[node name="Label3D" type="Label3D" parent="Keyboard/P"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "P"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="A" type="StaticBody3D" parent="."]
+[node name="A" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 0.145721)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="A"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/A"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="A"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/A"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="A"]
+[node name="Label3D" type="Label3D" parent="Keyboard/A"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "A"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="S" type="StaticBody3D" parent="."]
+[node name="S" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 0.690815)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="S"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/S"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="S"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/S"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="S"]
+[node name="Label3D" type="Label3D" parent="Keyboard/S"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "S"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="D" type="StaticBody3D" parent="."]
+[node name="D" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 1.23703)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/D"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/D"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="D"]
+[node name="Label3D" type="Label3D" parent="Keyboard/D"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "D"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="F" type="StaticBody3D" parent="."]
+[node name="F" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 1.78645)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="F"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/F"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="F"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/F"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="F"]
+[node name="Label3D" type="Label3D" parent="Keyboard/F"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "F"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="G" type="StaticBody3D" parent="."]
+[node name="G" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 2.31901)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="G"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/G"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="G"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/G"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="G"]
+[node name="Label3D" type="Label3D" parent="Keyboard/G"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "G"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="H" type="StaticBody3D" parent="."]
+[node name="H" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 2.89594)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="H"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/H"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="H"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/H"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="H"]
+[node name="Label3D" type="Label3D" parent="Keyboard/H"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "H"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="J" type="StaticBody3D" parent="."]
+[node name="J" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 3.47288)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="J"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/J"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="J"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/J"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="J"]
+[node name="Label3D" type="Label3D" parent="Keyboard/J"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "J
@@ -345,364 +363,448 @@ text = "J
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="K" type="StaticBody3D" parent="."]
+[node name="K" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 4.03503)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="K"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/K"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="K"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/K"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="K"]
+[node name="Label3D" type="Label3D" parent="Keyboard/K"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "K"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="L" type="StaticBody3D" parent="."]
+[node name="L" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.599235, 4.61197)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="L"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/L"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="L"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/L"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="L"]
+[node name="Label3D" type="Label3D" parent="Keyboard/L"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "L"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="Y" type="StaticBody3D" parent="."]
+[node name="Y" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 0.381267)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Y"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/Y"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Y"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/Y"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="Y"]
+[node name="Label3D" type="Label3D" parent="Keyboard/Y"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Y"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="X" type="StaticBody3D" parent="."]
+[node name="X" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 0.926361)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="X"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/X"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="X"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/X"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="X"]
+[node name="Label3D" type="Label3D" parent="Keyboard/X"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "X"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="C" type="StaticBody3D" parent="."]
+[node name="C" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 1.47257)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="C"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/C"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="C"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/C"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="C"]
+[node name="Label3D" type="Label3D" parent="Keyboard/C"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "C"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="V" type="StaticBody3D" parent="."]
+[node name="V" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 2.02199)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="V"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/V"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="V"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/V"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="V"]
+[node name="Label3D" type="Label3D" parent="Keyboard/V"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "V"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="B" type="StaticBody3D" parent="."]
+[node name="B" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 2.55455)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="B"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/B"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="B"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/B"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="B"]
+[node name="Label3D" type="Label3D" parent="Keyboard/B"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "B"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="N" type="StaticBody3D" parent="."]
+[node name="N" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 3.13149)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="N"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/N"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="N"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/N"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="N"]
+[node name="Label3D" type="Label3D" parent="Keyboard/N"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "N"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="M" type="StaticBody3D" parent="."]
+[node name="M" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2399, 3.70843)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="M"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/M"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="M"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/M"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="M"]
+[node name="Label3D" type="Label3D" parent="Keyboard/M"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "M"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="1" type="StaticBody3D" parent="."]
+[node name="1" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, -0.244009)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/1"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/1"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="1"]
+[node name="Label3D" type="Label3D" parent="Keyboard/1"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "1"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="2" type="StaticBody3D" parent="."]
+[node name="2" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 0.301085)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/2"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/2"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/2"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "2"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="E2" type="StaticBody3D" parent="."]
+[node name="3" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 0.847297)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="E2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/3"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="E2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/3"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="E2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/3"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
-text = "E
+text = "3
 "
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="R2" type="StaticBody3D" parent="."]
+[node name="4" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 1.39672)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="R2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/4"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="R2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/4"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="R2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/4"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
-text = "R"
+text = "4"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="T2" type="StaticBody3D" parent="."]
+[node name="5" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 1.92927)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="T2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/5"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="T2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/5"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="T2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/5"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
-text = "T"
+text = "5"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="Z2" type="StaticBody3D" parent="."]
+[node name="6" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 2.50621)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Z2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/6"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Z2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/6"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="Z2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/6"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
-text = "Z"
+text = "6"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="U2" type="StaticBody3D" parent="."]
+[node name="7" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 3.08315)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="U2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/7"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="U2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/7"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="U2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/7"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
-text = "U"
+text = "7"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="I2" type="StaticBody3D" parent="."]
+[node name="8" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 3.6453)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="I2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/8"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="I2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/8"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="I2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/8"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
-text = "I"
+text = "8"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="O2" type="StaticBody3D" parent="."]
+[node name="9" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 4.22224)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="O2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/9"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="O2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/9"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="O2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/9"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
-text = "O"
+text = "9"
 font = ExtResource("2_nhq81")
 font_size = 35
 
-[node name="P2" type="StaticBody3D" parent="."]
+[node name="0" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570701, 4.76959)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_pns72")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="P2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/0"]
 mesh = SubResource("BoxMesh_dslw2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="P2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/0"]
 shape = SubResource("ConcavePolygonShape3D_squbp")
 
-[node name="Label3D" type="Label3D" parent="P2"]
+[node name="Label3D" type="Label3D" parent="Keyboard/0"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
 outline_modulate = Color(0, 0, 0, 0)
-text = "P"
+text = "0"
 font = ExtResource("2_nhq81")
 font_size = 35
+
+[node name="Space" type="StaticBody3D" parent="Keyboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.89838, 2.42737)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/Space"]
+mesh = SubResource("BoxMesh_8sed0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/Space"]
+shape = SubResource("ConcavePolygonShape3D_a15m8")
+
+[node name="Label3D" type="Label3D" parent="Keyboard/Space"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "-"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="Backspace" type="StaticBody3D" parent="Keyboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.568025, 6.08234)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/Backspace"]
+mesh = SubResource("BoxMesh_vy0nh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/Backspace"]
+shape = SubResource("ConcavePolygonShape3D_7ek5d")
+
+[node name="Label3D" type="Label3D" parent="Keyboard/Backspace"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "BACKSPACE"
+font = ExtResource("2_nhq81")
+font_size = 35
+
+[node name="LAbel" type="Label3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 1.64773, 1.51796)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Ship Name"
+font = ExtResource("2_nhq81")
+font_size = 107
+
+[connection signal="interacted" from="Keyboard/Q" to="." method="_on_q_interacted"]
+[connection signal="interacted" from="Keyboard/W" to="." method="_on_w_interacted"]
+[connection signal="interacted" from="Keyboard/E" to="." method="_on_e_interacted"]
+[connection signal="interacted" from="Keyboard/R" to="." method="_on_r_interacted"]
+[connection signal="interacted" from="Keyboard/T" to="." method="_on_t_interacted"]
+[connection signal="interacted" from="Keyboard/Z" to="." method="_on_z_interacted"]
+[connection signal="interacted" from="Keyboard/U" to="." method="_on_u_interacted"]
+[connection signal="interacted" from="Keyboard/I" to="." method="_on_i_interacted"]
+[connection signal="interacted" from="Keyboard/O" to="." method="_on_o_interacted"]
+[connection signal="interacted" from="Keyboard/P" to="." method="_on_p_interacted"]
+[connection signal="interacted" from="Keyboard/A" to="." method="_on_a_interacted"]
+[connection signal="interacted" from="Keyboard/S" to="." method="_on_s_interacted"]
+[connection signal="interacted" from="Keyboard/D" to="." method="_on_d_interacted"]
+[connection signal="interacted" from="Keyboard/F" to="." method="_on_f_interacted"]
+[connection signal="interacted" from="Keyboard/G" to="." method="_on_g_interacted"]
+[connection signal="interacted" from="Keyboard/H" to="." method="_on_h_interacted"]
+[connection signal="interacted" from="Keyboard/J" to="." method="_on_j_interacted"]
+[connection signal="interacted" from="Keyboard/K" to="." method="_on_k_interacted"]
+[connection signal="interacted" from="Keyboard/L" to="." method="_on_l_interacted"]
+[connection signal="interacted" from="Keyboard/Y" to="." method="_on_y_interacted"]
+[connection signal="interacted" from="Keyboard/X" to="." method="_on_x_interacted"]
+[connection signal="interacted" from="Keyboard/C" to="." method="_on_c_interacted"]
+[connection signal="interacted" from="Keyboard/V" to="." method="_on_v_interacted"]
+[connection signal="interacted" from="Keyboard/B" to="." method="_on_b_interacted"]
+[connection signal="interacted" from="Keyboard/N" to="." method="_on_n_interacted"]
+[connection signal="interacted" from="Keyboard/M" to="." method="_on_m_interacted"]
+[connection signal="interacted" from="Keyboard/1" to="." method="_on__interacted"]
+[connection signal="interacted" from="Keyboard/2" to="." method="_on_2_interacted"]
+[connection signal="interacted" from="Keyboard/3" to="." method="_on_3_interacted"]
+[connection signal="interacted" from="Keyboard/4" to="." method="_on_4_interacted"]
+[connection signal="interacted" from="Keyboard/5" to="." method="_on_5_interacted"]
+[connection signal="interacted" from="Keyboard/6" to="." method="_on_6_interacted"]
+[connection signal="interacted" from="Keyboard/7" to="." method="_on_7_interacted"]
+[connection signal="interacted" from="Keyboard/8" to="." method="_on_8_interacted"]
+[connection signal="interacted" from="Keyboard/9" to="." method="_on_9_interacted"]
+[connection signal="interacted" from="Keyboard/0" to="." method="_on_0_interacted"]
+[connection signal="interacted" from="Keyboard/Space" to="." method="_on_space_interacted"]
+[connection signal="interacted" from="Keyboard/Backspace" to="." method="_on_backspace_interacted"]
