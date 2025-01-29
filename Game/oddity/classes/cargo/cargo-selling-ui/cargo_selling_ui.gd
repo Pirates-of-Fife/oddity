@@ -20,5 +20,10 @@ func _ready() -> void:
 	connected_cargo_grid.cargo_has_been_removed_from_grid.connect(update)
 
 func _on_interaction_button_interacted(player: Player, control_entity: ControlEntity) -> void:
+	if current_cargo.size() == 0:
+		$No.play()
+		return
+	
 	connected_cargo_grid.sell_cargo()
 	cargo_selling_ui_2d.reset()
+	$Sold.play()

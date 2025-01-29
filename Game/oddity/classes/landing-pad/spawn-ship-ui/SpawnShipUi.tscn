@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfxi85byqr0ku"]
+[gd_scene load_steps=16 format=3 uid="uid://bfxi85byqr0ku"]
 
 [ext_resource type="Script" path="res://classes/landing-pad/spawn-ship-ui/spawn_ship_ui.gd" id="1_jhslh"]
 [ext_resource type="PackedScene" uid="uid://cjbws8qmgqwac" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi2d.tscn" id="1_s0u3q"]
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="2_2l8jx"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="2_k281c"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_3l2da"]
+[ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="6_tw3n8"]
+[ext_resource type="AudioStream" uid="uid://crdgvtkwst2i" path="res://classes/landing-pad/spawn-ship-ui/no.wav" id="7_7obba"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ixh8f"]
 viewport_path = NodePath("SubViewport")
@@ -121,6 +123,14 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "Claim "
 font = ExtResource("3_3l2da")
 font_size = 24
+
+[node name="Spawn" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_tw3n8")
+volume_db = -48.0
+
+[node name="Decline" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_7obba")
+volume_db = -48.0
 
 [connection signal="interacted" from="ClaimShip" to="." method="_on_claim_ship_interacted"]
 [connection signal="interacted" from="RequestNewShip" to="." method="_on_request_new_ship_interacted"]

@@ -12,5 +12,5 @@ func _on_save_ship_interacted(player: Player, control_entity: ControlEntity) -> 
 		return
 	
 	loadout_tools.save_loadout(landing_pad.starship)
-	
+	$AudioStreamPlayer3D.play()
 	

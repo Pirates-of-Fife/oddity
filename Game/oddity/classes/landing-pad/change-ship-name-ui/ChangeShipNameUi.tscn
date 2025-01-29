@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bokp84s0jmkuw"]
+[gd_scene load_steps=13 format=3 uid="uid://bokp84s0jmkuw"]
 
 [ext_resource type="Script" path="res://classes/landing-pad/change-ship-name-ui/change_ship_name_ui.gd" id="1_2ohbc"]
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="1_pns72"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_nhq81"]
+[ext_resource type="AudioStream" uid="uid://x76m6bo76mxm" path="res://classes/landing-pad/change-ship-name-ui/click.wav" id="4_dj41v"]
+[ext_resource type="AudioStream" uid="uid://bapltmq7cwe2s" path="res://classes/landing-pad/change-ship-name-ui/backspace.wav" id="5_3i42x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr0ni"]
 diffuse_mode = 3
@@ -33,8 +35,9 @@ size = Vector3(0.14, 0.5, 1.735)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7ek5d"]
 data = PackedVector3Array(-0.07, 0.25, 0.8675, 0.07, 0.25, 0.8675, -0.07, -0.25, 0.8675, 0.07, 0.25, 0.8675, 0.07, -0.25, 0.8675, -0.07, -0.25, 0.8675, 0.07, 0.25, -0.8675, -0.07, 0.25, -0.8675, 0.07, -0.25, -0.8675, -0.07, 0.25, -0.8675, -0.07, -0.25, -0.8675, 0.07, -0.25, -0.8675, 0.07, 0.25, 0.8675, 0.07, 0.25, -0.8675, 0.07, -0.25, 0.8675, 0.07, 0.25, -0.8675, 0.07, -0.25, -0.8675, 0.07, -0.25, 0.8675, -0.07, 0.25, -0.8675, -0.07, 0.25, 0.8675, -0.07, -0.25, -0.8675, -0.07, 0.25, 0.8675, -0.07, -0.25, 0.8675, -0.07, -0.25, -0.8675, 0.07, 0.25, 0.8675, -0.07, 0.25, 0.8675, 0.07, 0.25, -0.8675, -0.07, 0.25, 0.8675, -0.07, 0.25, -0.8675, 0.07, 0.25, -0.8675, -0.07, -0.25, 0.8675, 0.07, -0.25, 0.8675, -0.07, -0.25, -0.8675, 0.07, -0.25, 0.8675, 0.07, -0.25, -0.8675, -0.07, -0.25, -0.8675)
 
-[node name="ChangeShipNameUi" type="Node3D"]
+[node name="ChangeShipNameUi" type="Node3D" node_paths=PackedStringArray("ship_name_label")]
 script = ExtResource("1_2ohbc")
+ship_name_label = NodePath("LAbel")
 
 [node name="Keyboard" type="Node3D" parent="."]
 
@@ -769,6 +772,18 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "Ship Name"
 font = ExtResource("2_nhq81")
 font_size = 107
+
+[node name="Click" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.40916)
+stream = ExtResource("4_dj41v")
+volume_db = -47.358
+bus = &"Environment"
+
+[node name="Remove" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.40916)
+stream = ExtResource("5_3i42x")
+volume_db = -47.358
+bus = &"Environment"
 
 [connection signal="interacted" from="Keyboard/Q" to="." method="_on_q_interacted"]
 [connection signal="interacted" from="Keyboard/W" to="." method="_on_w_interacted"]

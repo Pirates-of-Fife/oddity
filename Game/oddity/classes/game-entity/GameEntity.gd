@@ -8,6 +8,14 @@ signal on_game_entity_drop_request
 
 signal on_damage_taken(damage : float)
 
+var is_mass_locked : bool :
+	get:
+		for i : FrameOfReference in in_frame_of_references:
+			if i.mass_lock:
+				return true
+		return false
+		
+
 @export_category("Value")
 
 @export

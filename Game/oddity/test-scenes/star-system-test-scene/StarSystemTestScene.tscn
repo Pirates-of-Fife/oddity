@@ -38,32 +38,31 @@ script = ExtResource("1_bvu6x")
 star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_dfuqd")]
 
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
-player_respawn_position = Vector3(492238, 11815.9, 761032)
 
 [node name="RabsKestrelMk2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 461117, -24868.9, 684173)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 492193, 11821.1, 761060)
 ship_name = &"The Kestrel"
 default_loadout = ExtResource("7_jnb7m")
 current_state = 0
 difficulty = 3
 
 [node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
-transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 461117, -24866.9, 684191)
+transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 492193, 11823.1, 761078)
 interaction_length = 2.0
 
 [node name="BountyHuntingZone" type="Node3D" parent="SubViewportContainer/SubViewport/World/SystemA" node_paths=PackedStringArray("distant_sprite")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 428384, -194.236, 765486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 455268, -12594.6, 765486)
 script = ExtResource("10_xqrji")
 possible_loadouts = [ExtResource("7_ig6r4")]
 ship_count = 3
 spawn_radius = 5000.0
-activate_distance = 5000.0
-deactivate_distance = 10000.0
+activate_distance = 20000.0
+deactivate_distance = 60000.0
 one_shot = true
 use_distance_display = true
 distant_sprite = NodePath("MarkerSprite")
-sprite_distance = 1000.0
-sprite_max_distance = 10000.0
+sprite_distance = 20000.0
+sprite_max_distance = 110000.0
 
 [node name="MarkerSprite" parent="SubViewportContainer/SubViewport/World/SystemA/BountyHuntingZone" instance=ExtResource("11_d3jqi")]
 text = &"Test Label name"

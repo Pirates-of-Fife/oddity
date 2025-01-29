@@ -24,44 +24,38 @@ func calculate_repair_costs(starship : Starship) -> int:
 	return (health_difference * 1.5) as int
 
 
-
-
 func _on_ship_landed(starship : Starship) -> void:
 	repair_costs = calculate_repair_costs(starship)
 
 	repair_ui_2d.ship_landed(starship, credit_hud.convert_to_human_readable(repair_costs))
 
 	landed_ship = starship
-	print("ship landed")
 
 func _on_ship_took_off(starship : Starship) -> void:
 	landed_ship = null
 	repair_ui_2d.ship_took_off()
-	print("ship not laned")
 
 func _on_interaction_button_interacted(player: Player, control_entity: ControlEntity) -> void:
-	print("Repair requested")
-	print(landed_ship)
-	print(repair_costs)
-	print(landed_ship.current_hull_health == landed_ship.max_hull_health)
-
-
 	if landed_ship == null:
+		$Decline.play()
 		return
 
 	if landed_ship.current_hull_health == landed_ship.max_hull_health:
+		$Decline.play()
 		return
 
 	if repair_costs == 0:
+		$Decline.play()
 		return
 
 	if player.credits < repair_costs:
+		$Decline.play()
 		return
 
 	landed_ship.repair()
 
 	repair_ui_2d.repaired()
-
-	print("ship repaireds")
+	
+	$AudioStreamPlayer3D.play()
 
 	player.remove_credits(repair_costs)

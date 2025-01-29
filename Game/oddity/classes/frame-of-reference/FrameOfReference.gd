@@ -34,6 +34,8 @@ var frame_of_reference_name : String = ""
 @export
 var size : FrameOfReferenceSize
 
+@export
+var mass_lock : bool = false
 
 # INFO: Physics parent gets used for game entity freezing.
 # if a frame of reference has a physics parents, it moves unpredictably, so game entities inside it should freeze so they they remain stable during e.g. a flight on a space ship

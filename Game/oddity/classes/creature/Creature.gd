@@ -214,7 +214,7 @@ func is_in_gravity() -> bool:
 
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor.camera_anchor, interaction_length)
-
+	
 	if (game_entity_being_picked_up != null):
 		drop()
 		return

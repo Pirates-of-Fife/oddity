@@ -69,7 +69,7 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	if player == null:
 		return
 
-	var distance_to_player : float = (global_position - player_reference.global_position).length_squared()
+	var distance_to_player : float = (global_position - player_reference.control_entity.global_position).length_squared()
 
 	if distance_to_player < 625:
 		if !interior_shown:
@@ -143,6 +143,11 @@ func update_ui() -> void:
 
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
+	
+	if is_mass_locked:
+		$Interior/Bridge/MassLockedLabel.show()
+	else:
+		$Interior/Bridge/MassLockedLabel.hide()
 
 func on_power_on() -> void:
 	power_on_sound_player.play()

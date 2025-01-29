@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0d3hia8voe4y"]
+[gd_scene load_steps=11 format=3 uid="uid://c0d3hia8voe4y"]
 
 [ext_resource type="Script" path="res://classes/cargo/cargo-selling-ui/cargo_selling_ui.gd" id="1_ihbg8"]
 [ext_resource type="PackedScene" uid="uid://dng30pjufice1" path="res://classes/cargo/cargo-selling-ui/CargoSellingUi2d.tscn" id="1_n5hjm"]
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="2_g1v5y"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_q13eg"]
+[ext_resource type="AudioStream" uid="uid://bad71memsim6o" path="res://classes/cargo/cargo-selling-ui/pickupCoin2.wav" id="5_3i5kd"]
+[ext_resource type="AudioStream" uid="uid://crdgvtkwst2i" path="res://classes/landing-pad/spawn-ship-ui/no.wav" id="6_yis2d"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ly2wj"]
 viewport_path = NodePath("SubViewport")
@@ -54,5 +56,13 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "SELL CARGO"
 font = ExtResource("3_q13eg")
 font_size = 42
+
+[node name="Sold" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_3i5kd")
+volume_db = -48.0
+
+[node name="No" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_yis2d")
+volume_db = -48.0
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]

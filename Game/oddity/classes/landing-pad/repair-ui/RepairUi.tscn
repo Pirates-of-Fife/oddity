@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1bi6doj50har"]
+[gd_scene load_steps=11 format=3 uid="uid://b1bi6doj50har"]
 
 [ext_resource type="PackedScene" uid="uid://b06fofkojjj37" path="res://classes/landing-pad/repair-ui/RepairUi2d.tscn" id="1_0cnma"]
 [ext_resource type="Script" path="res://classes/landing-pad/repair-ui/repair_ui.gd" id="1_ivklh"]
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="2_hkmx1"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_qbdml"]
+[ext_resource type="AudioStream" uid="uid://bjxc5hbguibta" path="res://classes/landing-pad/repair-ui/pickupCoin.wav" id="5_a3i51"]
+[ext_resource type="AudioStream" uid="uid://crdgvtkwst2i" path="res://classes/landing-pad/spawn-ship-ui/no.wav" id="5_ft8sf"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_464ik"]
 viewport_path = NodePath("SubViewport")
@@ -52,5 +54,13 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "Repair"
 font = ExtResource("3_qbdml")
 font_size = 76
+
+[node name="Decline" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_ft8sf")
+volume_db = -48.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_a3i51")
+volume_db = -48.0
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]

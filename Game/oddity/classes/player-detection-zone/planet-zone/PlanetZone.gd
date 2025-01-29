@@ -17,7 +17,8 @@ func _planet_zone_ready() -> void:
 	activate.connect(_on_activate)
 	deactivate.connect(_on_deactivate)
 	
-	activate_distance = planet_gravity.radius * 1.5
+	activate_distance = planet_gravity.radius * 2
+	deactivate_distance = planet_gravity.radius * 2 + 1
 
 func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 	if control_entity is Starship:
@@ -27,6 +28,10 @@ func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 			
 			if control_entity.current_super_cruise_speed > 500:
 				control_entity.take_damage(control_entity.current_super_cruise_speed * 6)
+		
+		activate_distance = planet_gravity.radius * 1.1
+
+			
 
 func _on_deactivate(player : Player, control_entity : ControlEntity) -> void:
-	pass
+	activate_distance = planet_gravity.radius * 2
