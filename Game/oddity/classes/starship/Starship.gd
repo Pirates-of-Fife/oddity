@@ -244,6 +244,8 @@ var hull_health_damaged_state : float
 
 @export_subgroup("Radar")
 
+var is_targeted : bool = false
+
 @export
 var radar_surrounding_area : RadarSurroundingArea
 
@@ -386,12 +388,14 @@ func focus_target() -> void:
 	focused_starship = ship
 	focused_target.emit(focused_starship)
 	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
+	focused_starship.is_targeted = true
 
 func focused_ship_destroyed() -> void:
 	unfocus_target(focused_starship)
 
 func unfocus_target(starship : Starship) -> void:
 	unfocused_target.emit(starship)
+	focused_starship.is_targeted = false
 	focused_starship.state_changed_to_destroyed.disconnect(focused_ship_destroyed)
 	focused_starship = null
 

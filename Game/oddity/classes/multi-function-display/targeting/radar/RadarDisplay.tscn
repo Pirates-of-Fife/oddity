@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca0mkj205cm2l"]
+
+[ext_resource type="Texture2D" uid="uid://bxguph5onrvh4" path="res://classes/multi-function-display/targeting/radar/radar.svg" id="1_0pmr2"]
+[ext_resource type="Script" path="res://classes/multi-function-display/targeting/radar/radar_display.gd" id="1_77r2x"]
+[ext_resource type="PackedScene" uid="uid://dnwh66i5cp7fk" path="res://classes/multi-function-display/targeting/radar/RadarBlip.tscn" id="2_qhqja"]
+[ext_resource type="PackedScene" uid="uid://o58cxnw1ggt5" path="res://classes/multi-function-display/targeting/radar/RadarBlipTarget.tscn" id="3_30had"]
+
+[node name="RadarDisplay" type="Node3D"]
+script = ExtResource("1_77r2x")
+target_position_relative_to_ship = Vector3(71.005, -1000, 50)
+radar_blip_scene = ExtResource("2_qhqja")
+targeted_radar_blip_scene = ExtResource("3_30had")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.999901, -4.44582e-19, -0.0141018, 0.0137747, -0.214139, 0.976706, -0.00301975, -0.976803, -0.214118, 0, -2.52818, 0)
+texture = ExtResource("1_0pmr2")
+
+[node name="RadarBlips" type="Node3D" parent="."]
+
+[node name="RadarBlip" parent="RadarBlips" instance=ExtResource("2_qhqja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.071005, -1, 0.05)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.15
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

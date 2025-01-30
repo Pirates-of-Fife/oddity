@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnwh66i5cp7fk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05fr4"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.4, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jxkhm"]
+material = SubResource("StandardMaterial3D_05fr4")
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="RadarBlip" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_jxkhm")
