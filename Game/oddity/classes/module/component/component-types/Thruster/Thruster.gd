@@ -35,7 +35,7 @@ func _thruster_ready() -> void:
 	_module_ready()
 
 	initial_direction = thruster_particles.process_material.get("direction")
-	uninserted.connect(_on_uninsert)
+	uninserted.connect(_on_uninsert_thruster)
 
-func _on_uninsert(slot : ModuleSlot) -> void:
+func _on_uninsert_thruster(slot : ModuleSlot) -> void:
 	current_thrust = 0

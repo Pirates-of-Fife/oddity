@@ -14,4 +14,6 @@ func focus_target() -> Starship:
 				min_distance = distance
 				ship = t
 
+	print("FOCUSED " + str(ship))
+
 	return ship

@@ -18,6 +18,9 @@ var super_cruise_mfd : SuperCruiseMFD3D
 var shield_and_health_ui : ShieldAndHullUi3D
 
 @export
+var targeting : StarshipTargetMFD
+
+@export
 var damaged_label : Label3D
 
 @export
@@ -118,6 +121,8 @@ func on_supercruise_disengaged() -> void:
 func update_ui() -> void:
 	crosshair.yaw = -target_rotational_thrust_vector.y
 	crosshair.pitch = -target_rotational_thrust_vector.x
+
+	targeting.update(focused_starship)
 
 	velocity_mfd.forwards_velocity = local_linear_velocity.z
 	velocity_mfd.lateral_velocity_right = abs(minf(local_linear_velocity.x, 0))

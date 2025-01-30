@@ -376,6 +376,8 @@ func focus_target() -> void:
 	var ship : Starship = radar_focus_area.focus_target()
 
 	if ship == null:
+		if focused_starship != null:
+			unfocus_target(focused_starship)
 		return
 
 	if ship == focused_starship:
@@ -383,9 +385,14 @@ func focus_target() -> void:
 
 	focused_starship = ship
 	focused_target.emit(focused_starship)
+	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
+
+func focused_ship_destroyed() -> void:
+	unfocus_target(focused_starship)
 
 func unfocus_target(starship : Starship) -> void:
 	unfocused_target.emit(starship)
+	focused_starship.state_changed_to_destroyed.disconnect(focused_ship_destroyed)
 	focused_starship = null
 
 

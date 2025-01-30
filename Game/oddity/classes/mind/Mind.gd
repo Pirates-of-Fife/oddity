@@ -27,7 +27,7 @@ func die() -> void:
 func possess(control_entity : ControlEntity) -> void:
 	if control_entity.player != null:
 		return
-			
+
 	if current_controller != null:
 		current_controller.queue_free()
 
@@ -52,5 +52,5 @@ func possess(control_entity : ControlEntity) -> void:
 
 	self.position = self.control_entity.anchor.camera_anchor.global_position
 	self.rotation = self.control_entity.anchor.camera_anchor.global_rotation
-		
+
 	posses.emit(self.control_entity)
