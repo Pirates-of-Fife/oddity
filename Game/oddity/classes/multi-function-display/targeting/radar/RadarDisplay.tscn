@@ -23,6 +23,7 @@ targeted_radar_blip_scene = ExtResource("3_30had")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.275, 0, 0, 0, 1.68389e-17, -0.275, 0, 0.275, 1.68389e-17, 0, -0.880945, 0)
+texture_filter = 0
 texture = ExtResource("1_0pmr2")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Sprite3D"]

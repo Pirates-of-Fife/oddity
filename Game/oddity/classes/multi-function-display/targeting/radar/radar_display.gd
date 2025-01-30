@@ -67,9 +67,10 @@ func spawn_radar_blip(game_entity : GameEntity) -> void:
 
 
 func _on_timer_timeout() -> void:
-	for i : Node3D in $RadarBlips.get_children():
-		i.queue_free()
+	pass
+	#for i : Node3D in $RadarBlips.get_children():
+		#i.queue_free()
 
-	for i : GameEntity in radar_surrounding.entities:
-		spawn_radar_blip(i)
+	#for i : GameEntity in radar_surrounding.entities:
+		#spawn_radar_blip(i)
 		#print("Spawn")
