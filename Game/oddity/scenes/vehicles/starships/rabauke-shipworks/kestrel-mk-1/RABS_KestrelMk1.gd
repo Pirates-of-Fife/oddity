@@ -143,7 +143,7 @@ func update_ui() -> void:
 
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
-	
+
 	if is_mass_locked:
 		$Interior/Bridge/MassLockedLabel.show()
 	else:

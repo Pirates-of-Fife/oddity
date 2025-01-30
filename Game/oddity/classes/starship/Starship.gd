@@ -242,6 +242,20 @@ var current_hull_health : float
 @export
 var hull_health_damaged_state : float
 
+@export_subgroup("Radar")
+
+@export
+var radar_surrounding_area : RadarSurroundingArea
+
+@export
+var radar_focus_area : RadarFocusArea
+
+@export
+var focused_starship : Starship
+
+signal focused_target(target : Starship)
+signal unfocused_target(target : Starship)
+
 @export_category("Cargo")
 @export
 var cargo_grids : Array = Array()
@@ -358,6 +372,22 @@ func on_decrease_distance() -> void:
 	if third_person:
 		active_control_seat.decrease_distance(third_person_distance_change_sensitivity)
 
+func focus_target() -> void:
+	var ship : Starship = radar_focus_area.focus_target()
+
+	if ship == null:
+		return
+
+	if ship == focused_starship:
+		unfocus_target(focused_starship)
+
+	focused_starship = ship
+	focused_target.emit(focused_starship)
+
+func unfocus_target(starship : Starship) -> void:
+	unfocused_target.emit(starship)
+	focused_starship = null
+
 
 func _starship_ready() -> void:
 	_default_ready()
@@ -371,6 +401,7 @@ func _starship_ready() -> void:
 
 	power_off_sound_player.finished.connect(sound_power_state_change_complete)
 	power_on_sound_player.finished.connect(sound_power_state_change_complete)
+
 
 	if !landing_gear_on:
 		toggle_landing_gear()
