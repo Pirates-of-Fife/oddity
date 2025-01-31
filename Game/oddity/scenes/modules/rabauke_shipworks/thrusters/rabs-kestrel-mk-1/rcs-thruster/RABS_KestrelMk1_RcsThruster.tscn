@@ -49,8 +49,8 @@ vertex_color_use_as_albedo = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_xn41a"]
 material = SubResource("StandardMaterial3D_cytp2")
-radial_segments = 16
-rings = 8
+radial_segments = 12
+rings = 6
 
 [node name="RabsKestrelMk1RcsThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_particles")]
 collision_layer = 537396737
@@ -73,6 +73,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0662971, -0.0873393)
 amount = 40
 amount_ratio = 0.0
 lifetime = 0.15
+fixed_fps = 15
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_anxn1")
 draw_pass_1 = SubResource("SphereMesh_xn41a")

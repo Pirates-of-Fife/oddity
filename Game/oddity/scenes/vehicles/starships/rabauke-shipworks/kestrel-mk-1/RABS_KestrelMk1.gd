@@ -83,6 +83,11 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 			hide_interior()
 			interior_shown = false
 
+	if relative_linear_velocity.length() > 300:
+		$Interior/Bridge/CruiseLabel.show()
+	else:
+		$Interior/Bridge/CruiseLabel.hide()
+
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Pitch/Blend3/blend_amount", actual_rotation_vector_unit.x )
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Vertical/Blend3/blend_amount", -actual_thrust_vector_unit.y)
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Forwards/Blend3/blend_amount", -actual_thrust_vector_unit.z)

@@ -31,10 +31,10 @@ curve = SubResource("Curve_bach7")
 resource_local_to_scene = true
 direction = Vector3(0, 0, 1)
 spread = 5.0
-initial_velocity_min = 20.0
-initial_velocity_max = 30.0
+initial_velocity_min = 100.0
+initial_velocity_max = 130.0
 gravity = Vector3(0, 0, 0)
-scale_max = 5.0
+scale_max = 10.0
 scale_curve = SubResource("CurveTexture_7mvij")
 color_ramp = SubResource("GradientTexture1D_5q1wc")
 alpha_curve = SubResource("CurveTexture_h6ipi")
@@ -46,8 +46,8 @@ vertex_color_use_as_albedo = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_tlo6e"]
 material = SubResource("StandardMaterial3D_k00ce")
-radial_segments = 16
-rings = 8
+radial_segments = 12
+rings = 6
 
 [node name="RabsKestrelMk1MainThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_particles")]
 collision_layer = 537396737
@@ -67,9 +67,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123499, -0.0113469, 0.1134
 shape = SubResource("BoxShape3D_oj6mv")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.16869)
-amount = 100
-amount_ratio = 0.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.0959)
+amount = 200
+speed_scale = 2.21
+fixed_fps = 15
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_6yadg")
 draw_pass_1 = SubResource("SphereMesh_tlo6e")

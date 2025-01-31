@@ -17,4 +17,4 @@ func _process(delta: float) -> void:
 	line_mesh.mesh.size.y = abs(distance_to_zero)
 	line_mesh.position.y = distance_to_zero / 2
 
-	print(line_mesh.mesh.size.y)
+	#print(line_mesh.mesh.size.y)

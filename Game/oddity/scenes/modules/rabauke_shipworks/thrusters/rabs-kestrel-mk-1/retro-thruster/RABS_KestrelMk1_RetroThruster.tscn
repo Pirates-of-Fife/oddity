@@ -33,8 +33,8 @@ emission_shape = 3
 emission_box_extents = Vector3(0.3, 1, 1)
 direction = Vector3(0, 0, -1)
 spread = 5.0
-initial_velocity_min = 20.0
-initial_velocity_max = 30.0
+initial_velocity_min = 120.0
+initial_velocity_max = 150.0
 gravity = Vector3(0, 0, 0)
 scale_max = 5.0
 scale_curve = SubResource("CurveTexture_gojhc")
@@ -48,8 +48,8 @@ vertex_color_use_as_albedo = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_1vfnt"]
 material = SubResource("StandardMaterial3D_ta1i7")
-radial_segments = 16
-rings = 8
+radial_segments = 12
+rings = 6
 
 [node name="RabsKestrelMk1RetroThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_particles")]
 collision_layer = 537396737
@@ -68,9 +68,9 @@ shape = SubResource("ConvexPolygonShape3D_pe7na")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.932175, -0.187925, -2.42456)
-amount = 100
-amount_ratio = 0.0
-lifetime = 0.4
+amount = 150
+lifetime = 0.17
+fixed_fps = 15
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_7unsp")
 draw_pass_1 = SubResource("SphereMesh_1vfnt")

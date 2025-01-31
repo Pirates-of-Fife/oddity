@@ -81,6 +81,7 @@ func _process(delta : float) -> void:
 		
 	
 	adjust_fov()
+		
 	adjust_camera_position()
 	
 	if (enable_screen_shake):
@@ -91,8 +92,8 @@ func adjust_camera_position() -> void:
 	
 func adjust_fov() -> void:
 	# Define the minimum and maximum speeds for mapping
-	var min_speed : float = -300.0
-	var max_speed : float = 300.0
+	var min_speed : float = -500.0
+	var max_speed : float = 500.0
 
 	# Ensure that the speed is within the specified range
 	var current_speed : float = clamp(speed, min_speed, max_speed)
