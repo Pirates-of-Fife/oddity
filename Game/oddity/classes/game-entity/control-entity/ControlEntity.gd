@@ -35,13 +35,13 @@ func set_active_anchor(new_anchor : Anchor) -> void:
 
 func toggle_third_person() -> void:
 	toggle_third_person_view.emit()
-	
+
 func third_person_decrease_distance() -> void:
 	decrease_third_person_distance.emit()
-	
+
 func third_person_increase_distance() -> void:
 	increase_third_person_distance.emit()
-	
+
 func toggle_look_around() -> void:
 	toggle_look_around_view.emit()
 

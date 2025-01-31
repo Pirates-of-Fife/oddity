@@ -40,6 +40,9 @@ func _ready() -> void:
 func spawn_radar_blip(game_entity : GameEntity) -> void:
 	var radar_blip : Node3D
 
+	if game_entity == starship:
+		return
+
 	if game_entity is Starship:
 		if game_entity.is_targeted == true:
 			radar_blip = targeted_radar_blip_scene.instantiate()
@@ -48,14 +51,15 @@ func spawn_radar_blip(game_entity : GameEntity) -> void:
 	else:
 		radar_blip = radar_blip_scene.instantiate()
 
-	var relative_position: Vector3 = starship.global_position - game_entity.global_position
-
+	var relative_position: Vector3 = (starship.global_position - game_entity.global_position) * starship.global_basis.inverse()
 	#print(relative_position)
+	#relative_position.x = -relative_position.x
+	#relative_position.y = -relative_position.y
 
 	var distance: float = relative_position.length()
 
 	# Apply logarithmic scaling
-	var scaled_distance : float = log(1 + distance) / log(2)  # Base 2 logarithm scaling
+	var scaled_distance : float = (log(distance) / log(2)) # Base 2 logarithm scaling
 	var direction : Vector3 = relative_position.normalized()
 
 	$RadarBlips.add_child(radar_blip)
@@ -63,14 +67,12 @@ func spawn_radar_blip(game_entity : GameEntity) -> void:
 	# Scale down by a factor to fit within radar bounds
 	radar_blip.position = (direction * scaled_distance) / 15
 
-	print(radar_blip.position)
+	#starship.debug_log(str("RADAR: ") + str(radar_blip.position) + " " + str(scaled_distance) + " " + str(relative_position))
 
 
 func _on_timer_timeout() -> void:
-	pass
-	#for i : Node3D in $RadarBlips.get_children():
-		#i.queue_free()
+	for i : Node3D in $RadarBlips.get_children():
+		i.queue_free()
 
-	#for i : GameEntity in radar_surrounding.entities:
-		#spawn_radar_blip(i)
-		#print("Spawn")
+	for i : GameEntity in radar_surrounding.entities:
+		spawn_radar_blip(i)

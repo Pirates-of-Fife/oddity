@@ -40,16 +40,18 @@ script = ExtResource("1_bvu6x")
 star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_dfuqd")]
 
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
+player_respawn_position = Vector3(492238, 11815.9, 761032)
 
 [node name="RabsKestrelMk2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 743339)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 602708)
 ship_name = &"The Kestrel"
 default_loadout = ExtResource("7_x7otm")
 current_state = 0
 difficulty = 3
+debug = true
 
 [node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
-transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 475132, 11823.1, 743357)
+transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 475132, 11823.1, 602726)
 interaction_length = 2.0
 
 [node name="BountyHuntingZone" type="Node3D" parent="SubViewportContainer/SubViewport/World/SystemA" node_paths=PackedStringArray("distant_sprite")]
@@ -70,17 +72,17 @@ sprite_max_distance = 110000.0
 text = &"Test Label name"
 
 [node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 743950)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 603319)
 default_loadout = ExtResource("7_x7otm")
 current_state = 0
 
 [node name="RabsKestrelMk3" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475324, 11821.1, 743950)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 497441, 11821.1, 743950)
 default_loadout = ExtResource("12_sfjus")
 current_state = 0
 
 [node name="RabsKestrelMk4" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475551, 11821.1, 743950)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 497668, 11821.1, 743950)
 default_loadout = ExtResource("13_t0rrd")
 current_state = 0
 

@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnwh66i5cp7fk"]
+[gd_scene load_steps=6 format=3 uid="uid://dnwh66i5cp7fk"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/targeting/radar/RadarBlip.gd" id="1_py72u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05fr4"]
 shading_mode = 0
@@ -10,7 +12,23 @@ albedo_color = Color(1, 0.4, 0, 1)
 material = SubResource("StandardMaterial3D_05fr4")
 size = Vector3(0.05, 0.05, 0.05)
 
-[node name="RadarBlip" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x8qlx"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.4, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ltusq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_x8qlx")
+size = Vector3(0.03, 0, 0.03)
+
+[node name="RadarBlip" type="Node3D" node_paths=PackedStringArray("line_mesh")]
+script = ExtResource("1_py72u")
+line_mesh = NodePath("Line")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_jxkhm")
+
+[node name="Line" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ltusq")
