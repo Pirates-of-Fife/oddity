@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=3 format=3 uid="uid://t4drs30vwue6"]
+
+[ext_resource type="PackedScene" uid="uid://ccwn75a2pmjr4" path="res://scenes/modules/test-module/rotary-autocannon/RotaryAutoCannonProjectile.tscn" id="1_47j1v"]
+[ext_resource type="Script" path="res://resources/classes/projectile/ProjectileResource.gd" id="2_y23ui"]
+
+[resource]
+script = ExtResource("2_y23ui")
+projectile_scene_file = ExtResource("1_47j1v")

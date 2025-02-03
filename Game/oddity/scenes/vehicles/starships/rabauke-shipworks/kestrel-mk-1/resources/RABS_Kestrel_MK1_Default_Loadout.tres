@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=75 format=3 uid="uid://dryumn61chwql"]
+[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=74 format=3 uid="uid://dryumn61chwql"]
 
 [ext_resource type="PackedScene" uid="uid://ddvpx7ldofuyc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.tscn" id="1_cph7c"]
 [ext_resource type="PackedScene" uid="uid://dnn6ul2cu7f2j" path="res://scenes/cargo/cargo-containers/Cu1Container.tscn" id="1_grnyv"]
@@ -20,11 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://b3x2bgp6b0ev6" path="res://scenes/modules/test-module/ShieldGenerator/size-2/Size2ShieldGenerator.tscn" id="12_2l8t1"]
 [ext_resource type="PackedScene" uid="uid://b4yftdtjyvs6p" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_RightRadiator.tscn" id="12_p3li7"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="12_tqy46"]
-[ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="13_5s5ad"]
 [ext_resource type="PackedScene" uid="uid://dgpwqm2dpuubj" path="res://scenes/modules/test-module/hull-reinforcement/size-2/Size2HullReinforcement.tscn" id="13_6kdb8"]
-[ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="14_f538g"]
 [ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="14_rlbhv"]
-[ext_resource type="PackedScene" uid="uid://dcv860lf15jdf" path="res://scenes/modules/test-module/rail-gun/size-6/Size6RailGun.tscn" id="18_vvtub"]
+[ext_resource type="PackedScene" uid="uid://d0j0tdift7ymb" path="res://scenes/modules/test-module/rotary-autocannon/size-6/Size6RotaryAutoCannon.tscn" id="20_dh477"]
+[ext_resource type="PackedScene" uid="uid://b0yf8dexkb3j6" path="res://scenes/modules/test-module/rotary-autocannon/size-5/Size5RotaryAutoCannon.tscn" id="20_evhbx"]
 
 [sub_resource type="Resource" id="Resource_rev50"]
 script = ExtResource("2_qgev0")
@@ -342,7 +341,7 @@ id = 38
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint"
-module = ExtResource("18_vvtub")
+module = ExtResource("20_dh477")
 value = 0
 id = 39
 
@@ -350,7 +349,7 @@ id = 39
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint2"
-module = ExtResource("18_vvtub")
+module = ExtResource("20_dh477")
 value = 0
 id = 40
 
@@ -358,7 +357,7 @@ id = 40
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint3"
-module = ExtResource("13_5s5ad")
+module = ExtResource("20_dh477")
 value = 0
 id = 41
 
@@ -366,7 +365,7 @@ id = 41
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint4"
-module = ExtResource("13_5s5ad")
+module = ExtResource("20_dh477")
 value = 0
 id = 42
 
@@ -374,7 +373,7 @@ id = 42
 script = ExtResource("5_h3fdl")
 size = 5
 name = &"ExternalHardpoint5"
-module = ExtResource("14_f538g")
+module = ExtResource("20_evhbx")
 value = 0
 id = 43
 
@@ -382,7 +381,7 @@ id = 43
 script = ExtResource("5_h3fdl")
 size = 5
 name = &"ExternalHardpoint6"
-module = ExtResource("14_f538g")
+module = ExtResource("20_evhbx")
 value = 0
 id = 44
 

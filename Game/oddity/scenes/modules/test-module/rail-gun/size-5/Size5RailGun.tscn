@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cfjflwsaancca"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/rail-gun/rail_gun.gd" id="1_8wu6e"]
+[ext_resource type="PackedScene" uid="uid://nssl2fvrxc88" path="res://scenes/modules/test-module/rail-gun/RailGunSound.tscn" id="2_bpqs4"]
 [ext_resource type="PackedScene" uid="uid://chw5mobhsfp6f" path="res://scenes/modules/test-module/rail-gun/railgun.glb" id="2_lldl4"]
 [ext_resource type="Resource" uid="uid://bbqr1rkg6k4cb" path="res://scenes/modules/test-module/rail-gun/size-5/Size5Railgun.tres" id="2_mdyci"]
-[ext_resource type="AudioStream" uid="uid://dlekynry85pnx" path="res://scenes/modules/test-module/rail-gun/railgun_fire.wav" id="3_212s3"]
 [ext_resource type="AudioStream" uid="uid://ccvhspemtu6rg" path="res://scenes/modules/test-module/rail-gun/cooldowncomplete.mp3" id="5_dxcby"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tdrth"]
@@ -12,22 +12,16 @@ points = PackedVector3Array(-0.334642, -0.538758, -0.50336, -0.420504, -8.7925e-
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wxb2g"]
 points = PackedVector3Array(0.146794, 0.00980174, 1.71012, 0.103912, 0.108755, 1.71012, 0.0356838, -0.116498, 1.71012, 0.146794, 0.00980174, -1.70819, -0.0638973, 0.120189, 1.71012, 0.103912, 0.108755, -1.70819, -0.145456, 0.0194093, 1.70677, -0.0797456, -0.135413, 1.70677, 0.0356838, -0.116498, -1.70819, -0.0797456, -0.135413, -1.71121, -0.145456, 0.0194093, -1.71121, -0.0638973, 0.120189, -1.70819)
 
-[node name="RailGun" type="RigidBody3D" node_paths=PackedStringArray("cooldown_complete_sound", "nozzle", "audio")]
+[node name="RailGun" type="RigidBody3D" node_paths=PackedStringArray("cooldown_complete_sound", "nozzle")]
 collision_layer = 537396737
 collision_mask = 537396737
 script = ExtResource("1_8wu6e")
 cooldown_complete_sound = NodePath("AudioStreamPlayer3D2")
+shot_audio = ExtResource("2_bpqs4")
 size = 5
 nozzle = NodePath("Marker3D")
-audio = NodePath("AudioStreamPlayer3D")
 module_resource = ExtResource("2_mdyci")
 can_be_picked_up = true
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.96441)
-stream = ExtResource("3_212s3")
-volume_db = -6.0
-bus = &"Weapon"
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0987408, 1.99262)

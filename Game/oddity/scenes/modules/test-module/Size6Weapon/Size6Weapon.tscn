@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkvastwu4s12v"]
+[gd_scene load_steps=6 format=3 uid="uid://bkvastwu4s12v"]
 
 [ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeapon.gd" id="1_sl6ec"]
 [ext_resource type="Resource" uid="uid://d0swmobju4op7" path="res://scenes/modules/test-module/Size6Weapon/Size6WeaponResource.tres" id="2_ys687"]
-[ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="3_tq2k2"]
 [ext_resource type="PackedScene" uid="uid://pjimcldb2p2a" path="res://scenes/modules/test-module/Size6Weapon/size-6.glb" id="4_n0yfi"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x62t2"]
@@ -11,28 +10,16 @@ points = PackedVector3Array(2.50679, 0.143738, 0.5538, 0.215485, -0.5942, -0.758
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jmki0"]
 points = PackedVector3Array(-0.659806, -0.00366032, 0.247827, -0.570881, -0.359635, -0.286135, -0.570881, -0.00366032, -0.286135, -2.9736, -0.359635, -0.197124, -0.392781, -0.359635, 0.247827, -2.9736, -0.00366032, 0.158816, -2.9736, -0.359635, 0.158816, -2.9736, -0.00366032, -0.197124, -0.392781, -0.00366032, -0.286135, -0.392781, -0.00366032, 0.247827, -0.392781, -0.359635, -0.286135, -0.659806, -0.359635, 0.247827)
 
-[node name="Size6Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle", "audio")]
+[node name="Size6Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 100.0
 script = ExtResource("1_sl6ec")
 size = 6
 nozzle = NodePath("Nozzle")
-audio = NodePath("AudioStreamPlayer3D")
 module_resource = ExtResource("2_ys687")
 value = 35000
 can_be_picked_up = true
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_tq2k2")
-volume_db = -4.0
-unit_size = 50.0
-max_db = 6.0
-max_distance = 3000.0
-max_polyphony = 7
-panning_strength = 2.0
-bus = &"Weapon"
-playback_type = 1
 
 [node name="Nozzle" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196321, 2.71022)

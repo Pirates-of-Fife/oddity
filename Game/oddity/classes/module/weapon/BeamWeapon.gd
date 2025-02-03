@@ -21,11 +21,9 @@ func _beam_weapon_ready() -> void:
 
 func shoot() -> void:
 	beam_laser.start_beam()
-	audio.play()
 
 func stop_shooting() -> void:
 	beam_laser.stop_beam()
-	audio.stop()
 
 func on_hit(game_entity : GameEntity) -> void:
 	pass
