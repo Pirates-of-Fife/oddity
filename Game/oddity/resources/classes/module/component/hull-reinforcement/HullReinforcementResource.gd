@@ -6,3 +6,6 @@ class_name HullReinforcementResource
 
 @export
 var additional_hull_health : float 
+
+@export
+var additional_hardness : float

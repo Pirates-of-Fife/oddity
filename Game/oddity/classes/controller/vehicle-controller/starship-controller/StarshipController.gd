@@ -38,6 +38,8 @@ var starship_stop_shooting_tertiary_command : StarshipStopShootingTertiaryComman
 
 var starship_cycle_power_state_command : StarshipCyclePowerStateCommand = StarshipCyclePowerStateCommand.new()
 
+var starship_focus_target_command : StarshipFocusTargetCommand = StarshipFocusTargetCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -249,7 +251,7 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_just_pressed("starship_initiate_super_cruise")):
 			if control_entity.is_in_abyss:
 				return
-				
+
 			if control_entity.is_mass_locked:
 				return
 
@@ -289,6 +291,9 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_just_released("starship_shoot_tertiary_weapons")):
 			starship_stop_shooting_tertiary_command.execute(control_entity)
+
+		if (Input.is_action_just_released("starship_focus_target")):
+			starship_focus_target_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

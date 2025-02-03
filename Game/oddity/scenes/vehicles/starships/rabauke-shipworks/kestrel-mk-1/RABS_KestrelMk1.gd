@@ -18,6 +18,9 @@ var super_cruise_mfd : SuperCruiseMFD3D
 var shield_and_health_ui : ShieldAndHullUi3D
 
 @export
+var targeting : StarshipTargetMFD
+
+@export
 var damaged_label : Label3D
 
 @export
@@ -80,6 +83,11 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 			hide_interior()
 			interior_shown = false
 
+	if relative_linear_velocity.length() > 300:
+		$Interior/Bridge/CruiseLabel.show()
+	else:
+		$Interior/Bridge/CruiseLabel.hide()
+
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Pitch/Blend3/blend_amount", actual_rotation_vector_unit.x )
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Vertical/Blend3/blend_amount", -actual_thrust_vector_unit.y)
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Forwards/Blend3/blend_amount", -actual_thrust_vector_unit.z)
@@ -119,6 +127,8 @@ func update_ui() -> void:
 	crosshair.yaw = -target_rotational_thrust_vector.y
 	crosshair.pitch = -target_rotational_thrust_vector.x
 
+	targeting.update(focused_starship)
+
 	velocity_mfd.forwards_velocity = local_linear_velocity.z
 	velocity_mfd.lateral_velocity_right = abs(minf(local_linear_velocity.x, 0))
 	velocity_mfd.lateral_velocity_left = maxf(local_linear_velocity.x, 0)
@@ -143,7 +153,7 @@ func update_ui() -> void:
 
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
-	
+
 	if is_mass_locked:
 		$Interior/Bridge/MassLockedLabel.show()
 	else:

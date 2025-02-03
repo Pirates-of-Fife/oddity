@@ -62,8 +62,8 @@ albedo_color = Color(1, 1, 1, 0.345098)
 material = SubResource("StandardMaterial3D_wfxa5")
 radius = 0.2
 height = 0.4
-radial_segments = 16
-rings = 8
+radial_segments = 12
+rings = 6
 
 [sub_resource type="GDScript" id="GDScript_y2brl"]
 resource_name = "Fire"
@@ -100,6 +100,7 @@ light_color = Color(1, 0.584314, 0.137255, 1)
 light_energy = 0.487
 distance_fade_enabled = true
 omni_range = 2.148
+omni_shadow_mode = 0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_31vuh")

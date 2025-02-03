@@ -242,6 +242,28 @@ var current_hull_health : float
 @export
 var hull_health_damaged_state : float
 
+@export
+var hull_hardness : float
+
+@export_subgroup("Radar")
+
+var is_targeted : bool = false
+
+@export
+var radar_surrounding_area : RadarSurroundingArea
+
+@export
+var radar_focus_area : RadarFocusArea
+
+@export
+var focused_starship : Starship
+
+signal focused_target(target : Starship)
+signal unfocused_target(target : Starship)
+
+@export
+var focus_player : AudioStreamPlayer3D
+
 @export_category("Cargo")
 @export
 var cargo_grids : Array = Array()
@@ -358,6 +380,33 @@ func on_decrease_distance() -> void:
 	if third_person:
 		active_control_seat.decrease_distance(third_person_distance_change_sensitivity)
 
+func focus_target() -> void:
+	var ship : Starship = radar_focus_area.focus_target()
+
+	if ship == null:
+		if focused_starship != null:
+			unfocus_target(focused_starship)
+		return
+
+	if ship == focused_starship:
+		unfocus_target(focused_starship)
+
+	focused_starship = ship
+	focused_target.emit(focused_starship)
+	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
+	focused_starship.is_targeted = true
+	
+	focus_player.play()
+
+func focused_ship_destroyed() -> void:
+	unfocus_target(focused_starship)
+
+func unfocus_target(starship : Starship) -> void:
+	unfocused_target.emit(starship)
+	focused_starship.is_targeted = false
+	focused_starship.state_changed_to_destroyed.disconnect(focused_ship_destroyed)
+	focused_starship = null
+
 
 func _starship_ready() -> void:
 	_default_ready()
@@ -371,6 +420,7 @@ func _starship_ready() -> void:
 
 	power_off_sound_player.finished.connect(sound_power_state_change_complete)
 	power_on_sound_player.finished.connect(sound_power_state_change_complete)
+
 
 	if !landing_gear_on:
 		toggle_landing_gear()
@@ -603,7 +653,10 @@ func destroyed() -> void:
 	else:
 		var p : Player = get_tree().get_first_node_in_group("Player")
 		if (p.global_position - global_position).length() <= blast_radius:
-			p.die()
+			if p.control_entity is Starship:
+				p.control_entity.take_damage(5000)
+			else:
+				p.die()
 
 
 	if is_bounty_target:
@@ -660,7 +713,8 @@ func _on_module_insert(module : Module) -> void:
 		hull_reinforcements.append(module)
 		max_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
-
+		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
+	
 func _on_module_uninserted(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
@@ -670,7 +724,9 @@ func _on_module_uninserted(module : Module) -> void:
 		hull_reinforcements.erase(module)
 		max_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
+		hull_hardness -= (module.module_resource as HullReinforcementResource).additional_hardness
 
+		
 		if current_hull_health <= 0:
 			current_hull_health = 1
 
@@ -749,6 +805,9 @@ func update_shield_stats() -> void:
 func shoot_primary() -> void:
 	if !is_powered_on():
 		return
+	
+	if relative_linear_velocity.length() > 300:
+		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
@@ -760,6 +819,9 @@ func shoot_primary() -> void:
 
 func shoot_secondary() -> void:
 	if !is_powered_on():
+		return
+
+	if relative_linear_velocity.length() > 300:
 		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
@@ -774,6 +836,9 @@ func shoot_tertiary() -> void:
 	if !is_powered_on():
 		return
 
+	if relative_linear_velocity.length() > 300:
+		return
+
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
 
@@ -784,6 +849,9 @@ func shoot_tertiary() -> void:
 
 func stop_shooting_primary() -> void:
 	if !is_powered_on():
+		return
+
+	if relative_linear_velocity.length() > 300:
 		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
@@ -801,6 +869,9 @@ func stop_shooting_secondary() -> void:
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
 
+	if relative_linear_velocity.length() > 300:
+		return
+
 	for hardpoint : Hardpoint in hardpoints:
 		if hardpoint.assignment == Hardpoint.HardpointAssignment.SECONDARY:
 			if hardpoint.module != null:
@@ -808,6 +879,9 @@ func stop_shooting_secondary() -> void:
 
 func stop_shooting_tertiary() -> void:
 	if !is_powered_on():
+		return
+		
+	if relative_linear_velocity.length() > 300:
 		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
@@ -854,7 +928,7 @@ func ship_take_damage(damage : float) -> void:
 	if shield_current_health > 0:
 		return
 
-	current_hull_health -= damage
+	current_hull_health -= calculate_final_damage(damage)
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
 
 	if current_hull_health <= hull_health_damaged_state and damaged == false:
@@ -872,28 +946,56 @@ func on_collision(body : Node3D) -> void:
 		shield.take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
 		take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
 
-
+	
 	if landing_gear_on and relative_linear_velocity.length() <= 50:
 		return
-
+	
+	var shield_damage : float = pow(relative_linear_velocity.length(), 2) * 0.35
+	var hull_damage : float = pow(relative_linear_velocity.length(), 2) * 0.15
+	
+	if body is GameEntity:
+		shield_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.35
+		hull_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.15
+	
+		
 	if shield_current_health > 0:
-		shield.take_damage(pow(relative_linear_velocity.length(), 3) * 0.2)
+		var old_health : float = shield_current_health
+		
+		shield.take_damage(shield_damage)
+				
+		if shield_damage / 4 > shield_max_health:
+			take_damage(shield_damage - old_health)
+		
 		return
 
 	var current_sound : AudioStream = hull_collision_sounds.pick_random()
 
 	# If bounty target crashes instead of being killed, reduce the reward
 
-	if (current_hull_health - pow(relative_linear_velocity.length(), 2) * 0.15) <= 0:
+	if (current_hull_health - hull_damage) <= 0 and body is not Starship:
 		reward = 10000
 
-	take_damage(pow(relative_linear_velocity.length(), 2) * 0.15)
-
-
+	take_damage(hull_damage)
 
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound
 		hull_collision_player.play()
+
+func calculate_final_damage(base_damage: float) -> float:
+	var max_hardness: float = 164 
+	var max_reduction: float = 0.6
+		
+	var linear_factor: float = hull_hardness / max_hardness  # Pure linear scaling (0 to 1)
+	var log_factor: float = log(1 + hull_hardness) / log(1 + max_hardness)  # Log scaling
+
+	# Blend the two (adjust weight to control effect)
+	var blend_ratio: float = 0.6  # Higher = more linear, Lower = more logarithmic
+	var reduction: float = max_reduction * ((blend_ratio * linear_factor) + ((1 - blend_ratio) * log_factor))
+
+	var final_damage: float = base_damage * (1.0 - reduction)
+
+	return final_damage
+
 
 func update_abyssal_mfd() -> void:
 	pass

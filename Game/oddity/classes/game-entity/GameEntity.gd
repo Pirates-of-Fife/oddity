@@ -14,7 +14,7 @@ var is_mass_locked : bool :
 			if i.mass_lock:
 				return true
 		return false
-		
+
 
 @export_category("Value")
 
