@@ -261,6 +261,9 @@ var focused_starship : Starship
 signal focused_target(target : Starship)
 signal unfocused_target(target : Starship)
 
+@export
+var focus_player : AudioStreamPlayer3D
+
 @export_category("Cargo")
 @export
 var cargo_grids : Array = Array()
@@ -392,6 +395,8 @@ func focus_target() -> void:
 	focused_target.emit(focused_starship)
 	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
 	focused_starship.is_targeted = true
+	
+	focus_player.play()
 
 func focused_ship_destroyed() -> void:
 	unfocus_target(focused_starship)
@@ -952,16 +957,12 @@ func on_collision(body : Node3D) -> void:
 		shield_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.35
 		hull_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.15
 	
-		debug_log(str(relative_linear_velocity.length()) + " + " + str(body.relative_linear_velocity.length()))
-
 		
 	if shield_current_health > 0:
 		var old_health : float = shield_current_health
 		
 		shield.take_damage(shield_damage)
-		
-		debug_log(shield_damage)
-		
+				
 		if shield_damage / 4 > shield_max_health:
 			take_damage(shield_damage - old_health)
 		
@@ -992,8 +993,6 @@ func calculate_final_damage(base_damage: float) -> float:
 	var reduction: float = max_reduction * ((blend_ratio * linear_factor) + ((1 - blend_ratio) * log_factor))
 
 	var final_damage: float = base_damage * (1.0 - reduction)
-
-	print(str(hull_hardness) + " " + str(reduction) + " " + str(base_damage) + " " + str(final_damage))
 
 	return final_damage
 

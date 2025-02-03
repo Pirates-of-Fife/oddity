@@ -23,56 +23,58 @@ var radar_focus : RadarFocusArea
 func _ready() -> void:
 	radar_focus = starship.radar_focus_area
 	radar_surrounding = starship.radar_surrounding_area
+	radar_surrounding.entity_entered_radar_area.connect(_on_rader_area_entered)
+	radar_surrounding.entity_exited_radar_area.connect(_on_radar_area_exited)
+	
+func update_radar_blips() -> void:
+	for radar_blip : RadarBlip in $RadarBlips.get_children():
+		var relative_position : Vector3 = starship.to_local(radar_blip.entity.global_position)
 
-#func _process(delta: float) -> void:
-#	return
+		relative_position = log_transform(relative_position) 
+		
+		radar_blip.position = relative_position
+		
+		if radar_blip.entity is Starship:
+			if (radar_blip.entity as Starship).is_targeted:
+				radar_blip.set_target_material()
+			else:
+				radar_blip.set_default_material()
 
-#	var relative_position: Vector3 = target_position_relative_to_ship
-#	var distance: float = relative_position.length()
+func log_transform(vec: Vector3) -> Vector3:
+	var max_dist: float = 2000.0
+	var min_dist: float = 10.0  # The reference point where it should be ~±0.1
 
-	# Apply logarithmic scaling
-#	var scaled_distance : float = log(1 + distance) / log(2)  # Base 2 logarithm scaling
-#	var direction : Vector3 = relative_position.normalized()
+	var transformed: Vector3 = Vector3()
 
-#	# Scale down by a factor to fit within radar bounds
-#	$RadarBlips/RadarBlip.position = (direction * scaled_distance) / 10
+	for i: int in 3:
+		var value: float = vec[i]
+		var sign: float = sign(value)  # Preserve direction
+		var abs_value: float = abs(value)
 
-func spawn_radar_blip(game_entity : GameEntity) -> void:
-	var radar_blip : Node3D
-
-	if game_entity == starship:
-		return
-
-	if game_entity is Starship:
-		if game_entity.is_targeted == true:
-			radar_blip = targeted_radar_blip_scene.instantiate()
+		if abs_value <= 0:
+			transformed[i] = 0.0
 		else:
-			radar_blip = radar_blip_scene.instantiate()
-	else:
-		radar_blip = radar_blip_scene.instantiate()
+			var normalized: float = clamp((log(abs_value / min_dist) / log(max_dist / min_dist)), 0.0, 1.0)
+			transformed[i] = sign * normalized  # Restore original direction
 
-	var relative_position: Vector3 = (starship.global_position - game_entity.global_position) * starship.global_basis.inverse()
-	#print(relative_position)
-	#relative_position.x = -relative_position.x
-	#relative_position.y = -relative_position.y
+	return transformed
 
-	var distance: float = relative_position.length()
 
-	# Apply logarithmic scaling
-	var scaled_distance : float = (log(distance) / log(2)) # Base 2 logarithm scaling
-	var direction : Vector3 = relative_position.normalized()
-
+func _on_rader_area_entered(entity : GameEntity) -> void:
+	var radar_blip : RadarBlip = radar_blip_scene.instantiate()
+	radar_blip.entity = entity
+	
 	$RadarBlips.add_child(radar_blip)
-
-	# Scale down by a factor to fit within radar bounds
-	radar_blip.position = (direction * scaled_distance) / 15
-
-	#starship.debug_log(str("RADAR: ") + str(radar_blip.position) + " " + str(scaled_distance) + " " + str(relative_position))
-
+	$BlipEnter.play()
+	update_radar_blips()
+	
+func _on_radar_area_exited(entity : GameEntity) -> void:
+	for radar_blip : RadarBlip in $RadarBlips.get_children():
+		if radar_blip.entity == entity:
+			radar_blip.queue_free()
+			$BlipExit.play()
+			update_radar_blips()
+			
 
 func _on_timer_timeout() -> void:
-	for i : Node3D in $RadarBlips.get_children():
-		i.queue_free()
-
-	for i : GameEntity in radar_surrounding.entities:
-		spawn_radar_blip(i)
+	update_radar_blips()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bteqskba0aasp"]
+[gd_scene load_steps=17 format=3 uid="uid://bteqskba0aasp"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="11_d3jqi"]
 [ext_resource type="Resource" uid="uid://b4nc2y5nss3v0" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_3_Loadout.tres" id="12_sfjus"]
 [ext_resource type="Resource" uid="uid://cw5ypqunlmkk7" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_4_Loadout.tres" id="13_t0rrd"]
+[ext_resource type="PackedScene" uid="uid://bk046jth70dqt" path="res://scenes/cargo/bounty-hunting-cargo-containers/GatewayRum.tscn" id="14_wv1hr"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="15_u213w"]
 
 [node name="StarSystemTestScene" type="Node3D"]
@@ -41,6 +42,7 @@ script = ExtResource("1_bvu6x")
 star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_dfuqd")]
 
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
+player_respawn_position = Vector3(492238, 11815.9, 761032)
 
 [node name="RabsKestrelMk2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 602708)
@@ -79,14 +81,17 @@ is_bounty_target = true
 difficulty = 3
 
 [node name="RabsKestrelMk3" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 497441, 11821.1, 743950)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 474743, 10649.7, 601441)
 default_loadout = ExtResource("12_sfjus")
 current_state = 0
 
 [node name="RabsKestrelMk4" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 497668, 11821.1, 743950)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 476316, 12709.9, 601704)
 default_loadout = ExtResource("13_t0rrd")
 current_state = 0
+
+[node name="Cu1Container" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("14_wv1hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 474724, 12131.6, 603093)
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
