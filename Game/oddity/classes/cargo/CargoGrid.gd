@@ -80,9 +80,10 @@ func _ready() -> void:
 		var collision_shape : CollisionShape3D = area.get_node("CollisionShape3D")
 		var shape : Shape3D = collision_shape.shape
 
-	for i : CargoArea in cargo_area_root.get_children():
-		i.cargo_added_to_area.connect(cargo_added_to_grid)
-		i.cargo_removed_from_area.connect(cargo_removed_from_grid)
+	for i : Node3D in cargo_area_root.get_children():
+		if i is CargoArea:
+			i.cargo_added_to_area.connect(cargo_added_to_grid)
+			i.cargo_removed_from_area.connect(cargo_removed_from_grid)
 	
 func cargo_added_to_grid(cargo_area : CargoArea, cargo : CargoContainer) -> void:
 	current_value += cargo.value
