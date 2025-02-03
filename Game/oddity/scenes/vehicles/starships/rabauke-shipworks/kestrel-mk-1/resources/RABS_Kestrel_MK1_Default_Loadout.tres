@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=74 format=3 uid="uid://dryumn61chwql"]
+[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=70 format=3 uid="uid://dryumn61chwql"]
 
 [ext_resource type="PackedScene" uid="uid://ddvpx7ldofuyc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.tscn" id="1_cph7c"]
 [ext_resource type="PackedScene" uid="uid://dnn6ul2cu7f2j" path="res://scenes/cargo/cargo-containers/Cu1Container.tscn" id="1_grnyv"]
@@ -12,18 +12,14 @@
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="4_ab8lg"]
 [ext_resource type="PackedScene" uid="uid://v6gv82xubo7h" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RABS_KestrelMk1_RetroThruster.tscn" id="4_iiatx"]
 [ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="4_xdl2b"]
-[ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/size-4/Size4ShieldGenerator.tscn" id="5_1k84y"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="5_h3fdl"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="6_7bqi6"]
 [ext_resource type="PackedScene" uid="uid://cfbal0ceng7tn" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="6_ss1c4"]
 [ext_resource type="PackedScene" uid="uid://fabmgwjbqisa" path="res://scenes/modules/test-module/Size2AbyssDrive.tscn" id="8_r3ijb"]
-[ext_resource type="PackedScene" uid="uid://b3x2bgp6b0ev6" path="res://scenes/modules/test-module/ShieldGenerator/size-2/Size2ShieldGenerator.tscn" id="12_2l8t1"]
 [ext_resource type="PackedScene" uid="uid://b4yftdtjyvs6p" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_RightRadiator.tscn" id="12_p3li7"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="12_tqy46"]
-[ext_resource type="PackedScene" uid="uid://dgpwqm2dpuubj" path="res://scenes/modules/test-module/hull-reinforcement/size-2/Size2HullReinforcement.tscn" id="13_6kdb8"]
+[ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="14_f538g"]
 [ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="14_rlbhv"]
-[ext_resource type="PackedScene" uid="uid://d0j0tdift7ymb" path="res://scenes/modules/test-module/rotary-autocannon/size-6/Size6RotaryAutoCannon.tscn" id="20_dh477"]
-[ext_resource type="PackedScene" uid="uid://b0yf8dexkb3j6" path="res://scenes/modules/test-module/rotary-autocannon/size-5/Size5RotaryAutoCannon.tscn" id="20_evhbx"]
 
 [sub_resource type="Resource" id="Resource_rev50"]
 script = ExtResource("2_qgev0")
@@ -208,7 +204,6 @@ id = 20
 script = ExtResource("2_0ogyp")
 size = 4
 name = &"ComponentSlot"
-module = ExtResource("5_1k84y")
 value = 0
 id = 21
 
@@ -216,7 +211,6 @@ id = 21
 script = ExtResource("2_0ogyp")
 size = 4
 name = &"ComponentSlot2"
-module = ExtResource("5_1k84y")
 value = 0
 id = 22
 
@@ -224,7 +218,6 @@ id = 22
 script = ExtResource("2_0ogyp")
 size = 2
 name = &"ComponentSlot3"
-module = ExtResource("12_2l8t1")
 value = 0
 id = 23
 
@@ -246,7 +239,6 @@ id = 25
 script = ExtResource("2_0ogyp")
 size = 2
 name = &"ComponentSlot5"
-module = ExtResource("13_6kdb8")
 value = 0
 id = 26
 
@@ -254,7 +246,6 @@ id = 26
 script = ExtResource("2_0ogyp")
 size = 2
 name = &"ComponentSlot6"
-module = ExtResource("13_6kdb8")
 value = 0
 id = 27
 
@@ -341,7 +332,6 @@ id = 38
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint"
-module = ExtResource("20_dh477")
 value = 0
 id = 39
 
@@ -349,7 +339,6 @@ id = 39
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint2"
-module = ExtResource("20_dh477")
 value = 0
 id = 40
 
@@ -357,7 +346,6 @@ id = 40
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint3"
-module = ExtResource("20_dh477")
 value = 0
 id = 41
 
@@ -365,7 +353,6 @@ id = 41
 script = ExtResource("5_h3fdl")
 size = 6
 name = &"ExternalHardpoint4"
-module = ExtResource("20_dh477")
 value = 0
 id = 42
 
@@ -373,7 +360,7 @@ id = 42
 script = ExtResource("5_h3fdl")
 size = 5
 name = &"ExternalHardpoint5"
-module = ExtResource("20_evhbx")
+module = ExtResource("14_f538g")
 value = 0
 id = 43
 
@@ -381,7 +368,7 @@ id = 43
 script = ExtResource("5_h3fdl")
 size = 5
 name = &"ExternalHardpoint6"
-module = ExtResource("20_evhbx")
+module = ExtResource("14_f538g")
 value = 0
 id = 44
 

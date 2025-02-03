@@ -25,8 +25,8 @@
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="12_q35vd"]
 [ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="13_kcdld"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="14_4hing"]
-[ext_resource type="PackedScene" uid="uid://bkvastwu4s12v" path="res://scenes/modules/test-module/Size6Weapon/Size6Weapon.tscn" id="17_lc18t"]
-[ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="19_k3alb"]
+[ext_resource type="PackedScene" uid="uid://d0j0tdift7ymb" path="res://scenes/modules/test-module/rotary-autocannon/size-6/Size6RotaryAutoCannon.tscn" id="21_rxcq7"]
+[ext_resource type="PackedScene" uid="uid://b0yf8dexkb3j6" path="res://scenes/modules/test-module/rotary-autocannon/size-5/Size5RotaryAutoCannon.tscn" id="23_6n7nv"]
 
 [sub_resource type="Resource" id="Resource_hweff"]
 script = ExtResource("1_sfmah")
@@ -394,7 +394,7 @@ id = 38
 script = ExtResource("10_6jaiy")
 size = 6
 name = &"ExternalHardpoint"
-module = ExtResource("17_lc18t")
+module = ExtResource("21_rxcq7")
 value = 0
 id = 39
 
@@ -402,7 +402,7 @@ id = 39
 script = ExtResource("10_6jaiy")
 size = 6
 name = &"ExternalHardpoint2"
-module = ExtResource("17_lc18t")
+module = ExtResource("21_rxcq7")
 value = 0
 id = 40
 
@@ -410,7 +410,7 @@ id = 40
 script = ExtResource("10_6jaiy")
 size = 6
 name = &"ExternalHardpoint3"
-module = ExtResource("17_lc18t")
+module = ExtResource("21_rxcq7")
 value = 0
 id = 41
 
@@ -418,7 +418,7 @@ id = 41
 script = ExtResource("10_6jaiy")
 size = 6
 name = &"ExternalHardpoint4"
-module = ExtResource("17_lc18t")
+module = ExtResource("21_rxcq7")
 value = 0
 id = 42
 
@@ -426,7 +426,7 @@ id = 42
 script = ExtResource("10_6jaiy")
 size = 5
 name = &"ExternalHardpoint5"
-module = ExtResource("19_k3alb")
+module = ExtResource("23_6n7nv")
 value = 0
 id = 43
 
@@ -434,7 +434,7 @@ id = 43
 script = ExtResource("10_6jaiy")
 size = 5
 name = &"ExternalHardpoint6"
-module = ExtResource("19_k3alb")
+module = ExtResource("23_6n7nv")
 value = 0
 id = 44
 
