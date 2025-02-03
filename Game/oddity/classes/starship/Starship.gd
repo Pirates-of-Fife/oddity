@@ -607,6 +607,10 @@ func power_on() -> void:
 		shield_online.emit()
 
 func power_off() -> void:
+	stop_shooting_primary()
+	stop_shooting_secondary()
+	stop_shooting_tertiary()
+	
 	current_state = State.POWER_OFF
 	power_state_change_complete = true
 	axis_lock_linear_x = false
@@ -618,9 +622,6 @@ func power_off() -> void:
 	actual_thrust_vector = Vector3.ZERO
 	actual_thrust_vector_unit = Vector3.ZERO
 
-	stop_shooting_primary()
-	stop_shooting_secondary()
-	stop_shooting_tertiary()
 
 func repair() -> void:
 	current_hull_health = max_hull_health

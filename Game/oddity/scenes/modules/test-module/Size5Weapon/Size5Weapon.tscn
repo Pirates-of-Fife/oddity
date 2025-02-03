@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeapon.gd" id="1_lcbtv"]
 [ext_resource type="Resource" uid="uid://c5ty3dn338c3x" path="res://scenes/modules/test-module/Size5Weapon/Size5WeaponResource.tres" id="2_p70ds"]
-[ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="3_fwayv"]
+[ext_resource type="PackedScene" uid="uid://qrehj8v1p47o" path="res://scenes/modules/test-module/Size5Weapon/Size5WeaponAudio.tscn" id="3_p5x1g"]
 [ext_resource type="PackedScene" uid="uid://cbysuhn5p35if" path="res://scenes/modules/test-module/Size5Weapon/size-5.glb" id="4_n3pji"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_08hxi"]
@@ -11,28 +11,17 @@ points = PackedVector3Array(1.6533, 0.145038, 0.3653, 0.142276, -0.3417, -0.5004
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ltfh3"]
 points = PackedVector3Array(-0.435198, 0.0478802, 0.163487, -0.376541, -0.186933, -0.188733, -0.376541, 0.0478802, -0.188733, -1.96145, -0.186933, -0.130018, -0.25906, -0.186933, 0.163487, -1.96145, 0.0478802, 0.104772, -1.96145, -0.186933, 0.104772, -1.96145, 0.0478802, -0.130018, -0.25906, 0.0478802, -0.188733, -0.25906, 0.0478802, 0.163487, -0.25906, -0.186933, -0.188733, -0.435198, -0.186933, 0.163487)
 
-[node name="Size5Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle", "audio")]
+[node name="Size5Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 100.0
 script = ExtResource("1_lcbtv")
+shot_audio = ExtResource("3_p5x1g")
 size = 5
 nozzle = NodePath("Nozzle")
-audio = NodePath("AudioStreamPlayer3D")
 module_resource = ExtResource("2_p70ds")
 value = 10000
 can_be_picked_up = true
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_fwayv")
-volume_db = -3.0
-unit_size = 50.0
-max_db = 6.0
-max_distance = 3000.0
-max_polyphony = 7
-panning_strength = 2.0
-bus = &"Weapon"
-playback_type = 1
 
 [node name="Nozzle" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.114789, 1.74712)

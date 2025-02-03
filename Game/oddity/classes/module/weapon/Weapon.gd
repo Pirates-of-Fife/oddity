@@ -12,10 +12,8 @@ var size : ModuleSize.HardpointSize
 @export
 var nozzle : Marker3D
 
-@export
-var audio : AudioStreamPlayer3D
-
 signal weapon_shot
+signal weapon_stopped_shooting
 signal weapon_hit(target : GameEntity)
 
 func _ready() -> void:

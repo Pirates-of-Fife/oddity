@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://nssl2fvrxc88"]
+
+[ext_resource type="AudioStream" uid="uid://dlekynry85pnx" path="res://scenes/modules/test-module/rail-gun/railgun_fire.wav" id="1_27x4h"]
+[ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeaponShootAudioStreamPlayer3D.gd" id="2_xfjsv"]
+
+[node name="RailGunSound" type="AudioStreamPlayer3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.96441)
+stream = ExtResource("1_27x4h")
+volume_db = -6.0
+bus = &"Weapon"
+script = ExtResource("2_xfjsv")

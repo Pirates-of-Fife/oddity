@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://co7nbe2h7fmnp"]
+
+[ext_resource type="Resource" uid="uid://eri2jqmgs8ef" path="res://scenes/modules/test-module/rail-gun/RailgunProjectile.tres" id="1_j4yi8"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_ed856"]
+[ext_resource type="AudioStream" uid="uid://dlekynry85pnx" path="res://scenes/modules/test-module/rail-gun/railgun_fire.wav" id="3_dguhf"]
+
+[resource]
+script = ExtResource("2_ed856")
+projectile = ExtResource("1_j4yi8")
+weapon_force = 3000.0
+cooldown = 7.0
+damage = 15000.0
+penetration = 10.0
+sound = ExtResource("3_dguhf")

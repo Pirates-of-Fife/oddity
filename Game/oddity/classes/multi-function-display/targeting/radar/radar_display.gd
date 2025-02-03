@@ -41,7 +41,7 @@ func update_radar_blips() -> void:
 				radar_blip.set_default_material()
 
 func log_transform(vec: Vector3) -> Vector3:
-	var max_dist: float = 2000.0
+	var max_dist: float = 4000.0
 	var min_dist: float = 10.0  # The reference point where it should be ~±0.1
 
 	var transformed: Vector3 = Vector3()

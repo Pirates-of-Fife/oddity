@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccwn75a2pmjr4"]
+
+[ext_resource type="Script" path="res://classes/projectile/Projectile.gd" id="1_vk3jm"]
+[ext_resource type="PackedScene" uid="uid://bejivpu8nqi63" path="res://scenes/modules/test-module/rotary-autocannon/RotaryAutoCannonProjectileHitSound.tscn" id="2_84r3a"]
+[ext_resource type="PackedScene" uid="uid://cdq5yxu5omvtc" path="res://scenes/modules/test-module/rotary-autocannon/ProjectileHitPartcle.tscn" id="3_fpmst"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c1boy"]
+size = Vector3(0.3, 0.3, 0.76)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20qt2"]
+shading_mode = 0
+albedo_color = Color(1, 0.733333, 0, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8833c"]
+margin = 1.0
+points = PackedVector3Array(0.15, 0.15, 1, 0.15, -0.15, 1, 0.15, 0.15, -1, -0.15, 0.15, 1, -0.15, -0.15, 1, 0.15, -0.15, -1, -0.15, 0.15, -1, -0.15, -0.15, -1)
+
+[node name="RotaryAutoCannonProjectile" type="RigidBody3D"]
+collision_layer = 8388608
+collision_mask = 8388608
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_vk3jm")
+timeout = 10.0
+on_hit_sound = ExtResource("2_84r3a")
+projectile_collision_layer = 7340032
+projectile_hit_particle = ExtResource("3_fpmst")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.875, 0, 0, 0, 1.975, 0, 0, 0, 3.605, 0, 0, 0)
+mesh = SubResource("BoxMesh_c1boy")
+surface_material_override/0 = SubResource("StandardMaterial3D_20qt2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_8833c")

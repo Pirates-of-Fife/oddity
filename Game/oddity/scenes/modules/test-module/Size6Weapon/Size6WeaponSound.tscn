@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://5kbn7vpbbjm6"]
+
+[ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="1_w8xrr"]
+[ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeaponShootAudioStreamPlayer3D.gd" id="2_updhj"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_w8xrr")
+volume_db = -4.0
+unit_size = 50.0
+max_db = 6.0
+max_distance = 3000.0
+max_polyphony = 7
+panning_strength = 2.0
+bus = &"Weapon"
+playback_type = 1
+script = ExtResource("2_updhj")
+sound = ExtResource("1_w8xrr")
