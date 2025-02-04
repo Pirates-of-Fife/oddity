@@ -1,0 +1,3 @@
+extends PlayerDetectionZone
+
+class_name SpaceStationZone

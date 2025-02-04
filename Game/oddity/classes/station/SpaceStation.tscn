@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bifjawf38tw3r"]
+
+[ext_resource type="Script" path="res://classes/station/SpaceStation.gd" id="1_inwp3"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/station-zone/SpaceStationZone.gd" id="2_fwi2u"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_lrcnp"]
+
+[node name="SpaceStation" type="Node3D"]
+script = ExtResource("1_inwp3")
+
+[node name="SpaceStationZone" type="Node3D" parent="." node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("2_fwi2u")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="SpaceStationZone" instance=ExtResource("3_lrcnp")]
