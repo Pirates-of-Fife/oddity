@@ -1,0 +1,23 @@
+[gd_scene load_steps=8 format=3 uid="uid://btfjb27t5uw5n"]
+
+[ext_resource type="Script" path="res://classes/station/radio-chatter/RadioChatterPlayer.gd" id="1_a0rk2"]
+[ext_resource type="AudioStream" uid="uid://dnl0ohnk8oiy" path="res://classes/station/radio-chatter/radiochatter1.wav" id="2_jilcb"]
+[ext_resource type="AudioStream" uid="uid://dna2qgs37beob" path="res://classes/station/radio-chatter/radiochatter2.wav" id="3_s35ge"]
+[ext_resource type="AudioStream" uid="uid://u34f3hv273tc" path="res://classes/station/radio-chatter/radiochatter3.wav" id="4_db5rh"]
+[ext_resource type="AudioStream" uid="uid://cgjig2flwrur2" path="res://classes/station/radio-chatter/radiochatter4.wav" id="5_7v8me"]
+[ext_resource type="AudioStream" uid="uid://cii10kf4uxyg4" path="res://classes/station/radio-chatter/radiochatter5.wav" id="6_hdrqy"]
+[ext_resource type="AudioStream" uid="uid://blakwp52w2yfx" path="res://classes/station/radio-chatter/radiochatter6.wav" id="7_qq5qy"]
+
+[node name="RadioChatterPlayer" type="AudioStreamPlayer3D"]
+volume_db = -30.0
+max_distance = 5.0
+bus = &"Radio"
+script = ExtResource("1_a0rk2")
+audio_streams = [ExtResource("2_jilcb"), ExtResource("3_s35ge"), ExtResource("4_db5rh"), ExtResource("5_7v8me"), ExtResource("6_hdrqy"), ExtResource("7_qq5qy")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="finished" from="." to="." method="_on_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

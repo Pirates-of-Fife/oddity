@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://doqo8e7mmc8xm"]
+
+[ext_resource type="Script" path="res://classes/station/space_station_loading_zone.gd" id="1_mq0e1"]
+[ext_resource type="PackedScene" uid="uid://bifjawf38tw3r" path="res://classes/station/SpaceStation.tscn" id="2_28swi"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="2_ql6ut"]
+
+[node name="SpaceStationLoadingZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_mq0e1")
+scene = ExtResource("2_28swi")
+station_name = &"TestStation"
+activate_distance = 200000.0
+deactivate_distance = 210000.0
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 5000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("2_ql6ut")]
