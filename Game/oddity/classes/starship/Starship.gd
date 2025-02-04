@@ -1049,11 +1049,18 @@ func initiate_abyssal_travel() -> void:
 	abyssal_portal.destination_star_system = selected_system.scene_file
 	abyssal_portal.starship = self
 
-func initiate_super_cruise() -> void:
+func initiate_super_cruise() -> void:	
 	if alcubierre_drive_slot.module == null:
 		return
+	
+	reset_thrust_vectors()
+	actual_thrust_vector_unit = Vector3.ZERO
+	actual_rotation_vector_unit = Vector3.ZERO
+
+	target_thrust_vector = Vector3.ZERO
 
 	alcubierre_drive_charge_end()
+	
 	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_start()
 	super_cruise_enter.play()
 

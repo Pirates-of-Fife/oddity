@@ -327,6 +327,7 @@ script = ExtResource("2_fwi2u")
 activate_distance = 4000.0
 deactivate_distance = 5000.0
 
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="activate" from="SpaceStationZone" to="." method="_on_space_station_zone_activate"]
 [connection signal="deactivate" from="SpaceStationZone" to="." method="_on_space_station_zone_deactivate"]
 [connection signal="activate" from="PlayerForceSpeedLimit" to="." method="_on_player_force_speed_limit_activate"]
