@@ -44,7 +44,6 @@ func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 		asteroid.resource_value_max = randi_range(13000, 40000)
 		
 		add_child(asteroid)
-		print(spawn_radius)
 		asteroid.position = (Vector3(randf_range(0, spawn_radius), randf_range(-50, 50), randf_range(0, spawn_radius)))
 		asteroid.rotation = Vector3(randf_range(0, 360), randf_range(0, 360), randf_range(0, 360))
 		asteroid.reparent(get_tree().get_first_node_in_group("StarSystem"))

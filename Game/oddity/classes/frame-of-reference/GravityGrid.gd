@@ -42,7 +42,7 @@ func set_local_gravity_direction() -> void:
 	gravity_direction = -global_transform.basis.y
 
 func _on_body_entered(body : Node3D) -> void:
-	body_entered(body)
+	on_body_entered(body)
 	
 func _on_body_exited(body : Node3D) -> void:
-	body_exited(body)
+	on_body_exited(body)

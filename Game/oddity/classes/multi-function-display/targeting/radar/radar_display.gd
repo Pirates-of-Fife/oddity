@@ -28,17 +28,18 @@ func _ready() -> void:
 	
 func update_radar_blips() -> void:
 	for radar_blip : RadarBlip in $RadarBlips.get_children():
-		var relative_position : Vector3 = starship.to_local(radar_blip.entity.global_position)
+		if is_instance_valid(radar_blip):
+			var relative_position : Vector3 = starship.to_local(radar_blip.entity.global_position)
 
-		relative_position = log_transform(relative_position) 
-		
-		radar_blip.position = relative_position
-		
-		if radar_blip.entity is Starship:
-			if (radar_blip.entity as Starship).is_targeted:
-				radar_blip.set_target_material()
-			else:
-				radar_blip.set_default_material()
+			relative_position = log_transform(relative_position) 
+			
+			radar_blip.position = relative_position
+			
+			if radar_blip.entity is Starship:
+				if (radar_blip.entity as Starship).is_targeted:
+					radar_blip.set_target_material()
+				else:
+					radar_blip.set_default_material()
 
 func log_transform(vec: Vector3) -> Vector3:
 	var max_dist: float = 4000.0

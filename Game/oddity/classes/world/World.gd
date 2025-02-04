@@ -41,17 +41,13 @@ func enter_abyss(destination_star_system : PackedScene, starship : Starship, por
 	
 	abyss_entered = true
 	
-	print("Abyss Entered")
 	var old_star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
 	starship.reparent.call_deferred(self)
 	old_star_system.queue_free()
-	print("old system unloaded")
 
-	print("new star system instanced")
 	var new_star_system : StarSystem = destination_star_system.instantiate()
 	var spawn_location : Vector3 = new_star_system.player_spawn_position
 	new_star_system.queue_free()
-	print("new star system unloaded")
 
 	
 	starship.is_in_abyss = true

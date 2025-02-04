@@ -297,6 +297,11 @@ var power_on_sound_player : AudioStreamPlayer3D
 @export
 var power_off_sound_player : AudioStreamPlayer3D
 
+@export_subgroup("Radio Chatter")
+
+@export
+var radio_chatter : RadioChatterPlayer
+
 @export_category("Interaction")
 
 @export

@@ -102,7 +102,7 @@ func calculate_gravity_strength(body : GameEntity) -> float:
 	return gravity_strength
 
 func _on_body_entered(body : Node3D) -> void:
-	body_entered(body)
+	on_body_entered(body)
 
 func _on_body_exited(body : Node3D) -> void:
-	body_exited(body)
+	on_body_exited(body)
