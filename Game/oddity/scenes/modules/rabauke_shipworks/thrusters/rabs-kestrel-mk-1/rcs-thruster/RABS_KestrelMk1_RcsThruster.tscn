@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://1ebgimexp8aj"]
+[gd_scene load_steps=14 format=3 uid="uid://1ebgimexp8aj"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/thruster/RcsThruster.gd" id="1_sb0d5"]
 [ext_resource type="PackedScene" uid="uid://dewwgjehiu44g" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/rcs-thruster/RABS_KestrelMk1_RCSThruster.glb" id="2_1i1tv"]
+[ext_resource type="AudioStream" uid="uid://cpe1noqjpfa1b" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/rcs-thruster/rcs_thruster.wav" id="3_op7wx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0otn4"]
 size = Vector3(0.706493, 0.343999, 1.79583)
@@ -52,12 +53,14 @@ material = SubResource("StandardMaterial3D_cytp2")
 radial_segments = 12
 rings = 6
 
-[node name="RabsKestrelMk1RcsThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_particles")]
+[node name="RabsKestrelMk1RcsThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_sound", "thruster_particles")]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 500.0
 script = ExtResource("1_sb0d5")
 size = 2
+thruster_sound = NodePath("AudioStreamPlayer3D")
+modifier = 0.7
 thruster_particles = NodePath("GPUParticles3D")
 value = 5000
 can_be_picked_up = true
@@ -77,3 +80,8 @@ fixed_fps = 15
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_anxn1")
 draw_pass_1 = SubResource("SphereMesh_xn41a")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_op7wx")
+max_distance = 500.0
+bus = &"Thruster"
