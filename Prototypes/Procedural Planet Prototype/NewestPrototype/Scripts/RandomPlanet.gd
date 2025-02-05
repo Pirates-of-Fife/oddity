@@ -8,28 +8,34 @@ func _ready():
 		planet_data = PlanetData.new()
 		planet_data.set_radius(100)
 		planet_data.set_res(30)
+
+		# Stelle sicher, dass das PlanetNoise-Array existiert
+		planet_data.planet_noise = []
 		
-		# Initialisiere PlanetNoise
+		# Erstelle und füge PlanetNoise hinzu
 		var noise = PlanetNoise.new()
-		noise.set_amplitude(1.0)
-		noise.set_minh(0.5)
-		noise.set_noise_map(FastNoiseLite.new())
+		noise.amplitude = 1.0
+		noise.minh = 0.5
+		noise.noise_map = FastNoiseLite.new()
 		
-		planet_data.planet_noise = [noise]
+		planet_data.planet_noise.append(noise)
 		
-		# Initialisiere Biomes
+		# Stelle sicher, dass das Biome-Array existiert
+		planet_data.biomes = []
+		
+		# Erstelle und füge Biome hinzu
 		var biome = PlanetBiome.new()
-		biome.set_start_h(0.2)
-		biome.set_gradient(GradientTexture1D.new())
+		biome.start_h = 0.2
+		biome.gradient = GradientTexture1D.new()
 		
-		planet_data.biomes = [biome]
+		planet_data.biomes.append(biome)
 		
-		# Setze Biome Noise Einstellungen
+		# Setze Biome-Noise-Einstellungen
 		planet_data.biome_noise = FastNoiseLite.new()
 		planet_data.biome_amplitude = 1.0
 		planet_data.biome_offset = 0.5
 		planet_data.biome_blend = 0.8
-		
+
 	generate_planet()
 
 func generate_planet():
