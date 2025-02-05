@@ -3,6 +3,7 @@ extends AudioStreamPlayer
 class_name BlueDanubePlayer
 
 var current_position : float = 0
+var remove_after_play : bool = false
 
 func resume_playing() -> void:
 	$AnimationPlayer.play("Start")
@@ -16,3 +17,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Stop":
 		stop()
 		current_position = get_playback_position()
+		if remove_after_play:
+			queue_free()
+		

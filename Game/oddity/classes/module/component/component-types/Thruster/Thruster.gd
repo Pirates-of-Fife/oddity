@@ -8,12 +8,26 @@ var size : ModuleSize.ThrusterSize
 @export_category("Thruster")
 
 @export
+var thruster_sound : AudioStreamPlayer3D
+
+@export
+var modifier : float = 1
+
+@export
 var current_thrust : float :
 	set(value):
 		current_thrust = clampf(value, 0, 1)
 
 		if thruster_particles != null:
 			thruster_particles.amount_ratio = current_thrust
+		
+		if thruster_sound != null:
+			thruster_sound.volume_db = lerpf(thruster_sound.volume_db, lerpf(-20, 10, current_thrust * modifier), 0.2)
+			if current_thrust == 0:
+				thruster_sound.stop()
+			else:
+				if !thruster_sound.playing:
+					thruster_sound.play()
 	get:
 		return current_thrust
 

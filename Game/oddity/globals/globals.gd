@@ -8,6 +8,9 @@ var starship_controller_sensitity : float = 0.1
 
 const SETTINGS_FILE: String = "user://settings.cfg"
 
+const STARSHIP_SAVED_LOADOUT : String = "user://saved_loadout.tres"
+const PLAYER_SHIP_SAVE : String = "user://player_saved_ship.tres"
+
 func _ready() -> void:
 	load_settings()
 

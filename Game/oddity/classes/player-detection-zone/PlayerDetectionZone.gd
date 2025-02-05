@@ -54,6 +54,12 @@ func _player_detection_zone_ready() -> void:
 
 func update() -> void:
 	var distance : float = get_player_distance()
+	
+	if player == null:
+		player = get_tree().get_first_node_in_group("Player")
+	
+	if !is_instance_valid(player):
+		return
 
 	if use_distance_display:
 		if player.control_entity.third_person or player.control_entity is not Starship:
@@ -84,4 +90,10 @@ func update() -> void:
 			active = false
 
 func get_player_distance() -> float:
+	if player == null:
+		return 100000000
+	
+	if !is_instance_valid(player.control_entity):
+		return 1000000000
+	
 	return (global_position - player.control_entity.global_position).length()

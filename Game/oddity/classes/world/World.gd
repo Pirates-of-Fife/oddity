@@ -16,6 +16,23 @@ var star_systems : Array
 var abyss_entered : bool = false
 var new_system_loaded : bool = false
 
+@export
+var player : Player
+
+@export
+var player_control_entity : Creature
+
+@export
+var player_ship : Starship
+
+@export
+var spawn_station : SpaceStationLoadingZone
+
+var auto_save_timer : Timer = Timer.new()
+
+@export
+var is_main_menu_world : bool = false
+
 func cycle_system() -> StarSystemResource:
 	var size : int = star_systems.size()
 	
@@ -34,6 +51,18 @@ func cycle_system() -> StarSystemResource:
 func _ready() -> void:
 	add_to_group("World")
 	
+	if is_main_menu_world:
+		return
+		
+	auto_save_timer.timeout.connect(save_player_ship_state)
+	auto_save_timer.one_shot = false
+	auto_save_timer.autostart = true
+	auto_save_timer.wait_time = 60 * 2
+	add_child(auto_save_timer)
+	
+	spawn_station = get_tree().get_first_node_in_group("StarSystem").spawn_station
+	
+	spawn_player_ship()
 
 func enter_abyss(destination_star_system : PackedScene, starship : Starship, portal_global_rotation : Vector3) -> void:
 	if abyss_entered:
@@ -102,8 +131,8 @@ func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	
 	
 func respawn_player() -> void:
-	var player : Player = get_tree().get_first_node_in_group("Player")
 	var player_body : Creature = player.respawn_body.instantiate()
+	player.reparent(self)
 	add_child(player_body)
 	player.possess(player_body)
 	
@@ -113,8 +142,62 @@ func respawn_player() -> void:
 	var new_star_system : StarSystem = player.respawn_star_system.instantiate()
 	add_child(new_star_system)
 	player_body.reparent(new_star_system)
-	player_body.global_position = new_star_system.player_respawn_position
+	
+	spawn_station = new_star_system.spawn_station
+		
+	player_body.global_position = spawn_station.player_spawn_marker.global_position
+	player_body.global_rotation = spawn_station.player_spawn_marker.global_rotation
+	
+	var default_loadout : StarshipLoadout = preload("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
+	
+	ResourceSaver.save(default_loadout, Globals.PLAYER_SHIP_SAVE)
+		
+func save_player_ship_state() -> void:
+	if player_ship == null:
+		return
+	
+	var loadout_generator : LoadoutGenerator = LoadoutGenerator.new()
+	
+	loadout_generator.save_loadout(player_ship, true, true, true)
+	
 	
 
+func _notification(what : int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_player_ship_state()
+		get_tree().quit()
+
+func spawn_player_ship() -> void:
+	var ship_scene : PackedScene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
+	var ship : Starship = ship_scene.instantiate()
+	var loadout : StarshipLoadout
 	
+	var f : FileAccess = FileAccess.open(Globals.PLAYER_SHIP_SAVE, FileAccess.READ)
+	if f == null:
+		loadout = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
+	else:
+		loadout = load(Globals.PLAYER_SHIP_SAVE)
+
+	ship.default_loadout = loadout
+	ship.apply_loadout_health = true
 	
+	ship.current_state = Starship.State.POWER_OFF
+	ship.landing_gear_on = true
+	
+	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
+	star_system.add_child(ship)
+	
+	ship.global_position = spawn_station.ship_spawn_marker.global_position
+	ship.global_rotation = spawn_station.ship_spawn_marker.global_rotation
+	
+	player_control_entity.global_position = spawn_station.player_spawn_marker.global_position
+	player_control_entity.global_rotation = spawn_station.player_spawn_marker.global_rotation
+	
+	player.possess(player_control_entity)
+	
+	player_ship = ship
+	
+
+func exit_to_main_menu() -> void:
+	save_player_ship_state()
+	get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")

@@ -49,7 +49,7 @@ func clear_modules(starship : Starship) -> void:
 				module.queue_free()
 
 
-func save_loadout(starship : Starship, save_cargo : bool = false, save_entities : bool = false) -> void:
+func save_loadout(starship : Starship, save_cargo : bool = false, save_entities : bool = false, save_as_player_ship_save : bool = false) -> void:
 	var loadout : StarshipLoadout = StarshipLoadout.new()
 
 	var children : Array = starship.find_children("*", "", true, false)
@@ -82,6 +82,7 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 					loadout.entities.append(generate_game_entity_entry(child, starship))
 
 	loadout.value = 0
+	loadout.current_health = starship.current_hull_health
 
 	for i : ModuleSlotLoadoutResource in loadout.module_slots:
 		loadout.value += i.value
@@ -91,14 +92,22 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 		loadout.value += i.value
 
 	loadout.ship_name = starship.ship_name
+	
 
-	var err : Error = ResourceSaver.save(loadout, "user://saved_loadout.tres")
-	if err == OK:
-		print("Loadout saved successfully")
+	if save_as_player_ship_save:
+		var err : Error = ResourceSaver.save(loadout, Globals.PLAYER_SHIP_SAVE)
+		if err == OK:
+			print("Loadout saved successfully")
+		else:
+			print("Failed to save loadout")
 	else:
-		print("Failed to save loadout")
+		var err : Error = ResourceSaver.save(loadout, Globals.STARSHIP_SAVED_LOADOUT)
+		if err == OK:
+			print("Loadout saved successfully")
+		else:
+			print("Failed to save loadout")
 
-func load_loadout(starship : Starship, loadout : StarshipLoadout) -> void:
+func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health : bool = false) -> void:
 	clear_modules(starship)
 
 	var children : Array = starship.find_children("*", "", true, false)
@@ -131,6 +140,11 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout) -> void:
 		starship.add_child(game_entity)
 		game_entity.position = entity.position
 		game_entity.rotation = entity.rotation
+	
+	if apply_health:
+		starship.current_hull_health = loadout.current_health
+		
+
 
 func editor_save_current_load_out() -> void:
 	if starship == null:

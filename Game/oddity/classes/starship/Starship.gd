@@ -146,6 +146,12 @@ signal alcubierre_drive_inserted
 @export
 var alcubierre_drive_slot : AlcubierreDriveSlot
 
+@export_flags_3d_physics
+var super_cruise_exit_collision_layer : int
+
+@export_flags_3d_physics
+var super_cruise_exit_collision_mask : int
+
 var alcubierre_drive_spool_time : float
 var alcubierre_drive_accelleration : float
 var alcubierre_drive_max_speed : float
@@ -412,6 +418,7 @@ func unfocus_target(starship : Starship) -> void:
 	focused_starship.state_changed_to_destroyed.disconnect(focused_ship_destroyed)
 	focused_starship = null
 
+var apply_loadout_health : bool = false
 
 func _starship_ready() -> void:
 	_default_ready()
@@ -491,7 +498,7 @@ func _starship_ready() -> void:
 	shield_broken.connect(shield.on_shield_broken)
 	shield_online.connect(shield.on_shield_online)
 
-	loadout_tools.load_loadout(self, default_loadout)
+	loadout_tools.load_loadout(self, default_loadout, apply_loadout_health)
 
 	if module_node != null:
 		for node : Node in module_node.get_children():
@@ -539,6 +546,8 @@ func _starship_ready() -> void:
 	for c : Node3D in hardpoints_root.get_children():
 		if c is Hardpoint:
 			hardpoints.append(c)
+	
+	
 
 enum Directions
 {
@@ -1049,11 +1058,18 @@ func initiate_abyssal_travel() -> void:
 	abyssal_portal.destination_star_system = selected_system.scene_file
 	abyssal_portal.starship = self
 
-func initiate_super_cruise() -> void:
+func initiate_super_cruise() -> void:	
 	if alcubierre_drive_slot.module == null:
 		return
+	
+	reset_thrust_vectors()
+	actual_thrust_vector_unit = Vector3.ZERO
+	actual_rotation_vector_unit = Vector3.ZERO
+
+	target_thrust_vector = Vector3.ZERO
 
 	alcubierre_drive_charge_end()
+	
 	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_start()
 	super_cruise_enter.play()
 
@@ -1078,8 +1094,8 @@ func exit_super_cruise(force_exit : bool = false) -> void:
 	travel_mode =  StarshipTravelModes.TravelMode.CRUISE
 
 	freeze = false
-	collision_layer = 1 << 8
-	collision_mask = 1 << 8
+	collision_layer = super_cruise_exit_collision_layer
+	collision_mask = super_cruise_exit_collision_mask
 
 	super_cruise_disengaged.emit()
 

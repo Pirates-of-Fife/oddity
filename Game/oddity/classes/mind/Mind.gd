@@ -27,10 +27,10 @@ func die() -> void:
 func possess(control_entity : ControlEntity) -> void:
 	if control_entity.player != null:
 		return
-
+	
 	if current_controller != null:
 		current_controller.queue_free()
-
+	
 	var controller_script : PackedScene
 
 	if self is Player:

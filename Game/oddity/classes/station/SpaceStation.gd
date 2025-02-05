@@ -95,3 +95,16 @@ func _on_player_force_speed_limit_activate(player: Player, control_entity: Contr
 
 func _on_player_force_speed_limit_deactivate(player: Player, control_entity: ControlEntity) -> void:
 	enforce_speed_limit = false
+
+func _on_tree_exiting() -> void:
+	var p : Player = get_tree().get_first_node_in_group("Player")
+	
+	if p == null:
+		return
+	
+	var c : ControlEntity = p.control_entity
+	if c is Starship:
+		c.radio_chatter.stop_playing()
+	donau_walzer_player.reparent(c)
+	donau_walzer_player.remove_after_play = true
+	donau_walzer_player.pause_playing()

@@ -43,7 +43,7 @@ func _on_body_entered(body : Node3D) -> void:
 	if body is Starship:
 		if starship != null:
 			return
-
+		
 		starship = body
 
 		starship.landing_gear_deployed.connect(_on_starship_landing_gear_deployed)
@@ -51,6 +51,9 @@ func _on_body_entered(body : Node3D) -> void:
 		starship.state_changed_to_power_on.connect(_on_starship_power_on)
 		starship.state_changed_to_power_off.connect(_on_starship_power_off)
 		starship.state_changed_to_destroyed.connect(_on_starship_destroyed)
+
+		_check_landing_status()
+
 
 func _on_body_exited(body : Node3D) -> void:
 	if body is Starship:

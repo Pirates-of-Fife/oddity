@@ -25,6 +25,9 @@ var player_respawn_marker : Marker3D
 @export
 var player_respawn_position : Vector3
 
+@export
+var spawn_station : SpaceStationLoadingZone
+
 func _ready() -> void:
 	add_to_group("StarSystem")
 	if player_spawn_marker != null:

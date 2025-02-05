@@ -43,7 +43,7 @@ func activate_collision() -> void:
 	collision_layer = projectile_collision_layer
 	collision_mask = projectile_collision_layer
 
-func _on_body_entered(body : Node) -> void:
+func _on_body_entered(body : Node) -> void:	
 	if body is GameEntity or body is StaticGameEntity:
 		body.take_damage(damage)
 		if body is GameEntity:

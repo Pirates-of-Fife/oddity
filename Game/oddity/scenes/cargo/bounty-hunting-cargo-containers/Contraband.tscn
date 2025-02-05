@@ -1,18 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://h2gmsd4soaa8"]
+[gd_scene load_steps=3 format=3 uid="uid://h2gmsd4soaa8"]
 
 [ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_vlikg"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7m325"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.27451, 0, 1, 1)
-metallic = 0.2
-metallic_specular = 0.97
-roughness = 0.3
-
-[sub_resource type="BoxMesh" id="BoxMesh_yv02j"]
-material = SubResource("StandardMaterial3D_7m325")
-size = Vector3(1.25, 1.25, 1.25)
+[ext_resource type="PackedScene" uid="uid://nk8apqptu76e" path="res://scenes/cargo/bounty-hunting-cargo-containers/godotPlushieCage.glb" id="2_37ciy"]
 
 [node name="Cu1Container" type="RigidBody3D"]
 collision_layer = 537921029
@@ -24,5 +13,4 @@ contents = "Contraband"
 value = 110000
 can_be_picked_up = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_yv02j")
+[node name="godotPlushieCage" parent="." instance=ExtResource("2_37ciy")]

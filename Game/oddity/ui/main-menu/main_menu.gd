@@ -17,22 +17,27 @@ func _on_main_menu_ui_animation_started() -> void:
 func load_last_possessed_starship() -> void:
 	if ship_loaded:
 		return
+	
+	var starship_scene : PackedScene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
+	
+	if starship_scene:
+		var ship : Node3D = starship_scene.instantiate()
+		
+		var loadout : StarshipLoadout
+	
+		var f : FileAccess = FileAccess.open(Globals.PLAYER_SHIP_SAVE, FileAccess.READ)
+		if f == null:
+			loadout = preload("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
+		else:
+			loadout = load(Globals.PLAYER_SHIP_SAVE)
+		
+		ship.default_loadout = loadout
+		
+		add_child(ship)
+		
+		ship.global_position = Vector3(7, -1, -1)
 
-	# Open the file in read mode to retrieve saved data
-	var save_file : FileAccess = FileAccess.open("user://last_possessed_starship.save", FileAccess.READ)  # FileAccess
-	if save_file:
-		var save_data : Dictionary = save_file.get_var()  # Dictionary (retrieved from file)
-		save_file.close()
-
-		# Check if the dictionary has the saved "scene_path" key
-		if save_data.has("scene_path"):
-			var starship_scene : PackedScene = load(save_data["scene_path"])  # PackedScene
-			if starship_scene:
-				var ship : Node3D = starship_scene.instantiate()
-				add_child(ship)
-				ship.global_position = Vector3(7, -1, -1)
-
-				ship_loaded = true
+		ship_loaded = true
 
 func _process(delta: float) -> void:
 	if ship_loaded:

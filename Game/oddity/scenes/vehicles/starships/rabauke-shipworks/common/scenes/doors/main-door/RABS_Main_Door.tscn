@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4edxhfqsax0l"]
+[gd_scene load_steps=16 format=3 uid="uid://c4edxhfqsax0l"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_c4sj4"]
 [ext_resource type="PackedScene" uid="uid://0fkj4y7sgn7a" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/main-door/DoorFrame.glb" id="2_ivvmc"]
 [ext_resource type="PackedScene" uid="uid://gq5g5memphy6" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/main-door/DoorR.glb" id="3_lp5sc"]
 [ext_resource type="PackedScene" uid="uid://cnv8q12rrd8og" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/main-door/DoorSide.glb" id="4_o1vd0"]
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/OpenableDetectionArea.gd" id="5_doljf"]
+[ext_resource type="AudioStream" uid="uid://xq4lkl4qjbjm" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/doors/door_open.wav" id="6_s1d87"]
 
 [sub_resource type="Animation" id="Animation_nod2o"]
 length = 0.001
@@ -111,13 +112,15 @@ data = PackedVector3Array(-0.636, 0.9952, 0.15, -0.636, 1, -0.15, -0.636, 1, 0.1
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufm2d"]
 size = Vector3(2.07848, 1.86898, 2.66212)
 
-[node name="RabsMainDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "detection_area")]
+[node name="RabsMainDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "detection_area", "open_sound", "close_sound")]
 collision_layer = 1024
 collision_mask = 1024
 script = ExtResource("1_c4sj4")
 animation_player = NodePath("AnimationPlayer")
 type = 1
 detection_area = NodePath("OpenableDetectionArea")
+open_sound = NodePath("AudioStreamPlayer3D")
+close_sound = NodePath("AudioStreamPlayer3D")
 
 [node name="DoorFrame" parent="." instance=ExtResource("2_ivvmc")]
 
@@ -154,3 +157,8 @@ script = ExtResource("5_doljf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OpenableDetectionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124381, 1.04141, -0.217181)
 shape = SubResource("BoxShape3D_ufm2d")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_s1d87")
+volume_db = -3.0
+bus = &"Interior"

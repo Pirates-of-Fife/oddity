@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://ddvpx7ldofuyc"]
+[gd_scene load_steps=14 format=3 uid="uid://ddvpx7ldofuyc"]
 
 [ext_resource type="Script" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.gd" id="1_rxy08"]
 [ext_resource type="PackedScene" uid="uid://be1lhilrvjun7" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/KestrelMk1MainThruster.glb" id="2_38npm"]
+[ext_resource type="AudioStream" uid="uid://3flkfd04wo4m" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/main_thruster-001.wav" id="3_2tohx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oj6mv"]
 size = Vector3(4.7547, 3.72179, 11.4831)
@@ -49,12 +50,14 @@ material = SubResource("StandardMaterial3D_k00ce")
 radial_segments = 12
 rings = 6
 
-[node name="RabsKestrelMk1MainThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_particles")]
+[node name="RabsKestrelMk1MainThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_sound", "thruster_particles")]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 15000.0
 script = ExtResource("1_rxy08")
 size = 5
+thruster_sound = NodePath("AudioStreamPlayer3D")
+modifier = 4.0
 thruster_particles = NodePath("GPUParticles3D")
 value = 70000
 can_be_picked_up = true
@@ -69,8 +72,14 @@ shape = SubResource("BoxShape3D_oj6mv")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.0959)
 amount = 200
+amount_ratio = 0.0
 speed_scale = 2.21
 fixed_fps = 15
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_6yadg")
 draw_pass_1 = SubResource("SphereMesh_tlo6e")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_2tohx")
+max_distance = 500.0
+bus = &"Thruster"
