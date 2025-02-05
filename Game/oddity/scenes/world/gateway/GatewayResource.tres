@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="StarSystemResource" load_steps=2 format=3 uid="uid://hjfcmfeltkkc"]
+[gd_resource type="Resource" script_class="StarSystemResource" load_steps=3 format=3 uid="uid://hjfcmfeltkkc"]
 
+[ext_resource type="PackedScene" uid="uid://c6fr87c666t64" path="res://scenes/world/gateway/GatewaySystem.tscn" id="1_ek84d"]
 [ext_resource type="Script" path="res://classes/star-system/StarSystemResource.gd" id="1_wp5gl"]
 
 [resource]
 script = ExtResource("1_wp5gl")
-name = ""
+name = "Gateway"
+scene_file = ExtResource("1_ek84d")

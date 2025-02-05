@@ -43,12 +43,13 @@
 - **Mirage** (Ringed)
   - Phantom
 - **Omen**
-- **Colossus** (Gas Giant, Ringed)
+- **Colossus** (Gas Giant)
   - Gale
   - Torrent
 
 ### Station:
 - **Ghost's Beacon** (Orbiting Colossus)
+- **Asp Creek Port** (Orbitting Mirage)
 
 ---
 
@@ -60,29 +61,22 @@
   - Drifter
 - **Leviathan** (Gas Giant, Ringed)
   - Kraken
-  - Maelstrom
 
 ### Station:
-- **Corsair's Watch** (Orbiting Bastion)
+- **Corsair's Watch** (Orbiting Kraken)
 
 ---
 
-## System: Abyssal Echoes
-**Hazard:** Temporal Fluctuations (time warps that can send ye reeling back to old battles)
+## System: Echo
+**Hazard:** High
 
 ### Planets:
-- **Eclipse** (Ringed)
-  - Twilight
-- **Resonance**
-  - Reverb
-  - Cadence
-- **Oblivion**
+- **Resonance** (Gas Giant)
 - **Goliath** (Gas Giant, Ringed)
   - Rumble
-  - Aftershock
 
 ### Station:
-- **Echo Outpost** (Orbiting Eclipse)
+- **New Horizon** (Orbiting Resonance)
 
 ---
 

@@ -63,7 +63,7 @@ func _orbit_camera(delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://test-scenes/star-system-test-scene/StarSystemTestScene.tscn")
+	get_tree().change_scene_to_file("res://scenes/world/world/MainScene.tscn")
 
 func _on_credits_button_pressed() -> void:
 	pass # Replace with function body.

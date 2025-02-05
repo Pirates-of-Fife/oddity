@@ -38,7 +38,7 @@ func _planet_loading_zone_ready() -> void:
 			activate_distance = 5000000
 			deactivate_distance = 5500000
 			sprite_distance = 160000
-			sprite_max_distance = 450000
+			sprite_max_distance = 1450000
 		PlanetSize.PLANET:
 			activate_distance = 10000000
 			deactivate_distance = 11000000

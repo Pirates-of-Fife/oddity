@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1x5jomuyohr6"]
+
+[ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_mdave"]
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_c4ioh"]
+[ext_resource type="PackedScene" uid="uid://x1ps87x6yhq6" path="res://scenes/world/echo/celestial-bodies/Echo.tscn" id="3_341i7"]
+[ext_resource type="PackedScene" uid="uid://dsq6mo1hm2w2j" path="res://scenes/world/echo/celestial-bodies/goliath/GoliathZone.tscn" id="4_v7bva"]
+[ext_resource type="PackedScene" uid="uid://dvfis284n2kiq" path="res://scenes/world/echo/celestial-bodies/goliath/RumbleZone.tscn" id="5_uo2ft"]
+[ext_resource type="PackedScene" uid="uid://bngue56ck5wut" path="res://scenes/world/echo/celestial-bodies/resonance/ResonanceZone.tscn" id="8_pluxd"]
+[ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="10_u488v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qypl4"]
+shader = ExtResource("2_c4ioh")
+shader_parameter/sky_color = Color(0.0705882, 0, 0.0745098, 1)
+shader_parameter/star_base_color = Color(1, 1, 1, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_lvikx"]
+sky_material = SubResource("ShaderMaterial_qypl4")
+
+[sub_resource type="Environment" id="Environment_f6j25"]
+background_mode = 2
+sky = SubResource("Sky_lvikx")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.0
+volumetric_fog_anisotropy = 0.0
+volumetric_fog_length = 0.01
+
+[node name="AbyssalEchoesSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
+script = ExtResource("1_mdave")
+system_name = &"Echo"
+main_star = NodePath("Echo")
+player_spawn_marker = NodePath("Marker3D")
+player_spawn_position = Vector3(-2.77895e+06, 0, 0)
+player_respawn_marker = NodePath("Marker3D")
+spawn_station = NodePath("ResonanceZone/SpaceStationLoadingZone")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f6j25")
+
+[node name="Echo" parent="." instance=ExtResource("3_341i7")]
+
+[node name="GoliathZone" parent="." instance=ExtResource("4_v7bva")]
+transform = Transform3D(0.890149, 0.455669, 0, -0.455669, 0.890149, 0, 0, 0, 1, -3e+06, -2e+06, 0)
+
+[node name="RumbleZone" parent="GoliathZone" instance=ExtResource("5_uo2ft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -317506, 199438, 0)
+
+[node name="ResonanceZone" parent="." instance=ExtResource("8_pluxd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4e+06, 60000, -1e+06)
+
+[node name="SpaceStationLoadingZone" parent="ResonanceZone" instance=ExtResource("10_u488v")]
+transform = Transform3D(0.45944, 0, 0.888209, -0.190715, 0.976676, 0.0986502, -0.867492, -0.214718, 0.448724, 22894.4, 1377.31, -54282)
+station_name = &"New Horizon"
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://brj78otnh04wn"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_uadvj"]
+[ext_resource type="PackedScene" uid="uid://5tqwlhi3e52e" path="res://scenes/world/paradox/celestial-bodies/marrow/Marrow.tscn" id="2_k0quh"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_1dwkm"]
+
+[node name="MarrowZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_uadvj")
+planet_name = &"Marrow"
+planet_scene = ExtResource("2_k0quh")
+planet_scale = 1
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_1dwkm")]
+text = &"Auric"

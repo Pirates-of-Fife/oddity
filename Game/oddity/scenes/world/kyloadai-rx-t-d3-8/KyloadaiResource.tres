@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StarSystemResource" load_steps=3 format=3 uid="uid://bhr768vxa5a12"]
+
+[ext_resource type="PackedScene" uid="uid://d3v26w8qkcgf2" path="res://scenes/world/kyloadai-rx-t-d3-8/Kyloadai RX-T d3-8 System.tscn" id="1_kqsbs"]
+[ext_resource type="Script" path="res://classes/star-system/StarSystemResource.gd" id="1_pw57s"]
+
+[resource]
+script = ExtResource("1_pw57s")
+name = "Kyloadai RX-T d3-8"
+scene_file = ExtResource("1_kqsbs")

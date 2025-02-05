@@ -52,6 +52,6 @@ func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 			
 		
 func _on_deactivate(player : Player, control_entity : ControlEntity) -> void:
-	for i : Minable in instanced_asteroids:
-		i.queue_free()
-		instanced_asteroids.erase(i)
+	for i : int in range(instanced_asteroids.size() - 1, -1, -1):
+		instanced_asteroids[i].free()
+		instanced_asteroids.remove_at(i)

@@ -1,19 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://b66bgr1r1ypcb"]
+[gd_scene load_steps=11 format=3 uid="uid://b66bgr1r1ypcb"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_wgmgi"]
 [ext_resource type="PackedScene" uid="uid://c6fr87c666t64" path="res://scenes/world/gateway/GatewaySystem.tscn" id="2_ad3lj"]
 [ext_resource type="Resource" uid="uid://hjfcmfeltkkc" path="res://scenes/world/gateway/GatewayResource.tres" id="2_rqxl3"]
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="3_5uyom"]
+[ext_resource type="Resource" uid="uid://budqbmc455pxb" path="res://scenes/world/echo/EchoResource.tres" id="3_imvkk"]
 [ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/mind/player/player.tscn" id="4_14xpe"]
+[ext_resource type="Resource" uid="uid://bssd3ptw5jt84" path="res://scenes/world/rogues-gambit/RoguesGambitResource.tres" id="4_owmr8"]
+[ext_resource type="Resource" uid="uid://cso46hk7o5fg6" path="res://scenes/world/paradox/ParadoxResource.tres" id="5_15hgi"]
+[ext_resource type="Resource" uid="uid://0wtfxp7u6y8l" path="res://scenes/world/mirage/MirageResource.tres" id="6_56n3f"]
+[ext_resource type="Resource" uid="uid://bhr768vxa5a12" path="res://scenes/world/kyloadai-rx-t-d3-8/KyloadaiResource.tres" id="7_q2man"]
 
-[node name="OddityWorld" type="Node3D" node_paths=PackedStringArray("player", "player_control_entity")]
+[node name="OddityWorld" type="Node3D" node_paths=PackedStringArray("player", "player_control_entity", "spawn_station")]
 script = ExtResource("1_wgmgi")
-star_systems = [ExtResource("2_rqxl3"), ExtResource("2_ad3lj"), null, null, null, null]
+star_systems = [ExtResource("2_rqxl3"), ExtResource("3_imvkk"), ExtResource("4_owmr8"), ExtResource("5_15hgi"), ExtResource("6_56n3f"), ExtResource("7_q2man")]
 player = NodePath("Player")
 player_control_entity = NodePath("GatewaySystem/Humanoid")
+spawn_station = NodePath("GatewaySystem/ArkaZone/SpaceStationLoadingZone")
 
 [node name="GatewaySystem" parent="." instance=ExtResource("2_ad3lj")]
-player_respawn_position = Vector3(-2.77895e+06, 0, 0)
 
 [node name="Humanoid" parent="GatewaySystem" instance=ExtResource("3_5uyom")]
 transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 475132, 11823.1, 602726)
@@ -22,4 +27,6 @@ interaction_length = 2.0
 [node name="Player" parent="." node_paths=PackedStringArray("control_entity") instance=ExtResource("4_14xpe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
 credits = 100000
-control_entity = NodePath("")
+control_entity = NodePath("../GatewaySystem/Humanoid")
+
+[editable path="GatewaySystem"]
