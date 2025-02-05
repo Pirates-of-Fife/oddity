@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://blrj8jl743g4l"]
+[gd_scene load_steps=15 format=3 uid="uid://blrj8jl743g4l"]
 
 [ext_resource type="Script" path="res://classes/abyss/abyssal-portal/AbyssalPortal.gd" id="1_hywtj"]
 [ext_resource type="Material" uid="uid://qkyd6a5rceox" path="res://classes/abyss/abyssal-portal/AbyssalPortalMaterial.tres" id="2_d63xj"]
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="3_e5fqd"]
 [ext_resource type="PackedScene" uid="uid://dlb8gn1owid73" path="res://classes/abyss/abyssal-portal/AbyssalPortal.glb" id="3_qi30m"]
 [ext_resource type="PackedScene" uid="uid://k08g2jtx2tb8" path="res://classes/abyss/abyssal-portal/AbyssalParticles.tscn" id="4_rq8un"]
+[ext_resource type="AudioStream" uid="uid://c3jdy02gi7lqr" path="res://classes/abyss/abyssal-portal/portal_open-001.wav" id="6_uioal"]
+[ext_resource type="AudioStream" uid="uid://dscq6ddgtcbji" path="res://classes/abyss/abyssal-portal/portal_close.wav" id="7_mj3lp"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_crcga"]
 material = ExtResource("2_d63xj")
@@ -108,11 +110,13 @@ size = Vector3(136.943, 261.506, 259.672)
 height = 112.317
 radius = 81.875
 
-[node name="AbyssalPortal" type="Node3D" node_paths=PackedStringArray("openable", "tunnel_mesh")]
+[node name="AbyssalPortal" type="Node3D" node_paths=PackedStringArray("openable", "tunnel_mesh", "open_sound", "close_sound")]
 script = ExtResource("1_hywtj")
 openable = NodePath("Openable")
 tunnel_mesh = NodePath("Openable/Portal/AbyssalPortal/Tunnel")
 offset_velocity = 1.0
+open_sound = NodePath("Open")
+close_sound = NodePath("Close")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, 0, 0, 0)
@@ -153,6 +157,16 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Openable/Area3D"]
 transform = Transform3D(-6.12323e-17, -1.22465e-16, -1, 1, 6.12323e-17, -6.12323e-17, 6.12323e-17, -1, 1.22465e-16, 19.2419, 0, -44.4225)
 shape = SubResource("CylinderShape3D_vdyw0")
+
+[node name="Open" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_uioal")
+volume_db = 18.0
+bus = &"Environment"
+
+[node name="Close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_mj3lp")
+volume_db = 18.0
+bus = &"Environment"
 
 [connection signal="openable_closed" from="Openable" to="." method="_on_openable_openable_closed"]
 [connection signal="openable_opened" from="Openable" to="." method="_on_openable_openable_opened"]
