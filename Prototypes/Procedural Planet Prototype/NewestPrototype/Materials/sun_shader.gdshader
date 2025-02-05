@@ -1,25 +1,47 @@
 shader_type spatial;
+render_mode specular_schlick_ggx;
 
-uniform float time : hint_range(0.0, 100.0);
-uniform vec4 sun_color : source_color;
+uniform float Glow_P : hint_range(0,10) = 9;
+uniform float Lightness_Difference : hint_range(0,10) = 4;
+uniform vec4 Sun_Color : source_color;
+uniform sampler2D voronoi_noise;
+uniform sampler2D emission_noise;
+varying vec3 vertex_pos;
+uniform float waveSpeed : hint_range(0,1) = 0.05;
+uniform float fresnel : hint_range(0,2) = 1.6;
+uniform float scale : hint_range(0,2) = 0.01;
+uniform float blendSharpness : hint_range(0,2) = 0.0;
+
+vec4 triplanar_texture(vec3 position, vec3 normal, vec2 offset, sampler2D noise) {
+	vec4 colX = texture(noise, position.xy * scale + offset);
+	vec4 colY = texture(noise, position.xz * scale + offset);
+	vec4 colZ = texture(noise, position.zy * scale + offset);
+
+	vec3 blendWeight = abs(normal);
+	blendWeight = vec3(pow(blendWeight.x, blendSharpness), pow(blendWeight.y, blendSharpness), pow(blendWeight.z, blendSharpness));
+	blendWeight /= (blendWeight.x + blendWeight.y + blendWeight.z);
+	return colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
+}
+
+void vertex() {
+	vertex_pos = VERTEX;
+}
 
 void fragment() {
+	// Fresnel
+	float fresnel_out = pow(fresnel - clamp(dot(NORMAL, VIEW), 0.0, fresnel), fresnel);
 
-    vec2 uv = SCREEN_UV;
+	vec2 waveOffsetA = vec2(TIME * waveSpeed, TIME * waveSpeed * 0.8);
+	vec2 waveOffsetB = vec2(TIME * waveSpeed * - 0.8, TIME * waveSpeed * -0.3);
+	vec2 result_offset = waveOffsetA + waveOffsetB;
 
+	vec3 cloud_tex = triplanar_texture(vertex_pos, NORMAL, result_offset, voronoi_noise).rgb;
+	vec3 cloud_tex_with_light = cloud_tex * vec3(Lightness_Difference);
+	vec3 cloud_tex_with_light_with_color = cloud_tex_with_light * Sun_Color.rgb;
+	vec3 cloud_tex_with_light_with_color_with_glow = vec3(Glow_P) * cloud_tex_with_light_with_color;
 
-    float glow = (uv.x * 2.0 ) * 0.5 + 3.5;
+	vec3 noise_tex = triplanar_texture(vertex_pos, NORMAL, result_offset, emission_noise).rgb;
+	vec3 result = cloud_tex_with_light_with_color_with_glow * noise_tex;
 
-
-    glow = smoothstep(0.3, 0.7, glow);
-
-
-    vec3 final_color = sun_color.rgb * glow;
-
-
-
-
-
-    ALBEDO = final_color;
-    EMISSION = final_color * 1.5;
+	EMISSION = vec3(fresnel_out) * result;
 }

@@ -30,14 +30,27 @@ func _ready():
 	# Create a ShaderMaterial and assign the shader
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
-	shader_material.set_shader_parameter("sun_color", color)
+	shader_material.set_shader_parameter("Sun_Color", color)  # Change 'sun_color' to 'Sun_Color'
+	
+	
+	
+	# Load the textures (make sure the paths are correct)
+	var voronoi_texture = preload("res://Noise/voronoi_noise.png")  
+	var emission_texture = preload("res://Noise/emission_noise.png")  
+
+	# Set the textures in the shader
+	shader_material.set_shader_parameter("voronoi_noise", voronoi_texture)
+	shader_material.set_shader_parameter("emission_noise", emission_texture)
+	
+	
+	
 	
 	# Apply the shader material to the sphere mesh
 	sphere_mesh.material_override = shader_material
 
-func _process(delta: float):
+
 	# Rotate the mesh slowly to simulate movement or animation
 #	sphere_mesh.rotate_y(rotation_speed * delta)
 	
 	# Update the shader's time parameter for animation
-	shader_material.set_shader_parameter("time", Time.get_ticks_msec() / 1000.0)  # Time-based animation
+	
