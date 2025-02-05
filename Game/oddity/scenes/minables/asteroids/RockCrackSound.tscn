@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://chostsn4e5kah"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/minable/MinableAudio.gd" id="1_k75nd"]
+[ext_resource type="AudioStream" uid="uid://7jt6vhkgyd08" path="res://scenes/minables/asteroids/rock_crack-001.wav" id="1_vjngo"]
+
+[node name="RockCrackSound" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_vjngo")
+volume_db = 12.0
+unit_size = 30.0
+max_db = 6.0
+autoplay = true
+max_distance = 1000.0
+bus = &"Environment"
+script = ExtResource("1_k75nd")

@@ -3,6 +3,21 @@
 [ext_resource type="AudioStream" uid="uid://cwdj0pha03wa1" path="res://classes/abyss/abyss/ambiance.wav" id="1_8o3s4"]
 [ext_resource type="Script" path="res://classes/abyss/abyss/abyssal_ambiance.gd" id="2_p76ud"]
 
+[sub_resource type="Animation" id="Animation_co2ea"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_5e5bx"]
 resource_name = "start"
 length = 5.0
@@ -17,21 +32,6 @@ tracks/0/keys = {
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
 "values": [-50.0, 12.0]
-}
-
-[sub_resource type="Animation" id="Animation_co2ea"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:volume_db")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_wcyms"]

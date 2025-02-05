@@ -23,6 +23,9 @@ var ship_name : StringName = "Default Starship" :
 			name_label.text = value
 	get:
 		return ship_name
+		
+@export
+var cruise_speed : float = 300.1234
 
 @export
 var name_label : Label3D
@@ -821,7 +824,7 @@ func shoot_primary() -> void:
 	if !is_powered_on():
 		return
 	
-	if relative_linear_velocity.length() > 300:
+	if relative_linear_velocity.length() > cruise_speed:
 		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
@@ -836,7 +839,7 @@ func shoot_secondary() -> void:
 	if !is_powered_on():
 		return
 
-	if relative_linear_velocity.length() > 300:
+	if relative_linear_velocity.length() > cruise_speed:
 		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
@@ -851,7 +854,7 @@ func shoot_tertiary() -> void:
 	if !is_powered_on():
 		return
 
-	if relative_linear_velocity.length() > 300:
+	if relative_linear_velocity.length() > cruise_speed:
 		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
@@ -864,9 +867,6 @@ func shoot_tertiary() -> void:
 
 func stop_shooting_primary() -> void:
 	if !is_powered_on():
-		return
-
-	if relative_linear_velocity.length() > 300:
 		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
@@ -884,9 +884,6 @@ func stop_shooting_secondary() -> void:
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
 
-	if relative_linear_velocity.length() > 300:
-		return
-
 	for hardpoint : Hardpoint in hardpoints:
 		if hardpoint.assignment == Hardpoint.HardpointAssignment.SECONDARY:
 			if hardpoint.module != null:
@@ -894,9 +891,6 @@ func stop_shooting_secondary() -> void:
 
 func stop_shooting_tertiary() -> void:
 	if !is_powered_on():
-		return
-		
-	if relative_linear_velocity.length() > 300:
 		return
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:

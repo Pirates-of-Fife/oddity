@@ -13,5 +13,7 @@ func _on_save_ship_interacted(player: Player, control_entity: ControlEntity) -> 
 	
 	loadout_tools.save_loadout(landing_pad.starship)
 	loadout_tools.save_loadout(landing_pad.starship, true, true, true)
+	var world : World = get_tree().get_first_node_in_group("World")
+	world.player_ship = landing_pad.starship
 	$AudioStreamPlayer3D.play()
 	
