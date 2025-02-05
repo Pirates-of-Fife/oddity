@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://4mv7dfuhle7g"]
+[gd_scene load_steps=15 format=3 uid="uid://4mv7dfuhle7g"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_1gwop"]
 [ext_resource type="PackedScene" uid="uid://c1uwtywe3kbvu" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/landing-gear/Foot.glb" id="2_5llj1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bp73dqrkmmj35" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/landing-gear/MidSection.glb" id="4_w7xiw"]
 [ext_resource type="PackedScene" uid="uid://cevy5ediga6r1" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/landing-gear/TopSection.glb" id="5_8kdti"]
 [ext_resource type="PackedScene" uid="uid://cvtn35uewft6h" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/landing-gear/Flaps.glb" id="6_x0qfl"]
+[ext_resource type="AudioStream" uid="uid://dbwhnohfdpdpb" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/scenes/landing-gear/landing_gear.wav" id="7_qwt2c"]
 
 [sub_resource type="Animation" id="Animation_hdbid"]
 length = 0.001
@@ -468,12 +469,14 @@ metallic_specular = 0.31
 [sub_resource type="BoxShape3D" id="BoxShape3D_bd6gt"]
 size = Vector3(1, 0.542537, 2.88476)
 
-[node name="RabsKestrelMk1LandingGear" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+[node name="RabsKestrelMk1LandingGear" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
 collision_layer = 513
 collision_mask = 513
 script = ExtResource("1_1gwop")
 animation_player = NodePath("AnimationPlayer")
 starting_state = 0
+open_sound = NodePath("AudioStreamPlayer3D")
+close_sound = NodePath("AudioStreamPlayer3D")
 
 [node name="Foot2" parent="." instance=ExtResource("2_5llj1")]
 
@@ -505,5 +508,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_qykcv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.228732, 0.164211)
 shape = SubResource("BoxShape3D_bd6gt")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_qwt2c")
+bus = &"Interior"
 
 [editable path="Flaps"]

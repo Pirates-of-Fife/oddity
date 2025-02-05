@@ -36,6 +36,12 @@ var detection_area : Area3D
 @export
 var interactables : Array = Array()
 
+@export
+var open_sound : AudioStreamPlayer3D
+
+@export
+var close_sound : AudioStreamPlayer3D
+
 func _ready() -> void:
 	animation_player.animation_finished.connect(on_animation_player_animation_finished)
 	animation_player.animation_changed.connect(on_animation_player_animation_changed)
@@ -52,6 +58,7 @@ func _ready() -> void:
 func open() -> void:
 	if state == State.CLOSED:
 		animation_player.play("open")
+		open_sound.play()
 		state = State.OPENING
 	
 	elif state == State.CLOSING:
@@ -60,6 +67,7 @@ func open() -> void:
 func close() -> void:
 	if state == State.OPEN:
 		animation_player.play("close")
+		close_sound.play()
 		state = State.CLOSING
 	
 	elif state == State.OPENING:
