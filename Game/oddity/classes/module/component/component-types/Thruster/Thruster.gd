@@ -22,7 +22,7 @@ var current_thrust : float :
 			thruster_particles.amount_ratio = current_thrust
 		
 		if thruster_sound != null:
-			thruster_sound.volume_db = lerpf(thruster_sound.volume_db, lerpf(-20, 10, current_thrust * modifier), 0.2)
+			thruster_sound.volume_db = lerpf(thruster_sound.volume_db, lerpf(-20, 20, current_thrust * modifier), 0.2)
 			if current_thrust == 0:
 				thruster_sound.stop()
 			else:

@@ -10,9 +10,12 @@ func set_current_system(system : String) -> void:
 	
 func set_selected_system(system : String) -> void:
 	abyssal_mfd.set_selected_system(system)
+	$AudioStreamPlayer3D2.play()
 	
 func set_gateway_closed() -> void:
 	abyssal_mfd.set_gateway_closed()
+	$AudioStreamPlayer3D.play()
 
 func set_gateway_open() -> void:
 	abyssal_mfd.set_gateway_open()
+	$AudioStreamPlayer3D.play()
