@@ -1,0 +1,27 @@
+[gd_scene load_steps=9 format=3 uid="uid://cu8wj57gtlipl"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="1_7we00"]
+[ext_resource type="Resource" uid="uid://hu5gqe83uwsy" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_1_Loadout.tres" id="2_2p3mw"]
+[ext_resource type="Resource" uid="uid://xh2efbrk3clj" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_2_Loadout.tres" id="3_5bymm"]
+[ext_resource type="Resource" uid="uid://b4nc2y5nss3v0" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_3_Loadout.tres" id="4_ycql5"]
+[ext_resource type="Resource" uid="uid://cw5ypqunlmkk7" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_4_Loadout.tres" id="5_grks1"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="6_5ugf1"]
+[ext_resource type="Resource" uid="uid://x01t8bceapmv" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_5_Loadout.tres" id="6_tcoel"]
+[ext_resource type="Resource" uid="uid://dkn5t8ulgw3qq" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_6_Loadout.tres" id="7_pecbp"]
+
+[node name="ExtremeDifficultyZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_7we00")
+difficulty = 3
+possible_loadouts = [ExtResource("2_2p3mw"), ExtResource("3_5bymm"), ExtResource("4_ycql5"), ExtResource("5_grks1"), ExtResource("6_tcoel"), ExtResource("7_pecbp")]
+ship_count = 1
+spawn_radius = 20000.0
+activate_distance = 20000.0
+deactivate_distance = 21000.0
+one_shot = true
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 20000.0
+sprite_max_distance = 200000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("6_5ugf1")]
+text = &"Signal [EXTREME THREAT]"

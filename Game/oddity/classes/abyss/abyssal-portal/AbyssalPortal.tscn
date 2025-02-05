@@ -160,12 +160,12 @@ shape = SubResource("CylinderShape3D_vdyw0")
 
 [node name="Open" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_uioal")
-volume_db = 18.0
+volume_db = 12.0
 bus = &"Environment"
 
 [node name="Close" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_mj3lp")
-volume_db = 18.0
+volume_db = 12.0
 bus = &"Environment"
 
 [connection signal="openable_closed" from="Openable" to="." method="_on_openable_openable_closed"]

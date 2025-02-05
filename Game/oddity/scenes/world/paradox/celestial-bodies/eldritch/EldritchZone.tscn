@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn8jhywmokb1j"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_doslg"]
+[ext_resource type="PackedScene" uid="uid://cagyaergrs6jw" path="res://scenes/world/paradox/celestial-bodies/eldritch/Eldritch.tscn" id="2_a05e8"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_1pwqm"]
+
+[node name="EldritchZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_doslg")
+planet_name = &"Eldritch"
+planet_scene = ExtResource("2_a05e8")
+planet_scale = 1
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_1pwqm")]
+text = &"Eldritch"

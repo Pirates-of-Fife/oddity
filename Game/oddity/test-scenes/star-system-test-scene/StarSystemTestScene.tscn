@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bteqskba0aasp"]
+[gd_scene load_steps=15 format=3 uid="uid://bteqskba0aasp"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://dryumn61chwql" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres" id="10_jyh57"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="10_xqrji"]
 [ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="11_d3jqi"]
+[ext_resource type="PackedScene" uid="uid://b52oun8p1nf8p" path="res://scenes/world/gateway/celestial-bodies/alcolin/Alcolin.tscn" id="12_b18qr"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="15_u213w"]
 
 [node name="StarSystemTestScene" type="Node3D"]
@@ -41,7 +42,6 @@ player = NodePath("Player")
 player_control_entity = NodePath("SystemA/Humanoid")
 
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
-player_respawn_position = Vector3(492238, 11815.9, 761032)
 
 [node name="RabsKestrelMk2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 602708)
@@ -71,6 +71,9 @@ sprite_max_distance = 287000.0
 
 [node name="MarkerSprite" parent="SubViewportContainer/SubViewport/World/SystemA/BountyHuntingZone" instance=ExtResource("11_d3jqi")]
 text = &"Test Label name"
+
+[node name="Alcolin" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("12_b18qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 564825, 9877.36, 753771)
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)

@@ -49,13 +49,13 @@ show_percentage = false
 
 [node name="CurrentSystem" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 84.0
-offset_right = 440.0
-offset_bottom = 155.0
+offset_left = 18.0
+offset_top = 110.0
+offset_right = 434.0
+offset_bottom = 181.0
 scale = Vector2(1.69, 1.69)
 theme = ExtResource("2_7wq40")
-text = "Current: None"
+text = "None"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -92,13 +92,13 @@ color = Color(0.780392, 0, 0, 1)
 
 [node name="SelectedSystem" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 21.0
-offset_top = 165.0
-offset_right = 417.0
-offset_bottom = 236.0
+offset_left = 18.0
+offset_top = 242.0
+offset_right = 508.0
+offset_bottom = 313.0
 scale = Vector2(1.69, 1.69)
 theme = ExtResource("2_7wq40")
-text = "Selected: None
+text = "Kyloadai RX-T d3-8
 "
 
 [node name="GatwayOpen" type="RichTextLabel" parent="."]
@@ -123,3 +123,24 @@ scale = Vector2(2.01, 2.01)
 theme = ExtResource("2_7wq40")
 theme_override_colors/default_color = Color(0.972549, 0, 0, 1)
 text = "Gateway CLOSED"
+
+[node name="label" type="RichTextLabel" parent="."]
+offset_left = 18.0
+offset_top = 57.0
+offset_right = 508.0
+offset_bottom = 128.0
+scale = Vector2(1.69, 1.69)
+theme = ExtResource("2_7wq40")
+theme_override_colors/default_color = Color(0.326424, 0.532407, 1, 1)
+text = "Current
+"
+
+[node name="label2" type="RichTextLabel" parent="."]
+offset_left = 17.0
+offset_top = 183.0
+offset_right = 507.0
+offset_bottom = 254.0
+scale = Vector2(1.69, 1.69)
+theme = ExtResource("2_7wq40")
+theme_override_colors/default_color = Color(0.326424, 0.532407, 1, 1)
+text = "Selected"

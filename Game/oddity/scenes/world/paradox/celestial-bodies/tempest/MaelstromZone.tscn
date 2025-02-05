@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://chx75n3352av6"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_41hfu"]
+[ext_resource type="PackedScene" uid="uid://dnghg8etw8ug1" path="res://scenes/world/paradox/celestial-bodies/tempest/Maelstrom.tscn" id="2_aj7xv"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_ob6ie"]
+
+[node name="MaelstromZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_41hfu")
+planet_name = &"Maelstrom"
+planet_scene = ExtResource("2_aj7xv")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_ob6ie")]
+text = &"Maelstrom"

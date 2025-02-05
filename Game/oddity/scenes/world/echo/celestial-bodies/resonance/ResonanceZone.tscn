@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bngue56ck5wut"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_u3yt4"]
+[ext_resource type="PackedScene" uid="uid://cf8217tx3r86j" path="res://scenes/world/echo/celestial-bodies/resonance/Resonance.tscn" id="2_158w7"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_bsfo2"]
+
+[node name="ResonanceZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_u3yt4")
+planet_name = &"Resonance"
+planet_scene = ExtResource("2_158w7")
+planet_scale = 3
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 450000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_bsfo2")]
+text = &"Alcolin"

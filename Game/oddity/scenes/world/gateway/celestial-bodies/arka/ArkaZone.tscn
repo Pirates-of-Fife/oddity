@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjuue14xnwrxc"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_q5wty"]
+[ext_resource type="PackedScene" uid="uid://rb8yfa4ux5r7" path="res://scenes/world/gateway/celestial-bodies/arka/Arka.tscn" id="2_l7qvc"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_h1c2k"]
+
+[node name="ArkaZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_q5wty")
+planet_name = &"Arka"
+planet_scene = ExtResource("2_l7qvc")
+planet_scale = 1
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 200000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_h1c2k")]
+text = &"Arka"

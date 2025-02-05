@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=16 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bfxi85byqr0ku" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi.tscn" id="10_p6mr5"]
 [ext_resource type="Script" path="res://classes/landing-pad/LandingPad.gd" id="11_feiv4"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="12_3xl3d"]
-[ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="12_cpd2v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w6y13"]
 size = Vector3(5, 4.585, 4.16)
@@ -287,12 +286,6 @@ mass_lock = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.745, -54.9565)
 shape = SubResource("BoxShape3D_cwni3")
-
-[node name="Size6MiningLaser" parent="." instance=ExtResource("12_cpd2v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4568, 6.83497, -8.67894)
-
-[node name="Size6MiningLaser2" parent="." instance=ExtResource("12_cpd2v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3851, 6.83497, -7.83349)
 
 [connection signal="starship_landed" from="LandingPad" to="." method="_on_landing_pad_starship_landed"]
 [connection signal="starship_took_off" from="LandingPad" to="." method="_on_landing_pad_starship_took_off"]

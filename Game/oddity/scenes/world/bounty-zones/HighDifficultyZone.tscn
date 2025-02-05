@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://butet7fsf0gys"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="1_43qhc"]
+[ext_resource type="Resource" uid="uid://rlrpfh68skls" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_1_Loadout.tres" id="2_7vhfc"]
+[ext_resource type="Resource" uid="uid://c8wnmwc1ifguk" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_2_Loadout.tres" id="3_vsqpq"]
+[ext_resource type="Resource" uid="uid://cekgwod1j2e28" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_3_Loadout.tres" id="4_o5a4v"]
+[ext_resource type="Resource" uid="uid://xcpmwtvsqu40" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_4_Loadout.tres" id="5_hax5k"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="6_4lg1t"]
+
+[node name="HighDifficultyZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_43qhc")
+difficulty = 2
+possible_loadouts = [ExtResource("2_7vhfc"), ExtResource("3_vsqpq"), ExtResource("4_o5a4v"), ExtResource("5_hax5k")]
+ship_count = 1
+spawn_radius = 20000.0
+activate_distance = 20000.0
+deactivate_distance = 21000.0
+one_shot = true
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 20000.0
+sprite_max_distance = 200000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("6_4lg1t")]
+text = &"Signal [HIGH THREAT]"

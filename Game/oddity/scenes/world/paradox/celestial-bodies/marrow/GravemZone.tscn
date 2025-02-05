@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ti4vralo41jf"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_s5cd8"]
+[ext_resource type="PackedScene" uid="uid://ogsgnh1ngc6n" path="res://scenes/world/paradox/celestial-bodies/marrow/Gravem.tscn" id="2_t7cv1"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_lhlx8"]
+
+[node name="GravemZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_s5cd8")
+planet_name = &"Gravem"
+planet_scene = ExtResource("2_t7cv1")
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_lhlx8")]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://n8b0kumefmg0"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_dpc0e"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="2_ea6rw"]
+[ext_resource type="PackedScene" uid="uid://8uelaj03lcbm" path="res://scenes/world/gateway/celestial-bodies/alcolin/Logi.tscn" id="2_nock1"]
+
+[node name="LogiZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_dpc0e")
+planet_name = &"Logi"
+planet_scene = ExtResource("2_nock1")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("2_ea6rw")]
+text = &"Noctiluna"

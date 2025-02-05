@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwhxklunfv4wc"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_j6l7n"]
+[ext_resource type="PackedScene" uid="uid://ba0rth1o7krh8" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/Bastion.tscn" id="2_53num"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_0mkvk"]
+
+[node name="BastionZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_j6l7n")
+planet_name = &"Bastion"
+planet_scene = ExtResource("2_53num")
+planet_scale = 1
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_0mkvk")]
+text = &"Auric"
