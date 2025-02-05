@@ -55,8 +55,6 @@ func force_respawn_timer_timeout() -> void:
 func die() -> void:
 	if has_died:
 		return
-
-	print("Player died")
 	
 	has_died = true
 
@@ -80,10 +78,7 @@ func die() -> void:
 	respawn()
 
 func respawn() -> void:
-	print("Player Respawning")
 	var world : World = get_tree().get_first_node_in_group("World")
-		
-	print("PArent: " + str(get_parent_node_3d()))
 	
 	world.respawn_player()
 	respawn_hud.hide()
@@ -127,7 +122,3 @@ func save_last_possessed_starship(starship : Starship) -> void:
 	if save_file:
 		save_file.store_var(save_data)
 		save_file.close()
-
-
-func _on_tree_exited() -> void:
-	print("Player exited tree for some reason?")

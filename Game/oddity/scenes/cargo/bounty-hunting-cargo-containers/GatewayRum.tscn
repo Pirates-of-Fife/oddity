@@ -1,18 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk046jth70dqt"]
+[gd_scene load_steps=3 format=3 uid="uid://bk046jth70dqt"]
 
 [ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_scknl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7m325"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0, 0.445297, 0.0683003, 1)
-metallic = 0.2
-metallic_specular = 0.97
-roughness = 0.3
-
-[sub_resource type="BoxMesh" id="BoxMesh_yv02j"]
-material = SubResource("StandardMaterial3D_7m325")
-size = Vector3(1.25, 1.25, 1.25)
+[ext_resource type="PackedScene" uid="uid://4uebyrm0bxtw" path="res://scenes/cargo/bounty-hunting-cargo-containers/gatewayRum.glb" id="2_4qy0y"]
 
 [node name="Cu1Container" type="RigidBody3D"]
 collision_layer = 537921029
@@ -24,5 +13,4 @@ contents = "Gateway Rum"
 value = 55000
 can_be_picked_up = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_yv02j")
+[node name="gatewayRum" parent="." instance=ExtResource("2_4qy0y")]

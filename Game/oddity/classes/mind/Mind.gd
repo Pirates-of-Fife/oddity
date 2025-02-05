@@ -30,8 +30,6 @@ func possess(control_entity : ControlEntity) -> void:
 	
 	if current_controller != null:
 		current_controller.queue_free()
-
-	print("possesing : " + str(control_entity))
 	
 	var controller_script : PackedScene
 
