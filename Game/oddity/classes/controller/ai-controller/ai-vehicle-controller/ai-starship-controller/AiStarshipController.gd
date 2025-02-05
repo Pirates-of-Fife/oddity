@@ -200,7 +200,8 @@ func rotate_away_from_player() -> void:
 
 func rotate_towards_player() -> void:
 
-	var direction_to_player : Vector3 = (player.global_position - control_entity.global_position) * control_entity.global_basis.inverse().inverse()
+	var direction_to_player : Vector3 = control_entity.to_local(player.control_entity.global_position)
+	#(player.global_position - control_entity.global_position) * control_entity.global_basis.inverse().inverse()
 
 	var normalized_direction: Vector3 = direction_to_player.normalized()
 

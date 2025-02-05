@@ -146,6 +146,12 @@ signal alcubierre_drive_inserted
 @export
 var alcubierre_drive_slot : AlcubierreDriveSlot
 
+@export_flags_3d_physics
+var super_cruise_exit_collision_layer : int
+
+@export_flags_3d_physics
+var super_cruise_exit_collision_mask : int
+
 var alcubierre_drive_spool_time : float
 var alcubierre_drive_accelleration : float
 var alcubierre_drive_max_speed : float
@@ -1088,8 +1094,8 @@ func exit_super_cruise(force_exit : bool = false) -> void:
 	travel_mode =  StarshipTravelModes.TravelMode.CRUISE
 
 	freeze = false
-	collision_layer = 1 << 8
-	collision_mask = 1 << 8
+	collision_layer = super_cruise_exit_collision_layer
+	collision_mask = super_cruise_exit_collision_mask
 
 	super_cruise_disengaged.emit()
 

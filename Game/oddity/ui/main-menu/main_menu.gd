@@ -18,7 +18,7 @@ func load_last_possessed_starship() -> void:
 	if ship_loaded:
 		return
 	
-	var starship_scene : PackedScene = preload("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
+	var starship_scene : PackedScene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
 	
 	if starship_scene:
 		var ship : Node3D = starship_scene.instantiate()

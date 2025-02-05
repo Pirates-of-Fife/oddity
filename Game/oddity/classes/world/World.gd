@@ -174,7 +174,7 @@ func spawn_player_ship() -> void:
 	
 	var f : FileAccess = FileAccess.open(Globals.PLAYER_SHIP_SAVE, FileAccess.READ)
 	if f == null:
-		loadout = preload("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
+		loadout = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
 	else:
 		loadout = load(Globals.PLAYER_SHIP_SAVE)
 
