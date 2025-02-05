@@ -25,6 +25,9 @@ var resource_value_max : int = 10000
 @export
 var resource_value_min : int = 40000
 
+@export
+var minable_sound : PackedScene = preload("res://scenes/minables/asteroids/RockCrackSound.tscn")
+
 func mine(damage : float, mining_position : Vector3, normal : Vector3) -> void:
 	is_being_mined.emit(damage, mining_position)
 	
@@ -36,7 +39,7 @@ func mine(damage : float, mining_position : Vector3, normal : Vector3) -> void:
 		current_resource_health = max_resource_health
 		resource_count -= 1
 
-func release_extractable(pos : Vector3, normal : Vector3) -> void:	
+func release_extractable(pos : Vector3, normal : Vector3) -> void:
 	var selected_extractable : PackedScene = extractable_resources.pick_random()
 	
 	var extractable : GameEntity = selected_extractable.instantiate()
@@ -49,4 +52,6 @@ func release_extractable(pos : Vector3, normal : Vector3) -> void:
 	extractable.apply_central_impulse(force)
 	extractable.value = randi_range(resource_value_min, resource_value_max)
 	
+	var sound : MineableAudio = minable_sound.instantiate()
+	extractable.add_child(sound)
 	

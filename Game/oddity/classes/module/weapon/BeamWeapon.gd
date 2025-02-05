@@ -7,6 +7,9 @@ class_name BeamWeapon
 @export
 var beam_laser : BeamLaserProjectile
 
+@export
+var beam_sound : AudioStreamPlayer3D
+
 func _ready() -> void:
 	_beam_weapon_ready()
 
@@ -21,9 +24,12 @@ func _beam_weapon_ready() -> void:
 
 func shoot() -> void:
 	beam_laser.start_beam()
+	if !beam_sound.playing:
+		beam_sound.play()
 
 func stop_shooting() -> void:
 	beam_laser.stop_beam()
+	beam_sound.stop()
 
 func on_hit(game_entity : GameEntity) -> void:
 	pass

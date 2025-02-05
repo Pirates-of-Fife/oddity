@@ -85,7 +85,7 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 			hide_interior()
 			interior_shown = false
 
-	if relative_linear_velocity.length() > 300 and current_state == State.POWER_ON:
+	if relative_linear_velocity.length() >= cruise_speed and current_state == State.POWER_ON:
 		if !$Interior/Bridge/CruiseLabel.visible:
 			$Interior/Bridge/CruiseLabel.show()
 			$Interior/Bridge/CruiseLabel/CruiseSound.play()

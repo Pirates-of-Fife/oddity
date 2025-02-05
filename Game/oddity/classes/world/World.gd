@@ -131,6 +131,10 @@ func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	
 	
 func respawn_player() -> void:
+	if abyss_entered:
+		get_node("AbyssalTunnel").queue_free()
+		get_node("AbyssalAmbiance").queue_free()
+	
 	var player_body : Creature = player.respawn_body.instantiate()
 	player.reparent(self)
 	add_child(player_body)
