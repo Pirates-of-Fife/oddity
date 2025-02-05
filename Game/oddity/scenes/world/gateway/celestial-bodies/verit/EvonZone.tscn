@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxpqqnarxjs56"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_y01mj"]
+[ext_resource type="PackedScene" uid="uid://cwdb8nfj4d8s8" path="res://scenes/world/gateway/celestial-bodies/verit/Evon.tscn" id="2_ql7dx"]
+
+[node name="EvonZone" type="Node3D"]
+script = ExtResource("1_y01mj")
+planet_name = &"Evon"
+planet_scene = ExtResource("2_ql7dx")

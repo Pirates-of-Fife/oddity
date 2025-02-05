@@ -1,0 +1,93 @@
+[gd_scene load_steps=18 format=3 uid="uid://c6fr87c666t64"]
+
+[ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_rfo0q"]
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_1xiln"]
+[ext_resource type="PackedScene" uid="uid://cqmac5l8glprl" path="res://scenes/world/gateway/celestial-bodies/Gateway.tscn" id="3_dnbpr"]
+[ext_resource type="PackedScene" uid="uid://b7e4h5rtiy0j6" path="res://scenes/world/gateway/celestial-bodies/arka/NoctilunaZone.tscn" id="4_6f7ci"]
+[ext_resource type="PackedScene" uid="uid://cjuue14xnwrxc" path="res://scenes/world/gateway/celestial-bodies/arka/ArkaZone.tscn" id="5_dbwvd"]
+[ext_resource type="PackedScene" uid="uid://crojdgkgwr1f8" path="res://scenes/world/gateway/celestial-bodies/alcolin/AlcolinZone.tscn" id="8_lc1q5"]
+[ext_resource type="PackedScene" uid="uid://cffn5ri2p6nrr" path="res://scenes/world/gateway/celestial-bodies/alcolin/AvantZone.tscn" id="10_ulerh"]
+[ext_resource type="PackedScene" uid="uid://n8b0kumefmg0" path="res://scenes/world/gateway/celestial-bodies/alcolin/LogiZone.tscn" id="11_damws"]
+[ext_resource type="PackedScene" uid="uid://dtg1up7xr7k15" path="res://scenes/world/gateway/celestial-bodies/alcolin/RataZone.tscn" id="12_rvpmt"]
+[ext_resource type="PackedScene" uid="uid://mvlkl5w1pgts" path="res://scenes/world/gateway/celestial-bodies/seraphis/SeraphisZone.tscn" id="13_vlrcf"]
+[ext_resource type="PackedScene" uid="uid://cys7hpq6o76yy" path="res://scenes/world/gateway/celestial-bodies/verit/CrestZone.tscn" id="14_3ctes"]
+[ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="14_fjptq"]
+[ext_resource type="PackedScene" uid="uid://dxpqqnarxjs56" path="res://scenes/world/gateway/celestial-bodies/verit/EvonZone.tscn" id="16_4jkyv"]
+[ext_resource type="PackedScene" uid="uid://s0ssiqwmwye0" path="res://scenes/world/gateway/celestial-bodies/verit/VeritZone.tscn" id="18_jwl7x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3f7i4"]
+shader = ExtResource("2_1xiln")
+shader_parameter/sky_color = Color(0.013851, 0, 0.000919866, 1)
+shader_parameter/star_base_color = Color(1, 1, 1, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_hlwge"]
+sky_material = SubResource("ShaderMaterial_3f7i4")
+
+[sub_resource type="Environment" id="Environment_gm8ak"]
+background_mode = 2
+sky = SubResource("Sky_hlwge")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.0
+volumetric_fog_anisotropy = 0.0
+volumetric_fog_length = 0.01
+
+[node name="GatewaySystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
+script = ExtResource("1_rfo0q")
+system_name = &"Gateway"
+main_star = NodePath("Gateway")
+player_spawn_marker = NodePath("Marker3D")
+player_spawn_position = Vector3(-2.77895e+06, 0, 0)
+player_respawn_marker = NodePath("Marker3D")
+player_respawn_position = Vector3(-2.77895e+06, 0, 0)
+spawn_station = NodePath("SpaceStationLoadingZone")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gm8ak")
+
+[node name="Gateway" parent="." instance=ExtResource("3_dnbpr")]
+
+[node name="NoctilunaZone" parent="." instance=ExtResource("4_6f7ci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02467e+06, 1.07536e+06, -505317)
+
+[node name="ArkaZone" parent="." instance=ExtResource("5_dbwvd")]
+transform = Transform3D(-0.0606795, 0.230984, 0.971063, 0.967184, 0.254079, 0, -0.246727, 0.939197, -0.238822, -2.20465e+06, 1.02059e+06, -545728)
+
+[node name="AlcolinZone" parent="." instance=ExtResource("8_lc1q5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05714e+06, 1.77618e+06, 1.98153e+06)
+
+[node name="AvantZone" parent="." instance=ExtResource("10_ulerh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7284e+06, 2.11587e+06, 2.17546e+06)
+
+[node name="LogiZone" parent="." instance=ExtResource("11_damws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.57182e+06, 1.45017e+06, 1.98479e+06)
+
+[node name="RataZone" parent="." instance=ExtResource("12_rvpmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46694e+06, 2.11587e+06, 2.17545e+06)
+
+[node name="SeraphisZone" parent="." instance=ExtResource("13_vlrcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31786e+06, 250102, 2.47601e+06)
+
+[node name="CrestZone" parent="." instance=ExtResource("14_3ctes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50429e+06, 170212, 576437)
+
+[node name="EvonZone" parent="." instance=ExtResource("16_4jkyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.55935e+06, 175021, 619065)
+
+[node name="VeritZone" parent="." instance=ExtResource("18_jwl7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.57161e+06, 137713, 597785)
+
+[node name="SpaceStationLoadingZone" parent="." instance=ExtResource("14_fjptq")]
+transform = Transform3D(-0.970556, 0.230984, 0.0683168, 0.12795, 0.254079, 0.958683, 0.204083, 0.939197, -0.276152, -2.24817e+06, 1.01946e+06, -534718)
+station_name = &"Rum\'s Reach"
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)

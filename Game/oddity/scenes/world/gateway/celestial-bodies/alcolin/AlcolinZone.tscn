@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://crojdgkgwr1f8"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_okknx"]
+[ext_resource type="PackedScene" uid="uid://b52oun8p1nf8p" path="res://scenes/world/gateway/celestial-bodies/alcolin/Alcolin.tscn" id="2_fj016"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_2rful"]
+
+[node name="AlcolinZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_okknx")
+planet_name = &"Alcolin"
+planet_scene = ExtResource("2_fj016")
+planet_scale = 3
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 450000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_2rful")]
+text = &"Alcolin"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://s0ssiqwmwye0"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_cm0ke"]
+[ext_resource type="PackedScene" uid="uid://dogb4cmkid8db" path="res://scenes/world/gateway/celestial-bodies/verit/Verit.tscn" id="2_7gg5r"]
+
+[node name="VeritZone" type="Node3D"]
+script = ExtResource("1_cm0ke")
+planet_name = &"Verit"
+planet_scene = ExtResource("2_7gg5r")
+planet_scale = 1

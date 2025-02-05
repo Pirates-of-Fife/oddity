@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cys7hpq6o76yy"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_p04fo"]
+[ext_resource type="PackedScene" uid="uid://dlkbsodcrk8b0" path="res://scenes/world/gateway/celestial-bodies/verit/Crest.tscn" id="2_d0twg"]
+
+[node name="CrestZone" type="Node3D"]
+script = ExtResource("1_p04fo")
+planet_name = &"Crest"
+planet_scene = ExtResource("2_d0twg")
