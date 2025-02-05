@@ -10,6 +10,12 @@ var station_name : StringName
 
 var station : SpaceStation
 
+@export
+var player_spawn_marker : Marker3D
+
+@export
+var ship_spawn_marker : Marker3D
+
 func _ready() -> void:
 	_space_station_loading_zone()
 

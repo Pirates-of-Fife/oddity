@@ -17,6 +17,9 @@ var ship_name : StringName
 @export
 var value : int = 0
 
+@export
+var current_health : float
+
 ## not implemented yet
 @export
 var ship_color : Color

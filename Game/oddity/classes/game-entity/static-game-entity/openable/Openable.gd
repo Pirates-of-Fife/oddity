@@ -58,7 +58,8 @@ func _ready() -> void:
 func open() -> void:
 	if state == State.CLOSED:
 		animation_player.play("open")
-		open_sound.play()
+		if open_sound != null:
+			open_sound.play()
 		state = State.OPENING
 	
 	elif state == State.CLOSING:
@@ -67,7 +68,8 @@ func open() -> void:
 func close() -> void:
 	if state == State.OPEN:
 		animation_player.play("close")
-		close_sound.play()
+		if close_sound != null:
+			close_sound.play()
 		state = State.CLOSING
 	
 	elif state == State.OPENING:

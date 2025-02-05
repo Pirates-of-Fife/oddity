@@ -41,6 +41,8 @@ var alarm_sound_player : AudioStreamPlayer3D
 @export
 var explosion_partcle : GPUParticles3D
 
+
+
 var interior_shown : bool = true
 var player_reference : Player
 
@@ -83,10 +85,14 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 			hide_interior()
 			interior_shown = false
 
-	if relative_linear_velocity.length() > 300:
-		$Interior/Bridge/CruiseLabel.show()
+	if relative_linear_velocity.length() > 300 and current_state == State.POWER_ON:
+		if !$Interior/Bridge/CruiseLabel.visible:
+			$Interior/Bridge/CruiseLabel.show()
+			$Interior/Bridge/CruiseLabel/CruiseSound.play()
 	else:
-		$Interior/Bridge/CruiseLabel.hide()
+		if $Interior/Bridge/CruiseLabel.visible:
+			$Interior/Bridge/CruiseLabel/CruiseSound.play()
+			$Interior/Bridge/CruiseLabel.hide()
 
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Pitch/Blend3/blend_amount", actual_rotation_vector_unit.x )
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Vertical/Blend3/blend_amount", -actual_thrust_vector_unit.y)
@@ -113,7 +119,20 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	_starship_ready()
 
 	player_reference = get_tree().get_first_node_in_group("Player")
-
+	
+	if current_state == State.POWER_OFF:
+		$Interior/Bridge/ShieldAndHullUi3d.hide()
+		$Interior/Bridge/VelocityMfd3d.hide()
+		$Interior/Bridge/AbyssalMFD3d.hide()
+		$Interior/Bridge/RabsControlSeat/Crosshair3d.hide()
+		$Interior/Bridge/MassLockedLabel.hide()
+		$Interior/Bridge/CruiseLabel.hide()
+		if damaged:
+			$Interior/Bridge/DamagedLabel.hide()
+		$Interior/Bridge/RadarDisplay.hide()
+		$Interior/Bridge/PowerLabel.show()
+		$Interior/Bridge/StarshipTargetMfd.hide()
+	
 
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
@@ -154,17 +173,45 @@ func update_ui() -> void:
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
 
-	if is_mass_locked:
-		$Interior/Bridge/MassLockedLabel.show()
+	if is_mass_locked and current_state == State.POWER_ON:
+		if !$Interior/Bridge/MassLockedLabel.visible:
+			$Interior/Bridge/MassLockedLabel.show()
+			$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
 	else:
-		$Interior/Bridge/MassLockedLabel.hide()
-
+		if $Interior/Bridge/MassLockedLabel.visible:
+			$Interior/Bridge/MassLockedLabel.hide()
+			$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+			
 func on_power_on() -> void:
 	power_on_sound_player.play()
+
+	$Interior/Bridge/ShieldAndHullUi3d.show()
+	$Interior/Bridge/VelocityMfd3d.show()
+	$Interior/Bridge/AbyssalMFD3d.show()
+	$Interior/Bridge/RabsControlSeat/Crosshair3d.show()
+	$Interior/Bridge/MassLockedLabel.show()
+	$Interior/Bridge/CruiseLabel.show()
+	if damaged:
+		$Interior/Bridge/DamagedLabel.show()
+	$Interior/Bridge/RadarDisplay.show()
+	$Interior/Bridge/PowerLabel.hide()
+	$Interior/Bridge/StarshipTargetMfd.show()
 
 func on_power_off() -> void:
 	power_off_sound_player.play()
 	power_off()
+	$Interior/Bridge/ShieldAndHullUi3d.hide()
+	$Interior/Bridge/VelocityMfd3d.hide()
+	$Interior/Bridge/AbyssalMFD3d.hide()
+	$Interior/Bridge/RabsControlSeat/Crosshair3d.hide()
+	$Interior/Bridge/MassLockedLabel.hide()
+	$Interior/Bridge/CruiseLabel.hide()
+	if damaged:
+		$Interior/Bridge/DamagedLabel.hide()
+	$Interior/Bridge/RadarDisplay.hide()
+	$Interior/Bridge/PowerLabel.show()
+	$Interior/Bridge/StarshipTargetMfd.hide()
+
 
 func update_abyssal_mfd() -> void:
 	abyssal_mfd.set_current_system(current_star_system.system_name)

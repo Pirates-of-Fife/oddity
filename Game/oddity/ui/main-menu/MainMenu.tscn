@@ -58,6 +58,7 @@ render_target_update_mode = 4
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
 script = ExtResource("2_1i8r8")
 star_systems = [SubResource("Resource_jce33")]
+is_main_menu_world = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)

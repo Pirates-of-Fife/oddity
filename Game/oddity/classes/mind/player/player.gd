@@ -50,10 +50,14 @@ func _player_ready() -> void:
 func force_respawn_timer_timeout() -> void:
 	force_respawn_pressed_count = 0
 
+
+
 func die() -> void:
 	if has_died:
 		return
 
+	print("Player died")
+	
 	has_died = true
 
 	current_controller.queue_free()
@@ -76,7 +80,11 @@ func die() -> void:
 	respawn()
 
 func respawn() -> void:
+	print("Player Respawning")
 	var world : World = get_tree().get_first_node_in_group("World")
+		
+	print("PArent: " + str(get_parent_node_3d()))
+	
 	world.respawn_player()
 	respawn_hud.hide()
 	AudioServer.remove_bus_effect(AudioServer.get_bus_index("Master"), 0)
@@ -91,7 +99,7 @@ func _process(delta: float) -> void:
 
 	if (Input.is_action_just_released("ui_cancel")):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")
+		get_tree().get_first_node_in_group("World").exit_to_main_menu()
 
 	if (Input.is_action_just_released("player_force_respawn")):
 		force_respawn_pressed_count += 1
@@ -104,6 +112,7 @@ func _process(delta: float) -> void:
 
 	if control_entity == null:
 		return
+		
 
 func on_posses(control_entity : ControlEntity) -> void:
 	if control_entity is Starship:
@@ -118,3 +127,7 @@ func save_last_possessed_starship(starship : Starship) -> void:
 	if save_file:
 		save_file.store_var(save_data)
 		save_file.close()
+
+
+func _on_tree_exited() -> void:
+	print("Player exited tree for some reason?")

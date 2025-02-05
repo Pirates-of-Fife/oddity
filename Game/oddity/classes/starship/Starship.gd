@@ -412,6 +412,7 @@ func unfocus_target(starship : Starship) -> void:
 	focused_starship.state_changed_to_destroyed.disconnect(focused_ship_destroyed)
 	focused_starship = null
 
+var apply_loadout_health : bool = false
 
 func _starship_ready() -> void:
 	_default_ready()
@@ -491,7 +492,7 @@ func _starship_ready() -> void:
 	shield_broken.connect(shield.on_shield_broken)
 	shield_online.connect(shield.on_shield_online)
 
-	loadout_tools.load_loadout(self, default_loadout)
+	loadout_tools.load_loadout(self, default_loadout, apply_loadout_health)
 
 	if module_node != null:
 		for node : Node in module_node.get_children():
@@ -539,6 +540,8 @@ func _starship_ready() -> void:
 	for c : Node3D in hardpoints_root.get_children():
 		if c is Hardpoint:
 			hardpoints.append(c)
+	
+	
 
 enum Directions
 {

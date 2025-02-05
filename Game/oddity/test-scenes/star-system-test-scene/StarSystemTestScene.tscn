@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bteqskba0aasp"]
+[gd_scene load_steps=14 format=3 uid="uid://bteqskba0aasp"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
@@ -12,7 +12,6 @@
 [ext_resource type="Resource" uid="uid://xcpmwtvsqu40" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_4_Loadout.tres" id="10_s0f0k"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="10_xqrji"]
 [ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="11_d3jqi"]
-[ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="15_argi1"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="15_u213w"]
 
 [node name="StarSystemTestScene" type="Node3D"]
@@ -35,9 +34,11 @@ audio_listener_enable_3d = true
 size = Vector2i(640, 360)
 render_target_update_mode = 4
 
-[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("player", "player_control_entity") groups=["World"]]
 script = ExtResource("1_bvu6x")
 star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_dfuqd")]
+player = NodePath("Player")
+player_control_entity = NodePath("SystemA/Humanoid")
 
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
 player_respawn_position = Vector3(492238, 11815.9, 761032)
@@ -70,9 +71,6 @@ sprite_max_distance = 287000.0
 
 [node name="MarkerSprite" parent="SubViewportContainer/SubViewport/World/SystemA/BountyHuntingZone" instance=ExtResource("11_d3jqi")]
 text = &"Test Label name"
-
-[node name="SpaceStationLoadingZone" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("15_argi1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 560664, 15875.7, 736749)
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)

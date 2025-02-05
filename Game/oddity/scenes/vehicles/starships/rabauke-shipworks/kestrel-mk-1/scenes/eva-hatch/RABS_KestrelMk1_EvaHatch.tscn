@@ -61,9 +61,11 @@ _data = {
 "open": SubResource("Animation_5fim6")
 }
 
-[node name="RabsKestrelMk1EvaHatch" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+[node name="RabsKestrelMk1EvaHatch" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
 script = ExtResource("1_8smbw")
 animation_player = NodePath("AnimationPlayer")
+open_sound = NodePath("AudioStreamPlayer3D")
+close_sound = NodePath("AudioStreamPlayer3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_ippyt")
