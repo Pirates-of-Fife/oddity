@@ -7,8 +7,11 @@
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 script = ExtResource("1_r72t7")
-size = 18.475
+size = 22.74
+color = Color(0.278431, 0.396078, 0.992157, 1)
 shader_path = "res://materials/sun_shader.gdshader"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 45.1029)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

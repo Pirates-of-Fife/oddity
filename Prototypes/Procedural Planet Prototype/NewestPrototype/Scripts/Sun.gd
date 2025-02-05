@@ -4,7 +4,7 @@ extends Node3D
 # Exported variables for customization
 @export var size: float = 10.0
 @export var color: Color = Color(1.0, 1.0, 0.0)  # Default yellow
-@export var rotation_speed: float = 0.1  # Speed for rotating the texture/mesh
+#@export var rotation_speed: float = 0.1  # Speed for rotating the texture/mesh
 
 # Path to the external shader file
 @export var shader_path: String = "res://Materials/sun_shader.gdshader"
@@ -19,7 +19,7 @@ func _ready():
 	sphere_mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = size
-	sphere.height = size*2
+	sphere.height = size * 2
 	sphere_mesh.mesh = sphere
 	sphere_mesh.position = Vector3.ZERO
 	add_child(sphere_mesh)
@@ -37,7 +37,7 @@ func _ready():
 
 func _process(delta: float):
 	# Rotate the mesh slowly to simulate movement or animation
-	sphere_mesh.rotate_y(rotation_speed * delta)
+#	sphere_mesh.rotate_y(rotation_speed * delta)
 	
-	# Update the shader's time parameter for animation using OS.get_ticks_msec()
+	# Update the shader's time parameter for animation
 	shader_material.set_shader_parameter("time", Time.get_ticks_msec() / 1000.0)  # Time-based animation
