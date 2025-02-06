@@ -56,6 +56,6 @@ font_size = 44
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_isxhd")
-volume_db = -48.0
+volume_db = -32.0
 
 [connection signal="interacted" from="SaveShip" to="." method="_on_save_ship_interacted"]

@@ -814,13 +814,13 @@ font_size = 107
 [node name="Click" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.40916)
 stream = ExtResource("4_dj41v")
-volume_db = -47.358
+volume_db = -36.0
 bus = &"Environment"
 
 [node name="Remove" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.40916)
 stream = ExtResource("5_3i42x")
-volume_db = -47.358
+volume_db = -36.0
 bus = &"Environment"
 
 [connection signal="interacted" from="Keyboard/Q" to="." method="_on_q_interacted"]

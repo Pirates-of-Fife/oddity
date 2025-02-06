@@ -11,13 +11,13 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_ixh8f"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jy1sj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kx5xp"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.396078, 0.682353, 0.854902, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a3jx4"]
-material = SubResource("StandardMaterial3D_jy1sj")
+material = SubResource("StandardMaterial3D_kx5xp")
 size = Vector3(2.005, 0.85, 0.035)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c3jfg"]
@@ -126,11 +126,11 @@ font_size = 24
 
 [node name="Spawn" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_tw3n8")
-volume_db = -48.0
+volume_db = -32.0
 
 [node name="Decline" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_7obba")
-volume_db = -48.0
+volume_db = -32.0
 
 [connection signal="interacted" from="ClaimShip" to="." method="_on_claim_ship_interacted"]
 [connection signal="interacted" from="RequestNewShip" to="." method="_on_request_new_ship_interacted"]

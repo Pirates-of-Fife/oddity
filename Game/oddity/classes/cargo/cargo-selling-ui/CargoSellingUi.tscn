@@ -59,10 +59,10 @@ font_size = 42
 
 [node name="Sold" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_3i5kd")
-volume_db = -48.0
+volume_db = -32.0
 
 [node name="No" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_yis2d")
-volume_db = -48.0
+volume_db = -32.0
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]

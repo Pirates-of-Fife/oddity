@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=3 uid="uid://gng0koxqa0i4"]
+
+[ext_resource type="PackedScene" uid="uid://demq8skgr3t4n" path="res://classes/station/station_landing_pad/Tutorial2D.tscn" id="1_ex1fy"]
+[ext_resource type="PackedScene" uid="uid://bf7s7vwhd8bfp" path="res://scenes/modules/test-module/ShieldGenerator/shield-modul.glb" id="1_f2sen"]
+[ext_resource type="PackedScene" uid="uid://sqlkqvg7d5tk" path="res://scenes/modules/test-module/hull-reinforcement/hullReinforcementModule.glb" id="2_uhty2"]
+[ext_resource type="PackedScene" uid="uid://b4rqsv1kqush4" path="res://scenes/modules/test-module/alcubierre_drive.glb" id="4_h4jqw"]
+[ext_resource type="PackedScene" uid="uid://d3qowdbvmnoir" path="res://scenes/modules/test-module/abyss_drive.glb" id="5_1twlb"]
+[ext_resource type="PackedScene" uid="uid://jubrpulvdctu" path="res://scenes/modules/test-module/mining-laser/size-5/mining_laser_5.glb" id="6_ku0oh"]
+[ext_resource type="PackedScene" uid="uid://chw5mobhsfp6f" path="res://scenes/modules/test-module/rail-gun/railgun.glb" id="7_75o42"]
+[ext_resource type="PackedScene" uid="uid://pjimcldb2p2a" path="res://scenes/modules/test-module/Size6Weapon/size-6.glb" id="8_mpl22"]
+[ext_resource type="PackedScene" uid="uid://bjkwkgvfjsaea" path="res://scenes/modules/test-module/rotary-autocannon/rotary_cannon.glb" id="9_0hg02"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_okumb"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Tutorial" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_okumb")
+
+[node name="shield-modul" parent="Sprite3D" instance=ExtResource("1_f2sen")]
+transform = Transform3D(7.59281e-17, 0, -1.24, 0, 1.24, 0, 1.24, 0, 7.59281e-17, 14.7536, 6.98435, 0.835345)
+
+[node name="hullReinforcementModule" parent="Sprite3D" instance=ExtResource("2_uhty2")]
+transform = Transform3D(7.59281e-17, 0, -1.24, 0, 1.24, 0, 1.24, 0, 7.59281e-17, 14.804, 4.15799, 0.698192)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(8490, 2095)
+
+[node name="Tutorial2d" parent="SubViewport" instance=ExtResource("1_ex1fy")]
+
+[node name="alcubierre_drive" parent="." instance=ExtResource("4_h4jqw")]
+transform = Transform3D(7.89249e-33, -1.28894e-16, 2.105, 2.105, 1.28894e-16, 0, -1.28894e-16, 2.105, 1.28894e-16, 14.8182, 0, 0.702628)
+
+[node name="abyss_drive" parent="." instance=ExtResource("5_1twlb")]
+transform = Transform3D(1.04707e-16, 0, 1.71, 0, 1.71, 0, -1.71, 0, 1.04707e-16, 14.6791, -4.04554, 0.633857)
+
+[node name="mining_laser_5" parent="." instance=ExtResource("6_ku0oh")]
+transform = Transform3D(1.39, 0, 0, 0, 1.39, 0, 0, 0, 1.39, 30.3343, -4.3513, 0.580963)
+
+[node name="railgun" parent="." instance=ExtResource("7_75o42")]
+transform = Transform3D(8.11329e-17, 0, -1.325, 0, 1.325, 0, 1.325, 0, 8.11329e-17, 30.4814, 0, 1.00984)
+
+[node name="size-6" parent="." instance=ExtResource("8_mpl22")]
+transform = Transform3D(0.91, 0, -1.51545e-16, 0, 0.91, 0, 1.51545e-16, 0, 0.91, 30.678, 7.38326, 0.814116)
+
+[node name="rotary_cannon" parent="." instance=ExtResource("9_0hg02")]
+transform = Transform3D(7.77651e-17, 0, -1.27, 0, 1.27, 0, 1.27, 0, 7.77651e-17, 32.9852, 3.87204, 0.63906)

@@ -9,6 +9,38 @@
 [ext_resource type="AudioStream" uid="uid://xvrrxr8w73j8" path="res://ui/main-menu/sounds/after_start_click.wav" id="6_6sojb"]
 [ext_resource type="Texture2D" uid="uid://d3swk0fy83bl" path="res://ui/main-menu/OddityLogo-02.png" id="6_slygv"]
 
+[sub_resource type="Animation" id="Animation_rbwtj"]
+resource_name = "Credits"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Credits:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 3),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 1089), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tjm30"]
+resource_name = "CreditsExit"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Credits:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 3),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 1111.48)]
+}
+
 [sub_resource type="Animation" id="Animation_r183a"]
 length = 0.001
 tracks/0/type = "value"
@@ -122,38 +154,6 @@ tracks/3/keys = {
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
 "values": [Vector2(-1226, 196), Vector2(-480, 250)]
-}
-
-[sub_resource type="Animation" id="Animation_rbwtj"]
-resource_name = "Credits"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Credits:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 3),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector2(5, 1089), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_tjm30"]
-resource_name = "CreditsExit"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Credits:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 3),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(5, 1111.48)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_882nw"]
