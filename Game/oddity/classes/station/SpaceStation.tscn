@@ -341,19 +341,19 @@ deactivate_distance = 5000.0
 [node name="FighterGen7_blue_open" parent="Node3D" instance=ExtResource("12_hdu5d")]
 transform = Transform3D(1, 0, 0, 0, 0.279611, -0.960113, 0, 0.960113, 0.279611, -112.815, 1.56578, -82.8528)
 
-[node name="FighterGen7_purple_closed" parent="." instance=ExtResource("13_fk227")]
+[node name="FighterGen7_purple_closed" parent="Node3D" instance=ExtResource("13_fk227")]
 transform = Transform3D(1, 0, 0, 0, -0.264142, 0.964484, 0, -0.964484, -0.264142, 71.8462, 57.6791, 146.742)
 
-[node name="FighterGen7_green_closed" parent="." instance=ExtResource("14_c5wsj")]
+[node name="FighterGen7_green_closed" parent="Node3D" instance=ExtResource("14_c5wsj")]
 transform = Transform3D(1, 0, 0, 0, 0.708352, -0.705859, 0, 0.705859, 0.708352, 125.678, -63.4996, -51.263)
 
-[node name="FighterGen7_blue_closed" parent="." instance=ExtResource("15_gtxdv")]
+[node name="FighterGen7_blue_closed" parent="Node3D" instance=ExtResource("15_gtxdv")]
 transform = Transform3D(1, 0, 0, 0, -0.706699, -0.707514, 0, 0.707514, -0.706699, 226.222, 101.983, -53.0962)
 
-[node name="FighterGen7_red_closed" parent="." instance=ExtResource("16_0cor8")]
+[node name="FighterGen7_red_closed" parent="Node3D" instance=ExtResource("16_0cor8")]
 transform = Transform3D(1, 0, 0, 0, -0.916076, 0.401005, 0, -0.401005, -0.916076, 129.02, 136.721, 61.4231)
 
-[node name="FighterGen7_red_open" parent="." instance=ExtResource("17_rn1jh")]
+[node name="FighterGen7_red_open" parent="Node3D" instance=ExtResource("17_rn1jh")]
 transform = Transform3D(1, 0, 0, 0, 0.989198, -0.146584, 0, 0.146584, 0.989198, -2.30104, -91.7713, -2.24161)
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
