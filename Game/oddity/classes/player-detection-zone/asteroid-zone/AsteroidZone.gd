@@ -19,6 +19,8 @@ var instanced_asteroids : Array = Array()
 @export
 var asteroid_ring : Node3D
 
+@export
+var asteroid_marker : PackedScene = preload("res://classes/player-detection-zone/asteroid-zone/AsteroidMarkerZone.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,6 +31,8 @@ func _asteroid_zone_ready() -> void:
 	
 	activate.connect(_on_activate)
 	deactivate.connect(_on_deactivate)
+	
+	add_child(asteroid_marker.instantiate())
 	
 	if asteroid_ring != null:
 		scale = Vector3(1 / asteroid_ring.scale.x, 1 / asteroid_ring.scale.y, 1 / asteroid_ring.scale.z)
