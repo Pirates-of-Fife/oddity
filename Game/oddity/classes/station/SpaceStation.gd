@@ -108,3 +108,16 @@ func _on_tree_exiting() -> void:
 	donau_walzer_player.reparent(c)
 	donau_walzer_player.remove_after_play = true
 	donau_walzer_player.pause_playing()
+
+
+func _on_player_detection_zone_activate(player: Player, control_entity: ControlEntity) -> void:
+	var interior : Node3D = load("res://classes/station/StationInterior/StationInterior.tscn").instantiate()
+	interior.station = self
+	$InteriorRoot.add_child(interior)
+
+
+func _on_player_detection_zone_deactivate(player: Player, control_entity: ControlEntity) -> void:
+	var i : Node3D = $InteriorRoot.get_child(0)
+	
+	if i != null:
+		i.queue_free()

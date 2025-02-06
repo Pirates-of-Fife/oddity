@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=22 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bfxi85byqr0ku" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi.tscn" id="10_p6mr5"]
 [ext_resource type="Script" path="res://classes/landing-pad/LandingPad.gd" id="11_feiv4"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="12_3xl3d"]
-[ext_resource type="PackedScene" uid="uid://gng0koxqa0i4" path="res://classes/station/station_landing_pad/Tutorial.tscn" id="12_tcx47"]
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="13_vqirh"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_clb07"]
 [ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="15_ikxe5"]
@@ -303,7 +302,7 @@ mass_lock = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.745, -54.9565)
 shape = SubResource("BoxShape3D_cwni3")
 
-[node name="Tutorial" parent="." instance=ExtResource("12_tcx47")]
+[node name="TutorialRoot" type="Node3D" parent="."]
 transform = Transform3D(-0.125, 0, -1.53081e-17, 0, 0.125, 0, 1.53081e-17, 0, -0.125, 13.0185, 1.47012, -3.67868)
 
 [node name="InteractionButton" type="StaticBody3D" parent="." node_paths=PackedStringArray("interaction_sound")]
@@ -312,6 +311,7 @@ collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("13_vqirh")
 interaction_sound = NodePath("Spawn")
+press_delay = 0.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135261, -0.21738, 0)

@@ -32,6 +32,7 @@ var load_loadout_editor : StarshipLoadout
 @export
 var output : StarshipLoadout
 
+
 func editor__load_loadout() -> void:
 	clear_modules(starship)
 
@@ -95,6 +96,7 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	
 
 	if save_as_player_ship_save:
+		loadout.apply_health = true
 		var err : Error = ResourceSaver.save(loadout, Globals.PLAYER_SHIP_SAVE)
 		if err == OK:
 			print("Loadout saved successfully")

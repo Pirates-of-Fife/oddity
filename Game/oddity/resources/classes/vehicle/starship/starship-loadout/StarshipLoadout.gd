@@ -18,6 +18,9 @@ var ship_name : StringName
 var value : int = 0
 
 @export
+var apply_health : bool = false
+
+@export
 var current_health : float
 
 ## not implemented yet

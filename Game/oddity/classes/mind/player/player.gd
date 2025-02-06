@@ -23,6 +23,9 @@ var respawn_cost : int = 1000
 @export
 var respawn_hud : CanvasLayer
 
+@export
+var hud : CreditHud
+
 var force_respawn_pressed_count : int = 0
 var force_respawn_timer : Timer = Timer.new()
 var has_died : bool = false
@@ -33,10 +36,14 @@ func _ready() -> void:
 func add_credits(credits : int) -> void:
 	self.credits += abs(credits)
 	credits_added.emit(abs(credits))
+	var world : World = get_tree().get_first_node_in_group("World")
+	world.save_player_money_state()
 
 func remove_credits(credits : int) -> void:
 	self.credits -= abs(credits)
 	credits_removed.emit(abs(credits))
+	var world : World = get_tree().get_first_node_in_group("World")
+	world.save_player_money_state()
 
 func _player_ready() -> void:
 	_mind_ready()

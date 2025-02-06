@@ -63,6 +63,19 @@ func _ready() -> void:
 	spawn_station = get_tree().get_first_node_in_group("StarSystem").spawn_station
 	
 	spawn_player_ship()
+	
+	var f : FileAccess = FileAccess.open(Globals.PLAYER_MONEY, FileAccess.READ)
+	if f == null:
+		var res : PlayerMoneyResource = PlayerMoneyResource.new()
+		res.credits = 10000
+
+		ResourceSaver.save(res, Globals.PLAYER_MONEY)
+	
+	var credits_resource : PlayerMoneyResource = load(Globals.PLAYER_MONEY)
+	
+	player.credits = credits_resource.credits
+	player.hud.current_credits = player.credits
+	player.hud.displayed_credits = player.credits
 
 func enter_abyss(destination_star_system : PackedScene, starship : Starship, portal_global_rotation : Vector3) -> void:
 	if abyss_entered:
@@ -164,11 +177,20 @@ func save_player_ship_state() -> void:
 	
 	loadout_generator.save_loadout(player_ship, true, true, true)
 	
+func save_player_money_state() -> void:
+	var f : FileAccess = FileAccess.open(Globals.PLAYER_MONEY, FileAccess.READ)
+	if f == null:
+		return
 	
+	var res : PlayerMoneyResource = PlayerMoneyResource.new()
+	res.credits = player.credits
+
+	ResourceSaver.save(res, Globals.PLAYER_MONEY)
 
 func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_player_ship_state()
+		save_player_money_state()
 		get_tree().quit()
 
 func spawn_player_ship() -> void:

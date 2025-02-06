@@ -40,6 +40,7 @@ main_star = NodePath("Echo")
 player_spawn_marker = NodePath("Marker3D")
 player_spawn_position = Vector3(-2.77895e+06, 0, 0)
 player_respawn_marker = NodePath("Marker3D")
+player_respawn_position = Vector3(-2.77895e+06, 0, 0)
 spawn_station = NodePath("ResonanceZone/SpaceStationLoadingZone")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -48,13 +49,13 @@ environment = SubResource("Environment_f6j25")
 [node name="Echo" parent="." instance=ExtResource("3_341i7")]
 
 [node name="GoliathZone" parent="." instance=ExtResource("4_v7bva")]
-transform = Transform3D(0.890149, 0.455669, 0, -0.455669, 0.890149, 0, 0, 0, 1, -3e+06, -2e+06, 0)
+transform = Transform3D(0.890149, 0.455669, 0, -0.455669, 0.890149, 0, 0, 0, 1, -6e+06, -4e+06, 0)
 
 [node name="RumbleZone" parent="GoliathZone" instance=ExtResource("5_uo2ft")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -317506, 199438, 0)
 
 [node name="ResonanceZone" parent="." instance=ExtResource("8_pluxd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4e+06, 60000, -1e+06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8e+06, 120000, -2e+06)
 
 [node name="SpaceStationLoadingZone" parent="ResonanceZone" instance=ExtResource("10_u488v")]
 transform = Transform3D(0.45944, 0, 0.888209, -0.190715, 0.976676, 0.0986502, -0.867492, -0.214718, 0.448724, 22894.4, 1377.31, -54282)

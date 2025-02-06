@@ -45,6 +45,7 @@ func _ready() -> void:
 	timer.autostart = true
 	timer.one_shot = false
 	timer.timeout.connect(update)
+	add_child(timer)
 	
 
 func cargo_added() -> void:

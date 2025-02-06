@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://caj2js4p6j1sj"]
+[gd_scene load_steps=10 format=3 uid="uid://cj27np7373glj"]
 
 [ext_resource type="PackedScene" uid="uid://bouoa1mpvga6i" path="res://scenes/world/gateway/celestial-bodies/arka/ring.glb" id="1_wuayg"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="2_a4tbd"]
@@ -38,8 +38,8 @@ data = PackedVector3Array(0.7388, -0.6029, 0.1015, 0.8506, -0.5257, 0, 0.7381, -
 script = ExtResource("2_a4tbd")
 use_distance_display = true
 distant_sprite = NodePath("MarkerSprite")
-sprite_distance = 12000.0
-sprite_max_distance = 15000.0
+sprite_distance = 6000.0
+sprite_max_distance = 60000.0
 
 [node name="MarkerSprite" parent="PlayerDetectionZone" instance=ExtResource("3_d8q5x")]
 text = &"The Gateway"
@@ -52,7 +52,7 @@ transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, 0, 0)
 
 [node name="Label3D" type="Label3D" parent="Node3D"]
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 1.30387, 0)
-billboard = 2
+billboard = 1
 modulate = Color(0, 1, 1, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "GATEWAY"
@@ -61,7 +61,7 @@ font_size = 35
 
 [node name="Label3D2" type="Label3D" parent="Node3D"]
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -1.26156, 0)
-billboard = 2
+billboard = 1
 modulate = Color(0, 1, 1, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "PROTECTORATE FEDERATION"
@@ -74,7 +74,7 @@ mesh = SubResource("CylinderMesh_fbgyg")
 skeleton = NodePath("../StaticGameEntity/ring")
 
 [node name="StaticGameEntity" type="StaticBody3D" parent="Node3D"]
-transform = Transform3D(6.12323e-17, -0.338041, 1.22465e-16, 0.804673, -7.92284e-18, -0.593719, -0.593719, -4.56012e-17, -0.804673, 0, 0, 0)
+transform = Transform3D(6.12323e-17, -0.338041, 1.22465e-16, -0.75109, 1.17842e-17, 0.660201, 0.660201, 4.47591e-17, 0.75109, 0, 0, 0)
 collision_layer = 2097409
 collision_mask = 3670273
 script = SubResource("GDScript_1a1nv")
