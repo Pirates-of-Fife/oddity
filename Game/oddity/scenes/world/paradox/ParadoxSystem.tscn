@@ -54,7 +54,7 @@ environment = SubResource("Environment_trn0h")
 [node name="Paradox" parent="." instance=ExtResource("3_164d5")]
 
 [node name="AuricZone" parent="." instance=ExtResource("4_23hwr")]
-transform = Transform3D(0.788, 0, -0.615675, 0, 1, 0, 0.615675, 0, 0.788, 3.5e+06, 0, 0)
+transform = Transform3D(0.788, 0, -0.615675, 0, 1, 0, 0.615675, 0, 0.788, 7e+06, 0, 0)
 
 [node name="SolsticeZone" parent="AuricZone" instance=ExtResource("5_d5fx4")]
 transform = Transform3D(0.679363, -0.147654, 0.718794, 0.408064, 0.890137, -0.202828, -0.609877, 0.431108, 0.664978, -333895, 0, 85049.7)
@@ -64,16 +64,16 @@ transform = Transform3D(-0.900219, 0.240658, -0.362891, 0.266769, 0.96349, -0.02
 station_name = &"Pirate\'s Reprieve "
 
 [node name="EldritchZone" parent="." instance=ExtResource("10_1va2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5e+06, 0, 2.25e+06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9e+06, 0, 4.5e+06)
 
 [node name="MarrowZone" parent="." instance=ExtResource("12_rtn27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5e+06, 500000, 680000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5e+06, 1e+06, 1.36e+06)
 
 [node name="GravemZone" parent="MarrowZone" instance=ExtResource("14_txhdx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58466.9, 34761.4, -43958.4)
 
 [node name="TempestZone" parent="." instance=ExtResource("16_u444p")]
-transform = Transform3D(1, 0, 0, 0, 0.671358, -0.741133, 0, 0.741133, 0.671358, -3.6e+06, -3.6e+06, -3.6e+06)
+transform = Transform3D(1, 0, 0, 0, 0.671358, -0.741133, 0, 0.741133, 0.671358, -7.2e+06, -7.2e+06, -7.2e+06)
 
 [node name="WhirlpoolZone" parent="TempestZone" instance=ExtResource("18_13w8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20532e+06, 213894, -22061.3)

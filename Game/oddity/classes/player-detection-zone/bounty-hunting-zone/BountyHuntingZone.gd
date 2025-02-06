@@ -44,17 +44,28 @@ func spawn_bounty_target() -> void:
 	ship.difficulty = difficulty
 	ship.current_state = Starship.State.POWER_ON
 	ship.landing_gear_on = false
-	add_child.call_deferred(ship)
+	get_tree().get_first_node_in_group("StarSystem").add_child(ship)
 
 	var ai : Ai = ai_scene.instantiate()
 	ai.control_entity = ship
-	add_child.call_deferred(ai)
+	get_tree().get_first_node_in_group("StarSystem").add_child(ai)
 
 	var spawn_position : Vector3 = Vector3(randf_range(0, spawn_radius), randf_range(0, spawn_radius), randf_range(0, spawn_radius))
-
-	ship.position = spawn_position
+	
+	
+	
+	print(spawn_position)
+	
+	ship.global_position = global_position + spawn_position
 
 	spawned_ships.append(ship)
+	
+	var p : Player = get_tree().get_first_node_in_group("Player")
+	
+	print((p.global_position - ship.global_position).length())
+	
+	print(str(ship) + str(ship.global_position))
+	
 
 func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 	spawn_ships()

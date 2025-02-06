@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=22 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://bfxi85byqr0ku" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi.tscn" id="10_p6mr5"]
 [ext_resource type="Script" path="res://classes/landing-pad/LandingPad.gd" id="11_feiv4"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="12_3xl3d"]
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="13_vqirh"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_clb07"]
+[ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="15_ikxe5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w6y13"]
 size = Vector3(5, 4.585, 4.16)
@@ -25,6 +28,18 @@ size = Vector3(100, 48.8493, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cwni3"]
 resource_local_to_scene = true
 size = Vector3(50, 50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufevf"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.00328447, 0.0636197, 0.0314881, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6yfcq"]
+material = SubResource("StandardMaterial3D_ufevf")
+size = Vector3(2.005, 0.85, 0.035)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jg31d"]
+data = PackedVector3Array(-1.0025, 0.425, 0.0175, 1.0025, 0.425, 0.0175, -1.0025, -0.425, 0.0175, 1.0025, 0.425, 0.0175, 1.0025, -0.425, 0.0175, -1.0025, -0.425, 0.0175, 1.0025, 0.425, -0.0175, -1.0025, 0.425, -0.0175, 1.0025, -0.425, -0.0175, -1.0025, 0.425, -0.0175, -1.0025, -0.425, -0.0175, 1.0025, -0.425, -0.0175, 1.0025, 0.425, 0.0175, 1.0025, 0.425, -0.0175, 1.0025, -0.425, 0.0175, 1.0025, 0.425, -0.0175, 1.0025, -0.425, -0.0175, 1.0025, -0.425, 0.0175, -1.0025, 0.425, -0.0175, -1.0025, 0.425, 0.0175, -1.0025, -0.425, -0.0175, -1.0025, 0.425, 0.0175, -1.0025, -0.425, 0.0175, -1.0025, -0.425, -0.0175, 1.0025, 0.425, 0.0175, -1.0025, 0.425, 0.0175, 1.0025, 0.425, -0.0175, -1.0025, 0.425, 0.0175, -1.0025, 0.425, -0.0175, 1.0025, 0.425, -0.0175, -1.0025, -0.425, 0.0175, 1.0025, -0.425, 0.0175, -1.0025, -0.425, -0.0175, 1.0025, -0.425, 0.0175, 1.0025, -0.425, -0.0175, -1.0025, -0.425, -0.0175)
 
 [node name="StationPad" type="StaticBody3D"]
 collision_layer = 2097409
@@ -287,5 +302,36 @@ mass_lock = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.745, -54.9565)
 shape = SubResource("BoxShape3D_cwni3")
 
+[node name="TutorialRoot" type="Node3D" parent="."]
+transform = Transform3D(-0.125, 0, -1.53081e-17, 0, 0.125, 0, 1.53081e-17, 0, -0.125, 13.0185, 1.47012, -3.67868)
+
+[node name="InteractionButton" type="StaticBody3D" parent="." node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(-0.385, 0, 4.71489e-17, 0, 0.385, 0, -4.71489e-17, 0, -0.385, 6.89543, 0.67762, -4.50478)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("13_vqirh")
+interaction_sound = NodePath("Spawn")
+press_delay = 0.2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135261, -0.21738, 0)
+mesh = SubResource("BoxMesh_6yfcq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135261, -0.21738, 0)
+shape = SubResource("ConcavePolygonShape3D_jg31d")
+
+[node name="Label3D" type="Label3D" parent="InteractionButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0676093, -0.199535, 0.0222267)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Tutorial"
+font = ExtResource("14_clb07")
+font_size = 44
+
+[node name="Spawn" type="AudioStreamPlayer3D" parent="InteractionButton"]
+stream = ExtResource("15_ikxe5")
+volume_db = -48.0
+
 [connection signal="starship_landed" from="LandingPad" to="." method="_on_landing_pad_starship_landed"]
 [connection signal="starship_took_off" from="LandingPad" to="." method="_on_landing_pad_starship_took_off"]
+[connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]

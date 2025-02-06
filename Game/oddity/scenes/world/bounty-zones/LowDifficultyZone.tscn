@@ -11,13 +11,13 @@
 script = ExtResource("1_vcp2l")
 possible_loadouts = [ExtResource("2_f2plc"), ExtResource("3_3yktt"), ExtResource("4_6awx6"), ExtResource("5_pn835")]
 ship_count = 1
-spawn_radius = 20000.0
-activate_distance = 20000.0
+spawn_radius = 500.0
+activate_distance = 5000.0
 deactivate_distance = 21000.0
 one_shot = true
 use_distance_display = true
 distant_sprite = NodePath("MarkerSprite")
-sprite_distance = 20000.0
+sprite_distance = 10000.0
 sprite_max_distance = 200000.0
 
 [node name="MarkerSprite" parent="." instance=ExtResource("2_u5x8s")]

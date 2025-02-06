@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv2bmk2wykg8u"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="1_p7cyy"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="2_hmqps"]
+
+[node name="AsteroidMarkerZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_p7cyy")
+update_time = 1.0
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 6000.0
+sprite_max_distance = 35000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("2_hmqps")]
+text = &"Asteroids"

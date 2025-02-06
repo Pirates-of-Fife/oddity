@@ -1,15 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://bifjawf38tw3r"]
+[gd_scene load_steps=18 format=3 uid="uid://bifjawf38tw3r"]
 
 [ext_resource type="Script" path="res://classes/station/SpaceStation.gd" id="1_inwp3"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/station-zone/SpaceStationZone.gd" id="2_fwi2u"]
 [ext_resource type="PackedScene" uid="uid://bplyib3726paa" path="res://classes/station/meshes/space_station.glb" id="4_6uunj"]
-[ext_resource type="PackedScene" uid="uid://nt8x885vl1er" path="res://classes/station/meshes/interior.glb" id="5_0eno8"]
 [ext_resource type="PackedScene" uid="uid://drbrbjsbeqtir" path="res://classes/station/meshes/small_wheel.glb" id="6_iyyf1"]
 [ext_resource type="Script" path="res://classes/station/station_ring.gd" id="7_wymsb"]
 [ext_resource type="PackedScene" uid="uid://bwwggih8j5dw1" path="res://classes/station/meshes/big_wheel.glb" id="8_scieo"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/FrameOfReference.gd" id="10_kh2ml"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="10_pk7ie"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="11_ift0s"]
-[ext_resource type="PackedScene" uid="uid://c4ngoo5a5cmvu" path="res://classes/station/station_landing_pad/StationPad.tscn" id="11_wox1x"]
 [ext_resource type="PackedScene" uid="uid://oj7tc4oxwdby" path="res://classes/station/BlueDanubePlayer.tscn" id="12_p5ocr"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tebqv"]
@@ -41,22 +40,6 @@ distance_fade_max_distance = 1000.0
 material = SubResource("StandardMaterial3D_emc16")
 size = Vector3(2.505, 97.12, 350)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_m7hde"]
-resource_local_to_scene = true
-size = Vector3(142.495, 48.8493, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8155l"]
-resource_local_to_scene = true
-size = Vector3(160.007, 50, 131.952)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_giiak"]
-resource_local_to_scene = true
-size = Vector3(89.9624, 45.8444, 77.8548)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0yc5o"]
-resource_local_to_scene = true
-size = Vector3(92.6164, 47.3518, 79.9015)
-
 [node name="SpaceStation" type="StaticBody3D" node_paths=PackedStringArray("space_station_zone", "station_frame_of_reference", "station_label_1", "station_label_2", "donau_walzer_player")]
 collision_layer = 2097409
 collision_mask = 2097409
@@ -76,8 +59,6 @@ deactivate_distance = 12000.0
 [node name="Mesh" type="Node3D" parent="."]
 
 [node name="space_station" parent="Mesh" instance=ExtResource("4_6uunj")]
-
-[node name="interior" parent="Mesh" instance=ExtResource("5_0eno8")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 4.23593, 21.3039, 34.1248)
@@ -149,179 +130,9 @@ text = "Station Name"
 font = ExtResource("11_ift0s")
 font_size = 25
 
-[node name="Lights" type="Node3D" parent="."]
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(-0.999909, 0, -0.0135259, 0, 1, 0, 0.0135259, 0, -0.999909, -426.522, 69.883, -57.8644)
-spot_range = 76.3937
-spot_angle = 14.1621
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(-0.999909, 0, -0.0135259, 0, 1, 0, 0.0135259, 0, -0.999909, -426.522, -19.3309, -57.8644)
-spot_range = 76.3937
-spot_angle = 14.1621
-
-[node name="SpotLight3D3" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(-0.999909, 0, -0.0135259, -1.65644e-18, -1, 1.22453e-16, -0.0135259, 1.22465e-16, 0.999909, -426.522, 69.883, 110.866)
-spot_range = 76.3937
-spot_angle = 14.1621
-
-[node name="SpotLight3D4" type="SpotLight3D" parent="Lights"]
-transform = Transform3D(-0.999909, 0, -0.0135259, 1.65644e-18, -1, -1.22453e-16, -0.0135259, -1.22465e-16, 0.999909, -426.522, -19.3309, 112.127)
-spot_range = 76.3937
-spot_angle = 14.1621
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -267.142, 22.4802, 26.0603)
-light_energy = 16.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_length = 1000.0
-omni_range = 4096.0
-omni_shadow_mode = 0
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.27918, 22.4802, 26.0603)
-light_energy = 16.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_length = 1000.0
-omni_range = 4096.0
-omni_shadow_mode = 0
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 230.141, 22.4802, 26.0603)
-light_energy = 16.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_length = 1000.0
-omni_range = 4096.0
-omni_shadow_mode = 0
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 456.937, 22.4802, 26.0603)
-light_energy = 16.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 100.0
-distance_fade_length = 1000.0
-omni_range = 4096.0
-omni_shadow_mode = 0
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -409.705, 16.5977, 32.3491)
 mesh = SubResource("BoxMesh_vcn7d")
-
-[node name="Pads" type="Node3D" parent="."]
-
-[node name="StationPad" parent="Pads" node_paths=PackedStringArray("station") instance=ExtResource("11_wox1x")]
-transform = Transform3D(1, 0, 0, 0, 0.976627, 0.21494, 0, -0.21494, 0.976627, -338.144, -61.1731, 119.835)
-station = NodePath("../..")
-
-[node name="CollisionShape3D" parent="Pads/StationPad/LandingPad" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
-shape = SubResource("BoxShape3D_m7hde")
-
-[node name="CollisionShape3D" parent="Pads/StationPad/GravityGrid" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.3124, 14.745, -58.3089)
-shape = SubResource("BoxShape3D_8155l")
-
-[node name="StationPad2" parent="Pads" node_paths=PackedStringArray("station") instance=ExtResource("11_wox1x")]
-transform = Transform3D(1, 0, 0, 0, -0.192025, 0.98139, 0, -0.98139, -0.192025, -338.144, 104.594, 118.459)
-station = NodePath("../..")
-
-[node name="house" parent="Pads/StationPad2" index="0"]
-transform = Transform3D(1.5, 0, 0, 0, 1.4989, 0.0575556, 0, -0.0575556, 1.4989, 0, 2.92221, 0.00126375)
-
-[node name="CollisionShape3D" parent="Pads/StationPad2/LandingPad" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
-shape = SubResource("BoxShape3D_m7hde")
-
-[node name="CollisionShape3D" parent="Pads/StationPad2/GravityGrid" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.0774, 14.745, -60.0424)
-shape = SubResource("BoxShape3D_8155l")
-
-[node name="StationPad3" parent="Pads" node_paths=PackedStringArray("station") instance=ExtResource("11_wox1x")]
-transform = Transform3D(1, 0, 0, 0, 0.866226, 0.499652, 0, -0.499652, 0.866226, -52.351, -60.5755, 120.777)
-station = NodePath("../..")
-
-[node name="house" parent="Pads/StationPad3" index="0"]
-transform = Transform3D(1.5, 0, 0, 0, 1.49997, 0.00871787, 0, -0.00871787, 1.49997, 0, 2.80605, 0.000718834)
-
-[node name="CollisionShape3D" parent="Pads/StationPad3/LandingPad" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)
-shape = SubResource("BoxShape3D_giiak")
-
-[node name="CollisionShape3D" parent="Pads/StationPad3/GravityGrid" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 37.3435, 20.9875, -33.516)
-shape = SubResource("BoxShape3D_0yc5o")
-
-[node name="StationPad4" parent="Pads" node_paths=PackedStringArray("station") instance=ExtResource("11_wox1x")]
-transform = Transform3D(1, 0, 0, 0, -0.482518, -0.875886, 0, 0.875886, -0.482518, -283.188, 48.6485, -81.957)
-station = NodePath("../..")
-
-[node name="CollisionShape3D" parent="Pads/StationPad4/LandingPad" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)
-shape = SubResource("BoxShape3D_giiak")
-
-[node name="CollisionShape3D" parent="Pads/StationPad4/GravityGrid" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 2.22045e-16, 0, -2.22045e-16, 1, 36.5276, 20.9875, -33.516)
-shape = SubResource("BoxShape3D_0yc5o")
-
-[node name="StationPad5" parent="Pads" node_paths=PackedStringArray("station") instance=ExtResource("11_wox1x")]
-transform = Transform3D(1, 0, 0, 0, 0.859264, -0.511533, 0, 0.511533, 0.859264, 405.56, -93.4544, 3.11715)
-station = NodePath("../..")
-
-[node name="CollisionShape3D" parent="Pads/StationPad5/LandingPad" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)
-shape = SubResource("BoxShape3D_giiak")
-
-[node name="CollisionShape3D" parent="Pads/StationPad5/GravityGrid" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9412, 20.9875, -31.9201)
-shape = SubResource("BoxShape3D_0yc5o")
-
-[node name="StationPad6" parent="Pads" node_paths=PackedStringArray("station") instance=ExtResource("11_wox1x")]
-transform = Transform3D(1, 0, 0, 0, 0.0122694, -0.999925, 0, 0.999925, 0.0122694, 368.713, -12.7212, -79.8359)
-station = NodePath("../..")
-
-[node name="CollisionShape3D" parent="Pads/StationPad6/LandingPad" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)
-shape = SubResource("BoxShape3D_giiak")
-
-[node name="CollisionShape3D" parent="Pads/StationPad6/GravityGrid" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.3594, 20.9875, -32.9479)
-shape = SubResource("BoxShape3D_0yc5o")
-
-[node name="StationPad7" parent="Pads" node_paths=PackedStringArray("station") instance=ExtResource("11_wox1x")]
-transform = Transform3D(1, 0, 0, 0, -0.647295, 0.762239, 0, -0.762239, -0.647295, 215.367, 134.231, 68.1165)
-station = NodePath("../..")
-
-[node name="CollisionShape3D" parent="Pads/StationPad7/LandingPad" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
-shape = SubResource("BoxShape3D_m7hde")
-
-[node name="CollisionShape3D" parent="Pads/StationPad7/GravityGrid" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.7764, 14.745, -60.0424)
-shape = SubResource("BoxShape3D_8155l")
-
-[node name="StationPad8" parent="Pads" node_paths=PackedStringArray("station") instance=ExtResource("11_wox1x")]
-transform = Transform3D(1, 0, 0, 0, 0.730425, 0.682993, 0, -0.682993, 0.730425, 418.909, -15.3607, 143.704)
-station = NodePath("../..")
-
-[node name="CollisionShape3D" parent="Pads/StationPad8/LandingPad" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
-shape = SubResource("BoxShape3D_m7hde")
-
-[node name="CollisionShape3D" parent="Pads/StationPad8/GravityGrid" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.1102, 14.745, -55.8466)
-shape = SubResource("BoxShape3D_8155l")
 
 [node name="BlueDanubePlayer" parent="." instance=ExtResource("12_p5ocr")]
 
@@ -330,19 +141,20 @@ script = ExtResource("2_fwi2u")
 activate_distance = 4000.0
 deactivate_distance = 5000.0
 
+[node name="PlayerDetectionZone" type="Node3D" parent="."]
+script = ExtResource("10_pk7ie")
+activate_distance = 6000.0
+deactivate_distance = 7000.0
+
+[node name="InteriorRoot" type="Node3D" parent="."]
+
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="activate" from="SpaceStationZone" to="." method="_on_space_station_zone_activate"]
 [connection signal="deactivate" from="SpaceStationZone" to="." method="_on_space_station_zone_deactivate"]
 [connection signal="activate" from="PlayerForceSpeedLimit" to="." method="_on_player_force_speed_limit_activate"]
 [connection signal="deactivate" from="PlayerForceSpeedLimit" to="." method="_on_player_force_speed_limit_deactivate"]
+[connection signal="activate" from="PlayerDetectionZone" to="." method="_on_player_detection_zone_activate"]
+[connection signal="deactivate" from="PlayerDetectionZone" to="." method="_on_player_detection_zone_deactivate"]
 
 [editable path="Ring1/CollisionShape3D/big_wheel"]
 [editable path="Ring2/CollisionShape3D/small_wheel"]
-[editable path="Pads/StationPad"]
-[editable path="Pads/StationPad2"]
-[editable path="Pads/StationPad3"]
-[editable path="Pads/StationPad4"]
-[editable path="Pads/StationPad5"]
-[editable path="Pads/StationPad6"]
-[editable path="Pads/StationPad7"]
-[editable path="Pads/StationPad8"]

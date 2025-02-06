@@ -63,10 +63,13 @@ func _orbit_camera(delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
+	$SubViewportContainer/MainMenuUi/LOADING.show()
+	$SubViewportContainer/MainMenuUi/LoadingRect.show()
+	await get_tree().create_timer(2).timeout
 	get_tree().change_scene_to_file("res://scenes/world/world/MainScene.tscn")
 
 func _on_credits_button_pressed() -> void:
-	pass # Replace with function body.
+	$SubViewportContainer/MainMenuUi/AnimationPlayer.play("Credits")
 
 
 func _on_exit_button_pressed() -> void:
@@ -75,3 +78,7 @@ func _on_exit_button_pressed() -> void:
 
 func _on_background_music_finished() -> void:
 	$BackgroundMusic.play()
+
+
+func _on_back_pressed() -> void:
+	$SubViewportContainer/MainMenuUi/AnimationPlayer.play("CreditsExit")

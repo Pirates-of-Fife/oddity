@@ -18,12 +18,13 @@ dof_blur_near_distance = 0.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_al7kd"]
 radius = 50.0
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("respawn_hud") groups=["Player"]]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("respawn_hud", "hud") groups=["Player"]]
 script = ExtResource("1_1lph1")
 credits = 1000
 respawn_star_system = ExtResource("2_xvsrd")
 respawn_body = ExtResource("3_lx58o")
 respawn_hud = NodePath("DeathHud")
+hud = NodePath("HeadsUpDisplay")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
 attributes = SubResource("CameraAttributesPractical_genkd")

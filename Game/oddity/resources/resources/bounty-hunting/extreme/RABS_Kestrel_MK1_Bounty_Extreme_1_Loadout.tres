@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="13_kcdld"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="14_4hing"]
 [ext_resource type="PackedScene" uid="uid://d0j0tdift7ymb" path="res://scenes/modules/test-module/rotary-autocannon/size-6/Size6RotaryAutoCannon.tscn" id="21_rxcq7"]
-[ext_resource type="PackedScene" uid="uid://b0yf8dexkb3j6" path="res://scenes/modules/test-module/rotary-autocannon/size-5/Size5RotaryAutoCannon.tscn" id="23_6n7nv"]
+[ext_resource type="PackedScene" uid="uid://pmfbi24jhmdj" path="res://scenes/modules/test-module/mining-laser/size-5/Size5MiningLaser.tscn" id="23_r5xvd"]
 
 [sub_resource type="Resource" id="Resource_hweff"]
 script = ExtResource("1_sfmah")
@@ -426,7 +426,7 @@ id = 42
 script = ExtResource("10_6jaiy")
 size = 5
 name = &"ExternalHardpoint5"
-module = ExtResource("23_6n7nv")
+module = ExtResource("23_r5xvd")
 value = 0
 id = 43
 
@@ -434,7 +434,7 @@ id = 43
 script = ExtResource("10_6jaiy")
 size = 5
 name = &"ExternalHardpoint6"
-module = ExtResource("23_6n7nv")
+module = ExtResource("23_r5xvd")
 value = 0
 id = 44
 
@@ -460,6 +460,7 @@ module_slots = [SubResource("Resource_p5tfs"), SubResource("Resource_350rj"), Su
 cargo = [SubResource("Resource_hweff"), SubResource("Resource_cxt33"), SubResource("Resource_i6pra"), SubResource("Resource_nt5ds"), SubResource("Resource_6inuu"), SubResource("Resource_j7c11"), SubResource("Resource_yfg2q"), SubResource("Resource_y5fe0"), SubResource("Resource_emc2h"), SubResource("Resource_cvd72")]
 entities = null
 ship_name = &"Rocinante"
-value = 0
-current_health = 0.0
+value = 10000
+apply_health = false
+current_health = 76000.0
 ship_color = Color(0, 0, 0, 1)

@@ -532,7 +532,10 @@ func _starship_ready() -> void:
 
 	if current_state == State.DESTROYED:
 		destroyed()
-
+	
+	if default_loadout.apply_health:
+		current_hull_health = default_loadout.current_health
+	
 	if is_bounty_target:
 		match difficulty:
 			BountyDifficulty.LOW:
