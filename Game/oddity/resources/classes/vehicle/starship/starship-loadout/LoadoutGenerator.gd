@@ -51,6 +51,9 @@ func clear_modules(starship : Starship) -> void:
 
 
 func save_loadout(starship : Starship, save_cargo : bool = false, save_entities : bool = false, save_as_player_ship_save : bool = false) -> void:
+	if starship == null:
+		return
+	
 	var loadout : StarshipLoadout = StarshipLoadout.new()
 
 	var children : Array = starship.find_children("*", "", true, false)
@@ -93,7 +96,7 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 		loadout.value += i.value
 
 	loadout.ship_name = starship.ship_name
-	
+	loadout.ship_identification = starship.ship_identification
 
 	if save_as_player_ship_save:
 		loadout.apply_health = true
@@ -115,7 +118,8 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 	var children : Array = starship.find_children("*", "", true, false)
 
 	starship.ship_name = loadout.ship_name
-
+	starship.ship_identification = loadout.ship_identification
+	
 	for node : Node in children:
 		if node is DynamicModuleSlot:
 			var module_scene : PackedScene = loadout.get_module_by_id(node.id)

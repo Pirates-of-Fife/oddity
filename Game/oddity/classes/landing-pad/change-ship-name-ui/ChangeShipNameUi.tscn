@@ -764,6 +764,26 @@ text = "0"
 font = ExtResource("2_nhq81")
 font_size = 35
 
+[node name="vertical thing" type="StaticBody3D" parent="Keyboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000965741, -0.619524, 5.63554)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_pns72")
+press_delay = 0.02
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Keyboard/vertical thing"]
+mesh = SubResource("BoxMesh_dslw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keyboard/vertical thing"]
+shape = SubResource("ConcavePolygonShape3D_squbp")
+
+[node name="Label3D" type="Label3D" parent="Keyboard/vertical thing"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.075398, 0.0261829, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "'"
+font = ExtResource("2_nhq81")
+font_size = 35
+
 [node name="Space" type="StaticBody3D" parent="Keyboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.89838, 2.42737)
 collision_layer = 536870912
@@ -859,5 +879,6 @@ bus = &"Environment"
 [connection signal="interacted" from="Keyboard/8" to="." method="_on_8_interacted"]
 [connection signal="interacted" from="Keyboard/9" to="." method="_on_9_interacted"]
 [connection signal="interacted" from="Keyboard/0" to="." method="_on_0_interacted"]
+[connection signal="interacted" from="Keyboard/vertical thing" to="." method="_on_vertical_thing_interacted"]
 [connection signal="interacted" from="Keyboard/Space" to="." method="_on_space_interacted"]
 [connection signal="interacted" from="Keyboard/Backspace" to="." method="_on_backspace_interacted"]

@@ -24,11 +24,26 @@ var ship_name : StringName = "Default Starship" :
 	get:
 		return ship_name
 		
+
+@export
+var ship_identification : StringName = "Default Starship" :
+	set(value):
+		ship_identification = value
+		if ship_identification_label != null:
+			ship_identification_label.text = value
+			print(ship_identification_label.text + " oooo")
+	get:
+		return ship_identification
+		
+
 @export
 var cruise_speed : float = 300.1234
 
 @export
 var name_label : Label3D
+
+@export
+var ship_identification_label : Label3D
 
 @export
 var default_loadout : StarshipLoadout
@@ -441,7 +456,8 @@ func _starship_ready() -> void:
 		toggle_landing_gear()
 
 	name_label.text = ship_name
-
+	ship_identification_label.text = ship_identification
+	
 	travel_mode = starship_travel_modes.TravelMode.CRUISE
 
 	lock_timer.one_shot = true
@@ -1251,6 +1267,25 @@ func decrease_max_velocity(velocity : float) -> void:
 		return
 
 	current_max_velocity -= velocity
+
+func generate_ship_id() -> String:
+	var prefix : Array = ["RABS"]
+	var letters : String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	var numbers : String = "0123456789"
+
+	var id_prefix : String = prefix[randi() % prefix.size()]
+	var id_letters : String = ""
+	for i : int in range(3):
+		id_letters += letters[randi() % letters.length()]
+
+	var id_numbers : String = ""
+	for i : int in range(4):
+		id_numbers += numbers[randi() % numbers.length()]
+		
+	print(id_prefix + "-" + id_letters + "-" + id_numbers)
+	
+	return id_prefix + "-" + id_letters + "-" + id_numbers
+
 
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)

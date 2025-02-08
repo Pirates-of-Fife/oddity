@@ -52,19 +52,13 @@ func spawn_bounty_target() -> void:
 
 	var spawn_position : Vector3 = Vector3(randf_range(0, spawn_radius), randf_range(0, spawn_radius), randf_range(0, spawn_radius))
 	
-	
-	
-	print(spawn_position)
-	
 	ship.global_position = global_position + spawn_position
 
 	spawned_ships.append(ship)
 	
 	var p : Player = get_tree().get_first_node_in_group("Player")
 	
-	print((p.global_position - ship.global_position).length())
-	
-	print(str(ship) + str(ship.global_position))
+	ship.ship_identification = ship.generate_ship_id()
 	
 
 func _on_activate(player : Player, control_entity : ControlEntity) -> void:

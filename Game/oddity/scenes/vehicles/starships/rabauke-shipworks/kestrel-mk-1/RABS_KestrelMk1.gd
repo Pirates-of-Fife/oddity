@@ -93,6 +93,11 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 		if $Interior/Bridge/CruiseLabel.visible:
 			$Interior/Bridge/CruiseLabel/CruiseSound.play()
 			$Interior/Bridge/CruiseLabel.hide()
+			
+	if ship_name.to_lower() == "the sunk'n norwegian":
+		$Decal.show()
+	else:
+		$Decal.hide()
 
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Pitch/Blend3/blend_amount", actual_rotation_vector_unit.x )
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Vertical/Blend3/blend_amount", -actual_thrust_vector_unit.y)
