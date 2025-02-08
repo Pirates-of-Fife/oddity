@@ -42,7 +42,7 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 	var starship : Starship = ship_scene.instantiate()
 	starship.current_state = Starship.State.POWER_OFF
 	starship.landing_gear_on = true
-	
+
 	get_tree().get_first_node_in_group("World").player_ship = starship
 	
 	get_tree().get_first_node_in_group("StarSystem").add_child(starship)
@@ -52,10 +52,11 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 
 	loadout_tools.load_loadout(starship, loadout)
 	$Spawn.play()
+	starship.ship_identification = starship.generate_ship_id()
 	
-	ResourceSaver.save(loadout, Globals.PLAYER_SHIP_SAVE)
+	loadout_tools.save_loadout(landing_pad.starship, true, true, true)
+	loadout_tools.save_loadout(landing_pad.starship)
 
-	
 	update_price_information()
 
 
@@ -77,6 +78,8 @@ func _on_request_new_ship_interacted(player: Player, control_entity: ControlEnti
 	var default_loadout : StarshipLoadout = preload("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
 	
 	ResourceSaver.save(default_loadout, Globals.PLAYER_SHIP_SAVE)
+	
+	starship.ship_identification = starship.generate_ship_id()
 	
 	$Spawn.play()
 	

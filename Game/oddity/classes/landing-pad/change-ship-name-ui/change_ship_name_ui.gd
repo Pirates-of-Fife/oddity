@@ -153,3 +153,7 @@ func _on_0_interacted(player: Player, control_entity: ControlEntity) -> void:
 
 func _on_space_interacted(player: Player, control_entity: ControlEntity) -> void:
 	add_letter(" ")
+
+
+func _on_vertical_thing_interacted(player: Player, control_entity: ControlEntity) -> void:
+	add_letter("'")
