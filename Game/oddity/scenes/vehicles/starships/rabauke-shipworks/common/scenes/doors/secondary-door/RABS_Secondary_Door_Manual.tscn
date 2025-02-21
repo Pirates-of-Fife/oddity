@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://crt017bsrobyp"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_1xlu8"]
+[ext_resource type="PackedScene" uid="uid://dujj1luln23rv" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/secondary-door/SecondaryDoorFrame.glb" id="2_8bw0m"]
+[ext_resource type="PackedScene" uid="uid://cxlfg36h51g0f" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/secondary-door/SecondaryDoor.glb" id="4_atoan"]
+
+[sub_resource type="Animation" id="Animation_53li6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorCollider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.873842, 0.999365, 0.00533572)]
+}
+
+[sub_resource type="Animation" id="Animation_osjt5"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorCollider:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.4, 0.466667, 1),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.98051, 0.999365, 0.00533572), Vector3(1.43805, 0.999365, 0.00533572), Vector3(1.39519, 0.999365, 0.00533572), Vector3(0.873842, 0.999365, 0.00533572)]
+}
+
+[sub_resource type="Animation" id="Animation_0mhvc"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorCollider:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.0666667, 0.133333, 1),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.873842, 0.999365, 0.00533572), Vector3(1.0505, 0.999365, 0.00533572), Vector3(0.95, 0.999, 0.005), Vector3(1.98051, 0.999365, 0.00533572)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wbbum"]
+_data = {
+"RESET": SubResource("Animation_53li6"),
+"close": SubResource("Animation_osjt5"),
+"open": SubResource("Animation_0mhvc")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yckue"]
+size = Vector3(0.316781, 2.07839, 0.432676)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hv7uf"]
+size = Vector3(1.15288, 2.07067, 0.42495)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0kvib"]
+size = Vector3(1.10202, 1.99618, 0.350642)
+
+[node name="RabsSecondaryDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+collision_layer = 1024
+collision_mask = 1024
+script = ExtResource("1_1xlu8")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="SecondaryDoorFrame" parent="." instance=ExtResource("2_8bw0m")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wbbum")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161928, 1.03553, -0.00180772)
+shape = SubResource("BoxShape3D_yckue")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01543, 1.03167, 0.00205545)
+shape = SubResource("BoxShape3D_hv7uf")
+
+[node name="DoorCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.873842, 0.999365, 0.00533572)
+shape = SubResource("BoxShape3D_0kvib")
+
+[node name="SecondaryDoor" parent="DoorCollider" instance=ExtResource("4_atoan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.873842, -0.999365, -0.00533572)

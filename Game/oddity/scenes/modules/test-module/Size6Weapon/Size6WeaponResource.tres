@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=4 format=3 uid="uid://d0swmobju4op7"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/WeaponResource.gd" id="1_8eubq"]
+[ext_resource type="Resource" uid="uid://coukollifi3g1" path="res://scenes/modules/test-module/Size6Weapon/LaserProjectile.tres" id="1_633y6"]
+[ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="3_rx1l4"]
+
+[resource]
+script = ExtResource("1_8eubq")
+projectile = ExtResource("1_633y6")
+damage = 400.0
+penetration = 10.0
+sound = ExtResource("3_rx1l4")
+weapon_force = 750.0
+cooldown = 1.5

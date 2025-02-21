@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://be3k5hhmiuojd"]
+
+[ext_resource type="Script" path="res://classes/abyss/abyss/abyss.gd" id="1_uskup"]
+[ext_resource type="Environment" uid="uid://cjn2onsi1vcnl" path="res://classes/abyss/abyss/AbyssEnvironment.tres" id="2_dwi45"]
+
+[node name="Abyss" type="Node3D" groups=["Abyss", "StarSystem"]]
+script = ExtResource("1_uskup")
+system_name = &"The Abyss"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, -0.999999, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0)
+light_color = Color(0.00473202, 0.181354, 0.806165, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_dwi45")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://covp2c4kn7g6k"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/velocity-mfd/velocity_mfd_3d.gd" id="1_cp583"]
+[ext_resource type="PackedScene" uid="uid://bovg4vw88cb2i" path="res://classes/multi-function-display/velocity-mfd/VelocityMFD.tscn" id="1_rmvlk"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m6aqv"]
+viewport_path = NodePath("SubViewport")
+
+[node name="VelocityMfd3d" type="Node3D" node_paths=PackedStringArray("velocity_mfd")]
+script = ExtResource("1_cp583")
+velocity_mfd = NodePath("SubViewport/VelocityMfd")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(757, 480)
+
+[node name="VelocityMfd" parent="SubViewport" instance=ExtResource("1_rmvlk")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_m6aqv")

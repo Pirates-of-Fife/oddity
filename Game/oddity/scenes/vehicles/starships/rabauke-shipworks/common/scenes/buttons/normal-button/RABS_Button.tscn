@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxdkumdfiftmg"]
+
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="1_42luv"]
+[ext_resource type="PackedScene" uid="uid://c4xn0h4s60wpy" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/buttons/normal-button/DoorButton.glb" id="2_asnu5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xtcvb"]
+size = Vector3(0.263408, 0.378773, 0.11968)
+
+[node name="RabsButton" type="StaticBody3D"]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_42luv")
+
+[node name="DoorButton" parent="." instance=ExtResource("2_asnu5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00239903, 0.015908)
+shape = SubResource("BoxShape3D_xtcvb")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8q0kmhpluwao"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/ShieldGenerator.gd" id="1_d24jn"]
+[ext_resource type="Resource" uid="uid://cbmpfj3cst4in" path="res://scenes/modules/test-module/ShieldGenerator/Size3Shield.tres" id="2_ij1nd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqtcg"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.580392, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1sdmv"]
+material = SubResource("StandardMaterial3D_aqtcg")
+size = Vector3(1.5, 1.5, 3)
+
+[node name="ShieldGenerator" type="RigidBody3D"]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 50.0
+script = ExtResource("1_d24jn")
+size = 3
+module_resource = ExtResource("2_ij1nd")
+can_be_picked_up = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1sdmv")

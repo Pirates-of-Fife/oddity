@@ -21,13 +21,13 @@ Height Clearance **15m**
 #### Hangar
 
 Width **40m**
-Length **50m**
+Length **60m**
 Height **30m**
 
 #### Pad
 
 Width **35m**
-Length **40m**
+Length **50m**
 Height Clearance **30m**
 
 

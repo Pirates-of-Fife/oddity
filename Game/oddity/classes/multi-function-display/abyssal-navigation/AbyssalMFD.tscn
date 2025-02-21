@@ -1,0 +1,125 @@
+[gd_scene load_steps=4 format=3 uid="uid://cabsyyyuxl75t"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/abyssal-navigation/abyssal_mfd.gd" id="1_lij5t"]
+[ext_resource type="Theme" uid="uid://cnkijshs3vtdk" path="res://ui/themes/BasicMFDTheme.tres" id="2_7wq40"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_400cp"]
+bg_color = Color(0, 0.470848, 0.856842, 1)
+
+[node name="AbyssalMFD" type="Control" node_paths=PackedStringArray("current_system", "selected_system", "gateway_open", "gateway_closed")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lij5t")
+current_system = NodePath("CurrentSystem")
+selected_system = NodePath("SelectedSystem")
+gateway_open = NodePath("GatwayOpen")
+gateway_closed = NodePath("GatwayCLosed")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+offset_right = 757.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 0.560784)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 84.0
+offset_top = 12.0
+offset_right = 450.0
+offset_bottom = 88.0
+theme = ExtResource("2_7wq40")
+text = "Abyssal Navigation"
+
+[node name="Charge" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 654.0
+offset_top = 63.0
+offset_right = 709.0
+offset_bottom = 446.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_400cp")
+max_value = 1.0
+value = 0.5
+fill_mode = 3
+show_percentage = false
+
+[node name="CurrentSystem" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 84.0
+offset_right = 440.0
+offset_bottom = 155.0
+scale = Vector2(1.69, 1.69)
+theme = ExtResource("2_7wq40")
+text = "Current: None"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 37.0
+offset_right = 82.0
+offset_bottom = 67.0
+scale = Vector2(0.445, 0.445)
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -46.0
+offset_right = 31.0
+offset_bottom = -17.0
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = 47.0
+offset_right = 31.0
+offset_bottom = 79.0
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -68.0
+offset_top = -46.0
+offset_right = -34.0
+offset_bottom = 78.0
+color = Color(0.780392, 0, 0, 1)
+
+[node name="SelectedSystem" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 165.0
+offset_right = 417.0
+offset_bottom = 236.0
+scale = Vector2(1.69, 1.69)
+theme = ExtResource("2_7wq40")
+text = "Selected: None
+"
+
+[node name="GatwayOpen" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 55.0
+offset_top = 312.0
+offset_right = 303.0
+offset_bottom = 378.0
+scale = Vector2(2.01, 2.01)
+theme = ExtResource("2_7wq40")
+theme_override_colors/default_color = Color(0.219626, 0.445708, 1, 1)
+text = "Gateway OPEN"
+
+[node name="GatwayCLosed" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 312.0
+offset_right = 338.0
+offset_bottom = 378.0
+scale = Vector2(2.01, 2.01)
+theme = ExtResource("2_7wq40")
+theme_override_colors/default_color = Color(0.972549, 0, 0, 1)
+text = "Gateway CLOSED"

@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmfdqfo736y4y"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/super-cruise/super_cruise_mfd.gd" id="1_fqpwa"]
+[ext_resource type="Theme" uid="uid://cnkijshs3vtdk" path="res://ui/themes/BasicMFDTheme.tres" id="2_6o1ek"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_400cp"]
+bg_color = Color(0, 0.470848, 0.856842, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0b5cd"]
+bg_color = Color(0.951395, 0.410497, 0, 1)
+
+[node name="SuperCruiseMfd" type="Control" node_paths=PackedStringArray("throttle_progress_bar", "velocity_progress_bar", "velocity_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fqpwa")
+throttle_progress_bar = NodePath("Throttle")
+velocity_progress_bar = NodePath("Velocity")
+velocity_label = NodePath("RichTextLabel2")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+offset_right = 757.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 0.560784)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 84.0
+offset_top = 12.0
+offset_right = 450.0
+offset_bottom = 88.0
+theme = ExtResource("2_6o1ek")
+text = "Super Cruise"
+
+[node name="ProtectorateLogoTemp" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.082
+anchor_top = 0.142
+anchor_right = 0.082
+anchor_bottom = 0.142
+offset_left = -155.44
+offset_top = -153.36
+offset_right = 40.56
+offset_bottom = 38.64
+scale = Vector2(0.485, 0.485)
+
+[node name="Throttle" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 654.0
+offset_top = 63.0
+offset_right = 709.0
+offset_bottom = 446.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_400cp")
+max_value = 1.0
+value = 0.5
+fill_mode = 3
+show_percentage = false
+
+[node name="Velocity" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 262.0
+offset_right = 637.0
+offset_bottom = 447.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_0b5cd")
+value = 54.74
+show_percentage = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 89.0
+offset_right = 260.0
+offset_bottom = 153.0
+scale = Vector2(2.845, 2.845)
+theme = ExtResource("2_6o1ek")
+text = "300000 U
+"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 37.0
+offset_right = 82.0
+offset_bottom = 67.0
+scale = Vector2(0.445, 0.445)
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -46.0
+offset_right = 31.0
+offset_bottom = -17.0
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = 47.0
+offset_right = 31.0
+offset_bottom = 79.0
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -68.0
+offset_top = -46.0
+offset_right = -34.0
+offset_bottom = 78.0
+color = Color(0.780392, 0, 0, 1)

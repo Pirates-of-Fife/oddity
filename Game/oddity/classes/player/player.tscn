@@ -12,9 +12,12 @@ dof_blur_near_distance = 0.5
 auto_exposure_min_sensitivity = 50.0
 auto_exposure_max_sensitivity = 500.0
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" groups=["Player"]]
 script = ExtResource("1_1lph1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 attributes = SubResource("CameraAttributesPractical_genkd")
-far = 1e+06
+far = 1e+14
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+current = true

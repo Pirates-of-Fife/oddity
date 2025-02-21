@@ -1,0 +1,3 @@
+extends RcsThruster
+
+class_name RABS_KestrelMk1_RcsThruster

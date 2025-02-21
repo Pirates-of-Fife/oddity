@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://doc60iflu7si2"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldAndHullUi3D.gd" id="1_aboe0"]
+[ext_resource type="PackedScene" uid="uid://dynh8g426n3gq" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldAndHullUI.tscn" id="2_sbcqf"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lqkok"]
+viewport_path = NodePath("SubViewport")
+
+[node name="ShieldAndHullUi3d" type="Node3D" node_paths=PackedStringArray("ui")]
+script = ExtResource("1_aboe0")
+ui = NodePath("SubViewport/ShieldAndHullUi")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="ShieldAndHullUi" parent="SubViewport" instance=ExtResource("2_sbcqf")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_lqkok")

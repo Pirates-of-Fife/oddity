@@ -2,86 +2,32 @@
 
 ## Weapon Volumes
 
-### Size 0
+### Weapon Sizes and Proportions
 
-Width **0.25m**
-Length **0.5m**
-Height **0.25m**
+| **Size** | **Width (m)** | **Length (m)** | **Height (m)** |
+|----------|---------------|----------------|----------------|
+| 0        | 0.13          | 0.5            | 0.14           |
+| 1        | 0.18          | 0.7            | 0.20           |
+| 2        | 0.34          | 1.3            | 0.36           |
+| 3        | 0.52          | 2.0            | 0.56           |
+| 4        | 0.78          | 3.0            | 0.84           |
+| 5        | 1.04          | 4.0            | 1.12           |
+| 6        | 1.56          | 6.0            | 1.68           |
+| 7        | 2.08          | 8.0            | 2.24           |
+| 8        | 2.60          | 10.0           | 2.80           |
+| 9        | 3.12          | 12.0           | 3.36           |
+| 10       | 3.64          | 14.0           | 3.92           |
+| 11       | 4.16          | 16.0           | 4.48           |
+| 12       | 4.68          | 18.0           | 5.04           |
+| 13       | 5.20          | 20.0           | 5.60           |
 
-### Size 1
+### Weapon Attachment Point Sizes
 
-Width **0.35m**
-Length **0.7m**
-Height **0.35m**
+| **Size** | **Width (m)** | **Length (m)** |
+|----------|---------------|----------------|
+| 0        | 0.025         | 0.084          |
+| 5        | 0.66          | 1              |
+| 6        | 1.00          | 1.50           |
 
-### Size 2
 
-Width **0.5m**
-Length **1m**
-Height **0.5m**
 
-### Size 3
-
-Width **0.7m**
-Length **1.5m**
-Height **0.7m**
-
-### Size 4
-
-Width **1m**
-Length **2m**
-Height **1m**
-
-### Size 5
-
-Width **2m**
-Length **4m**
-Height **2m**
-
-### Size 6
-
-Width **3m**
-Length **6m**
-Height **3m**
-
-### Size 7
-
-Width **4m**
-Length **8m**
-Height **4m**
-
-### Size 8
-
-Width **5m**
-Length **10m**
-Height **5m**
-
-### Size 9
-
-Width **6m**
-Length **12m**
-Height **6m**
-
-### Size 10
-
-Width **7m**
-Length **14m**
-Height **7m**
-
-### Size 11
-
-Width **8m**
-Length **16m**
-Height **8m**
-
-### Size 12
-
-Width **9m**
-Length **18m**
-Height **9m**
-
-### Size 13
-
-Width **10m**
-Length **20m**
-Height **10m**

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cl1lyeabmrdst"]
+[gd_scene load_steps=19 format=3 uid="uid://cl1lyeabmrdst"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship-2/demo_ship_2.gd" id="1_gtrcu"]
 [ext_resource type="PackedScene" uid="uid://ci6pe2jfbwwi1" path="res://scenes/vehicles/starships/demo-ship-2/fighter_gen_7_model.tscn" id="2_qgepc"]
@@ -6,17 +6,15 @@
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="3_dqaga"]
 [ext_resource type="ArrayMesh" uid="uid://0evsbkipsbqe" path="res://scenes/vehicles/starships/demo-ship-2/fighterGen7-CollisionMesh.obj" id="4_en1wd"]
 [ext_resource type="Script" path="res://classes/pid-controller/PIDController.gd" id="7_3qamo"]
-[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/thrust_vector_label.gd" id="8_2a822"]
-[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/rotation_vector_label.gd" id="9_iapp8"]
-[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/speed_label.gd" id="10_pywgb"]
-[ext_resource type="Script" path="res://scenes/vehicles/starships/demo-ship/thrust_vectors.gd" id="11_fvq50"]
+[ext_resource type="PackedScene" uid="uid://bk417jw4gd0w" path="res://classes/multi-function-display/crosshair/Crosshair3d.tscn" id="11_4eega"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="12_2ad4s"]
 [ext_resource type="PackedScene" uid="uid://q7qxuwsn55b5" path="res://scenes/interactable/control-seat/DemoControlSeat.tscn" id="12_17fxx"]
 [ext_resource type="PackedScene" uid="uid://brkik5oaep1vf" path="res://scenes/interactable/interaction-button/InteractionButton.tscn" id="13_ejv10"]
+[ext_resource type="PackedScene" uid="uid://covp2c4kn7g6k" path="res://classes/multi-function-display/velocity-mfd/VelocityMFD_3D.tscn" id="14_d33vb"]
 
 [sub_resource type="Resource" id="Resource_8x1bo"]
 script = ExtResource("2_wijyj")
-max_linear_velocity = 600.0
+max_linear_velocity = 500.0
 max_angular_pitch_velocity = 0.9
 max_angular_yaw_velocity = 0.9
 max_angular_roll_velocity = 2.0
@@ -54,20 +52,13 @@ points = PackedVector3Array(-6.14677, 1.93546, 2.56028, -8.79806, 4.58589, 5.210
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xw1k0"]
 points = PackedVector3Array(-5.85364, -1.89361, 5.21022, -2.61405, -1.30465, 0.793534, -5.26482, -2.48171, 1.97158, -3.20287, -1.89361, 4.6212, -9.09179, -4.54396, 5.79973, -9.68206, -3.36559, 4.03218, -2.61405, -0.126289, 0.793534, -2.61405, -0.126289, 4.32669, -9.09179, -4.54396, 4.03218, -9.68206, -3.36559, 5.79973, -2.61405, -1.59913, 1.08805, -2.31928, -1.30465, 4.32669, -9.68206, -4.54396, 4.03218, -2.31928, -0.126289, 0.793534, -2.31928, -0.126289, 4.32669, -7.03056, -3.66008, 3.14962, -8.50369, -3.36559, 5.79973, -2.31928, -1.30465, 0.793534, -9.68206, -4.54396, 5.79973, -3.79313, -2.18853, 4.6212, -8.50369, -4.24904, 5.79973, -8.50369, -3.07111, 3.44315, -3.79313, -2.18853, 1.67707, -7.03056, -3.66008, 5.21022, -3.20287, -0.715686, 4.6212, -7.61938, -2.48171, 5.50473, -2.61405, -1.59913, 4.32669, -8.50369, -3.95456, 3.44315)
 
-[sub_resource type="SphereMesh" id="SphereMesh_ksn18"]
-radius = 0.05
-height = 0.1
-radial_segments = 32
-rings = 16
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8kr5"]
-albedo_color = Color(1, 0, 0, 1)
-
-[node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+[node name="DemoShip2" type="RigidBody3D" node_paths=PackedStringArray("velocity_mfd", "crosshair", "anchor")]
 collision_layer = 513
 collision_mask = 513
 mass = 1200.0
 script = ExtResource("1_gtrcu")
+velocity_mfd = NodePath("VelocityMfd3d")
+crosshair = NodePath("Crosshair3d")
 ship_info = SubResource("Resource_8x1bo")
 thruster_force = SubResource("Resource_4ayql")
 controller_reference = "res://classes/controller/vehicle-controller/starship-controller/StarshipController.tscn"
@@ -103,127 +94,94 @@ shape = SubResource("ConvexPolygonShape3D_0otas")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_xw1k0")
 
-[node name="PIDControllers" type="Node" parent="."]
+[node name="ShipPidControllers" type="Node" parent="."]
 
-[node name="PIDForward" type="Node" parent="PIDControllers"]
+[node name="PIDForward" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDBackward" type="Node" parent="PIDControllers"]
+[node name="PIDBackward" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDUp" type="Node" parent="PIDControllers"]
+[node name="PIDUp" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDDown" type="Node" parent="PIDControllers"]
+[node name="PIDDown" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDLeft" type="Node" parent="PIDControllers"]
+[node name="PIDLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDRight" type="Node" parent="PIDControllers"]
+[node name="PIDRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 40000.0
 Ki = 0.2
 Kd = 0.01
 use_absolute_error = true
 
-[node name="PIDRollLeft" type="Node" parent="PIDControllers"]
+[node name="PIDRollLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDRollRight" type="Node" parent="PIDControllers"]
+[node name="PIDRollRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDYawLeft" type="Node" parent="PIDControllers"]
+[node name="PIDYawLeft" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDYawRight" type="Node" parent="PIDControllers"]
+[node name="PIDYawRight" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDPitchUp" type="Node" parent="PIDControllers"]
+[node name="PIDPitchUp" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
 
-[node name="PIDPitchDown" type="Node" parent="PIDControllers"]
+[node name="PIDPitchDown" type="Node" parent="ShipPidControllers"]
 script = ExtResource("7_3qamo")
 Kp = 250000.0
 Ki = 0.2
 Kd = 0.05
 use_absolute_error = true
-
-[node name="Labels" type="Node3D" parent="."]
-transform = Transform3D(0.445, 0, 0, 0, 0.445, 0, 0, 0, 0.445, 0, 0.414049, 0)
-
-[node name="ThrustVectorLabel" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.23128, 1.76344, -0.307331)
-text = "Placeholder"
-script = ExtResource("8_2a822")
-
-[node name="RotationVectorLabel" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, 1.25382, 1.53521, -0.307331)
-text = "Placeholder"
-script = ExtResource("9_iapp8")
-
-[node name="speed label" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, -1.23861, 1.34873, -0.307331)
-text = "Placeholder"
-script = ExtResource("10_pywgb")
-
-[node name="Thrust Vectors" type="Label3D" parent="Labels"]
-transform = Transform3D(-0.999876, 0, -0.0157597, 0, 1, 0, 0.0157597, 0, -0.999876, -1.25653, 1.70731, -0.307331)
-text = "Placeholder"
-script = ExtResource("11_fvq50")
 
 [node name="Anchor" parent="." instance=ExtResource("12_2ad4s")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.33571, -1.95017)
-
-[node name="Center" type="MeshInstance3D" parent="Anchor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
-mesh = SubResource("SphereMesh_ksn18")
-skeleton = NodePath("../../fighterGen7")
-surface_material_override/0 = SubResource("StandardMaterial3D_y8kr5")
-
-[node name="SpaceBall" type="MeshInstance3D" parent="Anchor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62702e-07, 0, -5.2927)
-mesh = SubResource("SphereMesh_ksn18")
 
 [node name="DemoControlSeat" parent="." node_paths=PackedStringArray("target_control_entity") instance=ExtResource("12_17fxx")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 1.13241, -0.796841)
@@ -233,7 +191,13 @@ target_control_entity = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16777, -1.22166, -2.38015)
 
 [node name="InteractionButton" parent="." instance=ExtResource("13_ejv10")]
-transform = Transform3D(-0.00275762, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275762, -1.4023, -1.04238, 0.463093)
+transform = Transform3D(-0.0110994, 0, -4.02498, 0, 4.025, 0, 4.02498, 0, -0.0110994, -1.4023, -1.25471, 0.463093)
+
+[node name="VelocityMfd3d" parent="." instance=ExtResource("14_d33vb")]
+transform = Transform3D(-0.0800339, 0.0108994, -0.039696, 0.0033811, 0.0882352, 0.01741, 0.0410261, 0.0139909, -0.078874, 0.351364, 0.8029, -0.60919)
+
+[node name="Crosshair3d" parent="." instance=ExtResource("11_4eega")]
+transform = Transform3D(0.185, 0, 0, 0, 0.185, 0, 0, 0, 0.185, 0, 1.30037, -0.491115)
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 
