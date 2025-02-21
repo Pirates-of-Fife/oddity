@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvqqr6jcca3to"]
+
+[ext_resource type="Script" path="res://Scripts/Sun.gd" id="1_r72t7"]
+
+[node name="SunTest" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+script = ExtResource("1_r72t7")
+size = 22.74
+color = Color(1, 0.501961, 0, 1)
+shader_path = "res://materials/sun_shader.gdshader"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 45.1029)

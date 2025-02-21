@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://kd25l6cvhdx1"]
+
+[ext_resource type="PackedScene" uid="uid://c40w7gkxhdh0j" path="res://Planet.tscn" id="1_14ovx"]
+[ext_resource type="Script" path="res://main_test.gd" id="1_vamv1"]
+[ext_resource type="Resource" uid="uid://djf37q4r4vb5s" path="res://example_planetdata_three_biomes.tres" id="3_63of4"]
+
+[node name="mainTest" type="Node3D"]
+script = ExtResource("1_vamv1")
+
+[node name="Planet" parent="." instance=ExtResource("1_14ovx")]
+planetdata = ExtResource("3_63of4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 76.6927, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2273.95, 0, 0)
