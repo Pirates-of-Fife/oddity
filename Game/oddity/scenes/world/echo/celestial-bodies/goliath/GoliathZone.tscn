@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsq6mo1hm2w2j"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_md7oo"]
+[ext_resource type="PackedScene" uid="uid://cu7552nhoejl" path="res://scenes/world/echo/celestial-bodies/goliath/Goliath.tscn" id="2_q3xxm"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_gbbik"]
+
+[node name="GoliathZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_md7oo")
+planet_name = &"Goliath"
+planet_scene = ExtResource("2_q3xxm")
+planet_scale = 3
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 450000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_gbbik")]
+text = &"Alcolin"

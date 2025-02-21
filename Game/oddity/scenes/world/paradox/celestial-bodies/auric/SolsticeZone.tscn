@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://5a2fhh6a1a3j"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_527ng"]
+[ext_resource type="PackedScene" uid="uid://d0kavv4cayqdk" path="res://scenes/world/paradox/celestial-bodies/auric/Solstice.tscn" id="2_1q8qe"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="2_4wn7a"]
+
+[node name="SolsticeZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_527ng")
+planet_name = &"Solstice"
+planet_scene = ExtResource("2_1q8qe")
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("2_4wn7a")]

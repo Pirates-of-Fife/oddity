@@ -1,0 +1,131 @@
+[gd_scene load_steps=12 format=3 uid="uid://djulhrtweiemd"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/hardpoint-assignment-screen/AssignmentButton.gd" id="1_x65ks"]
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="2_hsss5"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_3q4lv"]
+[ext_resource type="AudioStream" uid="uid://2w7aoby4ad1l" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/button.wav" id="4_ojjn8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0jbt"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_color = Color(0.0364521, 0.496535, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cq8qm"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_y0jbt")
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_48r7u"]
+data = PackedVector3Array(-0.5, 0.5, 0.05, 0.5, 0.5, 0.05, -0.5, -0.5, 0.05, 0.5, 0.5, 0.05, 0.5, -0.5, 0.05, -0.5, -0.5, 0.05, 0.5, 0.5, -0.05, -0.5, 0.5, -0.05, 0.5, -0.5, -0.05, -0.5, 0.5, -0.05, -0.5, -0.5, -0.05, 0.5, -0.5, -0.05, 0.5, 0.5, 0.05, 0.5, 0.5, -0.05, 0.5, -0.5, 0.05, 0.5, 0.5, -0.05, 0.5, -0.5, -0.05, 0.5, -0.5, 0.05, -0.5, 0.5, -0.05, -0.5, 0.5, 0.05, -0.5, -0.5, -0.05, -0.5, 0.5, 0.05, -0.5, -0.5, 0.05, -0.5, -0.5, -0.05, 0.5, 0.5, 0.05, -0.5, 0.5, 0.05, 0.5, 0.5, -0.05, -0.5, 0.5, 0.05, -0.5, 0.5, -0.05, 0.5, 0.5, -0.05, -0.5, -0.5, 0.05, 0.5, -0.5, 0.05, -0.5, -0.5, -0.05, 0.5, -0.5, 0.05, 0.5, -0.5, -0.05, -0.5, -0.5, -0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mim2"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_color = Color(0.0364521, 0.496535, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qyash"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1mim2")
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymthb"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_color = Color(0.0364521, 0.496535, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d3tqc"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ymthb")
+size = Vector3(1, 1, 0.1)
+
+[node name="AssignmentButton" type="Node3D"]
+script = ExtResource("1_x65ks")
+default_color = Color(0.0352941, 0.498039, 1, 1)
+selected_color = Color(0.805078, 0.172112, 0.178139, 1)
+
+[node name="InteractionButton1" type="StaticBody3D" parent="." node_paths=PackedStringArray("interaction_sound")]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_hsss5")
+interaction_sound = NodePath("AudioStreamPlayer3D")
+
+[node name="Label3D" type="Label3D" parent="InteractionButton1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0733099, 0.050753, 0.0571138)
+pixel_size = 0.015
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1"
+font = ExtResource("3_3q4lv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton1"]
+mesh = SubResource("BoxMesh_cq8qm")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton1"]
+shape = SubResource("ConcavePolygonShape3D_48r7u")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="InteractionButton1"]
+stream = ExtResource("4_ojjn8")
+volume_db = 6.0
+pitch_scale = 0.5
+bus = &"Interior"
+
+[node name="InteractionButton2" type="StaticBody3D" parent="." node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06131, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_hsss5")
+interaction_sound = NodePath("AudioStreamPlayer3D")
+
+[node name="Label3D" type="Label3D" parent="InteractionButton2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0733099, 0.050753, 0.0571138)
+pixel_size = 0.015
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "2"
+font = ExtResource("3_3q4lv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton2"]
+mesh = SubResource("BoxMesh_qyash")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton2"]
+shape = SubResource("ConcavePolygonShape3D_48r7u")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="InteractionButton2"]
+stream = ExtResource("4_ojjn8")
+volume_db = 6.0
+pitch_scale = 0.5
+bus = &"Interior"
+
+[node name="InteractionButton3" type="StaticBody3D" parent="." node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12192, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_hsss5")
+interaction_sound = NodePath("AudioStreamPlayer3D")
+
+[node name="Label3D" type="Label3D" parent="InteractionButton3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0733099, 0.050753, 0.0571138)
+pixel_size = 0.015
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "3"
+font = ExtResource("3_3q4lv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton3"]
+mesh = SubResource("BoxMesh_d3tqc")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton3"]
+shape = SubResource("ConcavePolygonShape3D_48r7u")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="InteractionButton3"]
+stream = ExtResource("4_ojjn8")
+volume_db = 6.0
+pitch_scale = 0.5
+bus = &"Interior"
+
+[connection signal="interacted" from="InteractionButton1" to="." method="_on_interaction_button_1_interacted"]
+[connection signal="interacted" from="InteractionButton2" to="." method="_on_interaction_button_2_interacted"]
+[connection signal="interacted" from="InteractionButton3" to="." method="_on_interaction_button_3_interacted"]

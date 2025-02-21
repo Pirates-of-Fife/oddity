@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bna5l6mg5rq5c"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_ghljd"]
+[ext_resource type="PackedScene" uid="uid://b6d6qs4q1ex02" path="res://scenes/world/paradox/celestial-bodies/auric/Auric.tscn" id="2_ajr7u"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_op2qd"]
+
+[node name="AuricZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_ghljd")
+planet_name = &"Auric"
+planet_scene = ExtResource("2_ajr7u")
+planet_scale = 1
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_op2qd")]
+text = &"Auric"

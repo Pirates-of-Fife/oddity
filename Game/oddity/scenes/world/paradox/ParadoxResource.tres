@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StarSystemResource" load_steps=3 format=3 uid="uid://cso46hk7o5fg6"]
+
+[ext_resource type="Script" path="res://classes/star-system/StarSystemResource.gd" id="1_mlhlf"]
+[ext_resource type="PackedScene" uid="uid://bwho7y2mkwclo" path="res://scenes/world/paradox/ParadoxSystem.tscn" id="1_xg8oy"]
+
+[resource]
+script = ExtResource("1_mlhlf")
+name = "Paradox"
+scene_file = ExtResource("1_xg8oy")

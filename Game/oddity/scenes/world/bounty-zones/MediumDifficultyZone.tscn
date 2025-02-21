@@ -1,0 +1,26 @@
+[gd_scene load_steps=8 format=3 uid="uid://0ahgehvj4tip"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="1_sveqb"]
+[ext_resource type="Resource" uid="uid://b4ib3lsww33hn" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_1_Loadout.tres" id="2_kxems"]
+[ext_resource type="Resource" uid="uid://df1cwvhxsy02u" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_2_Loadout.tres" id="3_dyb2y"]
+[ext_resource type="Resource" uid="uid://dt126675t14xe" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_3_Loadout.tres" id="4_7b8aa"]
+[ext_resource type="Resource" uid="uid://c16d15b15gtlo" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_4_Loadout.tres" id="5_6l85q"]
+[ext_resource type="Resource" uid="uid://dar1u2a1o2pis" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_5_Loadout.tres" id="6_cej81"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="6_l1wes"]
+
+[node name="MediumDifficultyZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_sveqb")
+difficulty = 1
+possible_loadouts = [ExtResource("2_kxems"), ExtResource("3_dyb2y"), ExtResource("4_7b8aa"), ExtResource("5_6l85q"), ExtResource("6_cej81")]
+ship_count = 1
+spawn_radius = 1000.0
+activate_distance = 10000.0
+deactivate_distance = 21000.0
+one_shot = true
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 10000.0
+sprite_max_distance = 200000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("6_l1wes")]
+text = &"Signal [MEDIUM THREAT]"

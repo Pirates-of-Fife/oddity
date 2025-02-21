@@ -8,6 +8,11 @@ signal module_removed(module : Module)
 @export
 var vehicle : Starship
 
+
+## Used for loadouts
+@export
+var id : int = 0
+
 func _ready() -> void:
 	_module_slot_ready()
 

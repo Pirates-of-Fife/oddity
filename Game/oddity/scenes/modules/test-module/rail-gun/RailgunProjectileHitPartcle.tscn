@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://lg8sh1a34lw3"]
+
+[sub_resource type="Gradient" id="Gradient_nfajq"]
+offsets = PackedFloat32Array(0.230769, 1)
+colors = PackedColorArray(5.96821e-06, 0.562179, 0.87411, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sp4jy"]
+gradient = SubResource("Gradient_nfajq")
+
+[sub_resource type="Curve" id="Curve_mobd2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mc63o"]
+curve = SubResource("Curve_mobd2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_58ddx"]
+angle_min = -720.0
+angle_max = 1120.5
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_mc63o")
+color_ramp = SubResource("GradientTexture1D_sp4jy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vk5mh"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_i6wwy"]
+material = SubResource("StandardMaterial3D_vk5mh")
+size = Vector2(0.32, 0.62)
+
+[sub_resource type="GDScript" id="GDScript_s5lcp"]
+resource_name = "ProjectileHitParticle"
+script/source = "extends GPUParticles3D
+
+func _ready() -> void:
+	emitting = true
+
+func _on_finished() -> void:
+	queue_free()
+"
+
+[node name="ProjectileHitPartcle" type="GPUParticles3D"]
+emitting = false
+amount = 40
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_58ddx")
+draw_pass_1 = SubResource("QuadMesh_i6wwy")
+script = SubResource("GDScript_s5lcp")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

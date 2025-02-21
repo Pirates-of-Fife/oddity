@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7e4h5rtiy0j6"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_efyxv"]
+[ext_resource type="PackedScene" uid="uid://cs520326tu707" path="res://scenes/world/gateway/celestial-bodies/arka/Noctiluna.tscn" id="2_hs0co"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_7qw4h"]
+
+[node name="NoctilunaZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_efyxv")
+planet_name = &"Noctiluna"
+planet_scene = ExtResource("2_hs0co")
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 160000.0
+sprite_max_distance = 450000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_7qw4h")]
+text = &"Noctiluna"

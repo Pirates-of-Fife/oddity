@@ -10,7 +10,7 @@ var creature_run_command : CreatureRunCommand = CreatureRunCommand.new()
 
 @export_category("Control Settings")
 @export
-var mouse_sensitivity : float = 0.001
+var mouse_sensitivity : float = Globals.creature_controller_sensitivity
 
 var twist_input : float = 0.0
 var pitch_input : float = 0.0

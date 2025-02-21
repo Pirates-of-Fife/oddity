@@ -1,11 +1,45 @@
-[gd_scene load_steps=10 format=3 uid="uid://ba5evvevagnhw"]
+[gd_scene load_steps=20 format=3 uid="uid://ba5evvevagnhw"]
 
 [ext_resource type="Texture2D" uid="uid://vdqa5pcoa462" path="res://project-images/OddityLogo-04.png" id="1_edjeb"]
 [ext_resource type="Script" path="res://ui/main-menu/main_menu_ui.gd" id="1_wya4y"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_7jeg0"]
-[ext_resource type="Texture2D" uid="uid://b3b4ai1255iue" path="res://ui/main-menu/pirates-of-fife-logo.png" id="4_nsbdi"]
+[ext_resource type="Texture2D" uid="uid://blx1ve3e5tnix" path="res://ui/main-menu/logo_pirates_of_fife_transparent.png" id="4_s5c1x"]
+[ext_resource type="Texture2D" uid="uid://38xfxy0pupdp" path="res://ui/main-menu/LogoTextWhite.svg" id="5_dhhx1"]
 [ext_resource type="AudioStream" uid="uid://xc5f4vvul0a6" path="res://ui/main-menu/sounds/button_click.wav" id="5_l73e1"]
 [ext_resource type="AudioStream" uid="uid://xvrrxr8w73j8" path="res://ui/main-menu/sounds/after_start_click.wav" id="6_6sojb"]
+[ext_resource type="Texture2D" uid="uid://d3swk0fy83bl" path="res://ui/main-menu/OddityLogo-02.png" id="6_slygv"]
+
+[sub_resource type="Animation" id="Animation_rbwtj"]
+resource_name = "Credits"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Credits:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 3),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 1089), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tjm30"]
+resource_name = "CreditsExit"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Credits:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 3),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 1111.48)]
+}
 
 [sub_resource type="Animation" id="Animation_r183a"]
 length = 0.001
@@ -56,6 +90,18 @@ tracks/3/keys = {
 "transitions": PackedFloat64Array(1),
 "update": 0,
 "values": [Vector2(-1226, 196)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Credits:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(5, 1089)]
 }
 
 [sub_resource type="Animation" id="Animation_02e8o"]
@@ -112,9 +158,59 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_882nw"]
 _data = {
+"Credits": SubResource("Animation_rbwtj"),
+"CreditsExit": SubResource("Animation_tjm30"),
 "RESET": SubResource("Animation_r183a"),
 "start": SubResource("Animation_02e8o")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmehw"]
+bg_color = Color(0.0627451, 0.0588235, 0.54902, 0.741176)
+skew = Vector2(0.33, 0.03)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1gip"]
+bg_color = Color(0.0627451, 0.0588235, 0.478431, 0.933333)
+skew = Vector2(0.33, 0.03)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sddlw"]
+bg_color = Color(0.0152652, 0.0395471, 0.130003, 1)
+skew = Vector2(0.33, 0.03)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ga7k"]
+bg_color = Color(0.063083, 0.0573695, 0.479214, 0.498039)
+skew = Vector2(0.33, 0.03)
+
+[sub_resource type="GDScript" id="GDScript_lnw6i"]
+resource_name = "creature_sensitivity"
+script/source = "extends HSlider
+
+func _ready() -> void:
+	value = Globals.creature_controller_sensitivity
+
+func _on_value_changed(value: float) -> void:
+	Globals.creature_controller_sensitivity = value
+	tooltip_text = \"Sensitivity: \" + str(value)
+
+
+func _on_drag_ended(value_changed: bool) -> void:
+	Globals.save_settings()
+"
+
+[sub_resource type="GDScript" id="GDScript_chui5"]
+resource_name = "starship_sensitivity"
+script/source = "extends HSlider
+
+func _ready() -> void:
+	value = Globals.starship_controller_sensitity
+
+func _on_value_changed(value: float) -> void:
+	Globals.starship_controller_sensitity = value
+	tooltip_text = \"Sensitivity: \" + str(value)
+
+
+func _on_drag_ended(value_changed: bool) -> void:
+	Globals.save_settings()
+"
 
 [node name="MainMenuUi" type="Control"]
 layout_mode = 3
@@ -155,20 +251,20 @@ offset_top = 979.0
 offset_right = 2122.0
 offset_bottom = 1120.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Logo"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = -25.0
-offset_right = 238.865
-offset_bottom = 26.0
-scale = Vector2(2.205, 2.205)
-theme_override_fonts/normal_font = ExtResource("2_7jeg0")
-text = "Pirates of Fife"
-
 [node name="Sprite2D" type="Sprite2D" parent="Logo"]
-position = Vector2(-69, 29)
-scale = Vector2(4.655, 4.655)
-texture = ExtResource("4_nsbdi")
+position = Vector2(348, 47)
+scale = Vector2(0.010922, 0.010922)
+texture = ExtResource("4_s5c1x")
+
+[node name="LogoTextWhite" type="Sprite2D" parent="Logo"]
+position = Vector2(432, 48)
+scale = Vector2(0.0541018, 0.0541018)
+texture = ExtResource("5_dhhx1")
+
+[node name="OddityLogo-02" type="Sprite2D" parent="Logo"]
+position = Vector2(256, 49)
+scale = Vector2(0.0104692, 0.0104692)
+texture = ExtResource("6_slygv")
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
@@ -195,18 +291,68 @@ grow_vertical = 2
 [node name="StartButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kmehw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g1gip")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sddlw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ga7k")
 text = "START"
 
 [node name="CreditsButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kmehw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g1gip")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sddlw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ga7k")
 text = "CREDITS"
 
 [node name="ExitButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kmehw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g1gip")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sddlw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ga7k")
 text = "EXIT
 "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
+text = "Player"
+
+[node name="CreatureSensitivity" type="HSlider" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.001
+max_value = 0.05
+step = 0.001
+value = 0.001
+tick_count = 10
+script = SubResource("GDScript_lnw6i")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
+text = "Ship"
+
+[node name="StarshipSensitivity" type="HSlider" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.05
+max_value = 0.5
+step = 0.01
+value = 0.05
+tick_count = 10
+script = SubResource("GDScript_chui5")
 
 [node name="ButtonClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_l73e1")
@@ -215,6 +361,204 @@ volume_db = 16.0
 [node name="Click2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_6sojb")
 
+[node name="Credits" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 1089.0
+offset_right = 1917.0
+offset_bottom = 1089.0
+
+[node name="ColorRect" type="ColorRect" parent="Credits"]
+layout_mode = 2
+offset_left = -4.0
+offset_top = 6.0
+offset_right = 1927.0
+offset_bottom = 1090.0
+color = Color(0.0728427, 0.0728426, 0.0728427, 0.956863)
+
+[node name="Back" type="Button" parent="Credits"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 56.0
+offset_right = 239.0
+offset_bottom = 134.0
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kmehw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g1gip")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sddlw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ga7k")
+text = "BACK"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 517.0
+offset_top = 10.52
+offset_right = 1390.0
+offset_bottom = 159.52
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[wave amp=50 freq=5 connected=1][color=crimson]Thank you for playing!"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 659.0
+offset_top = 149.0
+offset_right = 1274.0
+offset_bottom = 244.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+text = "A GAME BY THE PIRATES OF FIFE"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 181.0
+offset_top = 322.0
+offset_right = 796.0
+offset_bottom = 417.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "LEAD DEV: [wave amp=50 freq=5 connected=1][color=crimson]ZOE MCFIFE"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 94.0
+offset_top = 407.0
+offset_right = 900.0
+offset_bottom = 502.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "LORE AND WORLDBUILDING: [wave amp=50 freq=5 connected=1][color=crimson]ZOE MCFIFE"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 154.0
+offset_top = 502.0
+offset_right = 769.0
+offset_bottom = 597.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "TEAM LEAD: [wave amp=50 freq=5 connected=1][color=crimson]ZOE MCFIFE"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 60.0
+offset_top = 582.0
+offset_right = 1033.0
+offset_bottom = 677.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "KESTREL MK1 AND ADDITIONAL ASSETS: [wave amp=50 freq=5 connected=1][color=crimson]ZOE MCFIFE"
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 1179.0
+offset_top = 292.0
+offset_right = 1794.0
+offset_bottom = 387.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "SOUND DESIGN: [wave amp=50 freq=5 connected=1][color=GREEN]Julhtz"
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 1199.0
+offset_top = 388.0
+offset_right = 1814.0
+offset_bottom = 483.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "ASSETS: [wave amp=50 freq=5 connected=1][color=BLUE]buchidotcom"
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 1022.0
+offset_top = 487.0
+offset_right = 1811.0
+offset_bottom = 582.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "PROCEDURAL GENERATION: [wave amp=50 freq=5 connected=1][color=yellow]Bergdoktor"
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 1204.0
+offset_top = 591.0
+offset_right = 1819.0
+offset_bottom = 686.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "CHARACTERS: [wave amp=50 freq=5 connected=1][color=PURPLE]tobiliiiii"
+
+[node name="RichTextLabel11" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 213.0
+offset_top = 907.0
+offset_right = 1186.0
+offset_bottom = 1002.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "SPECIAL THANKS TO [wave amp=50 freq=5 connected=1][color=ORANGE]ENTOMOLOMOTH"
+
+[node name="RichTextLabel12" type="RichTextLabel" parent="Credits"]
+layout_direction = 1
+layout_mode = 1
+offset_left = 912.0
+offset_top = 905.0
+offset_right = 1885.0
+offset_bottom = 1000.0
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "FOR SUPPORTING ME WITH PIZZAS AND SUSHI "
+
+[node name="LoadingRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -129.0
+offset_top = -138.0
+offset_right = 2042.0
+offset_bottom = 1211.0
+color = Color(0, 0, 0, 1)
+
+[node name="LOADING" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 1
+offset_left = 528.0
+offset_top = 359.0
+offset_right = 609.0
+offset_bottom = 393.0
+scale = Vector2(12.975, 12.975)
+theme_override_fonts/normal_font = ExtResource("2_7jeg0")
+theme_override_font_sizes/normal_font_size = 10
+text = "LOADING"
+
 [connection signal="pressed" from="Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="drag_ended" from="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" to="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" method="_on_drag_ended"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" to="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" method="_on_value_changed"]
+[connection signal="drag_ended" from="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" to="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" method="_on_drag_ended"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" to="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" method="_on_value_changed"]
+[connection signal="pressed" from="Credits/Back" to="." method="_on_back_pressed"]

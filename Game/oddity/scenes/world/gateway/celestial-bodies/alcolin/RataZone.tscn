@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtg1up7xr7k15"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_k46g4"]
+[ext_resource type="PackedScene" uid="uid://ce08neepcd5ns" path="res://scenes/world/gateway/celestial-bodies/alcolin/Rata.tscn" id="2_0fu3a"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="2_imb8g"]
+
+[node name="RataZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_k46g4")
+planet_name = &"Rata"
+planet_scene = ExtResource("2_0fu3a")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("2_imb8g")]
+text = &"Noctiluna"

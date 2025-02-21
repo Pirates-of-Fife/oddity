@@ -1,0 +1,105 @@
+[gd_scene load_steps=16 format=3 uid="uid://bteqskba0aasp"]
+
+[ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
+[ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
+[ext_resource type="PackedScene" uid="uid://b52ipcjo5n8ik" path="res://test-scenes/star-system-test-scene/SystemA.tscn" id="2_spmg2"]
+[ext_resource type="Resource" uid="uid://bhhiitluon2c7" path="res://test-scenes/star-system-test-scene/SystemB.tres" id="3_ejcto"]
+[ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/mind/player/player.tscn" id="3_n2a02"]
+[ext_resource type="Resource" uid="uid://bfa4l2rtgwpr1" path="res://test-scenes/star-system-test-scene/SystemC.tres" id="4_dfuqd"]
+[ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
+[ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
+[ext_resource type="Resource" uid="uid://b1pldqyejslhf" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_1_Loadout.tres" id="7_ig6r4"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="10_xqrji"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="11_d3jqi"]
+[ext_resource type="Resource" uid="uid://b4nc2y5nss3v0" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_3_Loadout.tres" id="12_sfjus"]
+[ext_resource type="Resource" uid="uid://cw5ypqunlmkk7" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_4_Loadout.tres" id="13_t0rrd"]
+[ext_resource type="PackedScene" uid="uid://bk046jth70dqt" path="res://scenes/cargo/bounty-hunting-cargo-containers/GatewayRum.tscn" id="14_wv1hr"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="15_u213w"]
+
+[node name="StarSystemTestScene" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch = true
+stretch_shrink = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
+script = ExtResource("1_bvu6x")
+star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_dfuqd")]
+
+[node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
+player_respawn_position = Vector3(492238, 11815.9, 761032)
+
+[node name="RabsKestrelMk2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 602708)
+ship_name = &"The Kestrel"
+current_state = 0
+difficulty = 3
+debug = true
+
+[node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
+transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 475132, 11823.1, 602726)
+interaction_length = 2.0
+
+[node name="BountyHuntingZone" type="Node3D" parent="SubViewportContainer/SubViewport/World/SystemA" node_paths=PackedStringArray("distant_sprite")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 455268, -12594.6, 765486)
+script = ExtResource("10_xqrji")
+possible_loadouts = [ExtResource("7_ig6r4")]
+ship_count = 3
+spawn_radius = 5000.0
+activate_distance = 20000.0
+deactivate_distance = 60000.0
+one_shot = true
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 20000.0
+sprite_max_distance = 110000.0
+
+[node name="MarkerSprite" parent="SubViewportContainer/SubViewport/World/SystemA/BountyHuntingZone" instance=ExtResource("11_d3jqi")]
+text = &"Test Label name"
+
+[node name="RabsKestrelMk1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 603319)
+default_loadout = ExtResource("12_sfjus")
+current_state = 0
+is_bounty_target = true
+difficulty = 3
+
+[node name="RabsKestrelMk3" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 474743, 10649.7, 601441)
+default_loadout = ExtResource("12_sfjus")
+current_state = 0
+
+[node name="RabsKestrelMk4" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 476316, 12709.9, 601704)
+default_loadout = ExtResource("13_t0rrd")
+current_state = 0
+
+[node name="Cu1Container" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("14_wv1hr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 474724, 12131.6, 603093)
+
+[node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
+credits = 100000
+control_entity = NodePath("../SystemA/Humanoid")
+
+[node name="LandingGearLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 9.89629e-19, 3.95098e-21, -9.89572e-19, 0.999967, 0.00808106, 3.9957e-21, -0.00808106, 0.999967, 1.22749, 1.56267, -28.1154)
+pixel_size = 0.0005
+modulate = Color(0.917849, 0.358676, 1.92523e-07, 1)
+outline_modulate = Color(1, 1, 1, 0)
+text = "Landing Gear"
+font = ExtResource("15_u213w")

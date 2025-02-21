@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqdrlgwfdvjp0"]
+[gd_scene load_steps=6 format=3 uid="uid://bqdrlgwfdvjp0"]
 
 [ext_resource type="Script" path="res://classes/multi-function-display/abyssal-navigation/abyssal_mfd_3d.gd" id="1_3rf24"]
 [ext_resource type="PackedScene" uid="uid://cabsyyyuxl75t" path="res://classes/multi-function-display/abyssal-navigation/AbyssalMFD.tscn" id="2_7qnfy"]
+[ext_resource type="AudioStream" uid="uid://ccwidvolqeakd" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/sounds/notification.wav" id="3_37wmr"]
+[ext_resource type="AudioStream" uid="uid://2w7aoby4ad1l" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/button.wav" id="4_y4c6j"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_m6aqv"]
 viewport_path = NodePath("SubViewport")
@@ -18,3 +20,15 @@ size = Vector2i(757, 480)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 texture = SubResource("ViewportTexture_m6aqv")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_37wmr")
+volume_db = 3.0
+pitch_scale = 0.7
+bus = &"Interior"
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_y4c6j")
+volume_db = 6.0
+pitch_scale = 1.3
+bus = &"Interior"

@@ -26,10 +26,10 @@ var ui : ShieldAndHullUi
 func _ready() -> void:
 	ui.hull_health_bar.max_value = max_hull_health
 	ui.hull_health_bar.value = current_hull_health
-	
+
 	ui.shield_health_bar.max_value = max_shield_health
 	ui.shield_health_bar.value = current_shield_health
-	
+
 	ui.shield_charge.max_value = cooldown_time
 	ui.shield_charge.value = cooldown_time
 
@@ -38,9 +38,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	ui.max_hull_health = max_hull_health
 	ui.current_hull_health = current_hull_health
-	
+
 	ui.max_shield_health = max_shield_health
 	ui.current_shield_health = current_shield_health
-	
+
 	ui.cooldown_time = cooldown_time
 	ui.current_cooldown = current_cooldown

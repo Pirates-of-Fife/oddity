@@ -34,6 +34,8 @@ var frame_of_reference_name : String = ""
 @export
 var size : FrameOfReferenceSize
 
+@export
+var mass_lock : bool = false
 
 # INFO: Physics parent gets used for game entity freezing.
 # if a frame of reference has a physics parents, it moves unpredictably, so game entities inside it should freeze so they they remain stable during e.g. a flight on a space ship
@@ -117,18 +119,18 @@ func vector_origin_body(body : GameEntity) -> Vector3:
 	return body.global_position - global_position
 
 func _on_body_entered(body : Node3D) -> void:
-	body_entered(body)
+	on_body_entered(body)
 
 func _on_body_exited(body : Node3D) -> void:
-	body_exited(body)
+	on_body_exited(body)
 
-func body_entered(body : Node3D) -> void:
+func on_body_entered(body : Node3D) -> void:
 	if (body is GameEntity):
 		bodies_in_reference_frame.append(body)
 		body.in_frame_of_references.append(self)
 		body.evaluate_active_frame_of_reference()
 
-func body_exited(body : Node3D) -> void:
+func on_body_exited(body : Node3D) -> void:
 	if (body is GameEntity):
 		bodies_in_reference_frame.erase(body)
 		body.in_frame_of_references.erase(self)

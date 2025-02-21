@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://p0y1f3bv2d13"]
+[gd_scene load_steps=7 format=3 uid="uid://p0y1f3bv2d13"]
 
 [ext_resource type="Script" path="res://classes/projectile/Projectile.gd" id="1_3doe2"]
+[ext_resource type="PackedScene" uid="uid://cnndwmtqt7vxt" path="res://scenes/modules/test-module/Size6Weapon/LaserProjectileHitSound.tscn" id="2_xfbk8"]
+[ext_resource type="PackedScene" uid="uid://wruwr1h3utsp" path="res://scenes/modules/test-module/Size6Weapon/ProjectileHitPartcle.tscn" id="3_pxbxy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c1boy"]
 size = Vector3(0.3, 0.3, 2)
@@ -10,19 +12,23 @@ shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8833c"]
+margin = 1.0
 points = PackedVector3Array(0.15, 0.15, 1, 0.15, -0.15, 1, 0.15, 0.15, -1, -0.15, 0.15, 1, -0.15, -0.15, 1, 0.15, -0.15, -1, -0.15, 0.15, -1, -0.15, -0.15, -1)
 
 [node name="LaserProjectile" type="RigidBody3D"]
-collision_layer = 6291456
-collision_mask = 6291456
+collision_layer = 8388608
+collision_mask = 8388608
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_3doe2")
-timeout = 20.0
+timeout = 10.0
+on_hit_sound = ExtResource("2_xfbk8")
+projectile_collision_layer = 7340032
+projectile_hit_particle = ExtResource("3_pxbxy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.01, 0, 0, 0, 2.01, 0, 0, 0, 2.01, 0, 0, 0)
+transform = Transform3D(1.875, 0, 0, 0, 1.975, 0, 0, 0, 3.605, 0, 0, 0)
 mesh = SubResource("BoxMesh_c1boy")
 surface_material_override/0 = SubResource("StandardMaterial3D_20qt2")
 

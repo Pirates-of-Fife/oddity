@@ -4,6 +4,9 @@ class_name CargoContainer
 
 @export_category("Cargo")
 
+signal snapped_to_grid(cargo_area : CargoArea, cargo_grid : CargoGrid)
+signal snapped_out_of_grid(cargo_area : CargoArea, cargo_grid : CargoGrid)
+
 @export
 var container_size : CargoUnit.ContainerSize
 
@@ -16,6 +19,9 @@ var snapped_to : CargoArea
 # INFO Will be replaced by a resource file or something else
 @export
 var contents : String
+
+@export
+var initialize_collision_shape_automatically : bool = true
 
 enum CargoContainerDirection
 {
@@ -32,7 +38,9 @@ func _process(delta: float) -> void:
 
 func _cargo_container_ready() -> void:
 	_default_ready()
-	_initialize_collision_shape()
+
+	if initialize_collision_shape_automatically:
+		_initialize_collision_shape()
 
 func _cargo_container_process(delta : float) -> void:
 	_default_process(delta)
@@ -53,7 +61,12 @@ func snap_to_grid(cargo_area : CargoArea) -> void:
 
 	cargo_area.cargo_added()
 
+	snapped_to_grid.emit(cargo_area, cargo_area.cargo_grid)
+	cargo_area.cargo_added_to_area.emit(cargo_area, self)
+
 func unsnap_from_grid() -> void:
+	snapped_out_of_grid.emit(snapped_to, snapped_to.cargo_grid)
+	snapped_to.cargo_removed_from_area.emit(snapped_to, self)
 	snapped_to.cargo_removed()
 	snapped_to.snapped_cargo = null
 	snapped_to = null
@@ -78,6 +91,8 @@ func on_interact_self() -> void:
 		unsnap_from_grid()
 
 	unfreeze()
+	unfreeze_in_frame_of_reference()
+
 
 func _initialize_collision_shape() -> void:
 	var box_shape : BoxShape3D = BoxShape3D.new()

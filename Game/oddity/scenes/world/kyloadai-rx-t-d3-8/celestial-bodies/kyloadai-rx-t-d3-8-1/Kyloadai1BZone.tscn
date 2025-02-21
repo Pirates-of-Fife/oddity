@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dojnmqagc6udm"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_deai1"]
+[ext_resource type="PackedScene" uid="uid://mag2cbit5upm" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/Kyloadai1B.tscn" id="2_linnj"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_w26vy"]
+
+[node name="Kyloadai RX-T d3-8 1 B Zone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_deai1")
+planet_name = &"Kyloadai RX-T d3-8 1 B"
+planet_scene = ExtResource("2_linnj")
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 160000.0
+sprite_max_distance = 450000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_w26vy")]
+text = &"Noctiluna"

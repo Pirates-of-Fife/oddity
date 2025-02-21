@@ -3,7 +3,7 @@ extends Resource
 class_name StarSystemResource
 
 @export
-var name : StringName
+var name : String
 
 @export
 var scene_file : PackedScene

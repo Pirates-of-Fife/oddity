@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvfis284n2kiq"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_hgs6j"]
+[ext_resource type="PackedScene" uid="uid://boqgfg1xmd3qa" path="res://scenes/world/echo/celestial-bodies/goliath/Rumble.tscn" id="2_oh02t"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_w07ss"]
+
+[node name="RumbleZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_hgs6j")
+planet_name = &"Rumble"
+planet_scene = ExtResource("2_oh02t")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_w07ss")]
+text = &"Maelstrom"

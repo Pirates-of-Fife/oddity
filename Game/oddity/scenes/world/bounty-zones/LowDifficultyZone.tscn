@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnymcx1rpfcjb"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="1_vcp2l"]
+[ext_resource type="Resource" uid="uid://b1pldqyejslhf" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_1_Loadout.tres" id="2_f2plc"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="2_u5x8s"]
+[ext_resource type="Resource" uid="uid://ca4wmcu2s8h2s" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_2_Loadout.tres" id="3_3yktt"]
+[ext_resource type="Resource" uid="uid://bxsbx566gtyon" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_3_Loadout.tres" id="4_6awx6"]
+[ext_resource type="Resource" uid="uid://d4kj1o1a18i2o" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_4_Loadout.tres" id="5_pn835"]
+
+[node name="LowDifficultyZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_vcp2l")
+possible_loadouts = [ExtResource("2_f2plc"), ExtResource("3_3yktt"), ExtResource("4_6awx6"), ExtResource("5_pn835")]
+ship_count = 1
+spawn_radius = 500.0
+activate_distance = 5000.0
+deactivate_distance = 21000.0
+one_shot = true
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 10000.0
+sprite_max_distance = 200000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("2_u5x8s")]
+text = &"Signal [LOW THREAT]"

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://blq0p2lrhxs8a"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_7cwqk"]
+[ext_resource type="PackedScene" uid="uid://mk80syhel3p0" path="res://scenes/world/mirage/celestia-bodies/colossus/Gale.tscn" id="2_7qyxc"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_ilmu3"]
+
+[node name="GaleZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_7cwqk")
+planet_name = &"Gale"
+planet_scene = ExtResource("2_7qyxc")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_ilmu3")]
+text = &"Maelstrom"

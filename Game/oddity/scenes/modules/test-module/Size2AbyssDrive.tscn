@@ -1,13 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://fabmgwjbqisa"]
+[gd_scene load_steps=3 format=3 uid="uid://fabmgwjbqisa"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/AbyssalJumpDrive.gd" id="1_v4do7"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6l5o8"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_cscou"]
-material = SubResource("StandardMaterial3D_6l5o8")
-size = Vector3(0.75, 1.5, 4)
+[ext_resource type="PackedScene" uid="uid://d3qowdbvmnoir" path="res://scenes/modules/test-module/abyss_drive.glb" id="2_jigba"]
 
 [node name="Size2AbyssDrive" type="RigidBody3D"]
 collision_layer = 537396225
@@ -15,7 +9,8 @@ collision_mask = 537396225
 mass = 100.0
 script = ExtResource("1_v4do7")
 size = 2
+value = 30000
 can_be_picked_up = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_cscou")
+[node name="abyss_drive" parent="." instance=ExtResource("2_jigba")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 2, 0, 0, 0)

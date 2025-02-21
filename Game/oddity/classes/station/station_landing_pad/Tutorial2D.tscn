@@ -1,0 +1,387 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjl6akhp03lif"]
+
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="1_6pmrs"]
+[ext_resource type="Texture2D" uid="uid://d3swk0fy83bl" path="res://ui/main-menu/OddityLogo-02.png" id="2_inhcs"]
+
+[node name="Tutorial2d" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1865.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 8425.0
+offset_bottom = 1987.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_direction = 1
+layout_mode = 0
+offset_left = 565.0
+offset_top = -2.0
+offset_right = 873.0
+offset_bottom = 147.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[wave amp=50 freq=5 connected=1][color=crimson]Tutorial"
+threaded = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_direction = 1
+layout_mode = 0
+offset_left = 402.0
+offset_top = 82.0
+offset_right = 1175.0
+offset_bottom = 231.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[color=Blue] Welcome to ODDITY"
+
+[node name="OddityLogo-02" type="Sprite2D" parent="."]
+position = Vector2(189, 150)
+scale = Vector2(0.0309575, 0.0309575)
+texture = ExtResource("2_inhcs")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+layout_direction = 1
+layout_mode = 0
+offset_left = 68.0
+offset_top = 305.0
+offset_right = 841.0
+offset_bottom = 454.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[color=Orange] Your Ship"
+threaded = true
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="."]
+layout_direction = 1
+layout_mode = 0
+offset_left = 431.0
+offset_top = 303.0
+offset_right = 1577.0
+offset_bottom = 452.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "RABAUKE SHIPWORKS KESTREL MK1"
+threaded = true
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 75.0
+offset_top = 182.0
+offset_right = 776.0
+offset_bottom = 487.0
+scale = Vector2(0.525, 0.525)
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Control"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 22.0
+offset_top = 451.0
+offset_right = 1938.0
+offset_bottom = 3102.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Controls:
+
+
+[wave amp=80 freq=2 connected=1][color=RED]Movement[/color][/wave]
+
+Throttle Forwards: [wave amp=50 freq=5 connected=1][color=green]W[/color][/wave]
+Throttle Rervse: [wave amp=50 freq=5 connected=1][color=green]S[/color][/wave]
+Throttle Left: [wave amp=50 freq=5 connected=1][color=green]A[/color][/wave]
+Throttle Right: [wave amp=50 freq=5 connected=1][color=green]D[/color][/wave]
+Throttle Up: [wave amp=50 freq=5 connected=1][color=green]SPACE or Mouse 5[/color][/wave]
+Throttle Down: [wave amp=50 freq=5 connected=1][color=green]SHIFT or Mouse 4[/color][/wave]
+Throttle Forwards: [wave amp=50 freq=5 connected=1][color=green]W[/color][/wave]
+
+Yaw: [wave amp=50 freq=5 connected=1][color=green]Mouse X-Axis[/color][/wave]
+Pitch: [wave amp=50 freq=5 connected=1][color=green]Mouse Y-Axis[/color][/wave]
+Roll Left: [wave amp=50 freq=5 connected=1][color=green]Q[/color][/wave]
+Roll Right: [wave amp=50 freq=5 connected=1][color=green]E[/color][/wave]
+
+
+"
+scroll_active = false
+threaded = true
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Control"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 42.0
+offset_top = 2428.0
+offset_right = 1373.0
+offset_bottom = 3588.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[wave amp=80 freq=2 connected=1][color=RED]Combat[/color][/wave]
+
+Shoot Primary Weapons: [wave amp=50 freq=5 connected=1][color=green]Mouse 1[/color][/wave]
+Shoot Secondary Weapons: [wave amp=50 freq=5 connected=1][color=green]Mouse 2[/color][/wave]
+Shoot Tertiary Weapons: [wave amp=50 freq=5 connected=1][color=green][/color][/wave]
+
+Target: [wave amp=50 freq=5 connected=1][color=green]T[/color][/wave]
+
+
+
+"
+fit_content = true
+scroll_active = false
+threaded = true
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="Control"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 3561.0
+offset_top = 1027.0
+offset_right = 5477.0
+offset_bottom = 2651.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[wave amp=80 freq=2 connected=1][color=RED]On Foot[/color][/wave]
+
+Movement: [wave amp=50 freq=5 connected=1][color=green]WASD[/color][/wave]
+Jump: [wave amp=50 freq=5 connected=1][color=green]SPACE[/color][/wave]
+Run: [wave amp=50 freq=5 connected=1][color=green]SHIFT or Mouse 4[/color][/wave]
+Interact: [wave amp=50 freq=5 connected=1][color=green]F[/color][/wave]
+
+[wave amp=80 freq=2 connected=1][color=RED]EVA[/color][/wave]
+
+EVA Mode engages when not in Gravity
+Roll: [wave amp=50 freq=5 connected=1][color=green]Q / E[/color][/wave]
+
+
+
+"
+fit_content = true
+scroll_active = false
+threaded = true
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="Control"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 1467.0
+offset_top = 762.0
+offset_right = 3679.0
+offset_bottom = 3314.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[wave amp=80 freq=2 connected=1][color=RED]General[/color][/wave]
+
+Exit Seat: [wave amp=50 freq=5 connected=1][color=green]K[/color][/wave]
+
+Adjust speed Limiter: [wave amp=50 freq=5 connected=1][color=green]Scroll Wheel[/color][/wave]
+
+Engage Alcubierre Drive: [wave amp=50 freq=5 connected=1][color=green]Hold V[/color][/wave]
+Exit Super Cruise: [wave amp=50 freq=5 connected=1][color=green]V (Must be under 0.1 C)[/color][/wave]
+
+Open / Close Abyssal Gateway: [wave amp=50 freq=5 connected=1][color=green]U[/color][/wave]
+Cycle Target System: [wave amp=50 freq=5 connected=1][color=green]B[/color][/wave]
+
+INFO: Power must be off and landing gear deployed to successfully land at a pad.
+Cycle Power: [wave amp=50 freq=5 connected=1][color=green]P[/color][/wave]
+Landing Gear: [wave amp=50 freq=5 connected=1][color=green]N[/color][/wave]
+
+Third Person: [wave amp=50 freq=5 connected=1][color=green]F4[/color][/wave]
+Toggle Free Look: [wave amp=50 freq=5 connected=1][color=green]CTRL[/color][/wave]
+Third Person Distance: [wave amp=50 freq=5 connected=1][color=green]Scroll Wheel[/color][/wave] (Free Look must be Active)
+
+
+"
+fit_content = true
+scroll_active = false
+threaded = true
+
+[node name="Control2" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control2"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 3355.0
+offset_top = 66.0
+offset_right = 3816.0
+offset_bottom = 215.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[wave amp=50 freq=5 connected=1][color=crimson]How to Play"
+threaded = true
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Control2"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 2886.0
+offset_top = 274.0
+offset_right = 4693.0
+offset_bottom = 1686.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Use your Ship to travel through the [wave amp=50 freq=5 connected=1][color=Cyan]Star Systems[/color][/wave].
+
+You'll find [wave amp=50 freq=5 connected=1][color=Cyan]Signals[/color][/wave] around Planets which could potentially have threats. 
+
+You can enter destroyed ships and take their [wave amp=50 freq=5 connected=1][color=Cyan]components[/color][/wave] to upgrade your  ship and take their [wave amp=50 freq=5 connected=1][color=Cyan]cargo[/color][/wave] to sell at stations.
+
+If equipped with [wave amp=50 freq=5 connected=1][color=Cyan]Mining Lasers[/color][/wave], you can mine asteroids. Asteroids can be found around planets with [wave amp=50 freq=5 connected=1][color=Cyan]asteroid belts[/color][/wave]"
+threaded = true
+
+[node name="Control3" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1976.0
+offset_top = -18.0
+offset_right = 2779.0
+offset_bottom = 498.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 3355.0
+offset_top = 66.0
+offset_right = 3816.0
+offset_bottom = 215.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[wave amp=50 freq=5 connected=1][color=crimson]Modules"
+threaded = true
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 2886.0
+offset_top = 274.0
+offset_right = 4291.0
+offset_bottom = 481.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Shield Generator"
+threaded = true
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 2869.0
+offset_top = 630.0
+offset_right = 4274.0
+offset_bottom = 837.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Hull Reeinforcement"
+threaded = true
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 2852.0
+offset_top = 1026.0
+offset_right = 4257.0
+offset_bottom = 1233.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Alcubierre Drive"
+threaded = true
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 2863.0
+offset_top = 1434.0
+offset_right = 4268.0
+offset_bottom = 1641.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Abyssal Jump Drive"
+threaded = true
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 4596.0
+offset_top = 253.0
+offset_right = 6001.0
+offset_bottom = 460.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Pulse Laser"
+threaded = true
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 4546.0
+offset_top = 596.0
+offset_right = 5951.0
+offset_bottom = 803.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Rotary Autocannon"
+threaded = true
+
+[node name="RichTextLabel11" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 4521.0
+offset_top = 1015.0
+offset_right = 5926.0
+offset_bottom = 1222.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Rail Gun"
+threaded = true
+
+[node name="RichTextLabel12" type="RichTextLabel" parent="Control3"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 4540.0
+offset_top = 1459.0
+offset_right = 5945.0
+offset_bottom = 1666.0
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_6pmrs")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "Mining Laser"
+threaded = true

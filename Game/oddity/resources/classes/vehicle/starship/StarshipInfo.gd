@@ -13,3 +13,6 @@ var max_angular_yaw_velocity : float
 
 @export
 var max_angular_roll_velocity : float
+
+@export
+var max_health : float

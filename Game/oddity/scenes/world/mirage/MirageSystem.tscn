@@ -1,0 +1,81 @@
+[gd_scene load_steps=14 format=3 uid="uid://c61qdki0q0p1b"]
+
+[ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_16yi2"]
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_vascq"]
+[ext_resource type="PackedScene" uid="uid://c5qou1irssard" path="res://scenes/world/mirage/celestia-bodies/Mirage.tscn" id="3_sahsf"]
+[ext_resource type="PackedScene" uid="uid://btqrtt2reo8uq" path="res://scenes/world/mirage/celestia-bodies/mirage/MirageZone.tscn" id="4_lichq"]
+[ext_resource type="PackedScene" uid="uid://y13m0gm0utk0" path="res://scenes/world/mirage/celestia-bodies/mirage/PhantomZone.tscn" id="6_s5lqx"]
+[ext_resource type="PackedScene" uid="uid://b3bbejxbh25sf" path="res://scenes/world/mirage/celestia-bodies/colossus/ColossusZone.tscn" id="8_66jas"]
+[ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="8_kf3d1"]
+[ext_resource type="PackedScene" uid="uid://blq0p2lrhxs8a" path="res://scenes/world/mirage/celestia-bodies/colossus/GaleZone.tscn" id="10_sggck"]
+[ext_resource type="PackedScene" uid="uid://bblcs7gvy7v1l" path="res://scenes/world/mirage/celestia-bodies/colossus/TorrentZone.tscn" id="12_2426o"]
+[ext_resource type="PackedScene" uid="uid://c7ibe2vyuxfw3" path="res://scenes/world/mirage/celestia-bodies/omen/OmenZone.tscn" id="14_l5kh6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hp5j"]
+shader = ExtResource("2_vascq")
+shader_parameter/sky_color = Color(0.0156863, 0, 0.0627451, 1)
+shader_parameter/star_base_color = Color(1, 1, 1, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_6y4dd"]
+sky_material = SubResource("ShaderMaterial_8hp5j")
+
+[sub_resource type="Environment" id="Environment_xarcs"]
+background_mode = 2
+sky = SubResource("Sky_6y4dd")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.0
+volumetric_fog_anisotropy = 0.0
+volumetric_fog_length = 0.01
+
+[node name="MirageSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
+script = ExtResource("1_16yi2")
+system_name = &"Mirage"
+main_star = NodePath("Mirage")
+player_spawn_marker = NodePath("Marker3D")
+player_spawn_position = Vector3(-2.77895e+06, 0, 0)
+player_respawn_marker = NodePath("Marker3D")
+player_respawn_position = Vector3(-2.77895e+06, 0, 0)
+spawn_station = NodePath("MirageZone/SpaceStationLoadingZone")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xarcs")
+
+[node name="Mirage" parent="." instance=ExtResource("3_sahsf")]
+
+[node name="MirageZone" parent="." instance=ExtResource("4_lichq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4e+06, 200000, 100000)
+
+[node name="PhantomZone" parent="MirageZone" instance=ExtResource("6_s5lqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60964.8, 52990.2, -150693)
+
+[node name="SpaceStationLoadingZone" parent="MirageZone" instance=ExtResource("8_kf3d1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91687.6, 29082.6, 0)
+station_name = &"Asp Creek Port"
+
+[node name="ColossusZone" parent="." instance=ExtResource("8_66jas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6e+06, 2e+06, -9e+06)
+
+[node name="GaleZone" parent="ColossusZone" instance=ExtResource("10_sggck")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 344610, 715540)
+
+[node name="TorrentZone" parent="ColossusZone" instance=ExtResource("12_2426o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -881596, -381325, -394938)
+
+[node name="SpaceStationLoadingZone" parent="ColossusZone" instance=ExtResource("8_kf3d1")]
+transform = Transform3D(0.695587, -0.718442, 0, 0.718442, 0.695587, 0, 0, 0, 1, 174652, 160277, -37548)
+station_name = &"Ghost\'s Beacon"
+
+[node name="OmenZone" parent="." instance=ExtResource("14_l5kh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2e+06, 2e+06, 2e+06)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)

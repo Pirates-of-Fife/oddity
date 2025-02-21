@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://ca0mkj205cm2l"]
+
+[ext_resource type="Texture2D" uid="uid://bxguph5onrvh4" path="res://classes/multi-function-display/targeting/radar/radar.svg" id="1_0pmr2"]
+[ext_resource type="Script" path="res://classes/multi-function-display/targeting/radar/radar_display.gd" id="1_77r2x"]
+[ext_resource type="PackedScene" uid="uid://dnwh66i5cp7fk" path="res://classes/multi-function-display/targeting/radar/RadarBlip.tscn" id="2_qhqja"]
+[ext_resource type="PackedScene" uid="uid://o58cxnw1ggt5" path="res://classes/multi-function-display/targeting/radar/RadarBlipTarget.tscn" id="3_30had"]
+[ext_resource type="AudioStream" uid="uid://c052bj71cfk40" path="res://classes/multi-function-display/targeting/radar/blipSelect.wav" id="6_4fw0t"]
+[ext_resource type="AudioStream" uid="uid://daki3arsot4il" path="res://classes/multi-function-display/targeting/radar/iVM0xCBf.wav" id="7_vxou1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csvdf"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.114897, 0.114897, 0.114897, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hid6f"]
+material = SubResource("StandardMaterial3D_csvdf")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rof1o"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(2.98411e-06, 0.669639, 0.768851, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_o67g4"]
+material = SubResource("StandardMaterial3D_rof1o")
+radius = 0.05
+height = 0.1
+radial_segments = 16
+rings = 8
+
+[node name="RadarDisplay" type="Node3D"]
+script = ExtResource("1_77r2x")
+radar_blip_scene = ExtResource("2_qhqja")
+targeted_radar_blip_scene = ExtResource("3_30had")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.275, 0, 0, 0, 1.68389e-17, -0.275, 0, 0.275, 1.68389e-17, 0, -0.498, 0.647)
+texture_filter = 0
+texture = ExtResource("1_0pmr2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Sprite3D"]
+transform = Transform3D(3.63637, 0, 0, 0, 2.22663e-16, 3.63636, 0, -3.63636, 2.22663e-16, 0, -9.11316e-17, 1.48829)
+mesh = SubResource("CylinderMesh_hid6f")
+
+[node name="RadarBlips" type="Node3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_o67g4")
+
+[node name="BlipEnter" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_4fw0t")
+volume_db = -40.0
+pitch_scale = 0.5
+max_distance = 5.0
+bus = &"Interior"
+
+[node name="BlipExit" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_vxou1")
+volume_db = -40.0
+pitch_scale = 0.5
+max_distance = 5.0
+bus = &"Interior"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

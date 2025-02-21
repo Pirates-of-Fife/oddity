@@ -1,14 +1,22 @@
-[gd_resource type="Resource" script_class="AlcubierreDriveResource" load_steps=2 format=3 uid="uid://bcnnlkr5akc2h"]
+[gd_resource type="Resource" script_class="AlcubierreDriveResource" load_steps=6 format=3 uid="uid://bcnnlkr5akc2h"]
 
 [ext_resource type="Script" path="res://resources/classes/module/component/alcubierre-drive/AlcubierreDriveResource.gd" id="1_pcsd4"]
+[ext_resource type="AudioStream" uid="uid://dlp4trogq3fk" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_end.wav" id="1_smf7l"]
+[ext_resource type="AudioStream" uid="uid://bgxc6texjc537" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_loop.wav" id="2_oqoog"]
+[ext_resource type="AudioStream" uid="uid://bo7fqw26hxuon" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_start.wav" id="3_fctay"]
+[ext_resource type="AudioStream" uid="uid://c7vtf858tqoyu" path="res://classes/module/component/component-types/alcubierre-drive/sounds/travelling/travelling.wav" id="5_nrlft"]
 
 [resource]
 script = ExtResource("1_pcsd4")
-spool_time = 5.0
+spool_time = 6.0
 acceleration = 1.5
 deacceleration = 25.0
 max_speed = 10000.0
 max_turn_speed = 0.015
+charging_start = ExtResource("3_fctay")
+charging_sound = ExtResource("2_oqoog")
+charging_end = ExtResource("1_smf7l")
+travelling_sound = ExtResource("5_nrlft")
 type = &"Alcubierre Drive"
 manufacturer = &"Test"
 model = &"Alcubierre Drive"

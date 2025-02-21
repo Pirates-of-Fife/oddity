@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkma80xy8ykw7"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_6abw8"]
+[ext_resource type="PackedScene" uid="uid://bqdd2css1vi5s" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/Leviathan.tscn" id="2_mx0fd"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_y0f0i"]
+
+[node name="LeviathanZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_6abw8")
+planet_name = &"Leviathan"
+planet_scene = ExtResource("2_mx0fd")
+planet_scale = 3
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 450000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_y0f0i")]
+text = &"Alcolin"

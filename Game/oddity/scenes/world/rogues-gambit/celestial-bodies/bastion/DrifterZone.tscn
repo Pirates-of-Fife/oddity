@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbhb7jrm8wt22"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_j43rb"]
+[ext_resource type="PackedScene" uid="uid://de7igm5vd3snj" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/Drifter.tscn" id="2_chfmx"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_gojs5"]
+
+[node name="DrifterZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_j43rb")
+planet_name = &"Drifter"
+planet_scene = ExtResource("2_chfmx")
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_gojs5")]

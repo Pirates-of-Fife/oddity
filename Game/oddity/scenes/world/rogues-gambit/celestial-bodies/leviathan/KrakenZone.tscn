@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5fmks2ayyeqc"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_ldaxe"]
+[ext_resource type="PackedScene" uid="uid://ccy0ovve63qfv" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/Kraken.tscn" id="2_uyk6k"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_2paq4"]
+
+[node name="KrakenZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_ldaxe")
+planet_name = &"Kraken"
+planet_scene = ExtResource("2_uyk6k")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_2paq4")]
+text = &"Maelstrom"

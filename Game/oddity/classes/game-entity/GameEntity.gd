@@ -8,6 +8,19 @@ signal on_game_entity_drop_request
 
 signal on_damage_taken(damage : float)
 
+var is_mass_locked : bool :
+	get:
+		for i : FrameOfReference in in_frame_of_references:
+			if i.mass_lock:
+				return true
+		return false
+
+
+@export_category("Value")
+
+@export
+var value : int
+
 @export_category("Interaction")
 
 @export
@@ -50,7 +63,7 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	_default_ready()
-	
+
 # WARNING: temporary, damage will depend on penetration and armour values
 func take_damage(damage : float) -> void:
 	on_damage_taken.emit(damage)
@@ -65,9 +78,9 @@ func _default_physics_process(delta : float) -> void:
 					if freeze_timer.is_stopped():
 						freeze_timer.start()
 
-func debug_log(msg : String) -> void:
+func debug_log(msg : Variant) -> void:
 	if debug:
-		print(str(self) + str(" Debug: ") + msg)
+		print(str(self) + str(" Debug: ") + str(msg))
 
 func _default_process(delta : float) -> void:
 	pass
@@ -83,6 +96,27 @@ func _default_ready() -> void:
 
 func on_interact_self() -> void:
 	unfreeze()
+	unfreeze_in_frame_of_reference()
+
+
+func unfreeze_in_frame_of_reference() -> void:
+	if get_parent_node_3d() is not FrameOfReference:
+		return
+
+	for body : Node in get_parent_node_3d().get_children():
+		if body == self:
+			continue
+
+		if body is GameEntity:
+			if body.freeze == true:
+				if body.can_be_picked_up == true:
+					if body is CargoContainer:
+						if (body as CargoContainer).snapped_to == null:
+							body.unfreeze()
+					else:
+						body.unfreeze()
+
+
 
 func freeze_timer_timeout() -> void:
 	if active_frame_of_reference != null:

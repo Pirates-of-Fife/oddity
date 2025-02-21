@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7ibe2vyuxfw3"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_0hx6v"]
+[ext_resource type="PackedScene" uid="uid://blpqloyqri6dm" path="res://scenes/world/mirage/celestia-bodies/omen/Omen.tscn" id="2_6ddq0"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_kpgm0"]
+
+[node name="OmenZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_0hx6v")
+planet_name = &"Omen"
+planet_scene = ExtResource("2_6ddq0")
+planet_scale = 1
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_kpgm0")]
+text = &"Eldritch"

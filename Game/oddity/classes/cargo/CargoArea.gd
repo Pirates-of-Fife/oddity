@@ -2,6 +2,9 @@ extends Area3D
 
 class_name CargoArea
 
+signal cargo_removed_from_area(cargo_area : CargoArea,cargo : CargoContainer)
+signal cargo_added_to_area(cargo_area : CargoArea, cargo : CargoContainer)
+
 @export
 var cargo_in_area : CargoContainer
 
@@ -20,6 +23,10 @@ var snapped_cargo : CargoContainer
 @export
 var valid : bool
 
+@export
+var timer : Timer = Timer.new()
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var error_enter : Error = self.connect("body_entered", body_entered)
@@ -33,7 +40,13 @@ func _ready() -> void:
 
 	if cargo_in_area != null:
 		valid = false
-
+	
+	timer.wait_time = 0.15
+	timer.autostart = true
+	timer.one_shot = false
+	timer.timeout.connect(update)
+	add_child(timer)
+	
 
 func cargo_added() -> void:
 	valid = false
@@ -53,7 +66,7 @@ func cargo_removed() -> void:
 		upper_cargo_area.valid = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func update() -> void:
 	if cargo_in_area == null:
 		return
 

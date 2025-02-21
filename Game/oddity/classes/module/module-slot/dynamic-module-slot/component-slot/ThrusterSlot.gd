@@ -8,12 +8,47 @@ var size : ModuleSize.ThrusterSize
 @export
 var type : ThrusterType
 
+@export
+var primary_direction : Directions
+
+@export
+var secondary_direction : Directions
+
+@export
+var tertiary_direction : Directions
+
+@export
+var current_thrust : float :
+	set(value):
+		current_thrust = clampf(value, 0, 1)
+		if module != null:
+			(module as Thruster).current_thrust = current_thrust
+	get:
+		return current_thrust
+
 enum ThrusterType
 {
 	MAIN = 0,
 	RCS,
 	RETRO,
 	VTOL
+}
+
+enum Directions
+{
+	NONE = 0,
+	FORWARDS,
+	BACKWARDS,
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	ROLL_LEFT,
+	ROLL_RIGHT,
+	YAW_LEFT,
+	YAW_RIGHT,
+	PITCH_UP,
+	PITCH_DOWN
 }
 
 func _module_fits(module : Module) -> bool:
@@ -48,7 +83,6 @@ func _thruster_slot_ready() -> void:
 
 
 	if highlight_box == null:
-
 		var mesh_instance : MeshInstance3D = MeshInstance3D.new()
 		var box_mesh : BoxMesh = BoxMesh.new()
 		box_mesh.size = area.get_child(0).shape.size
