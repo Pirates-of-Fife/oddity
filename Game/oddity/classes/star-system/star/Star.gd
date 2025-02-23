@@ -6,7 +6,7 @@ class_name Star
 var danger_distance : float
 
 @export
-var mesh : MeshInstance3D
+var mesh : Node3D
 
 @export
 var rotation_speed : float = 1
@@ -18,6 +18,8 @@ func _process(delta: float) -> void:
 
 
 func _ready() -> void:
+	add_child(zone)
+	
 	zone.activate_distance = danger_distance
 	zone.deactivate_distance = danger_distance
 	zone.update_time = 0.3
