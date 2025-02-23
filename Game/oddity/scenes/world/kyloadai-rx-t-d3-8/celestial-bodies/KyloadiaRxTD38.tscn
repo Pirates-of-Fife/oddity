@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://8rwcs2d5ajpx"]
+[gd_scene load_steps=8 format=3 uid="uid://8rwcs2d5ajpx"]
 
 [ext_resource type="Script" path="res://classes/star-system/star/Star.gd" id="1_dbtm6"]
 [ext_resource type="Texture2D" uid="uid://bxvs20qhjctbo" path="res://scenes/world/textures/8k_sun - Copy.jpg" id="2_rt1xf"]
 [ext_resource type="Script" path="res://classes/star-system/StarLight.gd" id="3_mipsy"]
+[ext_resource type="Script" path="res://classes/star-system/star/star-shader/SunShader.gd" id="4_b1vko"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1py8r"]
 radius = 250000.0
@@ -28,6 +29,7 @@ rotation_speed = 0.3
 
 [node name="Sun" type="MeshInstance3D" parent="."]
 transform = Transform3D(-3.32666, -3.73197, -0.0759467, -0.0667774, 0.161215, -4.99695, 3.73215, -3.32362, -0.157103, 0, 0, 0)
+visible = false
 layers = 2
 gi_mode = 0
 mesh = SubResource("SphereMesh_1py8r")
@@ -44,3 +46,8 @@ shadow_enabled = true
 shadow_opacity = 0.97
 directional_shadow_max_distance = 1000.0
 script = ExtResource("3_mipsy")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(125000, 0, 0, 0, 125000, 0, 0, 0, 125000, 0, 0, 0)
+script = ExtResource("4_b1vko")
+color = Color(0, 0.327363, 0.73911, 1)
