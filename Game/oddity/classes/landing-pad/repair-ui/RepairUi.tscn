@@ -30,7 +30,9 @@ repair_ui_2d = NodePath("SubViewport/RepairUi2d")
 texture = SubResource("ViewportTexture_464ik")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
 transparent_bg = true
+gui_disable_input = true
 size_2d_override_stretch = true
 
 [node name="RepairUi2d" parent="SubViewport" instance=ExtResource("1_0cnma")]

@@ -25,7 +25,9 @@ data = PackedVector3Array(-1.0025, 0.425, 0.0175, 1.0025, 0.425, 0.0175, -1.0025
 script = ExtResource("1_odvdi")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
 transparent_bg = true
+gui_disable_input = true
 size = Vector2i(492, 312)
 
 [node name="SaveShipUi2d" parent="SubViewport" instance=ExtResource("1_ouk84")]

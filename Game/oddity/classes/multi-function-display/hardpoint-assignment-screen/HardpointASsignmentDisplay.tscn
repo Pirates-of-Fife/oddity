@@ -66,7 +66,9 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, -3.29891, -1.489, 0)
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.67175, -1.34661, 0)
 
 [node name="SubViewport2" type="SubViewport" parent="."]
+disable_3d = true
 transparent_bg = true
+gui_disable_input = true
 size = Vector2i(1920, 1080)
 
 [node name="Control" parent="SubViewport2" instance=ExtResource("2_46kkq")]
