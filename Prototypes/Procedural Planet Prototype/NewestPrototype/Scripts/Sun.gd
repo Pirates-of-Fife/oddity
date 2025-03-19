@@ -34,7 +34,6 @@ func _ready():
 	
 	
 	
-	# Load the textures (make sure the paths are correct)
 	var voronoi_texture = preload("res://Noise/voronoi_noise.png")  
 	var emission_texture = preload("res://Noise/emission_noise.png")  
 
