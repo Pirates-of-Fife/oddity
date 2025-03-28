@@ -18,7 +18,6 @@ uniform int layers_count: hint_range(0, 12) = 3;
 
 
 vec3 hue(vec3 inp, float offset, int range_index) {
-
 	vec4 k = vec4(0., -1./3., 2./3., -1.);
 	vec4 p = mix(vec4(inp.bg, k.wz), vec4(inp.gb, k.xy), step(inp.b, inp.g));
 	vec4 q = mix(vec4(p.xyw, inp.r), vec4(inp.r, p.yzx), step(p.x, inp.r));
@@ -49,7 +48,7 @@ vec3 hash(vec3 x) {
 	return fract(sin(x) * 43758.5453123);
 }
 
-vec2 voronoi(in vec3 x){
+vec2 Cloud_Pattern_Noise(in vec3 x){
 	vec3 p= floor(x);
 	vec3 f= fract(x);
 	float res = 100.;
@@ -74,7 +73,7 @@ void sky() {
 	COLOR = sky_color;
 	for (int i = 0; i<layers_count; i++) {
 		vec3 pos = EYEDIR *(layer_scale +float(i)*layer_scale_step);
-		vec2 layer = voronoi(pos);
+		vec2 layer = Cloud_Pattern_Noise(pos);
 
 		vec3 rand = hash(vec3(layer.y));
 
