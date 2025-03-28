@@ -2,28 +2,27 @@
 extends Resource
 class_name PlanetNoise
 
-@export var amplitude : float = 1.0 : set = set_amplitude
-@export var minh : float = 1.0 : set = set_minh
-@export var noise_map : FastNoiseLite : set = set_noise_map
-@export var use_first_layer_as_mask : bool = false : set = set_first_layer_as_mask
+@export var strength : float = 1.0 : set = set_strength
+@export var min_height : float = 1.0 : set = set_min_height
+@export var noise_generator : FastNoiseLite : set = set_noise_generator
+@export var use_base_as_mask : bool = false : set = set_use_base_as_mask
 
-func set_first_layer_as_mask(val:bool) -> void:
-	use_first_layer_as_mask = val
+func set_use_base_as_mask(value:bool) -> void:
+	use_base_as_mask = value
 	emit_signal("changed")
 
-func set_amplitude(val:float) -> void:
-	amplitude = val
+func set_strength(value:float) -> void:
+	strength = value
 	emit_signal("changed")
 
-func set_minh(val:float) -> void:
-	minh = val
+func set_min_height(value:float) -> void:
+	min_height = value
 	emit_signal("changed")
 
-func set_noise_map(val:FastNoiseLite) -> void:
-	noise_map = val
-	if noise_map != null and not noise_map.is_connected("changed", on_data_changed):
-		noise_map.connect("changed", on_data_changed)
+func set_noise_generator(value:FastNoiseLite) -> void:
+	noise_generator = value
+	if noise_generator != null and not noise_generator.is_connected("changed", on_modified):
+		noise_generator.connect("changed", on_modified)
 
-
-func on_data_changed() -> void:
+func on_modified() -> void:
 	emit_signal("changed")
