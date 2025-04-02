@@ -3,121 +3,123 @@ extends Resource
 
 class_name PlanetData
 
-@export var radius : float = 1.0 : set = set_radius
-@export var res : int = 5 : set = set_res
-@export var planet_noise : Array[PlanetNoise] : set = set_planet_noise
-@export var biomes : Array[PlanetBiome] : set = set_biomes
-@export var biome_noise : FastNoiseLite : set = set_biome_noise
-@export var biome_amplitude : float = 1.0 : set = set_biome_amplitude
-@export var biome_offset : float = 1.0 : set = set_biome_offset
-@export_range(0.0, 1.0) var biome_blend : float = 1.0 : set = set_biome_blend
+@export var size : float = 1.0 : set = set_size
+@export var resolution : int = 5 : set = set_resolution
+@export var terrain_layers : Array[PlanetNoise] : set = set_terrain_layers
+@export var region_types : Array[PlanetBiome] : set = set_region_types
+@export var region_noise : FastNoiseLite : set = set_region_noise
+@export var region_strength : float = 1.0 : set = set_region_strength
+@export var region_bias : float = 1.0 : set = set_region_bias
+@export_range(0.0, 1.0) var region_transition : float = 1.0 : set = set_region_transition
 
-var min_height : float = 99999.0
-var max_height : float = 0.0
+var lowest_point : float = 99999.0
+var highest_point : float = 0.0
 
-func set_biome_noise(val : FastNoiseLite) -> void:
-	biome_noise = val
-	emit_signal("changed")
-	if biome_noise != null and not biome_noise.is_connected("changed", on_data_changed):
-			biome_noise.connect("changed", on_data_changed)
 
-func set_biome_amplitude(val : float) -> void:
-	biome_amplitude = val
+func set_region_noise(value : FastNoiseLite) -> void:
+	region_noise = value
 	emit_signal("changed")
-func set_biome_offset(val :float) -> void:
-	biome_offset = val
-	emit_signal("changed")
-func set_biome_blend(val:float) -> void:
-	biome_blend = val
-	emit_signal("changed")
-func set_planet_noise(val:Array[PlanetNoise]) -> void:
-	planet_noise = val
-	emit_signal("changed")
-	for n :PlanetNoise in planet_noise:
-		if n != null and not n.is_connected("changed", on_data_changed):
-			n.connect("changed", on_data_changed)
+	if region_noise != null and not region_noise.is_connected("changed", on_modified):
+			region_noise.connect("changed", on_modified)
 
-func set_biomes(val:Array[PlanetBiome]) -> void:
-	biomes = val
-	if biomes.size() == 0:
-		biomes[0] = PlanetBiome.new()
-	for n:PlanetBiome in biomes:
-		if n == null:
-			n = PlanetBiome.new()
-		if not n.is_connected("changed", on_data_changed):
-			n.connect("changed", on_data_changed)
+
+func set_region_strength(value : float) -> void:
+	region_strength = value
+	emit_signal("changed")
+func set_region_bias(value :float) -> void:
+	region_bias = value
+	emit_signal("changed")
+func set_region_transition(value:float) -> void:
+	region_transition = value
+	emit_signal("changed")
+func set_terrain_layers(value:Array[PlanetNoise]) -> void:
+	terrain_layers = value
+	emit_signal("changed")
+	for layer :PlanetNoise in terrain_layers:
+		if layer != null and not layer.is_connected("changed", on_modified):
+			layer.connect("changed", on_modified)
+
+func set_region_types(value:Array[PlanetBiome]) -> void:
+	region_types = value
+	if region_types.size() == 0:
+		region_types[0] = PlanetBiome.new()
+	for region:PlanetBiome in region_types:
+		if region == null:
+			region = PlanetBiome.new()
+		if not region.is_connected("changed", on_modified):
+			region.connect("changed", on_modified)
 	
 	emit_signal("changed")
 
-const MAXRES : int = 100
-const MINRES : int = -MAXRES
+const MAX_RESOLUTION : int = 100
+const MIN_RESOLUTION : int = -MAX_RESOLUTION
 
-func set_radius(val:float) -> void:
-	radius = val
+func set_size(value:float) -> void:
+	size = value
 	emit_signal("changed")
 
-func set_res(val:int) -> void:
-	if val > MAXRES:
-		val = MAXRES
-	if val < MINRES:
-		val = MINRES
-	res = val
+func set_resolution(value:int) -> void:
+	if value > MAX_RESOLUTION:
+		value = MAX_RESOLUTION
+	if value < MIN_RESOLUTION:
+		value = MIN_RESOLUTION
+	resolution = value
 	emit_signal("changed")
 
-func on_data_changed() -> void:
+func on_modified() -> void:
 	emit_signal("changed")
 
-func point_on_planet_old(pos : Vector3) -> Vector3:
-	var elevation : float = 0.0
-	for n:PlanetNoise in planet_noise:
-		var nelevation:float = n.noise_map.get_noise_3dv(pos)
-		nelevation = nelevation + 1 / 2.0 * n.amplitude
-		nelevation = max(0.0, nelevation - n.minh)
-		elevation += nelevation
-	return pos * radius * (elevation+1.0)
+func get_surface_point_legacy(position : Vector3) -> Vector3:
+	var height : float = 0.0
+	for layer:PlanetNoise in terrain_layers:
+		var layer_height:float = layer.noise_map.get_noise_3dv(position)
+		layer_height = layer_height + 1 / 2.0 * layer.amplitude
+		layer_height = max(0.0, layer_height - layer.minh)
+		height += layer_height
+	return position * size * (height+1.0)
 
-func update_biome_texture() -> ImageTexture:
-	var image_texture:ImageTexture = ImageTexture.new()
-	var dynamic_image:Image = Image.new()
-	var h : int = biomes.size()
-	if h > 0:
-		var data : PackedByteArray = []
-		var w : int = biomes[0].gradient_t.width
-		for b:PlanetBiome in biomes:
-			data.append_array(b.gradient_t.get_image().get_data())
+func generate_region_texture() -> ImageTexture:
+	var texture:ImageTexture = ImageTexture.new()
+	var image:Image = Image.new()
+	var region_count : int = region_types.size()
+	if region_count > 0:
+		var pixel_data : PackedByteArray = []
+		var texture_width : int = region_types[0].gradient_t.width
+		for biome:PlanetBiome in region_types:
+			pixel_data.append_array(biome.gradient_t.get_image().get_data())
 		
-		dynamic_image = Image.create_from_data(w, h, false, Image.FORMAT_RGBA8, data)
+		image = Image.create_from_data(texture_width, region_count, false, Image.FORMAT_RGBA8, pixel_data)
 		
-		image_texture.set_image(dynamic_image)
-		image_texture.resource_name = "Biome Texture"
-	return image_texture
+		texture.set_image(image)
+		texture.resource_name = "Biome Texture"
+	return texture
 
-func biome_percent_from_point(point_on_unit_sphere : Vector3) -> float:
-	var height_percent : float = (point_on_unit_sphere.y + 1.0) / 2.0
-	height_percent += ((biome_noise.get_noise_3dv(point_on_unit_sphere*100.0)+1.0/2.0)-biome_offset) * biome_amplitude
-	var num_biome : float = biomes.size()
-	var biome_index : float = 0.0;
-	var blend_range : float = biome_blend / 2.0 + 0.0001
-	for i:float in range(num_biome):
-		var dst : float = height_percent - biomes[i].start_h
-		var weight:float = clamp(inverse_lerp(-blend_range, blend_range, dst), 0.0, 1.0)
-		biome_index *= (1 - weight)
-		biome_index += i * weight
-	return biome_index / max(1.0, num_biome - 1.0)
+func get_region_blend_value(surface_point : Vector3) -> float:
+	var vertical_position : float = (surface_point.y + 1.0) / 2.0
+	vertical_position += ((region_noise.get_noise_3dv(surface_point*100.0)+1.0/2.0)-region_bias) * region_strength
+	var total_regions : float = region_types.size()
+	var blend_result : float = 0.0;
+	var transition_width : float = region_transition / 2.0 + 0.0001
+	for index:float in range(total_regions):
+		var distance : float = vertical_position - region_types[index].start_h
+		var influence:float = clamp(inverse_lerp(-transition_width, transition_width, distance), 0.0, 1.0)
+		blend_result *= (1 - influence)
+		blend_result += index * influence
+	return blend_result / max(1.0, total_regions - 1.0)
 
-func point_on_planet(point_on_sphere : Vector3) -> Vector3:
-	var elevation : float = 0.0
-	var base_elevation :float = 0.0
-	if planet_noise.size() > 0:
-		base_elevation = (planet_noise[0].noise_map.get_noise_3dv(point_on_sphere*100.0))
-		base_elevation = (base_elevation + 1.0) / 2.0 * planet_noise[0].amplitude
-		base_elevation = max(0.0, base_elevation - planet_noise[0].minh)
-	for n:PlanetNoise in planet_noise:
-		var mask :float = 1.0
-		if n.use_first_layer_as_mask:
-			mask = base_elevation
-		var level_elevation:float = n.noise_map.get_noise_3dv(point_on_sphere*100.0)
-		level_elevation = (level_elevation + 1.0) / 2.0 * n.amplitude
-		level_elevation = max(0.0, level_elevation - n.minh) * mask
-		elevation += level_elevation
-	return point_on_sphere * radius * (elevation+1.0)
+func get_surface_point(sphere_point : Vector3) -> Vector3:
+	var total_height : float = 0.0
+	var base_height :float = 0.0
+	if terrain_layers.size() > 0:
+		base_height = (terrain_layers[0].noise_map.get_noise_3dv(sphere_point*100.0))
+		base_height = (base_height + 1.0) / 2.0 * terrain_layers[0].amplitude
+		base_height = max(0.0, base_height - terrain_layers[0].minh)
+	for layer:PlanetNoise in terrain_layers:
+		var masking :float = 1.0
+		if layer.use_first_layer_as_mask:
+			masking = base_height
+		var layer_height:float = layer.noise_map.get_noise_3dv(sphere_point*100.0)
+		layer_height = (layer_height + 1.0) / 2.0 * layer.amplitude
+		layer_height = max(0.0, layer_height - layer.minh) * masking
+		total_height += layer_height
+	return sphere_point * size * (total_height+1.0)
