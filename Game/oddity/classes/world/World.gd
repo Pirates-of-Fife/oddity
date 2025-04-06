@@ -147,6 +147,7 @@ func respawn_player() -> void:
 	if abyss_entered:
 		get_node("AbyssalTunnel").queue_free()
 		get_node("AbyssalAmbiance").queue_free()
+		abyss_entered = false
 	
 	var player_body : Creature = player.respawn_body.instantiate()
 	player.reparent(self)
