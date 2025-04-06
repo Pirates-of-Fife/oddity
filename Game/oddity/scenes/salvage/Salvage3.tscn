@@ -1,0 +1,58 @@
+[gd_scene load_steps=28 format=3 uid="uid://bclu6h18h468j"]
+
+[ext_resource type="Script" path="res://scenes/salvage/random_salvage_ship_loadout.gd" id="1_7cg3d"]
+[ext_resource type="Resource" uid="uid://b1pldqyejslhf" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_1_Loadout.tres" id="2_7ol3p"]
+[ext_resource type="Resource" uid="uid://ca4wmcu2s8h2s" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_2_Loadout.tres" id="3_hiohj"]
+[ext_resource type="Resource" uid="uid://bxsbx566gtyon" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_3_Loadout.tres" id="4_toulm"]
+[ext_resource type="Resource" uid="uid://d4kj1o1a18i2o" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_4_Loadout.tres" id="5_o2gpq"]
+[ext_resource type="Resource" uid="uid://b4ib3lsww33hn" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_1_Loadout.tres" id="6_ckntt"]
+[ext_resource type="Resource" uid="uid://df1cwvhxsy02u" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_2_Loadout.tres" id="7_fkvgi"]
+[ext_resource type="Resource" uid="uid://dt126675t14xe" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_3_Loadout.tres" id="8_p16ff"]
+[ext_resource type="Resource" uid="uid://c16d15b15gtlo" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_4_Loadout.tres" id="9_and0d"]
+[ext_resource type="Resource" uid="uid://dar1u2a1o2pis" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_5_Loadout.tres" id="10_q7i35"]
+[ext_resource type="Resource" uid="uid://rlrpfh68skls" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_1_Loadout.tres" id="11_jgpc0"]
+[ext_resource type="Resource" uid="uid://c8wnmwc1ifguk" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_2_Loadout.tres" id="12_ffdrt"]
+[ext_resource type="Resource" uid="uid://cekgwod1j2e28" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_3_Loadout.tres" id="13_hxawi"]
+[ext_resource type="Resource" uid="uid://xcpmwtvsqu40" path="res://resources/resources/bounty-hunting/high/RABS_Kestrel_MK1_Bounty_High_4_Loadout.tres" id="14_iang2"]
+[ext_resource type="Resource" uid="uid://hu5gqe83uwsy" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_1_Loadout.tres" id="15_27y4h"]
+[ext_resource type="Resource" uid="uid://xh2efbrk3clj" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_2_Loadout.tres" id="16_rhc44"]
+[ext_resource type="Resource" uid="uid://b4nc2y5nss3v0" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_3_Loadout.tres" id="17_t4etu"]
+[ext_resource type="Resource" uid="uid://cw5ypqunlmkk7" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_4_Loadout.tres" id="18_v4k8e"]
+[ext_resource type="Resource" uid="uid://x01t8bceapmv" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_5_Loadout.tres" id="19_spjgd"]
+[ext_resource type="Resource" uid="uid://dkn5t8ulgw3qq" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_6_Loadout.tres" id="20_bukck"]
+[ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="21_qf3x5"]
+[ext_resource type="PackedScene" uid="uid://d0j0tdift7ymb" path="res://scenes/modules/test-module/rotary-autocannon/size-6/Size6RotaryAutoCannon.tscn" id="22_6t0w1"]
+[ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="23_up6c2"]
+[ext_resource type="PackedScene" uid="uid://dlwiiho663iff" path="res://scenes/modules/test-module/hull-reinforcement/size-4/Size4HullReinforcement.tscn" id="24_m3tsm"]
+[ext_resource type="PackedScene" uid="uid://c8q0kmhpluwao" path="res://scenes/modules/test-module/ShieldGenerator/size-3/Size3ShieldGenerator.tscn" id="25_8t7xt"]
+[ext_resource type="PackedScene" uid="uid://h2gmsd4soaa8" path="res://scenes/cargo/bounty-hunting-cargo-containers/Contraband.tscn" id="26_r2ksx"]
+[ext_resource type="PackedScene" uid="uid://bk046jth70dqt" path="res://scenes/cargo/bounty-hunting-cargo-containers/GatewayRum.tscn" id="27_s7x5w"]
+
+[node name="Salvage1" type="Node3D" node_paths=PackedStringArray("ship")]
+script = ExtResource("1_7cg3d")
+ship = NodePath("RabsKestrelMk1")
+possible_loadouts = [ExtResource("2_7ol3p"), ExtResource("3_hiohj"), ExtResource("4_toulm"), ExtResource("5_o2gpq"), ExtResource("6_ckntt"), ExtResource("7_fkvgi"), ExtResource("8_p16ff"), ExtResource("9_and0d"), ExtResource("10_q7i35"), ExtResource("11_jgpc0"), ExtResource("12_ffdrt"), ExtResource("13_hxawi"), ExtResource("14_iang2"), ExtResource("15_27y4h"), ExtResource("16_rhc44"), ExtResource("17_t4etu"), ExtResource("18_v4k8e"), ExtResource("19_spjgd"), ExtResource("20_bukck")]
+
+[node name="RabsKestrelMk1" parent="." instance=ExtResource("21_qf3x5")]
+current_state = 2
+
+[node name="Size6RotaryAutoCannon" parent="." instance=ExtResource("22_6t0w1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0443, 0, -37.5587)
+
+[node name="Size6MiningLaser" parent="." instance=ExtResource("23_up6c2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.154, 0, -27.0732)
+
+[node name="Size6MiningLaser2" parent="." instance=ExtResource("23_up6c2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.366, 0, -20.1832)
+
+[node name="Size4HullReinforcement" parent="." instance=ExtResource("24_m3tsm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9697, 0, -0.494406)
+
+[node name="Size3ShieldGenerator" parent="." instance=ExtResource("25_8t7xt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6243, -1.77636e-15, 0.324748)
+
+[node name="Cu1Container" parent="." instance=ExtResource("26_r2ksx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.73931, 0.0438607, -24.7986)
+
+[node name="Cu1Container2" parent="." instance=ExtResource("27_s7x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4519, -0.0677241, -39.0818)
