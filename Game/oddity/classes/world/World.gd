@@ -57,7 +57,7 @@ func _ready() -> void:
 	auto_save_timer.timeout.connect(save_player_ship_state)
 	auto_save_timer.one_shot = false
 	auto_save_timer.autostart = true
-	auto_save_timer.wait_time = 60 * 2
+	auto_save_timer.wait_time = 60
 	add_child(auto_save_timer)
 	
 	spawn_station = get_tree().get_first_node_in_group("StarSystem").spawn_station

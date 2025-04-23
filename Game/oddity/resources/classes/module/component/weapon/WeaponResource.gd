@@ -1,4 +1,4 @@
-extends ModuleResource
+extends ComponentResource
 
 class_name WeaponResource
 

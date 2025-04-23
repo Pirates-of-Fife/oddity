@@ -9,21 +9,41 @@ var cargo_selling_ui_2d : CargoSellingUi2d
 var connected_cargo_grid : CargoGrid
 
 @export
+var connected_module_selling_area : ModuleSellingArea
+
+@export
 var current_cargo : Array = Array()
 
-func update(cargo_area : CargoArea, cargo : CargoContainer) -> void:
+@export
+var current_modules : Array = Array()
+
+func update_cargo(cargo_area : CargoArea, cargo : CargoContainer) -> void:
 	current_cargo = connected_cargo_grid.current_cargo_in_grid
-	cargo_selling_ui_2d.update(current_cargo)
+	update_ui()
+
+func update_modules() -> void:
+	current_modules = connected_module_selling_area.modules
+	update_ui()
+
+func update_ui() -> void:
+	cargo_selling_ui_2d.update(current_cargo, current_modules)
 
 func _ready() -> void:
-	connected_cargo_grid.cargo_has_been_added_to_grid.connect(update)
-	connected_cargo_grid.cargo_has_been_removed_from_grid.connect(update)
+	connected_cargo_grid.cargo_has_been_added_to_grid.connect(update_cargo)
+	connected_cargo_grid.cargo_has_been_removed_from_grid.connect(update_cargo)
+	connected_module_selling_area.modules_updated.connect(update_modules)
 
 func _on_interaction_button_interacted(player: Player, control_entity: ControlEntity) -> void:
-	if current_cargo.size() == 0:
+	if current_cargo.size() == 0 and current_modules.size() == 0:
 		$No.play()
 		return
 	
-	connected_cargo_grid.sell_cargo()
+	if current_cargo.size() > 0:
+		connected_cargo_grid.sell_cargo()
+	if current_modules.size() > 0:
+		connected_module_selling_area.sell_modules()
+	
 	cargo_selling_ui_2d.reset()
 	$Sold.play()
+	
+	
