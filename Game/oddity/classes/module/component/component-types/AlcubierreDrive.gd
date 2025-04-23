@@ -9,6 +9,9 @@ var size : ModuleSize.AlcubierreDriveSize
 @export
 var initialize_collision_shape_automatically : bool = true
 
+@export
+var manouvarabilty_curve : Curve
+
 @export_category("Sounds")
 
 @export

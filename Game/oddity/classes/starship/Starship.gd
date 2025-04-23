@@ -1208,6 +1208,10 @@ func super_cruise_travel(delta : float) -> void:
 
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
 	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
+	
+	
+	var manouvarability_curve : Curve = (alcubierre_drive_slot.module as AlcubierreDrive).manouvarabilty_curve
+	var turning_multiplier : float =  manouvarability_curve.sample((current_super_cruise_speed / alcubierre_drive_slot.module.module_resource.max_speed))
 
 	if current_super_cruise_speed > target_velocity:
 		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale
@@ -1224,9 +1228,9 @@ func super_cruise_travel(delta : float) -> void:
 
 	last_position = global_position
 
-	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed)
-	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed)
-	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed)
+	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
+	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
+	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)

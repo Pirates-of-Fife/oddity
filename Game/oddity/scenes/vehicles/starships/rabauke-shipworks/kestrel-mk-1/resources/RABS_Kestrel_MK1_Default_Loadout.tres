@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="4_xdl2b"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="5_h3fdl"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="6_7bqi6"]
-[ext_resource type="PackedScene" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="6_ss1c4"]
+[ext_resource type="PackedScene" uid="uid://ssxap6l3wimu" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="6_ss1c4"]
 [ext_resource type="PackedScene" path="res://scenes/modules/test-module/Size2AbyssDrive.tscn" id="8_r3ijb"]
 [ext_resource type="PackedScene" uid="uid://b4yftdtjyvs6p" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_RightRadiator.tscn" id="12_p3li7"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="12_tqy46"]
@@ -379,7 +379,7 @@ module_slots = [SubResource("Resource_p5tfs"), SubResource("Resource_350rj"), Su
 cargo = null
 entities = [SubResource("Resource_l0i7w")]
 ship_name = &"RABS_Kestrel_Mk1"
-ship_identification = &""
+ship_identification = &"RABS-ZMF-0027"
 value = 0
 apply_health = false
 current_health = 20000.0
