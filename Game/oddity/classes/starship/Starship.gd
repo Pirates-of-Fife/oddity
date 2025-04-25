@@ -288,6 +288,23 @@ signal unfocused_target(target : Starship)
 @export
 var focus_player : AudioStreamPlayer3D
 
+@export_subgroup("Heat")
+
+@export
+var passive_heat_generation : float
+
+@export
+var maximum_heat_capacity : float
+
+@export
+var current_heat : float
+
+@export
+var damage_per_heat_over_capacity : float
+
+@export
+var heat_damage_timer : Timer = Timer.new()
+
 @export_category("Cargo")
 @export
 var cargo_grids : Array = Array()
@@ -579,7 +596,26 @@ func _starship_ready() -> void:
 		if c is Hardpoint:
 			hardpoints.append(c)
 
+	heat_damage_timer.one_shot = false
+	heat_damage_timer.timeout.connect(heat_damage_timer_timeout)
+	heat_damage_timer.wait_time = 1.5
+	add_child(heat_damage_timer)
 
+	if !is_bounty_target:
+		heat_damage_timer.start()
+
+func heat_damage_timer_timeout() -> void:
+	if current_heat < maximum_heat_capacity:
+		return
+
+	ship_take_damage((current_heat - maximum_heat_capacity) * damage_per_heat_over_capacity)
+
+func add_heat(heat : float) -> void:
+	current_heat += heat
+
+func remove_heat(heat : float) -> void:
+	current_heat -= heat
+	current_heat = clampf(current_heat, 0, 1000000000000)
 
 enum Directions
 {
