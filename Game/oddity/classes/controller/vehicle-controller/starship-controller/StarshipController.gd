@@ -40,6 +40,8 @@ var starship_cycle_power_state_command : StarshipCyclePowerStateCommand = Starsh
 
 var starship_focus_target_command : StarshipFocusTargetCommand = StarshipFocusTargetCommand.new()
 
+var starship_toggle_headlights_command : StarshipToggleHeadlightsCommand = StarshipToggleHeadlightsCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -145,6 +147,9 @@ func _starship_controller_process(delta : float) -> void:
 			mouse_pitch = 0
 			general_toggle_look_around_command.execute(control_entity)
 			look_around = !look_around
+
+		if (Input.is_action_just_pressed("ship_toggle_headlights")):
+			starship_toggle_headlights_command.execute(control_entity)
 
 		if look_around:
 			if control_entity.active_control_seat != null:

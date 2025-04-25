@@ -70,7 +70,7 @@ func _process(delta: float) -> void:
 
 func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	_starship_process(delta)
-	
+
 	if player == null:
 		return
 
@@ -93,7 +93,7 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 		if $Interior/Bridge/CruiseLabel.visible:
 			$Interior/Bridge/CruiseLabel/CruiseSound.play()
 			$Interior/Bridge/CruiseLabel.hide()
-			
+
 	if ship_name.to_lower() == "the sunk'n norwegian":
 		$Decal.show()
 	else:
@@ -124,7 +124,7 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	_starship_ready()
 
 	player_reference = get_tree().get_first_node_in_group("Player")
-	
+
 	if current_state == State.POWER_OFF:
 		$Interior/Bridge/ShieldAndHullUi3d.hide()
 		$Interior/Bridge/VelocityMfd3d.hide()
@@ -137,7 +137,7 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		$Interior/Bridge/RadarDisplay.hide()
 		$Interior/Bridge/PowerLabel.show()
 		$Interior/Bridge/StarshipTargetMfd.hide()
-	
+
 
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
@@ -186,7 +186,7 @@ func update_ui() -> void:
 		if $Interior/Bridge/MassLockedLabel.visible:
 			$Interior/Bridge/MassLockedLabel.hide()
 			$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
-			
+
 func on_power_on() -> void:
 	power_on_sound_player.play()
 
