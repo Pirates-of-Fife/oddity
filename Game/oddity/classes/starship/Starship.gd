@@ -23,7 +23,7 @@ var ship_name : StringName = "Default Starship" :
 			name_label.text = value
 	get:
 		return ship_name
-		
+
 
 @export
 var ship_identification : StringName = "Default Starship" :
@@ -34,7 +34,7 @@ var ship_identification : StringName = "Default Starship" :
 			print(ship_identification_label.text + " oooo")
 	get:
 		return ship_identification
-		
+
 
 @export
 var cruise_speed : float = 300.1234
@@ -366,6 +366,16 @@ enum BountyDifficulty
 	EXTREME
 }
 
+@export_category("Other")
+
+@export
+var headlight_left : SpotLight3D
+
+@export
+var headlight_right : SpotLight3D
+
+@export
+var headlight_icon : Sprite3D
 
 func _ready() -> void:
 	_starship_ready()
@@ -424,7 +434,7 @@ func focus_target() -> void:
 	focused_target.emit(focused_starship)
 	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
 	focused_starship.is_targeted = true
-	
+
 	focus_player.play()
 
 func focused_ship_destroyed() -> void:
@@ -457,7 +467,7 @@ func _starship_ready() -> void:
 
 	name_label.text = ship_name
 	ship_identification_label.text = ship_identification
-	
+
 	travel_mode = starship_travel_modes.TravelMode.CRUISE
 
 	lock_timer.one_shot = true
@@ -548,10 +558,10 @@ func _starship_ready() -> void:
 
 	if current_state == State.DESTROYED:
 		destroyed()
-	
+
 	if default_loadout.apply_health:
 		current_hull_health = default_loadout.current_health
-	
+
 	if is_bounty_target:
 		match difficulty:
 			BountyDifficulty.LOW:
@@ -568,8 +578,8 @@ func _starship_ready() -> void:
 	for c : Node3D in hardpoints_root.get_children():
 		if c is Hardpoint:
 			hardpoints.append(c)
-	
-	
+
+
 
 enum Directions
 {
@@ -646,7 +656,7 @@ func power_off() -> void:
 	stop_shooting_primary()
 	stop_shooting_secondary()
 	stop_shooting_tertiary()
-	
+
 	current_state = State.POWER_OFF
 	power_state_change_complete = true
 	axis_lock_linear_x = false
@@ -751,7 +761,7 @@ func _on_module_insert(module : Module) -> void:
 		max_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
-	
+
 func _on_module_uninserted(module : Module) -> void:
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
@@ -763,7 +773,7 @@ func _on_module_uninserted(module : Module) -> void:
 		current_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
 		hull_hardness -= (module.module_resource as HullReinforcementResource).additional_hardness
 
-		
+
 		if current_hull_health <= 0:
 			current_hull_health = 1
 
@@ -842,7 +852,7 @@ func update_shield_stats() -> void:
 func shoot_primary() -> void:
 	if !is_powered_on():
 		return
-	
+
 	if relative_linear_velocity.length() > cruise_speed:
 		return
 
@@ -974,26 +984,26 @@ func on_collision(body : Node3D) -> void:
 		shield.take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
 		take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
 
-	
+
 	if landing_gear_on and relative_linear_velocity.length() <= 50:
 		return
-	
+
 	var shield_damage : float = pow(relative_linear_velocity.length(), 2) * 0.35
 	var hull_damage : float = pow(relative_linear_velocity.length(), 2) * 0.15
-	
+
 	if body is GameEntity:
 		shield_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.35
 		hull_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.15
-	
-		
+
+
 	if shield_current_health > 0:
 		var old_health : float = shield_current_health
-		
+
 		shield.take_damage(shield_damage)
-				
+
 		if shield_damage / 4 > shield_max_health:
 			take_damage(shield_damage - old_health)
-		
+
 		return
 
 	var current_sound : AudioStream = hull_collision_sounds.pick_random()
@@ -1010,9 +1020,9 @@ func on_collision(body : Node3D) -> void:
 		hull_collision_player.play()
 
 func calculate_final_damage(base_damage: float) -> float:
-	var max_hardness: float = 164 
+	var max_hardness: float = 164
 	var max_reduction: float = 0.6
-		
+
 	var linear_factor: float = hull_hardness / max_hardness  # Pure linear scaling (0 to 1)
 	var log_factor: float = log(1 + hull_hardness) / log(1 + max_hardness)  # Log scaling
 
@@ -1071,10 +1081,10 @@ func initiate_abyssal_travel() -> void:
 	abyssal_portal.destination_star_system = selected_system.scene_file
 	abyssal_portal.starship = self
 
-func initiate_super_cruise() -> void:	
+func initiate_super_cruise() -> void:
 	if alcubierre_drive_slot.module == null:
 		return
-	
+
 	reset_thrust_vectors()
 	actual_thrust_vector_unit = Vector3.ZERO
 	actual_rotation_vector_unit = Vector3.ZERO
@@ -1082,7 +1092,7 @@ func initiate_super_cruise() -> void:
 	target_thrust_vector = Vector3.ZERO
 
 	alcubierre_drive_charge_end()
-	
+
 	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_start()
 	super_cruise_enter.play()
 
@@ -1208,8 +1218,8 @@ func super_cruise_travel(delta : float) -> void:
 
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
 	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
-	
-	
+
+
 	var manouvarability_curve : Curve = (alcubierre_drive_slot.module as AlcubierreDrive).manouvarabilty_curve
 	var turning_multiplier : float =  manouvarability_curve.sample((current_super_cruise_speed / alcubierre_drive_slot.module.module_resource.max_speed))
 
@@ -1285,9 +1295,9 @@ func generate_ship_id() -> String:
 	var id_numbers : String = ""
 	for i : int in range(4):
 		id_numbers += numbers[randi() % numbers.length()]
-		
+
 	print(id_prefix + "-" + id_letters + "-" + id_numbers)
-	
+
 	return id_prefix + "-" + id_letters + "-" + id_numbers
 
 
