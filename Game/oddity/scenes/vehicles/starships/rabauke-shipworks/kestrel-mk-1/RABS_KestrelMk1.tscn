@@ -1,4 +1,4 @@
-[gd_scene load_steps=195 format=3 uid="uid://24n0p54vbhsm"]
+[gd_scene load_steps=196 format=3 uid="uid://24n0p54vbhsm"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.gd" id="1_pouwl"]
 [ext_resource type="Resource" uid="uid://dryumn61chwql" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres" id="2_jt03q"]
@@ -84,6 +84,7 @@
 [ext_resource type="AudioStream" uid="uid://b5qxxa2v4bjxx" path="res://classes/module/component/component-types/alcubierre-drive/sounds/leave/leave.wav" id="72_c0mbx"]
 [ext_resource type="AudioStream" uid="uid://i34mw80pdit2" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/alarm/alarm.wav" id="74_1dgvu"]
 [ext_resource type="AudioStream" uid="uid://punb1myeiyt3" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/sounds/power_states/engine_start.wav" id="76_0qqdw"]
+[ext_resource type="Texture2D" uid="uid://ckpjdvwpndn2s" path="res://classes/multi-function-display/other/Headlight.svg" id="76_fnpxh"]
 [ext_resource type="AudioStream" uid="uid://ftlh5xvnksvd" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/sounds/power_states/starship_power_off.wav" id="77_01wg0"]
 [ext_resource type="PackedScene" uid="uid://bpoau7ueslq3g" path="res://scenes/environment/fire/Fire.tscn" id="78_nmody"]
 [ext_resource type="PackedScene" uid="uid://bkcjtkhnjpavu" path="res://scenes/environment/fire/BigFire.tscn" id="79_ebdjj"]
@@ -1722,7 +1723,7 @@ radius = 2000.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_fwwub"]
 size = Vector3(60, 60, 1819.25)
 
-[node name="RabsKestrelMk1" type="RigidBody3D" node_paths=PackedStringArray("velocity_mfd", "crosshair", "abyssal_mfd", "super_cruise_mfd", "shield_and_health_ui", "targeting", "damaged_label", "super_cruise_label", "interior_lights", "damaged_fires", "destroyed_fires", "alarm_sound_player", "explosion_partcle", "name_label", "ship_identification_label", "module_node", "abyss_drive_slot", "abyssal_portal_spawn_point", "alcubierre_drive_slot", "hardpoints_root", "thruster_slots_root", "shield", "radar_surrounding_area", "radar_focus_area", "focus_player", "hull_collision_player", "super_cruise_enter", "super_cruise_exit", "explosion_sound_player", "power_on_sound_player", "power_off_sound_player", "radio_chatter", "headlight_left", "headlight_right", "anchor")]
+[node name="RabsKestrelMk1" type="RigidBody3D" node_paths=PackedStringArray("velocity_mfd", "crosshair", "abyssal_mfd", "super_cruise_mfd", "shield_and_health_ui", "targeting", "damaged_label", "super_cruise_label", "interior_lights", "damaged_fires", "destroyed_fires", "alarm_sound_player", "explosion_partcle", "name_label", "ship_identification_label", "module_node", "abyss_drive_slot", "abyssal_portal_spawn_point", "alcubierre_drive_slot", "hardpoints_root", "thruster_slots_root", "shield", "radar_surrounding_area", "radar_focus_area", "focus_player", "hull_collision_player", "super_cruise_enter", "super_cruise_exit", "explosion_sound_player", "power_on_sound_player", "power_off_sound_player", "radio_chatter", "headlight_left", "headlight_right", "headlight_icon", "anchor")]
 collision_layer = 2097412
 collision_mask = 2097408
 mass = 5000.0
@@ -1775,6 +1776,7 @@ power_off_sound_player = NodePath("Sounds/Power State/PowerOffPlayer")
 radio_chatter = NodePath("Interior/Bridge/RadarDisplay/RadioChatterPlayer")
 headlight_left = NodePath("Exterior/Lights/SpotLight3D")
 headlight_right = NodePath("Exterior/Lights/SpotLight3D2")
+headlight_icon = NodePath("Exterior/Lights/LightSprite")
 third_person_distance_change_sensitivity = 20.0
 controller_reference = "res://classes/controller/vehicle-controller/starship-controller/StarshipController.tscn"
 ai_controller_reference = "res://classes/controller/ai-controller/ai-vehicle-controller/ai-starship-controller/AiStarshipController.tscn"
@@ -3485,6 +3487,11 @@ light_energy = 150.0
 shadow_enabled = true
 spot_range = 1500.0
 spot_angle = 15.0
+
+[node name="LightSprite" type="Sprite3D" parent="Exterior/Lights"]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.153629, 1.57053, -28.112)
+visible = false
+texture = ExtResource("76_fnpxh")
 
 [node name="Anchor" parent="." instance=ExtResource("45_q0j6u")]
 transform = Transform3D(1, 0, 2.44929e-16, 0, 1, 0, -2.44929e-16, 0, 1, 7.22361e-15, 11.0449, 201.176)
