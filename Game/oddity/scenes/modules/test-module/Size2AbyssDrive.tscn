@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://fabmgwjbqisa"]
+[gd_scene load_steps=3 format=3 uid="uid://csxjtno0xrxmo"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/AbyssalJumpDrive.gd" id="1_v4do7"]
 [ext_resource type="PackedScene" uid="uid://d3qowdbvmnoir" path="res://scenes/modules/test-module/abyss_drive.glb" id="2_jigba"]
@@ -9,6 +9,7 @@ collision_mask = 537396225
 mass = 100.0
 script = ExtResource("1_v4do7")
 size = 2
+passive_heat_generation = 100.0
 value = 30000
 can_be_picked_up = true
 

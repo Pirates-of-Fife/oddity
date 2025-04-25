@@ -65,7 +65,7 @@ func _thruster_ready() -> void:
 
 	heat_timer.one_shot = false
 	heat_timer.timeout.connect(heat_timer_timeout)
-	heat_timer.wait_time = 0.3
+	heat_timer.wait_time = 0.1
 	add_child(heat_timer)
 	heat_timer.start()
 

@@ -107,4 +107,4 @@ func on_shield_online() -> void:
 
 	shield_online_sound.play()
 	
-	
+	(game_entity as Starship).add_heat((game_entity as Starship).shield_heat_per_full_recharge)

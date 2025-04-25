@@ -250,6 +250,12 @@ var shield_cooldown_after_hit_timer : Timer = Timer.new()
 @onready
 var shield_charge_timer : Timer = Timer.new()
 
+@export
+var shield_heat_per_charge : float
+
+@export
+var shield_heat_per_full_recharge : float
+
 var shield_hit_cooldown_complete : bool = true
 var shield_break_cooldown_complete : bool = true
 
@@ -291,7 +297,7 @@ var focus_player : AudioStreamPlayer3D
 @export_subgroup("Heat")
 
 @export
-var passive_heat_generation : float
+var passive_heat_generation : float = 0
 
 @export
 var maximum_heat_capacity : float
@@ -398,6 +404,15 @@ func _ready() -> void:
 	_starship_ready()
 
 func update_module_stats() -> void:
+	passive_heat_generation = 0
+	current_heat = 0
+	
+	for module_slot : ModuleSlot in module_slots:
+		if module_slot is DynamicModuleSlot:
+			if module_slot.module != null:
+				passive_heat_generation += module_slot.module.passive_heat_generation
+				current_heat += module_slot.module.passive_heat_generation
+	
 	update_shield_stats()
 
 func sound_power_state_change_complete() -> void:
@@ -605,10 +620,14 @@ func _starship_ready() -> void:
 		heat_damage_timer.start()
 
 func heat_damage_timer_timeout() -> void:
+	
+	
 	if current_heat < maximum_heat_capacity:
 		return
-
-	ship_take_damage((current_heat - maximum_heat_capacity) * damage_per_heat_over_capacity)
+	
+	print("SHIP FIRE : " + str((current_heat - maximum_heat_capacity) * damage_per_heat_over_capacity))
+	
+	ship_take_damage(damage_per_heat_over_capacity, true)
 
 func add_heat(heat : float) -> void:
 	current_heat += heat
@@ -779,7 +798,9 @@ func shield_charge_cooldown_finished() -> void:
 
 	if shield_generators.size() == 0:
 		return
-
+	
+	add_heat(shield_heat_per_charge)
+	
 	shield_current_health += shield_charge_rate
 
 	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
@@ -788,6 +809,10 @@ func shield_charge_cooldown_finished() -> void:
 		shield.collision_mask = shield.layer_mask_online
 
 func _on_module_insert(module : Module) -> void:
+	passive_heat_generation += module.passive_heat_generation
+	current_heat += module.passive_heat_generation
+
+	
 	if module is ShieldGenerator:
 		shield_generators.append(module)
 		update_shield_stats()
@@ -797,8 +822,14 @@ func _on_module_insert(module : Module) -> void:
 		max_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
-
+	
+	print(passive_heat_generation)
+	
 func _on_module_uninserted(module : Module) -> void:
+	passive_heat_generation -= module.passive_heat_generation
+	current_heat -= module.passive_heat_generation
+
+	
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
 		update_shield_stats()
@@ -816,12 +847,16 @@ func _on_module_uninserted(module : Module) -> void:
 
 func _starship_process(delta: float) -> void:
 	_vehicle_process(delta)
+	
+	print(current_heat)
 
 func update_shield_stats() -> void:
 	shield_max_health = 0
 	shield_charge_rate = 0
 	shield_cooldown_after_break = 0
 	shield_cooldown_after_hit = 0
+	shield_heat_per_charge = 0
+	shield_heat_per_full_recharge = 0
 
 	var shield_generator_count : int = shield_generators.size()
 
@@ -857,6 +892,9 @@ func update_shield_stats() -> void:
 		total_red_offline += color_offline.r
 		total_green_offline += color_offline.g
 		total_blue_offline += color_offline.b
+		
+		shield_heat_per_charge += shield_resource.shield_heat_per_charge
+		shield_heat_per_full_recharge += shield_resource.shield_heat_per_full_recharge
 
 	shield_cooldown_after_break /= shield_generator_count
 	shield_cooldown_after_hit /= shield_generator_count
@@ -995,11 +1033,11 @@ func cycle_selected_system() -> void:
 	selected_system = world.cycle_system()
 	update_abyssal_mfd()
 
-func ship_take_damage(damage : float) -> void:
+func ship_take_damage(damage : float, ignore_shield : bool = false) -> void:
 	if current_state == State.DESTROYED:
 		return
 
-	if shield_current_health > 0:
+	if shield_current_health > 0 and ignore_shield == false:
 		return
 
 	current_hull_health -= calculate_final_damage(damage)
