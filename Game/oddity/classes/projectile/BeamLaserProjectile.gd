@@ -36,6 +36,8 @@ var hit_distance : float
 var hit_position : Vector3
 var hit_normal : Vector3
 
+var beam_weapon : BeamWeapon
+
 func _ready() -> void:
 	_beam_laser_projectile_ready()
 
@@ -99,6 +101,8 @@ func stop_beam() -> void:
 func _beam_laser_projectile_process(delta: float) -> void:
 	if !is_started:
 		return
+
+	beam_weapon.module_slot.vehicle.add_heat((beam_weapon.module_resource as BeamWeaponResource).heat_generation * delta)
 
 	var cast_point : Vector3
 	raycast.force_raycast_update()
