@@ -60,7 +60,6 @@ thruster_sound = NodePath("AudioStreamPlayer3D")
 modifier = 4.6
 thruster_particles = NodePath("GPUParticles3D")
 value = 70000
-can_be_picked_up = true
 
 [node name="KestrelMk1MainThruster" parent="." instance=ExtResource("2_38npm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140154, -1.77636e-15, 0.0986767)

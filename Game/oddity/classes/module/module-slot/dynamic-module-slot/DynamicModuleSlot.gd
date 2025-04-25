@@ -38,10 +38,10 @@ func _process(delta: float) -> void:
 
 func _dynamic_module_slot_process(delta : float) -> void:
 	_module_slot_process()
-		
+
 	if Engine.is_editor_hint():
 		return
-	
+
 	if module_held_in_slot == null:
 		if highlight_box != null:
 			highlight_box.hide()
