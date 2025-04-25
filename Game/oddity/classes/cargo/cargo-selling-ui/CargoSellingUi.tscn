@@ -32,24 +32,26 @@ cargo_selling_ui_2d = NodePath("SubViewport/CargoSellingUi2d")
 disable_3d = true
 transparent_bg = true
 gui_disable_input = true
-size = Vector2i(777, 702)
+size = Vector2i(1037, 1082)
 
 [node name="CargoSellingUi2d" parent="SubViewport" instance=ExtResource("1_n5hjm")]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20627, -0.95575, 0)
 texture = SubResource("ViewportTexture_ly2wj")
 
 [node name="InteractionButton" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.447266, 0.187633, -0.0121602)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("2_g1v5y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30428, 1.20918, 0)
+transform = Transform3D(0.675, 0, 0, 0, 0.675, 0, 0, 0, 0.675, 1.30428, 1.20918, 0)
 mesh = SubResource("BoxMesh_1whna")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30428, 1.20918, 0)
+transform = Transform3D(0.675, 0, 0, 0, 0.675, 0, 0, 0, 0.675, 1.30428, 1.20918, 0)
 shape = SubResource("ConcavePolygonShape3D_3jsm2")
 
 [node name="Label3D" type="Label3D" parent="InteractionButton"]

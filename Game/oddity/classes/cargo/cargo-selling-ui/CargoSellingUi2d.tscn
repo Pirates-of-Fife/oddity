@@ -17,32 +17,38 @@ total_credits_label = NodePath("Credit Total")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 216.0
-offset_bottom = 693.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 218.0
+offset_bottom = 695.0
+scale = Vector2(1.59, 1.59)
 color = Color(0.0768358, 0.0768358, 0.0768358, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 261.0
-offset_right = 798.0
-offset_bottom = 160.0
+layout_mode = 0
+offset_left = 357.0
+offset_top = 6.0
+offset_right = 894.0
+offset_bottom = 166.0
 color = Color(0.0768358, 0.0768358, 0.0768358, 1)
 
 [node name="Cargo Management Console" type="Label" parent="."]
 layout_mode = 0
-offset_left = 365.0
-offset_top = 29.0
-offset_right = 727.0
-offset_bottom = 75.0
+offset_left = 461.0
+offset_top = 35.0
+offset_right = 823.0
+offset_bottom = 81.0
 theme_override_fonts/font = ExtResource("2_qcw6c")
 theme_override_font_sizes/font_size = 16
 text = "Cargo Management Console"
 
 [node name="InventoryContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 37.0
-offset_right = 147.0
-offset_bottom = 713.0
+offset_left = 9.0
+offset_top = 39.0
+offset_right = 149.0
+offset_bottom = 715.0
+scale = Vector2(1.59, 1.59)
 
 [node name="Label" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
 layout_mode = 2
@@ -154,28 +160,31 @@ layout_mode = 2
 
 [node name="Total Value" type="Label" parent="."]
 layout_mode = 0
-offset_left = 301.0
-offset_top = 93.0
-offset_right = 445.0
-offset_bottom = 135.0
+offset_left = 397.0
+offset_top = 99.0
+offset_right = 541.0
+offset_bottom = 141.0
 theme_override_fonts/font = ExtResource("2_qcw6c")
 theme_override_font_sizes/font_size = 15
 text = "Total Value"
 
 [node name="Inventory" type="Label" parent="."]
-offset_left = 61.0
-offset_top = 4.0
-offset_right = 153.0
-offset_bottom = 32.0
+layout_mode = 0
+offset_left = 101.0
+offset_top = -4.0
+offset_right = 193.0
+offset_bottom = 24.0
+scale = Vector2(1.59, 1.59)
 theme_override_fonts/font = ExtResource("2_qcw6c")
 theme_override_font_sizes/font_size = 10
 text = "Inventory"
 
 [node name="Credit Total" type="Label" parent="."]
-offset_left = 490.0
-offset_top = 93.0
-offset_right = 637.0
-offset_bottom = 135.0
+layout_mode = 0
+offset_left = 586.0
+offset_top = 99.0
+offset_right = 733.0
+offset_bottom = 141.0
 theme_override_fonts/font = ExtResource("2_qcw6c")
 theme_override_font_sizes/font_size = 15
 text = "25k Credits
