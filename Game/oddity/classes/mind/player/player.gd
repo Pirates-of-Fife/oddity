@@ -102,7 +102,13 @@ func _process(delta: float) -> void:
 	if (Input.is_action_just_released("ui_cancel")):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_tree().get_first_node_in_group("World").exit_to_main_menu()
-
+	
+	if (Input.is_action_just_pressed("hide_ui")):
+		if $HeadsUpDisplay.visible:
+			$HeadsUpDisplay.hide()
+		else:
+			$HeadsUpDisplay.show()
+	
 	if (Input.is_action_just_released("player_force_respawn")):
 		force_respawn_pressed_count += 1
 

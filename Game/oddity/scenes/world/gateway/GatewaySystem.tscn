@@ -27,18 +27,15 @@ shader_parameter/layer_scale = 20.0
 shader_parameter/layer_scale_step = 10.0
 shader_parameter/layers_count = 3
 
-[sub_resource type="Sky" id="Sky_61y1b"]
+[sub_resource type="Sky" id="Sky_hqeqf"]
 sky_material = SubResource("ShaderMaterial_3f7i4")
 
 [sub_resource type="Environment" id="Environment_gm8ak"]
 background_mode = 2
-sky = SubResource("Sky_61y1b")
+sky = SubResource("Sky_hqeqf")
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
-volumetric_fog_emission_energy = 0.0
-volumetric_fog_gi_inject = 0.0
-volumetric_fog_anisotropy = 0.0
-volumetric_fog_length = 0.01
+volumetric_fog_length = 100000.0
 
 [node name="GatewaySystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
 script = ExtResource("1_rfo0q")
