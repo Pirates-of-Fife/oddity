@@ -110,6 +110,9 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Roll/Blend3/blend_amount", -actual_rotation_vector_unit.z)
 
 func _overheat_start() -> void:
+	if (is_bounty_target):
+		return
+
 	$Interior/Bridge/HeatUi/OverheatLabel.show()
 
 	for light : Node3D in interior_lights.get_children():
@@ -125,6 +128,9 @@ func _overheat_start() -> void:
 
 
 func _overheat_stop() -> void:
+	if (is_bounty_target):
+		return
+
 	$Interior/Bridge/HeatUi/OverheatLabel.hide()
 
 	if alarm_sound_player.playing:
