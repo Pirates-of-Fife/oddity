@@ -18,6 +18,9 @@ var super_cruise_mfd : SuperCruiseMFD3D
 var shield_and_health_ui : ShieldAndHullUi3D
 
 @export
+var heat_ui : HeatUi
+
+@export
 var targeting : StarshipTargetMFD
 
 @export
@@ -132,6 +135,7 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		$Interior/Bridge/RabsControlSeat/Crosshair3d.hide()
 		$Interior/Bridge/MassLockedLabel.hide()
 		$Interior/Bridge/CruiseLabel.hide()
+		heat_ui.hide()
 		if damaged:
 			$Interior/Bridge/DamagedLabel.hide()
 		$Interior/Bridge/RadarDisplay.hide()
@@ -196,6 +200,8 @@ func on_power_on() -> void:
 	$Interior/Bridge/RabsControlSeat/Crosshair3d.show()
 	$Interior/Bridge/MassLockedLabel.show()
 	$Interior/Bridge/CruiseLabel.show()
+	heat_ui.show()
+
 	if damaged:
 		$Interior/Bridge/DamagedLabel.show()
 	$Interior/Bridge/RadarDisplay.show()
@@ -211,6 +217,7 @@ func on_power_off() -> void:
 	$Interior/Bridge/RabsControlSeat/Crosshair3d.hide()
 	$Interior/Bridge/MassLockedLabel.hide()
 	$Interior/Bridge/CruiseLabel.hide()
+	heat_ui.hide()
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()

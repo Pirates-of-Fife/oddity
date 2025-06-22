@@ -302,8 +302,15 @@ var passive_heat_generation : float = 0
 @export
 var maximum_heat_capacity : float
 
+signal heat_changed(heat : float)
+
 @export
-var current_heat : float
+var current_heat : float :
+	set(value):
+		current_heat = value
+		heat_changed.emit(current_heat)
+	get():
+		return current_heat
 
 @export
 var damage_per_heat_over_capacity : float
@@ -406,13 +413,13 @@ func _ready() -> void:
 func update_module_stats() -> void:
 	passive_heat_generation = 0
 	current_heat = 0
-	
+
 	for module_slot : ModuleSlot in module_slots:
 		if module_slot is DynamicModuleSlot:
 			if module_slot.module != null:
 				passive_heat_generation += module_slot.module.passive_heat_generation
 				current_heat += module_slot.module.passive_heat_generation
-	
+
 	update_shield_stats()
 
 func sound_power_state_change_complete() -> void:
@@ -620,13 +627,13 @@ func _starship_ready() -> void:
 		heat_damage_timer.start()
 
 func heat_damage_timer_timeout() -> void:
-	
-	
+
+
 	if current_heat < maximum_heat_capacity:
 		return
-	
+
 	print("SHIP FIRE : " + str((current_heat - maximum_heat_capacity) * damage_per_heat_over_capacity))
-	
+
 	ship_take_damage(damage_per_heat_over_capacity, true)
 
 func add_heat(heat : float) -> void:
@@ -798,9 +805,9 @@ func shield_charge_cooldown_finished() -> void:
 
 	if shield_generators.size() == 0:
 		return
-	
+
 	add_heat(shield_heat_per_charge)
-	
+
 	shield_current_health += shield_charge_rate
 
 	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
@@ -812,7 +819,7 @@ func _on_module_insert(module : Module) -> void:
 	passive_heat_generation += module.passive_heat_generation
 	current_heat += module.passive_heat_generation
 
-	
+
 	if module is ShieldGenerator:
 		shield_generators.append(module)
 		update_shield_stats()
@@ -822,14 +829,14 @@ func _on_module_insert(module : Module) -> void:
 		max_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
-	
+
 	print(passive_heat_generation)
-	
+
 func _on_module_uninserted(module : Module) -> void:
 	passive_heat_generation -= module.passive_heat_generation
 	current_heat -= module.passive_heat_generation
 
-	
+
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
 		update_shield_stats()
@@ -847,8 +854,6 @@ func _on_module_uninserted(module : Module) -> void:
 
 func _starship_process(delta: float) -> void:
 	_vehicle_process(delta)
-	
-	print(current_heat)
 
 func update_shield_stats() -> void:
 	shield_max_health = 0
@@ -892,7 +897,7 @@ func update_shield_stats() -> void:
 		total_red_offline += color_offline.r
 		total_green_offline += color_offline.g
 		total_blue_offline += color_offline.b
-		
+
 		shield_heat_per_charge += shield_resource.shield_heat_per_charge
 		shield_heat_per_full_recharge += shield_resource.shield_heat_per_full_recharge
 
@@ -1333,6 +1338,7 @@ func _physics_process(delta: float) -> void:
 			super_cruise_travel(delta)
 
 	update_ui()
+
 
 		# reset thrust vector
 	reset_thrust_vectors()
