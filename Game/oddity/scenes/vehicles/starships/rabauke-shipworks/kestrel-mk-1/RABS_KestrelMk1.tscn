@@ -2439,7 +2439,6 @@ bus = &"Interior"
 
 [node name="PowerLabel" type="Label3D" parent="Interior/Bridge"]
 transform = Transform3D(3.47, 3.43382e-18, 1.38844e-20, -3.43382e-18, 3.46989, 0.0280414, 1.38651e-20, -0.0280414, 3.46989, 0.700474, 1.77, -28.1154)
-visible = false
 pixel_size = 0.0005
 modulate = Color(0.898276, 1.10701e-06, 9.62615e-07, 1)
 outline_modulate = Color(1, 1, 1, 0)
@@ -2454,6 +2453,15 @@ texture = ExtResource("50_e5ue5")
 [node name="HeatUi" parent="Interior/Bridge" node_paths=PackedStringArray("ship") instance=ExtResource("51_1mkw2")]
 transform = Transform3D(0.03, 2.64221e-18, 8.48356e-18, -3.17065e-18, 0.0126298, 0.120821, 1.81791e-18, -0.0215752, 0.0707267, 0.635301, 1.52687, -28.0688)
 ship = NodePath("../../..")
+
+[node name="OverheatLabel" type="Label3D" parent="Interior/Bridge/HeatUi"]
+transform = Transform3D(115.667, -1.21664e-14, 6.91049e-15, 1.45997e-14, 71.0862, -119.215, 1.48082e-15, 21.2884, 12.694, 2.17242, 4.60451, 0.770883)
+visible = false
+pixel_size = 0.0005
+modulate = Color(0.976471, 0.45098, 0.168627, 1)
+outline_modulate = Color(1, 1, 1, 0)
+text = "OVERHEAT"
+font = ExtResource("30_yp8pv")
 
 [node name="CargoGrid" type="Node3D" parent="Interior" node_paths=PackedStringArray("cargo_area_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0377168, 1.27004, 0.642427)

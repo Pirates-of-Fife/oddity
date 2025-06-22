@@ -303,10 +303,18 @@ var passive_heat_generation : float = 0
 var maximum_heat_capacity : float
 
 signal heat_changed(heat : float)
+signal overheating_start
+signal overheating_stop
 
 @export
 var current_heat : float :
 	set(value):
+		if value > maximum_heat_capacity and current_heat < maximum_heat_capacity + 10:
+			overheating_start.emit()
+
+		if current_heat > maximum_heat_capacity and value < maximum_heat_capacity:
+			overheating_stop.emit()
+
 		current_heat = value
 		heat_changed.emit(current_heat)
 	get():
@@ -627,14 +635,12 @@ func _starship_ready() -> void:
 		heat_damage_timer.start()
 
 func heat_damage_timer_timeout() -> void:
-
-
 	if current_heat < maximum_heat_capacity:
 		return
 
-	print("SHIP FIRE : " + str((current_heat - maximum_heat_capacity) * damage_per_heat_over_capacity))
-
-	ship_take_damage(damage_per_heat_over_capacity, true)
+	#print("SHIP FIRE : " + str((current_heat - maximum_heat_capacity) * damage_per_heat_over_capacity))
+	print(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity))
+	ship_take_damage(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity), true)
 
 func add_heat(heat : float) -> void:
 	current_heat += heat

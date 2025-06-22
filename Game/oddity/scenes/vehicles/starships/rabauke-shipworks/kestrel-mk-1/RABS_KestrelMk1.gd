@@ -109,6 +109,34 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Yaw/Blend3/blend_amount", -actual_rotation_vector_unit.y)
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Roll/Blend3/blend_amount", -actual_rotation_vector_unit.z)
 
+func _overheat_start() -> void:
+	$Interior/Bridge/HeatUi/OverheatLabel.show()
+
+	for light : Node3D in interior_lights.get_children():
+		if light is OmniLight3D:
+			light.light_color = interior_lights.red_color
+			light.light_energy = interior_lights.dim_light_energy
+
+	for fire : GPUParticles3D in damaged_fires.get_children():
+		fire.start_fire()
+
+	if !alarm_sound_player.playing:
+		alarm_sound_player.play()
+
+
+func _overheat_stop() -> void:
+	$Interior/Bridge/HeatUi/OverheatLabel.hide()
+
+	if alarm_sound_player.playing:
+		alarm_sound_player.stop()
+
+	for fire : GPUParticles3D in damaged_fires.get_children():
+		fire.stop_fire()
+
+	for light : Node3D in interior_lights.get_children():
+		if light is OmniLight3D:
+			light.light_color = interior_lights.default_color
+			light.light_energy = interior_lights.default_light_energy
 
 
 func RABS_Kestrel_Mk1_ready() -> void:
@@ -127,6 +155,9 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	_starship_ready()
 
 	player_reference = get_tree().get_first_node_in_group("Player")
+
+	overheating_start.connect(_overheat_start)
+	overheating_stop.connect(_overheat_stop)
 
 	if current_state == State.POWER_OFF:
 		$Interior/Bridge/ShieldAndHullUi3d.hide()
@@ -181,6 +212,8 @@ func update_ui() -> void:
 
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
+
+
 
 	if is_mass_locked and current_state == State.POWER_ON:
 		if !$Interior/Bridge/MassLockedLabel.visible:
