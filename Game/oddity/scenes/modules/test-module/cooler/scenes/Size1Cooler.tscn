@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2lhs5t1ljn1u"]
+[gd_scene load_steps=6 format=3 uid="uid://c2lhs5t1ljn1u"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/Cooler.gd" id="1_0bcyk"]
+[ext_resource type="Resource" uid="uid://td0c2gk7tpmi" path="res://scenes/modules/test-module/cooler/scenes/Size1CoolerResource.tres" id="2_8rpbc"]
 [ext_resource type="PackedScene" uid="uid://i6vj2e60304s" path="res://scenes/modules/test-module/cooler/CoolerBody.glb" id="2_80lw6"]
 [ext_resource type="PackedScene" uid="uid://tutibqo7k53f" path="res://scenes/modules/test-module/cooler/CoolerFan.tscn" id="3_5op32"]
 
@@ -14,6 +15,8 @@ mass = 70.0
 script = ExtResource("1_0bcyk")
 size = 1
 initialize_collision_shape_automatically = false
+module_resource = ExtResource("2_8rpbc")
+value = 5000
 can_be_picked_up = true
 
 [node name="CoolerBody" parent="." instance=ExtResource("2_80lw6")]

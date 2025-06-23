@@ -326,6 +326,29 @@ var damage_per_heat_over_capacity : float
 @export
 var heat_damage_timer : Timer = Timer.new()
 
+var current_heat_sink_capacity : float = 0 :
+	get():
+		var heat_sink : float = 0
+
+		for cooler : Cooler in coolers:
+			heat_sink += cooler.cooler_resource.heat_sink_size
+
+		return heat_sink
+
+var current_heat_sink_usage : float = 0 :
+	get():
+		var heat_sink : float = 0
+
+		for cooler : Cooler in coolers:
+			heat_sink += cooler.current_stored_heat
+
+		return heat_sink
+
+var coolers : Array = Array()
+
+signal cooler_update
+signal on_cooler_config_changed
+
 @export_category("Cargo")
 @export
 var cargo_grids : Array = Array()
@@ -421,6 +444,7 @@ func _ready() -> void:
 func update_module_stats() -> void:
 	passive_heat_generation = 0
 	current_heat = 0
+	current_heat_sink_capacity = 0
 
 	for module_slot : ModuleSlot in module_slots:
 		if module_slot is DynamicModuleSlot:
@@ -483,6 +507,7 @@ func focus_target() -> void:
 	focused_starship.is_targeted = true
 
 	focus_player.play()
+
 
 func focused_ship_destroyed() -> void:
 	unfocus_target(focused_starship)
@@ -599,6 +624,10 @@ func _starship_ready() -> void:
 			if module_slot.module is HullReinforcement:
 				_on_module_insert(module_slot.module)
 
+			if module_slot.module is Cooler:
+				coolers.append(module_slot.module)
+				on_cooler_config_changed.emit()
+
 	update_module_stats()
 
 	shield_current_health = shield_max_health
@@ -644,10 +673,17 @@ func heat_damage_timer_timeout() -> void:
 
 func add_heat(heat : float) -> void:
 	current_heat += heat
+	#print(current_heat)
 
 func remove_heat(heat : float) -> void:
 	current_heat -= heat
 	current_heat = clampf(current_heat, 0, 1000000000000)
+
+func remove_heat_from_heat_sink(heat : float) -> void:
+	var cooler_count : int = coolers.size()
+
+	for cooler : Cooler in coolers:
+		cooler.current_stored_heat -= (heat / cooler_count)
 
 enum Directions
 {
@@ -836,12 +872,19 @@ func _on_module_insert(module : Module) -> void:
 		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
 
+	if module is Cooler:
+		coolers.append(module)
+		on_cooler_config_changed.emit()
+
 	print(passive_heat_generation)
 
 func _on_module_uninserted(module : Module) -> void:
 	passive_heat_generation -= module.passive_heat_generation
 	current_heat -= module.passive_heat_generation
 
+	if module is Cooler:
+		coolers.erase(module)
+		on_cooler_config_changed.emit()
 
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
@@ -1382,10 +1425,7 @@ func generate_ship_id() -> String:
 	for i : int in range(4):
 		id_numbers += numbers[randi() % numbers.length()]
 
-	print(id_prefix + "-" + id_letters + "-" + id_numbers)
-
 	return id_prefix + "-" + id_letters + "-" + id_numbers
-
 
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
@@ -1429,8 +1469,6 @@ func thrust_up(thrust: float) -> void:
 
 	actual_thrust_vector.y = thrust
 	actual_thrust_vector_unit.y = thrust / thruster_force.up_thrust
-
-
 
 func thrust_down(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.down_thrust)

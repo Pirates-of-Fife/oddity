@@ -90,7 +90,7 @@ func on_shield_broken() -> void:
 	shield_material.albedo_color.a = last_a
 	collision_mask = layer_mask_offline
 	collision_layer = layer_mask_offline
-	
+
 	shield_break_sound.play()
 
 func on_shield_online() -> void:
@@ -106,5 +106,5 @@ func on_shield_online() -> void:
 	collision_layer = layer_collision_online
 
 	shield_online_sound.play()
-	
+
 	(game_entity as Starship).add_heat((game_entity as Starship).shield_heat_per_full_recharge)

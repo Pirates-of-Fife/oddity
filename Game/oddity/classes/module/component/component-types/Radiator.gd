@@ -83,6 +83,15 @@ func cooling_timeout() -> void:
 		return
 
 	if ship_current_heat < ship_max_heat_capacity * start_cooling_at_heat:
+		module_slot.vehicle.remove_heat_from_heat_sink(cooling_capacity)
 		return
 
-	module_slot.vehicle.remove_heat(cooling_capacity)
+	if ship_current_heat > ship_max_heat_capacity * 0.7:
+		module_slot.vehicle.remove_heat(cooling_capacity)
+		return
+
+	if module_slot.vehicle.current_heat_sink_capacity != 0:
+		module_slot.vehicle.remove_heat_from_heat_sink(cooling_capacity / 2)
+		module_slot.vehicle.remove_heat(cooling_capacity / 2)
+	else:
+		module_slot.vehicle.remove_heat(cooling_capacity)
