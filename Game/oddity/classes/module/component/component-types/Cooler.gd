@@ -55,13 +55,16 @@ func _cooling_timer_timeout() -> void:
 	if !can_cool:
 		return
 
+	if module_slot.vehicle.current_state == module_slot.vehicle.State.POWER_OFF:
+		return
+
 	if module_slot == null:
 #		print("no cooler module slot")
 		return
 
 	#print("cooling timeout")
 
-	if module_slot.vehicle.current_heat < cooler_resource.cooling_capacity * 1.5 or module_slot.vehicle.current_heat < 300:
+	if module_slot.vehicle.current_heat < cooler_resource.cooling_capacity * 1.8 or module_slot.vehicle.current_heat < 300:
 		#print("skip")
 		return
 
