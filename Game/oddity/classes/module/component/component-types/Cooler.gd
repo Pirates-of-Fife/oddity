@@ -61,8 +61,13 @@ func _cooling_timer_timeout() -> void:
 
 	#print("cooling timeout")
 
-	if module_slot.vehicle.current_heat < 500:
+	if module_slot.vehicle.current_heat < cooler_resource.cooling_capacity * 1.5 or module_slot.vehicle.current_heat < 300:
 		#print("skip")
+		return
+
+	if cooler_resource.cooling_capacity + current_stored_heat > cooler_resource.heat_sink_size:
+		module_slot.vehicle.remove_heat(cooler_resource.heat_sink_size - current_stored_heat)
+		current_stored_heat += cooler_resource.heat_sink_size - current_stored_heat
 		return
 
 	module_slot.vehicle.remove_heat(cooler_resource.cooling_capacity)

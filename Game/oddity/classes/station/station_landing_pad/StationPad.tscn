@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=30 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -16,6 +16,11 @@
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_clb07"]
 [ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="15_ikxe5"]
 [ext_resource type="PackedScene" uid="uid://c2lhs5t1ljn1u" path="res://scenes/modules/test-module/cooler/scenes/Size1Cooler.tscn" id="16_3drt3"]
+[ext_resource type="PackedScene" uid="uid://5fbmdtglg32y" path="res://scenes/modules/test-module/cooler/scenes/Size2Cooler.tscn" id="17_erxi2"]
+[ext_resource type="PackedScene" uid="uid://tl0xlgv8va7f" path="res://scenes/modules/test-module/cooler/scenes/Size3Cooler.tscn" id="18_gn8ur"]
+[ext_resource type="PackedScene" uid="uid://djs6k5fteam85" path="res://scenes/modules/test-module/cooler/scenes/Size4Cooler.tscn" id="19_0pg3d"]
+[ext_resource type="PackedScene" uid="uid://dcv860lf15jdf" path="res://scenes/modules/test-module/rail-gun/size-6/Size6RailGun.tscn" id="20_25qnr"]
+[ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="21_ictpx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w6y13"]
 size = Vector3(5, 4.585, 4.16)
@@ -350,6 +355,27 @@ volume_db = -48.0
 
 [node name="Size1Cooler" parent="." instance=ExtResource("16_3drt3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60439, 2.3139, -8.455)
+
+[node name="Size2Cooler" parent="." instance=ExtResource("17_erxi2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9717, 4.05741, -7.44461)
+
+[node name="Size3Cooler" parent="." instance=ExtResource("18_gn8ur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01709, 3.09027, -8.17104)
+
+[node name="Size4Cooler" parent="." instance=ExtResource("19_0pg3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.29934, 3.74059, -7.25414)
+
+[node name="RailGun" parent="." instance=ExtResource("20_25qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.29069, 5.112, -15.6053)
+
+[node name="RailGun2" parent="." instance=ExtResource("20_25qnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58012, 2.39262, -13.0173)
+
+[node name="Size6MiningLaser" parent="." instance=ExtResource("21_ictpx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.83679, 2.26062, -9.07092)
+
+[node name="Size6MiningLaser2" parent="." instance=ExtResource("21_ictpx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.768305, 3.04321, -10.2858)
 
 [connection signal="starship_landed" from="LandingPad" to="." method="_on_landing_pad_starship_landed"]
 [connection signal="starship_took_off" from="LandingPad" to="." method="_on_landing_pad_starship_took_off"]
