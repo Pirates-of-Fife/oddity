@@ -876,7 +876,6 @@ func _on_module_insert(module : Module) -> void:
 		coolers.append(module)
 		on_cooler_config_changed.emit()
 
-	print(passive_heat_generation)
 
 func _on_module_uninserted(module : Module) -> void:
 	passive_heat_generation -= module.passive_heat_generation

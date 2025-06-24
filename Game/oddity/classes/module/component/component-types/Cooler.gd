@@ -32,7 +32,7 @@ func _cooler_ready() -> void:
 	_component_ready()
 	cooler_resource = (module_resource as CoolerResource)
 
-	cooling_interval_timer.autostart = true
+	cooling_interval_timer.autostart = false
 	cooling_interval_timer.one_shot = false
 	cooling_interval_timer.timeout.connect(_cooling_timer_timeout)
 	cooling_interval_timer.wait_time = cooler_resource.cooling_interval

@@ -39,3 +39,14 @@ var heat_bar : ProgressBar
 
 @export
 var cool_bar : ProgressBar
+
+
+func hide_cool_bar() -> void:
+	cool_bar.hide()
+	$CoolSymbol.hide()
+	$CurrentCool.hide()
+
+func show_cool_bar() -> void:
+	cool_bar.show()
+	$CoolSymbol.show()
+	$CurrentCool.show()

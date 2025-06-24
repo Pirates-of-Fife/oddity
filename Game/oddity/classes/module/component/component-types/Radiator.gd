@@ -96,30 +96,28 @@ func cooling_timeout() -> void:
 	heat_sink_size = module_slot.vehicle.current_heat_sink_capacity
 	heat_sink_current_usage = module_slot.vehicle.current_heat_sink_usage
 
-	if heat_sink_size == 0:
+	if heat_sink_size == 0 and ship_current_heat > 300:
 		module_slot.vehicle.remove_heat(cooling_capacity)
-		print("ship priority")
+		return
+
+	if heat_sink_current_usage < 300 and ship_current_heat > 300:
+		module_slot.vehicle.remove_heat(cooling_capacity)
 		return
 
 	if ship_current_heat < ship_max_heat_capacity * start_cooling_at_heat:
 		module_slot.vehicle.remove_heat_from_heat_sink(cooling_capacity)
-		print("heat sink priority")
 		return
 
 	if ship_current_heat > ship_max_heat_capacity * 0.7:
 		module_slot.vehicle.remove_heat(cooling_capacity)
-		print("ship priority")
 		return
 
 	if ship_current_heat <= 3000 and heat_sink_current_usage > ship_current_heat:
 		module_slot.vehicle.remove_heat_from_heat_sink(cooling_capacity)
-		print("heat sink priority")
 		return
 
 	if heat_sink_size != 0:
 		module_slot.vehicle.remove_heat_from_heat_sink(cooling_capacity / 2)
 		module_slot.vehicle.remove_heat(cooling_capacity / 2)
-		print("mixed usage")
 	else:
 		module_slot.vehicle.remove_heat(cooling_capacity)
-		print("ship priority")
