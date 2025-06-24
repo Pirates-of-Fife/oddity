@@ -44,12 +44,9 @@ func _on_insert(slot : ModuleSlot) -> void:
 		return
 
 	cooling_interval_timer.start()
-	print("Cooler Inserterted")
-	print(slot)
 
 func _on_uninsert(slot : ModuleSlot) -> void:
 	cooling_interval_timer.stop()
-	print("cooler removed")
 
 func _cooling_timer_timeout() -> void:
 	if !can_cool:
@@ -59,13 +56,9 @@ func _cooling_timer_timeout() -> void:
 		return
 
 	if module_slot == null:
-#		print("no cooler module slot")
 		return
 
-	#print("cooling timeout")
-
 	if module_slot.vehicle.current_heat < cooler_resource.cooling_capacity * 1.8 or module_slot.vehicle.current_heat < 300:
-		#print("skip")
 		return
 
 	if cooler_resource.cooling_capacity + current_stored_heat > cooler_resource.heat_sink_size:

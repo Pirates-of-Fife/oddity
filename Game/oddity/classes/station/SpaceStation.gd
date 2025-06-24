@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 
 func _space_station_process(delta : float) -> void:
 	if rotate_on:
-		rotate(Vector3(1, 0, 0) * global_basis.inverse(), rotation_speed * delta)
+		rotate_object_local(Vector3(1, 0, 0), rotation_speed * delta)
 
 	if enforce_speed_limit:
 		var player : Player = get_tree().get_first_node_in_group("Player")
