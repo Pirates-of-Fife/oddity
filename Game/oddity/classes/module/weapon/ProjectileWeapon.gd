@@ -47,8 +47,8 @@ func shoot() -> void:
 
 	# apply force
 
-	projectile.apply_central_impulse(Vector3(0, 0, (module_resource as WeaponResource).weapon_force) * global_basis.inverse())
-	
+	projectile.apply_central_impulse(Vector3(0, 0, (module_resource as ProjectileWeaponResource).weapon_force) * global_basis.inverse())
+
 	var audio : ProjectileWeaponShootAudioStreamPlayer3D = shot_audio.instantiate()
 	audio.pitch_scale = randf_range(0.7, 1.3)
 	audio.sound = (module_resource as WeaponResource).sound
@@ -57,8 +57,11 @@ func shoot() -> void:
 	# start cooldown
 	cooldown_complete = false
 	weapon_cooldown_timer.start()
-	
+
 	weapon_shot.emit()
+
+	if (module_slot != null):
+		module_slot.vehicle.add_heat((module_resource as ProjectileWeaponResource).heat_per_shot)
 
 func stop_shooting() -> void:
 	weapon_stopped_shooting.emit()

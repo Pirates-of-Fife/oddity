@@ -58,7 +58,7 @@ var player : Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	defaultPosition = position
-	
+
 	current_min_fov = min_fov_first_person
 	current_max_fov = max_fov_first_person
 	current_acceleration_movement_factor = acceleration_movement_factor_first_person
@@ -73,23 +73,23 @@ func _process(delta : float) -> void:
 			rotation = Vector3.ZERO
 			first_person_switch(true)
 			return
-	
+
 	acceleration = logarithmicTransform(player.control_entity.relative_acceleration)
 	speed = player.control_entity.relative_linear_velocity.length()
-	
+
 	first_person_switch(!player.control_entity.third_person)
-		
-	
+
+
 	adjust_fov()
-		
+
 	adjust_camera_position()
-	
+
 	if (enable_screen_shake):
 		camera_shake()
-	
+
 func adjust_camera_position() -> void:
 	position = position.lerp(acceleration + defaultPosition, get_process_delta_time() * 2.0)
-	
+
 func adjust_fov() -> void:
 	# Define the minimum and maximum speeds for mapping
 	var min_speed : float = -500.0

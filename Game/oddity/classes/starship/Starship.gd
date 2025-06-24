@@ -250,6 +250,12 @@ var shield_cooldown_after_hit_timer : Timer = Timer.new()
 @onready
 var shield_charge_timer : Timer = Timer.new()
 
+@export
+var shield_heat_per_charge : float
+
+@export
+var shield_heat_per_full_recharge : float
+
 var shield_hit_cooldown_complete : bool = true
 var shield_break_cooldown_complete : bool = true
 
@@ -287,6 +293,61 @@ signal unfocused_target(target : Starship)
 
 @export
 var focus_player : AudioStreamPlayer3D
+
+@export_subgroup("Heat")
+
+@export
+var passive_heat_generation : float = 0
+
+@export
+var maximum_heat_capacity : float
+
+signal heat_changed(heat : float)
+signal overheating_start
+signal overheating_stop
+
+@export
+var current_heat : float :
+	set(value):
+		if value > maximum_heat_capacity and current_heat < maximum_heat_capacity + 10:
+			overheating_start.emit()
+
+		if current_heat > maximum_heat_capacity and value < maximum_heat_capacity:
+			overheating_stop.emit()
+
+		current_heat = value
+		heat_changed.emit(current_heat)
+	get():
+		return current_heat
+
+@export
+var damage_per_heat_over_capacity : float
+
+@export
+var heat_damage_timer : Timer = Timer.new()
+
+var current_heat_sink_capacity : float = 0 :
+	get():
+		var heat_sink : float = 0
+
+		for cooler : Cooler in coolers:
+			heat_sink += cooler.cooler_resource.heat_sink_size
+
+		return heat_sink
+
+var current_heat_sink_usage : float = 0 :
+	get():
+		var heat_sink : float = 0
+
+		for cooler : Cooler in coolers:
+			heat_sink += cooler.current_stored_heat
+
+		return heat_sink
+
+var coolers : Array = Array()
+
+signal cooler_update
+signal on_cooler_config_changed
 
 @export_category("Cargo")
 @export
@@ -381,6 +442,16 @@ func _ready() -> void:
 	_starship_ready()
 
 func update_module_stats() -> void:
+	passive_heat_generation = 0
+	current_heat = 0
+	current_heat_sink_capacity = 0
+
+	for module_slot : ModuleSlot in module_slots:
+		if module_slot is DynamicModuleSlot:
+			if module_slot.module != null:
+				passive_heat_generation += module_slot.module.passive_heat_generation
+				current_heat += module_slot.module.passive_heat_generation
+
 	update_shield_stats()
 
 func sound_power_state_change_complete() -> void:
@@ -436,6 +507,7 @@ func focus_target() -> void:
 	focused_starship.is_targeted = true
 
 	focus_player.play()
+
 
 func focused_ship_destroyed() -> void:
 	unfocus_target(focused_starship)
@@ -552,6 +624,10 @@ func _starship_ready() -> void:
 			if module_slot.module is HullReinforcement:
 				_on_module_insert(module_slot.module)
 
+			if module_slot.module is Cooler:
+				coolers.append(module_slot.module)
+				on_cooler_config_changed.emit()
+
 	update_module_stats()
 
 	shield_current_health = shield_max_health
@@ -579,7 +655,35 @@ func _starship_ready() -> void:
 		if c is Hardpoint:
 			hardpoints.append(c)
 
+	heat_damage_timer.one_shot = false
+	heat_damage_timer.timeout.connect(heat_damage_timer_timeout)
+	heat_damage_timer.wait_time = 1.5
+	add_child(heat_damage_timer)
 
+	if !is_bounty_target:
+		heat_damage_timer.start()
+
+func heat_damage_timer_timeout() -> void:
+	if current_heat < maximum_heat_capacity:
+		return
+
+	#print("SHIP FIRE : " + str((current_heat - maximum_heat_capacity) * damage_per_heat_over_capacity))
+	print(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity))
+	ship_take_damage(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity), true)
+
+func add_heat(heat : float) -> void:
+	current_heat += heat
+	#print(current_heat)
+
+func remove_heat(heat : float) -> void:
+	current_heat -= heat
+	current_heat = clampf(current_heat, 0, 1000000000000)
+
+func remove_heat_from_heat_sink(heat : float) -> void:
+	var cooler_count : int = coolers.size()
+
+	for cooler : Cooler in coolers:
+		cooler.current_stored_heat -= (heat / cooler_count)
 
 enum Directions
 {
@@ -744,6 +848,8 @@ func shield_charge_cooldown_finished() -> void:
 	if shield_generators.size() == 0:
 		return
 
+	add_heat(shield_heat_per_charge)
+
 	shield_current_health += shield_charge_rate
 
 	shield_current_health = clampf(shield_current_health, 0, shield_max_health)
@@ -752,6 +858,10 @@ func shield_charge_cooldown_finished() -> void:
 		shield.collision_mask = shield.layer_mask_online
 
 func _on_module_insert(module : Module) -> void:
+	passive_heat_generation += module.passive_heat_generation
+	current_heat += module.passive_heat_generation
+
+
 	if module is ShieldGenerator:
 		shield_generators.append(module)
 		update_shield_stats()
@@ -762,7 +872,19 @@ func _on_module_insert(module : Module) -> void:
 		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
 
+	if module is Cooler:
+		coolers.append(module)
+		on_cooler_config_changed.emit()
+
+
 func _on_module_uninserted(module : Module) -> void:
+	passive_heat_generation -= module.passive_heat_generation
+	current_heat -= module.passive_heat_generation
+
+	if module is Cooler:
+		coolers.erase(module)
+		on_cooler_config_changed.emit()
+
 	if module is ShieldGenerator:
 		shield_generators.erase(module)
 		update_shield_stats()
@@ -786,6 +908,8 @@ func update_shield_stats() -> void:
 	shield_charge_rate = 0
 	shield_cooldown_after_break = 0
 	shield_cooldown_after_hit = 0
+	shield_heat_per_charge = 0
+	shield_heat_per_full_recharge = 0
 
 	var shield_generator_count : int = shield_generators.size()
 
@@ -821,6 +945,9 @@ func update_shield_stats() -> void:
 		total_red_offline += color_offline.r
 		total_green_offline += color_offline.g
 		total_blue_offline += color_offline.b
+
+		shield_heat_per_charge += shield_resource.shield_heat_per_charge
+		shield_heat_per_full_recharge += shield_resource.shield_heat_per_full_recharge
 
 	shield_cooldown_after_break /= shield_generator_count
 	shield_cooldown_after_hit /= shield_generator_count
@@ -959,11 +1086,11 @@ func cycle_selected_system() -> void:
 	selected_system = world.cycle_system()
 	update_abyssal_mfd()
 
-func ship_take_damage(damage : float) -> void:
+func ship_take_damage(damage : float, ignore_shield : bool = false) -> void:
 	if current_state == State.DESTROYED:
 		return
 
-	if shield_current_health > 0:
+	if shield_current_health > 0 and ignore_shield == false:
 		return
 
 	current_hull_health -= calculate_final_damage(damage)
@@ -1260,6 +1387,7 @@ func _physics_process(delta: float) -> void:
 
 	update_ui()
 
+
 		# reset thrust vector
 	reset_thrust_vectors()
 
@@ -1296,10 +1424,7 @@ func generate_ship_id() -> String:
 	for i : int in range(4):
 		id_numbers += numbers[randi() % numbers.length()]
 
-	print(id_prefix + "-" + id_letters + "-" + id_numbers)
-
 	return id_prefix + "-" + id_letters + "-" + id_numbers
-
 
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor, interaction_length)
@@ -1343,8 +1468,6 @@ func thrust_up(thrust: float) -> void:
 
 	actual_thrust_vector.y = thrust
 	actual_thrust_vector_unit.y = thrust / thruster_force.up_thrust
-
-
 
 func thrust_down(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.down_thrust)

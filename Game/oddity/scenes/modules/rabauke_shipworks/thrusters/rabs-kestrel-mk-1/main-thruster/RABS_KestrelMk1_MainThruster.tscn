@@ -1,8 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://ddvpx7ldofuyc"]
+[gd_scene load_steps=15 format=3 uid="uid://ddvpx7ldofuyc"]
 
 [ext_resource type="Script" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.gd" id="1_rxy08"]
 [ext_resource type="PackedScene" uid="uid://be1lhilrvjun7" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/KestrelMk1MainThruster.glb" id="2_38npm"]
 [ext_resource type="AudioStream" uid="uid://3flkfd04wo4m" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/main_thruster-001.wav" id="3_2tohx"]
+
+[sub_resource type="Curve" id="Curve_3ecll"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.077821, 0.273096), 0.0, 0.0, 0, 0, Vector2(0.505837, 0.761103), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oj6mv"]
 size = Vector3(4.7547, 3.72179, 11.4831)
@@ -58,9 +62,10 @@ script = ExtResource("1_rxy08")
 size = 5
 thruster_sound = NodePath("AudioStreamPlayer3D")
 modifier = 4.6
+thruster_heat_curve = SubResource("Curve_3ecll")
+thruster_heat_multiplier = 15.0
 thruster_particles = NodePath("GPUParticles3D")
 value = 70000
-can_be_picked_up = true
 
 [node name="KestrelMk1MainThruster" parent="." instance=ExtResource("2_38npm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140154, -1.77636e-15, 0.0986767)

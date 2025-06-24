@@ -16,6 +16,8 @@ func _ready() -> void:
 func _beam_weapon_ready() -> void:
 	_weapon_ready()
 
+	beam_laser.beam_weapon = self
+
 	var beam_weapon_resource : BeamWeaponResource = module_resource as BeamWeaponResource
 
 	beam_laser.damage = beam_weapon_resource.damage

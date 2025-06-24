@@ -26,3 +26,9 @@ var shield_color : Color
 
 @export
 var shield_offline_color : Color
+
+@export
+var shield_heat_per_charge : float
+
+@export
+var shield_heat_per_full_recharge : float

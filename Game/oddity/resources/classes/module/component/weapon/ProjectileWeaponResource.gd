@@ -12,3 +12,6 @@ var weapon_force : float
 
 @export
 var cooldown : float
+
+@export
+var heat_per_shot : float

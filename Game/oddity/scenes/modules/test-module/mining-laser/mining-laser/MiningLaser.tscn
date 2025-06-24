@@ -34,6 +34,7 @@ debug_shape_thickness = 5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+cast_shadow = 0
 mesh = SubResource("CylinderMesh_8pvud")
 
 [node name="LaserHitPartcle" parent="." instance=ExtResource("2_x8j23")]
