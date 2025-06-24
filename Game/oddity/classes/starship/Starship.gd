@@ -31,7 +31,6 @@ var ship_identification : StringName = "Default Starship" :
 		ship_identification = value
 		if ship_identification_label != null:
 			ship_identification_label.text = value
-			print(ship_identification_label.text + " oooo")
 	get:
 		return ship_identification
 
@@ -667,13 +666,10 @@ func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:
 		return
 
-	#print("SHIP FIRE : " + str((current_heat - maximum_heat_capacity) * damage_per_heat_over_capacity))
-	print(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity))
 	ship_take_damage(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity), true)
 
 func add_heat(heat : float) -> void:
 	current_heat += heat
-	#print(current_heat)
 
 func remove_heat(heat : float) -> void:
 	current_heat -= heat
