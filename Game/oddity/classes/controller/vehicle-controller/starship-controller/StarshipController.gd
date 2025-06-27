@@ -152,7 +152,7 @@ func _starship_controller_process(delta : float) -> void:
 			control_entity.refuel()
 			#starship_ready_to_supercruise = true
 		if (Input.is_key_label_pressed(KEY_1)):
-			control_entity.current_fuel -= 100
+			control_entity.current_fuel = 100
 
 		if look_around:
 			if control_entity.active_control_seat != null:

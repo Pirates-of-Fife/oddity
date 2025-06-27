@@ -848,7 +848,7 @@ func on_fuel_empty() -> void:
 	
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		exit_super_cruise(true)
-		
+		ship_take_damage(current_super_cruise_speed * 6, true)
 		(player.current_controller as StarshipController).supercruise_exit_timer.start()
 		
 		if current_state != State.POWER_OFF:
@@ -856,7 +856,7 @@ func on_fuel_empty() -> void:
 		
 		var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 		
-		apply_torque(948750 * Vector3(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
+		apply_torque(9048750 * Vector3(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
 		
 		return
 	
@@ -1278,11 +1278,14 @@ func initiate_abyssal_travel() -> void:
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		return
-
+		
 	if abyssal_portal_active:
 		current_abyss_portal.close()
 		current_abyss_portal = null
 		abyssal_portal_active = false
+		return
+
+	if current_fuel <= (abyss_drive_slot.module as AbyssalJumpDrive).fuel_per_jump:
 		return
 
 	var abyssal_portal_scene : PackedScene = preload("res://classes/abyss/abyssal-portal/AbyssalPortal.tscn")
@@ -1290,6 +1293,8 @@ func initiate_abyssal_travel() -> void:
 
 	current_abyss_portal = abyssal_portal
 	abyssal_portal_active = true
+
+	current_fuel -= (abyss_drive_slot.module as AbyssalJumpDrive).fuel_per_jump
 
 	get_tree().get_first_node_in_group("StarSystem").add_child(abyssal_portal)
 	abyssal_portal.global_position = abyssal_portal_spawn_point.global_position
@@ -1300,7 +1305,9 @@ func initiate_abyssal_travel() -> void:
 func initiate_super_cruise() -> void:
 	if alcubierre_drive_slot.module == null:
 		return
-
+	
+	current_fuel -= ((alcubierre_drive_slot.module as AlcubierreDrive).module_resource as AlcubierreDriveResource).fuel_per_second * 200
+		
 	reset_thrust_vectors()
 	actual_thrust_vector_unit = Vector3.ZERO
 	actual_rotation_vector_unit = Vector3.ZERO
@@ -1431,7 +1438,10 @@ var last_position : Vector3 = Vector3.ZERO
 
 func super_cruise_travel(delta : float) -> void:
 	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed + 250
-
+	
+	if current_fuel < 100 and target_velocity > 500:
+		target_velocity = 500
+	
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
 	var acceleration_scale : float = lerpf(0, 1, velocity_diff / 3000)
 
