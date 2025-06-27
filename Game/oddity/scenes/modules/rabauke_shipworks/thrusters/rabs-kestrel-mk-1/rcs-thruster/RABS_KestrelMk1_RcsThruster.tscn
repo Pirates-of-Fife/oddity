@@ -67,6 +67,7 @@ thruster_sound = NodePath("AudioStreamPlayer3D")
 modifier = 0.7
 thruster_heat_curve = SubResource("Curve_oino1")
 thruster_heat_multiplier = 1.5
+fuel_usage = 0.03
 thruster_particles = NodePath("GPUParticles3D")
 value = 5000
 

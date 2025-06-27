@@ -30,7 +30,6 @@ func _ready() -> void:
 	
 func _on_max_ammo_changed(ammo : float) -> void:
 	max_ammo = ammo
-	print("max amo" + str(max_ammo))
 	
 func _on_current_ammo_changed(ammo : float) -> void:
 	current_ammo = ammo

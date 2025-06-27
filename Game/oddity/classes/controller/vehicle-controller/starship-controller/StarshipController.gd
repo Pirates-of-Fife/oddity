@@ -148,8 +148,11 @@ func _starship_controller_process(delta : float) -> void:
 			general_toggle_look_around_command.execute(control_entity)
 			look_around = !look_around
 
-		if (Input.is_action_just_pressed("ship_toggle_headlights")):
-			starship_toggle_headlights_command.execute(control_entity)
+		if (Input.is_key_label_pressed(KEY_0)):
+			control_entity.refuel()
+			#starship_ready_to_supercruise = true
+		if (Input.is_key_label_pressed(KEY_1)):
+			control_entity.current_fuel -= 100
 
 		if look_around:
 			if control_entity.active_control_seat != null:
@@ -170,6 +173,9 @@ func _starship_controller_process(delta : float) -> void:
 
 		if !control_entity.is_powered_on():
 			return
+
+		if (Input.is_action_just_pressed("ship_toggle_headlights")):
+			starship_toggle_headlights_command.execute(control_entity)
 
 		current_throttle_forwards_axis = starship_last_throttle_value #control_entity.target_thrust_vector.z
 
@@ -269,12 +275,20 @@ func _starship_controller_process(delta : float) -> void:
 					control_entity.alcubierre_drive_charge_start()
 
 		if (Input.is_action_just_released("starship_initiate_super_cruise")):
+			print("WORK")
+			
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				return
-
+			
+			print("super")
+			
 			if control_entity.is_in_abyss:
 				return
-
+			
+			print("abyss")
+			
+			print(starship_ready_to_supercruise)
+			
 			if starship_ready_to_supercruise:
 				supercruise_initialization_timer.stop()
 				control_entity.alcubierre_drive_charge_end()

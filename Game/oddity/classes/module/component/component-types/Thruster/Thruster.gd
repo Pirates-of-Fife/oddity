@@ -19,11 +19,18 @@ var thruster_heat_curve : Curve
 @export
 var thruster_heat_multiplier : float
 
+@export
+var fuel_usage : float
+
 var heat_timer : Timer = Timer.new()
 
 var current_heat : float :
 	get:
 		return thruster_heat_curve.sample(current_thrust) * thruster_heat_multiplier
+
+var current_fuel_usage : float :
+	get:
+		return thruster_heat_curve.sample(current_thrust) * fuel_usage
 
 @export
 var current_thrust : float :
@@ -72,6 +79,9 @@ func _thruster_ready() -> void:
 func heat_timer_timeout() -> void:
 	if module_slot != null:
 		module_slot.vehicle.add_heat(current_heat)
+		
+		if module_slot.vehicle.current_fuel > 0:
+			module_slot.vehicle.current_fuel -= current_fuel_usage
 
 
 func _on_uninsert_thruster(slot : ModuleSlot) -> void:

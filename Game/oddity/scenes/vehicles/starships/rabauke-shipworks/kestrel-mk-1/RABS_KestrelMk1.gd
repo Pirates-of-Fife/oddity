@@ -33,6 +33,9 @@ var super_cruise_label : Label3D
 var ammo_ui : AmmoUi3d
 
 @export
+var fuel_ui : FuelUi3d
+
+@export
 var interior_lights : Node3D
 
 @export
@@ -167,7 +170,10 @@ func RABS_Kestrel_Mk1_ready() -> void:
 
 	overheating_start.connect(_overheat_start)
 	overheating_stop.connect(_overheat_stop)
-
+	
+	fuel_empty.connect(_on_fuel_empty)
+	refueled.connect(_on_refueled)
+	
 	if current_state == State.POWER_OFF:
 		$Interior/Bridge/ShieldAndHullUi3d.hide()
 		$Interior/Bridge/VelocityMfd3d.hide()
@@ -175,6 +181,7 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		$Interior/Bridge/RabsControlSeat/Crosshair3d.hide()
 		$Interior/Bridge/MassLockedLabel.hide()
 		$Interior/Bridge/CruiseLabel.hide()
+		fuel_ui.hide()
 		heat_ui.hide()
 		if damaged:
 			$Interior/Bridge/DamagedLabel.hide()
@@ -184,6 +191,32 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		ammo_ui.hide()
 
 
+func _on_fuel_empty() -> void:
+	$Interior/Bridge/ShieldAndHullUi3d.hide()
+	$Interior/Bridge/VelocityMfd3d.hide()
+	$Interior/Bridge/AbyssalMFD3d.hide()
+	$Interior/Bridge/RabsControlSeat/Crosshair3d.hide()
+	$Interior/Bridge/MassLockedLabel.hide()
+	$Interior/Bridge/CruiseLabel.hide()
+	fuel_ui.hide()
+	heat_ui.hide()
+	if damaged:
+		$Interior/Bridge/DamagedLabel.hide()
+	$Interior/Bridge/RadarDisplay.hide()
+	$Interior/Bridge/PowerLabel.hide()
+	$Interior/Bridge/StarshipTargetMfd.hide()
+	$Interior/Bridge/LandingGearLabel.hide()
+	ammo_ui.hide()
+	
+	for light : Node3D in interior_lights.get_children():
+		if light is OmniLight3D:
+			light.hide()
+		
+func _on_refueled() -> void:
+	for light : Node3D in interior_lights.get_children():
+		if light is OmniLight3D:
+			light.show()
+			
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
 	super_cruise_mfd.show()
@@ -243,6 +276,7 @@ func on_power_on() -> void:
 	$Interior/Bridge/RabsControlSeat/Crosshair3d.show()
 	$Interior/Bridge/MassLockedLabel.show()
 	$Interior/Bridge/CruiseLabel.show()
+	fuel_ui.show()
 	heat_ui.show()
 
 	if damaged:
@@ -263,6 +297,7 @@ func on_power_off() -> void:
 	$Interior/Bridge/MassLockedLabel.hide()
 	$Interior/Bridge/CruiseLabel.hide()
 	heat_ui.hide()
+	fuel_ui.hide()
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()

@@ -65,7 +65,6 @@ signal repaired
 signal change_to_damaged_state
 
 signal restocked
-signal refueled
 
 signal landing_gear_deployed
 signal landing_gear_retracted
@@ -372,6 +371,35 @@ var coolers : Array = Array()
 signal cooler_update
 signal on_cooler_config_changed
 
+@export_category("Fuel")
+signal refueled
+
+signal max_fuel_changed(fuel : float)
+signal current_fuel_changed(fuel : float)
+
+signal fuel_empty
+
+@export
+var max_fuel : float : 
+	set(value):
+		max_fuel = value
+		max_fuel_changed.emit(max_fuel)
+	get():
+		return max_fuel
+
+@export
+var current_fuel : float : 
+	set(value):
+		current_fuel = value
+		current_fuel = clampf(current_fuel, 0, max_fuel)
+						
+		if current_fuel == 0:
+			fuel_empty.emit()
+		
+		current_fuel_changed.emit(current_fuel)
+	get():
+		return current_fuel
+
 @export_category("Cargo")
 @export
 var cargo_grids : Array = Array()
@@ -491,6 +519,9 @@ func toggle_power_state() -> void:
 		return
 
 	if current_state == State.POWER_OFF:
+		if current_fuel == 0:
+			return
+		
 		power_state_change_complete = false
 		state_changed_to_power_on.emit()
 	elif current_state == State.POWER_ON:
@@ -556,7 +587,8 @@ func _starship_ready() -> void:
 	power_off_sound_player.finished.connect(sound_power_state_change_complete)
 	power_on_sound_player.finished.connect(sound_power_state_change_complete)
 
-
+	fuel_empty.connect(on_fuel_empty)
+	
 	if !landing_gear_on:
 		toggle_landing_gear()
 
@@ -688,7 +720,10 @@ func _starship_ready() -> void:
 	
 	current_ammo_changed.emit(current_ammo)
 	max_ammo_changed.emit(max_ammo)
-
+	
+	current_fuel_changed.emit(current_fuel)
+	max_fuel_changed.emit(max_fuel)
+	
 func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:
 		return
@@ -802,7 +837,31 @@ func repair() -> void:
 	repaired.emit()
 
 func refuel() -> void:
+	current_fuel = max_fuel
 	refueled.emit()
+	linear_damp = 0
+
+func on_fuel_empty() -> void:
+	var starship_cycle_power_state_command : StarshipCyclePowerStateCommand = StarshipCyclePowerStateCommand.new()
+	
+	linear_damp = 0.5
+	
+	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+		exit_super_cruise(true)
+		
+		(player.current_controller as StarshipController).supercruise_exit_timer.start()
+		
+		if current_state != State.POWER_OFF:
+			starship_cycle_power_state_command.execute(self)
+		
+		var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+		
+		apply_torque(948750 * Vector3(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
+		
+		return
+	
+	if current_state != State.POWER_OFF:
+		starship_cycle_power_state_command.execute(self)
 
 func restock() -> void:
 	restocked.emit()
@@ -1401,10 +1460,13 @@ func super_cruise_travel(delta : float) -> void:
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
-
+	
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
 	calculate_acceleration(delta)
+	
+	if relative_linear_velocity.length() < 10 and current_fuel == 0:
+		linear_damp = 0
 
 	if active_control_seat != null and freeze == true:
 		unfreeze()
