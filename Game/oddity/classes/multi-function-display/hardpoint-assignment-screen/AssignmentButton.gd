@@ -16,6 +16,7 @@ var selected_color : Color
 
 func set_ready() -> void:
 	current_selection = hardpoint.assignment
+		
 	match current_selection:
 		Hardpoint.HardpointAssignment.PRIMARY:
 			($InteractionButton1/MeshInstance3D.get_active_material(0) as StandardMaterial3D).albedo_color = selected_color

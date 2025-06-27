@@ -25,7 +25,13 @@ var turret_left : Hardpoint
 @export
 var turret_right : Hardpoint
 
+@export
+var ship : Starship
+
 func _ready() -> void:
+	ship.ready.connect(_ship_ready)
+
+func _ship_ready() -> void:
 	$UpperLeft.hardpoint = upper_left
 	$LowerLeft.hardpoint = lower_left
 	$LowerRight.hardpoint = lower_right
