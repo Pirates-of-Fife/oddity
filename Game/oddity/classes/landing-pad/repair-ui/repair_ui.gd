@@ -31,14 +31,14 @@ func calculate_refuel_costs(starship : Starship) -> int:
 func calculate_restock_costs(starship : Starship) -> int:
 	var restock_difference : float = starship.max_ammo - starship.current_ammo
 	
-	return (roundf(restock_difference * 4) as int)
+	return (roundf(restock_difference * 4))
 
 func _on_ship_landed(starship : Starship) -> void:
 	repair_costs = calculate_repair_costs(starship)
 	refuel_costs = calculate_refuel_costs(starship)
 	restock_costs = calculate_restock_costs(starship)
 	
-	repair_ui_2d.ship_landed(starship, credit_hud.convert_to_human_readable(repair_costs))
+	repair_ui_2d.ship_landed(starship, credit_hud.convert_to_human_readable(repair_costs), credit_hud.convert_to_human_readable(refuel_costs), credit_hud.convert_to_human_readable(restock_costs))
 
 	landed_ship = starship
 
@@ -86,6 +86,11 @@ func _on_interaction_button_2_interacted(player: Player, control_entity: Control
 		$Decline.play()
 		return
 		
+	repair_ui_2d.refueled()
+	landed_ship.refuel()
+	player.remove_credits(refuel_costs)
+
+	
 # restock
 func _on_interaction_button_3_interacted(player: Player, control_entity: ControlEntity) -> void:
 	if landed_ship == null:
@@ -106,8 +111,9 @@ func _on_interaction_button_3_interacted(player: Player, control_entity: Control
 	
 		landed_ship.repair()
 
-	repair_ui_2d.repaired()
+	repair_ui_2d.restocked()
+	landed_ship.restock()
 	
 	$AudioStreamPlayer3D.play()
 
-	player.remove_credits(repair_costs)
+	player.remove_credits(restock_costs)

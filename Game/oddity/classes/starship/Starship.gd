@@ -64,6 +64,9 @@ signal state_changed_to_destroyed
 signal repaired
 signal change_to_damaged_state
 
+signal restocked
+signal refueled
+
 signal landing_gear_deployed
 signal landing_gear_retracted
 
@@ -797,6 +800,13 @@ func repair() -> void:
 	current_hull_health = max_hull_health
 	damaged = false
 	repaired.emit()
+
+func refuel() -> void:
+	refueled.emit()
+
+func restock() -> void:
+	restocked.emit()
+	current_ammo = max_ammo
 
 func destroyed() -> void:
 	stop_shooting_primary()
