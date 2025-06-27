@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1bi6doj50har"]
+[gd_scene load_steps=17 format=3 uid="uid://b1bi6doj50har"]
 
 [ext_resource type="PackedScene" uid="uid://b06fofkojjj37" path="res://classes/landing-pad/repair-ui/RepairUi2d.tscn" id="1_0cnma"]
 [ext_resource type="Script" path="res://classes/landing-pad/repair-ui/repair_ui.gd" id="1_ivklh"]
@@ -10,17 +10,41 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_464ik"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4yslk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upe8u"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.52549, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w2nf3"]
-material = SubResource("StandardMaterial3D_4yslk")
-size = Vector3(3.195, 0.785, 0.025)
+material = SubResource("StandardMaterial3D_upe8u")
+size = Vector3(1.485, 0.82, 0.025)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5g1ls"]
-data = PackedVector3Array(-1.5975, 0.3925, 0.0125, 1.5975, 0.3925, 0.0125, -1.5975, -0.3925, 0.0125, 1.5975, 0.3925, 0.0125, 1.5975, -0.3925, 0.0125, -1.5975, -0.3925, 0.0125, 1.5975, 0.3925, -0.0125, -1.5975, 0.3925, -0.0125, 1.5975, -0.3925, -0.0125, -1.5975, 0.3925, -0.0125, -1.5975, -0.3925, -0.0125, 1.5975, -0.3925, -0.0125, 1.5975, 0.3925, 0.0125, 1.5975, 0.3925, -0.0125, 1.5975, -0.3925, 0.0125, 1.5975, 0.3925, -0.0125, 1.5975, -0.3925, -0.0125, 1.5975, -0.3925, 0.0125, -1.5975, 0.3925, -0.0125, -1.5975, 0.3925, 0.0125, -1.5975, -0.3925, -0.0125, -1.5975, 0.3925, 0.0125, -1.5975, -0.3925, 0.0125, -1.5975, -0.3925, -0.0125, 1.5975, 0.3925, 0.0125, -1.5975, 0.3925, 0.0125, 1.5975, 0.3925, -0.0125, -1.5975, 0.3925, 0.0125, -1.5975, 0.3925, -0.0125, 1.5975, 0.3925, -0.0125, -1.5975, -0.3925, 0.0125, 1.5975, -0.3925, 0.0125, -1.5975, -0.3925, -0.0125, 1.5975, -0.3925, 0.0125, 1.5975, -0.3925, -0.0125, -1.5975, -0.3925, -0.0125)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ybk2b"]
+points = PackedVector3Array(-0.754286, -0.421786, -0.0242857, 0.754286, 0.426786, 0.0228571, 0.754286, 0.426786, -0.0242857, -0.754286, 0.426786, 0.0228571, 0.754286, -0.421786, 0.0228571, 0.754286, -0.421786, -0.0242857, -0.754286, 0.426786, -0.0242857, -0.754286, -0.421786, 0.0228571)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cse73"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.31799, 0.457017, 6.73831e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_idiqo"]
+material = SubResource("StandardMaterial3D_cse73")
+size = Vector3(1.485, 0.82, 0.025)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3htlv"]
+points = PackedVector3Array(-0.754286, -0.421786, -0.0242857, 0.754286, 0.426786, 0.0228571, 0.754286, 0.426786, -0.0242857, -0.754286, 0.426786, 0.0228571, 0.754286, -0.421786, 0.0228571, 0.754286, -0.421786, -0.0242857, -0.754286, 0.426786, -0.0242857, -0.754286, -0.421786, 0.0228571)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygxyy"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.807777, 0.627091, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i2rpc"]
+material = SubResource("StandardMaterial3D_ygxyy")
+size = Vector3(1.485, 0.82, 0.025)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ni253"]
+points = PackedVector3Array(-0.754286, -0.421786, -0.0242857, 0.754286, 0.426786, 0.0228571, 0.754286, 0.426786, -0.0242857, -0.754286, 0.426786, 0.0228571, 0.754286, -0.421786, 0.0228571, 0.754286, -0.421786, -0.0242857, -0.754286, 0.426786, -0.0242857, -0.754286, -0.421786, 0.0228571)
 
 [node name="RepairUi" type="Node3D" node_paths=PackedStringArray("repair_ui_2d")]
 script = ExtResource("1_ivklh")
@@ -37,7 +61,16 @@ size_2d_override_stretch = true
 
 [node name="RepairUi2d" parent="SubViewport" instance=ExtResource("1_0cnma")]
 
+[node name="Decline" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_ft8sf")
+volume_db = -32.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_a3i51")
+volume_db = -32.0
+
 [node name="InteractionButton" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63241, 0, 0)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("2_hkmx1")
@@ -48,21 +81,58 @@ mesh = SubResource("BoxMesh_w2nf3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
-shape = SubResource("ConcavePolygonShape3D_5g1ls")
+shape = SubResource("ConvexPolygonShape3D_ybk2b")
 
 [node name="Label3D" type="Label3D" parent="InteractionButton"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.213287, 0.0148309)
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 0, 0.213287, 0.0148309)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Repair"
 font = ExtResource("3_qbdml")
 font_size = 76
 
-[node name="Decline" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_ft8sf")
-volume_db = -32.0
+[node name="InteractionButton2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0468529, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_hkmx1")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_a3i51")
-volume_db = -32.0
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+mesh = SubResource("BoxMesh_idiqo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+shape = SubResource("ConvexPolygonShape3D_3htlv")
+
+[node name="Label3D" type="Label3D" parent="InteractionButton2"]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 0, 0.213287, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Refuel"
+font = ExtResource("3_qbdml")
+font_size = 76
+
+[node name="InteractionButton3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69896, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_hkmx1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+mesh = SubResource("BoxMesh_i2rpc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+shape = SubResource("ConvexPolygonShape3D_ni253")
+
+[node name="Label3D" type="Label3D" parent="InteractionButton3"]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 0, 0.213287, 0.0148309)
+pixel_size = 0.004
+outline_modulate = Color(0, 0, 0, 0)
+text = "Restock"
+font = ExtResource("3_qbdml")
+font_size = 76
 
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
+[connection signal="interacted" from="InteractionButton2" to="." method="_on_interaction_button_2_interacted"]
+[connection signal="interacted" from="InteractionButton3" to="." method="_on_interaction_button_3_interacted"]

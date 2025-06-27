@@ -30,6 +30,9 @@ var damaged_label : Label3D
 var super_cruise_label : Label3D
 
 @export
+var ammo_ui : AmmoUi3d
+
+@export
 var interior_lights : Node3D
 
 @export
@@ -178,6 +181,7 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		$Interior/Bridge/RadarDisplay.hide()
 		$Interior/Bridge/PowerLabel.show()
 		$Interior/Bridge/StarshipTargetMfd.hide()
+		ammo_ui.hide()
 
 
 func on_supercruise_engaged() -> void:
@@ -246,6 +250,8 @@ func on_power_on() -> void:
 	$Interior/Bridge/RadarDisplay.show()
 	$Interior/Bridge/PowerLabel.hide()
 	$Interior/Bridge/StarshipTargetMfd.show()
+	
+	ammo_ui.show()
 
 func on_power_off() -> void:
 	power_off_sound_player.play()
@@ -262,7 +268,7 @@ func on_power_off() -> void:
 	$Interior/Bridge/RadarDisplay.hide()
 	$Interior/Bridge/PowerLabel.show()
 	$Interior/Bridge/StarshipTargetMfd.hide()
-
+	ammo_ui.hide()
 
 func update_abyssal_mfd() -> void:
 	abyssal_mfd.set_current_system(current_star_system.system_name)

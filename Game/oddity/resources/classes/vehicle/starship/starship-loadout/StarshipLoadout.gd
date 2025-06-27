@@ -30,6 +30,15 @@ var current_health : float
 @export
 var ship_color : Color
 
+@export
+var current_ammo : float = 10000
+
+@export
+var max_ammo : float = 10000
+
+@export
+var current_heat : float = 0
+
 func get_module_by_id(id : int) -> PackedScene:
 	for slot : ModuleSlotLoadoutResource in module_slots:
 		if slot.id == id:

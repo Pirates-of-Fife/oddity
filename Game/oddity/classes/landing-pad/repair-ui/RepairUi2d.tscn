@@ -34,7 +34,7 @@ cost_label = NodePath("ShipLandedUi/Cost")
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 547.0
-offset_bottom = 310.0
+offset_bottom = 471.0
 color = Color(0.0768358, 0.0768358, 0.0768358, 1)
 
 [node name="ShipLandedUi" type="Control" parent="."]
@@ -49,7 +49,7 @@ offset_left = 159.0
 offset_top = 2.0
 offset_right = 294.0
 offset_bottom = 72.0
-text = "Repair"
+text = "Resupply"
 label_settings = SubResource("LabelSettings_1q5ux")
 
 [node name="Ship" type="Label" parent="ShipLandedUi"]
@@ -67,7 +67,7 @@ offset_left = 24.0
 offset_top = 114.0
 offset_right = 224.0
 offset_bottom = 184.0
-text = "Costs:"
+text = "Repair:"
 label_settings = SubResource("LabelSettings_1q5ux")
 
 [node name="Cost" type="Label" parent="ShipLandedUi"]
@@ -79,7 +79,40 @@ offset_bottom = 185.0
 text = "25k Credits"
 label_settings = SubResource("LabelSettings_1q5ux")
 
+[node name="CostLabel2" type="Label" parent="ShipLandedUi"]
+offset_left = 24.0
+offset_top = 157.0
+offset_right = 224.0
+offset_bottom = 227.0
+text = "Refuel:"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Cost2" type="Label" parent="ShipLandedUi"]
+offset_left = 250.0
+offset_top = 158.0
+offset_right = 495.0
+offset_bottom = 228.0
+text = "25k Credits"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="CostLabel3" type="Label" parent="ShipLandedUi"]
+offset_left = 24.0
+offset_top = 202.0
+offset_right = 224.0
+offset_bottom = 272.0
+text = "Restock:"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Cost3" type="Label" parent="ShipLandedUi"]
+offset_left = 250.0
+offset_top = 203.0
+offset_right = 495.0
+offset_bottom = 273.0
+text = "25k Credits"
+label_settings = SubResource("LabelSettings_1q5ux")
+
 [node name="NoShipLandedUi" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -90,7 +123,7 @@ offset_left = 159.0
 offset_top = 2.0
 offset_right = 294.0
 offset_bottom = 72.0
-text = "Repair"
+text = "Resupply"
 label_settings = SubResource("LabelSettings_1q5ux")
 
 [node name="Ship" type="Label" parent="NoShipLandedUi"]
@@ -103,7 +136,6 @@ text = "No Ship Landed"
 label_settings = SubResource("LabelSettings_7qp6s")
 
 [node name="ShipRepaired" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -115,7 +147,7 @@ offset_left = 159.0
 offset_top = 2.0
 offset_right = 294.0
 offset_bottom = 72.0
-text = "Repair"
+text = "Resupply"
 label_settings = SubResource("LabelSettings_1q5ux")
 
 [node name="Ship" type="Label" parent="ShipRepaired"]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://f740mc3xw052"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/ammo-display/AmmoUi2d.gd" id="1_733ik"]
+[ext_resource type="Texture2D" uid="uid://b6d7jrptjya3s" path="res://classes/multi-function-display/ammo-display/Ammo.svg" id="2_6u3vd"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_6x11q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ru1c"]
+bg_color = Color(0.520608, 0.402703, 0, 1)
+
+[node name="AmmoUi2d" type="Control" node_paths=PackedStringArray("ammo_bar", "ammo_text")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_733ik")
+ammo_bar = NodePath("AmmoBar")
+ammo_text = NodePath("CurrentAmmo")
+
+[node name="Ammo" type="Sprite2D" parent="."]
+position = Vector2(86, 118)
+scale = Vector2(0.235499, 0.235499)
+texture = ExtResource("2_6u3vd")
+
+[node name="AmmoBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 164.0
+offset_top = 39.0
+offset_right = 1226.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_7ru1c")
+value = 49.76
+show_percentage = false
+
+[node name="CurrentAmmo" type="Label" parent="."]
+offset_left = 201.0
+offset_top = -72.0
+offset_right = 1103.0
+offset_bottom = 226.0
+scale = Vector2(1.145, 1.145)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_6x11q")
+theme_override_font_sizes/font_size = 106
+text = "10000 IFV"
+horizontal_alignment = 2
