@@ -16,7 +16,7 @@ var ammo_text : Label
 var current_ammo : float : 
 	set(value):
 		current_ammo = value
-		ammo_text.text = str(value) + " IFV"
+		ammo_text.text = str(roundf(value)) + " IFV"
 		ammo_bar.value = value
 		
 @export

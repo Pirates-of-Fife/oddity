@@ -19,6 +19,12 @@ var max_speed : float
 @export
 var max_turn_speed : float
 
+@export
+var fuel_per_second : float
+
+@export
+var fuel_curve : Curve
+
 @export_subgroup("Sounds")
 
 @export

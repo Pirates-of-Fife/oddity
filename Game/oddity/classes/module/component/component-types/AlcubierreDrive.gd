@@ -55,7 +55,7 @@ func _ready() -> void:
 
 func _alcubierre_drive_ready() -> void:
 	_module_ready()
-	
+		
 	charging_start.finished.connect(_on_charging_start_finished)
 	
 	charging_start.stream = (module_resource as AlcubierreDriveResource).charging_start
@@ -78,3 +78,18 @@ func _initialize_collision_shape() -> void:
 	collision_shape.shape = box_shape
 		
 	add_child(collision_shape)
+
+
+func _on_timer_timeout() -> void:
+	if (module_slot.vehicle != null):
+		var ship : Starship = module_slot.vehicle
+		
+		if ship.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
+			return
+		
+		var current_speed : float = ship.current_super_cruise_speed
+		var max_speed : float = (module_resource as AlcubierreDriveResource).max_speed
+		
+		var fuel_multiplier : float = (module_resource as AlcubierreDriveResource).fuel_curve.sample(current_speed / max_speed)
+		
+		ship.current_fuel -= (module_resource as AlcubierreDriveResource).fuel_per_second * fuel_multiplier

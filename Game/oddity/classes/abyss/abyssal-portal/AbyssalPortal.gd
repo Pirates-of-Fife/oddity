@@ -36,8 +36,11 @@ func _process(delta: float) -> void:
 	tunnel_material.uv1_offset.y += offset_velocity / 6 * delta
 	
 func close() -> void:
-	openable.close()
+	if (openable.state == Openable.State.OPENING):
+		await openable.openable_opened
+	
 	close_sound.play()
+	openable.close()
 
 func _ready() -> void:
 	tunnel_material = tunnel_mesh.get_active_material(0)
@@ -46,8 +49,11 @@ func _ready() -> void:
 	open_sound.play()
 
 func _on_openable_openable_closed() -> void:
-	queue_free()
 	starship.abyssal_mfd.set_gateway_closed()
+
+	await get_tree().create_timer(5).timeout
+	
+	queue_free()
 
 
 func _on_openable_openable_opened() -> void:

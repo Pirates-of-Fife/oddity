@@ -26,7 +26,9 @@ func calculate_repair_costs(starship : Starship) -> int:
 	return (health_difference * 1.5) as int
 
 func calculate_refuel_costs(starship : Starship) -> int:
-	return 0
+	var refuel_difference : float = starship.max_fuel - starship.current_fuel
+	
+	return (refuel_difference)
 	
 func calculate_restock_costs(starship : Starship) -> int:
 	var restock_difference : float = starship.max_ammo - starship.current_ammo
@@ -82,12 +84,18 @@ func _on_interaction_button_2_interacted(player: Player, control_entity: Control
 		$Decline.play()
 		return
 
+	if landed_ship.current_fuel == landed_ship.max_fuel:
+		$Decline.play()
+		return
+
 	if player.credits < refuel_costs:
 		$Decline.play()
 		return
 		
 	repair_ui_2d.refueled()
 	landed_ship.refuel()
+	$AudioStreamPlayer3D.play()
+
 	player.remove_credits(refuel_costs)
 
 	
