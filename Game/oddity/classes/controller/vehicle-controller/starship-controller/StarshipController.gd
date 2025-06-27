@@ -148,12 +148,6 @@ func _starship_controller_process(delta : float) -> void:
 			general_toggle_look_around_command.execute(control_entity)
 			look_around = !look_around
 
-		if (Input.is_key_label_pressed(KEY_0)):
-			control_entity.refuel()
-			#starship_ready_to_supercruise = true
-		if (Input.is_key_label_pressed(KEY_1)):
-			control_entity.current_fuel = 100
-
 		if look_around:
 			if control_entity.active_control_seat != null:
 				control_entity.active_control_seat.control_seat_anchor.look(mouse_yaw, mouse_pitch)
