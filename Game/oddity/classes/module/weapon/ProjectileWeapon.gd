@@ -32,7 +32,13 @@ func shoot() -> void:
 	# check if cooldown complete
 	if cooldown_complete == false:
 		return
-
+	
+	if (module_slot.vehicle.current_ammo < (module_resource as ProjectileWeaponResource).ammo_usage):
+		return
+	
+	module_slot.vehicle.current_ammo -= (module_resource as ProjectileWeaponResource).ammo_usage
+	print((module_resource as ProjectileWeaponResource).ammo_usage)
+	
 	# spawn projectile
 
 	var projectile_scene : PackedScene = (module_resource as WeaponResource).projectile.projectile_scene_file
@@ -59,9 +65,9 @@ func shoot() -> void:
 	weapon_cooldown_timer.start()
 
 	weapon_shot.emit()
-
+	
 	if (module_slot != null):
 		module_slot.vehicle.add_heat((module_resource as ProjectileWeaponResource).heat_per_shot)
-
+		
 func stop_shooting() -> void:
 	weapon_stopped_shooting.emit()

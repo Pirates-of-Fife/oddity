@@ -64,6 +64,9 @@ signal state_changed_to_destroyed
 signal repaired
 signal change_to_damaged_state
 
+signal restocked
+signal refueled
+
 signal landing_gear_deployed
 signal landing_gear_retracted
 
@@ -187,6 +190,27 @@ var hardpoints_root : Node3D
 
 @onready
 var hardpoints : Array
+
+signal max_ammo_changed(ammo : float)
+
+@export
+var max_ammo : float = 10000 :  #max ammo in IFU
+	set(value):
+		max_ammo = value
+		max_ammo_changed.emit(value)
+	get():
+		return max_ammo
+	
+signal current_ammo_changed(ammo : float)
+
+@export
+var current_ammo : float = 10000 :
+	set(value):
+		current_ammo = value
+		current_ammo = clampf(current_ammo, 0, max_ammo)
+		current_ammo_changed.emit(value)
+	get():
+		return current_ammo
 
 @export_subgroup("Thrusters")
 
@@ -661,6 +685,9 @@ func _starship_ready() -> void:
 
 	if !is_bounty_target:
 		heat_damage_timer.start()
+	
+	current_ammo_changed.emit(current_ammo)
+	max_ammo_changed.emit(max_ammo)
 
 func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:
@@ -773,6 +800,13 @@ func repair() -> void:
 	current_hull_health = max_hull_health
 	damaged = false
 	repaired.emit()
+
+func refuel() -> void:
+	refueled.emit()
+
+func restock() -> void:
+	restocked.emit()
+	current_ammo = max_ammo
 
 func destroyed() -> void:
 	stop_shooting_primary()

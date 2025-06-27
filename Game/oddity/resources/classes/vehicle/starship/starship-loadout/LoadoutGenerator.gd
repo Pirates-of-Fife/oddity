@@ -97,6 +97,10 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 
 	loadout.ship_name = starship.ship_name
 	loadout.ship_identification = starship.ship_identification
+	
+	loadout.current_ammo = starship.current_ammo
+	loadout.max_ammo = starship.max_ammo
+	loadout.current_heat = starship.current_heat
 
 	if save_as_player_ship_save:
 		loadout.apply_health = true
@@ -149,7 +153,9 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 	
 	if apply_health:
 		starship.current_hull_health = loadout.current_health
-		
+		starship.current_ammo = loadout.current_ammo
+		starship.current_heat = loadout.current_heat
+		starship.max_ammo = loadout.max_ammo
 
 
 func editor_save_current_load_out() -> void:

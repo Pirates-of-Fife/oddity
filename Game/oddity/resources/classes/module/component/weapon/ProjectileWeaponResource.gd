@@ -15,3 +15,6 @@ var cooldown : float
 
 @export
 var heat_per_shot : float
+
+@export
+var ammo_usage : float
