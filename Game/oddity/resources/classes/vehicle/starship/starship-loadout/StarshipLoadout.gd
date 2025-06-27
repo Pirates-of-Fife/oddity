@@ -51,3 +51,10 @@ func get_module_by_id(id : int) -> PackedScene:
 			return slot.module
 	
 	return null
+
+func get_entry_by_id(id : int) -> ModuleSlotLoadoutResource:
+	for slot : ModuleSlotLoadoutResource in module_slots:
+		if slot.id == id:
+			return slot
+	
+	return null

@@ -135,6 +135,9 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 				var module : Module = module_scene.instantiate()
 				starship.add_child(module)
 				module.insert(node)
+				
+				if module is Weapon:
+					(node as Hardpoint).assignment = (loadout.get_entry_by_id(node.id) as HardpointLoadoutResource).hardpoint_assignment
 
 	for cargo_resource : CargoContainerLoadoutResource in loadout.cargo:
 		var cargo_grid : CargoGrid = null
@@ -280,7 +283,7 @@ func generate_hardpoint_slot_entry(slot : Hardpoint, save_module : bool = true) 
 	slot_entry.size = slot.size
 	slot_entry.id = slot.id
 	slot_entry.name = slot.name
-
+	slot_entry.hardpoint_assignment = slot.assignment
 
 	if save_module:
 		if slot.module != null:
