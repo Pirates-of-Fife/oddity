@@ -127,7 +127,10 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_just_pressed("player_interact")):
 			starship_player_interact_command.execute(control_entity)
-
+		
+		if (Input.is_key_label_pressed(KEY_0)):
+			control_entity.global_position = Vector3(24735800, 100000, 14952000)
+		
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				vehicle_exit_seat_command.execute(control_entity)
