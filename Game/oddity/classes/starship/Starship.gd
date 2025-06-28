@@ -318,6 +318,9 @@ var focus_player : AudioStreamPlayer3D
 
 @export_subgroup("Heat")
 
+signal entered_pressure_zone
+signal exited_pressure_zone
+
 @export
 var passive_heat_generation : float = 0
 

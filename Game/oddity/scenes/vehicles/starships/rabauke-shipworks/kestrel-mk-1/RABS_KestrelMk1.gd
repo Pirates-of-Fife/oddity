@@ -174,6 +174,9 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	fuel_empty.connect(_on_fuel_empty)
 	refueled.connect(_on_refueled)
 	
+	entered_pressure_zone.connect(_on_pressure_zone_entered)
+	exited_pressure_zone.connect(_on_pressure_zone_exited)
+	
 	if current_state == State.POWER_OFF:
 		$Interior/Bridge/ShieldAndHullUi3d.hide()
 		$Interior/Bridge/VelocityMfd3d.hide()
@@ -191,6 +194,14 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		ammo_ui.hide()
 
 
+func _on_pressure_zone_entered() -> void:
+	$Interior/Bridge/PressureLabel.show()
+	$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+	
+func _on_pressure_zone_exited() -> void:
+	$Interior/Bridge/PressureLabel.hide()
+	$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+	
 func _on_fuel_empty() -> void:
 	$Interior/Bridge/ShieldAndHullUi3d.hide()
 	$Interior/Bridge/VelocityMfd3d.hide()
