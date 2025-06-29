@@ -31,10 +31,7 @@ background_mode = 2
 sky = SubResource("Sky_6y4dd")
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
-volumetric_fog_emission_energy = 0.0
-volumetric_fog_gi_inject = 0.0
-volumetric_fog_anisotropy = 0.0
-volumetric_fog_length = 0.01
+volumetric_fog_length = 200000.0
 
 [node name="MirageSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
 script = ExtResource("1_16yi2")
