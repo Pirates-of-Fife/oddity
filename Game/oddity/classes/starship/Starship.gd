@@ -492,6 +492,13 @@ var headlight_right : SpotLight3D
 @export
 var headlight_icon : Sprite3D
 
+@export
+var altitude : float :
+	get():
+		if active_frame_of_reference is GravityWell:
+			return distance_to(active_frame_of_reference.global_position) - active_frame_of_reference.radius
+		return -1
+		
 func _ready() -> void:
 	_starship_ready()
 

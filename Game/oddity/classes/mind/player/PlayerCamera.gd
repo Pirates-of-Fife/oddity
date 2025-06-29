@@ -73,7 +73,7 @@ func _process(delta : float) -> void:
 			rotation = Vector3.ZERO
 			first_person_switch(true)
 			return
-
+	
 	acceleration = logarithmicTransform(player.control_entity.relative_acceleration)
 	speed = player.control_entity.relative_linear_velocity.length()
 

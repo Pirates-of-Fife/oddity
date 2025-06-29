@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://s0w2g33xr8l6"]
+[gd_scene load_steps=11 format=3 uid="uid://s0w2g33xr8l6"]
 
 [ext_resource type="Script" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.gd" id="1_vc68i"]
 [ext_resource type="PackedScene" uid="uid://dimtdo55dlp8e" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.glb" id="2_htjgk"]
@@ -29,6 +29,12 @@ func play_exit() -> void:
 func exit() -> void:
 	queue_free()
 "
+
+[sub_resource type="FogMaterial" id="FogMaterial_mitvc"]
+density = 0.002
+albedo = Color(2.5028e-06, 0.432785, 0.6853, 1)
+emission = Color(0.110537, 0.65091, 1, 1)
+edge_fade = 0.443827
 
 [node name="AbyssalTunnel" type="Node3D" node_paths=PackedStringArray("tunnel_mesh")]
 script = ExtResource("1_vc68i")
@@ -87,6 +93,12 @@ stream = ExtResource("5_lamxe")
 volume_db = 6.0
 bus = &"Environment"
 script = SubResource("GDScript_1va2o")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(0.858065, 0, -0.513541, 0, 1, 0, 0.513541, 0, 0.858065, -4981.88, -90.4533, 7844.95)
+size = Vector3(10000, 10000, 50000)
+shape = 0
+material = SubResource("FogMaterial_mitvc")
 
 [connection signal="body_entered" from="StaticBody3D/Exit" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="StaticBody3D/Entrance" to="." method="_on_entrance_body_entered"]

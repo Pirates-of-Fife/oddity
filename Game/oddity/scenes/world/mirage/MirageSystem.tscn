@@ -23,12 +23,12 @@ shader_parameter/layer_scale = 20.0
 shader_parameter/layer_scale_step = 10.0
 shader_parameter/layers_count = 3
 
-[sub_resource type="Sky" id="Sky_6y4dd"]
+[sub_resource type="Sky" id="Sky_sxt0v"]
 sky_material = SubResource("ShaderMaterial_8hp5j")
 
 [sub_resource type="Environment" id="Environment_xarcs"]
 background_mode = 2
-sky = SubResource("Sky_6y4dd")
+sky = SubResource("Sky_sxt0v")
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 volumetric_fog_length = 200000.0

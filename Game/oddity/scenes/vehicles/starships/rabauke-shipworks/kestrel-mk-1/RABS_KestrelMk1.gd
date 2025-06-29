@@ -273,11 +273,16 @@ func update_ui() -> void:
 		if !$Interior/Bridge/MassLockedLabel.visible:
 			$Interior/Bridge/MassLockedLabel.show()
 			$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+		if active_frame_of_reference is GravityWell:
+			$Interior/Bridge/AltLabel.show()
+			$Interior/Bridge/AltLabel.text = "ALT: " + str(roundf(altitude))
 	else:
 		if $Interior/Bridge/MassLockedLabel.visible:
 			$Interior/Bridge/MassLockedLabel.hide()
 			$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+			$Interior/Bridge/AltLabel.hide()
 
+			
 func on_power_on() -> void:
 	power_on_sound_player.play()
 
@@ -309,6 +314,8 @@ func on_power_off() -> void:
 	$Interior/Bridge/CruiseLabel.hide()
 	heat_ui.hide()
 	fuel_ui.hide()
+	$Interior/Bridge/AltLabel.hide()
+
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()
