@@ -54,7 +54,7 @@ func _player_detection_zone_ready() -> void:
 
 func update() -> void:
 	var distance : float = get_player_distance()
-
+	
 	if player == null:
 		player = get_tree().get_first_node_in_group("Player")
 

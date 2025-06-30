@@ -549,7 +549,7 @@ func on_third_person() -> void:
 func on_increase_distance() -> void:
 	if third_person:
 		active_control_seat.increase_distance(third_person_distance_change_sensitivity)
-
+		
 func on_decrease_distance() -> void:
 	if third_person:
 		active_control_seat.decrease_distance(third_person_distance_change_sensitivity)
