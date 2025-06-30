@@ -267,12 +267,23 @@ func update_ui() -> void:
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
 
-
-
+	if active_frame_of_reference != null and (active_frame_of_reference is GravityGrid or active_frame_of_reference is GravityWell) and current_state == State.POWER_ON:
+		$Interior/Bridge/GravityLabel.show()
+		
+		if (active_frame_of_reference is GravityGrid):
+			$Interior/Bridge/GravityLabel.text = str( roundf( (active_frame_of_reference.gravity_strength) * 10) / 10) + " G"
+		else:
+			$Interior/Bridge/GravityLabel.text = str( roundf( (active_frame_of_reference.gravity_strength / 9.8) * 10) / 10) + " G"
+	else:
+		$Interior/Bridge/GravityLabel.hide()
+	
 	if is_mass_locked and current_state == State.POWER_ON:
 		if !$Interior/Bridge/MassLockedLabel.visible:
 			$Interior/Bridge/MassLockedLabel.show()
 			$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+		
+
+		
 		if active_frame_of_reference is GravityWell:
 			$Interior/Bridge/AltLabel.show()
 			$Interior/Bridge/AltLabel.text = "ALT: " + str(roundf(altitude))
@@ -315,6 +326,7 @@ func on_power_off() -> void:
 	heat_ui.hide()
 	fuel_ui.hide()
 	$Interior/Bridge/AltLabel.hide()
+	$Interior/Bridge/GravityLabel.hide()
 
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
