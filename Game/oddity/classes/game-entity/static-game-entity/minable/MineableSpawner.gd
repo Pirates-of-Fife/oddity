@@ -8,7 +8,7 @@ class_name MineableSpawner
 @export
 var spawn_type : SpawnType = SpawnType.PLANET
 
-@export_range(1, 20, 1)
+@export_range(1, 200, 1)
 var splits : int = 1
 
 @export_range(100, 20000, 100)
@@ -46,22 +46,20 @@ var planet_mesh : SphereMesh
 
 var planet_radius : float
 
-
-@export
-var multimesh : MultiMeshInstance3D
-
 @export_category("Buttons")
 
 @export
 var spawn : bool :
 	set(value):
-		clear_current_mineables()
-		spawn_mineables()
+		if Engine.is_editor_hint():
+			clear_current_mineables()
+			spawn_mineables()
 
 @export
 var clear : bool :
 	set(value):
-		clear_current_mineables()
+		if Engine.is_editor_hint():
+			clear_current_mineables()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -76,41 +74,58 @@ func spawn_mineables() -> void:
 		SpawnType.GAS_GIANT:
 			spawn_mineables_in_gas_giant()
 
+@export
+var sector_positions : Array = Array()
+
 func spawn_mineables_on_planet_surface() -> void:
 	var sectors : Array = generate_sector_positions()
 	var mesh : ArrayMesh = mineable_resource.low_detail_mesh
-
+	
+	sector_positions = Array()
+	
 	var i : int = 0
 	for sector : Sector in sectors:
 		i += 1
 		var sector_node : Node3D = Node3D.new()
-		sector_node.name = str(i)
+		sector_node.name = "Sector_%d" % i
 		root_node.add_child(sector_node)
 		sector_node.owner = get_tree().edited_scene_root
 		
-		for t : Transform3D in sector.positions:
-			var mesh_instance_3d : MeshInstance3D = MeshInstance3D.new()
-			mesh_instance_3d.mesh = mesh
-			
-			sector_node.add_child(mesh_instance_3d)
-			mesh_instance_3d.transform = t
-			mesh_instance_3d.owner = get_tree().edited_scene_root
-			mesh_instance_3d.scale = Vector3(3,3,3)
-			
-			mesh_instance_3d.owner = get_tree().edited_scene_root
+		var mmi : MultiMeshInstance3D = MultiMeshInstance3D.new()
+		sector_node.add_child(mmi)
+		mmi.owner = get_tree().edited_scene_root
 		
+		var mm : MultiMesh = MultiMesh.new()
+		mm.mesh = mesh
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = sector.positions.size()
+				
+		var j : int = 0
+		for t : Transform3D in sector.positions:
+			#var mesh_instance_3d : MeshInstance3D = MeshInstance3D.new()
+			#mesh_instance_3d.mesh = mesh
+			#t.basis = t.basis.scaled(Vector3(3, 3, 3))
+			sector_positions.append(t.origin)
+			mm.set_instance_transform(j, t)
+			j += 1
+			#sector_node.add_child(mesh_instance_3d)
+			#mesh_instance_3d.transform = t
+			#mesh_instance_3d.owner = get_tree().edited_scene_root
+			#mesh_instance_3d.scale = Vector3(3,3,3)
+			
+			#mesh_instance_3d.owner = get_tree().edited_scene_root
+			
+		mmi.multimesh = mm
 		#print(i.positions)
+
+func _test() -> void:
+	print("AREA TRIGGERED")
 
 func generate_sector_positions() -> Array:
 	var sectors : Array = Array()
 	
 	var lattitude_splits : int = splits / 2
 	var longitude_splits : int = splits / 2
-	
-	
-	print(lattitude_splits)
-	print(longitude_splits)
-	
 	var radius : float = planet_radius - 1
 	
 	for lattitude_index : int in range(lattitude_splits):
@@ -153,11 +168,12 @@ func generate_sector_positions() -> Array:
 				spawn_xform.basis.y = up
 				spawn_xform.basis.z = forward
 				spawn_xform.origin = pos
+				spawn_xform = spawn_xform.scaled(Vector3(-1,-1,-1))
+				#print(spawn_xform.basis.get_scale())
 				
 				sector.positions.append(spawn_xform)
 				
 			sectors.append(sector)
-			print(sectors.size())
 			
 	return sectors
 
@@ -185,3 +201,22 @@ enum SpawnType
 	PLANET,
 	GAS_GIANT
 }
+
+func get_nearby_instances(center: Vector3, radius: float) -> Array:
+	var result : Array = []
+	var r2 : float = radius * radius
+	for i : int in range(sector_positions.size()):
+		var pos : Vector3 = sector_positions[i]
+		if center.distance_squared_to(pos) <= r2:
+			result.append(pos)
+	return result
+
+func _on_timer_timeout() -> void:
+	var player : Player = get_tree().get_first_node_in_group("Player")
+	if player == null:
+		return
+	var player_pos : Vector3 = player.global_position
+		
+	#var transformed_player_pos : Vector3 = global_position - player_pos
+	print(get_nearby_instances(to_local(player_pos), 500))
+	
