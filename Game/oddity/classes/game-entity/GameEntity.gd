@@ -98,6 +98,8 @@ func on_interact_self() -> void:
 	unfreeze()
 	unfreeze_in_frame_of_reference()
 
+func distance_to(pos : Vector3) -> float:
+	return (pos - global_position).length()
 
 func unfreeze_in_frame_of_reference() -> void:
 	if get_parent_node_3d() is not FrameOfReference:

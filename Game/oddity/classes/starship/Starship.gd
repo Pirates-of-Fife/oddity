@@ -318,6 +318,9 @@ var focus_player : AudioStreamPlayer3D
 
 @export_subgroup("Heat")
 
+signal entered_pressure_zone
+signal exited_pressure_zone
+
 @export
 var passive_heat_generation : float = 0
 
@@ -489,6 +492,13 @@ var headlight_right : SpotLight3D
 @export
 var headlight_icon : Sprite3D
 
+@export
+var altitude : float :
+	get():
+		if active_frame_of_reference is GravityWell:
+			return distance_to(active_frame_of_reference.global_position) - active_frame_of_reference.radius
+		return -1
+		
 func _ready() -> void:
 	_starship_ready()
 

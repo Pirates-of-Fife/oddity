@@ -174,6 +174,9 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	fuel_empty.connect(_on_fuel_empty)
 	refueled.connect(_on_refueled)
 	
+	entered_pressure_zone.connect(_on_pressure_zone_entered)
+	exited_pressure_zone.connect(_on_pressure_zone_exited)
+	
 	if current_state == State.POWER_OFF:
 		$Interior/Bridge/ShieldAndHullUi3d.hide()
 		$Interior/Bridge/VelocityMfd3d.hide()
@@ -191,6 +194,14 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		ammo_ui.hide()
 
 
+func _on_pressure_zone_entered() -> void:
+	$Interior/Bridge/PressureLabel.show()
+	$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+	
+func _on_pressure_zone_exited() -> void:
+	$Interior/Bridge/PressureLabel.hide()
+	$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+	
 func _on_fuel_empty() -> void:
 	$Interior/Bridge/ShieldAndHullUi3d.hide()
 	$Interior/Bridge/VelocityMfd3d.hide()
@@ -256,17 +267,33 @@ func update_ui() -> void:
 	shield_and_health_ui.cooldown_time = shield_cooldown_after_break
 	shield_and_health_ui.current_cooldown = shield_cooldown_after_break_timer.time_left
 
-
-
+	if active_frame_of_reference != null and (active_frame_of_reference is GravityGrid or active_frame_of_reference is GravityWell) and current_state == State.POWER_ON:
+		$Interior/Bridge/GravityLabel.show()
+		
+		if (active_frame_of_reference is GravityGrid):
+			$Interior/Bridge/GravityLabel.text = str( roundf( (active_frame_of_reference.gravity_strength) * 10) / 10) + " G"
+		else:
+			$Interior/Bridge/GravityLabel.text = str( roundf( (active_frame_of_reference.gravity_strength / 9.8) * 10) / 10) + " G"
+	else:
+		$Interior/Bridge/GravityLabel.hide()
+	
 	if is_mass_locked and current_state == State.POWER_ON:
 		if !$Interior/Bridge/MassLockedLabel.visible:
 			$Interior/Bridge/MassLockedLabel.show()
 			$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+		
+
+		
+		if active_frame_of_reference is GravityWell:
+			$Interior/Bridge/AltLabel.show()
+			$Interior/Bridge/AltLabel.text = "ALT: " + str(roundf(altitude))
 	else:
 		if $Interior/Bridge/MassLockedLabel.visible:
 			$Interior/Bridge/MassLockedLabel.hide()
 			$Interior/Bridge/MassLockedLabel/MassLockedSound.play()
+			$Interior/Bridge/AltLabel.hide()
 
+			
 func on_power_on() -> void:
 	power_on_sound_player.play()
 
@@ -298,6 +325,9 @@ func on_power_off() -> void:
 	$Interior/Bridge/CruiseLabel.hide()
 	heat_ui.hide()
 	fuel_ui.hide()
+	$Interior/Bridge/AltLabel.hide()
+	$Interior/Bridge/GravityLabel.hide()
+
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()

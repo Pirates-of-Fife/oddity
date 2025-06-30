@@ -20,18 +20,15 @@ shader_parameter/layer_scale = 20.0
 shader_parameter/layer_scale_step = 10.0
 shader_parameter/layers_count = 3
 
-[sub_resource type="Sky" id="Sky_lvikx"]
+[sub_resource type="Sky" id="Sky_6a56t"]
 sky_material = SubResource("ShaderMaterial_qypl4")
 
 [sub_resource type="Environment" id="Environment_f6j25"]
 background_mode = 2
-sky = SubResource("Sky_lvikx")
+sky = SubResource("Sky_6a56t")
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
-volumetric_fog_emission_energy = 0.0
-volumetric_fog_gi_inject = 0.0
-volumetric_fog_anisotropy = 0.0
-volumetric_fog_length = 0.01
+volumetric_fog_length = 200000.0
 
 [node name="AbyssalEchoesSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
 script = ExtResource("1_mdave")

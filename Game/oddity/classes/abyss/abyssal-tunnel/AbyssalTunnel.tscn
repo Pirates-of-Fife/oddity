@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.gd" id="1_vc68i"]
 [ext_resource type="PackedScene" uid="uid://dimtdo55dlp8e" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.glb" id="2_htjgk"]
 [ext_resource type="Script" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnelCollider.gd" id="2_mroe6"]
-[ext_resource type="Material" uid="uid://c34vqvshecp01" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnelMaterial.tres" id="3_n2qc7"]
 [ext_resource type="AudioStream" uid="uid://dehex6okkayeg" path="res://classes/abyss/abyssal-tunnel/enter.wav" id="5_lamxe"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5q35r"]
@@ -30,6 +29,12 @@ func exit() -> void:
 	queue_free()
 "
 
+[sub_resource type="FogMaterial" id="FogMaterial_mitvc"]
+density = 0.002
+albedo = Color(2.5028e-06, 0.432785, 0.6853, 1)
+emission = Color(0.110537, 0.65091, 1, 1)
+edge_fade = 0.443827
+
 [node name="AbyssalTunnel" type="Node3D" node_paths=PackedStringArray("tunnel_mesh")]
 script = ExtResource("1_vc68i")
 tunnel_mesh = NodePath("StaticBody3D/AbyssalTunnel/Tunnel")
@@ -48,9 +53,6 @@ shape = SubResource("ConcavePolygonShape3D_5q35r")
 
 [node name="AbyssalTunnel" parent="StaticBody3D" instance=ExtResource("2_htjgk")]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="Tunnel" parent="StaticBody3D/AbyssalTunnel" index="0"]
-surface_material_override/0 = ExtResource("3_n2qc7")
 
 [node name="Exit" type="Area3D" parent="StaticBody3D"]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 193.154, 8634.78, -422.041)
@@ -87,6 +89,12 @@ stream = ExtResource("5_lamxe")
 volume_db = 6.0
 bus = &"Environment"
 script = SubResource("GDScript_1va2o")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(0.858065, 0, -0.513541, 0, 1, 0, 0.513541, 0, 0.858065, -4981.88, -90.4533, 7844.95)
+size = Vector3(10000, 10000, 62000)
+shape = 0
+material = SubResource("FogMaterial_mitvc")
 
 [connection signal="body_entered" from="StaticBody3D/Exit" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="StaticBody3D/Entrance" to="." method="_on_entrance_body_entered"]
