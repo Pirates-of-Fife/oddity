@@ -77,10 +77,3 @@ func spawn_planet_surface_sectors() -> void:
 		#zone.owner = get_tree().edited_scene_root
 		
 		#print(i.positions)
-
-
-func spawn_mineables_in_gas_giant() -> void:
-	pass
-	
-func spawn_mineables_in_asteroid_belt() -> void:
-	pass
