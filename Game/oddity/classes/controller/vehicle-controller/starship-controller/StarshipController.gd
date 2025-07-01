@@ -129,7 +129,7 @@ func _starship_controller_process(delta : float) -> void:
 			starship_player_interact_command.execute(control_entity)
 		
 		if (Input.is_key_label_pressed(KEY_0)):
-			control_entity.global_position = Vector3(-36114200, 170000, -3963060)
+			control_entity.global_position = Vector3(-4409300 + 15000, 2041180, -1091460)
 			control_entity.repair()
 			
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
