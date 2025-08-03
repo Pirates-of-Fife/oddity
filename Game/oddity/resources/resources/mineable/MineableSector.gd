@@ -13,8 +13,8 @@ var spawn_radius : float
 
 var timer : Timer = Timer.new()
 
-#@export
-#var mineable_resource : MineableResource
+@export
+var mineable_resource : MineableResource
 
 @export
 var mineable_spawn_root : Node3D
@@ -38,22 +38,24 @@ func _ready() -> void:
 func _timer_timeout() -> void:
 	var player : Player = get_tree().get_first_node_in_group("Player")
 	
-	print("test")
+	#print("test")
 	
 	if player == null:
 		return
 		
 	
+	#spawn_mineables(get_nearby_instances(to_local(player.global_position), spawn_radius))
 	spawn_mineables(get_nearby_instances(to_local(player.global_position), spawn_radius))
-	
+
 	#var transformed_player_pos : Vector3 = global_position - player_pos
 	
-func _on_player_area_entered() -> void:
+func _on_player_area_entered(player : Player, control_entity : ControlEntity) -> void:
 	print("ENTER")
 	timer.start()
 	
-func _on_player_area_exited() -> void:
+func _on_player_area_exited(player : Player, control_entity : ControlEntity) -> void:
 	timer.stop()
+	despawn_mineables()
 
 func get_nearby_instances(center: Vector3, radius: float) -> Array:
 	var result : Array = []
@@ -64,6 +66,9 @@ func get_nearby_instances(center: Vector3, radius: float) -> Array:
 		var mineable : MineableTransform = mineable_transforms[i]
 		if center.distance_squared_to(mineable.mineable_transform.origin) <= r2:
 			result.append(mineable)
+			
+	print(result)
+	
 	return result
 
 func spawn_mineables(array : Array) -> void:
@@ -71,12 +76,16 @@ func spawn_mineables(array : Array) -> void:
 		if m.is_mineable_spawned:
 			continue
 		
-		#var mineable : PackedScene = mineable_resource.variants.pick_random()
+		var mineable : PackedScene = mineable_resource.variants.pick_random()
 		
-		#mineable_spawn_root.add_child(mineable.instantiate())
+		mineable_spawn_root.add_child(mineable.instantiate())
 		
 		print("spawned mineable")
 		m.is_mineable_spawned = true
+
+func despawn_mineables() -> void:
+	for i : Node in mineable_spawn_root.get_children():
+		i.queue_free()
 
 func append_transform(t : Transform3D) -> void:
 	var mineable_transform : MineableTransform = MineableTransform.new()
