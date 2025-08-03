@@ -44,8 +44,6 @@ func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 		asteroid.max_resource_health = randf_range(10000, 30000)
 		asteroid.current_resource_health = asteroid.max_resource_health
 		asteroid.resource_count = randi_range(4, 12)
-		asteroid.resource_value_min = randi_range(10000, 20000)
-		asteroid.resource_value_max = randi_range(24000, 140000)
 
 		add_child(asteroid)
 		asteroid.position = (Vector3(randf_range(0, spawn_radius/2), randf_range(-50, 50), randf_range(0, spawn_radius/2)))

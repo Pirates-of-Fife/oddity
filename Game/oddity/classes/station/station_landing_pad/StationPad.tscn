@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=25 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="13_vqirh"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_clb07"]
 [ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="15_ikxe5"]
+[ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="16_pndo4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w6y13"]
 size = Vector3(5, 4.585, 4.16)
@@ -346,6 +347,12 @@ font_size = 44
 [node name="Spawn" type="AudioStreamPlayer3D" parent="InteractionButton"]
 stream = ExtResource("15_ikxe5")
 volume_db = -48.0
+
+[node name="Size6MiningLaser" parent="." instance=ExtResource("16_pndo4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.90622, 4.91607, -13.2833)
+
+[node name="Size6MiningLaser2" parent="." instance=ExtResource("16_pndo4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.05436, 4.91607, -12.8152)
 
 [connection signal="starship_landed" from="LandingPad" to="." method="_on_landing_pad_starship_landed"]
 [connection signal="starship_took_off" from="LandingPad" to="." method="_on_landing_pad_starship_took_off"]
