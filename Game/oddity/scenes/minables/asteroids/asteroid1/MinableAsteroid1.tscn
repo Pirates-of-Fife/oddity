@@ -19,10 +19,8 @@ resource_count = 10
 extractable_resources = [ExtResource("2_8lytr"), ExtResource("3_4m7ef"), ExtResource("4_bcby4")]
 
 [node name="asteroid_1" parent="." instance=ExtResource("2_pn1dl")]
-transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_f2pq8")
 
 [editable path="asteroid_1"]

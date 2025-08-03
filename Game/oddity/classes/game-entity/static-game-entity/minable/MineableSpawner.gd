@@ -18,7 +18,6 @@ func spawn_planet_surface_sectors() -> void:
 	for sector : ScatterSector in sectors:
 		i += 1
 		var sector_node : MineableSector = MineableSector.new()
-		#var sector_node : Node3D = Node3D.new()
 		root.add_child(sector_node)
 		
 		sector_node.owner = get_tree().edited_scene_root
@@ -29,20 +28,14 @@ func spawn_planet_surface_sectors() -> void:
 		var sector_node_root : Node3D = Node3D.new()
 		sector_node.add_child(sector_node_root)
 		sector_node.update_rate = 0.5
+		sector_node.spawn_radius = spawn_radius
 		sector_node.mineable_spawn_root = sector_node_root
 		sector_node_root.owner = get_tree().edited_scene_root
 		sector_node.position = average
 		
 		var mmi : MultiMeshInstance3D = MultiMeshInstance3D.new()
-		#sector_node.add_child(mmi)
-		sector_node_root.add_child(mmi)
+		sector_node.add_child(mmi)
 		mmi.owner = get_tree().edited_scene_root
-		#mmi.custom_aabb = AABB(Vector3(-10000,-10000,-10000), Vector3(20000,20000,20000))
-		#mmi.custom_aabb = calculate_multimesh_aabb(mineable_resource.low_detail_mesh, sector.positions)
-		#print(mineable_resource.low_detail_mesh.get_aabb())
-		
-		#mmi.position = average
-		
 		
 		var mm : MultiMesh = MultiMesh.new()
 		mm.mesh = mesh
@@ -52,15 +45,13 @@ func spawn_planet_surface_sectors() -> void:
 		
 		var j : int = 0
 		for t : Transform3D in sector.transforms:
-			#sector_node.append_transform(t)                                        # THIS LINE CAUSES THE PRE CACHING BUG
-			#t.origin = mmi.to_local(t.origin)
+			sector_node.append_transform(t)
 			var local_t : Transform3D = Transform3D(t)
 			local_t.origin = sector_node.to_local(local_t.origin)
 			mm.set_instance_transform(j, local_t)
 			j += 1
-			
+		
 		mmi.multimesh = mm
-		#print(mmi.get_aabb())
 
 		var bounding_radius : float = sector.bounding_radius + sector_node.spawn_radius
 		
@@ -74,5 +65,3 @@ func spawn_planet_surface_sectors() -> void:
 		zone.global_position = sector_node.global_position
 		
 		zone.owner = get_tree().edited_scene_root
-		
-		#print(i.positions)
