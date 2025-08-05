@@ -162,7 +162,6 @@ func generate_gas_giant_scatter_sectors(splits : int, sector_count : int, planet
 func generate_asteroid_belt_scatter_sectors(splits : int, sector_count : int, asteroid_belt : AsteroidBelt, scale_multiplier : float, invert_scale : bool, scale_variance : float, vertical_variance : float) -> Array:
 	var sectors: Array = []
 
-	# Extract the belt's rotation & translation but drop scale
 	var raw_basis: Basis = asteroid_belt.global_transform.basis
 	var rot_basis: Basis = raw_basis.orthonormalized()
 	var belt_origin: Vector3 = asteroid_belt.global_transform.origin

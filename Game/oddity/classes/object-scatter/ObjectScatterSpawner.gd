@@ -66,6 +66,9 @@ var vertical_variance : float = 0
 @export
 var density : Gradient
 
+@export_range(0, 30000, 1000)
+var atmosphere_padding_radius : float
+
 @export_category("Functions")
 
 @export
