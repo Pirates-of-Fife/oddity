@@ -25,6 +25,9 @@ var count_per_multi_mesh : int :
 @export
 var scale_multiplier : float = 1
 
+@export_range(0, 1, 0.01)
+var scale_variance : float = 0
+
 @export
 var invert_scale : bool = false
 
@@ -54,6 +57,9 @@ var planet_radius : float
 
 @export
 var asteroid_belt : AsteroidBelt
+
+@export_range(0, 1000, 5)
+var vertical_variance : float = 0
 
 @export_category("Functions")
 

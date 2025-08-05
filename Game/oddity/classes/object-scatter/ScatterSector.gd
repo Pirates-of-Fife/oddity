@@ -8,6 +8,9 @@ var lat_max : float
 var lon_min : float
 var lon_max : float
 
+var angle_min : float
+var angle_max : float
+
 var average_position : Vector3 :
 	get():
 		if transforms.is_empty():

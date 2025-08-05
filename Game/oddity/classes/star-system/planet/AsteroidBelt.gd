@@ -20,3 +20,7 @@ var inner_radius : float :
 func _ready() -> void:
 	if !Engine.is_editor_hint():
 		global_rotation = belt_rotation
+
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		belt_rotation = global_rotation
