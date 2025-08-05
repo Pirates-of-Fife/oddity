@@ -1,3 +1,4 @@
+@tool
 extends PlayerDetectionZone
 
 class_name PlanetLoadingZone
@@ -20,6 +21,18 @@ enum PlanetSize
 	BIG_PLANET,
 	GAS_GIANT
 }
+
+@export_category("Tools")
+
+@export
+var active_editor : bool : 
+	set(value):
+		_on_activate(null, null)
+
+@export
+var deactive_editor : bool : 
+	set(value):
+		_on_deactivate(null, null)
 
 func _ready() -> void:
 	_planet_loading_zone_ready()

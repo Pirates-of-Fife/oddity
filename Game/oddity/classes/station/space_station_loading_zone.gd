@@ -1,3 +1,4 @@
+@tool
 extends PlayerDetectionZone
 
 class_name SpaceStationLoadingZone
@@ -15,6 +16,18 @@ var player_spawn_marker : Marker3D
 
 @export
 var ship_spawn_marker : Marker3D
+
+@export_category("Tools")
+
+@export
+var active_editor : bool : 
+	set(value):
+		_on_activate(null, null)
+
+@export
+var deactive_editor : bool : 
+	set(value):
+		_on_deactivate(null, null)
 
 func _ready() -> void:
 	_space_station_loading_zone()

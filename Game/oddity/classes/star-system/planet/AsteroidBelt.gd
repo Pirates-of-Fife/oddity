@@ -19,7 +19,8 @@ var inner_radius : float :
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if !Engine.is_editor_hint():
-		global_rotation = belt_rotation
+		pass
+		#global_rotation = belt_rotation
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
