@@ -68,6 +68,9 @@ func generate_gas_giant_scatter_sectors(splits : int, sector_count : int, planet
 func generate_asteroid_belt_scatter_sectors(splits : int, sector_count : int, asteroid_belt : AsteroidBelt, scale_multiplier : float, invert_scale : bool, scale_variance : float, vertical_variance : float) -> Array:
 	var sectors: Array = []
 
+	asteroid_belt.belt_rotation # Vector3 of global rotation in radians
+
+
 	# Calculate angular span per sector
 	var delta_angle: float = TAU / float(splits)
 

@@ -14,11 +14,13 @@ func spawn_asteroid_belt_sectors() -> void:
 	var sectors : Array = object_scatter.generate_asteroid_belt_scatter_sectors(splits, count_per_multi_mesh, asteroid_belt, scale_multiplier, invert_scale, scale_variance, vertical_variance)
 
 	var mesh : ArrayMesh = mineable_resource.low_detail_mesh
-
+	
+	
 	var i : int = 0
 	for sector : ScatterSector in sectors:
 		i += 1
 		var sector_node : MineableSector = MineableSector.new()
+		
 		root.add_child(sector_node)
 		
 		sector_node.owner = get_tree().edited_scene_root
