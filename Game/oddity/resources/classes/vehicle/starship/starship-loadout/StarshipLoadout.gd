@@ -3,13 +3,13 @@ extends Resource
 class_name StarshipLoadout
 
 @export
-var module_slots : Array[ModuleSlotLoadoutResource] = Array()
+var module_slots : Array[ModuleSlotLoadoutResource] = []
 
 @export
-var cargo : Array[CargoContainerLoadoutResource] = Array()
+var cargo : Array[CargoContainerLoadoutResource] = []
 
 @export
-var entities : Array[GameEntityLoadoutResource] = Array()
+var entities : Array[GameEntityLoadoutResource] = []
 
 @export
 var ship_name : StringName
