@@ -61,6 +61,11 @@ var asteroid_belt : AsteroidBelt
 @export_range(0, 1000, 5)
 var vertical_variance : float = 0
 
+@export_subgroup("Gas Giant")
+
+@export
+var density : Gradient
+
 @export_category("Functions")
 
 @export
