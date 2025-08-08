@@ -10,10 +10,10 @@ var player : Player = get_tree().get_first_node_in_group("Player")
 
 @export_category("Player Detection")
 
-@export_range(0, 100000, 1000, "or_greater")
+@export_range(0, 100000, 100, "or_greater")
 var activate_distance : float
 
-@export_range(0, 100000, 1000, "or_greater")
+@export_range(0, 100000, 100, "or_greater")
 var deactivate_distance : float
 
 @export_range(0, 1, 0.05, "or_greater")
@@ -54,7 +54,7 @@ func _player_detection_zone_ready() -> void:
 
 func update() -> void:
 	var distance : float = get_player_distance()
-
+	
 	if player == null:
 		player = get_tree().get_first_node_in_group("Player")
 

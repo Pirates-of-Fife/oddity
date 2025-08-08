@@ -74,7 +74,11 @@ func _process(delta : float) -> void:
 			first_person_switch(true)
 			return
 	
-	acceleration = logarithmicTransform(player.control_entity.relative_acceleration)
+	if player.control_entity.active_frame_of_reference is GravityWell:
+		acceleration = Vector3.ZERO
+	else:
+		acceleration = logarithmicTransform(player.control_entity.relative_acceleration)
+	
 	speed = player.control_entity.relative_linear_velocity.length()
 
 	first_person_switch(!player.control_entity.third_person)
