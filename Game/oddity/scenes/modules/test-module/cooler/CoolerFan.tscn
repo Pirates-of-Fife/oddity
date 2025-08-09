@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://tutibqo7k53f"]
+
+[ext_resource type="PackedScene" uid="uid://bgtp4165juf20" path="res://scenes/modules/test-module/cooler/Fan.glb" id="1_7jkeb"]
+
+[sub_resource type="Animation" id="Animation_331h8"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fan/FanFrame_001/Fan_001")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_hfabo"]
+resource_name = "Spin"
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fan/FanFrame_001/Fan_001")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, 0, 1, 6.12323e-17, 1, 1, 0, 0, -1.22465e-16, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16pv6"]
+_data = {
+"RESET": SubResource("Animation_331h8"),
+"Spin": SubResource("Animation_hfabo")
+}
+
+[node name="CoolerFan" type="Node3D"]
+
+[node name="Fan" parent="." instance=ExtResource("1_7jkeb")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_16pv6")
+}
+autoplay = "Spin"
+
+[editable path="Fan"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://btqrtt2reo8uq"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_os01c"]
+[ext_resource type="PackedScene" uid="uid://cmpi0goqqv3pp" path="res://scenes/world/mirage/celestia-bodies/mirage/MiragePlanet.tscn" id="2_abp1y"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_5fy03"]
+
+[node name="MirageZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_os01c")
+planet_name = &"Mirage"
+planet_scene = ExtResource("2_abp1y")
+planet_scale = 1
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_5fy03")]
+text = &"Auric"

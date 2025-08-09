@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://dd0ixedit8liw"]
+
+[ext_resource type="Resource" uid="uid://t4drs30vwue6" path="res://scenes/modules/test-module/rotary-autocannon/RotaryAutoCannonProjectile.tres" id="1_0x2k0"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="1_va521"]
+[ext_resource type="AudioStream" uid="uid://hlsfp2t6f64" path="res://scenes/modules/test-module/rotary-autocannon/ciws_single_shot.wav" id="3_em1wa"]
+
+[resource]
+script = ExtResource("1_va521")
+projectile = ExtResource("1_0x2k0")
+weapon_force = 1200.0
+cooldown = 0.1
+heat_per_shot = 20.0
+ammo_usage = 3.0
+damage = 100.0
+penetration = 10.0
+sound = ExtResource("3_em1wa")
+type = &""
+manufacturer = &""
+model = &""
+size = &"5"
+release_year = &"39"

@@ -1,0 +1,191 @@
+[gd_scene load_steps=4 format=3 uid="uid://dng30pjufice1"]
+
+[ext_resource type="Script" path="res://classes/cargo/cargo-selling-ui/cargo_selling_ui_2d.gd" id="1_p1rdu"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_qcw6c"]
+[ext_resource type="PackedScene" uid="uid://qgv0a1p812wm" path="res://classes/cargo/cargo-selling-ui/CargoLabel.tscn" id="3_ogqbo"]
+
+[node name="CargoSellingUi2d" type="Control" node_paths=PackedStringArray("inventory_container", "total_credits_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p1rdu")
+inventory_container = NodePath("InventoryContainer")
+total_credits_label = NodePath("Credit Total")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 218.0
+offset_bottom = 695.0
+scale = Vector2(1.59, 1.59)
+color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 357.0
+offset_top = 6.0
+offset_right = 894.0
+offset_bottom = 166.0
+color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[node name="Cargo Management Console" type="Label" parent="."]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 35.0
+offset_right = 823.0
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("2_qcw6c")
+theme_override_font_sizes/font_size = 16
+text = "Cargo Management Console"
+
+[node name="InventoryContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 39.0
+offset_right = 149.0
+offset_bottom = 715.0
+scale = Vector2(1.59, 1.59)
+
+[node name="Label" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel2" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label2" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel3" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel4" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label3" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel5" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel6" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label4" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel7" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel8" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label5" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel9" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel10" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label6" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel11" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel12" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label7" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel13" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel14" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label8" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel15" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel16" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label9" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel17" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel18" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label10" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel19" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel20" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label11" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel21" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel22" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Label12" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel23" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="CargoLabel24" parent="InventoryContainer" instance=ExtResource("3_ogqbo")]
+layout_mode = 2
+
+[node name="Total Value" type="Label" parent="."]
+layout_mode = 0
+offset_left = 397.0
+offset_top = 99.0
+offset_right = 541.0
+offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("2_qcw6c")
+theme_override_font_sizes/font_size = 15
+text = "Total Value"
+
+[node name="Inventory" type="Label" parent="."]
+layout_mode = 0
+offset_left = 101.0
+offset_top = -4.0
+offset_right = 193.0
+offset_bottom = 24.0
+scale = Vector2(1.59, 1.59)
+theme_override_fonts/font = ExtResource("2_qcw6c")
+theme_override_font_sizes/font_size = 10
+text = "Inventory"
+
+[node name="Credit Total" type="Label" parent="."]
+layout_mode = 0
+offset_left = 586.0
+offset_top = 99.0
+offset_right = 733.0
+offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("2_qcw6c")
+theme_override_font_sizes/font_size = 15
+text = "25k Credits
+"

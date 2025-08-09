@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b26er7jfxs4vt"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_n06ad"]
+[ext_resource type="PackedScene" uid="uid://qtwpgvdog64f" path="res://scenes/minables/asteroids/asteroid_chunks/asteroidChunk3.glb" id="2_ih1o6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vro6s"]
+points = PackedVector3Array(0.19764, -0.314489, -0.457724, -0.139644, -0.160737, 0.609733, -0.218107, -0.163506, 0.619585, 0.0276893, 0.619291, -0.138673, -0.56696, -0.338562, -0.119743, 0.561867, -0.413075, 0.186147, 0.335002, 0.371457, -0.523457, -0.161084, 0.365228, 0.505248, -0.255341, 0.365064, -0.457225, 0.104088, -0.605079, 0.33926, 0.457603, 0.193395, 0.145315, -0.446871, 0.348194, 0.0902644, -0.317999, -0.166187, -0.542484, 0.643155, -0.166427, -0.177686, 0.23571, -0.333944, 0.544103, 0.160524, -0.486931, -0.308139, -0.525239, -0.374769, 0.243178, 0.366822, 0.439819, -0.00426887, -0.067181, -0.448738, 0.621776, -0.522883, 0.177437, -0.175372, 0.00866543, 0.388401, -0.596668, 0.388026, -0.562436, -0.0423085, -0.0103648, -0.566376, -0.100023, -0.351339, 0.385516, 0.317657, 0.0276893, 0.383964, 0.429589, -0.313093, 0.517723, -0.00436016, 0.462647, 0.365852, -0.306954, -0.565192, -0.203572, 0.186448, -0.0667335, -0.295487, -0.533233, 0.18013, 0.53997, -0.480909, -0.163161, 0.540894, 0.262514, -0.181633, -0.564364, 0.185658)
+
+[node name="AsteroidChunk3" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 15.0
+linear_damp = 0.5
+script = ExtResource("1_n06ad")
+contents = "Asteroid"
+initialize_collision_shape_automatically = false
+value = 20000
+can_be_picked_up = true
+
+[node name="asteroidChunk3" parent="." instance=ExtResource("2_ih1o6")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_vro6s")
+
+[editable path="asteroidChunk3"]

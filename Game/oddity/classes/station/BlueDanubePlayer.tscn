@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://oj7tc4oxwdby"]
+
+[ext_resource type="Script" path="res://classes/station/BlueDanubePlayer.gd" id="1_k4848"]
+[ext_resource type="AudioStream" uid="uid://d0joypu604dkg" path="res://classes/station/donauwalzer.mp3" id="1_q3mo6"]
+
+[sub_resource type="Animation" id="Animation_c1rtf"]
+resource_name = "Start"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 5),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [-60.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ullt5"]
+resource_name = "Stop"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4.96667),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [0.0, -60.0]
+}
+
+[sub_resource type="Animation" id="Animation_ht4g3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2du1a"]
+_data = {
+"RESET": SubResource("Animation_ht4g3"),
+"Start": SubResource("Animation_c1rtf"),
+"Stop": SubResource("Animation_ullt5")
+}
+
+[node name="BlueDanubePlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_q3mo6")
+bus = &"Environment"
+script = ExtResource("1_k4848")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2du1a")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

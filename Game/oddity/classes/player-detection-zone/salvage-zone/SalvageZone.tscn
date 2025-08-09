@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbeuj1io6qndp"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/salvage-zone/SalvageZone.gd" id="1_4gegd"]
+[ext_resource type="PackedScene" uid="uid://7a3u3om1vuxa" path="res://scenes/salvage/Salvage1.tscn" id="2_5xp0e"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="2_x65q2"]
+[ext_resource type="PackedScene" uid="uid://bfg4d7id7ugk3" path="res://scenes/salvage/Salvage2.tscn" id="3_tvdkx"]
+[ext_resource type="PackedScene" uid="uid://bclu6h18h468j" path="res://scenes/salvage/Salvage3.tscn" id="4_xgl3v"]
+
+[node name="SalvageZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_4gegd")
+salvage_scene_array = [ExtResource("2_5xp0e"), ExtResource("3_tvdkx"), ExtResource("4_xgl3v")]
+activate_distance = 3000.0
+deactivate_distance = 6000.0
+one_shot = true
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 1500.0
+sprite_max_distance = 10000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("2_x65q2")]
+text = &"Salvage"
+
+[node name="Salvage" type="Node3D" parent="."]
+
+[connection signal="activate" from="." to="." method="_on_activate"]
+[connection signal="deactivate" from="." to="." method="_on_deactivate"]

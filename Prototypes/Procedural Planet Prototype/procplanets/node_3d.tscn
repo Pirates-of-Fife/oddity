@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqtf1itw7xrbx"]
+
+[ext_resource type="Script" path="res://script/Planet.gd" id="1_lptoo"]
+[ext_resource type="Script" path="res://script/ColourSettings.gd" id="2_1ll82"]
+[ext_resource type="Script" path="res://script/NoiseLayer.gd" id="2_hgrj6"]
+[ext_resource type="Script" path="res://script/NoiseSettings.gd" id="2_lip5g"]
+[ext_resource type="Script" path="res://script/ShapeSettings.gd" id="3_fjy52"]
+
+[sub_resource type="Resource" id="Resource_qgoob"]
+script = ExtResource("2_lip5g")
+strength = 1.0
+num_layers = 1
+base_roughness = 1.0
+roughness = 2.0
+persistence = 0.5
+centre = Vector3(0, 0, 0)
+min_value = 0.0
+
+[sub_resource type="Resource" id="Resource_na3gh"]
+script = ExtResource("2_hgrj6")
+noise_settings = SubResource("Resource_qgoob")
+
+[sub_resource type="Resource" id="Resource_lkq4s"]
+script = ExtResource("3_fjy52")
+planet_radius = 1.0
+height_scale = 1.0
+noise_layers = [SubResource("Resource_na3gh")]
+
+[sub_resource type="Resource" id="Resource_co5v6"]
+script = ExtResource("2_1ll82")
+planet_color = Color(1, 1, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("1_lptoo")
+auto_update = false
+shape_settings = SubResource("Resource_lkq4s")
+colour_settings = SubResource("Resource_co5v6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.45316)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.64675, 0, -0.762702, 0, 1, 0, 0.762702, 0, 0.64675, 0, 0, 0.524398)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.629592, 0, 0.776926, 0, 1, 0, -0.776926, 0, -0.629592, -0.399959, 0, 0.863552)

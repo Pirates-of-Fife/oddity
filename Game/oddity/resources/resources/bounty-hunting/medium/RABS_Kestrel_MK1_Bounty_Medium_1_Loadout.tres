@@ -1,0 +1,408 @@
+[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=71 format=3 uid="uid://b4ib3lsww33hn"]
+
+[ext_resource type="PackedScene" uid="uid://d26j0pywefc6q" path="res://scenes/cargo/bounty-hunting-cargo-containers/LowValueContainer.tscn" id="1_gkikw"]
+[ext_resource type="PackedScene" uid="uid://ddvpx7ldofuyc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.tscn" id="1_nitkn"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ThrusterSlotLoadoutResource.gd" id="2_c6s8h"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/cargo/CargoContainerLoadoutResource.gd" id="2_njpfj"]
+[ext_resource type="PackedScene" uid="uid://1ebgimexp8aj" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/rcs-thruster/RABS_KestrelMk1_RcsThruster.tscn" id="3_2luy0"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/ModuleSlotLoadoutResource.gd" id="3_7srma"]
+[ext_resource type="PackedScene" uid="uid://v6gv82xubo7h" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RABS_KestrelMk1_RetroThruster.tscn" id="4_ne51c"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ComponentSlotLoadoutResource.gd" id="5_c6eou"]
+[ext_resource type="PackedScene" uid="uid://ssxap6l3wimu" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="6_30jwb"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AlcubierreDriveSlotLoadoutResource.gd" id="7_go4i6"]
+[ext_resource type="PackedScene" uid="uid://csxjtno0xrxmo" path="res://scenes/modules/test-module/Size2AbyssDrive.tscn" id="8_63n8k"]
+[ext_resource type="PackedScene" uid="uid://c8q0kmhpluwao" path="res://scenes/modules/test-module/ShieldGenerator/size-3/Size3ShieldGenerator.tscn" id="8_em1gx"]
+[ext_resource type="PackedScene" uid="uid://6ds86klm46vk" path="res://scenes/modules/test-module/hull-reinforcement/size-3/Size3HullReinforcement.tscn" id="9_b26l8"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="9_fxs74"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="10_7ekag"]
+[ext_resource type="PackedScene" uid="uid://cpnhg66txfjsk" path="res://scenes/modules/test-module/ShieldGenerator/size-1/Size1ShieldGenerator.tscn" id="10_uegdp"]
+[ext_resource type="PackedScene" uid="uid://b4yftdtjyvs6p" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_RightRadiator.tscn" id="11_88m0x"]
+[ext_resource type="PackedScene" uid="uid://cku7uxj7tx0gd" path="res://scenes/modules/test-module/hull-reinforcement/size-1/Size1HullReinforcement.tscn" id="11_hkxum"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="12_n7kuk"]
+[ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="13_quska"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="14_gveih"]
+[ext_resource type="PackedScene" uid="uid://dcv860lf15jdf" path="res://scenes/modules/test-module/rail-gun/size-6/Size6RailGun.tscn" id="16_bidei"]
+[ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="18_0s0lr"]
+
+[sub_resource type="Resource" id="Resource_hsacr"]
+script = ExtResource("2_njpfj")
+cargo_container = ExtResource("1_gkikw")
+cargo_grid_id = 1
+value = 0
+
+[sub_resource type="Resource" id="Resource_p5tfs"]
+script = ExtResource("2_c6s8h")
+size = 5
+name = &"RabsKestrelMk1MainThrusterSlot"
+module = ExtResource("1_nitkn")
+value = 0
+id = 1
+
+[sub_resource type="Resource" id="Resource_350rj"]
+script = ExtResource("2_c6s8h")
+size = 5
+name = &"RabsKestrelMk1MainThrusterSlot2"
+module = ExtResource("1_nitkn")
+value = 0
+id = 2
+
+[sub_resource type="Resource" id="Resource_8c2df"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot"
+module = ExtResource("3_2luy0")
+value = 0
+id = 3
+
+[sub_resource type="Resource" id="Resource_iselx"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot6"
+module = ExtResource("3_2luy0")
+value = 0
+id = 4
+
+[sub_resource type="Resource" id="Resource_6wn54"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot4"
+module = ExtResource("3_2luy0")
+value = 0
+id = 5
+
+[sub_resource type="Resource" id="Resource_mkint"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot7"
+module = ExtResource("3_2luy0")
+value = 0
+id = 6
+
+[sub_resource type="Resource" id="Resource_a00r7"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot5"
+module = ExtResource("3_2luy0")
+value = 0
+id = 7
+
+[sub_resource type="Resource" id="Resource_w5ogr"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot8"
+module = ExtResource("3_2luy0")
+value = 0
+id = 8
+
+[sub_resource type="Resource" id="Resource_y2hro"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot2"
+module = ExtResource("3_2luy0")
+value = 0
+id = 9
+
+[sub_resource type="Resource" id="Resource_sboi4"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot9"
+module = ExtResource("3_2luy0")
+value = 0
+id = 10
+
+[sub_resource type="Resource" id="Resource_6oi1a"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot3"
+module = ExtResource("3_2luy0")
+value = 0
+id = 11
+
+[sub_resource type="Resource" id="Resource_tisgo"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot10"
+module = ExtResource("3_2luy0")
+value = 0
+id = 12
+
+[sub_resource type="Resource" id="Resource_rgapb"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot11"
+module = ExtResource("3_2luy0")
+value = 0
+id = 13
+
+[sub_resource type="Resource" id="Resource_7h3mv"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot12"
+module = ExtResource("3_2luy0")
+value = 0
+id = 14
+
+[sub_resource type="Resource" id="Resource_28sgm"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot13"
+module = ExtResource("3_2luy0")
+value = 0
+id = 15
+
+[sub_resource type="Resource" id="Resource_dlscg"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot14"
+module = ExtResource("3_2luy0")
+value = 0
+id = 16
+
+[sub_resource type="Resource" id="Resource_imnww"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot15"
+module = ExtResource("3_2luy0")
+value = 0
+id = 17
+
+[sub_resource type="Resource" id="Resource_xg1x0"]
+script = ExtResource("2_c6s8h")
+size = 2
+name = &"RabsKestrelMk1RcsThrusterSlot16"
+module = ExtResource("3_2luy0")
+value = 0
+id = 18
+
+[sub_resource type="Resource" id="Resource_c5ohs"]
+script = ExtResource("2_c6s8h")
+size = 3
+name = &"RabsKestrelMk1RetroThrusterSlot"
+module = ExtResource("4_ne51c")
+value = 0
+id = 19
+
+[sub_resource type="Resource" id="Resource_2foug"]
+script = ExtResource("2_c6s8h")
+size = 3
+name = &"RabsKestrelMk1RetroThrusterSlot2"
+module = ExtResource("4_ne51c")
+value = 0
+id = 20
+
+[sub_resource type="Resource" id="Resource_6dgny"]
+script = ExtResource("5_c6eou")
+size = 4
+name = &"ComponentSlot"
+value = 0
+id = 21
+
+[sub_resource type="Resource" id="Resource_a7ivi"]
+script = ExtResource("5_c6eou")
+size = 4
+name = &"ComponentSlot2"
+value = 0
+id = 22
+
+[sub_resource type="Resource" id="Resource_lnceq"]
+script = ExtResource("5_c6eou")
+size = 2
+name = &"ComponentSlot3"
+value = 0
+id = 23
+
+[sub_resource type="Resource" id="Resource_7ai1a"]
+script = ExtResource("5_c6eou")
+size = 2
+name = &"ComponentSlot4"
+value = 0
+id = 24
+
+[sub_resource type="Resource" id="Resource_wi6ej"]
+script = ExtResource("5_c6eou")
+size = 3
+name = &"ComponentSlot11"
+value = 0
+id = 25
+
+[sub_resource type="Resource" id="Resource_5u38n"]
+script = ExtResource("5_c6eou")
+size = 2
+name = &"ComponentSlot5"
+value = 0
+id = 26
+
+[sub_resource type="Resource" id="Resource_ufa64"]
+script = ExtResource("5_c6eou")
+size = 2
+name = &"ComponentSlot6"
+value = 0
+id = 27
+
+[sub_resource type="Resource" id="Resource_it1g5"]
+script = ExtResource("5_c6eou")
+size = 3
+name = &"ComponentSlot15"
+module = ExtResource("8_em1gx")
+value = 0
+id = 28
+
+[sub_resource type="Resource" id="Resource_i84pk"]
+script = ExtResource("5_c6eou")
+size = 3
+name = &"ComponentSlot16"
+module = ExtResource("8_em1gx")
+value = 0
+id = 29
+
+[sub_resource type="Resource" id="Resource_xd8a6"]
+script = ExtResource("5_c6eou")
+size = 3
+name = &"ComponentSlot17"
+module = ExtResource("9_b26l8")
+value = 0
+id = 30
+
+[sub_resource type="Resource" id="Resource_lckmn"]
+script = ExtResource("5_c6eou")
+size = 1
+name = &"ComponentSlot18"
+module = ExtResource("10_uegdp")
+value = 0
+id = 31
+
+[sub_resource type="Resource" id="Resource_5f82o"]
+script = ExtResource("5_c6eou")
+size = 1
+name = &"ComponentSlot19"
+module = ExtResource("11_hkxum")
+value = 0
+id = 32
+
+[sub_resource type="Resource" id="Resource_g77d6"]
+script = ExtResource("5_c6eou")
+size = 1
+name = &"ComponentSlot20"
+value = 0
+id = 33
+
+[sub_resource type="Resource" id="Resource_n7vgl"]
+script = ExtResource("5_c6eou")
+size = 1
+name = &"ComponentSlot21"
+module = ExtResource("11_hkxum")
+value = 0
+id = 34
+
+[sub_resource type="Resource" id="Resource_i8dmf"]
+script = ExtResource("5_c6eou")
+size = 5
+name = &"ComponentSlot7"
+value = 0
+id = 35
+
+[sub_resource type="Resource" id="Resource_pt4br"]
+script = ExtResource("5_c6eou")
+size = 5
+name = &"ComponentSlot8"
+value = 0
+id = 36
+
+[sub_resource type="Resource" id="Resource_g3gl0"]
+script = ExtResource("7_go4i6")
+size = 2
+name = &"AlcubierreDriveSlot"
+module = ExtResource("6_30jwb")
+value = 0
+id = 37
+
+[sub_resource type="Resource" id="Resource_jacr6"]
+script = ExtResource("9_fxs74")
+size = 2
+name = &"AbyssalJumpDriveSlot"
+module = ExtResource("8_63n8k")
+value = 0
+id = 38
+
+[sub_resource type="Resource" id="Resource_btol5"]
+script = ExtResource("10_7ekag")
+size = 6
+hardpoint_assignment = 0
+name = &"ExternalHardpoint"
+module = ExtResource("16_bidei")
+value = 0
+id = 39
+
+[sub_resource type="Resource" id="Resource_dev3m"]
+script = ExtResource("10_7ekag")
+size = 6
+hardpoint_assignment = 0
+name = &"ExternalHardpoint2"
+value = 0
+id = 40
+
+[sub_resource type="Resource" id="Resource_vp0ww"]
+script = ExtResource("10_7ekag")
+size = 6
+hardpoint_assignment = 0
+name = &"ExternalHardpoint3"
+value = 0
+id = 41
+
+[sub_resource type="Resource" id="Resource_7mqbg"]
+script = ExtResource("10_7ekag")
+size = 6
+hardpoint_assignment = 0
+name = &"ExternalHardpoint4"
+value = 0
+id = 42
+
+[sub_resource type="Resource" id="Resource_d4e1k"]
+script = ExtResource("10_7ekag")
+size = 5
+hardpoint_assignment = 0
+name = &"ExternalHardpoint5"
+value = 0
+id = 43
+
+[sub_resource type="Resource" id="Resource_psoki"]
+script = ExtResource("10_7ekag")
+size = 5
+hardpoint_assignment = 0
+name = &"ExternalHardpoint6"
+module = ExtResource("18_0s0lr")
+value = 0
+id = 44
+
+[sub_resource type="Resource" id="Resource_n4lv3"]
+script = ExtResource("12_n7kuk")
+size = 3
+name = &"RabsKestrelMk1RightRadiatorSlot"
+module = ExtResource("11_88m0x")
+value = 0
+id = 45
+
+[sub_resource type="Resource" id="Resource_wpvw1"]
+script = ExtResource("12_n7kuk")
+size = 3
+name = &"RabsKestrelMk1LeftRadiatorSlot"
+module = ExtResource("13_quska")
+value = 0
+id = 46
+
+[resource]
+script = ExtResource("14_gveih")
+module_slots = Array[ExtResource("3_7srma")]([SubResource("Resource_p5tfs"), SubResource("Resource_350rj"), SubResource("Resource_8c2df"), SubResource("Resource_iselx"), SubResource("Resource_6wn54"), SubResource("Resource_mkint"), SubResource("Resource_a00r7"), SubResource("Resource_w5ogr"), SubResource("Resource_y2hro"), SubResource("Resource_sboi4"), SubResource("Resource_6oi1a"), SubResource("Resource_tisgo"), SubResource("Resource_rgapb"), SubResource("Resource_7h3mv"), SubResource("Resource_28sgm"), SubResource("Resource_dlscg"), SubResource("Resource_imnww"), SubResource("Resource_xg1x0"), SubResource("Resource_c5ohs"), SubResource("Resource_2foug"), SubResource("Resource_6dgny"), SubResource("Resource_a7ivi"), SubResource("Resource_lnceq"), SubResource("Resource_7ai1a"), SubResource("Resource_wi6ej"), SubResource("Resource_5u38n"), SubResource("Resource_ufa64"), SubResource("Resource_it1g5"), SubResource("Resource_i84pk"), SubResource("Resource_xd8a6"), SubResource("Resource_lckmn"), SubResource("Resource_5f82o"), SubResource("Resource_g77d6"), SubResource("Resource_n7vgl"), SubResource("Resource_i8dmf"), SubResource("Resource_pt4br"), SubResource("Resource_g3gl0"), SubResource("Resource_jacr6"), SubResource("Resource_btol5"), SubResource("Resource_dev3m"), SubResource("Resource_vp0ww"), SubResource("Resource_7mqbg"), SubResource("Resource_d4e1k"), SubResource("Resource_psoki"), SubResource("Resource_n4lv3"), SubResource("Resource_wpvw1")])
+cargo = Array[ExtResource("2_njpfj")]([SubResource("Resource_hsacr"), SubResource("Resource_hsacr"), SubResource("Resource_hsacr"), SubResource("Resource_hsacr"), SubResource("Resource_hsacr"), SubResource("Resource_hsacr"), SubResource("Resource_hsacr")])
+entities = null
+ship_name = &"Wraith"
+ship_identification = &""
+value = 0
+apply_health = false
+current_health = 0.0
+ship_color = Color(0, 0, 0, 1)
+current_ammo = 10000.0
+max_ammo = 10000.0
+current_heat = 0.0
+current_fuel = 10800.0
+max_fuel = 10800.0

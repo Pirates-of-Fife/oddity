@@ -1,15 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1dqbkkil0eb6"]
+[gd_scene load_steps=15 format=3 uid="uid://bteqskba0aasp"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_bvu6x"]
 [ext_resource type="Resource" uid="uid://n2j00017hcu1" path="res://test-scenes/star-system-test-scene/SystemA.tres" id="2_o6vbg"]
 [ext_resource type="PackedScene" uid="uid://b52ipcjo5n8ik" path="res://test-scenes/star-system-test-scene/SystemA.tscn" id="2_spmg2"]
 [ext_resource type="Resource" uid="uid://bhhiitluon2c7" path="res://test-scenes/star-system-test-scene/SystemB.tres" id="3_ejcto"]
-[ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/player/player.tscn" id="3_n2a02"]
+[ext_resource type="PackedScene" uid="uid://c3ry8dgeqrhg1" path="res://classes/mind/player/player.tscn" id="3_n2a02"]
 [ext_resource type="Resource" uid="uid://bfa4l2rtgwpr1" path="res://test-scenes/star-system-test-scene/SystemC.tres" id="4_dfuqd"]
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="4_qf4c0"]
 [ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="5_2sr1o"]
-[ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="6_awn7r"]
-[ext_resource type="Script" path="res://test-scenes/star-system-test-scene/starshipTestShoot.gd" id="9_yfpyy"]
+[ext_resource type="Resource" uid="uid://dkn5t8ulgw3qq" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_6_Loadout.tres" id="7_hattc"]
+[ext_resource type="Resource" uid="uid://dryumn61chwql" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres" id="10_jyh57"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BountyHuntingZone.gd" id="10_xqrji"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="11_d3jqi"]
+[ext_resource type="PackedScene" uid="uid://b52oun8p1nf8p" path="res://scenes/world/gateway/celestial-bodies/alcolin/Alcolin.tscn" id="12_b18qr"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="15_u213w"]
 
 [node name="StarSystemTestScene" type="Node3D"]
 
@@ -31,38 +35,55 @@ audio_listener_enable_3d = true
 size = Vector2i(640, 360)
 render_target_update_mode = 4
 
-[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("player", "player_control_entity") groups=["World"]]
 script = ExtResource("1_bvu6x")
 star_systems = [ExtResource("2_o6vbg"), ExtResource("3_ejcto"), ExtResource("4_dfuqd")]
+player = NodePath("Player")
+player_control_entity = NodePath("SystemA/Humanoid")
 
 [node name="SystemA" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_spmg2")]
 
-[node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -229.762, 675.565)
-interaction_length = 5.0
-pick_up_distance = 3.0
-
-[node name="GodotPlushie" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("6_awn7r")]
-transform = Transform3D(-0.689229, 0, 0.724545, 0, 1, 0, -0.724545, 0, -0.689229, 104797, -230.177, 677.939)
-
-[node name="Ship1" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104796, -231.575, 657.756)
+[node name="RabsKestrelMk2" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("5_2sr1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 475132, 11821.1, 602708)
+ship_name = &"The Kestrel"
+default_loadout = ExtResource("7_hattc")
+current_state = 0
+difficulty = 3
 debug = true
 
-[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/World/SystemA" node_paths=PackedStringArray("ship")]
-script = ExtResource("9_yfpyy")
-ship = NodePath("Ship2")
+[node name="Humanoid" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("4_qf4c0")]
+transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 475132, 11823.1, 602726)
+interaction_length = 2.0
 
-[node name="Ship2" parent="SubViewportContainer/SubViewport/World/SystemA/Node3D" instance=ExtResource("5_2sr1o")]
-transform = Transform3D(-0.990085, 0.133805, 0.0427422, 0.0199034, 0.434856, -0.90028, -0.139049, -0.890504, -0.433208, 104796, -231.575, 1021.57)
+[node name="BountyHuntingZone" type="Node3D" parent="SubViewportContainer/SubViewport/World/SystemA" node_paths=PackedStringArray("distant_sprite")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 551337, -12594.6, 723162)
+script = ExtResource("10_xqrji")
+possible_loadouts = [ExtResource("10_jyh57")]
+ship_count = 1
+spawn_radius = 5000.0
+activate_distance = 20000.0
+deactivate_distance = 60000.0
+one_shot = true
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 20000.0
+sprite_max_distance = 287000.0
 
-[node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/World/SystemA/Node3D"]
-process_callback = 0
-wait_time = 2.0
-autostart = true
+[node name="MarkerSprite" parent="SubViewportContainer/SubViewport/World/SystemA/BountyHuntingZone" instance=ExtResource("11_d3jqi")]
+text = &"Test Label name"
+
+[node name="Alcolin" parent="SubViewportContainer/SubViewport/World/SystemA" instance=ExtResource("12_b18qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 564825, 9877.36, 753771)
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("control_entity") instance=ExtResource("3_n2a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104194, 1.07854, -0.609585)
+credits = 100000
 control_entity = NodePath("../SystemA/Humanoid")
 
-[connection signal="timeout" from="SubViewportContainer/SubViewport/World/SystemA/Node3D/Timer" to="SubViewportContainer/SubViewport/World/SystemA/Node3D" method="_on_timer_timeout"]
+[node name="LandingGearLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 9.89629e-19, 3.95098e-21, -9.89572e-19, 0.999967, 0.00808106, 3.9957e-21, -0.00808106, 0.999967, 1.22749, 1.56267, -28.1154)
+pixel_size = 0.0005
+modulate = Color(0.917849, 0.358676, 1.92523e-07, 1)
+outline_modulate = Color(1, 1, 1, 0)
+text = "Landing Gear"
+font = ExtResource("15_u213w")

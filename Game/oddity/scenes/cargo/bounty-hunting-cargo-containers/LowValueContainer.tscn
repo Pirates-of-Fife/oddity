@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d26j0pywefc6q"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_o0wl8"]
+[ext_resource type="PackedScene" uid="uid://ulg2kmno66p8" path="res://scenes/cargo/bounty-hunting-cargo-containers/smallValueBox.glb" id="2_vxo01"]
+
+[node name="Cu1Container" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 10.0
+contact_monitor = true
+script = ExtResource("1_o0wl8")
+contents = "Salvaged Blackheart Titanium"
+value = 5000
+can_be_picked_up = true
+
+[node name="smallValueBox" parent="." instance=ExtResource("2_vxo01")]

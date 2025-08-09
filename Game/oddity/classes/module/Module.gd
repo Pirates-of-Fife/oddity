@@ -15,6 +15,11 @@ var module_resource : ModuleResource
 @export
 var module_slot : DynamicModuleSlot
 
+@export_category("Heat")
+
+@export
+var passive_heat_generation : float = 0
+
 var is_being_held_after_uninsert : bool  = false
 
 func _ready() -> void:
@@ -49,7 +54,7 @@ func insert(slot : DynamicModuleSlot) -> void:
 
 	if get_parent_node_3d() != module_slot:
 		reparent.call_deferred(module_slot)
-	
+
 	module_slot.module_inserted.emit(self)
 	inserted.emit(module_slot)
 
@@ -63,6 +68,13 @@ func uninsert() -> void:
 	can_freeze = true
 
 
+func add_heat(heat : float) -> void:
+	if (module_slot == null):
+		return
+
+
+
+	module_slot.add_heat(heat)
 
 func _on_interact() -> void:
 	unfreeze()

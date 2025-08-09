@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2kvl8wv1vwnt"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_l5ms0"]
+[ext_resource type="PackedScene" uid="uid://bhgjbgxytykt6" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/Kyloadai1.tscn" id="2_blgc4"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_jxm2h"]
+
+[node name="Kyloadai RX-T d3-8 1 Zone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_l5ms0")
+planet_name = &"Kyloadai RX-T d3-8 1"
+planet_scene = ExtResource("2_blgc4")
+planet_scale = 1
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 200000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_jxm2h")]
+text = &"Arka"

@@ -1,0 +1,200 @@
+[gd_scene load_steps=6 format=3 uid="uid://b06fofkojjj37"]
+
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="1_a7nro"]
+[ext_resource type="Script" path="res://classes/landing-pad/repair-ui/RepairUi2d.gd" id="1_wfxd7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1q5ux"]
+font = ExtResource("1_a7nro")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_7qp6s"]
+font = ExtResource("1_a7nro")
+font_size = 25
+font_color = Color(0.94902, 0, 0.160784, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2bnv"]
+font = ExtResource("1_a7nro")
+font_size = 25
+font_color = Color(0.209399, 0.607089, 3.85046e-07, 1)
+
+[node name="RepairUi2d" type="Control" node_paths=PackedStringArray("ship_not_landed_ui", "ship_name", "refuel_ui", "refuel_cost_label", "ship_refueled_ui", "repair_ui", "repair_cost_label", "ship_repaired_ui", "restock_ui", "restock_cost_label", "ship_restocked_ui")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wfxd7")
+ship_not_landed_ui = NodePath("NoShipLandedUi")
+ship_name = NodePath("Ship")
+refuel_ui = NodePath("Refuel")
+refuel_cost_label = NodePath("Refuel/Cost2")
+ship_refueled_ui = NodePath("ShipRefueled")
+repair_ui = NodePath("Repair")
+repair_cost_label = NodePath("Repair/Cost")
+ship_repaired_ui = NodePath("ShipRepaired")
+restock_ui = NodePath("Restock")
+restock_cost_label = NodePath("Restock/Cost3")
+ship_restocked_ui = NodePath("ShipRestocked")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 547.0
+offset_bottom = 471.0
+color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[node name="Resupply" type="Label" parent="."]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 2.0
+offset_right = 344.0
+offset_bottom = 72.0
+text = "Resupply"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Ship" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "Ship Name"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="NoShipLandedUi" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Ship" type="Label" parent="NoShipLandedUi"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "No Ship Landed"
+label_settings = SubResource("LabelSettings_7qp6s")
+
+[node name="Repair" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CostLabel" type="Label" parent="Repair"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 114.0
+offset_right = 224.0
+offset_bottom = 184.0
+text = "Repair:"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Cost" type="Label" parent="Repair"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 115.0
+offset_right = 495.0
+offset_bottom = 185.0
+text = "25k Credits"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="ShipRepaired" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 54.0
+offset_right = 40.0
+offset_bottom = 94.0
+
+[node name="Ship" type="Label" parent="ShipRepaired"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "Ship Repaired"
+label_settings = SubResource("LabelSettings_f2bnv")
+
+[node name="Refuel" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CostLabel2" type="Label" parent="Refuel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 157.0
+offset_right = 224.0
+offset_bottom = 227.0
+text = "Refuel:"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Cost2" type="Label" parent="Refuel"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 158.0
+offset_right = 495.0
+offset_bottom = 228.0
+text = "25k Credits"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Restock" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CostLabel3" type="Label" parent="Restock"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 202.0
+offset_right = 224.0
+offset_bottom = 272.0
+text = "Restock:"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Cost3" type="Label" parent="Restock"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 203.0
+offset_right = 495.0
+offset_bottom = 273.0
+text = "25k Credits"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="ShipRefueled" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 96.0
+offset_right = 40.0
+offset_bottom = 136.0
+
+[node name="Ship" type="Label" parent="ShipRefueled"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "Ship Refueled"
+label_settings = SubResource("LabelSettings_f2bnv")
+
+[node name="ShipRestocked" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 142.0
+offset_right = 40.0
+offset_bottom = 182.0
+
+[node name="Ship" type="Label" parent="ShipRestocked"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "Ship Restocked"
+label_settings = SubResource("LabelSettings_f2bnv")

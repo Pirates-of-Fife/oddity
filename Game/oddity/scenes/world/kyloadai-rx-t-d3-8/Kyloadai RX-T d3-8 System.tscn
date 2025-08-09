@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://d3v26w8qkcgf2"]
+
+[ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_uw0bv"]
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_igqkf"]
+[ext_resource type="PackedScene" uid="uid://8rwcs2d5ajpx" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/KyloadiaRxTD38.tscn" id="3_7jbth"]
+[ext_resource type="PackedScene" uid="uid://d2kvl8wv1vwnt" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/Kyloadai1Zone.tscn" id="4_mcte5"]
+[ext_resource type="PackedScene" uid="uid://dojnmqagc6udm" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/Kyloadai1BZone.tscn" id="5_s831a"]
+[ext_resource type="PackedScene" uid="uid://crld0e6pc2tl4" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/Kyloadai1AZone.tscn" id="7_32jiq"]
+[ext_resource type="PackedScene" uid="uid://cc81y86yxt4qd" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-2/Kyloadai2Zone.tscn" id="10_aq6li"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g14yq"]
+shader = ExtResource("2_igqkf")
+shader_parameter/sky_color = Color(0.013851, 0, 0.000919866, 1)
+shader_parameter/star_base_color = Color(1, 1, 1, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_qgo0g"]
+sky_material = SubResource("ShaderMaterial_g14yq")
+
+[sub_resource type="Environment" id="Environment_p7b43"]
+background_mode = 2
+sky = SubResource("Sky_qgo0g")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 200000.0
+
+[node name="KyloadaiRx-tD3-8System" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker")]
+script = ExtResource("1_uw0bv")
+system_name = &"Kyloadai RX-T d3-8"
+main_star = NodePath("KyloadiaRxTd38")
+player_spawn_marker = NodePath("Marker3D")
+player_spawn_position = Vector3(-2.77895e+06, 0, 0)
+player_respawn_marker = NodePath("Marker3D")
+player_respawn_position = Vector3(-2.77895e+06, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p7b43")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)
+
+[node name="KyloadiaRxTd38" parent="." instance=ExtResource("3_7jbth")]
+
+[node name="Kyloadai RX-T d3-8 1 Zone" parent="." instance=ExtResource("4_mcte5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60000, -120000, -7e+06)
+
+[node name="Kyloadai RX-T d3-8 1 B Zone" parent="Kyloadai RX-T d3-8 1 Zone" instance=ExtResource("5_s831a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43120.4, 77862.3)
+
+[node name="Kyloadai RX-T d3-8 1 A Zone" parent="Kyloadai RX-T d3-8 1 Zone" instance=ExtResource("7_32jiq")]
+
+[node name="Kyloadai RX-T d3-8 2 Zone" parent="." instance=ExtResource("10_aq6li")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180000, -3.12e+06, 3e+07)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://clbiviujujc1o"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/fuel-display/FuelUi3d.gd" id="1_xw36s"]
+[ext_resource type="PackedScene" uid="uid://bthph3y5enjc2" path="res://classes/multi-function-display/fuel-display/FuelUi2d.tscn" id="2_nd5w1"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n1jqh"]
+viewport_path = NodePath("SubViewport")
+
+[node name="FuelUi3d" type="Node3D" node_paths=PackedStringArray("fuel_ui_2d")]
+script = ExtResource("1_xw36s")
+fuel_ui_2d = NodePath("SubViewport/FuelUi2d")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_n1jqh")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1677, 287)
+
+[node name="FuelUi2d" parent="SubViewport" instance=ExtResource("2_nd5w1")]

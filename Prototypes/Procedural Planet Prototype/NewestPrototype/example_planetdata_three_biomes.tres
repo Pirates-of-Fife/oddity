@@ -1,0 +1,92 @@
+[gd_resource type="Resource" script_class="PlanetData" load_steps=20 format=3 uid="uid://djf37q4r4vb5s"]
+
+[ext_resource type="Script" path="res://Scripts/PlanetBiome.gd" id="1_sjw6y"]
+[ext_resource type="Script" path="res://Scripts/PlanetNoise.gd" id="2_ctllh"]
+[ext_resource type="Script" path="res://Scripts/PlanetData.gd" id="3_32eyg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_721il"]
+offset = Vector3(-56.07, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_crq3s"]
+colors = PackedColorArray(0.256708, 0.0621438, 7.21961e-08, 1, 0.623923, 0.200204, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_epc6d"]
+gradient = SubResource("Gradient_crq3s")
+
+[sub_resource type="Resource" id="Resource_08k7q"]
+script = ExtResource("1_sjw6y")
+gradient_t = SubResource("GradientTexture1D_epc6d")
+start_h = 0.73
+
+[sub_resource type="Gradient" id="Gradient_10i7t"]
+colors = PackedColorArray(0.77104, 0.442743, 0, 1, 0.795282, 0.456071, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b1hlh"]
+gradient = SubResource("Gradient_10i7t")
+
+[sub_resource type="Resource" id="Resource_xinyi"]
+script = ExtResource("1_sjw6y")
+gradient_t = SubResource("GradientTexture1D_b1hlh")
+start_h = -6.03
+
+[sub_resource type="Gradient" id="Gradient_221vh"]
+colors = PackedColorArray(0.560755, 0.180844, 9.62615e-08, 1, 0.603293, 0.370208, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1rxab"]
+gradient = SubResource("Gradient_221vh")
+
+[sub_resource type="Resource" id="Resource_ijivp"]
+script = ExtResource("1_sjw6y")
+gradient_t = SubResource("GradientTexture1D_1rxab")
+start_h = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bfgwa"]
+seed = 14
+frequency = 0.0003
+fractal_octaves = 2
+fractal_lacunarity = 2.065
+fractal_gain = 1.22
+fractal_weighted_strength = 0.21
+
+[sub_resource type="Resource" id="Resource_0bho7"]
+script = ExtResource("2_ctllh")
+amplitude = 0.89
+minh = 0.675
+noise_map = SubResource("FastNoiseLite_bfgwa")
+use_first_layer_as_mask = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_srbss"]
+noise_type = 3
+frequency = 0.0007
+fractal_octaves = 3
+fractal_gain = 0.57
+
+[sub_resource type="Resource" id="Resource_4a527"]
+script = ExtResource("2_ctllh")
+amplitude = 1.385
+minh = 1.0
+noise_map = SubResource("FastNoiseLite_srbss")
+use_first_layer_as_mask = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hq5g1"]
+seed = 3
+frequency = 0.0003
+fractal_octaves = 3
+
+[sub_resource type="Resource" id="Resource_43jiw"]
+script = ExtResource("2_ctllh")
+amplitude = 0.375
+minh = 0.195
+noise_map = SubResource("FastNoiseLite_hq5g1")
+use_first_layer_as_mask = false
+
+[resource]
+script = ExtResource("3_32eyg")
+radius = 20.0
+res = 90
+planet_noise = Array[ExtResource("2_ctllh")]([SubResource("Resource_0bho7"), SubResource("Resource_4a527"), SubResource("Resource_43jiw")])
+biomes = Array[ExtResource("1_sjw6y")]([SubResource("Resource_08k7q"), SubResource("Resource_xinyi"), SubResource("Resource_ijivp")])
+biome_noise = SubResource("FastNoiseLite_721il")
+biome_amplitude = 1.705
+biome_offset = 3.88
+biome_blend = 1.0

@@ -1,14 +1,20 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=4 format=3 uid="uid://c5ty3dn338c3x"]
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://c5ty3dn338c3x"]
 
 [ext_resource type="Resource" uid="uid://coukollifi3g1" path="res://scenes/modules/test-module/Size6Weapon/LaserProjectile.tres" id="1_vn55u"]
-[ext_resource type="Script" path="res://resources/classes/module/component/weapon/WeaponResource.gd" id="2_lpthe"]
-[ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/Size6Weapon/laser_ausbereitung.wav" id="3_rvbj8"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_mkrul"]
+[ext_resource type="AudioStream" uid="uid://b7txiup6nktni" path="res://scenes/modules/test-module/Size5Weapon/laser_ausbereitung.wav" id="3_4m588"]
 
 [resource]
-script = ExtResource("2_lpthe")
+script = ExtResource("2_mkrul")
 projectile = ExtResource("1_vn55u")
-damage = 150.0
+weapon_force = 890.0
+cooldown = 0.2
+heat_per_shot = 70.0
+damage = 400.0
 penetration = 2.0
-sound = ExtResource("3_rvbj8")
-weapon_force = 750.0
-cooldown = 0.4
+sound = ExtResource("3_4m588")
+type = &"Laser Weapon"
+manufacturer = &"Ox\'vic Pyrr"
+model = &"Dread 5"
+size = &"5"
+release_year = &"200"

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://o58cxnw1ggt5"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/targeting/radar/RadarBlip.gd" id="1_1os5p"]
+[ext_resource type="Material" uid="uid://cxsh5vstg02bt" path="res://classes/multi-function-display/targeting/radar/RadarBlipSelectedMaterial.tres" id="2_3f5x3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hi81d"]
+material = ExtResource("2_3f5x3")
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ft1ht"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_xmsdt"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ft1ht")
+size = Vector3(0.03, 0, 0.03)
+
+[node name="RadarBlip" type="Node3D" node_paths=PackedStringArray("line_mesh")]
+script = ExtResource("1_1os5p")
+line_mesh = NodePath("Line")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hi81d")
+
+[node name="Line" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_xmsdt")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ik0bqvjr0uki"]
 
 [ext_resource type="Script" path="res://classes/creature/Creature.gd" id="1_8w455"]
-[ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/player/anchor/Anchor.tscn" id="2_2yapl"]
+[ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/mind/player/anchor/Anchor.tscn" id="2_2yapl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0f0b5"]
 friction = 0.2
@@ -19,7 +19,7 @@ radius = 0.3
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m4mvs"]
 radius = 0.6
 
-[node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("grounded_marker", "fall_timer", "ground_shape_cast", "stand_up_shape_cast", "anchor")]
+[node name="Creature" type="RigidBody3D" node_paths=PackedStringArray("grounded_marker", "pick_up_location", "fall_timer", "ground_shape_cast", "stand_up_shape_cast", "anchor")]
 collision_layer = 268436993
 collision_mask = 268436993
 axis_lock_angular_y = true
@@ -30,6 +30,7 @@ linear_damp = 10.0
 angular_damp = 10.0
 script = ExtResource("1_8w455")
 grounded_marker = NodePath("Marker3D")
+pick_up_location = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D")
 fall_timer = NodePath("Timer")
 ground_shape_cast = NodePath("ground_cast")
 stand_up_shape_cast = NodePath("stand_up_cast")
@@ -47,6 +48,9 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 0)
 enable_pitch_limit = true
 pitch_limit = 90.0
+
+[node name="Marker3D" type="Marker3D" parent="Anchor/TwistPivot/PitchPivot/CameraAnchor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.52077)
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
@@ -67,3 +71,5 @@ debug_shape_custom_color = Color(0, 0.67451, 0, 1)
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.71119, 0)
 gizmo_extents = 1.06
+
+[editable path="Anchor"]

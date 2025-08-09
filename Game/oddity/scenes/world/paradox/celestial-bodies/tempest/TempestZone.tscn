@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://meboekwfd8f5"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_drrlj"]
+[ext_resource type="PackedScene" uid="uid://duvbwfexx25l7" path="res://scenes/world/paradox/celestial-bodies/tempest/Tempest.tscn" id="2_t7ir1"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_dwuex"]
+
+[node name="TempestZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_drrlj")
+planet_name = &"Tempest"
+planet_scene = ExtResource("2_t7ir1")
+planet_scale = 3
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 450000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_dwuex")]
+text = &"Alcolin"

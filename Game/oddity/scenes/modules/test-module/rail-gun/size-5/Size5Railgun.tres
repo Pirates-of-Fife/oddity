@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://bbqr1rkg6k4cb"]
+
+[ext_resource type="Resource" uid="uid://eri2jqmgs8ef" path="res://scenes/modules/test-module/rail-gun/RailgunProjectile.tres" id="1_60sov"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_38khs"]
+[ext_resource type="AudioStream" uid="uid://dlekynry85pnx" path="res://scenes/modules/test-module/rail-gun/railgun_fire.wav" id="3_0s8j4"]
+
+[resource]
+script = ExtResource("2_38khs")
+projectile = ExtResource("1_60sov")
+weapon_force = 3000.0
+cooldown = 3.0
+heat_per_shot = 1800.0
+ammo_usage = 60.0
+damage = 3000.0
+penetration = 10.0
+sound = ExtResource("3_0s8j4")
+type = &"Rail Gun"
+manufacturer = &"Protectorate Federation"
+model = &"RAIL 5"
+size = &"5"
+release_year = &"20"

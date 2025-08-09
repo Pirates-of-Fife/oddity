@@ -3,6 +3,13 @@ extends Node3D
 
 class_name CargoGrid
 
+signal cargo_has_been_added_to_grid(cargo_area : CargoArea, cargo : CargoContainer)
+signal cargo_has_been_removed_from_grid(cargo_area : CargoArea, cargo : CargoContainer)
+signal cargo_sold
+
+@export
+var id : int = 0
+
 @export
 var monitoring_distance : float
 
@@ -27,6 +34,12 @@ var cargo_area_dictionary : Dictionary = {}
 
 @export
 var cargo_area_root : Node3D
+
+@export
+var current_value : int = 0
+
+@export
+var current_cargo_in_grid : Array
 
 var player : Player
 
@@ -66,6 +79,50 @@ func _ready() -> void:
 		var area : Area3D = $Area3D
 		var collision_shape : CollisionShape3D = area.get_node("CollisionShape3D")
 		var shape : Shape3D = collision_shape.shape
+
+	for i : Node3D in cargo_area_root.get_children():
+		if i is CargoArea:
+			i.cargo_added_to_area.connect(cargo_added_to_grid)
+			i.cargo_removed_from_area.connect(cargo_removed_from_grid)
+	
+func cargo_added_to_grid(cargo_area : CargoArea, cargo : CargoContainer) -> void:
+	current_value += cargo.value
+	current_cargo_in_grid.append(cargo)
+	cargo_has_been_added_to_grid.emit(cargo_area, cargo)
+
+func cargo_removed_from_grid(cargo_area : CargoArea, cargo : CargoContainer) -> void:
+	current_value -= cargo.value
+	current_cargo_in_grid.erase(cargo)
+	cargo_has_been_removed_from_grid.emit(cargo_area, cargo)
+
+	
+func sell_cargo() -> void:
+	var total : int = 0
+	
+	for c : CargoArea in cargo_area_root.get_children():
+		c.snapped_cargo = null
+		c.valid = true
+	
+	for c : CargoContainer in current_cargo_in_grid:
+		total += c.value
+		c.queue_free()
+	
+	player.add_credits(total)
+
+	cargo_sold.emit()
+
+func clear_cargo() -> void:
+	for c : CargoArea in cargo_area_root.get_children():
+		c.snapped_cargo = null
+		c.valid = true
+	
+	for c : CargoContainer in current_cargo_in_grid:
+		c.queue_free()
+		
+func add_cargo_container(cargo_container : CargoContainer) -> void:
+	for cargo_area : CargoArea in cargo_area_root.get_children():
+		if cargo_area.valid:
+			cargo_container.snap_to_grid(cargo_area)
 
 func find_cargo_area(coordinate : Vector3) -> CargoArea:
 	return cargo_area_dictionary.get(coordinate, null)

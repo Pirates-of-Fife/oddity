@@ -17,12 +17,14 @@ config/features=PackedStringArray("4.3", "Double Precision", "Forward Plus")
 boot_splash/image="res://project-images/OddityLogo-05.png"
 config/icon="res://project-images/OddityLogo-02.png"
 
+[autoload]
+
+Globals="*res://globals/globals.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/inferred_declaration=2
-gdscript/warnings/unsafe_property_access=1
-gdscript/warnings/unsafe_method_access=1
 gdscript/warnings/unsafe_cast=1
 gdscript/warnings/unsafe_call_argument=1
 gdscript/warnings/return_value_discarded=1
@@ -62,9 +64,9 @@ folder_colors={
 "res://classes/frame-of-reference/": "blue",
 "res://classes/game-entity/": "orange",
 "res://classes/interactable/": "orange",
+"res://classes/mind/player/": "yellow",
 "res://classes/module/": "teal",
 "res://classes/pid-controller/": "gray",
-"res://classes/player/": "yellow",
 "res://classes/starship/": "orange",
 "res://classes/vehicle/": "orange",
 "res://project-images/": "blue",
@@ -267,10 +269,61 @@ starship_shoot_secondary_weapons={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(481, 18),"global_position":Vector2(490, 64),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+starship_cycle_power_state={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":112,"location":0,"echo":false,"script":null)
+]
+}
+general_third_person={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194335,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+general_toogle_look_around={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+general_third_person_increase_distance={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":8,"position":Vector2(114, 13),"global_position":Vector2(123, 59),"factor":1.0,"button_index":4,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+general_third_person_decrease_distance={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(89, 10),"global_position":Vector2(98, 56),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+starship_shoot_tertiary_weapons={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":4,"position":Vector2(98, 24),"global_position":Vector2(107, 70),"factor":1.0,"button_index":3,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+player_force_respawn={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194308,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+starship_focus_target={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":84,"key_label":0,"unicode":116,"location":0,"echo":false,"script":null)
+]
+}
+ship_toggle_headlights={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":76,"key_label":0,"unicode":108,"location":0,"echo":false,"script":null)
+]
+}
+hide_ui={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194341,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
 3d_physics/layer_1="Common"
+3d_physics/layer_3="Radar"
 3d_physics/layer_9="Ship Collider"
 3d_physics/layer_10="Ship Exterior"
 3d_physics/layer_11="Ship Interior"
@@ -278,6 +331,8 @@ starship_shoot_secondary_weapons={
 3d_physics/layer_21="Cargo"
 3d_physics/layer_22="Projectile"
 3d_physics/layer_23="Shield"
+3d_physics/layer_24="ProjectilePreCollider"
+3d_physics/layer_25="ShieldRayCast"
 3d_physics/layer_29="OpenableDetection"
 3d_physics/layer_30="Interactable"
 
@@ -289,9 +344,7 @@ starship_shoot_secondary_weapons={
 3d/default_linear_damp=0.0
 3d/default_angular_damp=0.0
 common/physics_interpolation=true
-jolt_3d/solver/velocity_iterations=40
-jolt_3d/solver/position_iterations=16
-jolt_3d/limits/max_linear_velocity=1e+15
+jolt_3d/limits/max_linear_velocity=1500.0
 jolt_3d/limits/max_bodies=262144
 jolt_3d/limits/max_temporary_memory=1024
 

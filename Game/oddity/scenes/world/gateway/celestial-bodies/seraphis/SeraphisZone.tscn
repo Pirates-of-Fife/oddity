@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://mvlkl5w1pgts"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_d4sfn"]
+[ext_resource type="PackedScene" uid="uid://ccorusx3cx5rg" path="res://scenes/world/gateway/celestial-bodies/seraphis/Seraphis.tscn" id="2_45m5p"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_vl01k"]
+
+[node name="SeraphisZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_d4sfn")
+planet_name = &"Seraphis"
+planet_scene = ExtResource("2_45m5p")
+planet_scale = 1
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_vl01k")]
+text = &"Noctiluna"

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccr4kt2kqem5i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pdas4"]
+size = Vector3(100, 100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ct818"]
+shading_mode = 0
+
+[node name="PlaceholderObject" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pdas4")
+surface_material_override/0 = SubResource("StandardMaterial3D_ct818")

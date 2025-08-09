@@ -26,6 +26,9 @@ var interaction_length : float = 2.5
 @export
 var pick_up_distance : float = 1
 
+@export
+var pick_up_location : Marker3D
+
 var game_entity_being_picked_up : GameEntity
 
 @export_category("Keep Upright")
@@ -94,6 +97,7 @@ func creature_ready() -> void:
 	ground_shape_cast.add_exception(self)
 	stand_up_shape_cast.add_exception(self)
 	orignal_collision_shape = $CollisionShape3D.shape
+	pick_up_location.position.z = -pick_up_distance
 
 func fall_timer_timeout() -> void:
 	if !is_grounded():
@@ -231,16 +235,22 @@ func use_interact() -> void:
 				game_entity_being_picked_up.is_being_held = true
 				game_entity_being_picked_up.on_interact.emit()
 				game_entity_being_picked_up.on_game_entity_drop_request.connect(drop)
+				rotation_offset = pick_up_location.global_transform.basis.inverse() * game_entity_being_picked_up.global_transform.basis
 
+var rotation_offset : Basis
 
 func pick_up(game_entity : GameEntity, delta : float) -> void:
-	var entity_goal_position : Vector3 = anchor.camera_anchor.global_position + Vector3(0, 0, -pick_up_distance) * anchor.camera_anchor.global_basis.inverse()
+	game_entity.global_position = pick_up_location.global_position
+	game_entity.global_basis = pick_up_location.global_basis * rotation_offset
 
-	game_entity.global_position = entity_goal_position
+	game_entity.angular_velocity = Vector3.ZERO
+
 
 func drop() -> void:
 	game_entity_being_picked_up.on_game_entity_drop_request.disconnect(drop)
 	game_entity_being_picked_up.is_being_held = false
+	game_entity_being_picked_up.angular_velocity = Vector3.ZERO
+	game_entity_being_picked_up.linear_velocity = linear_velocity
 	game_entity_being_picked_up = null
 
 func keep_upright(delta: float) -> void:

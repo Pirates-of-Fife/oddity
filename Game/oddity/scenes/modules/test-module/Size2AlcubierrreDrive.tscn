@@ -1,23 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfbal0ceng7tn"]
+[gd_scene load_steps=5 format=3 uid="uid://ssxap6l3wimu"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/AlcubierreDrive.gd" id="1_e77oe"]
 [ext_resource type="Resource" uid="uid://bcnnlkr5akc2h" path="res://scenes/modules/test-module/Size2AlcubierreDrive.tres" id="2_fcs0k"]
+[ext_resource type="PackedScene" uid="uid://b4rqsv1kqush4" path="res://scenes/modules/test-module/alcubierre_drive.glb" id="3_g72co"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go6du"]
-albedo_color = Color(0.800888, 0.178815, 0, 1)
+[sub_resource type="Curve" id="Curve_ceube"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.104247, 0.739165), -4.46458, -4.46458, 0, 0, Vector2(0.50193, 0.0827011), 0.0, 0.0, 0, 0, Vector2(1, 0.0629742), 0.0, 0.0, 0, 0]
+point_count = 4
 
-[sub_resource type="BoxMesh" id="BoxMesh_ttxbx"]
-material = SubResource("StandardMaterial3D_go6du")
-size = Vector3(0.75, 1.5, 0.75)
-
-[node name="Size2AlcubierrreDrive" type="RigidBody3D"]
+[node name="Size2AlcubierrreDrive" type="RigidBody3D" node_paths=PackedStringArray("charging_start", "charging_sound", "charging_end", "travelling_sound")]
 collision_layer = 537396225
 collision_mask = 537396225
 mass = 30.0
 script = ExtResource("1_e77oe")
 size = 2
+manouvarabilty_curve = SubResource("Curve_ceube")
+charging_start = NodePath("ChargeStart")
+charging_sound = NodePath("ChargeLoop")
+charging_end = NodePath("ChargeEnd")
+travelling_sound = NodePath("Travelling")
 module_resource = ExtResource("2_fcs0k")
+passive_heat_generation = 50.0
+value = 20000
 can_be_picked_up = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_ttxbx")
+[node name="alcubierre_drive" parent="." instance=ExtResource("3_g72co")]
+transform = Transform3D(9.18485e-17, -1.5, 0, 1.5, 9.18485e-17, 0, 0, 0, 1.5, 0, -0.0260223, 0)
+
+[node name="ChargeStart" type="AudioStreamPlayer3D" parent="."]
+volume_db = -6.0
+
+[node name="ChargeLoop" type="AudioStreamPlayer3D" parent="."]
+volume_db = -6.0
+
+[node name="ChargeEnd" type="AudioStreamPlayer3D" parent="."]
+volume_db = -6.0
+
+[node name="Travelling" type="AudioStreamPlayer3D" parent="."]
+volume_db = -12.0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

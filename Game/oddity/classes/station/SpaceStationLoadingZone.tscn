@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://doqo8e7mmc8xm"]
+
+[ext_resource type="Script" path="res://classes/station/space_station_loading_zone.gd" id="1_mq0e1"]
+[ext_resource type="PackedScene" uid="uid://bifjawf38tw3r" path="res://classes/station/SpaceStation.tscn" id="2_28swi"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="2_ql6ut"]
+
+[node name="SpaceStationLoadingZone" type="Node3D" node_paths=PackedStringArray("player_spawn_marker", "ship_spawn_marker", "distant_sprite")]
+script = ExtResource("1_mq0e1")
+scene = ExtResource("2_28swi")
+station_name = &"TestStation"
+player_spawn_marker = NodePath("Marker3D2")
+ship_spawn_marker = NodePath("Marker3D")
+activate_distance = 50000.0
+deactivate_distance = 55000.0
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 5000.0
+sprite_max_distance = 250000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("2_ql6ut")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(6.12323e-17, -1.2326e-32, -1, 0.683274, 0.730162, 2.82878e-17, 0.730162, -0.683274, 8.57401e-17, 438.88, -29.0257, 125.361)
+
+[node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.730162, 0.683274, 0, -0.683274, 0.730162, 416.265, -21.1602, 134.892)

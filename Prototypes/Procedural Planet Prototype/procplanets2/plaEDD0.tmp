@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://0vpfsqc05upc"]
+
+[ext_resource type="Script" path="res://Planet.gd" id="1_s1xic"]
+[ext_resource type="Script" path="res://PlanetMeshFace.gd" id="2_3ebwr"]
+[ext_resource type="Script" path="res://PlanetResource.gd" id="2_f06wc"]
+
+[sub_resource type="Resource" id="Resource_3a172"]
+script = ExtResource("2_f06wc")
+radius = 6.885
+
+[node name="Planet" type="Node3D"]
+script = ExtResource("1_s1xic")
+planet_resource = SubResource("Resource_3a172")
+
+[node name="Up" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../Left")
+script = ExtResource("2_3ebwr")
+normal = Vector3(0, 1, 0)
+
+[node name="Down" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../Right")
+script = ExtResource("2_3ebwr")
+normal = Vector3(0, -1, 0)
+
+[node name="Left" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../Down")
+script = ExtResource("2_3ebwr")
+normal = Vector3(-1, 0, 0)
+
+[node name="Right" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../Front")
+script = ExtResource("2_3ebwr")
+normal = Vector3(1, 0, 0)
+
+[node name="Front" type="MeshInstance3D" parent="."]
+skeleton = NodePath("../Back")
+script = ExtResource("2_3ebwr")
+normal = Vector3(0, 0, -1)
+
+[node name="Back" type="MeshInstance3D" parent="."]
+script = ExtResource("2_3ebwr")
+normal = Vector3(0, 0, 1)

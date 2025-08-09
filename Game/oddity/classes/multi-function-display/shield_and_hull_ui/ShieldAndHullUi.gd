@@ -36,10 +36,10 @@ var hull_health_label : RichTextLabel
 func _ready() -> void:
 	hull_health_bar.max_value = max_hull_health
 	hull_health_bar.value = current_hull_health
-	
+
 	shield_health_bar.max_value = max_shield_health
 	shield_health_bar.value = current_shield_health
-	
+
 	shield_charge.max_value = cooldown_time
 	shield_charge.value = cooldown_time
 
@@ -48,16 +48,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	hull_health_bar.max_value = max_hull_health
 	hull_health_bar.value = current_hull_health
-	
+
 	shield_health_bar.max_value = max_shield_health
 	shield_health_bar.value = current_shield_health
-		
+
 	shield_charge.max_value = cooldown_time
 	shield_charge.value = cooldown_time - current_cooldown
-	
-	shield_health_label.text = str(current_shield_health) + " / " + str(max_shield_health)
-	hull_health_label.text = str(current_hull_health) + " / " + str(max_hull_health)
-	
+
+	shield_health_label.text = str(roundf(current_shield_health)) + " / " + str(roundf(max_shield_health))
+	hull_health_label.text = str(roundf(current_hull_health)) + " / " + str(roundf(max_hull_health))
+
 	if (max_shield_health == 0):
 		shield_health_bar.hide()
 		shield_charge.hide()

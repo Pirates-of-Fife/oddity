@@ -1,0 +1,3 @@
+extends StaticGameEntity
+
+class_name AbyssalTunnelCollider

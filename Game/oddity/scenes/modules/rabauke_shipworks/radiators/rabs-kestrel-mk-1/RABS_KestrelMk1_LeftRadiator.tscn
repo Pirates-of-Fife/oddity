@@ -1,23 +1,92 @@
-[gd_scene load_steps=4 format=3 uid="uid://bs4i4q3qx5qyk"]
+[gd_scene load_steps=10 format=3 uid="uid://bs4i4q3qx5qyk"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/Radiator.gd" id="1_ldcyo"]
 [ext_resource type="PackedScene" uid="uid://bfmmpr82g23n6" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/LeftRadiator.glb" id="2_455hm"]
 
+[sub_resource type="Gradient" id="Gradient_jvin0"]
+offsets = PackedFloat32Array(0, 0.276018, 0.828054, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.611765, 0, 0, 1, 1, 0.548609, 0.145742, 1, 1, 0.858824, 0.145098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gijv0"]
+gradient = SubResource("Gradient_jvin0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nt5s5"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_7s5wn"]
 size = Vector3(2.32865, 0.437696, 9.17139)
 
-[node name="RabsKestrelMk1LeftRadiator" type="RigidBody3D"]
+[sub_resource type="Animation" id="Animation_asafv"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftRadiator/Radiator_001/RadiatorFlap_004")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0.641616, 0.221812, -0.0520906)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LeftRadiator/Radiator_001/RadiatorFlap_005")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat64Array(0, 1, -0.569915, 0.0825821, -0.0601358)
+
+[sub_resource type="Animation" id="Animation_e7xb0"]
+resource_name = "heat"
+length = 1.01
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftRadiator/Radiator_001/RadiatorFlap_004")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0.641616, 0.221812, -0.0520906, 1, 1, 1.86962, 0.230816, -0.180844)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LeftRadiator/Radiator_001/RadiatorFlap_005")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat64Array(0, 1, -0.569915, 0.0825821, -0.0601358, 1, 1, -1.83523, 0.0733052, 0.0725304)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xdj8x"]
+_data = {
+"RESET": SubResource("Animation_asafv"),
+"heat": SubResource("Animation_e7xb0")
+}
+
+[node name="RabsKestrelMk1LeftRadiator" type="RigidBody3D" node_paths=PackedStringArray("radiator_animation", "heat_mesh")]
 collision_layer = 537395201
 collision_mask = 537395201
 mass = 1000.0
 script = ExtResource("1_ldcyo")
+heat_colors = SubResource("GradientTexture1D_gijv0")
+cooling_capacity = 100.0
+cooling_rate = 0.15
+start_cooling_at_heat = 0.1
+radiator_animation = NodePath("AnimationPlayer")
+heat_mesh = NodePath("LeftRadiator/Radiator_001")
 size = 3
-can_be_picked_up = true
 
 [node name="LeftRadiator" parent="." instance=ExtResource("2_455hm")]
+
+[node name="Radiator_001" parent="LeftRadiator" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nt5s5")
+
+[node name="RadiatorFlap_004" parent="LeftRadiator/Radiator_001" index="0"]
+transform = Transform3D(1, -8.67362e-19, 0, -8.67362e-19, 1, 0, 1.38778e-17, 0, 1, 0.641616, 0.221812, -0.0520906)
+
+[node name="RadiatorFlap_005" parent="LeftRadiator/Radiator_001" index="1"]
+transform = Transform3D(1, -8.67362e-19, 0, -8.67362e-19, 1, 0, 1.38778e-17, 0, 1, -0.569915, 0.0825821, -0.0601358)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.993959, 0, -0.109752, 0.00792912, 0.997387, 0.0718096, 0.109465, -0.072246, 0.991362, 0.0560094, 0.0849798, -0.0400114)
 shape = SubResource("BoxShape3D_7s5wn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xdj8x")
+}
 
 [editable path="LeftRadiator"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://gio6gsnty2a0"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/ammo-display/AmmoUi3d.gd" id="1_b77wi"]
+[ext_resource type="PackedScene" uid="uid://f740mc3xw052" path="res://classes/multi-function-display/ammo-display/AmmoUi2d.tscn" id="2_mrfk3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n1jqh"]
+viewport_path = NodePath("SubViewport")
+
+[node name="AmmoUi3d" type="Node3D" node_paths=PackedStringArray("ammo_ui_2d")]
+script = ExtResource("1_b77wi")
+ammo_ui_2d = NodePath("SubViewport/AmmoUi2d")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_n1jqh")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1332, 287)
+
+[node name="AmmoUi2d" parent="SubViewport" instance=ExtResource("2_mrfk3")]

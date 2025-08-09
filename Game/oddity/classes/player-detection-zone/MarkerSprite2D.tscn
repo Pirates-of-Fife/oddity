@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctmfdbmoeqjjl"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/MarkerSprite2d.gd" id="1_5nyjm"]
+[ext_resource type="Texture2D" uid="uid://7juweg8i7nbk" path="res://classes/player-detection-zone/SemiCircle.svg" id="1_6e6xv"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_2q4r5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p6ynv"]
+font = ExtResource("2_2q4r5")
+font_size = 76
+font_color = Color(0.909804, 0.666667, 0.00392157, 1)
+
+[node name="MarkerSprite2d" type="Control" node_paths=PackedStringArray("label", "distance")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.49, 0.49)
+script = ExtResource("1_5nyjm")
+label = NodePath("Label")
+distance = NodePath("Distance")
+
+[node name="SemiCircle" type="Sprite2D" parent="."]
+position = Vector2(314, 582)
+scale = Vector2(1.495, 1.495)
+texture = ExtResource("1_6e6xv")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 271.0
+offset_right = 3943.0
+offset_bottom = 499.0
+text = "Label"
+label_settings = SubResource("LabelSettings_p6ynv")
+
+[node name="Distance" type="Label" parent="."]
+layout_mode = 0
+offset_left = 640.816
+offset_top = 424.49
+offset_right = 2487.82
+offset_bottom = 652.49
+text = "5K"
+label_settings = SubResource("LabelSettings_p6ynv")

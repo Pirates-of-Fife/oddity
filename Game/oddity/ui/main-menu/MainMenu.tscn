@@ -58,6 +58,7 @@ render_target_update_mode = 4
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" groups=["World"]]
 script = ExtResource("2_1i8r8")
 star_systems = [SubResource("Resource_jce33")]
+is_main_menu_world = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, -0.0174179, 0.999848, 0, -0.999848, -0.0174179, 0, 243.68, -335.826)
@@ -73,6 +74,11 @@ transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 
 [node name="StarSystem" type="Node3D" parent="SubViewportContainer/SubViewport/World" groups=["StarSystem"]]
 script = ExtResource("5_r66er")
 
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World"]
+transform = Transform3D(-0.491862, 0.683612, -0.539209, -0.324792, 0.430537, 0.842109, 0.807825, 0.589332, 0.0102665, 0, 243.68, -335.826)
+light_color = Color(1, 0.912596, 0.841761, 1)
+light_energy = 0.5
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ra1n2")
 autoplay = true
@@ -81,5 +87,7 @@ autoplay = true
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/MainMenuUi/Credits/Back" to="." method="_on_back_pressed"]
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
 
 [editable path="SubViewportContainer/MainMenuUi"]

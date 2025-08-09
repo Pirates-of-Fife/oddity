@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bblcs7gvy7v1l"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/planet-loading-zone/PlanetLoadingZone.gd" id="1_p8sj2"]
+[ext_resource type="PackedScene" uid="uid://cdghcmhb6ida7" path="res://scenes/world/mirage/celestia-bodies/colossus/Torrent.tscn" id="2_7gyb8"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="3_nr3h7"]
+
+[node name="TorrentZone" type="Node3D" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("1_p8sj2")
+planet_name = &"Torrent"
+planet_scene = ExtResource("2_7gyb8")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+
+[node name="MarkerSprite" parent="." instance=ExtResource("3_nr3h7")]
+text = &"Noctiluna"

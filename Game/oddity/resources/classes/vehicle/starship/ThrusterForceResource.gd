@@ -2,9 +2,9 @@ extends Resource
 
 class_name ThrusterForces
 
-#============================================================================#
-# Temporary resource class for thruster forces until modules get implemented #
-#============================================================================#
+#=======================================================================================#
+# Temporary resource class for thruster forces until thrusters get properly implemented #
+#=======================================================================================#
 
 @export_category("Movement")
 

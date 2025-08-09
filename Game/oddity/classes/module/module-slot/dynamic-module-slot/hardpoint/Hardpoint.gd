@@ -6,6 +6,16 @@ class_name Hardpoint
 @export
 var size : ModuleSize.HardpointSize
 
+@export
+var assignment : HardpointAssignment 
+
+enum HardpointAssignment
+{
+	PRIMARY,
+	SECONDARY,
+	TERTIARY
+}
+
 func _module_fits(module : Module) -> bool:
 	if self.module != null:
 		return false

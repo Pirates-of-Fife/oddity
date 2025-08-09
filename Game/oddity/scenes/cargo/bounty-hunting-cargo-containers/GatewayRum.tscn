@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk046jth70dqt"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_scknl"]
+[ext_resource type="PackedScene" uid="uid://4uebyrm0bxtw" path="res://scenes/cargo/bounty-hunting-cargo-containers/gatewayRum.glb" id="2_4qy0y"]
+
+[node name="Cu1Container" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 10.0
+contact_monitor = true
+script = ExtResource("1_scknl")
+contents = "Gateway Rum"
+value = 55000
+can_be_picked_up = true
+
+[node name="gatewayRum" parent="." instance=ExtResource("2_4qy0y")]

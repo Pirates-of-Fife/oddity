@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://d03gmuy718ifl"]
+[gd_scene load_steps=11 format=3 uid="uid://d03gmuy718ifl"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/scenes/ramp/RABS_KestrelMk1_Ramp.gd" id="1_iikxa"]
 [ext_resource type="PackedScene" uid="uid://d3gggk22a5tty" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Ramp.glb" id="2_slpdt"]
 [ext_resource type="PackedScene" uid="uid://0dgidlq5ylvb" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/RampSmall.glb" id="3_chmtv"]
+[ext_resource type="AudioStream" uid="uid://bp6wfvgk40yy0" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/scenes/ramp/ramp.wav" id="4_cln7y"]
 
 [sub_resource type="Animation" id="Animation_ctx6s"]
 length = 0.001
@@ -100,11 +101,13 @@ points = PackedVector3Array(-5.09443, -0.000353813, -8.24571e-06, -5.09443, -0.0
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p6had"]
 points = PackedVector3Array(-4.59499, -0.000254746, -8.24571e-06, -4.59499, -0.000254746, 6.28817, -4.59499, 0.0960865, -8.24571e-06, 4.60131, -0.000254746, -8.24571e-06, -4.59499, 0.0960865, 6.28817, 4.60131, -0.000254746, 6.28817, 4.60131, 0.0960865, -8.24571e-06, 4.60131, 0.0960865, 6.28817)
 
-[node name="RabsKestrelMk1Ramp" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+[node name="RabsKestrelMk1Ramp" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
 collision_layer = 512
 collision_mask = 512
 script = ExtResource("1_iikxa")
 animation_player = NodePath("AnimationPlayer")
+open_sound = NodePath("AudioStreamPlayer3D")
+close_sound = NodePath("AudioStreamPlayer3D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -128,3 +131,10 @@ shape = SubResource("ConvexPolygonShape3D_p6had")
 
 [node name="RampSmall" parent="CollisionShape3D2/Ramp/SmallRamp/CollisionShape3D" instance=ExtResource("3_chmtv")]
 transform = Transform3D(1, 0, 0, 0, 0.71934, -0.694658, 0, 0.694658, 0.71934, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.84687, -0.29209)
+stream = ExtResource("4_cln7y")
+volume_db = -6.0
+max_distance = 20.0
+bus = &"Interior"

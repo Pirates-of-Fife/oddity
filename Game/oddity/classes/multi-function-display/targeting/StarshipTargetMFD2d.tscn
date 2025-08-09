@@ -1,0 +1,192 @@
+[gd_scene load_steps=9 format=3 uid="uid://4i0cdaflf1uc"]
+
+[ext_resource type="Theme" uid="uid://cnkijshs3vtdk" path="res://ui/themes/BasicMFDTheme.tres" id="1_6ph4f"]
+[ext_resource type="Script" path="res://classes/multi-function-display/targeting/starship_target_mfd_2d.gd" id="1_26te2"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_ivteq"]
+[ext_resource type="Texture2D" uid="uid://idh2x2dvxvt" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldIcon.svg" id="3_ef5ph"]
+[ext_resource type="Texture2D" uid="uid://bu2kbxefxdcae" path="res://classes/multi-function-display/shield_and_hull_ui/HeartIcon.svg" id="4_q0vja"]
+
+[sub_resource type="Theme" id="Theme_nmlx8"]
+default_font = ExtResource("2_ivteq")
+default_font_size = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ubvq"]
+bg_color = Color(1, 0, 0.164706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0ai2"]
+bg_color = Color(1.92523e-05, 0.911912, 0.998518, 1)
+
+[node name="StarshipTargetMfd2d" type="Control" node_paths=PackedStringArray("ship_name", "hull_health_bar", "shield_health_bar", "shield_charge", "shield_health_label", "hull_health_label", "ship_focused_display", "no_target_display")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_26te2")
+ship_name = NodePath("ShipFocused/Ship Name")
+hull_health_bar = NodePath("ShipFocused/HullHealthBar")
+shield_health_bar = NodePath("ShipFocused/ShieldHealthBar")
+shield_charge = NodePath("ShipFocused/ShieldCharge")
+shield_health_label = NodePath("ShipFocused/ShieldHealthLabel")
+hull_health_label = NodePath("ShipFocused/HullHealthLabel")
+ship_focused_display = NodePath("ShipFocused")
+no_target_display = NodePath("NoTarget")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 757.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 0.560784)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 12.0
+offset_right = 450.0
+offset_bottom = 88.0
+theme = ExtResource("1_6ph4f")
+text = "TArgeting"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 37.0
+offset_right = 82.0
+offset_bottom = 67.0
+scale = Vector2(0.445, 0.445)
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -46.0
+offset_right = 31.0
+offset_bottom = -17.0
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = 47.0
+offset_right = 31.0
+offset_bottom = 79.0
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -68.0
+offset_top = -46.0
+offset_right = -34.0
+offset_bottom = 78.0
+color = Color(0.780392, 0, 0, 1)
+
+[node name="ShipFocused" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Ship Name" type="RichTextLabel" parent="ShipFocused"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 127.0
+offset_right = 347.0
+offset_bottom = 171.0
+scale = Vector2(2.235, 2.235)
+theme = SubResource("Theme_nmlx8")
+text = "Ship Name
+"
+autowrap_mode = 0
+
+[node name="HullHealthBar" type="ProgressBar" parent="ShipFocused"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 84.0
+offset_top = 340.0
+offset_right = 654.385
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_1ubvq")
+max_value = 0.0
+show_percentage = false
+
+[node name="ShieldHealthBar" type="ProgressBar" parent="ShipFocused"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 84.0
+offset_top = 260.0
+offset_right = 654.385
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_j0ai2")
+max_value = 0.0
+show_percentage = false
+
+[node name="ShieldIcon" type="Sprite2D" parent="ShipFocused"]
+position = Vector2(720, 311)
+scale = Vector2(0.156, 0.156)
+texture = ExtResource("3_ef5ph")
+
+[node name="HeartIcon" type="Sprite2D" parent="ShipFocused"]
+position = Vector2(723, 394)
+scale = Vector2(0.151, 0.151)
+texture = ExtResource("4_q0vja")
+
+[node name="ShieldCharge" type="TextureProgressBar" parent="ShipFocused"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 301.0
+offset_right = 498.0
+offset_bottom = 801.0
+scale = Vector2(0.205, 0.205)
+max_value = 0.0
+step = 0.01
+fill_mode = 4
+texture_progress = ExtResource("3_ef5ph")
+
+[node name="ShieldHealthLabel" type="RichTextLabel" parent="ShipFocused"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 242.0
+offset_right = 585.0
+offset_bottom = 436.0
+scale = Vector2(2.585, 2.585)
+theme_override_fonts/normal_font = ExtResource("2_ivteq")
+text = "10000 / 10000"
+
+[node name="HullHealthLabel" type="RichTextLabel" parent="ShipFocused"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 321.0
+offset_right = 588.0
+offset_bottom = 421.0
+scale = Vector2(2.585, 2.585)
+theme_override_fonts/normal_font = ExtResource("2_ivteq")
+text = "10000 / 10000"
+
+[node name="NoTarget" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotargetLabel" type="RichTextLabel" parent="NoTarget"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 205.0
+offset_right = 426.0
+offset_bottom = 249.0
+scale = Vector2(2.235, 2.235)
+theme = SubResource("Theme_nmlx8")
+text = "No Target Focused"
+autowrap_mode = 0

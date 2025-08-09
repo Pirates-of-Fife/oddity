@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://h2gmsd4soaa8"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_vlikg"]
+[ext_resource type="PackedScene" uid="uid://nk8apqptu76e" path="res://scenes/cargo/bounty-hunting-cargo-containers/godotPlushieCage.glb" id="2_37ciy"]
+
+[node name="Cu1Container" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 10.0
+contact_monitor = true
+script = ExtResource("1_vlikg")
+contents = "Contraband"
+value = 110000
+can_be_picked_up = true
+
+[node name="godotPlushieCage" parent="." instance=ExtResource("2_37ciy")]

@@ -1,11 +1,8 @@
-extends ModuleResource
+extends ComponentResource
 
 class_name WeaponResource
 
 @export_category("Weapon Stats")
-
-@export
-var projectile : ProjectileResource
 
 @export
 var damage : float
@@ -15,9 +12,3 @@ var penetration : float
 
 @export
 var sound : AudioStreamWAV
-
-@export
-var weapon_force : float
-
-@export
-var cooldown : float

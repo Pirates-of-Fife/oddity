@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2vs32r0uamhh"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/heat-ui/HeatUi2d.gd" id="1_yt7ox"]
+[ext_resource type="Texture2D" uid="uid://d25sfojqq08e" path="res://classes/multi-function-display/heat-ui/FlameSymbol.svg" id="2_j42s7"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_st1sk"]
+[ext_resource type="Texture2D" uid="uid://ocg378hbw8pc" path="res://classes/multi-function-display/heat-ui/CoolSymbol.svg" id="4_evluf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apwsi"]
+bg_color = Color(0.945098, 0.352941, 0.141176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0utd4"]
+bg_color = Color(0, 0.0509804, 1, 1)
+
+[node name="HeatUi2d" type="Control" node_paths=PackedStringArray("heat_bar", "cool_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yt7ox")
+heat_bar = NodePath("HeatBar")
+cool_bar = NodePath("CoolBar")
+
+[node name="HeatBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -39.0
+offset_right = 632.0
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_apwsi")
+show_percentage = false
+
+[node name="FlameSymbol" type="Sprite2D" parent="."]
+position = Vector2(552, 544)
+scale = Vector2(0.317399, 0.210796)
+texture = ExtResource("2_j42s7")
+
+[node name="CoolBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = 119.0
+offset_right = 634.0
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_0utd4")
+show_percentage = false
+
+[node name="CurrentHeat" type="Label" parent="."]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 445.0
+offset_right = 1296.0
+offset_bottom = 771.0
+scale = Vector2(0.955, 0.955)
+theme_override_fonts/font = ExtResource("3_st1sk")
+theme_override_font_sizes/font_size = 81
+text = "test"
+
+[node name="CurrentCool" type="Label" parent="."]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 609.0
+offset_right = 1296.0
+offset_bottom = 935.0
+scale = Vector2(0.955, 0.955)
+theme_override_fonts/font = ExtResource("3_st1sk")
+theme_override_font_sizes/font_size = 81
+text = "test"
+
+[node name="CoolSymbol" type="Sprite2D" parent="."]
+position = Vector2(562, 731)
+scale = Vector2(0.204, 0.204)
+texture = ExtResource("4_evluf")

@@ -1,0 +1,139 @@
+[gd_scene load_steps=16 format=3 uid="uid://bfxi85byqr0ku"]
+
+[ext_resource type="Script" path="res://classes/landing-pad/spawn-ship-ui/spawn_ship_ui.gd" id="1_jhslh"]
+[ext_resource type="PackedScene" uid="uid://cjbws8qmgqwac" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi2d.tscn" id="1_s0u3q"]
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="2_2l8jx"]
+[ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="2_k281c"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_3l2da"]
+[ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="6_tw3n8"]
+[ext_resource type="AudioStream" uid="uid://crdgvtkwst2i" path="res://classes/landing-pad/spawn-ship-ui/no.wav" id="7_7obba"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ixh8f"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kx5xp"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.396078, 0.682353, 0.854902, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a3jx4"]
+material = SubResource("StandardMaterial3D_kx5xp")
+size = Vector3(2.005, 0.85, 0.035)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c3jfg"]
+data = PackedVector3Array(-1.0025, 0.425, 0.0175, 1.0025, 0.425, 0.0175, -1.0025, -0.425, 0.0175, 1.0025, 0.425, 0.0175, 1.0025, -0.425, 0.0175, -1.0025, -0.425, 0.0175, 1.0025, 0.425, -0.0175, -1.0025, 0.425, -0.0175, 1.0025, -0.425, -0.0175, -1.0025, 0.425, -0.0175, -1.0025, -0.425, -0.0175, 1.0025, -0.425, -0.0175, 1.0025, 0.425, 0.0175, 1.0025, 0.425, -0.0175, 1.0025, -0.425, 0.0175, 1.0025, 0.425, -0.0175, 1.0025, -0.425, -0.0175, 1.0025, -0.425, 0.0175, -1.0025, 0.425, -0.0175, -1.0025, 0.425, 0.0175, -1.0025, -0.425, -0.0175, -1.0025, 0.425, 0.0175, -1.0025, -0.425, 0.0175, -1.0025, -0.425, -0.0175, 1.0025, 0.425, 0.0175, -1.0025, 0.425, 0.0175, 1.0025, 0.425, -0.0175, -1.0025, 0.425, 0.0175, -1.0025, 0.425, -0.0175, 1.0025, 0.425, -0.0175, -1.0025, -0.425, 0.0175, 1.0025, -0.425, 0.0175, -1.0025, -0.425, -0.0175, 1.0025, -0.425, 0.0175, 1.0025, -0.425, -0.0175, -1.0025, -0.425, -0.0175)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0x14"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0, 0.227451, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6wo3m"]
+material = SubResource("StandardMaterial3D_g0x14")
+size = Vector3(2.005, 0.85, 0.035)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d67fv"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.433188, 0.60442, 0.0669715, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m7yb3"]
+material = SubResource("StandardMaterial3D_d67fv")
+size = Vector3(1.845, 0.415, 0.01)
+
+[node name="SpawnShipUi" type="Node3D"]
+script = ExtResource("1_jhslh")
+ship_scene = ExtResource("2_k281c")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_ixh8f")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+gui_disable_input = true
+size = Vector2i(1022, 407)
+
+[node name="SpawnShipUi2d" parent="SubViewport" instance=ExtResource("1_s0u3q")]
+
+[node name="ClaimShip" type="StaticBody3D" parent="."]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_2l8jx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ClaimShip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59397, -0.21738, 0)
+mesh = SubResource("BoxMesh_a3jx4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClaimShip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59397, -0.21738, 0)
+shape = SubResource("ConcavePolygonShape3D_c3jfg")
+
+[node name="Label3D" type="Label3D" parent="ClaimShip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.60344, -0.199535, 0.0222267)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Claim "
+font = ExtResource("3_3l2da")
+font_size = 44
+
+[node name="RequestNewShip" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.95979, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_2l8jx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RequestNewShip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59397, -0.21738, 0)
+mesh = SubResource("BoxMesh_6wo3m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RequestNewShip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59397, -0.21738, 0)
+shape = SubResource("ConcavePolygonShape3D_c3jfg")
+
+[node name="Label3D" type="Label3D" parent="RequestNewShip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48102, -0.199535, 0.0222267)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Request
+"
+font = ExtResource("3_3l2da")
+font_size = 44
+
+[node name="RequestNewShip2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57769, -0.204802, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_2l8jx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RequestNewShip2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53282, -0.21738, 0)
+mesh = SubResource("BoxMesh_m7yb3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RequestNewShip2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59397, -0.21738, 0)
+shape = SubResource("ConcavePolygonShape3D_c3jfg")
+
+[node name="Label3D" type="Label3D" parent="RequestNewShip2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48102, -0.199535, 0.0222267)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Refresh Price"
+font = ExtResource("3_3l2da")
+font_size = 24
+
+[node name="Price" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0753992, 0.110087, 0.0628491)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Claim "
+font = ExtResource("3_3l2da")
+font_size = 24
+
+[node name="Spawn" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_tw3n8")
+volume_db = -32.0
+
+[node name="Decline" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_7obba")
+volume_db = -32.0
+
+[connection signal="interacted" from="ClaimShip" to="." method="_on_claim_ship_interacted"]
+[connection signal="interacted" from="RequestNewShip" to="." method="_on_request_new_ship_interacted"]
+[connection signal="interacted" from="RequestNewShip2" to="." method="_on_request_new_ship_2_interacted"]

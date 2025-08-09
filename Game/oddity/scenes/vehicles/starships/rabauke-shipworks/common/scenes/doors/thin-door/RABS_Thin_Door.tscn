@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct86vf5q71mfl"]
+[gd_scene load_steps=14 format=3 uid="uid://ct86vf5q71mfl"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_0asnh"]
 [ext_resource type="PackedScene" uid="uid://nmrwr3gw1ae0" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/thin-door/ThinDoor.glb" id="2_4haa7"]
 [ext_resource type="PackedScene" uid="uid://bq5ik2fuv66u5" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/thin-door/ThinDoorFrame.glb" id="3_whchj"]
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/OpenableDetectionArea.gd" id="4_l50e8"]
+[ext_resource type="AudioStream" uid="uid://xq4lkl4qjbjm" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/doors/door_open.wav" id="5_nwe88"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gn43n"]
 size = Vector3(0.309055, 2.05521, 0.109628)
@@ -69,13 +70,15 @@ size = Vector3(1.19265, 1.99722, 1.56676)
 [sub_resource type="BoxShape3D" id="BoxShape3D_365i5"]
 size = Vector3(1.10849, 2.01364, 0.0970612)
 
-[node name="RabsThinDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "detection_area")]
+[node name="RabsThinDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "detection_area", "open_sound", "close_sound")]
 collision_layer = 1024
 collision_mask = 1024
 script = ExtResource("1_0asnh")
 animation_player = NodePath("AnimationPlayer")
 type = 1
 detection_area = NodePath("OpenableDetectionArea")
+open_sound = NodePath("AudioStreamPlayer3D2")
+close_sound = NodePath("AudioStreamPlayer3D2")
 
 [node name="ThinDoorFrame" parent="." instance=ExtResource("3_whchj")]
 
@@ -105,3 +108,8 @@ shape = SubResource("BoxShape3D_365i5")
 
 [node name="ThinDoor" parent="DoorCollider" instance=ExtResource("2_4haa7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.863642, -1.01327, -0.0121469)
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_nwe88")
+volume_db = -12.0
+bus = &"Interior"

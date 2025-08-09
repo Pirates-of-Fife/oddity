@@ -8,6 +8,9 @@ var size : ModuleSize.AbyssalJumpDriveSize
 @export
 var initialize_collision_shape_automatically : bool = true
 
+@export
+var fuel_per_jump : float = 1000
+
 func _ready() -> void:
 	_abyssal_jump_drive_ready()
 

@@ -1,23 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4yftdtjyvs6p"]
+[gd_scene load_steps=10 format=3 uid="uid://b4yftdtjyvs6p"]
 
 [ext_resource type="Script" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_RightRadiator.gd" id="1_572r0"]
 [ext_resource type="PackedScene" uid="uid://dv8f07qgmaf13" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RightRadiator.glb" id="2_nc4y3"]
 
+[sub_resource type="Gradient" id="Gradient_jvin0"]
+offsets = PackedFloat32Array(0, 0.276018, 0.828054, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.611765, 0, 0, 1, 1, 0.548609, 0.145742, 1, 1, 0.858824, 0.145098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hk3l4"]
+gradient = SubResource("Gradient_jvin0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnwfj"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 10.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_wsvsx"]
 size = Vector3(2.32865, 0.437696, 9.17139)
 
-[node name="RabsKestrelMk1RightRadiator" type="RigidBody3D"]
+[sub_resource type="Animation" id="Animation_s0pss"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightRadiator/RadiatorHeat_001/RadiatorFlap_006")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, -0.641616, 0.221813, -0.0520905)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightRadiator/RadiatorHeat_001/RadiatorFlap_007")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat64Array(0, 1, 0.569915, 0.0825826, -0.0601358)
+
+[sub_resource type="Animation" id="Animation_bnf1t"]
+resource_name = "heat"
+length = 1.01
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightRadiator/RadiatorHeat_001/RadiatorFlap_006")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, -0.641616, 0.221813, -0.0520905, 1, 1, -1.7587, 0.230003, -0.169215)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightRadiator/RadiatorHeat_001/RadiatorFlap_007")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat64Array(0, 1, 0.569915, 0.0825826, -0.0601358, 1, 1, 1.75089, 0.073924, 0.0636876)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pwgat"]
+_data = {
+"RESET": SubResource("Animation_s0pss"),
+"heat": SubResource("Animation_bnf1t")
+}
+
+[node name="RabsKestrelMk1RightRadiator" type="RigidBody3D" node_paths=PackedStringArray("radiator_animation", "heat_mesh")]
 collision_layer = 537395201
 collision_mask = 537395201
 mass = 1000.0
 script = ExtResource("1_572r0")
+heat_colors = SubResource("GradientTexture1D_hk3l4")
+cooling_capacity = 100.0
+cooling_rate = 0.15
+start_cooling_at_heat = 0.1
+radiator_animation = NodePath("AnimationPlayer")
+heat_mesh = NodePath("RightRadiator/RadiatorHeat_001")
+heat_material = SubResource("StandardMaterial3D_gnwfj")
 size = 3
-can_be_picked_up = true
+initialize_collision_shape_automatically = false
 
 [node name="RightRadiator" parent="." instance=ExtResource("2_nc4y3")]
+
+[node name="RadiatorHeat_001" parent="RightRadiator" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_gnwfj")
+
+[node name="RadiatorFlap_006" parent="RightRadiator/RadiatorHeat_001" index="0"]
+transform = Transform3D(1, 0, -1.38778e-17, 0, 1, 0, 2.77556e-17, -1.38778e-17, 1, -0.641616, 0.221813, -0.0520905)
+
+[node name="RadiatorFlap_007" parent="RightRadiator/RadiatorHeat_001" index="1"]
+transform = Transform3D(1, 0, -2.77556e-17, 0, 1, 0, 5.55112e-17, -2.77556e-17, 1, 0.569915, 0.0825826, -0.0601358)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.993855, -0.0165193, 0.109453, 0.0087042, 0.997403, 0.0714974, -0.11035, -0.0701054, 0.991417, 0.0560094, 0.0849798, -0.0400114)
 shape = SubResource("BoxShape3D_wsvsx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pwgat")
+}
 
 [editable path="RightRadiator"]

@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://wanq2hxulkqi"]
+
+[ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_gyh23"]
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_38nfj"]
+[ext_resource type="PackedScene" uid="uid://yalrqm6ps4np" path="res://scenes/world/rogues-gambit/celestial-bodies/RoguesGambit.tscn" id="3_qhgbd"]
+[ext_resource type="PackedScene" uid="uid://dwhxklunfv4wc" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/BastionZone.tscn" id="4_ynaga"]
+[ext_resource type="PackedScene" uid="uid://dbhb7jrm8wt22" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/DrifterZone.tscn" id="5_d5b27"]
+[ext_resource type="PackedScene" uid="uid://bkma80xy8ykw7" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/LeviathanZone.tscn" id="8_i8xb1"]
+[ext_resource type="PackedScene" uid="uid://b5fmks2ayyeqc" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/KrakenZone.tscn" id="10_rylj1"]
+[ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="12_apxux"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ysfo"]
+shader = ExtResource("2_38nfj")
+shader_parameter/sky_color = Color(0.00206328, 0.0178524, 0.0230942, 1)
+shader_parameter/star_base_color = Color(1, 1, 1, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_88kih"]
+sky_material = SubResource("ShaderMaterial_4ysfo")
+
+[sub_resource type="Environment" id="Environment_oemom"]
+background_mode = 2
+sky = SubResource("Sky_88kih")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 200000.0
+
+[node name="RoguesGambitSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
+script = ExtResource("1_gyh23")
+system_name = &"Rogues Gambit"
+main_star = NodePath("RoguesGambit")
+player_spawn_marker = NodePath("Marker3D")
+player_spawn_position = Vector3(-1.3079e+06, 0, 0)
+player_respawn_marker = NodePath("Marker3D")
+player_respawn_position = Vector3(-1.3079e+06, 0, 0)
+spawn_station = NodePath("LeviathanZone/KrakenZone/SpaceStationLoadingZone")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oemom")
+
+[node name="RoguesGambit" parent="." instance=ExtResource("3_qhgbd")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3079e+06, 0, 0)
+
+[node name="BastionZone" parent="." instance=ExtResource("4_ynaga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0533e+06)
+
+[node name="DrifterZone" parent="BastionZone" instance=ExtResource("5_d5b27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 181352, 0, 129064)
+
+[node name="LeviathanZone" parent="." instance=ExtResource("8_i8xb1")]
+transform = Transform3D(-0.441506, 0, 0.897258, 0, 1, 0, -0.897258, 0, -0.441506, 6.18962e+06, 10000, 1.0316e+06)
+
+[node name="KrakenZone" parent="LeviathanZone" instance=ExtResource("10_rylj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 304598, 738354)
+
+[node name="SpaceStationLoadingZone" parent="LeviathanZone/KrakenZone" instance=ExtResource("12_apxux")]
+transform = Transform3D(0.192375, 0.0780994, -0.978209, 0.298258, 0.945017, 0.134105, 0.934898, -0.317557, 0.158504, 14044.2, 10978.1, 23032.4)
+station_name = &"Corsair\'s Watch"

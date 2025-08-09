@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8vcrwv38lkvq"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_fj8vm"]
+[ext_resource type="PackedScene" uid="uid://ct5nfvtitwiw1" path="res://scenes/cargo/bounty-hunting-cargo-containers/mediumValueBox.glb" id="2_janv5"]
+
+[node name="Cu1Container" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 20.0
+contact_monitor = true
+script = ExtResource("1_fj8vm")
+contents = "Gold"
+value = 15000
+can_be_picked_up = true
+
+[node name="mediumValueBox" parent="." instance=ExtResource("2_janv5")]

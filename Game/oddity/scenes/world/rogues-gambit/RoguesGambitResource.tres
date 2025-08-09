@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StarSystemResource" load_steps=3 format=3 uid="uid://bssd3ptw5jt84"]
+
+[ext_resource type="PackedScene" uid="uid://wanq2hxulkqi" path="res://scenes/world/rogues-gambit/RoguesGambitSystem.tscn" id="1_jxn5p"]
+[ext_resource type="Script" path="res://classes/star-system/StarSystemResource.gd" id="2_qg5hb"]
+
+[resource]
+script = ExtResource("2_qg5hb")
+name = "Rogue's Gambit"
+scene_file = ExtResource("1_jxn5p")

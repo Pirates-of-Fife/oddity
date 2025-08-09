@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://tvngb5vet6rl"]
+[gd_scene load_steps=20 format=3 uid="uid://tvngb5vet6rl"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/scenes/elevator/RABS_KestrelMk1_Elevator.gd" id="1_qh0kc"]
 [ext_resource type="PackedScene" uid="uid://djn3nj2e5hm8j" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/ElevatorDoor.glb" id="2_0jfci"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dpyddv5jbntxr" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/AirShields.glb" id="4_ki75o"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="6_uuijq"]
 [ext_resource type="PackedScene" uid="uid://bxdkumdfiftmg" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/RABS_Button.tscn" id="7_nh0e7"]
+[ext_resource type="AudioStream" uid="uid://djf7wi1k1l81y" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/scenes/elevator/elevator.wav" id="8_70y4t"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6iqsc"]
 points = PackedVector3Array(-1.44908, -0.0366101, -0.806414, -1.44908, 0.0366101, -0.806414, 1.44908, -0.0366101, -0.806414, -1.44908, -0.0366101, 0.806414, -1.44908, 0.0366101, 0.806414, 1.44908, 0.0366101, -0.806414, 1.44908, -0.0366101, 0.806414, 1.44908, 0.0366101, 0.806414)
@@ -23,58 +24,6 @@ size = Vector3(0.24, 1.105, 0.07)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ehp1e"]
 albedo_color = Color(0.314316, 0.314316, 0.314316, 1)
 metallic = 0.93
-
-[sub_resource type="Animation" id="Animation_yg165"]
-resource_name = "open"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Door:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(1.06667, 2.53333),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(-2.62617, -0.3818, -15.5647), Vector3(-2.62617, -0.3818, -17.4644)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Elevator:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 1.76667, 2.16667, 5),
-"transitions": PackedFloat64Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 2.79231, -18.6585), Vector3(0, 1.51959, -18.6585), Vector3(0, 1.51959, -18.6585), Vector3(0, -0.788, -18.659)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ElevatorShafts/ThickShaftLeft/MediumShaftLeft:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat64Array(0, 1.76667, 2.16667, 3.33333),
-"transitions": PackedFloat64Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, -0.0158281, 0.00673676), Vector3(0, -1.31114, 0.00673676), Vector3(0, -1.31114, 0.00673676), Vector3(0, -2.1757, 0.00673676)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ElevatorShafts/ThickShaftLeft/MediumShaftLeft/ThinShaftLeft:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat64Array(0, 3.16667, 5),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0.00858235, -0.0101032), Vector3(0, 0.00858235, -0.0101032), Vector3(0, -1.20075, -0.0101032)]
-}
 
 [sub_resource type="Animation" id="Animation_n4fdd"]
 length = 0.001
@@ -179,6 +128,58 @@ tracks/3/keys = {
 "values": [Vector3(0, -1.20075, -0.0101032), Vector3(0, 0.00858235, -0.0101032), Vector3(0, 0.00858235, -0.0101032)]
 }
 
+[sub_resource type="Animation" id="Animation_yg165"]
+resource_name = "open"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(1.06667, 2.53333),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(-2.62617, -0.3818, -15.5647), Vector3(-2.62617, -0.3818, -17.4644)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Elevator:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 1.76667, 2.16667, 5),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.79231, -18.6585), Vector3(0, 1.51959, -18.6585), Vector3(0, 1.51959, -18.6585), Vector3(0, -0.788, -18.659)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ElevatorShafts/ThickShaftLeft/MediumShaftLeft:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0, 1.76667, 2.16667, 3.33333),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.0158281, 0.00673676), Vector3(0, -1.31114, 0.00673676), Vector3(0, -1.31114, 0.00673676), Vector3(0, -2.1757, 0.00673676)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ElevatorShafts/ThickShaftLeft/MediumShaftLeft/ThinShaftLeft:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0, 3.16667, 5),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.00858235, -0.0101032), Vector3(0, 0.00858235, -0.0101032), Vector3(0, -1.20075, -0.0101032)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q50c1"]
 _data = {
 "RESET": SubResource("Animation_n4fdd"),
@@ -186,12 +187,26 @@ _data = {
 "open": SubResource("Animation_yg165")
 }
 
-[node name="RabsKestrelMk1Elevator" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_heqg5"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0.180392, 0.847059, 1)
+distance_fade_mode = 2
+distance_fade_max_distance = 20.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_hl8ha"]
+material = SubResource("StandardMaterial3D_heqg5")
+size = Vector3(0.035, 2.3, 1.485)
+
+[node name="RabsKestrelMk1Elevator" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
 collision_layer = 1024
 collision_mask = 1024
 script = ExtResource("1_qh0kc")
 animation_player = NodePath("AnimationPlayer")
 interactables = [NodePath("Elevator/RabsButton"), null, null]
+open_sound = NodePath("AudioStreamPlayer3D")
+close_sound = NodePath("AudioStreamPlayer3D")
 
 [node name="Door" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62617, -0.3818, -15.5647)
@@ -201,6 +216,12 @@ shape = SubResource("ConvexPolygonShape3D_6iqsc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62617, 0.3818, 15.5647)
 
 [node name="ElevatorShafts" parent="." instance=ExtResource("3_hb60d")]
+
+[node name="MediumShaftLeft" parent="ElevatorShafts/ThickShaftLeft" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1.18337, 0, 0, 0, 1, 0, -0.0158281, 0.00673676)
+
+[node name="ThinShaftLeft" parent="ElevatorShafts/ThickShaftLeft/MediumShaftLeft" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1.2329, 0, 0, 0, 0.41818, 0, 0.00858235, -0.0101032)
 
 [node name="AirShields" parent="." instance=ExtResource("4_ki75o")]
 
@@ -230,5 +251,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ehp1e")
 libraries = {
 "": SubResource("AnimationLibrary_q50c1")
 }
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17461, 2.0975, -15.5564)
+mesh = SubResource("BoxMesh_hl8ha")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_70y4t")
+bus = &"Interior"
 
 [editable path="ElevatorShafts"]

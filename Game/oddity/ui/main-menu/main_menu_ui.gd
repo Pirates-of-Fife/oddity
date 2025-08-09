@@ -24,3 +24,7 @@ func _on_credits_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	press_sound()
+
+
+func _on_back_pressed() -> void:
+	press_sound()

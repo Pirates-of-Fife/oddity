@@ -1,0 +1,236 @@
+[gd_scene load_steps=14 format=3 uid="uid://bsk1ge75jhnkp"]
+
+[ext_resource type="PackedScene" uid="uid://b14ng1r3dbcmg" path="res://classes/station/meshes/decorative-ships/FighterGen7_blue_open.glb" id="1_2bbwq"]
+[ext_resource type="PackedScene" uid="uid://c4ycokrmru8bp" path="res://classes/station/meshes/decorative-ships/FighterGen7_purple_closed.glb" id="2_67anx"]
+[ext_resource type="PackedScene" uid="uid://cysvpod4ep23u" path="res://classes/station/meshes/decorative-ships/FighterGen7_green_closed.glb" id="3_r63ja"]
+[ext_resource type="PackedScene" uid="uid://18fry2nmw1m7" path="res://classes/station/meshes/decorative-ships/FighterGen7_blue_closed.glb" id="4_isuxy"]
+[ext_resource type="PackedScene" uid="uid://5ecfvcbjrjyy" path="res://classes/station/meshes/decorative-ships/FighterGen7_red_closed.glb" id="5_oxjdx"]
+[ext_resource type="PackedScene" uid="uid://ww3fr2yjnhca" path="res://classes/station/meshes/decorative-ships/FighterGen7_red_open.glb" id="6_xuv1h"]
+[ext_resource type="PackedScene" uid="uid://c4ngoo5a5cmvu" path="res://classes/station/station_landing_pad/StationPad.tscn" id="7_n3wul"]
+[ext_resource type="PackedScene" uid="uid://nt8x885vl1er" path="res://classes/station/meshes/interior.glb" id="8_g2nwt"]
+
+[sub_resource type="GDScript" id="GDScript_4exwq"]
+resource_name = "StationInterior"
+script/source = "extends Node3D
+
+@export
+var station : SpaceStation
+
+func _ready() -> void:
+	for i : Node in $Pads.get_children():
+		if i is StationPad:
+			i.station = station
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m7hde"]
+resource_local_to_scene = true
+size = Vector3(142.495, 48.8493, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8155l"]
+resource_local_to_scene = true
+size = Vector3(160.007, 50, 131.952)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_giiak"]
+resource_local_to_scene = true
+size = Vector3(89.9624, 45.8444, 77.8548)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0yc5o"]
+resource_local_to_scene = true
+size = Vector3(92.6164, 47.3518, 79.9015)
+
+[node name="StationInterior" type="Node3D"]
+script = SubResource("GDScript_4exwq")
+
+[node name="Node3D" type="Node3D" parent="."]
+visible = false
+
+[node name="FighterGen7_blue_open" parent="Node3D" instance=ExtResource("1_2bbwq")]
+transform = Transform3D(1, 0, 0, 0, 0.279611, -0.960113, 0, 0.960113, 0.279611, -112.815, 1.56578, -82.8528)
+
+[node name="FighterGen7_purple_closed" parent="Node3D" instance=ExtResource("2_67anx")]
+transform = Transform3D(1, 0, 0, 0, -0.264142, 0.964484, 0, -0.964484, -0.264142, 71.8462, 57.6791, 146.742)
+
+[node name="FighterGen7_green_closed" parent="Node3D" instance=ExtResource("3_r63ja")]
+transform = Transform3D(1, 0, 0, 0, 0.708352, -0.705859, 0, 0.705859, 0.708352, 125.678, -63.4996, -51.263)
+
+[node name="FighterGen7_blue_closed" parent="Node3D" instance=ExtResource("4_isuxy")]
+transform = Transform3D(1, 0, 0, 0, -0.706699, -0.707514, 0, 0.707514, -0.706699, 226.222, 101.983, -53.0962)
+
+[node name="FighterGen7_red_closed" parent="Node3D" instance=ExtResource("5_oxjdx")]
+transform = Transform3D(1, 0, 0, 0, -0.916076, 0.401005, 0, -0.401005, -0.916076, 129.02, 136.721, 61.4231)
+
+[node name="FighterGen7_red_open" parent="Node3D" instance=ExtResource("6_xuv1h")]
+transform = Transform3D(1, 0, 0, 0, 0.989198, -0.146584, 0, 0.146584, 0.989198, -2.30104, -91.7713, -2.24161)
+
+[node name="Pads" type="Node3D" parent="."]
+
+[node name="StationPad" parent="Pads" instance=ExtResource("7_n3wul")]
+transform = Transform3D(1, 0, 0, 0, 0.976627, 0.21494, 0, -0.21494, 0.976627, -338.144, -61.1731, 119.835)
+
+[node name="CollisionShape3D" parent="Pads/StationPad/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
+shape = SubResource("BoxShape3D_m7hde")
+
+[node name="CollisionShape3D" parent="Pads/StationPad/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.3124, 14.745, -58.3089)
+shape = SubResource("BoxShape3D_8155l")
+
+[node name="StationPad2" parent="Pads" instance=ExtResource("7_n3wul")]
+transform = Transform3D(1, 0, 0, 0, -0.192025, 0.98139, 0, -0.98139, -0.192025, -338.144, 104.594, 118.459)
+
+[node name="house" parent="Pads/StationPad2" index="0"]
+transform = Transform3D(1.5, 0, 0, 0, 1.4989, 0.0575556, 0, -0.0575556, 1.4989, 0, 2.92221, 0.00126375)
+
+[node name="CollisionShape3D" parent="Pads/StationPad2/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
+shape = SubResource("BoxShape3D_m7hde")
+
+[node name="CollisionShape3D" parent="Pads/StationPad2/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.0774, 14.745, -60.0424)
+shape = SubResource("BoxShape3D_8155l")
+
+[node name="StationPad3" parent="Pads" instance=ExtResource("7_n3wul")]
+transform = Transform3D(1, 0, 0, 0, 0.866226, 0.499652, 0, -0.499652, 0.866226, -52.351, -60.5755, 120.777)
+
+[node name="house" parent="Pads/StationPad3" index="0"]
+transform = Transform3D(1.5, 0, 0, 0, 1.49997, 0.00871787, 0, -0.00871787, 1.49997, 0, 2.80605, 0.000718834)
+
+[node name="CollisionShape3D" parent="Pads/StationPad3/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)
+shape = SubResource("BoxShape3D_giiak")
+
+[node name="CollisionShape3D" parent="Pads/StationPad3/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 37.3435, 20.9875, -33.516)
+shape = SubResource("BoxShape3D_0yc5o")
+
+[node name="StationPad4" parent="Pads" instance=ExtResource("7_n3wul")]
+transform = Transform3D(1, 0, 0, 0, -0.482518, -0.875886, 0, 0.875886, -0.482518, -283.188, 48.6485, -81.957)
+
+[node name="CollisionShape3D" parent="Pads/StationPad4/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)
+shape = SubResource("BoxShape3D_giiak")
+
+[node name="CollisionShape3D" parent="Pads/StationPad4/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.22045e-16, 0, -2.22045e-16, 1, 36.5276, 20.9875, -33.516)
+shape = SubResource("BoxShape3D_0yc5o")
+
+[node name="StationPad5" parent="Pads" instance=ExtResource("7_n3wul")]
+transform = Transform3D(1, 0, 0, 0, 0.859264, -0.511533, 0, 0.511533, 0.859264, 405.56, -93.4544, 3.11715)
+
+[node name="CollisionShape3D" parent="Pads/StationPad5/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)
+shape = SubResource("BoxShape3D_giiak")
+
+[node name="CollisionShape3D" parent="Pads/StationPad5/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9412, 20.9875, -31.9201)
+shape = SubResource("BoxShape3D_0yc5o")
+
+[node name="StationPad6" parent="Pads" instance=ExtResource("7_n3wul")]
+transform = Transform3D(1, 0, 0, 0, 0.0122694, -0.999925, 0, 0.999925, 0.0122694, 368.713, -12.7212, -79.8359)
+
+[node name="CollisionShape3D" parent="Pads/StationPad6/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)
+shape = SubResource("BoxShape3D_giiak")
+
+[node name="CollisionShape3D" parent="Pads/StationPad6/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.3594, 20.9875, -32.9479)
+shape = SubResource("BoxShape3D_0yc5o")
+
+[node name="StationPad7" parent="Pads" instance=ExtResource("7_n3wul")]
+transform = Transform3D(1, 0, 0, 0, -0.647295, 0.762239, 0, -0.762239, -0.647295, 215.367, 134.231, 68.1165)
+
+[node name="CollisionShape3D" parent="Pads/StationPad7/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
+shape = SubResource("BoxShape3D_m7hde")
+
+[node name="CollisionShape3D" parent="Pads/StationPad7/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.7764, 14.745, -60.0424)
+shape = SubResource("BoxShape3D_8155l")
+
+[node name="StationPad8" parent="Pads" instance=ExtResource("7_n3wul")]
+transform = Transform3D(1, 0, 0, 0, 0.730425, 0.682993, 0, -0.682993, 0.730425, 418.909, -15.3607, 143.704)
+
+[node name="CollisionShape3D" parent="Pads/StationPad8/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
+shape = SubResource("BoxShape3D_m7hde")
+
+[node name="CollisionShape3D" parent="Pads/StationPad8/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.1102, 14.745, -55.8466)
+shape = SubResource("BoxShape3D_8155l")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.999909, 0, -0.0135259, 0, 1, 0, 0.0135259, 0, -0.999909, -426.522, 69.883, -57.8644)
+spot_range = 76.3937
+spot_angle = 14.1621
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.999909, 0, -0.0135259, 0, 1, 0, 0.0135259, 0, -0.999909, -426.522, -19.3309, -57.8644)
+spot_range = 76.3937
+spot_angle = 14.1621
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.999909, 0, -0.0135259, -1.65644e-18, -1, 1.22453e-16, -0.0135259, 1.22465e-16, 0.999909, -426.522, 69.883, 110.866)
+spot_range = 76.3937
+spot_angle = 14.1621
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-0.999909, 0, -0.0135259, 1.65644e-18, -1, -1.22453e-16, -0.0135259, -1.22465e-16, 0.999909, -426.522, -19.3309, 112.127)
+spot_range = 76.3937
+spot_angle = 14.1621
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -267.142, 22.4802, 26.0603)
+light_energy = 16.0
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 100.0
+distance_fade_length = 1000.0
+omni_range = 4096.0
+omni_shadow_mode = 0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.27918, 22.4802, 26.0603)
+light_energy = 16.0
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 100.0
+distance_fade_length = 1000.0
+omni_range = 4096.0
+omni_shadow_mode = 0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 230.141, 22.4802, 26.0603)
+light_energy = 16.0
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 100.0
+distance_fade_length = 1000.0
+omni_range = 4096.0
+omni_shadow_mode = 0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 456.937, 22.4802, 26.0603)
+light_energy = 16.0
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 100.0
+distance_fade_length = 1000.0
+omni_range = 4096.0
+omni_shadow_mode = 0
+
+[node name="interior" parent="." instance=ExtResource("8_g2nwt")]
+
+[editable path="Pads/StationPad"]
+[editable path="Pads/StationPad2"]
+[editable path="Pads/StationPad3"]
+[editable path="Pads/StationPad4"]
+[editable path="Pads/StationPad5"]
+[editable path="Pads/StationPad6"]
+[editable path="Pads/StationPad7"]
+[editable path="Pads/StationPad8"]
