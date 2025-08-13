@@ -1,0 +1,20 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bc7vdqf5vehpp"]
+
+[ext_resource type="Texture2D" uid="uid://jmkso46uat3h" path="res://scenes/minables/void-diamonds/materials/VoidDiamond.png" id="1_57xt5"]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_57xt5")
+metallic = 0.11
+metallic_specular = 1.0
+roughness = 0.18
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 0.17
+ao_enabled = true
+subsurf_scatter_strength = 0.27
+refraction_enabled = true
+refraction_scale = 0.25
+distance_fade_mode = 1
+distance_fade_min_distance = 2100.0
+distance_fade_max_distance = 2000.0

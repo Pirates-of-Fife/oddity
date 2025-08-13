@@ -18,7 +18,10 @@ var min_resource_count : int
 var max_resource_count : int
 
 @export
-var extractable_resources : Array
+var extractable_resources : Array[PackedScene]
+
+@export_range(0, 10000, 10)
+var extraction_force : float
 
 @export_range(1, 20, 0.5)
 var min_rarity : float
@@ -27,7 +30,7 @@ var min_rarity : float
 var max_rarity : float
 
 @export
-var variants : Array
+var variants : Array[PackedScene]
 
 @export
 var low_detail_mesh : ArrayMesh

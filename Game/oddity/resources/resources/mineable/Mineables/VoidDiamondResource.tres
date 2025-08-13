@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MineableResource" load_steps=10 format=3 uid="uid://cg18rt8yknprx"]
+
+[ext_resource type="Script" path="res://resources/resources/mineable/MineableResource.gd" id="1_4xrsu"]
+[ext_resource type="PackedScene" uid="uid://cweaw6esrrgdn" path="res://scenes/minables/void-diamonds/extractables/VoidDiamondExtractable1.tscn" id="1_jw3l1"]
+[ext_resource type="PackedScene" uid="uid://l7cspikuw8i7" path="res://scenes/minables/void-diamonds/mineables/VoidDiamond1.tscn" id="1_px1nw"]
+[ext_resource type="PackedScene" uid="uid://dmxkpikijb2fc" path="res://scenes/minables/void-diamonds/sounds/VoidDiamondExtractionSound.tscn" id="1_qstsr"]
+[ext_resource type="PackedScene" uid="uid://duhcu3m7tjqk2" path="res://scenes/minables/void-diamonds/mineables/VoidDiamond2.tscn" id="2_cmbn1"]
+[ext_resource type="PackedScene" uid="uid://bcxbypsx40oh" path="res://scenes/minables/void-diamonds/extractables/VoidDiamondExtractable2.tscn" id="2_spcyr"]
+[ext_resource type="PackedScene" uid="uid://bphqsy35ttvew" path="res://scenes/minables/void-diamonds/mineables/VoidDiamond3.tscn" id="3_6r0hn"]
+[ext_resource type="PackedScene" uid="uid://bvjb7jcl43kwg" path="res://scenes/minables/void-diamonds/extractables/VoidDiamondExtractable3.tscn" id="3_pb2q3"]
+[ext_resource type="ArrayMesh" uid="uid://cbkeh2ttub5mu" path="res://scenes/minables/void-diamonds/mineables/VoidDiamondLowLod.tres" id="5_bsw0u"]
+
+[resource]
+script = ExtResource("1_4xrsu")
+mineable_name = &"Void Diamond"
+min_resource_health = 61340.0
+max_resource_health = 12030.0
+min_resource_count = 3
+max_resource_count = 6
+extractable_resources = Array[PackedScene]([ExtResource("1_jw3l1"), ExtResource("2_spcyr"), ExtResource("3_pb2q3")])
+extraction_force = 500.0
+min_rarity = 2.0
+max_rarity = 15.0
+variants = [ExtResource("1_px1nw"), ExtResource("2_cmbn1"), ExtResource("3_6r0hn")]
+low_detail_mesh = ExtResource("5_bsw0u")
+base_value = 74300
+value_variance = 0.15
+extraction_sound = ExtResource("1_qstsr")

@@ -21,9 +21,12 @@ func _humanoid_process(delta : float) -> void:
 	_creature_process(delta)
 
 	if control_entity is Humanoid:
+		if Input.is_key_pressed(KEY_1):
+			control_entity.global_position = Vector3(-4410289.92348768, 2041153.14906927, -1136750.91651972)
+		
 		if Input.is_action_pressed("humanoid_eva_forwards"):
 			humanoid_eva_move_forwards_command.execute(control_entity)
-
+		
 		if Input.is_action_pressed("humanoid_eva_backwards"):
 			humanoid_eva_move_backwards_command.execute(control_entity)
 
