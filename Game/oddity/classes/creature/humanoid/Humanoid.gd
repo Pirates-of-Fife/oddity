@@ -26,7 +26,6 @@ func humanoid_process(delta : float) -> void:
 func _physics_process(delta: float) -> void:
 	humanoid_physics_process(delta)
 
-
 func humanoid_physics_process(delta : float) -> void:
 	creature_physics_process(delta)
 

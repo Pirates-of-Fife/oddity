@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cweaw6esrrgdn"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_2nhhb"]
+[ext_resource type="PackedScene" uid="uid://b8ydcfqqeps5u" path="res://scenes/minables/void-diamonds/meshes/VoidDiamond_Extractable1.glb" id="2_2dvrs"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r8jrw"]
+points = PackedVector3Array(-0.434788, -0.665414, -0.322222, 0.658929, 0.370845, -0.290145, -0.413396, 0.0767422, 0.747972, 0.666742, -0.538415, 0.140563, -0.650182, 0.271776, -0.0598295, -0.0196383, -0.203706, -0.617186, 0.0234987, 0.651519, -0.127605, -0.412134, -0.584396, 0.301076, 0.341726, 0.180624, 0.367269, 0.200203, -0.628802, -0.481072, -0.207683, -0.0522917, -0.62261, 0.659845, 0.406284, -0.390014, -0.0677712, -0.354764, 0.553784, -0.5728, -0.171112, 0.438865, 0.612565, -0.163153, -0.343807, 0.299508, 0.031925, 0.47369, 0.595569, -0.582545, 0.136754, -0.514396, -0.548296, 0.242212, -0.0421626, 0.0331368, -0.608873, 0.487342, -0.606717, 0.026661, -0.209741, -0.0952196, -0.628883, 0.670014, 0.441952, -0.360642, -0.64008, 0.267474, -0.015277, 0.0233143, 0.640358, -0.10302, 0.591997, -0.163502, -0.366627, 0.606545, -0.572053, 0.0703175, -0.403421, 0.0319654, 0.7316, -0.645412, 0.226666, -0.0590477, 0.670469, 0.356118, -0.360926, -0.497961, -0.531524, 0.277834, 0.495634, -0.568793, 0.177559, 0.618738, -0.58358, 0.114816)
+
+[node name="VoidDiamondExtractable1" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 10.0
+script = ExtResource("1_2nhhb")
+contents = "Void Diamond Chunk"
+initialize_collision_shape_automatically = false
+value = 35000
+can_be_picked_up = true
+
+[node name="VoidDiamond_Extractable1" parent="." instance=ExtResource("2_2dvrs")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_r8jrw")

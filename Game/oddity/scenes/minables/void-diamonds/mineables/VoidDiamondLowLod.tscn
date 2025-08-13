@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://2m268jieh5ff"]
+
+[ext_resource type="ArrayMesh" uid="uid://cbkeh2ttub5mu" path="res://scenes/minables/void-diamonds/mineables/VoidDiamondLowLod.tres" id="1_rha5d"]
+
+[node name="LowLOD" type="MeshInstance3D"]
+mesh = ExtResource("1_rha5d")
+skeleton = NodePath("")
