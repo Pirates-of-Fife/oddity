@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://ct7u8wqb2isj0"]
+
+[ext_resource type="Script" path="res://scenes/minables/harrow/classes/HarrowSeedPod.gd" id="1_bxleo"]
+[ext_resource type="PackedScene" uid="uid://clc0abcbnrbg7" path="res://scenes/minables/harrow/meshes/Seedpod1.glb" id="2_2dgcg"]
+[ext_resource type="Material" uid="uid://57qwctcri2af" path="res://scenes/minables/harrow/materials/HarrowSeedPodMaterial.tres" id="3_tiov4"]
+[ext_resource type="AudioStream" uid="uid://bk3rae7ltyo6r" path="res://scenes/minables/harrow/sounds/HarrowCrackSound.wav" id="4_xcsiq"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rx2mk"]
+points = PackedVector3Array(0.467719, -0.0615441, 0.351944, -0.598301, -0.176373, -0.142193, -0.57935, -0.176431, -0.180477, -0.0257803, 0.609462, -0.00870535, 0.203589, -0.272259, -0.563189, -0.140793, -0.368667, 0.546883, 0.244137, -0.602603, 0.0681198, -0.332108, 0.148334, 0.43142, 0.465552, 0.108598, -0.329726, -0.273968, 0.147886, -0.485845, -0.40528, -0.536167, -0.141394, 0.275534, 0.183594, 0.462276, 0.376304, -0.52168, -0.23857, -0.501488, 0.24257, 0.0103444, -0.275575, -0.331148, -0.527292, 0.153477, 0.594539, 0.150087, -0.445807, -0.291106, 0.39213, 0.204243, 0.0911582, -0.564895, 0.568266, -0.292132, 0.125268, 0.520895, 0.146116, 0.179858, 0.33571, -0.442293, 0.39075, -0.0449698, -0.579123, -0.334273, -0.255112, -0.61627, 0.0674771, 0.202813, -0.0999367, 0.562722, -0.446259, 0.167276, -0.352755, 0.256633, 0.315233, -0.365987, -0.0828953, 0.014267, 0.581592, 0.433477, -0.310963, -0.391446, -0.139594, 0.336854, -0.388131, -0.592073, -0.00470001, 0.0290829, 0.12712, -0.444403, 0.488257, -0.214469, 0.353947, 0.31231)
+
+[sub_resource type="Curve" id="Curve_tcfxw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ntp3m"]
+curve = SubResource("Curve_tcfxw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wa5cg"]
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 0.799998
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_ntp3m")
+color = Color(0.968627, 0, 0.141176, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g8w6k"]
+material = ExtResource("3_tiov4")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="HarrowSeedpod1" type="RigidBody3D" node_paths=PackedStringArray("mesh", "sound", "particles")]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 1.5
+script = ExtResource("1_bxleo")
+health = 1700.0
+mesh = NodePath("Seedpod12")
+sound = NodePath("DestroySound")
+particles = NodePath("GPUParticles3D")
+contents = "Harrow Seed Pod"
+initialize_collision_shape_automatically = false
+value = 41000
+can_be_picked_up = true
+
+[node name="Seedpod12" parent="." instance=ExtResource("2_2dgcg")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_rx2mk")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 123
+lifetime = 0.3
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wa5cg")
+draw_pass_1 = SubResource("BoxMesh_g8w6k")
+
+[node name="DestroySound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_xcsiq")
+volume_db = -6.0
+pitch_scale = 3.05
+max_distance = 600.0
+bus = &"Environment"

@@ -38,7 +38,7 @@ var mineable_resource : MineableResource
 @export
 var extraction_force : float
 
-func _ready() -> void:
+func _mineable_ready() -> void:
 	if mineable_resource == null:
 		printerr("NO MINEABLE RESOURCE FOUND")
 		return
@@ -51,6 +51,9 @@ func _ready() -> void:
 	value_variance = mineable_resource.value_variance
 	minable_sound = mineable_resource.extraction_sound
 	extraction_force = mineable_resource.extraction_force
+	
+func _ready() -> void:
+	_mineable_ready()
 
 func mine(damage : float, mining_position : Vector3, normal : Vector3) -> void:
 	is_being_mined.emit(damage, mining_position)
