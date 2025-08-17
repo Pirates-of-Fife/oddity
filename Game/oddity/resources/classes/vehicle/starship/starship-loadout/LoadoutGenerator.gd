@@ -149,6 +149,7 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		if cargo_grid != null:
 			var cargo : CargoContainer = cargo_resource.cargo_container.instantiate()
 			starship.add_child(cargo)
+			cargo.value = cargo_resource.value
 			cargo_grid.add_cargo_container(cargo)
 
 	for entity : GameEntityLoadoutResource in loadout.entities:
@@ -156,6 +157,7 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		starship.add_child(game_entity)
 		game_entity.position = entity.position
 		game_entity.rotation = entity.rotation
+		game_entity.value = entity.value
 	
 	starship.max_ammo = loadout.max_ammo
 	loadout.max_fuel = starship.max_fuel

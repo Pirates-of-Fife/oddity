@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://buhchmvefv38a"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_s36a8"]
+[ext_resource type="PackedScene" uid="uid://dncrxnqwoga1u" path="res://scenes/minables/harrow/meshes/Wood1.glb" id="2_fh08n"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sacu2"]
+points = PackedVector3Array(0.533966, 0.148902, -0.185891, -0.603451, -0.0138683, -0.0648022, -0.536626, -0.0552932, -0.314165, -0.0169389, -0.617856, 0.476861, 0.338246, -0.640707, -0.56651, -0.464932, 0.262798, 0.615449, 0.0866041, 0.253272, -0.639687, -0.482987, -0.648385, 0.590195, -0.435826, -0.578946, -0.525506, 0.0249709, 0.645593, -0.0231127, 0.333702, 0.150713, 0.326867, 0.549538, -0.643577, -0.106981, 0.63478, 0.247851, -0.611858, -0.461305, 0.133985, -0.572403, 0.632842, -0.433178, -0.652237, -0.595364, 0.275441, 0.0180489, 0.340549, -0.540181, 0.355925, 0.637956, -0.0545748, -0.247908, 0.0457078, -0.664, -0.589421, -0.0164535, 0.192975, 0.514704, -0.456761, -0.0765602, -0.609185, 0.594241, -0.667632, -0.318381, -0.269058, -0.68535, 0.22857, -0.562435, 0.258749, 0.354319, 0.460305, 0.269569, -0.655403, 0.677687, -0.140152, -0.63393, 0.0655421, 0.634238, -0.0231127, 0.21447, -0.688756, -0.0652478, 0.0877856, 0.217265, -0.653854, -0.594464, 0.275028, -0.0436035, 0.63478, 0.247851, -0.568186, 0.0665794, -0.621137, -0.609584)
+
+[node name="HarrowExtractable1" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 3.0
+script = ExtResource("1_s36a8")
+contents = "Harrow Wood"
+initialize_collision_shape_automatically = false
+value = 20000
+can_be_picked_up = true
+
+[node name="Wood12" parent="." instance=ExtResource("2_fh08n")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_sacu2")

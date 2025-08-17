@@ -64,7 +64,11 @@ func die() -> void:
 		return
 
 	has_died = true
+	
+	var default_loadout : StarshipLoadout = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
 
+	ResourceSaver.save(default_loadout, Globals.PLAYER_SHIP_SAVE)
+	
 	current_controller.queue_free()
 
 	respawn_hud.show()

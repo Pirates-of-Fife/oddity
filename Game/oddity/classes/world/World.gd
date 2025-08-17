@@ -166,9 +166,7 @@ func respawn_player() -> void:
 	player_body.global_position = spawn_station.player_spawn_marker.global_position
 	player_body.global_rotation = spawn_station.player_spawn_marker.global_rotation
 
-	var default_loadout : StarshipLoadout = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
 
-	ResourceSaver.save(default_loadout, Globals.PLAYER_SHIP_SAVE)
 
 func save_player_ship_state() -> void:
 	if player_ship == null:
