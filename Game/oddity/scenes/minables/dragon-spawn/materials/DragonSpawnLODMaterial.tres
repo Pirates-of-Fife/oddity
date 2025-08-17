@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bvu84v07nex3i"]
+
+[ext_resource type="Texture2D" uid="uid://yqir0t8sgcsg" path="res://scenes/minables/dragon-spawn/meshes/DragonSpawn_Crystal1_DragonSpawn.png" id="1_x8mdk"]
+
+[resource]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.67451)
+albedo_texture = ExtResource("1_x8mdk")
+metallic = 0.17
+metallic_specular = 0.84
+roughness = 0.22
+refraction_scale = 0.74
+distance_fade_mode = 2
+distance_fade_min_distance = 2000.0
+distance_fade_max_distance = 2100.0

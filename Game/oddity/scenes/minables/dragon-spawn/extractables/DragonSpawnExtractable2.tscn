@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqtxydiw4chxe"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_avdl6"]
+[ext_resource type="PackedScene" uid="uid://d4isw0on1pc33" path="res://scenes/minables/dragon-spawn/meshes/DragonSpawn_Extractable2.glb" id="2_dii53"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_awahr"]
+points = PackedVector3Array(0.721849, 0.226369, 0.0880672, -0.360298, 0.187044, -0.721944, -0.513268, 0.23802, -0.721807, -0.7935, -0.449846, 0.323023, -0.7935, 0.441923, 0.603373, 0.408881, -0.601498, 0.283754, 0.431817, -0.502438, -0.495125, 0.0421822, 0.516164, -0.54111, 0.310118, 0.348477, 0.574577, -0.768111, -0.271492, -0.441457, -0.270875, -0.3045, 0.54406, -0.436783, 0.620399, -0.543415, -0.870144, 0.161618, 0.0935827, 0.631991, 0.376073, -0.155789, 0.254234, 0.0553265, 0.632182, 0.659076, -0.194968, 0.323023, 0.386965, -0.580235, -0.376504, -0.320345, -0.354454, -0.589067, -0.00559284, 0.375345, -0.669739, 0.582591, -0.500944, -0.212017, -0.394708, -0.502171, 0.477212, 0.682748, -0.0633404, -0.223066, -0.564205, 0.339971, 0.654421, 0.610902, 0.304069, -0.254972, -0.691626, 0.492898, -0.0846723, -0.7935, 0.467472, 0.552463, 0.606093, -0.48113, 0.186907, -0.436783, 0.441923, -0.721807, 0.280869, 0.367329, 0.542039, -0.702495, -0.231855, 0.470992, -0.564205, 0.212593, -0.670897, 0.55373, 0.275839, 0.356042)
+
+[node name="DragonSpawnExtractable2" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 10.0
+script = ExtResource("1_avdl6")
+contents = "Dragon Spawn Chunk"
+initialize_collision_shape_automatically = false
+value = 60000
+can_be_picked_up = true
+
+[node name="DragonSpawn_Extractable2" parent="." instance=ExtResource("2_dii53")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_awahr")

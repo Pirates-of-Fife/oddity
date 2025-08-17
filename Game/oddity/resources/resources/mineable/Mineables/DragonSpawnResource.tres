@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MineableResource" load_steps=10 format=3 uid="uid://ch41mxwtbsvo3"]
+
+[ext_resource type="Script" path="res://resources/resources/mineable/MineableResource.gd" id="1_iys2r"]
+[ext_resource type="PackedScene" uid="uid://bglwg6wubmeuw" path="res://scenes/minables/dragon-spawn/extractables/DragonSpawnExtractable1.tscn" id="1_k4qcb"]
+[ext_resource type="PackedScene" uid="uid://bqtxydiw4chxe" path="res://scenes/minables/dragon-spawn/extractables/DragonSpawnExtractable2.tscn" id="2_h655w"]
+[ext_resource type="PackedScene" uid="uid://cayh3n1oyi7oa" path="res://scenes/minables/dragon-spawn/extractables/DragonSpawnExtractable3.tscn" id="3_lj32c"]
+[ext_resource type="PackedScene" uid="uid://gxyfi1e478yb" path="res://scenes/minables/dragon-spawn/sounds/DragonSpawnExtractionSound.tscn" id="4_llrn5"]
+[ext_resource type="ArrayMesh" uid="uid://ch25salg4fnt2" path="res://scenes/minables/dragon-spawn/mineables/DragonSpawn_LOD.tres" id="5_vvrj4"]
+[ext_resource type="PackedScene" uid="uid://bgw43083jx80l" path="res://scenes/minables/dragon-spawn/mineables/DragonSpawn1.tscn" id="7_rd8kc"]
+[ext_resource type="PackedScene" uid="uid://b0hii6s1kiemr" path="res://scenes/minables/dragon-spawn/mineables/DragonSpawn2.tscn" id="8_upytn"]
+[ext_resource type="PackedScene" uid="uid://bokxjadl2th62" path="res://scenes/minables/dragon-spawn/mineables/DragonSpawn3.tscn" id="9_nsm52"]
+
+[resource]
+script = ExtResource("1_iys2r")
+mineable_name = &"Dragon Spawn"
+min_resource_health = 100000.0
+max_resource_health = 134470.0
+min_resource_count = 8
+max_resource_count = 12
+extractable_resources = Array[PackedScene]([ExtResource("1_k4qcb"), ExtResource("2_h655w"), ExtResource("3_lj32c")])
+extraction_force = 500.0
+min_rarity = 0.0
+max_rarity = 5.0
+variants = Array[PackedScene]([ExtResource("7_rd8kc"), ExtResource("8_upytn"), ExtResource("9_nsm52")])
+low_detail_mesh = ExtResource("5_vvrj4")
+base_value = 80000
+value_variance = 0.25
+extraction_sound = ExtResource("4_llrn5")
