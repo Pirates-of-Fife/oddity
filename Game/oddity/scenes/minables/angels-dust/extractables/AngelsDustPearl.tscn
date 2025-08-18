@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckkxpm1t68b7n"]
+
+[ext_resource type="Script" path="res://scenes/minables/angels-dust/classes/AngelsDustPearl.gd" id="1_4nc2x"]
+[ext_resource type="PackedScene" uid="uid://qmyhh246srdf" path="res://scenes/minables/angels-dust/meshes/AngelsDustPearl.glb" id="2_xu8kj"]
+[ext_resource type="PackedScene" uid="uid://divqtgw3qwgng" path="res://scenes/minables/angels-dust/meshes/AngelsDustContainer.glb" id="3_2ha06"]
+[ext_resource type="PackedScene" uid="uid://b2jkp1efg64ql" path="res://scenes/minables/angels-dust/meshes/AngelsDustCardboardBox.glb" id="4_tbpya"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dm0xt"]
+points = PackedVector3Array(-0.114993, -0.613498, -0.0191005, 0.115094, 0.613488, 0.0191002, 0.115094, 0.613488, -0.0191002, -0.611841, 0.114608, 0.0190414, 0.114781, -0.0190483, 0.611822, 0.341554, -0.0948546, -0.512191, 0.588062, -0.132732, 0.151625, -0.284948, 0.0189211, -0.550854, -0.341567, 0.0948534, 0.512185, 0.513128, 0.341989, 0.0948713, 0.0379302, 0.474448, -0.398584, -0.151561, -0.454454, 0.397737, 0.341656, -0.512345, 0.0948831, -0.551064, -0.285001, 0.0189286, -0.417777, 0.455643, -0.0759008, -0.0947944, -0.435958, -0.435958, -0.0379474, 0.474444, 0.398581, 0.473905, 0.246414, -0.322298, 0.434424, -0.358747, -0.264327, 0.395832, 0.244994, 0.414542, 0.322275, -0.246449, 0.473895, -0.473964, -0.246436, -0.322207, -0.414613, 0.244986, -0.395756, 0.0190434, 0.114652, -0.611835, -0.359236, 0.434856, 0.264633, -0.491287, -0.170004, 0.340127, 0.59031, -0.018966, -0.190256, 0.189265, -0.510922, -0.302711, -0.0952378, -0.228484, 0.57127, 0.0948957, -0.512367, 0.341618, 0.0952195, -0.228482, -0.571265, -0.398562, -0.474466, 0.0379335)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i4twb"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[node name="AngelsDustPearl" type="RigidBody3D" node_paths=PackedStringArray("normal_container", "new_collider", "old_collider", "cardboard_box")]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 14.655
+gravity_scale = 0.0
+linear_damp = 0.5
+script = ExtResource("1_4nc2x")
+normal_container = NodePath("AngelsDustContainer")
+new_collider = NodePath("CollisionShape3D2")
+old_collider = NodePath("CollisionShape3D")
+cardboard_box = NodePath("AngelsDustCardboardBox")
+contents = "Angel's Dust Pearl"
+initialize_collision_shape_automatically = false
+value = 64495
+can_be_picked_up = true
+
+[node name="AngelsDustPearl2" parent="." instance=ExtResource("2_xu8kj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.909365, 0, 0, 0, 0.909365, 0, 0, 0, 0.909365, 0, 0.00405192, 0)
+shape = SubResource("ConvexPolygonShape3D_dm0xt")
+
+[node name="AngelsDustContainer" parent="." instance=ExtResource("3_2ha06")]
+visible = false
+
+[node name="AngelsDustCardboardBox" parent="." instance=ExtResource("4_tbpya")]
+visible = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_i4twb")
