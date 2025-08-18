@@ -14,7 +14,7 @@ var splits : int = 1
 @export_range(100, 20000, 100)
 var spawn_count : int
 
-@export_range(100, 3000, 50)
+@export_range(100, 10000, 50)
 var spawn_radius : float
 
 @export

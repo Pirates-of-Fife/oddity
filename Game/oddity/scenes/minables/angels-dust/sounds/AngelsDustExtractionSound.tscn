@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfs3p7xqsyp6d"]
+
+[ext_resource type="AudioStream" uid="uid://c0lgl1u6f0h04" path="res://scenes/minables/angels-dust/sounds/AngelDustExtractionSound.wav" id="1_rur2p"]
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/minable/MinableAudio.gd" id="2_up7oa"]
+
+[node name="AngelsDustExtractionSound" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_rur2p")
+volume_db = 12.0
+unit_size = 30.0
+max_db = 6.0
+autoplay = true
+max_distance = 1913.3
+bus = &"Environment"
+script = ExtResource("2_up7oa")
