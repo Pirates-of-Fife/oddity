@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dex2gytvs2aba"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_6shs7"]
+[ext_resource type="PackedScene" uid="uid://e24bb7jxn80m" path="res://scenes/minables/obelisk/meshes/ObeliskChunk2.glb" id="2_sc78p"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pk4lc"]
+points = PackedVector3Array(-0.664023, 0.211648, -0.283564, 0.5723, 0.356591, 0.02295, -0.108164, -0.583088, 0.554309, -0.283915, 0.47748, 0.591026, 0.235523, -0.544527, -0.631195, 0.28673, 0.600341, -0.451394, -0.643529, -0.299086, 0.206756, 0.31737, 0.334368, 0.656729, 0.521795, -0.564877, 0.22725, -0.500458, -0.483229, -0.426639, -0.408857, 0.506318, -0.455924, 0.542895, -0.0320109, -0.608615, -0.316398, -0.278736, -0.631323, -0.520823, 0.559335, 0.0433159, 0.487112, 0.444604, 0.440256, 0.605257, -0.567934, -0.175306, -0.42751, -0.529622, 0.480463, 0.381616, -0.364384, 0.531675, 0.0515921, -0.626423, 0.247744, 0.31737, 0.620757, -0.18135, -0.627708, -0.146946, 0.331808, 0.559155, 0.438891, -0.330032, 0.446052, -0.567331, -0.551699, -0.617535, 0.164121, -0.447505, -0.070986, 0.27307, 0.656729, -0.541317, -0.19684, 0.493161, 0.538837, 0.203269, 0.355993, -0.127989, -0.544689, -0.568572, 0.207352, -0.604655, 0.516566, 0.623469, -0.328866, -0.273711, 0.382433, 0.321168, -0.545692, 0.516984, 0.55358, -0.0746017)
+
+[node name="ObeliskExtractable1" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 30.0
+script = ExtResource("1_6shs7")
+contents = "???"
+initialize_collision_shape_automatically = false
+value = 18000
+can_be_picked_up = true
+
+[node name="ObeliskChunk22" parent="." instance=ExtResource("2_sc78p")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_pk4lc")
