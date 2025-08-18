@@ -30,6 +30,8 @@ func _on_container_placed_in_grid(cargo_area : CargoArea, cargo_grid : CargoGrid
 		
 	placed = true
 	
+	print("AWOOGA")
+	
 	var random_number : int = randi_range(1, 100000)
 	
 	if random_number % 16 == 0:

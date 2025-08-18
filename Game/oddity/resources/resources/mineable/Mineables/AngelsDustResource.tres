@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="MineableResource" load_steps=10 format=3 uid="uid://dayl7e42i3cf3"]
+[gd_resource type="Resource" script_class="MineableResource" load_steps=11 format=3 uid="uid://dayl7e42i3cf3"]
 
 [ext_resource type="PackedScene" uid="uid://ckkxpm1t68b7n" path="res://scenes/minables/angels-dust/extractables/AngelsDustPearl.tscn" id="1_72aam"]
 [ext_resource type="Script" path="res://resources/resources/mineable/MineableResource.gd" id="1_81fh2"]
-[ext_resource type="PackedScene" uid="uid://gxyfi1e478yb" path="res://scenes/minables/dragon-spawn/sounds/DragonSpawnExtractionSound.tscn" id="2_s8082"]
+[ext_resource type="PackedScene" uid="uid://dfs3p7xqsyp6d" path="res://scenes/minables/angels-dust/sounds/AngelsDustExtractionSound.tscn" id="2_iguah"]
 [ext_resource type="ArrayMesh" uid="uid://cs2cno6fyh0xf" path="res://scenes/minables/angels-dust/AngelsDustLOD.tres" id="3_dxtyt"]
 [ext_resource type="PackedScene" uid="uid://c7of01iw3exn" path="res://scenes/minables/angels-dust/mineables/AngelsDust1.tscn" id="4_bbrqg"]
 [ext_resource type="PackedScene" uid="uid://ceel08orc6p2a" path="res://scenes/minables/angels-dust/mineables/AngelsDust2.tscn" id="6_cga4g"]
 [ext_resource type="PackedScene" uid="uid://d3phspb1uismx" path="res://scenes/minables/angels-dust/mineables/AngelsDust3.tscn" id="7_4k7iq"]
 [ext_resource type="PackedScene" uid="uid://cpahjeabhnujb" path="res://scenes/minables/angels-dust/mineables/AngelsDust4.tscn" id="8_0m1sh"]
 [ext_resource type="PackedScene" uid="uid://fltapphh4e0c" path="res://scenes/minables/angels-dust/mineables/AngelsDust5.tscn" id="9_54636"]
+[ext_resource type="PackedScene" uid="uid://drrwc7sxkcan3" path="res://scenes/minables/angels-dust/mineables/AngelsDust6.tscn" id="10_6twqf"]
 
 [resource]
 script = ExtResource("1_81fh2")
@@ -21,8 +22,8 @@ extractable_resources = Array[PackedScene]([ExtResource("1_72aam")])
 extraction_force = 60.0
 min_rarity = 2.0
 max_rarity = 7.0
-variants = Array[PackedScene]([ExtResource("4_bbrqg"), ExtResource("6_cga4g"), ExtResource("7_4k7iq"), ExtResource("8_0m1sh"), ExtResource("9_54636"), null])
+variants = Array[PackedScene]([ExtResource("4_bbrqg"), ExtResource("6_cga4g"), ExtResource("7_4k7iq"), ExtResource("8_0m1sh"), ExtResource("9_54636"), ExtResource("10_6twqf")])
 low_detail_mesh = ExtResource("3_dxtyt")
 base_value = 93000
 value_variance = 0.2
-extraction_sound = ExtResource("2_s8082")
+extraction_sound = ExtResource("2_iguah")
