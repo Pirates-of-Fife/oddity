@@ -1,0 +1,35 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://blcwrw143tx8d"]
+
+[ext_resource type="Material" uid="uid://bwsnrp1tfymb6" path="res://scenes/minables/obelisk/materials/ObeliskLODMaterial.tres" id="1_bjosq"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w65n2"]
+_surfaces = [{
+"aabb": AABB(-3.1327, 9.15896, -3.1327, 6.26539, 71.6821, 6.26539),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEAAgAEAAYAAgAAAAQABwABAAMABwAFAAEA"),
+"name": "Obelisk",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "ObeliskLOD_Cube_006"
+_surfaces = [{
+"aabb": AABB(-3.1327, 9.15896, -3.1327, 6.26539, 71.6821, 6.26539),
+"attribute_data": PackedByteArray("/z8AAAAA/z//P////38AAP+//z//f////z//vwAA/3//P/+//3//v/+//3//f/+//z//P/8//z//P/8//3//P/9//z//f/8//z//f/8//3//P/9//3//f/9//3//f/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AgALAAUAAgAIAAsABgAVAAkABgASABUAFAARABcAFAAOABEADAADAA8ADAAAAAMABwANABMABwABAA0AFgAEAAoAFgAQAAQA"),
+"material": ExtResource("1_bjosq"),
+"name": "Obelisk",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP///78AAAAA////vwAAAAD//1TVAAD//////78AAP///////wAA/////1TVAAAAAAAA//8AAAAAAAD/vwAAAAAAAFTVAAD//wAA//8AAP//AAD//wAA//8AAFTV//8AAP///7///wAA////v///AAD//1TV/////////7///////////////////1TV//8AAAAA/////wAAAAD/v///AAAAAFTV/////wAA////////AAD///////8AAFTV/////wAA/39U1VTV//////9//79U1VTV/7//vwAA/39U1VTV/7//v/9//79U1VTV/////wAA/3+qKqoq//////9//7+qKqoq/7//vwAA/3+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_w65n2")

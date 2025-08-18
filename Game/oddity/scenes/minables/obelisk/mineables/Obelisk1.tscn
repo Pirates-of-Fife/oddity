@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://daqm050t44ijy"]
+
+[ext_resource type="Script" path="res://scenes/minables/obelisk/classes/ObeliskMineable.gd" id="1_qvtkl"]
+[ext_resource type="PackedScene" uid="uid://bqo42u55pu503" path="res://scenes/minables/obelisk/meshes/Obelisk1.glb" id="2_8kfer"]
+[ext_resource type="AudioStream" uid="uid://cuerhh7qjm70o" path="res://scenes/minables/obelisk/sounds/whispers.wav" id="3_aram5"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/pressure-zone/PressureZone.gd" id="4_yf0s7"]
+[ext_resource type="AudioStream" uid="uid://b3tmu0mvvq0t7" path="res://scenes/minables/obelisk/sounds/obelisk_disappear.wav" id="5_my40h"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tr330"]
+data = PackedVector3Array(-3.1327, 9.159, 3.1327, -3.1327, 80.841, -3.1327, -3.1327, 80.841, 3.1327, -3.1327, 9.159, 3.1327, -3.1327, 9.159, -3.1327, -3.1327, 80.841, -3.1327, -3.1327, 9.159, -3.1327, 3.1327, 80.841, -3.1327, -3.1327, 80.841, -3.1327, -3.1327, 9.159, -3.1327, 3.1327, 9.159, -3.1327, 3.1327, 80.841, -3.1327, 3.1327, 9.159, -3.1327, 3.1327, 80.841, 3.1327, 3.1327, 80.841, -3.1327, 3.1327, 9.159, -3.1327, 3.1327, 9.159, 3.1327, 3.1327, 80.841, 3.1327, 3.1327, 9.159, 3.1327, -3.1327, 80.841, 3.1327, 3.1327, 80.841, 3.1327, 3.1327, 9.159, 3.1327, -3.1327, 9.159, 3.1327, -3.1327, 80.841, 3.1327, -3.1327, 9.159, -3.1327, 3.1327, 9.159, 3.1327, 3.1327, 9.159, -3.1327, -3.1327, 9.159, -3.1327, -3.1327, 9.159, 3.1327, 3.1327, 9.159, 3.1327, 3.1327, 80.841, -3.1327, -3.1327, 80.841, 3.1327, -3.1327, 80.841, -3.1327, 3.1327, 80.841, -3.1327, 3.1327, 80.841, 3.1327, -3.1327, 80.841, 3.1327)
+
+[sub_resource type="Curve" id="Curve_qwqqt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.252708, 0.318316), 1.64265, 1.64265, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Obelisk1" type="StaticBody3D" node_paths=PackedStringArray("depletion_sound")]
+collision_layer = 2097409
+collision_mask = 2097409
+script = ExtResource("1_qvtkl")
+depletion_sound = NodePath("AudioStreamPlayer3D2")
+
+[node name="Obelisk12" parent="." instance=ExtResource("2_8kfer")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_tr330")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.65073, 0)
+stream = ExtResource("3_aram5")
+volume_db = 10.0
+pitch_scale = 0.19
+autoplay = true
+max_distance = 1500.0
+bus = &"Environment"
+
+[node name="PressureZone" type="Node3D" parent="."]
+script = ExtResource("4_yf0s7")
+damage_timer = 0.2
+pressure_heat = 2500.0
+pressure_damage_curve = SubResource("Curve_qwqqt")
+activate_distance = 100.0
+deactivate_distance = 200.0
+update_time = 0.3
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.65073, 0)
+stream = ExtResource("5_my40h")
+volume_db = 10.0
+pitch_scale = 0.92
+autoplay = true
+max_distance = 1500.0
+bus = &"Environment"
