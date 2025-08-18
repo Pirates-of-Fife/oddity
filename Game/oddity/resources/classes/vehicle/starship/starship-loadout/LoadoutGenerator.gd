@@ -149,7 +149,8 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		if cargo_grid != null:
 			var cargo : CargoContainer = cargo_resource.cargo_container.instantiate()
 			starship.add_child(cargo)
-			cargo.value = cargo_resource.value
+			if cargo_resource.value != 0:
+				cargo.value = cargo_resource.value
 			cargo_grid.add_cargo_container(cargo)
 
 	for entity : GameEntityLoadoutResource in loadout.entities:

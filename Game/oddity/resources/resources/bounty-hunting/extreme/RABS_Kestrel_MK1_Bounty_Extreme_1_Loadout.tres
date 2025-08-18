@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=85 format=3 uid="uid://hu5gqe83uwsy"]
+[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=86 format=3 uid="uid://hu5gqe83uwsy"]
 
 [ext_resource type="PackedScene" uid="uid://ddvpx7ldofuyc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.tscn" id="1_qbujc"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/cargo/CargoContainerLoadoutResource.gd" id="1_sfmah"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://v6gv82xubo7h" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RABS_KestrelMk1_RetroThruster.tscn" id="4_3i324"]
 [ext_resource type="PackedScene" uid="uid://h2gmsd4soaa8" path="res://scenes/cargo/bounty-hunting-cargo-containers/Contraband.tscn" id="4_r6qli"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/ModuleSlotLoadoutResource.gd" id="5_2djr3"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/objects/GameEntityLoadoutResource.gd" id="5_8hjq6"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ComponentSlotLoadoutResource.gd" id="5_52gxx"]
 [ext_resource type="PackedScene" uid="uid://cbwjvb73gf6ew" path="res://scenes/modules/test-module/ShieldGenerator/size-4/Size4ShieldGenerator.tscn" id="5_tbn8s"]
 [ext_resource type="PackedScene" uid="uid://ssxap6l3wimu" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="6_uey0i"]
@@ -465,7 +466,7 @@ id = 46
 script = ExtResource("14_4hing")
 module_slots = Array[ExtResource("5_2djr3")]([SubResource("Resource_p5tfs"), SubResource("Resource_350rj"), SubResource("Resource_8c2df"), SubResource("Resource_iselx"), SubResource("Resource_6wn54"), SubResource("Resource_mkint"), SubResource("Resource_a00r7"), SubResource("Resource_w5ogr"), SubResource("Resource_y2hro"), SubResource("Resource_sboi4"), SubResource("Resource_6oi1a"), SubResource("Resource_tisgo"), SubResource("Resource_rgapb"), SubResource("Resource_7h3mv"), SubResource("Resource_28sgm"), SubResource("Resource_dlscg"), SubResource("Resource_imnww"), SubResource("Resource_xg1x0"), SubResource("Resource_c5ohs"), SubResource("Resource_2foug"), SubResource("Resource_6dgny"), SubResource("Resource_a7ivi"), SubResource("Resource_lnceq"), SubResource("Resource_7ai1a"), SubResource("Resource_wi6ej"), SubResource("Resource_5u38n"), SubResource("Resource_ufa64"), SubResource("Resource_it1g5"), SubResource("Resource_i84pk"), SubResource("Resource_xd8a6"), SubResource("Resource_lckmn"), SubResource("Resource_5f82o"), SubResource("Resource_g77d6"), SubResource("Resource_n7vgl"), SubResource("Resource_i8dmf"), SubResource("Resource_pt4br"), SubResource("Resource_g3gl0"), SubResource("Resource_jacr6"), SubResource("Resource_btol5"), SubResource("Resource_dev3m"), SubResource("Resource_vp0ww"), SubResource("Resource_7mqbg"), SubResource("Resource_d4e1k"), SubResource("Resource_psoki"), SubResource("Resource_n4lv3"), SubResource("Resource_wpvw1")])
 cargo = Array[ExtResource("1_sfmah")]([SubResource("Resource_hweff"), SubResource("Resource_cxt33"), SubResource("Resource_i6pra"), SubResource("Resource_nt5ds"), SubResource("Resource_6inuu"), SubResource("Resource_j7c11"), SubResource("Resource_yfg2q"), SubResource("Resource_y5fe0"), SubResource("Resource_emc2h"), SubResource("Resource_cvd72")])
-entities = null
+entities = Array[ExtResource("5_8hjq6")]([])
 ship_name = &"Rocinante"
 ship_identification = &""
 value = 10000
