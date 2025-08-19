@@ -29,6 +29,9 @@ var hud : CreditHud
 @export
 var inventory_hud : InventoryHud
 
+@export
+var inventory : PlayerInventoryResource
+
 var force_respawn_pressed_count : int = 0
 var force_respawn_timer : Timer = Timer.new()
 var has_died : bool = false
@@ -60,7 +63,165 @@ func _player_ready() -> void:
 func force_respawn_timer_timeout() -> void:
 	force_respawn_pressed_count = 0
 
+func store_item_in_slot(slot : int, entity : Node3D) -> void:
+	if !is_entity_storable(entity):
+		return
+	
+	if is_inventory_slot_occupied(slot):
+		inventory_hud.show_error("slot occupied")
+		return
+	
+	var inventory_slot : InventoryGameEntitySlot = create_inventory_slot_resource(entity)
+			
+	if entity is CargoContainer:
+		if entity.snapped_to != null:
+			entity.unsnap_from_grid()
+	
+	if entity is Module:
+		if entity.module_slot != null:
+			entity.uninsert()
+	
+	if entity is GameEntity:
+		if entity.is_being_held:
+			if control_entity is Creature:
+				control_entity.drop()
+		
+		entity.queue_free()
+	
+	inventory_hud.store_item_in_slot(slot, inventory_slot)
+	
+	match slot:
+		1:
+			inventory.inventory_slot_1 = inventory_slot
+		2:
+			inventory.inventory_slot_2 = inventory_slot
+		3:
+			inventory.inventory_slot_3 = inventory_slot
+		4:
+			inventory.inventory_slot_4 = inventory_slot
+		5:
+			inventory.inventory_slot_5 = inventory_slot
 
+
+func is_entity_storable(entity : Node3D) -> bool:
+	if entity == null:
+		inventory_hud.show_error("NO ENTITY TO STORE")
+		return false
+	
+	if entity is StaticGameEntity:
+		inventory_hud.show_error("Cannot store " + str(entity.entity_name))
+		return false
+		
+	if entity is CargoContainer:
+		if entity.container_size != CargoUnit.ContainerSize.CU_1:
+			inventory_hud.show_error("Cannot store large cargo containers")
+			return false
+	
+	if entity is Component:
+		if entity.size > ModuleSize.ComponentSize.SIZE_2:
+			inventory_hud.show_error("Cannot store large components")
+			return false
+	
+	if entity is Weapon:
+		inventory_hud.show_error("Cannot store large weapons")
+		return false
+	
+	return true
+
+func retrieve_item_in_slot(slot : int) -> void:
+	if !is_inventory_slot_occupied(slot):
+		return
+		
+	inventory_hud.retrieve_item_in_slot(slot)
+	
+	if control_entity is not Creature:
+		return
+	
+	var creature : Creature = control_entity
+	var entity : GameEntity
+	
+	match slot:
+		1:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_1)
+			
+			inventory.inventory_slot_1 = null
+		2:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_2)
+			
+			inventory.inventory_slot_2 = null
+		3:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_3)
+			
+			inventory.inventory_slot_3 = null
+		4:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_4)
+			
+			inventory.inventory_slot_4 = null
+		5:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_5)
+			
+			inventory.inventory_slot_5 = null
+
+	get_tree().get_first_node_in_group("World").add_child(entity)
+	
+	entity.global_position = creature.pick_up_location.global_position
+	entity.global_rotation = creature.pick_up_location.global_rotation
+
+
+func create_inventory_slot_resource(entity : GameEntity) -> InventoryGameEntitySlot:
+	var slot : InventoryGameEntitySlot = InventoryGameEntitySlot.new()
+	
+	slot.game_entity = load(entity.scene_file_path)
+	
+	if entity is Module:
+		if entity.module_resource is ComponentResource:
+			var component_resource : ComponentResource = entity.module_resource
+			
+			slot.name = component_resource.manufacturer + " " + component_resource.model + " | Size " + component_resource.size
+	elif entity is CargoContainer:
+		slot.name = entity.contents
+	elif entity is GameEntity:
+		slot.name = entity.entity_name
+	
+	slot.value = entity.value
+	
+	return slot
+
+func create_entity_from_inventory_slot_resource(slot : InventoryGameEntitySlot) -> GameEntity:
+	var entity : GameEntity = slot.game_entity.instantiate()
+	entity.value = slot.value
+	
+	return entity
+
+func is_inventory_slot_occupied(slot : int) -> bool:
+	match slot:
+		1:
+			if inventory.inventory_slot_1 == null:
+				return false
+			else:
+				return true
+		2:
+			if inventory.inventory_slot_2 == null:
+				return false
+			else:
+				return true
+		3:
+			if inventory.inventory_slot_3 == null:
+				return false
+			else:
+				return true
+		4:
+			if inventory.inventory_slot_4 == null:
+				return false
+			else:
+				return true
+		5:
+			if inventory.inventory_slot_5 == null:
+				return false
+			else:
+				return true
+	
+	return true
 
 func die() -> void:
 	if has_died:

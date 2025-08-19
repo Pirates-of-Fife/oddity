@@ -106,6 +106,68 @@ var inventory_visible : bool :
 			storable_icon_visibile = false
 			interaction_icon_visibile = false
 
+@export_category("Error")
+
+@export
+var error_label : Label
+
+@export
+var error_timer : Timer
 
 func _ready() -> void:
 	inventory_visible = true
+
+func store_item_in_slot(slot : int, entity : InventoryGameEntitySlot) -> void:
+	match slot:
+		1:
+			inventory_slot_1_label_number.show()
+			inventory_slot_1_label.show()
+			inventory_slot_1_label.text = entity.name
+		2:
+			inventory_slot_2_label_number.show()
+			inventory_slot_2_label.show()
+			inventory_slot_2_label.text = entity.name
+		3:
+			inventory_slot_3_label_number.show()
+			inventory_slot_3_label.show()
+			inventory_slot_3_label.text = entity.name
+		4:
+			inventory_slot_4_label_number.show()
+			inventory_slot_4_label.show()
+			inventory_slot_4_label.text = entity.name
+		5:
+			inventory_slot_5_label_number.show()
+			inventory_slot_5_label.show()
+			inventory_slot_5_label.text = entity.name
+
+func retrieve_item_in_slot(slot : int) -> void:
+	match slot:
+		1:
+			inventory_slot_1_label_number.hide()
+			inventory_slot_1_label.hide()
+			inventory_slot_1_label.text = ""
+		2:
+			inventory_slot_2_label_number.hide()
+			inventory_slot_2_label.hide()
+			inventory_slot_2_label.text = ""
+		3:
+			inventory_slot_3_label_number.hide()
+			inventory_slot_3_label.hide()
+			inventory_slot_3_label.text = ""
+		4:
+			inventory_slot_4_label_number.hide()
+			inventory_slot_4_label.hide()
+			inventory_slot_4_label.text = ""
+		5:
+			inventory_slot_5_label_number.hide()
+			inventory_slot_5_label.hide()
+			inventory_slot_5_label.text = ""
+
+
+func show_error(message : String) -> void:
+	error_label.text = message.to_upper()
+	error_label.show()
+	error_timer.start()
+
+func _on_timer_timeout() -> void:
+	error_label.hide()

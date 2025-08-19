@@ -30,15 +30,55 @@ func _humanoid_ready() -> void:
 func _interaction_entity_found(entity : Node3D) -> void:
 	if entity == null:
 		player.inventory_hud.interaction_icon_visibile = false
+		player.inventory_hud.storable_icon_visibile = false
 		return
 		
 	if player != null:
 		if player is Player:
 			player.inventory_hud.interaction_icon_visibile = true
+			
+			if player.is_entity_storable(entity):
+				player.inventory_hud.storable_icon_visibile = true
+			else:
+				player.inventory_hud.storable_icon_visibile = false
 
 func humanoid_process(delta : float) -> void:
 	pass
 
+func use_inventory_slot(slot : int) -> void:
+	if player is not Player:
+		return
+	
+	var p : Player = player
+	
+	if p.is_inventory_slot_occupied(slot):
+		retrieve_entity(slot)
+	else:
+		store_entity(slot)
+
+func store_entity(slot : int) -> void:
+	if player is not Player:
+		return
+	
+	var p : Player = player
+	
+	var entity : Node3D = interaction_probe()
+	
+	p.store_item_in_slot(slot, entity)
+
+func retrieve_entity(slot : int) -> void:
+	if player is not Player:
+		return
+	var p : Player = player
+
+	var entity : Node3D = interaction_probe()
+	
+	if entity != null:
+		p.inventory_hud.show_error("Inventory slot occupied")
+		return
+	
+	p.retrieve_item_in_slot(slot)
+	
 func _physics_process(delta: float) -> void:
 	humanoid_physics_process(delta)
 

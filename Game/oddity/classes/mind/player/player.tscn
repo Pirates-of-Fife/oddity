@@ -1,12 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3ry8dgeqrhg1"]
+[gd_scene load_steps=12 format=3 uid="uid://c3ry8dgeqrhg1"]
 
 [ext_resource type="Script" path="res://classes/mind/player/player.gd" id="1_1lph1"]
 [ext_resource type="PackedScene" uid="uid://f2enjgidilcu" path="res://classes/mind/player/CreditHud.tscn" id="2_gevx3"]
 [ext_resource type="PackedScene" uid="uid://c6fr87c666t64" path="res://scenes/world/gateway/GatewaySystem.tscn" id="2_xvsrd"]
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="3_lx58o"]
 [ext_resource type="Script" path="res://classes/mind/player/PlayerCamera.gd" id="4_0dcgl"]
+[ext_resource type="Script" path="res://resources/classes/inventory/PlayerInventoryResource.gd" id="4_sgkny"]
 [ext_resource type="PackedScene" uid="uid://c7mjyhgb60j0v" path="res://classes/mind/player/death-hud/DeathHud.tscn" id="5_xduys"]
 [ext_resource type="PackedScene" uid="uid://cw4l3bxh7ybdt" path="res://classes/mind/player/inventory-hud/InventoryHud.tscn" id="7_ewowx"]
+
+[sub_resource type="Resource" id="Resource_bv4eo"]
+script = ExtResource("4_sgkny")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_genkd"]
 auto_exposure_enabled = true
@@ -28,6 +32,7 @@ respawn_body = ExtResource("3_lx58o")
 respawn_hud = NodePath("DeathHud")
 hud = NodePath("HeadsUpDisplay")
 inventory_hud = NodePath("InventoryHud")
+inventory = SubResource("Resource_bv4eo")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
 attributes = SubResource("CameraAttributesPractical_genkd")
