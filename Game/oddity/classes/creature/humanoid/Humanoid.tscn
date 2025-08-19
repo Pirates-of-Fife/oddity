@@ -33,6 +33,7 @@ grounded_marker = NodePath("Marker3D")
 interaction_length = 6.0
 pick_up_distance = 2.0
 pick_up_location = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2")
+interaction_probe_timeout_time = 0.155
 fall_timer = NodePath("Timer")
 ground_shape_cast = NodePath("ground_cast")
 stand_up_shape_cast = NodePath("stand_up_cast")

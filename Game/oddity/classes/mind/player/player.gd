@@ -26,6 +26,9 @@ var respawn_hud : CanvasLayer
 @export
 var hud : CreditHud
 
+@export
+var inventory_hud : InventoryHud
+
 var force_respawn_pressed_count : int = 0
 var force_respawn_timer : Timer = Timer.new()
 var has_died : bool = false

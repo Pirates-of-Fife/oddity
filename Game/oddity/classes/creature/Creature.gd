@@ -29,7 +29,12 @@ var pick_up_distance : float = 1
 @export
 var pick_up_location : Marker3D
 
+@export
+var interaction_probe_timeout_time : float = 0.3
+
 var game_entity_being_picked_up : GameEntity
+
+signal can_interact_with_entity(entity : Node3D)
 
 @export_category("Keep Upright")
 
@@ -98,6 +103,12 @@ func creature_ready() -> void:
 	stand_up_shape_cast.add_exception(self)
 	orignal_collision_shape = $CollisionShape3D.shape
 	pick_up_location.position.z = -pick_up_distance
+	
+	var interaction_probe_timer : Timer = Timer.new()
+	interaction_probe_timer.autostart = true
+	interaction_probe_timer.timeout.connect(interaction_probe_timeout)
+	interaction_probe_timer.wait_time = interaction_probe_timeout_time
+	add_child(interaction_probe_timer)
 
 func fall_timer_timeout() -> void:
 	if !is_grounded():
@@ -236,6 +247,26 @@ func use_interact() -> void:
 				game_entity_being_picked_up.on_interact.emit()
 				game_entity_being_picked_up.on_game_entity_drop_request.connect(drop)
 				rotation_offset = pick_up_location.global_transform.basis.inverse() * game_entity_being_picked_up.global_transform.basis
+
+func interaction_probe() -> Node3D:
+	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor.camera_anchor, interaction_length)
+	
+	if result.size() > 0:
+		var collider : Object = result["collider"]
+
+		if collider is Interactable:
+			return collider
+
+		if collider is GameEntity:
+			if collider.can_be_picked_up == true:
+				return collider
+	
+	return null
+
+func interaction_probe_timeout() -> void:
+	var entity : Node3D = interaction_probe()
+	
+	can_interact_with_entity.emit(entity)
 
 var rotation_offset : Basis
 

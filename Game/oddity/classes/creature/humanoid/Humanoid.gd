@@ -19,6 +19,22 @@ var eva_roll_force : float = 50
 var eva_movement_vector : Vector3
 var eva_rotation_vector : Vector3
 
+func _ready() -> void:
+	_humanoid_ready()
+
+func _humanoid_ready() -> void:
+	creature_ready()
+	
+	can_interact_with_entity.connect(_interaction_entity_found)
+	
+func _interaction_entity_found(entity : Node3D) -> void:
+	if entity == null:
+		player.inventory_hud.interaction_icon_visibile = false
+		return
+		
+	if player != null:
+		if player is Player:
+			player.inventory_hud.interaction_icon_visibile = true
 
 func humanoid_process(delta : float) -> void:
 	pass

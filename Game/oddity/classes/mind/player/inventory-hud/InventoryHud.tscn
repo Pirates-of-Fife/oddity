@@ -1,0 +1,175 @@
+[gd_scene load_steps=10 format=3 uid="uid://cw4l3bxh7ybdt"]
+
+[ext_resource type="Script" path="res://classes/mind/player/inventory-hud/InventoryHud.gd" id="1_rycxk"]
+[ext_resource type="Texture2D" uid="uid://b3oaysosr3psk" path="res://classes/mind/player/inventory-hud/OddityPawIcon.png" id="2_b7fmq"]
+[ext_resource type="Shader" path="res://classes/mind/player/OnFootCrosshair.gdshader" id="2_ied7j"]
+[ext_resource type="Texture2D" uid="uid://44am24qa08u3" path="res://classes/mind/player/inventory-hud/InventoryIcon.png" id="3_fd8c3"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="4_8ompq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3und"]
+shader = ExtResource("2_ied7j")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42eap"]
+atlas = ExtResource("3_fd8c3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_neuki"]
+atlas = ExtResource("3_fd8c3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gvgpd"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_42eap")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_neuki")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="InventoryHud" type="CanvasLayer" node_paths=PackedStringArray("interaction_icon", "storable_icon", "inventory", "inventory_slot_1_label", "inventory_slot_2_label", "inventory_slot_3_label", "inventory_slot_4_label", "inventory_slot_5_label", "inventory_slot_1_label_number", "inventory_slot_2_label_number", "inventory_slot_3_label_number", "inventory_slot_4_label_number", "inventory_slot_5_label_number")]
+follow_viewport_enabled = true
+script = ExtResource("1_rycxk")
+interaction_icon = NodePath("Container/Sprite2D")
+storable_icon = NodePath("Container/AnimatedSprite2D")
+inventory = NodePath("Container/Inventory")
+inventory_slot_1_label = NodePath("Container/Inventory/InventoryItems/InventoryLabel1")
+inventory_slot_2_label = NodePath("Container/Inventory/InventoryItems/InventoryLabel2")
+inventory_slot_3_label = NodePath("Container/Inventory/InventoryItems/InventoryLabel3")
+inventory_slot_4_label = NodePath("Container/Inventory/InventoryItems/InventoryLabel4")
+inventory_slot_5_label = NodePath("Container/Inventory/InventoryItems/InventoryLabel5")
+inventory_slot_1_label_number = NodePath("Container/Inventory/Lables/InventoryLabel1")
+inventory_slot_2_label_number = NodePath("Container/Inventory/Lables/InventoryLabel2")
+inventory_slot_3_label_number = NodePath("Container/Inventory/Lables/InventoryLabel3")
+inventory_slot_4_label_number = NodePath("Container/Inventory/Lables/InventoryLabel4")
+inventory_slot_5_label_number = NodePath("Container/Inventory/Lables/InventoryLabel5")
+inventory_visible = true
+
+[node name="Container" type="Control" parent="."]
+material = SubResource("ShaderMaterial_r3und")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Container"]
+visible = false
+position = Vector2(9, 350)
+texture = ExtResource("2_b7fmq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Container"]
+visible = false
+position = Vector2(9, 330)
+sprite_frames = SubResource("SpriteFrames_gvgpd")
+autoplay = "default"
+frame_progress = 0.686449
+
+[node name="Inventory" type="Control" parent="Container"]
+anchors_preset = 0
+offset_right = 151.0
+offset_bottom = 104.0
+
+[node name="Lables" type="Control" parent="Container/Inventory"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 151.0
+offset_bottom = 104.0
+
+[node name="InventoryLabel1" type="Label" parent="Container/Inventory/Lables"]
+offset_left = 8.0
+offset_top = -2.0
+offset_right = 586.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "1:"
+
+[node name="InventoryLabel2" type="Label" parent="Container/Inventory/Lables"]
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 583.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "2:"
+
+[node name="InventoryLabel3" type="Label" parent="Container/Inventory/Lables"]
+offset_left = 5.0
+offset_top = 14.0
+offset_right = 583.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "3:"
+
+[node name="InventoryLabel4" type="Label" parent="Container/Inventory/Lables"]
+offset_left = 5.0
+offset_top = 22.0
+offset_right = 583.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "4:"
+
+[node name="InventoryLabel5" type="Label" parent="Container/Inventory/Lables"]
+offset_left = 5.0
+offset_top = 30.0
+offset_right = 583.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "5:"
+
+[node name="InventoryItems" type="Control" parent="Container/Inventory"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InventoryLabel1" type="Label" parent="Container/Inventory/InventoryItems"]
+offset_left = 18.0
+offset_top = -2.0
+offset_right = 596.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "Inventory Item"
+
+[node name="InventoryLabel2" type="Label" parent="Container/Inventory/InventoryItems"]
+offset_left = 18.0
+offset_top = 6.0
+offset_right = 596.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "Inventory Item"
+
+[node name="InventoryLabel3" type="Label" parent="Container/Inventory/InventoryItems"]
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 596.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "Inventory Item"
+
+[node name="InventoryLabel4" type="Label" parent="Container/Inventory/InventoryItems"]
+offset_left = 18.0
+offset_top = 22.0
+offset_right = 596.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "Inventory Item"
+
+[node name="InventoryLabel5" type="Label" parent="Container/Inventory/InventoryItems"]
+offset_left = 18.0
+offset_top = 30.0
+offset_right = 596.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("4_8ompq")
+theme_override_font_sizes/font_size = 5
+text = "Inventory Item"
