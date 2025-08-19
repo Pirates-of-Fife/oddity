@@ -101,10 +101,11 @@ var inventory_visible : bool :
 			inventory.show()
 			inventory_visible = value
 		else:
-			inventory_visible = value
-			inventory.hide()
 			storable_icon_visibile = false
 			interaction_icon_visibile = false
+			inventory_visible = value
+			inventory.hide()
+
 
 @export_category("Error")
 

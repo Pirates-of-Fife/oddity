@@ -54,7 +54,7 @@ func _ready() -> void:
 	if is_main_menu_world:
 		return
 
-	auto_save_timer.timeout.connect(save_player_ship_state)
+	auto_save_timer.timeout.connect(save_player_stats)
 	auto_save_timer.one_shot = false
 	auto_save_timer.autostart = true
 	auto_save_timer.wait_time = 60
@@ -63,7 +63,9 @@ func _ready() -> void:
 	spawn_station = get_tree().get_first_node_in_group("StarSystem").spawn_station
 
 	spawn_player_ship()
-
+	
+	player.load_inventory()
+	
 	var f : FileAccess = FileAccess.open(Globals.PLAYER_MONEY, FileAccess.READ)
 	if f == null:
 		var res : PlayerMoneyResource = PlayerMoneyResource.new()
@@ -168,13 +170,16 @@ func respawn_player() -> void:
 
 
 
-func save_player_ship_state() -> void:
+func save_player_stats() -> void:
 	if player_ship == null:
 		return
 
 	var loadout_generator : LoadoutGenerator = LoadoutGenerator.new()
 
 	loadout_generator.save_loadout(player_ship, true, true, true)
+		
+	player.save_inventory()
+	
 
 func save_player_money_state() -> void:
 	var f : FileAccess = FileAccess.open(Globals.PLAYER_MONEY, FileAccess.READ)
@@ -188,8 +193,8 @@ func save_player_money_state() -> void:
 
 func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_player_ship_state()
-		save_player_money_state()
+		save_player_stats()
+		
 		get_tree().quit()
 
 func spawn_player_ship() -> void:
@@ -224,5 +229,5 @@ func spawn_player_ship() -> void:
 
 
 func exit_to_main_menu() -> void:
-	save_player_ship_state()
+	save_player_stats()
 	get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")

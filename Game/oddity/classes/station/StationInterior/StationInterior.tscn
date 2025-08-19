@@ -81,6 +81,9 @@ transform = Transform3D(1, 0, 0, 0, -0.192025, 0.98139, 0, -0.98139, -0.192025, 
 [node name="house" parent="Pads/StationPad2" index="0"]
 transform = Transform3D(1.5, 0, 0, 0, 1.4989, 0.0575556, 0, -0.0575556, 1.4989, 0, 2.92221, 0.00126375)
 
+[node name="ChangeShipNameUi" parent="Pads/StationPad2" index="6"]
+transform = Transform3D(1.25526e-17, 0, -0.205, 0, 0.205, 0, 0.205, 0, 1.25526e-17, 5.305, 0.547, -4.529)
+
 [node name="CollisionShape3D" parent="Pads/StationPad2/LandingPad" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.7397, 24.4815, 2.13163e-14)
 shape = SubResource("BoxShape3D_m7hde")
@@ -90,10 +93,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.0774, 14.745, -60.0424)
 shape = SubResource("BoxShape3D_8155l")
 
 [node name="StationPad3" parent="Pads" instance=ExtResource("7_n3wul")]
-transform = Transform3D(1, 0, 0, 0, 0.866226, 0.499652, 0, -0.499652, 0.866226, -52.351, -60.5755, 120.777)
+transform = Transform3D(1, 0, 0, 0, 0.866226, 0.499652, 0, -0.499652, 0.866226, -52.351, -60.5411, 120.777)
 
 [node name="house" parent="Pads/StationPad3" index="0"]
 transform = Transform3D(1.5, 0, 0, 0, 1.49997, 0.00871787, 0, -0.00871787, 1.49997, 0, 2.80605, 0.000718834)
+
+[node name="ChangeShipNameUi" parent="Pads/StationPad3" index="6"]
+transform = Transform3D(1.25526e-17, 0, -0.205, 0, 0.205, 0, 0.205, 0, 1.25526e-17, 5.305, 0.522, -4.529)
 
 [node name="CollisionShape3D" parent="Pads/StationPad3/LandingPad" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, -5.55112e-17, 0, 5.55112e-17, 1, 36.8087, 21.6866, 27.0624)

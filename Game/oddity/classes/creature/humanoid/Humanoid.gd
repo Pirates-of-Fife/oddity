@@ -16,6 +16,12 @@ var eva_force : float = 450
 @export
 var eva_roll_force : float = 50
 
+@export
+var store_particles : GPUParticles3D
+
+@export
+var retrieve_particles : GPUParticles3D
+
 var eva_movement_vector : Vector3
 var eva_rotation_vector : Vector3
 
@@ -28,6 +34,9 @@ func _humanoid_ready() -> void:
 	can_interact_with_entity.connect(_interaction_entity_found)
 	
 func _interaction_entity_found(entity : Node3D) -> void:
+	if player == null:
+		return
+	
 	if entity == null:
 		player.inventory_hud.interaction_icon_visibile = false
 		player.inventory_hud.storable_icon_visibile = false
@@ -66,6 +75,15 @@ func store_entity(slot : int) -> void:
 	
 	p.store_item_in_slot(slot, entity)
 
+func play_store_particles() -> void:
+	store_particles.emitting = true
+	$Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2/AudioStreamPlayer3D.play()
+
+	
+func play_release_particles() -> void:
+	retrieve_particles.emitting = true
+	$Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2/AudioStreamPlayer3D.play()
+	
 func retrieve_entity(slot : int) -> void:
 	if player is not Player:
 		return

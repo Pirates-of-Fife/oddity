@@ -64,7 +64,7 @@ func force_respawn_timer_timeout() -> void:
 	force_respawn_pressed_count = 0
 
 func store_item_in_slot(slot : int, entity : Node3D) -> void:
-	if !is_entity_storable(entity):
+	if !is_entity_storable(entity, true):
 		return
 	
 	if is_inventory_slot_occupied(slot):
@@ -88,6 +88,9 @@ func store_item_in_slot(slot : int, entity : Node3D) -> void:
 		
 		entity.queue_free()
 	
+	if control_entity is Humanoid:
+		control_entity.play_store_particles()
+	
 	inventory_hud.store_item_in_slot(slot, inventory_slot)
 	
 	match slot:
@@ -103,35 +106,41 @@ func store_item_in_slot(slot : int, entity : Node3D) -> void:
 			inventory.inventory_slot_5 = inventory_slot
 
 
-func is_entity_storable(entity : Node3D) -> bool:
+func is_entity_storable(entity : Node3D, show_error : bool = false) -> bool:
 	if entity == null:
-		inventory_hud.show_error("NO ENTITY TO STORE")
+		if show_error:
+			inventory_hud.show_error("NO ENTITY TO STORE")
 		return false
 	
 	if entity is StaticGameEntity:
-		inventory_hud.show_error("Cannot store " + str(entity.entity_name))
+		if show_error:
+			inventory_hud.show_error("Cannot store " + str(entity.entity_name))
 		return false
 		
 	if entity is CargoContainer:
 		if entity.container_size != CargoUnit.ContainerSize.CU_1:
-			inventory_hud.show_error("Cannot store large cargo containers")
+			if show_error:
+				inventory_hud.show_error("Cannot store large cargo containers")
 			return false
 	
 	if entity is Component:
 		if entity.size > ModuleSize.ComponentSize.SIZE_2:
-			inventory_hud.show_error("Cannot store large components")
+			if show_error:
+				inventory_hud.show_error("Cannot store large components")
 			return false
 	
 	if entity is Weapon:
-		inventory_hud.show_error("Cannot store large weapons")
+		if show_error:
+			inventory_hud.show_error("Cannot store large weapons")
 		return false
 	
 	return true
 
+
 func retrieve_item_in_slot(slot : int) -> void:
 	if !is_inventory_slot_occupied(slot):
 		return
-		
+	
 	inventory_hud.retrieve_item_in_slot(slot)
 	
 	if control_entity is not Creature:
@@ -166,7 +175,9 @@ func retrieve_item_in_slot(slot : int) -> void:
 	
 	entity.global_position = creature.pick_up_location.global_position
 	entity.global_rotation = creature.pick_up_location.global_rotation
-
+	
+	if control_entity is Humanoid:
+		control_entity.play_release_particles()
 
 func create_inventory_slot_resource(entity : GameEntity) -> InventoryGameEntitySlot:
 	var slot : InventoryGameEntitySlot = InventoryGameEntitySlot.new()
@@ -223,9 +234,58 @@ func is_inventory_slot_occupied(slot : int) -> bool:
 	
 	return true
 
+func save_inventory() -> void:
+	var err : Error = ResourceSaver.save(inventory, Globals.PLAYER_INVENTORY)
+	
+	if err == OK:
+		print("Inventory saved successfully")
+	else:
+		printerr("Failed to save inventory")
+
+
+func load_inventory() -> void:
+	var f : FileAccess = FileAccess.open(Globals.PLAYER_INVENTORY, FileAccess.READ)
+
+	if f == null:
+		inventory = PlayerInventoryResource.new()
+	else:
+		inventory = load(Globals.PLAYER_INVENTORY)
+		
+	if inventory.inventory_slot_1 != null:
+		inventory_hud.store_item_in_slot(1, inventory.inventory_slot_1)
+
+	if inventory.inventory_slot_2 != null:
+		inventory_hud.store_item_in_slot(2, inventory.inventory_slot_2)
+
+	if inventory.inventory_slot_3 != null:
+		inventory_hud.store_item_in_slot(3, inventory.inventory_slot_3)
+
+	if inventory.inventory_slot_4 != null:
+		inventory_hud.store_item_in_slot(4, inventory.inventory_slot_4)
+
+	if inventory.inventory_slot_5 != null:
+		inventory_hud.store_item_in_slot(5, inventory.inventory_slot_5)
+
+
+func clear_inventory() -> void:
+	inventory.inventory_slot_1 = null
+	inventory.inventory_slot_2 = null
+	inventory.inventory_slot_3 = null
+	inventory.inventory_slot_4 = null
+	inventory.inventory_slot_5 = null
+	inventory_hud.retrieve_item_in_slot(1)
+	inventory_hud.retrieve_item_in_slot(2)
+	inventory_hud.retrieve_item_in_slot(3)
+	inventory_hud.retrieve_item_in_slot(4)
+	inventory_hud.retrieve_item_in_slot(5)
+
+
 func die() -> void:
 	if has_died:
 		return
+	
+	clear_inventory()
+	save_inventory()
 
 	has_died = true
 	
@@ -285,6 +345,11 @@ func _process(delta: float) -> void:
 
 		if force_respawn_pressed_count >= 5:
 			die()
+	
+	if control_entity is Creature:
+		inventory_hud.inventory_visible = true
+	else:
+		inventory_hud.inventory_visible = false
 
 	if control_entity == null:
 		return
