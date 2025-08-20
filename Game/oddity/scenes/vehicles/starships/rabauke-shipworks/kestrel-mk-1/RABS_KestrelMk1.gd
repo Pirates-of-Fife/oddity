@@ -39,6 +39,9 @@ var fuel_ui : FuelUi3d
 var interior_lights : Node3D
 
 @export
+var power_screen : RabaukePowerScreen
+
+@export
 var damaged_fires : Node3D
 
 @export
@@ -93,14 +96,17 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 		if interior_shown:
 			hide_interior()
 			interior_shown = false
-
+	
+	if landing_gear_on == true:
+		current_max_velocity = 100
+	
 	if relative_linear_velocity.length() >= cruise_speed and current_state == State.POWER_ON:
 		if !$Interior/Bridge/CruiseLabel.visible:
 			$Interior/Bridge/CruiseLabel.show()
 			$Interior/Bridge/CruiseLabel/CruiseSound.play()
 	else:
 		if $Interior/Bridge/CruiseLabel.visible:
-			$Interior/Bridge/CruiseLabel/CruiseSound.play()
+			#$Interior/Bridge/CruiseLabel/CruiseSound.play()
 			$Interior/Bridge/CruiseLabel.hide()
 
 	if ship_name.to_lower() == "the sunk'n norwegian":
@@ -184,15 +190,18 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		$Interior/Bridge/RabsControlSeat/Crosshair3d.hide()
 		$Interior/Bridge/MassLockedLabel.hide()
 		$Interior/Bridge/CruiseLabel.hide()
+		$Interior/Bridge/LandingGearLabel.hide()
 		fuel_ui.hide()
 		heat_ui.hide()
 		if damaged:
 			$Interior/Bridge/DamagedLabel.hide()
 		$Interior/Bridge/RadarDisplay.hide()
-		$Interior/Bridge/PowerLabel.show()
+		power_screen.set_state_power_off()
+		#$Interior/Bridge/PowerLabel.show()
 		$Interior/Bridge/StarshipTargetMfd.hide()
 		ammo_ui.hide()
-
+	else:
+		power_screen.set_state_power_on()
 
 func _on_pressure_zone_entered() -> void:
 	$Interior/Bridge/PressureLabel.show()
@@ -214,7 +223,8 @@ func _on_fuel_empty() -> void:
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()
-	$Interior/Bridge/PowerLabel.hide()
+	#$Interior/Bridge/PowerLabel.hide()
+	power_screen.hide()
 	$Interior/Bridge/StarshipTargetMfd.hide()
 	$Interior/Bridge/LandingGearLabel.hide()
 	ammo_ui.hide()
@@ -227,6 +237,7 @@ func _on_refueled() -> void:
 	for light : Node3D in interior_lights.get_children():
 		if light is OmniLight3D:
 			light.show()
+	power_screen.show()
 			
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
@@ -296,12 +307,16 @@ func update_ui() -> void:
 			
 func on_power_on() -> void:
 	power_on_sound_player.play()
-
+	power_screen.power_on()
+	
+	
+	await get_tree().create_timer(5).timeout
+	
 	$Interior/Bridge/ShieldAndHullUi3d.show()
 	$Interior/Bridge/VelocityMfd3d.show()
 	$Interior/Bridge/AbyssalMFD3d.show()
 	$Interior/Bridge/RabsControlSeat/Crosshair3d.show()
-	$Interior/Bridge/MassLockedLabel.show()
+	#$Interior/Bridge/MassLockedLabel.show()
 	$Interior/Bridge/CruiseLabel.show()
 	fuel_ui.show()
 	heat_ui.show()
@@ -309,8 +324,11 @@ func on_power_on() -> void:
 	if damaged:
 		$Interior/Bridge/DamagedLabel.show()
 	$Interior/Bridge/RadarDisplay.show()
-	$Interior/Bridge/PowerLabel.hide()
+	#$Interior/Bridge/PowerLabel.hide()
 	$Interior/Bridge/StarshipTargetMfd.show()
+	
+	if landing_gear_on:
+		$Interior/Bridge/LandingGearLabel.show()
 	
 	ammo_ui.show()
 
@@ -327,11 +345,13 @@ func on_power_off() -> void:
 	fuel_ui.hide()
 	$Interior/Bridge/AltLabel.hide()
 	$Interior/Bridge/GravityLabel.hide()
+	$Interior/Bridge/LandingGearLabel.hide()
 
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()
-	$Interior/Bridge/PowerLabel.show()
+	#$Interior/Bridge/PowerLabel.show()
+	power_screen.power_off()
 	$Interior/Bridge/StarshipTargetMfd.hide()
 	ammo_ui.hide()
 
@@ -355,7 +375,7 @@ func on_destroyed() -> void:
 
 	$ExplosionParticle.emitting = true
 
-
+	power_screen.hide()
 	velocity_mfd.hide()
 	crosshair.hide()
 	abyssal_mfd.hide()

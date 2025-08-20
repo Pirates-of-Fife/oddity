@@ -134,7 +134,7 @@ func is_entity_storable(entity : Node3D, show_error : bool = false) -> bool:
 			return false
 	
 	if entity is Weapon:
-		if entity.size > ModuleSize.HardpointSize.SIZE_6:
+		if entity.size != ModuleSize.HardpointSize.SIZE_5:
 			if show_error:
 				inventory_hud.show_error("Cannot store large weapon: " + str((entity.module_resource as ComponentResource).manufacturer + " " + (entity.module_resource as ComponentResource).model))
 			return false

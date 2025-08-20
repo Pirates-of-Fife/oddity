@@ -1,0 +1,366 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmi5agkxec07q"]
+
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="1_3hr7y"]
+[ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/power-screen/power_off_screen.gd" id="1_l44yy"]
+[ext_resource type="Texture2D" uid="uid://baq6nihwjnn2v" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.svg" id="2_htt13"]
+[ext_resource type="AudioStream" uid="uid://b1gbileux7ban" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/power-screen/RabaukeStartup.wav" id="26_lg0r1"]
+[ext_resource type="AudioStream" uid="uid://c125sktddtr6k" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/power-screen/RabaukePoweroff.wav" id="27_v26rd"]
+
+[sub_resource type="Animation" id="Animation_tv30t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.700474, 1.77897, -28.1154)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.1735, 0.1735, 0.1735)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PowerLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Color(0.898276, 1.10701e-06, 9.62615e-07, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PowerLabel2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Color(0.831373, 0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PowerLabel3:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Color(0.831373, 0, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PowerLabel4:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.973779, 1.64564, -28.1154)]
+}
+
+[sub_resource type="Animation" id="Animation_u017g"]
+resource_name = "power_off"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(),
+"transitions": PackedFloat64Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.2997, 0.5661, 1.665, 3.0969, 4.1958),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.466667), Color(1, 1, 1, 0.67451), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(),
+"transitions": PackedFloat64Array(),
+"update": 0,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PowerLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(3.65468, 3.85448, 4.03762, 4.22078),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.898039, 0, 0, 0), Color(0.898039, 0, 0, 0.533333), Color(0.898039, 0, 0, 0.34902), Color(0.898276, 1.10701e-06, 9.62615e-07, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat64Array(0, 4.2624),
+"transitions": PackedFloat64Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PowerLabel3:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat64Array(0.0333, 0.8325, 1.6317, 2.1978, 3.0969, 3.2967),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.831373, 0, 0, 0), Color(0.831373, 0, 0, 0.45098), Color(0.831373, 0, 0, 0.713726), Color(0.831373, 0, 0, 0.45098), Color(0.831373, 0, 0, 1), Color(0.831373, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mc75u"]
+resource_name = "power_on"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(),
+"transitions": PackedFloat64Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.2997, 0.5661, 0.8325, 7.4925, 9.9567),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.466667), Color(1, 1, 1, 0.67451), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(),
+"transitions": PackedFloat64Array(),
+"update": 0,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PowerLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0, 0.1665, 0.3663, 0.5661),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.898276, 1.10701e-06, 9.62615e-07, 1), Color(0.898039, 0, 0, 0.34902), Color(0.898039, 0, 0, 0.533333), Color(0.898039, 0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat64Array(0, 4.995),
+"transitions": PackedFloat64Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PowerLabel2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat64Array(0.507825, 0.740925, 0.974025, 1.1655, 4.1625, 4.7286),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.831373, 0, 0, 0), Color(0.831373, 0, 0, 1), Color(0.831373, 0, 0, 0.643137), Color(0.831373, 0, 0, 1), Color(0.831373, 0, 0, 1), Color(0.831373, 0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PowerLabel4:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat64Array(0.4995, 0.7326, 0.9657, 1.15718, 8.9244, 9.99),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.831373, 0, 0, 0), Color(0.831373, 0, 0, 1), Color(0.831373, 0, 0, 0.643137), Color(0.831373, 0, 0, 1), Color(0.831373, 0, 0, 1), Color(0.831373, 0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PowerLabel4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat64Array(0, 4.0959, 5.1948),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.973779, 1.64564, -28.1154), Vector3(0.973779, 1.64564, -28.1154), Vector3(0.740789, 1.64564, -28.1154)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6csxq"]
+_data = {
+"RESET": SubResource("Animation_tv30t"),
+"power_off": SubResource("Animation_u017g"),
+"power_on": SubResource("Animation_mc75u")
+}
+
+[node name="PowerOffScreen" type="Node3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_l44yy")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="PowerLabel" type="Label3D" parent="."]
+transform = Transform3D(1.865, 1.84555e-18, 7.46234e-21, -1.84555e-18, 1.86494, 0.0150712, 7.45199e-21, -0.0150712, 1.86494, 0.700474, 1.64088, -28.1154)
+pixel_size = 0.0005
+modulate = Color(0.898276, 1.10701e-06, 9.62615e-07, 1)
+outline_modulate = Color(1, 1, 1, 0)
+text = "SYSTEMS OFFLINE"
+font = ExtResource("1_3hr7y")
+font_size = 25
+
+[node name="PowerLabel2" type="Label3D" parent="."]
+transform = Transform3D(1.865, 1.84555e-18, 7.46234e-21, -1.84555e-18, 1.86494, 0.0150712, 7.45199e-21, -0.0150712, 1.86494, 0.513828, 1.64378, -28.1154)
+pixel_size = 0.0005
+modulate = Color(0.831373, 0, 0, 0)
+outline_modulate = Color(1, 1, 1, 0)
+text = "SYSTEM BOOTING UP"
+font = ExtResource("1_3hr7y")
+font_size = 25
+
+[node name="PowerLabel3" type="Label3D" parent="."]
+transform = Transform3D(1.865, 1.84555e-18, 7.46234e-21, -1.84555e-18, 1.86494, 0.0150712, 7.45199e-21, -0.0150712, 1.86494, 0.700474, 1.64378, -28.1154)
+pixel_size = 0.0005
+modulate = Color(0.831373, 0, 0, 0)
+outline_modulate = Color(1, 1, 1, 0)
+text = "SYSTEM SHUTTING DOWN"
+font = ExtResource("1_3hr7y")
+font_size = 25
+
+[node name="PowerLabel4" type="Label3D" parent="."]
+transform = Transform3D(1.865, 1.84555e-18, 7.46234e-21, -1.84555e-18, 1.86494, 0.0150712, 7.45199e-21, -0.0150712, 1.86494, 0.973779, 1.64564, -28.1154)
+pixel_size = 0.0005
+modulate = Color(0.831373, 0, 0, 0)
+outline_modulate = Color(1, 1, 1, 0)
+text = "ENGINES POWERING UP
+"
+font = ExtResource("1_3hr7y")
+font_size = 25
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.1735, 1.71691e-19, 6.94222e-22, -1.71691e-19, 0.173494, 0.00140207, 6.93255e-22, -0.00140207, 0.173494, 0.700474, 1.77897, -28.1154)
+texture_filter = 0
+texture = ExtResource("2_htt13")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6csxq")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.781436, 1.7023, -27.922)
+stream = ExtResource("26_lg0r1")
+volume_db = -30.0
+max_db = 1.0
+bus = &"Interior"
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.781436, 1.7023, -27.922)
+stream = ExtResource("27_v26rd")
+volume_db = -30.0
+max_db = 1.0
+bus = &"Interior"
