@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=28 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -15,6 +15,10 @@
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="13_vqirh"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_clb07"]
 [ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="15_ikxe5"]
+[ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="16_i30hb"]
+[ext_resource type="PackedScene" uid="uid://c2lhs5t1ljn1u" path="res://scenes/modules/test-module/cooler/scenes/Size1Cooler.tscn" id="17_ykrga"]
+[ext_resource type="PackedScene" uid="uid://cpnhg66txfjsk" path="res://scenes/modules/test-module/ShieldGenerator/size-1/Size1ShieldGenerator.tscn" id="18_g0ryy"]
+[ext_resource type="PackedScene" uid="uid://b0yf8dexkb3j6" path="res://scenes/modules/test-module/rotary-autocannon/size-5/Size5RotaryAutoCannon.tscn" id="19_x75a7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w6y13"]
 size = Vector3(5, 4.585, 4.16)
@@ -346,6 +350,21 @@ font_size = 44
 [node name="Spawn" type="AudioStreamPlayer3D" parent="InteractionButton"]
 stream = ExtResource("15_ikxe5")
 volume_db = -48.0
+
+[node name="GodotPlushie" parent="." instance=ExtResource("16_i30hb")]
+transform = Transform3D(-0.907705, 0, 0.41961, 0, 1, 0, -0.41961, 0, -0.907705, 0, 1.53235, -9.32684)
+
+[node name="Size1Cooler" parent="." instance=ExtResource("17_ykrga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2868, 4.44089e-16, -10.514)
+
+[node name="Size1ShieldGenerator" parent="." instance=ExtResource("18_g0ryy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.898257, 0, -10.2896)
+
+[node name="Size1ShieldGenerator2" parent="." instance=ExtResource("18_g0ryy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.877614, 0, -9.03514)
+
+[node name="Size5RotaryAutoCannon" parent="." instance=ExtResource("19_x75a7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.417343, 0.790187, -10.2341)
 
 [connection signal="starship_landed" from="LandingPad" to="." method="_on_landing_pad_starship_landed"]
 [connection signal="starship_took_off" from="LandingPad" to="." method="_on_landing_pad_starship_took_off"]

@@ -44,7 +44,7 @@ func calculate_credit_total() -> void:
 	for c : CargoContainer in current_cargo:
 		total_credits += c.value
 	
-	for m : Module in current_modules:
+	for m : GameEntity in current_modules:
 		total_credits += m.value
 	
 	var c : CreditHud = CreditHud.new()
@@ -59,7 +59,7 @@ func update_inventory_container() -> void:
 		label.set_cargo_text(c)
 		inventory_container.add_child(label)
 	
-	for m : Module in current_modules:
+	for m : GameEntity in current_modules:
 		var label : CargoLabel = cargo_label_scene.instantiate()
 		label.set_module_text(m)
 		inventory_container.add_child(label)

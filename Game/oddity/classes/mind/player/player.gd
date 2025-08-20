@@ -124,16 +124,23 @@ func is_entity_storable(entity : Node3D, show_error : bool = false) -> bool:
 			return false
 	
 	if entity is Component:
+		if entity is AbyssalJumpDrive:
+			if show_error:
+				inventory_hud.show_error("Cannot store large component: " +  str((entity.module_resource as ComponentResource).manufacturer + " " + (entity.module_resource as ComponentResource).model))
+		
 		if entity.size > ModuleSize.ComponentSize.SIZE_2:
 			if show_error:
-				inventory_hud.show_error("Cannot store large components")
+				inventory_hud.show_error("Cannot store large component: " +  str((entity.module_resource as ComponentResource).manufacturer + " " + (entity.module_resource as ComponentResource).model))
 			return false
 	
 	if entity is Weapon:
-		if show_error:
-			inventory_hud.show_error("Cannot store large weapons")
-		return false
-	
+		if entity.size > ModuleSize.HardpointSize.SIZE_6:
+			if show_error:
+				inventory_hud.show_error("Cannot store large weapon: " + str((entity.module_resource as ComponentResource).manufacturer + " " + (entity.module_resource as ComponentResource).model))
+			return false
+		else:
+			return true
+		
 	return true
 
 
@@ -174,7 +181,7 @@ func retrieve_item_in_slot(slot : int) -> void:
 	get_tree().get_first_node_in_group("World").add_child(entity)
 	
 	entity.global_position = creature.pick_up_location.global_position
-	entity.global_rotation = creature.pick_up_location.global_rotation
+	entity.global_rotation = creature.pick_up_location.global_rotation #+ entity.global_basis.inverse() * Vector3(0, deg_to_rad(60), 0)
 	
 	if control_entity is Humanoid:
 		control_entity.play_release_particles()
@@ -334,8 +341,10 @@ func _process(delta: float) -> void:
 	if (Input.is_action_just_pressed("hide_ui")):
 		if $HeadsUpDisplay.visible:
 			$HeadsUpDisplay.hide()
+			inventory_hud.hide()
 		else:
 			$HeadsUpDisplay.show()
+			inventory_hud.show()
 
 	if (Input.is_action_just_released("player_force_respawn")):
 		force_respawn_pressed_count += 1

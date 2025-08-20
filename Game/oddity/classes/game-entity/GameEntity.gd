@@ -23,6 +23,9 @@ var entity_name : StringName = ""
 @export
 var value : int
 
+@export
+var sellable : bool = false
+
 @export_category("Interaction")
 
 @export
