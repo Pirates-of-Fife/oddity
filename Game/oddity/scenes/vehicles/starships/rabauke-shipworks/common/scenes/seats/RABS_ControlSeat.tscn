@@ -25,6 +25,9 @@ shape = SubResource("ConcavePolygonShape3D_ol0ho")
 [node name="BridgeSeat" parent="CollisionShape3D" instance=ExtResource("2_snvlq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00011581, 0)
 
+[node name="Seat_003" parent="CollisionShape3D/BridgeSeat" index="0"]
+layers = 3
+
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0464789, 0.761728, 1.3198)
 
@@ -41,3 +44,6 @@ size = Vector3(0.2, 0.136153, 0.2)
 texture_albedo = ExtResource("4_45cav")
 upper_fade = 0.0024264
 lower_fade = 0.0142098
+cull_mask = 1048574
+
+[editable path="CollisionShape3D/BridgeSeat"]
