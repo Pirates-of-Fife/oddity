@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://4i0cdaflf1uc"]
+[gd_scene load_steps=10 format=3 uid="uid://4i0cdaflf1uc"]
 
 [ext_resource type="Theme" uid="uid://cnkijshs3vtdk" path="res://ui/themes/BasicMFDTheme.tres" id="1_6ph4f"]
 [ext_resource type="Script" path="res://classes/multi-function-display/targeting/starship_target_mfd_2d.gd" id="1_26te2"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_ivteq"]
 [ext_resource type="Texture2D" uid="uid://idh2x2dvxvt" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldIcon.svg" id="3_ef5ph"]
 [ext_resource type="Texture2D" uid="uid://bu2kbxefxdcae" path="res://classes/multi-function-display/shield_and_hull_ui/HeartIcon.svg" id="4_q0vja"]
+[ext_resource type="Texture2D" uid="uid://yk8lck1fg04t" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png" id="6_l35kr"]
 
 [sub_resource type="Theme" id="Theme_nmlx8"]
 default_font = ExtResource("2_ivteq")
@@ -47,39 +48,6 @@ offset_right = 450.0
 offset_bottom = 88.0
 theme = ExtResource("1_6ph4f")
 text = "TArgeting"
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 37.0
-offset_right = 82.0
-offset_bottom = 67.0
-scale = Vector2(0.445, 0.445)
-color = Color(0.780392, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
-layout_mode = 0
-offset_left = -66.0
-offset_top = -46.0
-offset_right = 31.0
-offset_bottom = -17.0
-color = Color(0.780392, 0, 0, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="ColorRect"]
-layout_mode = 0
-offset_left = -66.0
-offset_top = 47.0
-offset_right = 31.0
-offset_bottom = 79.0
-color = Color(0.780392, 0, 0, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="ColorRect"]
-layout_mode = 0
-offset_left = -68.0
-offset_top = -46.0
-offset_right = -34.0
-offset_bottom = 78.0
-color = Color(0.780392, 0, 0, 1)
 
 [node name="ShipFocused" type="Control" parent="."]
 visible = false
@@ -190,3 +158,8 @@ scale = Vector2(2.235, 2.235)
 theme = SubResource("Theme_nmlx8")
 text = "No Target Focused"
 autowrap_mode = 0
+
+[node name="RabaukeLogo-02" type="Sprite2D" parent="."]
+position = Vector2(46, 46)
+scale = Vector2(0.0368282, 0.0368282)
+texture = ExtResource("6_l35kr")

@@ -122,8 +122,8 @@ shape = SubResource("ConvexPolygonShape3D_24cp3")
 transform = Transform3D(1, 0, 0, 0, 0.71934, -0.694658, 0, 0.694658, 0.71934, 0, 0, 0)
 
 [node name="SmallRamp" type="StaticBody3D" parent="CollisionShape3D2/Ramp"]
-collision_layer = 512
-collision_mask = 512
+collision_layer = 1536
+collision_mask = 1536
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape3D2/Ramp/SmallRamp"]
 transform = Transform3D(1, 0, 0, 0, 0.71934, 0.694658, 0, -0.694658, 0.71934, 0, 0.0551818, 0.0223465)

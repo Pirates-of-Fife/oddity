@@ -15,11 +15,16 @@ var is_mass_locked : bool :
 				return true
 		return false
 
+@export_category("Information")
 
-@export_category("Value")
+@export
+var entity_name : StringName = ""
 
 @export
 var value : int
+
+@export
+var sellable : bool = false
 
 @export_category("Interaction")
 
@@ -93,6 +98,9 @@ func _default_ready() -> void:
 	freeze_timer.timeout.connect(freeze_timer_timeout)
 
 	on_interact.connect(on_interact_self)
+	
+	if entity_name.is_empty():
+		entity_name = name
 
 func on_interact_self() -> void:
 	unfreeze()

@@ -5,6 +5,7 @@ class_name ModuleSellingArea
 signal modules_updated
 
 var modules : Array = Array()
+var game_entities : Array = Array()
 
 func _ready() -> void:
 	body_entered.connect(_on_module_added)
@@ -12,11 +13,21 @@ func _ready() -> void:
 	
 
 func _on_module_added(body : Node3D) -> void:
-	print(body)
 	if body is Module:
 		if body is Thruster:
 			return
 		modules.append(body)
+		modules_updated.emit()
+		return
+		
+	if body is GameEntity:
+		if body is CargoContainer:
+			return
+		
+		if !body.sellable:
+			return
+		
+		game_entities.append(body)
 		modules_updated.emit()
 
 func _on_module_removed(body : Node3D) -> void:
@@ -24,6 +35,16 @@ func _on_module_removed(body : Node3D) -> void:
 		if body is Thruster:
 			return
 		modules.erase(body)
+		modules_updated.emit()
+		return
+	if body is GameEntity:
+		if body is CargoContainer:
+			return
+		
+		if !body.sellable:
+			return
+		
+		game_entities.erase(body)
 		modules_updated.emit()
 
 func sell_modules() -> void:
@@ -33,5 +54,9 @@ func sell_modules() -> void:
 	for module : Module in modules:
 		total += module.value
 		module.queue_free()
+	
+	for entity : GameEntity in game_entities:
+		total += entity.value
+		entity.queue_free()
 	
 	player.add_credits(total)

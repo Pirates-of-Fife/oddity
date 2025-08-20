@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://csxjtno0xrxmo"]
+[gd_scene load_steps=5 format=3 uid="uid://csxjtno0xrxmo"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/AbyssalJumpDrive.gd" id="1_v4do7"]
+[ext_resource type="Script" path="res://resources/classes/module/component/ComponentResource.gd" id="2_74s6q"]
 [ext_resource type="PackedScene" uid="uid://d3qowdbvmnoir" path="res://scenes/modules/test-module/abyss_drive.glb" id="2_jigba"]
+
+[sub_resource type="Resource" id="Resource_poojt"]
+script = ExtResource("2_74s6q")
+type = &"Abyssal Jump Drive"
+manufacturer = &"Meean’kar Corporation"
+model = &"Coreline"
+size = &"2"
+release_year = &"120"
 
 [node name="Size2AbyssDrive" type="RigidBody3D"]
 collision_layer = 537396225
@@ -10,6 +19,7 @@ mass = 100.0
 script = ExtResource("1_v4do7")
 size = 2
 fuel_per_jump = 1500.0
+module_resource = SubResource("Resource_poojt")
 passive_heat_generation = 100.0
 value = 30000
 can_be_picked_up = true

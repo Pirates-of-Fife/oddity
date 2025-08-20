@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cabsyyyuxl75t"]
+[gd_scene load_steps=5 format=3 uid="uid://cabsyyyuxl75t"]
 
 [ext_resource type="Script" path="res://classes/multi-function-display/abyssal-navigation/abyssal_mfd.gd" id="1_lij5t"]
 [ext_resource type="Theme" uid="uid://cnkijshs3vtdk" path="res://ui/themes/BasicMFDTheme.tres" id="2_7wq40"]
+[ext_resource type="Texture2D" uid="uid://yk8lck1fg04t" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png" id="3_rmhko"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_400cp"]
 bg_color = Color(0, 0.470848, 0.856842, 1)
@@ -57,39 +58,6 @@ scale = Vector2(1.69, 1.69)
 theme = ExtResource("2_7wq40")
 text = "None"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 37.0
-offset_right = 82.0
-offset_bottom = 67.0
-scale = Vector2(0.445, 0.445)
-color = Color(0.780392, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
-layout_mode = 0
-offset_left = -66.0
-offset_top = -46.0
-offset_right = 31.0
-offset_bottom = -17.0
-color = Color(0.780392, 0, 0, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="ColorRect"]
-layout_mode = 0
-offset_left = -66.0
-offset_top = 47.0
-offset_right = 31.0
-offset_bottom = 79.0
-color = Color(0.780392, 0, 0, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="ColorRect"]
-layout_mode = 0
-offset_left = -68.0
-offset_top = -46.0
-offset_right = -34.0
-offset_bottom = 78.0
-color = Color(0.780392, 0, 0, 1)
-
 [node name="SelectedSystem" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 18.0
@@ -111,7 +79,7 @@ offset_bottom = 378.0
 scale = Vector2(2.01, 2.01)
 theme = ExtResource("2_7wq40")
 theme_override_colors/default_color = Color(0.219626, 0.445708, 1, 1)
-text = "Gateway OPEN"
+text = "Portal OPEN"
 
 [node name="GatwayCLosed" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -122,9 +90,10 @@ offset_bottom = 378.0
 scale = Vector2(2.01, 2.01)
 theme = ExtResource("2_7wq40")
 theme_override_colors/default_color = Color(0.972549, 0, 0, 1)
-text = "Gateway CLOSED"
+text = "Portal CLOSED"
 
 [node name="label" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 18.0
 offset_top = 57.0
 offset_right = 508.0
@@ -136,6 +105,7 @@ text = "Current
 "
 
 [node name="label2" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 17.0
 offset_top = 183.0
 offset_right = 507.0
@@ -144,3 +114,8 @@ scale = Vector2(1.69, 1.69)
 theme = ExtResource("2_7wq40")
 theme_override_colors/default_color = Color(0.326424, 0.532407, 1, 1)
 text = "Selected"
+
+[node name="RabaukeLogo-02" type="Sprite2D" parent="."]
+position = Vector2(46, 46)
+scale = Vector2(0.0368282, 0.0368282)
+texture = ExtResource("3_rmhko")

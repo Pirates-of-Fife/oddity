@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PlayerInventoryResource" load_steps=4 format=3 uid="uid://bk1nd3s52nu4c"]
+
+[ext_resource type="Script" path="res://resources/classes/inventory/InventoryGameEntitySlot.gd" id="1_bkorx"]
+[ext_resource type="Script" path="res://resources/classes/inventory/PlayerInventoryResource.gd" id="1_vgm1b"]
+
+[sub_resource type="Resource" id="Resource_10cj3"]
+script = ExtResource("1_bkorx")
+name = &""
+value = 0
+
+[resource]
+script = ExtResource("1_vgm1b")
+inventory_slot_1 = SubResource("Resource_10cj3")
