@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://s0w2g33xr8l6"]
+[gd_scene load_steps=11 format=3 uid="uid://s0w2g33xr8l6"]
 
 [ext_resource type="Script" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.gd" id="1_vc68i"]
 [ext_resource type="PackedScene" uid="uid://dimtdo55dlp8e" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnel.glb" id="2_htjgk"]
 [ext_resource type="Script" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnelCollider.gd" id="2_mroe6"]
+[ext_resource type="Material" uid="uid://c34vqvshecp01" path="res://classes/abyss/abyssal-tunnel/AbyssalTunnelMaterial.tres" id="4_fpkdp"]
 [ext_resource type="AudioStream" uid="uid://dehex6okkayeg" path="res://classes/abyss/abyssal-tunnel/enter.wav" id="5_lamxe"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5q35r"]
@@ -53,6 +54,9 @@ shape = SubResource("ConcavePolygonShape3D_5q35r")
 
 [node name="AbyssalTunnel" parent="StaticBody3D" instance=ExtResource("2_htjgk")]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Tunnel" parent="StaticBody3D/AbyssalTunnel" index="0"]
+surface_material_override/0 = ExtResource("4_fpkdp")
 
 [node name="Exit" type="Area3D" parent="StaticBody3D"]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 193.154, 8634.78, -422.041)

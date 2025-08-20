@@ -308,29 +308,42 @@ func update_ui() -> void:
 func on_power_on() -> void:
 	power_on_sound_player.play()
 	power_screen.power_on()
-	
-	
-	await get_tree().create_timer(5).timeout
-	
-	$Interior/Bridge/ShieldAndHullUi3d.show()
-	$Interior/Bridge/VelocityMfd3d.show()
-	$Interior/Bridge/AbyssalMFD3d.show()
-	$Interior/Bridge/RabsControlSeat/Crosshair3d.show()
-	#$Interior/Bridge/MassLockedLabel.show()
-	$Interior/Bridge/CruiseLabel.show()
-	fuel_ui.show()
-	heat_ui.show()
+
+	var ui_elements : Array = [
+		$Interior/Bridge/ShieldAndHullUi3d,
+		$Interior/Bridge/VelocityMfd3d,
+		$Interior/Bridge/AbyssalMFD3d,
+		$Interior/Bridge/RabsControlSeat/Crosshair3d,
+		#$Interior/Bridge/MassLockedLabel,
+		$Interior/Bridge/CruiseLabel,
+		fuel_ui,
+		heat_ui,
+		$Interior/Bridge/RadarDisplay,
+		$Interior/Bridge/StarshipTargetMfd,
+		ammo_ui
+	]
 
 	if damaged:
-		$Interior/Bridge/DamagedLabel.show()
-	$Interior/Bridge/RadarDisplay.show()
-	#$Interior/Bridge/PowerLabel.hide()
-	$Interior/Bridge/StarshipTargetMfd.show()
-	
+		ui_elements.append($Interior/Bridge/DamagedLabel)
 	if landing_gear_on:
-		$Interior/Bridge/LandingGearLabel.show()
+		ui_elements.append($Interior/Bridge/LandingGearLabel)
 	
-	ammo_ui.show()
+	await get_tree().create_timer(3.5).timeout
+	
+	var boot_time : float = 0.5
+	var flicker_interval : float = 0.05
+	var elapsed : float = 0.0
+
+	while elapsed < boot_time:
+		for element : Node3D in ui_elements:
+			element.visible = randi() % 2 == 0
+		await get_tree().create_timer(flicker_interval).timeout
+		elapsed += flicker_interval
+
+	for element : Node3D in ui_elements:
+		element.show()
+
+
 
 func on_power_off() -> void:
 	power_off_sound_player.play()
