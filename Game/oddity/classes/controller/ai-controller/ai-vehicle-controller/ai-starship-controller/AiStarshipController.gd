@@ -167,6 +167,7 @@ func _ai_starship_controller_process(delta : float) -> void:
 		thrust_towards()
 
 	if current_ai_state == AiState.ENGAGING_PLAYER:
+		#rotate_towards_player()
 		aim_towards_player()
 		evade()
 		shoot_player()
@@ -222,30 +223,48 @@ func rotate_towards_player() -> void:
 		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(pitch_intensity))
 
 func aim_towards_player() -> void:
-	# --- TUNABLES ---
-	var projectile_speed: float = 60.0  # how "fast" the AI expects the shot/closure to be (units/sec)
-	var max_lead_time: float = 2.0       # cap so we don't predict forever
+	# --- TUNABLES (tweak to taste) ---
+	var max_lead_time: float = 2.0    # seconds max to look ahead
+	var lead_scale: float = 0.5       # 0..1 reduces/increases how strongly we lead
+	var min_rel_speed: float = 0.1    # avoid division by near-zero
 
-	# --- POS/VEL ---
-	var shooter_pos: Vector3 = control_entity.global_position
-	var target_pos: Vector3 = player.control_entity.global_position
+	# --- POS & VELOCITY (using your original movement fields) ---
+	var shooter_pos: Vector3 = control_entity.global_transform.origin
+	var target_pos: Vector3 = player.control_entity.global_transform.origin
 
-	# prefer global linear_velocity if available, else fallback to your relative var
+	# your project always has 'relative_linear_velocity' as the ship's actual velocity
+	var shooter_vel: Vector3 = Vector3.ZERO
 	var target_vel: Vector3 = Vector3.ZERO
-	
-	target_vel = player.control_entity.relative_linear_velocity - control_entity.relative_linear_velocity
+	shooter_vel = control_entity.relative_linear_velocity
+	target_vel = player.control_entity.relative_linear_velocity
 
-	# --- SIMPLE LEAD ---
+	# relative velocity as seen from shooter
+	var rel_vel: Vector3 = target_vel - shooter_vel
+
+	# vector from shooter to target
 	var to_target: Vector3 = target_pos - shooter_pos
 	var distance: float = to_target.length()
-	var lead_time: float = 0.0
-	if projectile_speed > 0.001:
-		lead_time = clamp(distance / projectile_speed, 0.0, max_lead_time)
 
-	var aim_pos: Vector3 = target_pos + target_vel * lead_time
+	# --- SIMPLE LEAD ESTIMATE (no projectile speed known) ---
+	var rel_speed: float = rel_vel.length()
+	var lead_time: float = 0.0
+	if rel_speed > min_rel_speed:
+		# basic heuristic: time = distance / rel_speed, scaled down to avoid over-leading
+		lead_time = clamp((distance / rel_speed) * lead_scale, 0.0, max_lead_time)
+	else:
+		lead_time = 0.0
+
+	# predicted aim position (world space)
+	var aim_pos: Vector3 = target_pos + rel_vel * lead_time
+
+	# convert to local and reuse your original aiming math
 	var direction_to_aim: Vector3 = control_entity.to_local(aim_pos)
 
-	# --- AIMING (same as you had, using predictive direction) ---
+	# guard for zero-length
+	if direction_to_aim.length() < 0.001:
+		# target practically on top — center aim (zero intensities)
+		return
+
 	var normalized_direction: Vector3 = direction_to_aim.normalized()
 	var yaw_intensity: float = pow(abs(normalized_direction.x), 0.5)
 	var pitch_intensity: float = pow(abs(normalized_direction.y), 0.5)
