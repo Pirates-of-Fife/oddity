@@ -1,11 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://bsk1ge75jhnkp"]
+[gd_scene load_steps=8 format=3 uid="uid://bsk1ge75jhnkp"]
 
-[ext_resource type="PackedScene" uid="uid://b14ng1r3dbcmg" path="res://classes/station/meshes/decorative-ships/FighterGen7_blue_open.glb" id="1_2bbwq"]
-[ext_resource type="PackedScene" uid="uid://c4ycokrmru8bp" path="res://classes/station/meshes/decorative-ships/FighterGen7_purple_closed.glb" id="2_67anx"]
-[ext_resource type="PackedScene" uid="uid://cysvpod4ep23u" path="res://classes/station/meshes/decorative-ships/FighterGen7_green_closed.glb" id="3_r63ja"]
-[ext_resource type="PackedScene" uid="uid://18fry2nmw1m7" path="res://classes/station/meshes/decorative-ships/FighterGen7_blue_closed.glb" id="4_isuxy"]
-[ext_resource type="PackedScene" uid="uid://5ecfvcbjrjyy" path="res://classes/station/meshes/decorative-ships/FighterGen7_red_closed.glb" id="5_oxjdx"]
-[ext_resource type="PackedScene" uid="uid://ww3fr2yjnhca" path="res://classes/station/meshes/decorative-ships/FighterGen7_red_open.glb" id="6_xuv1h"]
 [ext_resource type="PackedScene" uid="uid://c4ngoo5a5cmvu" path="res://classes/station/station_landing_pad/StationPad.tscn" id="7_n3wul"]
 [ext_resource type="PackedScene" uid="uid://nt8x885vl1er" path="res://classes/station/meshes/interior.glb" id="8_g2nwt"]
 
@@ -40,27 +34,6 @@ size = Vector3(92.6164, 47.3518, 79.9015)
 
 [node name="StationInterior" type="Node3D"]
 script = SubResource("GDScript_4exwq")
-
-[node name="Node3D" type="Node3D" parent="."]
-visible = false
-
-[node name="FighterGen7_blue_open" parent="Node3D" instance=ExtResource("1_2bbwq")]
-transform = Transform3D(1, 0, 0, 0, 0.279611, -0.960113, 0, 0.960113, 0.279611, -112.815, 1.56578, -82.8528)
-
-[node name="FighterGen7_purple_closed" parent="Node3D" instance=ExtResource("2_67anx")]
-transform = Transform3D(1, 0, 0, 0, -0.264142, 0.964484, 0, -0.964484, -0.264142, 71.8462, 57.6791, 146.742)
-
-[node name="FighterGen7_green_closed" parent="Node3D" instance=ExtResource("3_r63ja")]
-transform = Transform3D(1, 0, 0, 0, 0.708352, -0.705859, 0, 0.705859, 0.708352, 125.678, -63.4996, -51.263)
-
-[node name="FighterGen7_blue_closed" parent="Node3D" instance=ExtResource("4_isuxy")]
-transform = Transform3D(1, 0, 0, 0, -0.706699, -0.707514, 0, 0.707514, -0.706699, 226.222, 101.983, -53.0962)
-
-[node name="FighterGen7_red_closed" parent="Node3D" instance=ExtResource("5_oxjdx")]
-transform = Transform3D(1, 0, 0, 0, -0.916076, 0.401005, 0, -0.401005, -0.916076, 129.02, 136.721, 61.4231)
-
-[node name="FighterGen7_red_open" parent="Node3D" instance=ExtResource("6_xuv1h")]
-transform = Transform3D(1, 0, 0, 0, 0.989198, -0.146584, 0, 0.146584, 0.989198, -2.30104, -91.7713, -2.24161)
 
 [node name="Pads" type="Node3D" parent="."]
 

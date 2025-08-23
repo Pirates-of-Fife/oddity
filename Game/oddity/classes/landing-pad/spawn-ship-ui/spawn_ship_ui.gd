@@ -11,6 +11,9 @@ var ship_scene : PackedScene
 @export
 var percentage_of_value : float = 0.4
 
+@export
+var station_pad : StationPad
+
 var loadout_tools : LoadoutGenerator = LoadoutGenerator.new()
 
 func _ready() -> void:
@@ -33,11 +36,11 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 		$Decline.play()
 		return
 
-	if player.credits < loadout.value * percentage_of_value:
+	if player.credits < loadout.value * percentage_of_value * station_pad.station.buy_markup:
 		$Decline.play()
 		return
 
-	player.remove_credits(loadout.value * percentage_of_value)
+	player.remove_credits(loadout.value * percentage_of_value * station_pad.station.buy_markup)
 
 	var starship : Starship = ship_scene.instantiate()
 	starship.current_state = Starship.State.POWER_OFF
@@ -96,7 +99,11 @@ func update_price_information() -> void:
 		return
 
 	var c : CreditHud = CreditHud.new()
-	$Price.text = c.convert_to_human_readable(loadout.value * percentage_of_value)
+	
+	if (station_pad.station == null):
+		await get_tree().create_timer(5).timeout
+	
+	$Price.text = c.convert_to_human_readable(loadout.value * percentage_of_value * station_pad.station.buy_markup)
 	$Spawn.play()
 
 

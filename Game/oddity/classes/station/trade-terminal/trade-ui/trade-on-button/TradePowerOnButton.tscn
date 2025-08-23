@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bj28ky5rv3i3k"]
+
+[ext_resource type="Script" path="res://classes/station/trade-terminal/trade-ui/trade-on-button/TradePowerOnButton.gd" id="1_6f1n2"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_bnkac"]
+[ext_resource type="AudioStream" uid="uid://bjxc5hbguibta" path="res://classes/landing-pad/repair-ui/pickupCoin.wav" id="3_nhkas"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s402l"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0.222298, 0.15455, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_brbos"]
+material = SubResource("StandardMaterial3D_s402l")
+size = Vector3(7, 1.4, 0.025)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ka5vo"]
+data = PackedVector3Array(-3.5, 0.7, 0.0125, 3.5, 0.7, 0.0125, -3.5, -0.7, 0.0125, 3.5, 0.7, 0.0125, 3.5, -0.7, 0.0125, -3.5, -0.7, 0.0125, 3.5, 0.7, -0.0125, -3.5, 0.7, -0.0125, 3.5, -0.7, -0.0125, -3.5, 0.7, -0.0125, -3.5, -0.7, -0.0125, 3.5, -0.7, -0.0125, 3.5, 0.7, 0.0125, 3.5, 0.7, -0.0125, 3.5, -0.7, 0.0125, 3.5, 0.7, -0.0125, 3.5, -0.7, -0.0125, 3.5, -0.7, 0.0125, -3.5, 0.7, -0.0125, -3.5, 0.7, 0.0125, -3.5, -0.7, -0.0125, -3.5, 0.7, 0.0125, -3.5, -0.7, 0.0125, -3.5, -0.7, -0.0125, 3.5, 0.7, 0.0125, -3.5, 0.7, 0.0125, 3.5, 0.7, -0.0125, -3.5, 0.7, 0.0125, -3.5, 0.7, -0.0125, 3.5, 0.7, -0.0125, -3.5, -0.7, 0.0125, 3.5, -0.7, 0.0125, -3.5, -0.7, -0.0125, 3.5, -0.7, 0.0125, 3.5, -0.7, -0.0125, -3.5, -0.7, -0.0125)
+
+[node name="TradePowerOnButton" type="StaticBody3D" node_paths=PackedStringArray("interaction_sound")]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_6f1n2")
+interaction_sound = NodePath("AudioStreamPlayer3D")
+press_delay = 5.0
+entity_name = &"Power Button"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0511023, 0)
+mesh = SubResource("BoxMesh_brbos")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0511023, 0)
+shape = SubResource("ConcavePolygonShape3D_ka5vo")
+
+[node name="ON" type="Label3D" parent="."]
+transform = Transform3D(2.225, 0, 0, 0, 2.225, 0, 0, 0, 2.225, -0.0949872, 0.114137, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Turn on"
+font = ExtResource("2_bnkac")
+font_size = 76
+
+[node name="OFF" type="Label3D" parent="."]
+transform = Transform3D(2.225, 0, 0, 0, 2.225, 0, 0, 0, 2.225, -0.0949872, 0.114137, 0.0148309)
+visible = false
+outline_modulate = Color(0, 0, 0, 0)
+text = "Turn off"
+font = ExtResource("2_bnkac")
+font_size = 76
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_nhkas")
+volume_db = -32.0
+pitch_scale = 1.57

@@ -167,7 +167,7 @@ func _ai_starship_controller_process(delta : float) -> void:
 		thrust_towards()
 
 	if current_ai_state == AiState.ENGAGING_PLAYER:
-		rotate_towards_player()
+		aim_towards_player()
 		evade()
 		shoot_player()
 
@@ -221,6 +221,44 @@ func rotate_towards_player() -> void:
 	elif direction_to_player.y < 0:
 		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(pitch_intensity))
 
+func aim_towards_player() -> void:
+	# --- TUNABLES ---
+	var projectile_speed: float = 60.0  # how "fast" the AI expects the shot/closure to be (units/sec)
+	var max_lead_time: float = 2.0       # cap so we don't predict forever
+
+	# --- POS/VEL ---
+	var shooter_pos: Vector3 = control_entity.global_position
+	var target_pos: Vector3 = player.control_entity.global_position
+
+	# prefer global linear_velocity if available, else fallback to your relative var
+	var target_vel: Vector3 = Vector3.ZERO
+	
+	target_vel = player.control_entity.relative_linear_velocity - control_entity.relative_linear_velocity
+
+	# --- SIMPLE LEAD ---
+	var to_target: Vector3 = target_pos - shooter_pos
+	var distance: float = to_target.length()
+	var lead_time: float = 0.0
+	if projectile_speed > 0.001:
+		lead_time = clamp(distance / projectile_speed, 0.0, max_lead_time)
+
+	var aim_pos: Vector3 = target_pos + target_vel * lead_time
+	var direction_to_aim: Vector3 = control_entity.to_local(aim_pos)
+
+	# --- AIMING (same as you had, using predictive direction) ---
+	var normalized_direction: Vector3 = direction_to_aim.normalized()
+	var yaw_intensity: float = pow(abs(normalized_direction.x), 0.5)
+	var pitch_intensity: float = pow(abs(normalized_direction.y), 0.5)
+
+	if direction_to_aim.x > 0:
+		starship_yaw_right_command.execute(control_entity, StarshipYawRightCommand.Params.new(yaw_intensity))
+	elif direction_to_aim.x < 0:
+		starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(yaw_intensity))
+
+	if direction_to_aim.y > 0:
+		starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(pitch_intensity))
+	elif direction_to_aim.y < 0:
+		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(pitch_intensity))
 
 
 func thrust_towards() -> void:

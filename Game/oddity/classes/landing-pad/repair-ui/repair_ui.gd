@@ -16,6 +16,9 @@ var restock_costs : int
 
 var credit_hud : CreditHud = CreditHud.new()
 
+@export
+var station_pad : StationPad
+
 func _ready() -> void:
 	landing_pad.starship_landed.connect(_on_ship_landed)
 	landing_pad.starship_took_off.connect(_on_ship_took_off)
@@ -23,17 +26,17 @@ func _ready() -> void:
 func calculate_repair_costs(starship : Starship) -> int:
 	var health_difference : float = starship.max_hull_health - starship.current_hull_health
 
-	return (health_difference * 1.5) as int
+	return (health_difference * 1.5) * station_pad.station.buy_markup as int
 
 func calculate_refuel_costs(starship : Starship) -> int:
 	var refuel_difference : float = starship.max_fuel - starship.current_fuel
 	
-	return (refuel_difference)
+	return (refuel_difference * station_pad.station.buy_markup)
 	
 func calculate_restock_costs(starship : Starship) -> int:
 	var restock_difference : float = starship.max_ammo - starship.current_ammo
 	
-	return (roundf(restock_difference * 4))
+	return (roundf(restock_difference * 4 * station_pad.station.buy_markup))
 
 func _on_ship_landed(starship : Starship) -> void:
 	repair_costs = calculate_repair_costs(starship)

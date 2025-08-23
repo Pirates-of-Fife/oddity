@@ -10,13 +10,13 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_464ik"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upe8u"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nqgde"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.52549, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w2nf3"]
-material = SubResource("StandardMaterial3D_upe8u")
+material = SubResource("StandardMaterial3D_nqgde")
 size = Vector3(1.485, 0.82, 0.025)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ybk2b"]
