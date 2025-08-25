@@ -38,22 +38,24 @@ func _process(delta: float) -> void:
 	if currently_spawned_trade_item != null:
 		currently_spawned_trade_item.rotate_y(rotation_speed * delta)
 
-func display_trade_item(trade_item : TradeResource) -> void:
+func display_trade_item(trade_item : TradeResource, station_markup : float) -> void:
 	if currently_spawned_trade_item != null:
 		currently_spawned_trade_item.queue_free()
+	
+	credits.show()
 	
 	current_trade_item = trade_item
 	spawn_trade_item()
 	
 	title.text = current_trade_item.name
 	description.text = current_trade_item.description
-	credits.credits = current_trade_item.value
+	credits.credits = current_trade_item.value * station_markup
 
 func spawn_trade_item() -> void:
 	var trade_item : GameEntity = current_trade_item.scene.instantiate()
 	
 	preview.add_child(trade_item)
-	
+		
 	trade_item.owner = get_tree().edited_scene_root
 	
 	camera.position.z = current_trade_item.preview_distance

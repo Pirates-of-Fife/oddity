@@ -43,7 +43,13 @@ var current_cargo_in_grid : Array
 
 var player : Player
 
+var cargo_areas_left : int :
+	get():
+		return total_cu_capacity - current_cargo_in_grid.size()
+
 var player_nearby : bool = false
+
+
 
 @export
 var generate_grid : bool :

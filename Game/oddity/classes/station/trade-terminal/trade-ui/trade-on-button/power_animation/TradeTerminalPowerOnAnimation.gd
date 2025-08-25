@@ -11,3 +11,4 @@ func start_animation(station_name : String) -> void:
 	
 func animation_finished(anim_name : String) -> void:
 	powered_on.emit()
+	$AnimationPlayer.animation_finished.disconnect(animation_finished)

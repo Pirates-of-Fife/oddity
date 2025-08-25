@@ -41,7 +41,7 @@ var buy_markup : float = 1
 var sell_markup : float = 1
 
 @export
-var trade_items : Array[TradeResource]
+var trade_items : TradeResourceList
 
 func _ready() -> void:
 	_space_station_ready()

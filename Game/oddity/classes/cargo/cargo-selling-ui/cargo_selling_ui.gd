@@ -36,7 +36,7 @@ func _ready() -> void:
 	connected_cargo_grid.cargo_has_been_added_to_grid.connect(update_cargo)
 	connected_cargo_grid.cargo_has_been_removed_from_grid.connect(update_cargo)
 	connected_module_selling_area.modules_updated.connect(update_modules)
-	cargo_selling_ui_2d.station = station_pad.station
+	cargo_selling_ui_2d.station_pad = station_pad
 	
 func _on_interaction_button_interacted(player: Player, control_entity: ControlEntity) -> void:
 	if current_cargo.size() == 0 and current_modules.size() == 0:

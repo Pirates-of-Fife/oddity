@@ -4,7 +4,7 @@ class_name TradeChangeAmmountButtons
 
 signal counter_changed(counter : int)
 
-var counter : int :
+var counter : int = 1 :
 	set(value):
 		if value < 1:
 			$Decline.play()

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://b4xu7245y2tsc"]
+
+[ext_resource type="PackedScene" uid="uid://dex2gytvs2aba" path="res://scenes/minables/obelisk/extractables/ObeliskExtratable2.tscn" id="1_pieh3"]
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="2_o7w1q"]
+
+[resource]
+script = ExtResource("2_o7w1q")
+scene = ExtResource("1_pieh3")
+name = &"???"
+description = "what the fuck?"
+value = 100000000000000000
+preview_distance = 3.0

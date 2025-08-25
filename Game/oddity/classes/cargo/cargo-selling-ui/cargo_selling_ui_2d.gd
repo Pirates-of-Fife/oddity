@@ -20,7 +20,11 @@ var current_cargo : Array = Array()
 @export
 var current_modules : Array = Array()
 
-var station : SpaceStation
+var station_pad : StationPad
+
+var station : SpaceStation : 
+	get():
+		return station_pad.station
 
 func _ready() -> void:
 	reset()

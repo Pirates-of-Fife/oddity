@@ -6,7 +6,7 @@ class_name TradeCreditLabel
 var credits : int :
 	set(value):
 		var credit_convert : CreditHud = CreditHud.new()
-		
+				
 		text = credit_convert.convert_to_human_readable(value) + " Credits"
-		
+				
 		credits = value

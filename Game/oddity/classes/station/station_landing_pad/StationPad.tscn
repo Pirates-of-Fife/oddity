@@ -351,9 +351,15 @@ font_size = 44
 stream = ExtResource("15_ikxe5")
 volume_db = -48.0
 
-[node name="TradeTerminal" parent="." node_paths=PackedStringArray("station_pad") instance=ExtResource("16_1wsuf")]
+[node name="TradeTerminal" parent="." node_paths=PackedStringArray("station_pad", "cargo_grid", "module_spawn_position_marker") instance=ExtResource("16_1wsuf")]
 transform = Transform3D(-0.6, 0, -7.34788e-17, 0, 0.6, 0, 7.34788e-17, 0, -0.6, 7.71899, 0, -0.133626)
 station_pad = NodePath("..")
+cargo_grid = NodePath("../CargoGrid")
+module_spawn_position_marker = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="TradeTerminal"]
+transform = Transform3D(-1.66667, 0, 2.04108e-16, 0, 1.66667, 0, -2.04108e-16, 0, -1.66667, 19.9487, 5.35965, 11.2398)
+gizmo_extents = 2.5
 
 [connection signal="starship_landed" from="LandingPad" to="." method="_on_landing_pad_starship_landed"]
 [connection signal="starship_took_off" from="LandingPad" to="." method="_on_landing_pad_starship_took_off"]
