@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://21xoyeyja0yn"]
+
+[ext_resource type="PackedScene" uid="uid://b538smq5r2w83" path="res://scenes/minables/obelisk/extractables/ObeliskExtratable3.tscn" id="1_f6rti"]
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="2_ptfsh"]
+
+[resource]
+script = ExtResource("2_ptfsh")
+scene = ExtResource("1_f6rti")
+name = &"Unknown Crystaline Material"
+description = "A strange crystal, emitting strange noises. "
+value = 80000
+preview_distance = 2.0

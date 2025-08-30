@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://dmvp1o0rpoxl"]
+
+[ext_resource type="PackedScene" uid="uid://h2gmsd4soaa8" path="res://scenes/cargo/bounty-hunting-cargo-containers/Contraband.tscn" id="1_gq60o"]
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="1_qcw4k"]
+
+[resource]
+script = ExtResource("1_qcw4k")
+scene = ExtResource("1_gq60o")
+name = &"Contraband"
+description = "A wide assortment of illegal narcotics, discreetly concealed inside a marketable plushie. Most stations in the Gateway Systems will happily turn a blind eye and buy it off you."
+value = 280000
+preview_distance = 2.0

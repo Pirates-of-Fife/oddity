@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://d3dja2q0n16xa"]
+
+[ext_resource type="PackedScene" uid="uid://ihvpv2v8cshv" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tscn" id="1_0qg6s"]
+[ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="2_6b13j"]
+
+[resource]
+script = ExtResource("2_6b13j")
+scene = ExtResource("1_0qg6s")
+name = &"Ares Industrial Co. Rock Hunter 6"
+description = "A modern reimagining of a classic mining laser, proven reliable over 40+ years. For dependable performance, Ares Industrial remains the industry standard."
+value = 125600
+preview_distance = 5.0

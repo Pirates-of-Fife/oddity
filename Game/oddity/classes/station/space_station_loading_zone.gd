@@ -9,6 +9,9 @@ var scene : PackedScene
 @export
 var station_name : StringName
 
+@export
+var trade_list : TradeResourceList
+
 var station : SpaceStation
 
 @export
@@ -45,6 +48,7 @@ func _space_station_loading_zone() -> void:
 func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 	station = scene.instantiate()
 	station.station_name = station_name
+	station.trade_items = trade_list
 	add_child(station)
 	
 

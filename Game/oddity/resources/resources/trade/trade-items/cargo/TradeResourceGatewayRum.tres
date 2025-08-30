@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://h46qttbpv4el"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="1_8w37y"]
+[ext_resource type="PackedScene" uid="uid://bk046jth70dqt" path="res://scenes/cargo/bounty-hunting-cargo-containers/GatewayRum.tscn" id="1_wly5g"]
+
+[resource]
+script = ExtResource("1_8w37y")
+scene = ExtResource("1_wly5g")
+name = &"Gateway Rum Crate"
+description = "The most prized rum in known space. Distilled on Arka from strawberries and infused with Alcolin gases, giving it a unique effervescence. A symbol of status among pirates and nobles alike."
+value = 150000
+preview_distance = 2.0

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://dws0t8o88s7wn"]
+
+[ext_resource type="PackedScene" uid="uid://b0yf8dexkb3j6" path="res://scenes/modules/test-module/rotary-autocannon/size-5/Size5RotaryAutoCannon.tscn" id="1_2guhg"]
+[ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="1_2juv4"]
+
+[resource]
+script = ExtResource("1_2juv4")
+scene = ExtResource("1_2guhg")
+name = &"Ares Industrial Co. Cheetah Cannon | Size 5"
+description = "An efficient, high-output ballistic weapon featuring integrated radiators and the patented Ares auto-loading system."
+value = 85000
+preview_distance = 4.0

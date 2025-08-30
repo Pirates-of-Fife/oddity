@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TradeResourceList" load_steps=3 format=3 uid="uid://ccjtq86n0uwk8"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResourceList.gd" id="1_s1ce4"]
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="2_coaoy"]
+
+[resource]
+script = ExtResource("1_s1ce4")
+trade_resources = Array[ExtResource("2_coaoy")]([])
