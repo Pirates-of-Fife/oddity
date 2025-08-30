@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://wanq2hxulkqi"]
+[gd_scene load_steps=13 format=3 uid="uid://wanq2hxulkqi"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_gyh23"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_38nfj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dwhxklunfv4wc" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/BastionZone.tscn" id="4_ynaga"]
 [ext_resource type="PackedScene" uid="uid://dbhb7jrm8wt22" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/DrifterZone.tscn" id="5_d5b27"]
 [ext_resource type="PackedScene" uid="uid://bkma80xy8ykw7" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/LeviathanZone.tscn" id="8_i8xb1"]
+[ext_resource type="Resource" uid="uid://x2fvmriu228r" path="res://resources/resources/trade/trade-items/stations/KilmariesWatchTradeList.tres" id="9_8emv1"]
 [ext_resource type="PackedScene" uid="uid://b5fmks2ayyeqc" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/KrakenZone.tscn" id="10_rylj1"]
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="12_apxux"]
 
@@ -79,3 +80,4 @@ sprite_max_distance = 1.45e+06
 [node name="SpaceStationLoadingZone" parent="LeviathanZone/KrakenZone" instance=ExtResource("12_apxux")]
 transform = Transform3D(0.192375, 0.0780994, -0.978209, 0.298258, 0.945017, 0.134105, 0.934898, -0.317557, 0.158504, 14044.2, 10978.1, 23032.4)
 station_name = &"Kilmarie\'s Watch"
+trade_list = ExtResource("9_8emv1")
