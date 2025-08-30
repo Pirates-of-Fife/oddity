@@ -12,6 +12,12 @@ var station_name : StringName
 @export
 var trade_list : TradeResourceList
 
+@export_range(0, 5, 0.01)
+var buy_markup : float = 1
+
+@export_range(0, 5, 0.01)
+var sell_markup : float = 1
+
 var station : SpaceStation
 
 @export
@@ -49,6 +55,8 @@ func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 	station = scene.instantiate()
 	station.station_name = station_name
 	station.trade_items = trade_list
+	station.buy_markup = buy_markup
+	station.sell_markup = sell_markup
 	add_child(station)
 	
 
