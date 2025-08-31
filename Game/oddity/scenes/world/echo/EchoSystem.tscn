@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1x5jomuyohr6"]
+[gd_scene load_steps=12 format=3 uid="uid://c1x5jomuyohr6"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_mdave"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_c4ioh"]
 [ext_resource type="PackedScene" uid="uid://x1ps87x6yhq6" path="res://scenes/world/echo/celestial-bodies/Echo.tscn" id="3_341i7"]
 [ext_resource type="PackedScene" uid="uid://dsq6mo1hm2w2j" path="res://scenes/world/echo/celestial-bodies/goliath/GoliathZone.tscn" id="4_v7bva"]
 [ext_resource type="PackedScene" uid="uid://dvfis284n2kiq" path="res://scenes/world/echo/celestial-bodies/goliath/RumbleZone.tscn" id="5_uo2ft"]
+[ext_resource type="Resource" uid="uid://lnu3li625jjm" path="res://resources/resources/trade/trade-items/stations/NewHorizonTradeList.tres" id="8_bdmsb"]
 [ext_resource type="PackedScene" uid="uid://bngue56ck5wut" path="res://scenes/world/echo/celestial-bodies/resonance/ResonanceZone.tscn" id="8_pluxd"]
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="10_u488v"]
 
@@ -47,16 +48,29 @@ environment = SubResource("Environment_f6j25")
 
 [node name="GoliathZone" parent="." instance=ExtResource("4_v7bva")]
 transform = Transform3D(0.890149, 0.455669, 0, -0.455669, 0.890149, 0, 0, 0, 1, -6e+06, -4e+06, 0)
+activate_distance = 3.5e+07
+deactivate_distance = 3.8e+07
+sprite_distance = 400000.0
 
 [node name="RumbleZone" parent="GoliathZone" instance=ExtResource("5_uo2ft")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -317506, 199438, 0)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="ResonanceZone" parent="." instance=ExtResource("8_pluxd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8e+06, 120000, -2e+06)
+activate_distance = 3.5e+07
+deactivate_distance = 3.8e+07
+sprite_distance = 400000.0
 
 [node name="SpaceStationLoadingZone" parent="ResonanceZone" instance=ExtResource("10_u488v")]
 transform = Transform3D(0.45944, 0, 0.888209, -0.190715, 0.976676, 0.0986502, -0.867492, -0.214718, 0.448724, 22894.4, 19688.4, -89295.8)
 station_name = &"New Horizon"
+trade_list = ExtResource("8_bdmsb")
+buy_markup = 3.7
+sell_markup = 3.5
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)

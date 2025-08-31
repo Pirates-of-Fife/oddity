@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://wanq2hxulkqi"]
+[gd_scene load_steps=13 format=3 uid="uid://wanq2hxulkqi"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_gyh23"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_38nfj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dwhxklunfv4wc" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/BastionZone.tscn" id="4_ynaga"]
 [ext_resource type="PackedScene" uid="uid://dbhb7jrm8wt22" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/DrifterZone.tscn" id="5_d5b27"]
 [ext_resource type="PackedScene" uid="uid://bkma80xy8ykw7" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/LeviathanZone.tscn" id="8_i8xb1"]
+[ext_resource type="Resource" uid="uid://x2fvmriu228r" path="res://resources/resources/trade/trade-items/stations/KilmariesWatchTradeList.tres" id="9_8emv1"]
 [ext_resource type="PackedScene" uid="uid://b5fmks2ayyeqc" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/KrakenZone.tscn" id="10_rylj1"]
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="12_apxux"]
 
@@ -51,16 +52,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3079e+06, 0, 0)
 
 [node name="BastionZone" parent="." instance=ExtResource("4_ynaga")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0533e+06)
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
+sprite_distance = 200000.0
 
 [node name="DrifterZone" parent="BastionZone" instance=ExtResource("5_d5b27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 181352, 0, 129064)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+use_distance_display = true
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="LeviathanZone" parent="." instance=ExtResource("8_i8xb1")]
 transform = Transform3D(-0.441506, 0, 0.897258, 0, 1, 0, -0.897258, 0, -0.441506, 6.18962e+06, 10000, 1.0316e+06)
+activate_distance = 3.5e+07
+deactivate_distance = 3.8e+07
+sprite_distance = 400000.0
 
 [node name="KrakenZone" parent="LeviathanZone" instance=ExtResource("10_rylj1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 304598, 738354)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="SpaceStationLoadingZone" parent="LeviathanZone/KrakenZone" instance=ExtResource("12_apxux")]
 transform = Transform3D(0.192375, 0.0780994, -0.978209, 0.298258, 0.945017, 0.134105, 0.934898, -0.317557, 0.158504, 14044.2, 10978.1, 23032.4)
-station_name = &"Corsair\'s Watch"
+station_name = &"Kilmarie\'s Watch"
+trade_list = ExtResource("9_8emv1")
+buy_markup = 5.0
+sell_markup = 4.0

@@ -167,7 +167,8 @@ func _ai_starship_controller_process(delta : float) -> void:
 		thrust_towards()
 
 	if current_ai_state == AiState.ENGAGING_PLAYER:
-		rotate_towards_player()
+		#rotate_towards_player()
+		aim_towards_player()
 		evade()
 		shoot_player()
 
@@ -221,6 +222,62 @@ func rotate_towards_player() -> void:
 	elif direction_to_player.y < 0:
 		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(pitch_intensity))
 
+func aim_towards_player() -> void:
+	# --- TUNABLES (tweak to taste) ---
+	var max_lead_time: float = 2.0    # seconds max to look ahead
+	var lead_scale: float = 0.5       # 0..1 reduces/increases how strongly we lead
+	var min_rel_speed: float = 0.1    # avoid division by near-zero
+
+	# --- POS & VELOCITY (using your original movement fields) ---
+	var shooter_pos: Vector3 = control_entity.global_transform.origin
+	var target_pos: Vector3 = player.control_entity.global_transform.origin
+
+	# your project always has 'relative_linear_velocity' as the ship's actual velocity
+	var shooter_vel: Vector3 = Vector3.ZERO
+	var target_vel: Vector3 = Vector3.ZERO
+	shooter_vel = control_entity.relative_linear_velocity
+	target_vel = player.control_entity.relative_linear_velocity
+
+	# relative velocity as seen from shooter
+	var rel_vel: Vector3 = target_vel - shooter_vel
+
+	# vector from shooter to target
+	var to_target: Vector3 = target_pos - shooter_pos
+	var distance: float = to_target.length()
+
+	# --- SIMPLE LEAD ESTIMATE (no projectile speed known) ---
+	var rel_speed: float = rel_vel.length()
+	var lead_time: float = 0.0
+	if rel_speed > min_rel_speed:
+		# basic heuristic: time = distance / rel_speed, scaled down to avoid over-leading
+		lead_time = clamp((distance / rel_speed) * lead_scale, 0.0, max_lead_time)
+	else:
+		lead_time = 0.0
+
+	# predicted aim position (world space)
+	var aim_pos: Vector3 = target_pos + rel_vel * lead_time
+
+	# convert to local and reuse your original aiming math
+	var direction_to_aim: Vector3 = control_entity.to_local(aim_pos)
+
+	# guard for zero-length
+	if direction_to_aim.length() < 0.001:
+		# target practically on top — center aim (zero intensities)
+		return
+
+	var normalized_direction: Vector3 = direction_to_aim.normalized()
+	var yaw_intensity: float = pow(abs(normalized_direction.x), 0.5)
+	var pitch_intensity: float = pow(abs(normalized_direction.y), 0.5)
+
+	if direction_to_aim.x > 0:
+		starship_yaw_right_command.execute(control_entity, StarshipYawRightCommand.Params.new(yaw_intensity))
+	elif direction_to_aim.x < 0:
+		starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(yaw_intensity))
+
+	if direction_to_aim.y > 0:
+		starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(pitch_intensity))
+	elif direction_to_aim.y < 0:
+		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(pitch_intensity))
 
 
 func thrust_towards() -> void:

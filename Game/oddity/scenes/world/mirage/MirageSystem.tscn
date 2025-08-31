@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://c61qdki0q0p1b"]
+[gd_scene load_steps=16 format=3 uid="uid://c61qdki0q0p1b"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_16yi2"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_vascq"]
 [ext_resource type="PackedScene" uid="uid://c5qou1irssard" path="res://scenes/world/mirage/celestia-bodies/Mirage.tscn" id="3_sahsf"]
 [ext_resource type="PackedScene" uid="uid://btqrtt2reo8uq" path="res://scenes/world/mirage/celestia-bodies/mirage/MirageZone.tscn" id="4_lichq"]
 [ext_resource type="PackedScene" uid="uid://y13m0gm0utk0" path="res://scenes/world/mirage/celestia-bodies/mirage/PhantomZone.tscn" id="6_s5lqx"]
+[ext_resource type="Resource" uid="uid://bqsg2yiyyc6sa" path="res://resources/resources/trade/trade-items/stations/AspCreekPortTradeList.tres" id="7_b1dox"]
 [ext_resource type="PackedScene" uid="uid://b3bbejxbh25sf" path="res://scenes/world/mirage/celestia-bodies/colossus/ColossusZone.tscn" id="8_66jas"]
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="8_kf3d1"]
+[ext_resource type="Resource" uid="uid://ccjtq86n0uwk8" path="res://resources/resources/trade/trade-items/stations/GhostsBeaconTradeList.tres" id="10_1tnca"]
 [ext_resource type="PackedScene" uid="uid://blq0p2lrhxs8a" path="res://scenes/world/mirage/celestia-bodies/colossus/GaleZone.tscn" id="10_sggck"]
 [ext_resource type="PackedScene" uid="uid://bblcs7gvy7v1l" path="res://scenes/world/mirage/celestia-bodies/colossus/TorrentZone.tscn" id="12_2426o"]
 [ext_resource type="PackedScene" uid="uid://c7ibe2vyuxfw3" path="res://scenes/world/mirage/celestia-bodies/omen/OmenZone.tscn" id="14_l5kh6"]
@@ -50,29 +52,57 @@ environment = SubResource("Environment_xarcs")
 
 [node name="MirageZone" parent="." instance=ExtResource("4_lichq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4e+06, 200000, 100000)
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
+sprite_distance = 200000.0
 
 [node name="PhantomZone" parent="MirageZone" instance=ExtResource("6_s5lqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60964.8, 52990.2, -150693)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+use_distance_display = true
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="SpaceStationLoadingZone" parent="MirageZone" instance=ExtResource("8_kf3d1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159849, 29082.6, -5236.17)
 station_name = &"Asp Creek Port"
+trade_list = ExtResource("7_b1dox")
+buy_markup = 2.0
+sell_markup = 1.8
 
 [node name="ColossusZone" parent="." instance=ExtResource("8_66jas")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6e+06, 2e+06, -9e+06)
+activate_distance = 3.5e+07
+deactivate_distance = 3.8e+07
+sprite_distance = 400000.0
 
 [node name="GaleZone" parent="ColossusZone" instance=ExtResource("10_sggck")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 344610, 715540)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="TorrentZone" parent="ColossusZone" instance=ExtResource("12_2426o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -881596, -381325, -394938)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="SpaceStationLoadingZone" parent="ColossusZone" instance=ExtResource("8_kf3d1")]
 transform = Transform3D(0.695587, -0.718442, 0, 0.718442, 0.695587, 0, 0, 0, 1, 284424, 242092, -37548)
 station_name = &"Ghost\'s Beacon"
+trade_list = ExtResource("10_1tnca")
+buy_markup = 1.5
+sell_markup = 1.3
 
 [node name="OmenZone" parent="." instance=ExtResource("14_l5kh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2e+06, 2e+06, 2e+06)
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
+sprite_distance = 200000.0
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)

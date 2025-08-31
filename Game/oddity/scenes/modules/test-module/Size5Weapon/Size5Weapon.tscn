@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://x88nd68bot6m"]
+[gd_scene load_steps=8 format=3 uid="uid://x88nd68bot6m"]
 
 [ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeapon.gd" id="1_lcbtv"]
 [ext_resource type="Resource" uid="uid://c5ty3dn338c3x" path="res://scenes/modules/test-module/Size5Weapon/Size5WeaponResource.tres" id="2_p70ds"]
 [ext_resource type="PackedScene" uid="uid://qrehj8v1p47o" path="res://scenes/modules/test-module/Size5Weapon/Size5WeaponAudio.tscn" id="3_p5x1g"]
+[ext_resource type="Resource" uid="uid://c3nvkl1ilmbb4" path="res://resources/resources/trade/trade-items/modules/ox-vic-pyrr/dread/TradeResourceDread5.tres" id="4_1juyy"]
 [ext_resource type="PackedScene" uid="uid://cbysuhn5p35if" path="res://scenes/modules/test-module/Size5Weapon/size-5.glb" id="4_n3pji"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_08hxi"]
@@ -21,6 +22,7 @@ size = 5
 nozzle = NodePath("Nozzle")
 module_resource = ExtResource("2_p70ds")
 value = 10000
+trade_information = ExtResource("4_1juyy")
 can_be_picked_up = true
 
 [node name="Nozzle" type="Marker3D" parent="."]

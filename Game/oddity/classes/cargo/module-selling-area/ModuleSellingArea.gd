@@ -47,16 +47,25 @@ func _on_module_removed(body : Node3D) -> void:
 		game_entities.erase(body)
 		modules_updated.emit()
 
-func sell_modules() -> void:
+func sell_modules(station : SpaceStation = null) -> void:
 	var total : int = 0
 	var player : Player = get_tree().get_first_node_in_group("Player")
-
-	for module : Module in modules:
-		total += module.value
-		module.queue_free()
 	
-	for entity : GameEntity in game_entities:
-		total += entity.value
-		entity.queue_free()
+	if station == null:
+		for module : Module in modules:
+			total += module.value
+			module.queue_free()
+		
+		for entity : GameEntity in game_entities:
+			total += entity.value
+			entity.queue_free()
+	else:
+		for module : Module in modules:
+			total += module.value * station.sell_markup
+			module.queue_free()
+		
+		for entity : GameEntity in game_entities:
+			total += entity.value * station.sell_markup
+			entity.queue_free()
 	
 	player.add_credits(total)

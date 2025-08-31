@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bwho7y2mkwclo"]
+[gd_scene load_steps=17 format=3 uid="uid://bwho7y2mkwclo"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_boynr"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_wsrd6"]
 [ext_resource type="PackedScene" uid="uid://bv8hby1uoyvhj" path="res://scenes/world/paradox/celestial-bodies/Paradox.tscn" id="3_164d5"]
 [ext_resource type="PackedScene" uid="uid://bna5l6mg5rq5c" path="res://scenes/world/paradox/celestial-bodies/auric/AuricZone.tscn" id="4_23hwr"]
 [ext_resource type="PackedScene" uid="uid://5a2fhh6a1a3j" path="res://scenes/world/paradox/celestial-bodies/auric/SolsticeZone.tscn" id="5_d5fx4"]
+[ext_resource type="Resource" uid="uid://y5vcb1vovej4" path="res://resources/resources/trade/trade-items/stations/LarkhallOrbitalTradeList.tres" id="7_cymd6"]
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="8_r18gy"]
 [ext_resource type="PackedScene" uid="uid://bn8jhywmokb1j" path="res://scenes/world/paradox/celestial-bodies/eldritch/EldritchZone.tscn" id="10_1va2b"]
 [ext_resource type="PackedScene" uid="uid://brj78otnh04wn" path="res://scenes/world/paradox/celestial-bodies/marrow/MarrowZone.tscn" id="12_rtn27"]
@@ -52,31 +53,64 @@ environment = SubResource("Environment_trn0h")
 
 [node name="AuricZone" parent="." instance=ExtResource("4_23hwr")]
 transform = Transform3D(0.788, 0, -0.615675, 0, 1, 0, 0.615675, 0, 0.788, 7e+06, 0, 0)
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
+sprite_distance = 200000.0
 
 [node name="SolsticeZone" parent="AuricZone" instance=ExtResource("5_d5fx4")]
 transform = Transform3D(0.679363, -0.147654, 0.718794, 0.408064, 0.890137, -0.202828, -0.609877, 0.431108, 0.664978, -333895, 0, 85049.7)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+use_distance_display = true
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="SpaceStationLoadingZone" parent="AuricZone" instance=ExtResource("8_r18gy")]
 transform = Transform3D(-0.900219, 0.240658, -0.362891, 0.266769, 0.96349, -0.0228139, 0.344151, -0.117346, -0.931552, -173446, 29750.8, 71755.8)
-station_name = &"Pirate\'s Reprieve "
+station_name = &"Larkhall Orbital"
+trade_list = ExtResource("7_cymd6")
+buy_markup = 2.1
+sell_markup = 2.0
 
 [node name="EldritchZone" parent="." instance=ExtResource("10_1va2b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9e+06, 0, 4.5e+06)
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
+sprite_distance = 200000.0
 
 [node name="MarrowZone" parent="." instance=ExtResource("12_rtn27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5e+06, 1e+06, 1.36e+06)
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
+sprite_distance = 200000.0
 
 [node name="GravemZone" parent="MarrowZone" instance=ExtResource("14_txhdx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58466.9, 34761.4, -43958.4)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+use_distance_display = true
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="TempestZone" parent="." instance=ExtResource("16_u444p")]
 transform = Transform3D(1, 0, 0, 0, 0.671358, -0.741133, 0, 0.741133, 0.671358, -7.2e+06, -7.2e+06, -7.2e+06)
+activate_distance = 3.5e+07
+deactivate_distance = 3.8e+07
+sprite_distance = 400000.0
 
 [node name="WhirlpoolZone" parent="TempestZone" instance=ExtResource("18_13w8n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20532e+06, 213894, -22061.3)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="MaelstromZone" parent="TempestZone" instance=ExtResource("20_sll35")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -308873, 211576, -11974.7)
+activate_distance = 5e+06
+deactivate_distance = 5.5e+06
+sprite_distance = 160000.0
+sprite_max_distance = 1.45e+06
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)

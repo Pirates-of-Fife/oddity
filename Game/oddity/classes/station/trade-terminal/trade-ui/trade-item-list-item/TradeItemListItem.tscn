@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwp2libosf2yr"]
+
+[ext_resource type="Script" path="res://classes/station/trade-terminal/trade-ui/trade-item-list-item/TradeItemListItem.gd" id="1_urwl6"]
+[ext_resource type="AudioStream" uid="uid://x76m6bo76mxm" path="res://classes/landing-pad/change-ship-name-ui/click.wav" id="2_ht5yo"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_o8rdi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbqyw"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.333738, 0.261374, 4.81308e-08, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ovmlv"]
+material = SubResource("StandardMaterial3D_fbqyw")
+size = Vector3(11, 0.5, 0.025)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b7h73"]
+data = PackedVector3Array(-5.5, 0.25, 0.0125, 5.5, 0.25, 0.0125, -5.5, -0.25, 0.0125, 5.5, 0.25, 0.0125, 5.5, -0.25, 0.0125, -5.5, -0.25, 0.0125, 5.5, 0.25, -0.0125, -5.5, 0.25, -0.0125, 5.5, -0.25, -0.0125, -5.5, 0.25, -0.0125, -5.5, -0.25, -0.0125, 5.5, -0.25, -0.0125, 5.5, 0.25, 0.0125, 5.5, 0.25, -0.0125, 5.5, -0.25, 0.0125, 5.5, 0.25, -0.0125, 5.5, -0.25, -0.0125, 5.5, -0.25, 0.0125, -5.5, 0.25, -0.0125, -5.5, 0.25, 0.0125, -5.5, -0.25, -0.0125, -5.5, 0.25, 0.0125, -5.5, -0.25, 0.0125, -5.5, -0.25, -0.0125, 5.5, 0.25, 0.0125, -5.5, 0.25, 0.0125, 5.5, 0.25, -0.0125, -5.5, 0.25, 0.0125, -5.5, 0.25, -0.0125, 5.5, 0.25, -0.0125, -5.5, -0.25, 0.0125, 5.5, -0.25, 0.0125, -5.5, -0.25, -0.0125, 5.5, -0.25, 0.0125, 5.5, -0.25, -0.0125, -5.5, -0.25, -0.0125)
+
+[node name="TradeItemListItem" type="StaticBody3D" node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_urwl6")
+interaction_sound = NodePath("Click")
+entity_name = &"Trade Item List Item"
+
+[node name="Click" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_ht5yo")
+volume_db = -36.0
+pitch_scale = 0.6
+bus = &"Environment"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0)
+mesh = SubResource("BoxMesh_ovmlv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_b7h73")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 4.14536, 0.0746707, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Meean’kar Corporation Aeroguard | Size 1"
+font = ExtResource("3_o8rdi")
+font_size = 76

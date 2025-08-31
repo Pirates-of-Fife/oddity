@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://6ds86klm46vk"]
+[gd_scene load_steps=5 format=3 uid="uid://6ds86klm46vk"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/HullReinforcement.gd" id="1_mdpai"]
 [ext_resource type="Resource" uid="uid://b7ray8ku73foj" path="res://scenes/modules/test-module/hull-reinforcement/size-3/Size3HullReinforcement.tres" id="2_a7il0"]
+[ext_resource type="Resource" uid="uid://cy4k14rmehtui" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme3.tres" id="3_3utyd"]
 [ext_resource type="PackedScene" uid="uid://sqlkqvg7d5tk" path="res://scenes/modules/test-module/hull-reinforcement/hullReinforcementModule.glb" id="3_mnj33"]
 
 [node name="Size3HullReinforcement" type="RigidBody3D"]
@@ -12,6 +13,7 @@ script = ExtResource("1_mdpai")
 size = 3
 module_resource = ExtResource("2_a7il0")
 value = 15000
+trade_information = ExtResource("3_3utyd")
 can_be_picked_up = true
 
 [node name="hullReinforcementModule" parent="." instance=ExtResource("3_mnj33")]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://cej6iem100o58"]
+
+[ext_resource type="PackedScene" uid="uid://ckkxpm1t68b7n" path="res://scenes/minables/angels-dust/extractables/AngelsDustPearl.tscn" id="1_3qcy8"]
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="1_q0mrd"]
+
+[resource]
+script = ExtResource("1_q0mrd")
+is_mineable = true
+scene = ExtResource("1_3qcy8")
+name = &"Angel\'s Dust Pearl"
+description = "A rare substance with anomalous properties. Naturally unaffected by gravity, yet capable of generating localized gravity wells when subjected to an electric current. Integrated into starship deck plating and spaceport flooring, where current controllers, commonly referred to as “gravity generators”, regulate the flow through embedded Angel’s Dust wiring to produce stable artificial gravity. Recently adapted for hover vehicle propulsion systems."
+value = 75000
+preview_distance = 3.2

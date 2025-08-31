@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bifjawf38tw3r"]
+[gd_scene load_steps=19 format=3 uid="uid://bifjawf38tw3r"]
 
 [ext_resource type="Script" path="res://classes/station/SpaceStation.gd" id="1_inwp3"]
+[ext_resource type="Resource" uid="uid://c5fejwytq48u6" path="res://resources/resources/trade/trade-items/example/ExampleTradeResourceList.tres" id="2_b30wo"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/station-zone/SpaceStationZone.gd" id="2_fwi2u"]
 [ext_resource type="PackedScene" uid="uid://bplyib3726paa" path="res://classes/station/meshes/space_station.glb" id="4_6uunj"]
 [ext_resource type="PackedScene" uid="uid://drbrbjsbeqtir" path="res://classes/station/meshes/small_wheel.glb" id="6_iyyf1"]
@@ -50,6 +51,7 @@ rotation_speed = 0.05
 station_label_1 = NodePath("Label3D")
 station_label_2 = NodePath("Label3D2")
 donau_walzer_player = NodePath("BlueDanubePlayer")
+trade_items = ExtResource("2_b30wo")
 
 [node name="SpaceStationZone" type="Node3D" parent="."]
 script = ExtResource("2_fwi2u")

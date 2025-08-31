@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://cil2bekj0pyvo"]
+
+[ext_resource type="PackedScene" uid="uid://cpnhg66txfjsk" path="res://scenes/modules/test-module/ShieldGenerator/size-1/Size1ShieldGenerator.tscn" id="1_uayc6"]
+[ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="2_e0wpk"]
+
+[resource]
+script = ExtResource("2_e0wpk")
+scene = ExtResource("1_uayc6")
+name = &"Meean\'kar Corporation Aeroguard | Size 1"
+description = "A reliable shield generator offering excellent price-to-performance balance."
+value = 12000
+preview_distance = 2.0

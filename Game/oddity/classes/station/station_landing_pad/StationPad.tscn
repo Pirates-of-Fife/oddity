@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=25 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="13_vqirh"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_clb07"]
 [ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="15_ikxe5"]
+[ext_resource type="PackedScene" uid="uid://bvs0cmfbgiyy3" path="res://scenes/trade-terminal/scene/TradeTerminal.tscn" id="16_1wsuf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w6y13"]
 size = Vector3(5, 4.585, 4.16)
@@ -262,14 +263,16 @@ script = ExtResource("5_jeomx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39065, 1.30591, 2.80928)
 shape = SubResource("BoxShape3D_16w1y")
 
-[node name="CargoSellingUi" parent="." node_paths=PackedStringArray("connected_cargo_grid", "connected_module_selling_area") instance=ExtResource("6_0yf10")]
+[node name="CargoSellingUi" parent="." node_paths=PackedStringArray("connected_cargo_grid", "connected_module_selling_area", "station_pad") instance=ExtResource("6_0yf10")]
 transform = Transform3D(-0.25, 0, 3.06162e-17, 0, 0.25, 0, -3.06162e-17, 0, -0.25, 0.410803, 0.443192, -4.58464)
 connected_cargo_grid = NodePath("../CargoGrid")
 connected_module_selling_area = NodePath("../ModuleSellingArea")
+station_pad = NodePath("..")
 
-[node name="RepairUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("7_dxdv7")]
+[node name="RepairUi" parent="." node_paths=PackedStringArray("landing_pad", "station_pad") instance=ExtResource("7_dxdv7")]
 transform = Transform3D(-0.235, 0, 2.87792e-17, 0, 0.235, 0, -2.87792e-17, 0, -0.235, 4.79634, 1.38568, -4.53145)
 landing_pad = NodePath("../LandingPad")
+station_pad = NodePath("..")
 
 [node name="ChangeShipNameUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("8_25bk5")]
 transform = Transform3D(1.25526e-17, 0, -0.205, 0, 0.205, 0, 0.205, 0, 1.25526e-17, 5.30521, 0.706829, -4.52939)
@@ -279,9 +282,10 @@ landing_pad = NodePath("../LandingPad")
 transform = Transform3D(-0.18, 0, 2.20436e-17, 0, 0.18, 0, -2.20436e-17, 0, -0.18, 1.94727, 0.524399, -4.54461)
 landing_pad = NodePath("../LandingPad")
 
-[node name="SpawnShipUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("10_p6mr5")]
+[node name="SpawnShipUi" parent="." node_paths=PackedStringArray("landing_pad", "station_pad") instance=ExtResource("10_p6mr5")]
 transform = Transform3D(-0.18, 0, -4.85723e-17, 0, 0.18, 0, 4.85723e-17, 0, -0.18, 2.39331, 1.00168, -4.52643)
 landing_pad = NodePath("../LandingPad")
+station_pad = NodePath("..")
 
 [node name="LandingPad" type="Area3D" parent="." node_paths=PackedStringArray("starship_spawn_marker")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60.7212)
@@ -346,6 +350,16 @@ font_size = 44
 [node name="Spawn" type="AudioStreamPlayer3D" parent="InteractionButton"]
 stream = ExtResource("15_ikxe5")
 volume_db = -48.0
+
+[node name="TradeTerminal" parent="." node_paths=PackedStringArray("station_pad", "cargo_grid", "module_spawn_position_marker") instance=ExtResource("16_1wsuf")]
+transform = Transform3D(-0.6, 0, -7.34788e-17, 0, 0.6, 0, 7.34788e-17, 0, -0.6, 7.71899, 0, -0.133626)
+station_pad = NodePath("..")
+cargo_grid = NodePath("../CargoGrid")
+module_spawn_position_marker = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="TradeTerminal"]
+transform = Transform3D(-1.66667, 0, 2.04108e-16, 0, 1.66667, 0, -2.04108e-16, 0, -1.66667, 19.9487, 5.35965, 11.2398)
+gizmo_extents = 2.5
 
 [connection signal="starship_landed" from="LandingPad" to="." method="_on_landing_pad_starship_landed"]
 [connection signal="starship_took_off" from="LandingPad" to="." method="_on_landing_pad_starship_took_off"]

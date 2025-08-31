@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://r4c1oxdjlk7y"]
+
+[ext_resource type="PackedScene" uid="uid://dnyasispot0c3" path="res://scenes/minables/harrow/extractables/HarrowExtractable3.tscn" id="1_8qux4"]
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="2_f6n6t"]
+
+[resource]
+script = ExtResource("2_f6n6t")
+is_mineable = true
+scene = ExtResource("1_8qux4")
+name = &"Harrow Wood"
+description = "Timber harvested from cultivated Harrow trees, which thrive in diverse planetary environments. Frequently used for low-cost furniture, interior paneling, and decorative finishes."
+value = 20000
+preview_distance = 3.2

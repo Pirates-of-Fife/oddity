@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TradeResourceList" load_steps=8 format=3 uid="uid://c5fejwytq48u6"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResourceList.gd" id="1_u3r87"]
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="2_n4ncm"]
+[ext_resource type="Resource" uid="uid://c5d2bvcwkih6h" path="res://resources/resources/trade/trade-items/example/ExampleTradeResource1.tres" id="3_pq3t5"]
+[ext_resource type="Resource" uid="uid://bi40e7lqc27yq" path="res://resources/resources/trade/trade-items/example/ExampleTradeResource2.tres" id="4_3wfpi"]
+[ext_resource type="Resource" uid="uid://dr0u5hsu7bhxr" path="res://resources/resources/trade/trade-items/example/ExampleTradeResource3.tres" id="5_k1pyy"]
+[ext_resource type="Resource" uid="uid://c13rafo87n8he" path="res://resources/resources/trade/trade-items/example/ExampleTradeResource4.tres" id="6_ykb3o"]
+[ext_resource type="Resource" uid="uid://b4xu7245y2tsc" path="res://resources/resources/trade/trade-items/example/ExampleTradeResource5.tres" id="7_lp5q2"]
+
+[resource]
+script = ExtResource("1_u3r87")
+trade_resources = Array[ExtResource("2_n4ncm")]([ExtResource("3_pq3t5"), ExtResource("4_3wfpi"), ExtResource("5_k1pyy"), ExtResource("6_ykb3o"), ExtResource("7_lp5q2")])

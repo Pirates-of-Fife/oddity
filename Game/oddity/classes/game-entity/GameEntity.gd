@@ -21,10 +21,21 @@ var is_mass_locked : bool :
 var entity_name : StringName = ""
 
 @export
-var value : int
+var value : int :
+	set(v):
+		if trade_information == null:
+			value = v
+	get():
+		if trade_information == null:
+			return value
+		
+		return trade_information.value
 
 @export
 var sellable : bool = false
+
+@export
+var trade_information : TradeResource
 
 @export_category("Interaction")
 

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://drfy4m08nult5"]
+
+[ext_resource type="PackedScene" uid="uid://bqpmddm661vhp" path="res://scenes/cargo/bounty-hunting-cargo-containers/HighValueContainer.tscn" id="1_5g8xj"]
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="1_j68ou"]
+
+[resource]
+script = ExtResource("1_j68ou")
+scene = ExtResource("1_5g8xj")
+name = &"Refined Void Diamond"
+description = "A crystalline material essential for the production of Smart Glass and advanced optics. Rare and highly sought after by industrial and military contractors."
+value = 100000
+preview_distance = 3.2

@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0m1mj0kaoojt"]
+
+[ext_resource type="Script" path="res://classes/station/trade-terminal/trade-ui/TradeTerminalUi.gd" id="1_affxx"]
+[ext_resource type="PackedScene" uid="uid://m4eqg02uhya4" path="res://classes/station/trade-terminal/trade-ui/trade-buy-button/TradeTerminalBuyButton.tscn" id="2_rdxe2"]
+[ext_resource type="PackedScene" uid="uid://bsgsmtikad2xo" path="res://classes/station/trade-terminal/trade-ui/trade-change-amount-buttons/TradeChangeAmmountButtons.tscn" id="3_xmqof"]
+[ext_resource type="PackedScene" uid="uid://bxjlkxmhmnjit" path="res://classes/station/trade-terminal/trade-ui/trade-credit-total/TradeCreditLabel.tscn" id="4_vghmg"]
+[ext_resource type="PackedScene" uid="uid://b2wnd0bx76rs0" path="res://classes/station/trade-terminal/trade-ui/trade-item-information/TradeItemInformationScreen.tscn" id="5_tca6s"]
+[ext_resource type="PackedScene" uid="uid://ccuf50esqifjp" path="res://classes/station/trade-terminal/trade-ui/trade-item-list/TradeItemList.tscn" id="6_0g7n5"]
+[ext_resource type="AudioStream" uid="uid://crdgvtkwst2i" path="res://classes/landing-pad/spawn-ship-ui/no.wav" id="7_nwsbk"]
+
+[sub_resource type="Resource" id="Resource_88coe"]
+metadata/__load_path__ = "res://resources/resources/trade/trade-items/ExampleTradeResource.tres"
+
+[node name="TradeTerminalUi" type="Node3D" node_paths=PackedStringArray("trade_terminal_buy_button", "trade_change_ammount_buttons", "trade_credit_label", "trade_item_information_screen", "trade_item_list", "error_noise")]
+script = ExtResource("1_affxx")
+trade_terminal_buy_button = NodePath("TradeTerminalBuyButton")
+trade_change_ammount_buttons = NodePath("TradeChangeAmmountButtons")
+trade_credit_label = NodePath("TradeCreditLabel")
+trade_item_information_screen = NodePath("TradeItemInformationScreen")
+trade_item_list = NodePath("TradeItemList")
+error_noise = NodePath("ErrorNoise")
+
+[node name="TradeTerminalBuyButton" parent="." instance=ExtResource("2_rdxe2")]
+transform = Transform3D(1.83697e-17, 0, -0.3, 0, 0.3, 0, 0.3, 0, 1.83697e-17, -0.167201, 0.922007, 1.50138)
+
+[node name="TradeChangeAmmountButtons" parent="." instance=ExtResource("3_xmqof")]
+transform = Transform3D(9.18485e-18, 0, -0.15, 0, 0.15, 0, 0.15, 0, 9.18485e-18, -0.124023, 0.938472, 1.94385)
+
+[node name="TradeCreditLabel" parent="." instance=ExtResource("4_vghmg")]
+transform = Transform3D(1.10218e-17, 0, -0.18, 0, 0.18, 0, 0.18, 0, 1.10218e-17, -0.18364, 0.976089, 1.22694)
+horizontal_alignment = 2
+
+[node name="TradeItemInformationScreen" parent="." instance=ExtResource("5_tca6s")]
+transform = Transform3D(2.0819e-17, 0, -0.34, 0, 0.34, 0, 0.34, 0, 2.0819e-17, -0.126265, 2.28892, 1.13343)
+current_trade_item = SubResource("Resource_88coe")
+
+[node name="TradeItemList" parent="." instance=ExtResource("6_0g7n5")]
+transform = Transform3D(3.33067e-16, 0, -1, 0, 1, 0, 1, 0, 3.33067e-16, -0.148057, 2.7767, -2.86401)
+
+[node name="ErrorNoise" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_nwsbk")
+volume_db = -32.0

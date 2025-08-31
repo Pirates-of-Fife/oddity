@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://dhqrr42r4x631"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="1_5cdr2"]
+[ext_resource type="PackedScene" uid="uid://cfjflwsaancca" path="res://scenes/modules/test-module/rail-gun/size-5/Size5RailGun.tscn" id="1_7jd26"]
+
+[resource]
+script = ExtResource("1_5cdr2")
+scene = ExtResource("1_7jd26")
+name = &"Protectorate Federation Navy RAIL 5"
+description = "Military-grade railguns made from PR-03 Blackheart Titanium and sourced from military surplus. Extremely powerful and reliable, but high power draw and heat output require advanced cooling solutions."
+value = 250000
+preview_distance = 4.0

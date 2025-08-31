@@ -43,7 +43,13 @@ var current_cargo_in_grid : Array
 
 var player : Player
 
+var cargo_areas_left : int :
+	get():
+		return total_cu_capacity - current_cargo_in_grid.size()
+
 var player_nearby : bool = false
+
+
 
 @export
 var generate_grid : bool :
@@ -96,16 +102,21 @@ func cargo_removed_from_grid(cargo_area : CargoArea, cargo : CargoContainer) -> 
 	cargo_has_been_removed_from_grid.emit(cargo_area, cargo)
 
 	
-func sell_cargo() -> void:
+func sell_cargo(station : SpaceStation = null) -> void:
 	var total : int = 0
 	
 	for c : CargoArea in cargo_area_root.get_children():
 		c.snapped_cargo = null
 		c.valid = true
 	
-	for c : CargoContainer in current_cargo_in_grid:
-		total += c.value
-		c.queue_free()
+	if SpaceStation == null:
+		for c : CargoContainer in current_cargo_in_grid:
+			total += c.value
+			c.queue_free()
+	else:
+		for c : CargoContainer in current_cargo_in_grid:
+			total += c.value * station.sell_markup
+			c.queue_free()
 	
 	player.add_credits(total)
 

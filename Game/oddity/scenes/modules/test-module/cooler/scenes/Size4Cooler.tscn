@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://djs6k5fteam85"]
+[gd_scene load_steps=7 format=3 uid="uid://djs6k5fteam85"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/Cooler.gd" id="1_f1lb4"]
 [ext_resource type="Resource" uid="uid://dapar2aiuyyup" path="res://scenes/modules/test-module/cooler/scenes/Size4CoolerResource.tres" id="2_006fu"]
+[ext_resource type="Resource" uid="uid://wfeamfl04htc" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/cool-max/TradeResourceCoolMax4.tres" id="3_22pwv"]
 [ext_resource type="PackedScene" uid="uid://i6vj2e60304s" path="res://scenes/modules/test-module/cooler/CoolerBody.glb" id="3_gxmg5"]
 [ext_resource type="PackedScene" uid="uid://tutibqo7k53f" path="res://scenes/modules/test-module/cooler/CoolerFan.tscn" id="4_tyxwk"]
 
@@ -17,6 +18,7 @@ size = 4
 initialize_collision_shape_automatically = false
 module_resource = ExtResource("2_006fu")
 value = 60000
+trade_information = ExtResource("3_22pwv")
 can_be_picked_up = true
 
 [node name="CoolerBody" parent="." instance=ExtResource("3_gxmg5")]

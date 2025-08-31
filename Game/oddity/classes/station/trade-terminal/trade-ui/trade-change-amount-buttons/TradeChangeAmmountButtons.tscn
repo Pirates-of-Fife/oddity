@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsgsmtikad2xo"]
+
+[ext_resource type="Script" path="res://classes/station/trade-terminal/trade-ui/trade-change-amount-buttons/TradeChangeAmmountButtons.gd" id="1_adun6"]
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="2_3v5m1"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_pkc55"]
+[ext_resource type="AudioStream" uid="uid://bjxc5hbguibta" path="res://classes/landing-pad/repair-ui/pickupCoin.wav" id="4_watlv"]
+[ext_resource type="AudioStream" uid="uid://crdgvtkwst2i" path="res://classes/landing-pad/spawn-ship-ui/no.wav" id="5_84fwv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tw8a"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.356863, 0.843137, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xo0fh"]
+material = SubResource("StandardMaterial3D_1tw8a")
+size = Vector3(1, 1, 0.025)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vlf5j"]
+data = PackedVector3Array(-0.5, 0.5, 0.0125, 0.5, 0.5, 0.0125, -0.5, -0.5, 0.0125, 0.5, 0.5, 0.0125, 0.5, -0.5, 0.0125, -0.5, -0.5, 0.0125, 0.5, 0.5, -0.0125, -0.5, 0.5, -0.0125, 0.5, -0.5, -0.0125, -0.5, 0.5, -0.0125, -0.5, -0.5, -0.0125, 0.5, -0.5, -0.0125, 0.5, 0.5, 0.0125, 0.5, 0.5, -0.0125, 0.5, -0.5, 0.0125, 0.5, 0.5, -0.0125, 0.5, -0.5, -0.0125, 0.5, -0.5, 0.0125, -0.5, 0.5, -0.0125, -0.5, 0.5, 0.0125, -0.5, -0.5, -0.0125, -0.5, 0.5, 0.0125, -0.5, -0.5, 0.0125, -0.5, -0.5, -0.0125, 0.5, 0.5, 0.0125, -0.5, 0.5, 0.0125, 0.5, 0.5, -0.0125, -0.5, 0.5, 0.0125, -0.5, 0.5, -0.0125, 0.5, 0.5, -0.0125, -0.5, -0.5, 0.0125, 0.5, -0.5, 0.0125, -0.5, -0.5, -0.0125, 0.5, -0.5, 0.0125, 0.5, -0.5, -0.0125, -0.5, -0.5, -0.0125)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6o6fx"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.975665, 1.27546e-06, 5.77569e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pq8wl"]
+material = SubResource("StandardMaterial3D_6o6fx")
+size = Vector3(1, 1, 0.025)
+
+[node name="TradeChangeAmmountButtons" type="Node3D" node_paths=PackedStringArray("counter_label", "add_button", "remove_button")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+script = ExtResource("1_adun6")
+counter_label = NodePath("Label3D")
+add_button = NodePath("Add")
+remove_button = NodePath("Remove")
+
+[node name="Add" type="StaticBody3D" parent="." node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47351, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_3v5m1")
+interaction_sound = NodePath("../AudioStreamPlayer3D")
+press_delay = 0.1
+entity_name = &"Add"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Add"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+mesh = SubResource("BoxMesh_xo0fh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Add"]
+transform = Transform3D(1.1, 0, 0, 0, 1.02, 0, 0, 0, 4.57, 0, 0.110527, 0)
+shape = SubResource("ConcavePolygonShape3D_vlf5j")
+
+[node name="Label3D" type="Label3D" parent="Add"]
+transform = Transform3D(1.36242e-16, 2.225, 0, -2.225, 1.36242e-16, 0, 0, 0, 2.225, 0.0991218, 0.114137, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "<
+"
+font = ExtResource("3_pkc55")
+font_size = 76
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_watlv")
+volume_db = -32.0
+pitch_scale = 0.33
+
+[node name="Remove" type="StaticBody3D" parent="." node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.563762, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_3v5m1")
+interaction_sound = NodePath("../AudioStreamPlayer3D")
+press_delay = 0.1
+entity_name = &"Remove"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Remove"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+mesh = SubResource("BoxMesh_pq8wl")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Remove"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+shape = SubResource("ConcavePolygonShape3D_vlf5j")
+
+[node name="Label3D" type="Label3D" parent="Remove"]
+transform = Transform3D(-4.08726e-16, -2.225, 0, 2.225, -4.08726e-16, 0, 0, 0, 2.225, -0.0949872, 0.114137, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "<
+"
+font = ExtResource("3_pkc55")
+font_size = 76
+
+[node name="Decline" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_84fwv")
+volume_db = -32.0
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(2.225, 0, 0, 0, 2.225, 0, 0, 0, 2.225, 1.5773, 0.249943, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1"
+font = ExtResource("3_pkc55")
+font_size = 76

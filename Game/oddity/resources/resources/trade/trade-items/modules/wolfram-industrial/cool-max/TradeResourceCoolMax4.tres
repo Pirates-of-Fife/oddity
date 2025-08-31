@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://wfeamfl04htc"]
+
+[ext_resource type="PackedScene" uid="uid://djs6k5fteam85" path="res://scenes/modules/test-module/cooler/scenes/Size4Cooler.tscn" id="1_dbdaj"]
+[ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="2_4csfv"]
+
+[resource]
+script = ExtResource("2_4csfv")
+scene = ExtResource("1_dbdaj")
+name = &"Wolfram Industrial Cool Max | Size 1"
+description = "The Cool Max series is a mid-range cooler lineup, offering a significant upgrade over previous models, which were prone to coolant leaks. Reliable performance for a fair price."
+value = 190000
+preview_distance = 5.0

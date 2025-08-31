@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://cm0txhc2nbqyo"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="1_db1h7"]
+[ext_resource type="PackedScene" uid="uid://c8vcrwv38lkvq" path="res://scenes/cargo/bounty-hunting-cargo-containers/MediumValueContainer.tscn" id="1_vvad2"]
+
+[resource]
+script = ExtResource("1_db1h7")
+scene = ExtResource("1_vvad2")
+name = &"Gold"
+description = "A versatile metal, widely used in electronics, precision components, and occasionally for decorative applications."
+value = 48000
+preview_distance = 3.2

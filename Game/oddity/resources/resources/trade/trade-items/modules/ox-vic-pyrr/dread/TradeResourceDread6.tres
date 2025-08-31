@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://dgu3wlrgwyj8h"]
+
+[ext_resource type="PackedScene" uid="uid://bkvastwu4s12v" path="res://scenes/modules/test-module/Size6Weapon/Size6Weapon.tscn" id="1_sbx27"]
+[ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="2_lqjtp"]
+
+[resource]
+script = ExtResource("2_lqjtp")
+scene = ExtResource("1_sbx27")
+name = &"Ox\'vic Pyrr Dread 6"
+description = "Ox'vic Pyrrs Dread PCWs are the first pick for many bounty hunters and small militias. Cheap to run and hit hard."
+value = 395800
+preview_distance = 5.0

@@ -2,6 +2,8 @@ extends StaticGameEntity
 
 class_name SpaceStation
 
+@export_category("Station")
+
 @export
 var station_name : StringName
 
@@ -29,6 +31,17 @@ var donau_walzer_player : BlueDanubePlayer
 var speed_limit : float = 100
 
 var enforce_speed_limit : bool = false
+
+@export_category("Trade Information")
+
+@export_range(0, 5, 0.01)
+var buy_markup : float = 1
+
+@export_range(0, 5, 0.01)
+var sell_markup : float = 1
+
+@export
+var trade_items : TradeResourceList
 
 func _ready() -> void:
 	_space_station_ready()

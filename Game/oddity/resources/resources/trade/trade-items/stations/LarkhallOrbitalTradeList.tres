@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TradeResourceList" load_steps=16 format=3 uid="uid://y5vcb1vovej4"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResourceList.gd" id="1_0m4o6"]
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="2_8awk0"]
+[ext_resource type="Resource" uid="uid://p6knxl4qjuoh" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/cool-max/TradeResourceCoolMax1.tres" id="3_sqwvb"]
+[ext_resource type="Resource" uid="uid://duw3fo4yi0ba4" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/cool-max/TradeResourceCoolMax2.tres" id="4_8d1el"]
+[ext_resource type="Resource" uid="uid://bb58eav8vs3tu" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/cool-max/TradeResourceCoolMax3.tres" id="5_iuih0"]
+[ext_resource type="Resource" uid="uid://c3nvkl1ilmbb4" path="res://resources/resources/trade/trade-items/modules/ox-vic-pyrr/dread/TradeResourceDread5.tres" id="6_4edxu"]
+[ext_resource type="Resource" uid="uid://dgu3wlrgwyj8h" path="res://resources/resources/trade/trade-items/modules/ox-vic-pyrr/dread/TradeResourceDread6.tres" id="7_7vsde"]
+[ext_resource type="Resource" uid="uid://nrrbpbnp06y7" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard3.tres" id="8_niuyg"]
+[ext_resource type="Resource" uid="uid://cy4k14rmehtui" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme3.tres" id="9_c8c83"]
+[ext_resource type="Resource" uid="uid://dws0t8o88s7wn" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/cheetah-cannon/TradeResourceCheetahCannon5.tres" id="10_d811i"]
+[ext_resource type="Resource" uid="uid://combiu5ptglf5" path="res://resources/resources/trade/trade-items/mineables/TradeResourceHarrowSeedpod2.tres" id="11_66d5s"]
+[ext_resource type="Resource" uid="uid://k3fv1l44f6bp" path="res://resources/resources/trade/trade-items/mineables/TradeResourceDragonSpawn3.tres" id="12_apaux"]
+[ext_resource type="Resource" uid="uid://cm0txhc2nbqyo" path="res://resources/resources/trade/trade-items/cargo/TradeResourceGold.tres" id="13_gq4o1"]
+[ext_resource type="Resource" uid="uid://nvakvaqc8kir" path="res://resources/resources/trade/trade-items/cargo/TradeResourceSalvagedBlackheartTitanium.tres" id="14_7vi6p"]
+[ext_resource type="Resource" uid="uid://drfy4m08nult5" path="res://resources/resources/trade/trade-items/cargo/TradeResourceRefinedVoidDiamond.tres" id="15_5scdg"]
+
+[resource]
+script = ExtResource("1_0m4o6")
+trade_resources = Array[ExtResource("2_8awk0")]([ExtResource("3_sqwvb"), ExtResource("4_8d1el"), ExtResource("5_iuih0"), ExtResource("6_4edxu"), ExtResource("7_7vsde"), ExtResource("8_niuyg"), ExtResource("9_c8c83"), ExtResource("10_d811i"), ExtResource("11_66d5s"), ExtResource("12_apaux"), ExtResource("13_gq4o1"), ExtResource("14_7vi6p"), ExtResource("15_5scdg")])

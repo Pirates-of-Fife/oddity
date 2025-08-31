@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2wnd0bx76rs0"]
+
+[ext_resource type="Script" path="res://classes/station/trade-terminal/trade-ui/trade-item-information/TradeItemInformationScreen.gd" id="1_dqydi"]
+[ext_resource type="Resource" uid="uid://c5d2bvcwkih6h" path="res://resources/resources/trade/trade-items/example/ExampleTradeResource1.tres" id="2_stu6c"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="7_t01py"]
+[ext_resource type="PackedScene" uid="uid://bxjlkxmhmnjit" path="res://classes/station/trade-terminal/trade-ui/trade-credit-total/TradeCreditLabel.tscn" id="8_kpgxr"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3t5ig"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Environment" id="Environment_o8sxp"]
+background_energy_multiplier = 2.0
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 2.0
+glow_enabled = true
+
+[sub_resource type="World3D" id="World3D_0t510"]
+environment = SubResource("Environment_o8sxp")
+
+[node name="TradeItemInformationScreen" type="Node3D" node_paths=PackedStringArray("preview", "camera", "lights", "title", "credits", "description")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52166, 0)
+script = ExtResource("1_dqydi")
+current_trade_item = ExtResource("2_stu6c")
+preview = NodePath("SubViewport/Preview")
+visibility_layers = 524288
+rotation_speed = 0.5
+camera = NodePath("SubViewport/Preview/Camera3D")
+lights = NodePath("SubViewport/Preview/Lights")
+title = NodePath("TitleLabel")
+credits = NodePath("TradeCreditLabel")
+description = NodePath("DescriptionLabel")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+render_priority = -1
+texture = SubResource("ViewportTexture_3t5ig")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+world_3d = SubResource("World3D_0t510")
+transparent_bg = true
+
+[node name="Preview" type="Node3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.07049)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/Preview"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.927148, 5)
+cull_mask = 1
+
+[node name="Lights" type="Node3D" parent="SubViewport/Preview"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewport/Preview/Lights"]
+transform = Transform3D(0.962706, -0.128269, 0.238211, 0, 0.880469, 0.474103, -0.27055, -0.456422, 0.847633, 2.44192, 1.20653, 3.31927)
+layers = 524288
+light_energy = 10.239
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="SubViewport/Preview/Lights"]
+transform = Transform3D(-0.386486, 0.437264, -0.812052, 0, 0.880469, 0.474104, 0.922295, 0.183235, -0.340289, -3.72397, 1.20653, -2.85347)
+layers = 524288
+light_energy = 10.239
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -2.01157, -1.10588, 0.0690668)
+outline_modulate = Color(0, 0, 0, 0)
+font = ExtResource("7_t01py")
+font_size = 76
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="DescriptionLabel" type="Label3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.97417, -1.82495, 0.0690668)
+outline_modulate = Color(0, 0, 0, 0)
+font = ExtResource("7_t01py")
+font_size = 76
+horizontal_alignment = 0
+vertical_alignment = 0
+autowrap_mode = 3
+justification_flags = 171
+width = 3500.0
+
+[node name="TradeCreditLabel" parent="." instance=ExtResource("8_kpgxr")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -2.00101, -1.39171, 0.0690668)
+visible = false
+vertical_alignment = 0

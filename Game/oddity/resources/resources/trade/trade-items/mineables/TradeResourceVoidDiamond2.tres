@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://vq31g8icmhj8"]
+
+[ext_resource type="PackedScene" uid="uid://cweaw6esrrgdn" path="res://scenes/minables/void-diamonds/extractables/VoidDiamondExtractable1.tscn" id="1_2jj1i"]
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="2_vtfhr"]
+
+[resource]
+script = ExtResource("2_vtfhr")
+is_mineable = true
+scene = ExtResource("1_2jj1i")
+name = &"Void Diamond"
+description = "A crystalline material essential for the production of Smart Glass and advanced optics. Rare, refined, and highly sought after by industrial and military contractors."
+value = 28000
+preview_distance = 3.2

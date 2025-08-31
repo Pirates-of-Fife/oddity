@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TradeResource" load_steps=3 format=3 uid="uid://cjf15x4fiex57"]
+
+[ext_resource type="PackedScene" uid="uid://24n0p54vbhsm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn" id="1_1mvn8"]
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="1_71kcs"]
+
+[resource]
+script = ExtResource("1_71kcs")
+scene = ExtResource("1_1mvn8")
+name = &"Rabauke Shipworks Kestrel Mk1"
+description = "Kestrel Mk1 Facelift"
+value = 17500000
+preview_distance = 100.0
