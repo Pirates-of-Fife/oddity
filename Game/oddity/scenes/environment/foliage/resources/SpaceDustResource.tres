@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FoliageResource" load_steps=3 format=3 uid="uid://caoc2b63dq3pq"]
+
+[ext_resource type="ArrayMesh" uid="uid://objoubxnhea1" path="res://scenes/environment/foliage/meshes/SpaceDustMesh.tres" id="1_n36g4"]
+[ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageResource.gd" id="1_s124l"]
+
+[resource]
+script = ExtResource("1_s124l")
+foliage_mesh = ExtResource("1_n36g4")
+scale_multiplier = 3.0
+scale_variance = 0.1

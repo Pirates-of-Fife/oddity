@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FoliageResource" load_steps=3 format=3 uid="uid://oa48tjr3t31s"]
+
+[ext_resource type="ArrayMesh" uid="uid://bvofscdpiwguv" path="res://scenes/environment/foliage/meshes/GreenGrassMesh.tres" id="1_2r878"]
+[ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageResource.gd" id="2_snrxb"]
+
+[resource]
+script = ExtResource("2_snrxb")
+foliage_mesh = ExtResource("1_2r878")
+scale_multiplier = 2.0
+scale_variance = 0.0

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FoliageResource" load_steps=3 format=3 uid="uid://b416p5k3fq6d2"]
+
+[ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageResource.gd" id="1_crrsa"]
+[ext_resource type="ArrayMesh" uid="uid://5bcxunt7ccxm" path="res://scenes/environment/foliage/meshes/RedGrassMesh.tres" id="1_wy74w"]
+
+[resource]
+script = ExtResource("1_crrsa")
+foliage_mesh = ExtResource("1_wy74w")
+scale_multiplier = 1.0
+scale_variance = 0.1

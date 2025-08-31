@@ -26,7 +26,7 @@ func spawn_asteroid_belt_sectors() -> void:
 
 func spawn_planet_surface_sectors() -> void:
 	var object_scatter : ObjectScatter = ObjectScatter.new()
-
+	
 	for foliage : FoliageResource in foliage_meshes:
 
 		var sectors : Array = object_scatter.generate_planet_scatter_sectors(splits, count_per_multi_mesh, planet_radius, foliage.scale_multiplier, invert_scale, foliage.scale_variance)

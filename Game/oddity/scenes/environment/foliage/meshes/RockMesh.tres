@@ -1,0 +1,36 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://ctwxirq182328"]
+
+[ext_resource type="Material" uid="uid://cre6mi8onexau" path="res://scenes/minables/asteroids/asteroid_chunks/AsteroidChunkMaterial.tres" id="1_unpkw"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vaeb7"]
+_surfaces = [{
+"aabb": AABB(-0.177592, -0.0141582, -0.134734, 0.355184, 0.130321, 0.269468),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("AQAFAAQAAwAHAAAABwAFAAEACQAFAAcABQAKAAYADQAMAAsABAAOAAIAAgAOAAsACAAMAA0ABgAPAA4ADwAIAA0ADwAKAAkAAQAEAAAABAACAAAABgAEAAUABwABAAAABwADAAgACQAHAAgABQAJAAoAAgALAAAAAwAAAAsAAwALAAwABgAOAAQADQALAA4ACAADAAwADwANAA4ADwAJAAgADwAGAAoA"),
+"lods": [0.0281949, PackedByteArray("AQAFAAQAAQAEAAAABAACAAAABAAOAAIABQAOAAQAAgAOAAsADQALAA4ABQAPAA4ADwANAA4ABQAJAA8ACQAFAAcABwAFAAEADwAJAAgADwAIAA0ACAALAA0ACAAAAAsAAgALAAAACAAHAAAABwABAAAACQAHAAgA")],
+"name": "Rock",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("Fi6DKujRAAAAAFl+/38AAFl+/3///wAApYEAAP9/AABJL4vOOtgAAG8h79bVPQAAWX7///9/AAB1J6AyYi4AAFXE+Sd1IwAApYH/fwAAAAD/f2rclCMAAGvRUjJb2AAAat+iJv9/AAD//6WB/38AAEjSONW30QAAW9iszZMuAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "Rock_Cube"
+_surfaces = [{
+"aabb": AABB(-0.177592, -0.0141582, -0.134734, 0.355184, 0.130321, 0.269468),
+"format": 34896613383,
+"index_count": 84,
+"index_data": PackedByteArray("BwAdABcAEgAmAAIAKQAeAAkANAAcACcAGQA3ACIARQBCADwAEwBIAAoACwBKADsALABBAEQAIABQAEkAUwAtAEYATwA2ADAACAAYAAUAFgANAAMAIwAVABsAKAAGAAQAJAARAC4AMgAlAC8AGgAzADgADAA+AAEADgAAADkADwA6AD8AIQBNABQARwA9AEwAKgAQAEAAUgBDAEsAUQAxACsATgAfADUA"),
+"lods": [0.0281949, PackedByteArray("BwAZABMABwAYAAMAEwAKAAMAEwBIAAoAGQBIABMACgBIADsARwA7AEwAGQBOAEgATgBDAEgAGQAwAE4AMAAcACcAJwAcAAkAUQAwACsAUQArAEQAKgA5AEQAKgAAADkADAA5AAAAKgAkAAAAJAAGAAAAMgAkACoA")],
+"material": ExtResource("1_unpkw"),
+"name": "Rock",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 84,
+"vertex_data": PackedByteArray("Fi6DKujRH/cWLoMq6NHO3hYugyro0fz4Fi6DKujRm7EWLoMq6NGy5BYugyro0RSpAABZfv9/suQAAFl+/3823AAAWX7/fxSpAABZfv9/V9hZfv9///8z31l+/3///xjSWX7/f///zt5Zfv9///+bsaWBAAD/fx/3pYEAAP9/WPmlgQAA/39E/qWBAAD/f9v4pYEAAP9//PhJL4vOOtgz30kvi8462DX3SS+LzjrYEPhJL4vOOtibsUkvi8462DbcSS+LzjrYFKlvIe/W1T3V/G8h79bVPQz5byHv1tU9EPhvIe/W1T009W8h79bVPTbcbyHv1tU9V9hZfv///384+Vl+////fyz7WX7///9/NfdZfv///3/V/Fl+////fxD4dSegMmIu2/h1J6AyYi508HUnoDJiLvz4dSegMmIuNPV1J6AyYi6y5HUnoDJiLlfYVcT5J3UjRP5VxPkndSNG91XE+Sd1Ixf+VcT5J3UjvvxVxPkndSPb+FXE+Sd1I3TwpYH/fwAAY+2lgf9/AABG96WB/38AAHTwpYH/fwAADPmlgf9/AAA09f9/atyUIzj5/39q3JQjY+3/f2rclCPV/P9/atyUIwz5a9FSMlvYH/dr0VIyW9hY+WvRUjJb2BjSa9FSMlvYq/Rr0VIyW9h58mvRUjJb2M7eat+iJv9/WPlq36Im/39E/mrfoib/fxf+at+iJv9/q/T//6WB/39/+f//pYH/fxf+//+lgf9/q/T//6WB/3++/P//pYH/f3nySNI41bfRM99I0jjVt9Es+0jSONW30RjSSNI41bfRf/lI0jjVt9F58kjSONW30TX3W9iszZMuOPlb2KzNky5j7VvYrM2TLiz7W9iszZMuRvdb2KzNky5/+VvYrM2TLr78NHk4S1ZvKF6rwYb7/mpelrHAafjxbZXQscBp+D58YcHxbZXQXm5f44mQ0qHwlL93Vm8oXv5qXpY0eThLX4L6Q2qH9kHfQ+L4q8GG+4mQ0qHchsW02Hwsvf5qXpY+fGHB8W2V0JW+/Af0vzkm2HwsvR5T1sQ+fGHBXm5f4927hQPyPLUG3IbFtJW+/AfYfCy930Pi+HlEoN+rwYb7HlPWxLHAafhebl/jaof2QUnFtFKIJzTUBsXbad9D4vh5RKDfH76jKUnFtFJ5RKDf9L85Jh5T1sTdu4UDH76jKZW+/Af0vzkmNHk4S1+C+kPwlL93oZyoV7CpEnpWbyheX4L6Q2qH9kGIJzTUoZyoV/kvhhmIJzTUoZyoVwbF22mwqRJ6iZDSofI8tQbwlL93+S+GGbCpEnrchsW03buFAx++oynyPLUGScW0UvkvhhkGxdtp")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vaeb7")

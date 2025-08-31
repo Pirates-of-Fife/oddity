@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FoliageResource" load_steps=3 format=3 uid="uid://t1ha50funlye"]
+
+[ext_resource type="ArrayMesh" uid="uid://ctwxirq182328" path="res://scenes/environment/foliage/meshes/RockMesh.tres" id="1_bdspw"]
+[ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageResource.gd" id="1_urp6h"]
+
+[resource]
+script = ExtResource("1_urp6h")
+foliage_mesh = ExtResource("1_bdspw")
+scale_multiplier = 2.0
+scale_variance = 0.0
