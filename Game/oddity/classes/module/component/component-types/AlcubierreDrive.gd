@@ -81,9 +81,6 @@ func _initialize_collision_shape() -> void:
 
 
 func _on_timer_timeout() -> void:
-	if module_slot == null:
-		return
-
 	if (module_slot.vehicle != null):
 		var ship : Starship = module_slot.vehicle
 		
