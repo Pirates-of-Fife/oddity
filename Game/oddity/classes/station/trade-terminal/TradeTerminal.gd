@@ -105,6 +105,7 @@ func buy(player : Player, control_entity : ControlEntity) -> void:
 		
 		if trade_item is CargoContainer:
 			cargo_grid.add_cargo_container(trade_item)
+			trade_item.value = selected_trade_item.value
 		else:
 			trade_item.global_position = module_spawn_position_marker.global_position
 		

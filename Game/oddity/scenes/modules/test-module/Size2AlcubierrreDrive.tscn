@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ssxap6l3wimu"]
+[gd_scene load_steps=6 format=3 uid="uid://ssxap6l3wimu"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/AlcubierreDrive.gd" id="1_e77oe"]
 [ext_resource type="Resource" uid="uid://bcnnlkr5akc2h" path="res://scenes/modules/test-module/Size2AlcubierreDrive.tres" id="2_fcs0k"]
 [ext_resource type="PackedScene" uid="uid://b4rqsv1kqush4" path="res://scenes/modules/test-module/alcubierre_drive.glb" id="3_g72co"]
+[ext_resource type="Resource" uid="uid://dcf0f4wccjuer" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/fluxline/TradeResourceFluxline2.tres" id="3_vkqc2"]
 
 [sub_resource type="Curve" id="Curve_ceube"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.104247, 0.739165), -4.46458, -4.46458, 0, 0, Vector2(0.50193, 0.0827011), 0.0, 0.0, 0, 0, Vector2(1, 0.0629742), 0.0, 0.0, 0, 0]
@@ -22,6 +23,7 @@ travelling_sound = NodePath("Travelling")
 module_resource = ExtResource("2_fcs0k")
 passive_heat_generation = 50.0
 value = 20000
+trade_information = ExtResource("3_vkqc2")
 can_be_picked_up = true
 
 [node name="alcubierre_drive" parent="." instance=ExtResource("3_g72co")]

@@ -68,6 +68,8 @@ sprite_max_distance = 1.45e+06
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159849, 29082.6, -5236.17)
 station_name = &"Asp Creek Port"
 trade_list = ExtResource("7_b1dox")
+buy_markup = 2.0
+sell_markup = 1.8
 
 [node name="ColossusZone" parent="." instance=ExtResource("8_66jas")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6e+06, 2e+06, -9e+06)
@@ -93,8 +95,8 @@ sprite_max_distance = 1.45e+06
 transform = Transform3D(0.695587, -0.718442, 0, 0.718442, 0.695587, 0, 0, 0, 1, 284424, 242092, -37548)
 station_name = &"Ghost\'s Beacon"
 trade_list = ExtResource("10_1tnca")
-buy_markup = null
-sell_markup = null
+buy_markup = 1.5
+sell_markup = 1.3
 
 [node name="OmenZone" parent="." instance=ExtResource("14_l5kh6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2e+06, 2e+06, 2e+06)

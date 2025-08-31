@@ -1,8 +1,21 @@
-[gd_resource type="Resource" script_class="TradeResourceList" load_steps=3 format=3 uid="uid://lnu3li625jjm"]
+[gd_resource type="Resource" script_class="TradeResourceList" load_steps=16 format=3 uid="uid://lnu3li625jjm"]
 
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResourceList.gd" id="1_5jrof"]
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="2_jp8o0"]
+[ext_resource type="Resource" uid="uid://dws0t8o88s7wn" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/cheetah-cannon/TradeResourceCheetahCannon5.tres" id="3_pdaev"]
+[ext_resource type="Resource" uid="uid://b2lrfdbyjru5u" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/cheetah-cannon/TradeResourceCheetahCannon6.tres" id="4_cnaoa"]
+[ext_resource type="Resource" uid="uid://ccvrdyr0p3o78" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter5.tres" id="5_wn5nn"]
+[ext_resource type="Resource" uid="uid://d3dja2q0n16xa" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter6.tres" id="6_i7u45"]
+[ext_resource type="Resource" uid="uid://cil2bekj0pyvo" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard1.tres" id="7_4d7fo"]
+[ext_resource type="Resource" uid="uid://nrrbpbnp06y7" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard3.tres" id="8_x2rc5"]
+[ext_resource type="Resource" uid="uid://btnir1eoca2nq" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard4.tres" id="9_3g7i8"]
+[ext_resource type="Resource" uid="uid://cej6iem100o58" path="res://resources/resources/trade/trade-items/mineables/TradeResourceAngelsDustPearl.tres" id="10_r5uk6"]
+[ext_resource type="Resource" uid="uid://k3fv1l44f6bp" path="res://resources/resources/trade/trade-items/mineables/TradeResourceDragonSpawn3.tres" id="11_6acpp"]
+[ext_resource type="Resource" uid="uid://syf6v22ym8ql" path="res://resources/resources/trade/trade-items/mineables/TradeResourceVoidDiamond1.tres" id="12_gchai"]
+[ext_resource type="Resource" uid="uid://dmvp1o0rpoxl" path="res://resources/resources/trade/trade-items/cargo/TradeResourceContraband.tres" id="13_6r2fq"]
+[ext_resource type="Resource" uid="uid://drfy4m08nult5" path="res://resources/resources/trade/trade-items/cargo/TradeResourceRefinedVoidDiamond.tres" id="14_nk1qs"]
+[ext_resource type="Resource" uid="uid://cm0txhc2nbqyo" path="res://resources/resources/trade/trade-items/cargo/TradeResourceGold.tres" id="15_5ew6i"]
 
 [resource]
 script = ExtResource("1_5jrof")
-trade_resources = Array[ExtResource("2_jp8o0")]([])
+trade_resources = Array[ExtResource("2_jp8o0")]([ExtResource("3_pdaev"), ExtResource("4_cnaoa"), ExtResource("5_wn5nn"), ExtResource("6_i7u45"), ExtResource("7_4d7fo"), ExtResource("8_x2rc5"), ExtResource("9_3g7i8"), ExtResource("10_r5uk6"), ExtResource("11_6acpp"), ExtResource("12_gchai"), ExtResource("13_6r2fq"), ExtResource("14_nk1qs"), ExtResource("15_5ew6i")])

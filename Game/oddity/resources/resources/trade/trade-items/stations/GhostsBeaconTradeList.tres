@@ -1,8 +1,18 @@
-[gd_resource type="Resource" script_class="TradeResourceList" load_steps=3 format=3 uid="uid://ccjtq86n0uwk8"]
+[gd_resource type="Resource" script_class="TradeResourceList" load_steps=13 format=3 uid="uid://ccjtq86n0uwk8"]
 
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResourceList.gd" id="1_s1ce4"]
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="2_coaoy"]
+[ext_resource type="Resource" uid="uid://ccvrdyr0p3o78" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter5.tres" id="3_j6i8q"]
+[ext_resource type="Resource" uid="uid://bt4rh3lamcslt" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme1.tres" id="4_bhdm8"]
+[ext_resource type="Resource" uid="uid://bhguq6iupj3mx" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme2.tres" id="5_vdl1j"]
+[ext_resource type="Resource" uid="uid://8ofkjduu0xap" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/coreline/TradeResourceCoreLine2.tres" id="6_1w4nn"]
+[ext_resource type="Resource" uid="uid://dcf0f4wccjuer" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/fluxline/TradeResourceFluxline2.tres" id="7_r531w"]
+[ext_resource type="Resource" uid="uid://duw3fo4yi0ba4" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/cool-max/TradeResourceCoolMax2.tres" id="8_brdrj"]
+[ext_resource type="Resource" uid="uid://r4c1oxdjlk7y" path="res://resources/resources/trade/trade-items/mineables/TradeResourceHarrowWood3.tres" id="9_hae4t"]
+[ext_resource type="Resource" uid="uid://k3fv1l44f6bp" path="res://resources/resources/trade/trade-items/mineables/TradeResourceDragonSpawn3.tres" id="10_qy3ny"]
+[ext_resource type="Resource" uid="uid://nvakvaqc8kir" path="res://resources/resources/trade/trade-items/cargo/TradeResourceSalvagedBlackheartTitanium.tres" id="11_spyx3"]
+[ext_resource type="Resource" uid="uid://cm0txhc2nbqyo" path="res://resources/resources/trade/trade-items/cargo/TradeResourceGold.tres" id="12_1vjpm"]
 
 [resource]
 script = ExtResource("1_s1ce4")
-trade_resources = Array[ExtResource("2_coaoy")]([])
+trade_resources = Array[ExtResource("2_coaoy")]([ExtResource("3_j6i8q"), ExtResource("4_bhdm8"), ExtResource("5_vdl1j"), ExtResource("6_1w4nn"), ExtResource("7_r531w"), ExtResource("8_brdrj"), ExtResource("9_hae4t"), ExtResource("10_qy3ny"), ExtResource("11_spyx3"), ExtResource("12_1vjpm")])

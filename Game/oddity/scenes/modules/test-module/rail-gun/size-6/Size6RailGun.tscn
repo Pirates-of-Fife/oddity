@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcv860lf15jdf"]
+[gd_scene load_steps=9 format=3 uid="uid://dcv860lf15jdf"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/rail-gun/rail_gun.gd" id="1_2byvw"]
 [ext_resource type="Resource" uid="uid://co7nbe2h7fmnp" path="res://scenes/modules/test-module/rail-gun/size-6/Size6Railgun.tres" id="2_grniy"]
 [ext_resource type="PackedScene" uid="uid://nssl2fvrxc88" path="res://scenes/modules/test-module/rail-gun/RailGunSound.tscn" id="2_kcyjo"]
 [ext_resource type="PackedScene" uid="uid://chw5mobhsfp6f" path="res://scenes/modules/test-module/rail-gun/railgun.glb" id="3_hmgav"]
+[ext_resource type="Resource" uid="uid://f18yo7kp6bk0" path="res://resources/resources/trade/trade-items/modules/protectorate-federation/rail/TradeResourceRail6.tres" id="4_etpc7"]
 [ext_resource type="AudioStream" uid="uid://ccvhspemtu6rg" path="res://scenes/modules/test-module/rail-gun/cooldowncomplete.mp3" id="5_0ct43"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ttnaw"]
@@ -22,6 +23,7 @@ size = 6
 nozzle = NodePath("Marker3D")
 module_resource = ExtResource("2_grniy")
 value = 150000
+trade_information = ExtResource("4_etpc7")
 can_be_picked_up = true
 
 [node name="Marker3D" type="Marker3D" parent="."]
