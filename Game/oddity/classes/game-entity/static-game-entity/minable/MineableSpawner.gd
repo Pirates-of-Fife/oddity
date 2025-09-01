@@ -54,6 +54,7 @@ func spawn_objects(sectors : Array) -> void:
 		
 		var mmi : MultiMeshInstance3D = MultiMeshInstance3D.new()
 		sector_node.add_child(mmi)
+
 		mmi.owner = get_tree().edited_scene_root
 		
 		var mm : MultiMesh = MultiMesh.new()
@@ -72,6 +73,9 @@ func spawn_objects(sectors : Array) -> void:
 		
 		mmi.multimesh = mm
 
+		mmi.visibility_range_end = 200000
+		mmi.visibility_range_end_margin = 1000
+		
 		var bounding_radius : float = sector.bounding_radius + sector_node.spawn_radius
 		
 		var zone : PlayerDetectionZone = PlayerDetectionZone.new()
