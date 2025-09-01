@@ -8,7 +8,7 @@ var mineable_transforms : Array
 @export_range(0.1, 1, 0.05)
 var update_rate : float = 0.5
 
-@export_range(10, 1000, 5)
+@export_range(10, 1000, 5, "or_greater")
 var spawn_radius : float
 
 var timer : Timer = Timer.new()
