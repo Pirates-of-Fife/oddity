@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://ccvrdyr0p3o78"]
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=2 format=3 uid="uid://ccvrdyr0p3o78"]
 
-[ext_resource type="PackedScene" uid="uid://pmfbi24jhmdj" path="res://scenes/modules/test-module/mining-laser/size-5/Size5MiningLaser.tscn" id="1_1bqfj"]
 [ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="1_4qrpw"]
 
 [resource]
 script = ExtResource("1_4qrpw")
-scene = ExtResource("1_1bqfj")
+scene = "res://scenes/modules/test-module/mining-laser/size-5/Size5MiningLaser.tscn"
 name = &"Ares Industrial Co. Rock Hunter 5"
 description = "A modern reimagining of a classic mining laser, proven reliable over 40+ years. For dependable performance, Ares Industrial remains the industry standard."
 value = 68000

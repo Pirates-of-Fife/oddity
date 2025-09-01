@@ -100,7 +100,8 @@ func buy(player : Player, control_entity : ControlEntity) -> void:
 	show_success("Successfully bought " + str(ui.trade_change_ammount_buttons.counter) + " " + selected_trade_item.name)
 
 	for i : int in range(ui.trade_change_ammount_buttons.counter):
-		var trade_item : GameEntity = selected_trade_item.scene.instantiate()
+		var trade_item_scene : PackedScene = load(selected_trade_item.scene)
+		var trade_item : GameEntity = trade_item_scene.instantiate()
 		get_tree().get_first_node_in_group("World").add_child(trade_item)
 		
 		if trade_item is CargoContainer:

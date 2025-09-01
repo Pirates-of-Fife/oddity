@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://c3nvkl1ilmbb4"]
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=2 format=3 uid="uid://c3nvkl1ilmbb4"]
 
 [ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="1_6lgib"]
-[ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="1_yxhi6"]
 
 [resource]
 script = ExtResource("1_6lgib")
-scene = ExtResource("1_yxhi6")
+scene = "res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn"
 name = &"Ox\'vic Pyrr Dread 5"
 description = "Ox'vic Pyrrs Dread PCWs are the first pick for many bounty hunters and small militias. Cheap to run and hit hard."
 value = 80000
