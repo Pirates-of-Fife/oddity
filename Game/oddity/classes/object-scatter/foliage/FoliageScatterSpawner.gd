@@ -12,7 +12,7 @@ func spawn_gas_giant_sectors() -> void:
 	var object_scatter : ObjectScatter = ObjectScatter.new()
 	
 	for foliage : FoliageResource in foliage_meshes:
-		var sectors : Array = object_scatter.generate_gas_giant_scatter_sectors(splits, count_per_multi_mesh, planet_radius + atmosphere_padding_radius, foliage.scale_multiplier, invert_scale, foliage.scale_variance, density)
+		var sectors : Array = object_scatter.generate_gas_giant_scatter_sectors(splits, count_per_multi_mesh, planet_radius + atmosphere_padding_radius, foliage.scale_multiplier * scale_multiplier, invert_scale, foliage.scale_variance, density)
 	
 		spawn_objects(sectors, foliage.foliage_mesh)
 
@@ -20,7 +20,7 @@ func spawn_asteroid_belt_sectors() -> void:
 	var object_scatter : ObjectScatter = ObjectScatter.new()
 	
 	for foliage : FoliageResource in foliage_meshes:
-		var sectors : Array = object_scatter.generate_asteroid_belt_scatter_sectors(splits, count_per_multi_mesh, asteroid_belt, foliage.scale_multiplier, invert_scale, foliage.scale_variance, vertical_variance)
+		var sectors : Array = object_scatter.generate_asteroid_belt_scatter_sectors(splits, count_per_multi_mesh, asteroid_belt, foliage.scale_multiplier * scale_multiplier, invert_scale, foliage.scale_variance, vertical_variance)
 
 		spawn_objects(sectors, foliage.foliage_mesh)
 
@@ -29,7 +29,7 @@ func spawn_planet_surface_sectors() -> void:
 	
 	for foliage : FoliageResource in foliage_meshes:
 
-		var sectors : Array = object_scatter.generate_planet_scatter_sectors(splits, count_per_multi_mesh, planet_radius, foliage.scale_multiplier, invert_scale, foliage.scale_variance)
+		var sectors : Array = object_scatter.generate_planet_scatter_sectors(splits, count_per_multi_mesh, planet_radius, foliage.scale_multiplier * scale_multiplier, invert_scale, foliage.scale_variance)
 	
 		spawn_objects(sectors, foliage.foliage_mesh)
 
