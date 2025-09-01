@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqpmddm661vhp"]
 
 [ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_3ylpl"]
-[ext_resource type="Resource" uid="uid://drfy4m08nult5" path="res://resources/resources/trade/trade-items/cargo/TradeResourceRefinedVoidDiamond.tres" id="2_e8wr3"]
+[ext_resource type="Resource" uid="uid://drfy4m08nult5" path="res://resources/resources/trade/trade-items/cargo/TradeResourceRefinedVoidDiamond.tres" id="2_auajx"]
 [ext_resource type="PackedScene" uid="uid://c8ctjmmltntx5" path="res://scenes/cargo/bounty-hunting-cargo-containers/highValueBox.glb" id="2_v0go4"]
 
 [node name="Cu1Container" type="RigidBody3D"]
@@ -12,7 +12,7 @@ contact_monitor = true
 script = ExtResource("1_3ylpl")
 contents = "Refined Void Diamonds"
 value = 70000
-trade_information = ExtResource("2_e8wr3")
+trade_information = ExtResource("2_auajx")
 can_be_picked_up = true
 
 [node name="highValueBox" parent="." instance=ExtResource("2_v0go4")]

@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="TradeResource" load_steps=3 format=3 uid="uid://cnnhbaw11t3vf"]
+[gd_resource type="Resource" script_class="TradeResource" load_steps=2 format=3 uid="uid://cnnhbaw11t3vf"]
 
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="1_slsfj"]
-[ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="1_x1kba"]
 
 [resource]
 script = ExtResource("1_slsfj")
-scene = ExtResource("1_x1kba")
+scene = "res://test-scenes/star-system-test-scene/GodotPlushie.tscn"
 name = &"Godot Plushie"
 description = "An adorable little robot. Get one now! "
 value = 29

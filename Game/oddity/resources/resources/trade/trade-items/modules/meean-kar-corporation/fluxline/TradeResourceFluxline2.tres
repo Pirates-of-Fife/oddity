@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://dcf0f4wccjuer"]
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=2 format=3 uid="uid://dcf0f4wccjuer"]
 
 [ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="1_07nsm"]
-[ext_resource type="PackedScene" uid="uid://ssxap6l3wimu" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="1_wvmd4"]
 
 [resource]
 script = ExtResource("1_07nsm")
-scene = ExtResource("1_wvmd4")
+scene = "res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn"
 name = &"Meean\'kar Corporation Fluxline | Size 2"
 description = "Fluxline Alcubierre Drives are prone to failure. Avoid use until Meean'kar releases version 2. Current units are risky for long-term operations."
 value = 9000

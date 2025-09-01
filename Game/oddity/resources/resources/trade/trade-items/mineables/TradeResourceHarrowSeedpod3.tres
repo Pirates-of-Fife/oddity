@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://df8qflpgp11f6"]
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=2 format=3 uid="uid://df8qflpgp11f6"]
 
-[ext_resource type="PackedScene" uid="uid://8xvv1fjiqfqa" path="res://scenes/minables/harrow/extractables/HarrowSeedpod3.tscn" id="1_xej0q"]
 [ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="2_1u6id"]
 
 [resource]
 script = ExtResource("2_1u6id")
 is_mineable = true
-scene = ExtResource("1_xej0q")
+scene = "res://scenes/minables/harrow/extractables/HarrowSeedpod3.tscn"
 name = &"Harrow Seedpod"
 description = "Seed-bearing pods from the Harrow tree. Though the flesh is inedible, the seeds have potent psychedelic properties when brewed. Used in the medical sector as a base for certain therapeutic fluids."
 value = 40000

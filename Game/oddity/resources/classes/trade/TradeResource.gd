@@ -3,7 +3,7 @@ extends Resource
 class_name TradeResource
 
 @export
-var scene : PackedScene
+var scene : String
 
 @export
 var name : StringName

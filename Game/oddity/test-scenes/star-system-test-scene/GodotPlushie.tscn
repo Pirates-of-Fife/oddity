@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://rpex7qa7spbx"]
+[gd_scene load_steps=9 format=3 uid="uid://rpex7qa7spbx"]
 
 [ext_resource type="Script" path="res://classes/game-entity/GameEntity.gd" id="1_nl8xv"]
+[ext_resource type="Resource" uid="uid://cnnhbaw11t3vf" path="res://resources/resources/trade/trade-items/game-entities/TradeResourcePlushie.tres" id="2_a6ie4"]
 [ext_resource type="PackedScene" uid="uid://l76da1sleber" path="res://addons/godot_plush/godot_plush_sitting.glb" id="2_vc1jw"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_amdl0"]
@@ -26,6 +27,7 @@ script = ExtResource("1_nl8xv")
 entity_name = &"Godot Plushie"
 value = 10
 sellable = true
+trade_information = ExtResource("2_a6ie4")
 can_be_picked_up = true
 
 [node name="godot_plush_sitting" parent="." instance=ExtResource("2_vc1jw")]

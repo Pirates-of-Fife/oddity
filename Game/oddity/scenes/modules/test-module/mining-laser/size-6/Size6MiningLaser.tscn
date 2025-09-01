@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://classes/module/weapon/MiningLaser.gd" id="1_y74wc"]
 [ext_resource type="PackedScene" uid="uid://bfu75jklswq17" path="res://scenes/modules/test-module/mining-laser/size-6/mining_laser_6.glb" id="2_jw6kf"]
 [ext_resource type="Resource" uid="uid://crqu6riygyp6f" path="res://scenes/modules/test-module/mining-laser/size-6/Size6MiningLaser.tres" id="2_vjpma"]
+[ext_resource type="Resource" uid="uid://d3dja2q0n16xa" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter6.tres" id="3_3g1ve"]
 [ext_resource type="PackedScene" uid="uid://cfn6xc5cqonls" path="res://scenes/modules/test-module/mining-laser/mining-laser/MiningLaser.tscn" id="3_auwlm"]
-[ext_resource type="Resource" uid="uid://d3dja2q0n16xa" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter6.tres" id="3_cl8x6"]
 [ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="4_g18gm"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ubqe3"]
@@ -21,7 +21,7 @@ size = 6
 nozzle = NodePath("Nozzle")
 module_resource = ExtResource("2_vjpma")
 value = 70000
-trade_information = ExtResource("3_cl8x6")
+trade_information = ExtResource("3_3g1ve")
 can_be_picked_up = true
 
 [node name="mining_laser_6" parent="." instance=ExtResource("2_jw6kf")]
