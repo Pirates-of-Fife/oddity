@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/ShieldGenerator.gd" id="1_3sobq"]
 [ext_resource type="Resource" uid="uid://cbmpfj3cst4in" path="res://scenes/modules/test-module/ShieldGenerator/size-3/Size3Shield.tres" id="2_b4p8l"]
+[ext_resource type="Resource" uid="uid://nrrbpbnp06y7" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard3.tres" id="3_0wpc1"]
 [ext_resource type="PackedScene" uid="uid://bf7s7vwhd8bfp" path="res://scenes/modules/test-module/ShieldGenerator/shield-modul.glb" id="3_ewjby"]
-[ext_resource type="Resource" uid="uid://nrrbpbnp06y7" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard3.tres" id="3_ubdn4"]
 
 [node name="Size3ShieldGenerator" type="RigidBody3D"]
 collision_layer = 537396737
@@ -14,7 +14,7 @@ size = 3
 module_resource = ExtResource("2_b4p8l")
 passive_heat_generation = 200.0
 value = 45000
-trade_information = ExtResource("3_ubdn4")
+trade_information = ExtResource("3_0wpc1")
 can_be_picked_up = true
 
 [node name="shield-modul" parent="." instance=ExtResource("3_ewjby")]

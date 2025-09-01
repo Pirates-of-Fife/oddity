@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://nvakvaqc8kir"]
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=2 format=3 uid="uid://nvakvaqc8kir"]
 
 [ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="1_agvv5"]
-[ext_resource type="PackedScene" uid="uid://d26j0pywefc6q" path="res://scenes/cargo/bounty-hunting-cargo-containers/LowValueContainer.tscn" id="1_bp3my"]
 
 [resource]
 script = ExtResource("1_agvv5")
-scene = ExtResource("1_bp3my")
+is_mineable = false
+scene = "res://scenes/cargo/bounty-hunting-cargo-containers/LowValueContainer.tscn"
 name = &"Salvaged Blackheart Titanium"
 description = "A mix of salvaged titanium from various starship wrecks. "
 value = 25000

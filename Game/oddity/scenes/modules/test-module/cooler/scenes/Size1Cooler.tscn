@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://td0c2gk7tpmi" path="res://scenes/modules/test-module/cooler/scenes/Size1CoolerResource.tres" id="2_8rpbc"]
 [ext_resource type="PackedScene" uid="uid://i6vj2e60304s" path="res://scenes/modules/test-module/cooler/CoolerBody.glb" id="2_80lw6"]
 [ext_resource type="PackedScene" uid="uid://tutibqo7k53f" path="res://scenes/modules/test-module/cooler/CoolerFan.tscn" id="3_5op32"]
-[ext_resource type="Resource" uid="uid://p6knxl4qjuoh" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/cool-max/TradeResourceCoolMax1.tres" id="3_nlvpw"]
+[ext_resource type="Resource" uid="uid://p6knxl4qjuoh" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/cool-max/TradeResourceCoolMax1.tres" id="3_u21ki"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nvj01"]
 points = PackedVector3Array(0.434177, 0.238642, 0.206121, -0.477286, -0.179816, -0.242133, -0.444353, -0.208202, -0.210748, -0.477153, 0.207822, 0.25, 0.462173, -0.224439, 0.235052, 0.479406, 0.178827, -0.243226, -0.429835, 0.221436, -0.196115, -0.477153, -0.209558, 0.25, 0.477286, -0.179816, -0.242133, 0.477153, 0.207822, 0.25, -0.479406, 0.178827, -0.243226, 0.429835, 0.221436, -0.196115, 0.422114, -0.219179, -0.177942, -0.431951, -0.239151, 0.205085, -0.434177, 0.238642, 0.206121, 0.477153, -0.209558, 0.25, 0.431951, -0.239151, 0.205085, -0.452973, -0.22731, -0.0488129, 0.484657, 0.211104, 0.0417861, -0.484344, -0.212703, 0.0569181, -0.428927, 0.235746, 0.0705377, 0.48235, -0.196773, -0.0939486, -0.482405, 0.210119, 0.0567062, -0.422114, -0.219179, -0.177942, 0.426167, 0.234223, 0.0406711, -0.484623, -0.197696, -0.109526, 0.444353, -0.208202, -0.210748, 0.464555, 0.223854, 0.236243, 0.482011, -0.211683, 0.0717466, 0.483859, 0.195649, -0.139581, -0.464555, 0.223854, 0.236243, -0.482748, 0.195198, -0.109087)
@@ -18,7 +18,7 @@ size = 1
 initialize_collision_shape_automatically = false
 module_resource = ExtResource("2_8rpbc")
 value = 5000
-trade_information = ExtResource("3_nlvpw")
+trade_information = ExtResource("3_u21ki")
 can_be_picked_up = true
 
 [node name="CoolerBody" parent="." instance=ExtResource("2_80lw6")]

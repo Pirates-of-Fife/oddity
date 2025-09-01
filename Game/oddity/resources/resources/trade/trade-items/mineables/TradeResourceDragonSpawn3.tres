@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=3 format=3 uid="uid://k3fv1l44f6bp"]
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=2 format=3 uid="uid://k3fv1l44f6bp"]
 
-[ext_resource type="PackedScene" uid="uid://cayh3n1oyi7oa" path="res://scenes/minables/dragon-spawn/extractables/DragonSpawnExtractable3.tscn" id="1_6lgtu"]
 [ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="2_pl2mp"]
 
 [resource]
 script = ExtResource("2_pl2mp")
 is_mineable = true
-scene = ExtResource("1_6lgtu")
+scene = "res://scenes/minables/dragon-spawn/extractables/DragonSpawnExtractable3.tscn"
 name = &"Dragon Spawn"
 description = "A vivid red crystalline formation, naturally growing in spiked clusters. Limited industrial application beyond conductivity, but highly prized for cultural and ceremonial uses. Every badge of the Rubika Imperia is fashioned from genuine, non-printed Dragon Spawn crystal."
 value = 60000

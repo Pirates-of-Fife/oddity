@@ -23,7 +23,6 @@ func update_trade_item_list(trade_items : Array[TradeResource]) -> void:
 		var list_item : TradeItemListItem = trade_item_list_item_scene.instantiate()
 		list_item.position = Vector3(0, -current_trade_item_count * height_per_trade_item_list_item, 0)
 		list_item.trade_item = trade_item
-		print(list_item.trade_item)
 		list_item.switch_view.connect(_on_click)
 
 		add_child(list_item)
@@ -31,7 +30,6 @@ func update_trade_item_list(trade_items : Array[TradeResource]) -> void:
 		
 		current_trade_item_count += 1
 		
-		print(current_trade_item_count)
 		
 	
 func _on_click(trade_item : TradeResource) -> void:

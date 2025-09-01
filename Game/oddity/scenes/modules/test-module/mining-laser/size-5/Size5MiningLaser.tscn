@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://classes/module/weapon/MiningLaser.gd" id="1_67awj"]
 [ext_resource type="PackedScene" uid="uid://jubrpulvdctu" path="res://scenes/modules/test-module/mining-laser/size-5/mining_laser_5.glb" id="2_w37g0"]
 [ext_resource type="Resource" uid="uid://blt132nd84dk1" path="res://scenes/modules/test-module/mining-laser/size-5/Size5MiningLaserResource.tres" id="2_ymhg8"]
-[ext_resource type="Resource" uid="uid://ccvrdyr0p3o78" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter5.tres" id="3_0rp21"]
+[ext_resource type="Resource" uid="uid://ccvrdyr0p3o78" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter5.tres" id="3_4b0fh"]
 [ext_resource type="PackedScene" uid="uid://cfn6xc5cqonls" path="res://scenes/modules/test-module/mining-laser/mining-laser/MiningLaser.tscn" id="3_w6qr8"]
 [ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="4_d1aon"]
 
@@ -21,7 +21,7 @@ size = 5
 nozzle = NodePath("Nozzle")
 module_resource = ExtResource("2_ymhg8")
 value = 40000
-trade_information = ExtResource("3_0rp21")
+trade_information = ExtResource("3_4b0fh")
 can_be_picked_up = true
 
 [node name="mining_laser_5" parent="." instance=ExtResource("2_w37g0")]

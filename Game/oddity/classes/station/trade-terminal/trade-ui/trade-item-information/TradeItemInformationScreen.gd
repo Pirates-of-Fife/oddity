@@ -52,7 +52,8 @@ func display_trade_item(trade_item : TradeResource, station_markup : float) -> v
 	credits.credits = current_trade_item.value * station_markup
 
 func spawn_trade_item() -> void:
-	var trade_item : GameEntity = current_trade_item.scene.instantiate()
+	var trade_item_scene : PackedScene = load(current_trade_item.scene)
+	var trade_item : GameEntity = trade_item_scene.instantiate()
 	
 	preview.add_child(trade_item)
 		

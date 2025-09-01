@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://classes/module/component/component-types/HullReinforcement.gd" id="1_2xavw"]
 [ext_resource type="Resource" uid="uid://tuf8tmghd3tu" path="res://scenes/modules/test-module/hull-reinforcement/size-2/Size2HullReinforcement.tres" id="2_p38nl"]
 [ext_resource type="PackedScene" uid="uid://sqlkqvg7d5tk" path="res://scenes/modules/test-module/hull-reinforcement/hullReinforcementModule.glb" id="3_de0ob"]
-[ext_resource type="Resource" uid="uid://bhguq6iupj3mx" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme2.tres" id="3_w65g5"]
+[ext_resource type="Resource" uid="uid://bhguq6iupj3mx" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme2.tres" id="3_shjdb"]
 
 [node name="Size2HullReinforcement" type="RigidBody3D"]
 collision_layer = 537396225
@@ -13,7 +13,7 @@ script = ExtResource("1_2xavw")
 size = 2
 module_resource = ExtResource("2_p38nl")
 value = 4000
-trade_information = ExtResource("3_w65g5")
+trade_information = ExtResource("3_shjdb")
 can_be_picked_up = true
 
 [node name="hullReinforcementModule" parent="." instance=ExtResource("3_de0ob")]

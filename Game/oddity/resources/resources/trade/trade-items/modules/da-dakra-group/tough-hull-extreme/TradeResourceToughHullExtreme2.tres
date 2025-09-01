@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=3 format=3 uid="uid://bhguq6iupj3mx"]
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=2 format=3 uid="uid://bhguq6iupj3mx"]
 
-[ext_resource type="PackedScene" uid="uid://dgpwqm2dpuubj" path="res://scenes/modules/test-module/hull-reinforcement/size-2/Size2HullReinforcement.tscn" id="1_pvax5"]
 [ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="2_fl65f"]
 
 [resource]
 script = ExtResource("2_fl65f")
-scene = ExtResource("1_pvax5")
+scene = "res://scenes/modules/test-module/hull-reinforcement/size-2/Size2HullReinforcement.tscn"
 name = &"Da\'dakra Group Tough Hull Extreme | Size 2"
 description = "Da'dakra Group demonstrates its material science mastery with the Tough Hull Extreme series. Top-tier hull reinforcements designed for maximum durability in hostile environments."
 value = 35000
