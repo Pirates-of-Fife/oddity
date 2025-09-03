@@ -114,6 +114,11 @@ func clear_sector_root() -> void:
 	for i : Node in root.get_children():
 		i.queue_free()
 
+# just deletes the helper node when in game
+func _ready() -> void:
+	if !Engine.is_editor_hint():
+		queue_free()
+
 enum SpawnType
 {
 	ASTEROID_BELT,
