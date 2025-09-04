@@ -52,13 +52,13 @@ environment = SubResource("Environment_trn0h")
 [node name="Paradox" parent="." instance=ExtResource("3_164d5")]
 
 [node name="AuricZone" parent="." instance=ExtResource("4_23hwr")]
-transform = Transform3D(0.788, 0, -0.615675, 0, 1, 0, 0.615675, 0, 0.788, 7e+06, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7e+06, 0, 0)
 activate_distance = 1e+07
 deactivate_distance = 1.1e+07
 sprite_distance = 200000.0
 
 [node name="SolsticeZone" parent="AuricZone" instance=ExtResource("5_d5fx4")]
-transform = Transform3D(0.679363, -0.147654, 0.718794, 0.408064, 0.890137, -0.202828, -0.609877, 0.431108, 0.664978, -333895, 0, 85049.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -333895, 0, 85049.7)
 activate_distance = 5e+06
 deactivate_distance = 5.5e+06
 use_distance_display = true
@@ -114,3 +114,5 @@ sprite_max_distance = 1.45e+06
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)
+
+[connection signal="tree_exiting" from="AuricZone/SpaceStationLoadingZone/SpaceStation" to="AuricZone/SpaceStationLoadingZone/SpaceStation" method="_on_tree_exiting"]
