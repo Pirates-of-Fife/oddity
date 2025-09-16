@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlkbsodcrk8b0"]
+[gd_scene load_steps=16 format=3 uid="uid://dlkbsodcrk8b0"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_7b44d"]
 [ext_resource type="Texture2D" uid="uid://cpel0w3umdx5i" path="res://scenes/world/textures/8k_venus_surface.jpg" id="2_sh30o"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_nvw1l"]
 [ext_resource type="Script" path="res://classes/star-system/planet/CloudRotation.gd" id="5_uorak"]
 [ext_resource type="AudioStream" uid="uid://cedchmebo3pt4" path="res://scenes/world/sounds/wind2.wav" id="6_pdivp"]
+[ext_resource type="PackedScene" uid="uid://chfjpmowvvm5x" path="res://scenes/world/gateway/celestial-bodies/verit/scatter-objects/CrestFoliage.tscn" id="7_bkw6j"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="9_qcsc1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_je1tr"]
 diffuse_mode = 3
@@ -89,7 +91,13 @@ unit_size = 4e+10
 max_db = 6.0
 pitch_scale = 0.4
 autoplay = true
-stream_paused = true
 max_distance = 6000.0
 panning_strength = 0.0
 bus = &"Environment"
+
+[node name="SceneLoadingZone" type="Node3D" parent="."]
+script = ExtResource("9_qcsc1")
+scene = ExtResource("7_bkw6j")
+activate_distance = 15000.0
+deactivate_distance = 15500.0
+update_time = 0.8

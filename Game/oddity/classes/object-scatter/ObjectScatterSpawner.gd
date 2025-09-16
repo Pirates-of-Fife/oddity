@@ -11,11 +11,11 @@ var spawn_type : SpawnType = SpawnType.PLANET
 @export_range(1, 200, 1)
 var splits : int = 1
 
-@export_range(100, 20000, 100)
+@export_range(100, 20000, 100, "or_greater")
 var spawn_count : int
 
 @export_range(100, 10000, 50)
-var spawn_radius : float
+var spawn_radius : float = 2000
 
 @export
 var count_per_multi_mesh : int :
@@ -49,9 +49,16 @@ var planet_mesh_instance : MeshInstance3D :
 	get():
 		return planet_mesh_instance
 
+@export_range(-100, 100, 0.01)
+var radius_modifier : float = 0
+
 var planet_mesh : SphereMesh
 
-var planet_radius : float
+var planet_radius : float :
+	set(value):
+		planet_radius = value
+	get():
+		return planet_radius + radius_modifier
 
 @export_subgroup("Asteroid Belt")
 
@@ -106,6 +113,11 @@ func spawn_gas_giant_sectors() -> void:
 func clear_sector_root() -> void:
 	for i : Node in root.get_children():
 		i.queue_free()
+
+# just deletes the helper node when in game
+func _ready() -> void:
+	if !Engine.is_editor_hint():
+		queue_free()
 
 enum SpawnType
 {

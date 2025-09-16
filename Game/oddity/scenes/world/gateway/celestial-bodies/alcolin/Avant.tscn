@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bngoxqbwbrlgb"]
+[gd_scene load_steps=10 format=3 uid="uid://bngoxqbwbrlgb"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_ail2g"]
 [ext_resource type="Texture2D" uid="uid://pnsa7mr4l37y" path="res://scenes/world/textures/4k_eris_fictional.jpg" id="2_wemh4"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="3_ykbt0"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_4q3ah"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="8_wiiyp"]
+[ext_resource type="PackedScene" uid="uid://bxrgsaqkf0hwr" path="res://scenes/world/gateway/celestial-bodies/alcolin/scatter-objects/AvantFoliage.tscn" id="9_b3pmu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm0e4"]
 diffuse_mode = 3
@@ -47,3 +49,9 @@ script = ExtResource("4_4q3ah")
 planet_gravity = NodePath("../GravityWell")
 activate_distance = 18000.0
 deactivate_distance = 19000.0
+
+[node name="SceneLoadingZone" type="Node3D" parent="."]
+script = ExtResource("8_wiiyp")
+scene = ExtResource("9_b3pmu")
+activate_distance = 12000.0
+deactivate_distance = 12500.0

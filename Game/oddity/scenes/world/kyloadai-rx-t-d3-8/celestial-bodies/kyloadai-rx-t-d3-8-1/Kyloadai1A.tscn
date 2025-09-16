@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bx8trnqa8x7m6"]
+[gd_scene load_steps=11 format=3 uid="uid://bx8trnqa8x7m6"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_n080h"]
 [ext_resource type="Texture2D" uid="uid://bixiyk5l82qqj" path="res://scenes/world/textures/8k_moon.jpg" id="2_6ovx0"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="3_uin3v"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_wvm3r"]
 [ext_resource type="PackedScene" uid="uid://cbeuj1io6qndp" path="res://classes/player-detection-zone/salvage-zone/SalvageZone.tscn" id="5_mao2b"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="6_by1ec"]
+[ext_resource type="PackedScene" uid="uid://bsegfaavfd5tj" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/scatter-objects/Kyloadai1aFoliage.tscn" id="7_rqe3j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnwms"]
 diffuse_mode = 3
@@ -50,3 +52,10 @@ deactivate_distance = 19000.0
 
 [node name="SalvageZone" parent="." instance=ExtResource("5_mao2b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6617.05, 1951.17, -12919.8)
+
+[node name="SceneLoadingZone" type="Node3D" parent="."]
+script = ExtResource("6_by1ec")
+scene = ExtResource("7_rqe3j")
+activate_distance = 23900.0
+deactivate_distance = 24000.0
+update_time = 0.95

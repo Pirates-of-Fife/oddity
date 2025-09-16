@@ -1,5 +1,7 @@
 extends PlayerDetectionZone
 
+class_name SalvageZone
+
 @export
 var salvage_scene_array : Array
 

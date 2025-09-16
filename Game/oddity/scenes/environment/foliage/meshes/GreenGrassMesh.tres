@@ -1,0 +1,39 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://bvofscdpiwguv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xt8rw"]
+resource_name = "Grass"
+cull_mode = 2
+albedo_color = Color(0.516875, 0.689738, 0.560097, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_c0qr7"]
+_surfaces = [{
+"aabb": AABB(-0.0764407, 0.00151665, -0.0767327, 0.151092, 0.150483, 0.151669),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAADAAEAAAACAAMABAAHAAUABAAGAAcA"),
+"name": "Grass",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("kaX+/19+AAD//wAAfXYAAExOHv76hQAAAAAAAM2MAACDgf//kaUAAIOBAAD//wAAg4Ee/kxOAACDgQAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "GreenGrass_Plane_017"
+_surfaces = [{
+"aabb": AABB(-0.0764407, 0.00151665, -0.0767327, 0.151092, 0.150483, 0.151669),
+"attribute_data": PackedByteArray("AAD///////8AAAAA//8AAAAA////////AAAAAP//AAA="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAADAAEAAAACAAMABAAHAAUABAAGAAcA"),
+"material": SubResource("StandardMaterial3D_xt8rw"),
+"name": "Grass",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("kaX+/19+fv3//wAAfXby/UxOHv76hSH9AAAAAM2MwP2Dgf//kaWY1YOBAAD//8jdg4Ee/kxOo86DgQAAAABW2gVBRL7SNp+zskpdyAk7BbjTqqdVT6+fXh6mPkyCrQZb")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_c0qr7")
