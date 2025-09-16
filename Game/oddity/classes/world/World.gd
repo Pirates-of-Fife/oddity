@@ -48,6 +48,18 @@ func cycle_system() -> StarSystemResource:
 
 	return system
 
+func get_current_star_sytem_resource() -> StarSystemResource:
+	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
+	
+	if star_system.system_name == "The Abyss":
+		return star_systems[0]
+	
+	for system : StarSystemResource in star_systems:
+		if system.name == star_system.system_name:
+			return system
+	
+	return star_systems[0]
+
 func _ready() -> void:
 	add_to_group("World")
 
@@ -60,8 +72,40 @@ func _ready() -> void:
 	auto_save_timer.wait_time = 60
 	add_child(auto_save_timer)
 
-	spawn_station = get_tree().get_first_node_in_group("StarSystem").spawn_station
 
+	var player_position_resource : PlayerPositionSave
+	var f2 : FileAccess = FileAccess.open(Globals.PLAYER_POSITION_SAVE, FileAccess.READ)
+	
+	if f2 == null:
+		player_position_resource = PlayerPositionSave.new()
+		player_position_resource.respawn_at_station = true
+		spawn_at_station()
+		
+		print("No file spawinging at station")
+		
+	else:
+		player_position_resource = load(Globals.PLAYER_POSITION_SAVE)
+		
+		if player_position_resource.respawn_at_station == true:
+			spawn_at_station()
+			
+			print("File but spawn at sation")
+			
+			return
+		
+		if player_position_resource.star_system.name != "Gateway":
+			load_star_system(player_position_resource.star_system)
+			
+			print("Loaded new star system")
+			
+		spawn_at_station()
+		
+		print("regular spawn whatever that means at this point")
+	
+
+func spawn_at_station() -> void:
+	spawn_station = get_tree().get_first_node_in_group("StarSystem").spawn_station
+	
 	spawn_player_ship()
 	
 	player.load_inventory()
@@ -124,9 +168,22 @@ func load_new_system(destination_star_system : PackedScene, starship : Starship)
 	add_child(new_star_system)
 
 	starship.reparent.call_deferred(new_star_system)
-
-	var abyss :Abyss = get_tree().get_first_node_in_group("Abyss")
+	
+	spawn_station = new_star_system.spawn_station
+	player.respawn_star_system = destination_star_system
+	var abyss : Abyss = get_tree().get_first_node_in_group("Abyss")
 	abyss.queue_free()
+
+
+func load_star_system(star_system_resource : StarSystemResource) -> void:
+	var old_star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
+	old_star_system.queue_free()
+	
+	var star_system : StarSystem = star_system_resource.scene_file.instantiate()
+	add_child(star_system)
+	
+	spawn_station = star_system.spawn_station
+	player.respawn_star_system = star_system_resource.scene_file
 
 
 func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
@@ -177,7 +234,9 @@ func save_player_stats() -> void:
 	var loadout_generator : LoadoutGenerator = LoadoutGenerator.new()
 
 	loadout_generator.save_loadout(player_ship, true, true, true)
-		
+	
+	save_player_position_information()
+	
 	player.save_inventory()
 	
 
@@ -201,7 +260,7 @@ func spawn_player_ship() -> void:
 	var ship_scene : PackedScene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
 	var ship : Starship = ship_scene.instantiate()
 	var loadout : StarshipLoadout
-
+	
 	var f : FileAccess = FileAccess.open(Globals.PLAYER_SHIP_SAVE, FileAccess.READ)
 	if f == null:
 		loadout = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
@@ -213,7 +272,30 @@ func spawn_player_ship() -> void:
 
 	ship.current_state = Starship.State.POWER_OFF
 	ship.landing_gear_on = true
+	
+	print("player ship spawn start")
 
+	var f2 : FileAccess = FileAccess.open(Globals.PLAYER_POSITION_SAVE, FileAccess.READ)
+	
+	if f2 == null:
+		spawn_player_ship_at_station(ship)
+		print("no file found! spawning player sihp")
+		return
+	else:
+		#var player_position_resource : PlayerPositionSave = load(Globals.PLAYER_POSITION_SAVE)
+
+		#if player_ship == null:
+		#	player_position_resource.respawn_at_station = true
+		#	ResourceSaver.save(player_position_resource, Globals.PLAYER_POSITION_SAVE)
+		#	return
+		print("spawning player at cool position!")
+		spawn_player_ship_at_player_position(ship)
+		
+
+
+
+
+func spawn_player_ship_at_station(ship : Starship) -> void:
 	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
 	star_system.add_child(ship)
 
@@ -226,7 +308,73 @@ func spawn_player_ship() -> void:
 	player.possess(player_control_entity)
 
 	player_ship = ship
+	
+	print("this works i think")
+	
+func spawn_player_ship_at_player_position(ship : Starship) -> void:
+	var f2 : FileAccess = FileAccess.open(Globals.PLAYER_POSITION_SAVE, FileAccess.READ)
+	
+	if f2 == null:
+		spawn_player_ship_at_station(ship)
+		return
+	
+	print("starting player ship location spawner thing")
+	
+	var player_position_save : PlayerPositionSave = load(Globals.PLAYER_POSITION_SAVE)
+	
+	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
+	star_system.add_child(ship)
 
+	ship.global_position = player_position_save.position
+	ship.global_rotation = player_position_save.rotation
+	
+	print(ship.get_bed(player_position_save.last_used_bed_index).player_spawn_position)
+	
+	player_control_entity.global_position = ship.get_bed(player_position_save.last_used_bed_index).player_spawn_position
+	player_control_entity.global_rotation = ship.get_bed(player_position_save.last_used_bed_index).player_spawn_position_marker.global_rotation
+
+	player.possess(player_control_entity)
+
+	player_ship = ship
+	
+			
+func save_player_position_information() -> void:
+	var player_position_resource : PlayerPositionSave
+	var f : FileAccess = FileAccess.open(Globals.PLAYER_POSITION_SAVE, FileAccess.READ)
+	
+	if f == null:
+		player_position_resource = PlayerPositionSave.new()
+	else:
+		player_position_resource = load(Globals.PLAYER_POSITION_SAVE)
+		
+	if player_ship == null:
+		player_position_resource.respawn_at_station = true
+		ResourceSaver.save(player_position_resource, Globals.PLAYER_POSITION_SAVE)
+		return
+	
+	player_position_resource.position = player_ship.global_position
+	player_position_resource.rotation = player_ship.global_rotation
+	player_position_resource.respawn_at_station = false
+	player_position_resource.star_system = get_current_star_sytem_resource()
+	
+	ResourceSaver.save(player_position_resource, Globals.PLAYER_POSITION_SAVE)
+
+func bed_exit(bed_index : int) -> void:
+	var player_position_resource : PlayerPositionSave
+	var f : FileAccess = FileAccess.open(Globals.PLAYER_POSITION_SAVE, FileAccess.READ)
+	
+	if f == null:
+		exit_to_main_menu()
+	else:
+		player_position_resource = load(Globals.PLAYER_POSITION_SAVE)
+	
+	player_position_resource.last_used_bed_index = bed_index
+	
+	ResourceSaver.save(player_position_resource, Globals.PLAYER_POSITION_SAVE)
+	
+	await get_tree().create_timer(1).timeout
+	
+	exit_to_main_menu()
 
 func exit_to_main_menu() -> void:
 	save_player_stats()

@@ -481,6 +481,10 @@ enum BountyDifficulty
 	EXTREME
 }
 
+@export_category("Beds")
+@export
+var beds : Array[Bed]
+
 @export_category("Other")
 
 @export
@@ -521,6 +525,13 @@ func sound_power_state_change_complete() -> void:
 
 	power_state_change_complete = true
 
+func get_bed(index : int) -> Bed:
+	for b : Bed in beds:
+		if b.bed_index == index:
+			return b
+	
+	return null
+	
 func toggle_power_state() -> void:
 	if !power_state_change_complete:
 		return

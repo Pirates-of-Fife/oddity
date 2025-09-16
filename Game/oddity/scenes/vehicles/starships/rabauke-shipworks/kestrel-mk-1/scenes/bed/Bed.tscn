@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3gukfx5gs16a"]
+
+[ext_resource type="Script" path="res://classes/interactable/bed/Bed.gd" id="1_30whl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fpssh"]
+size = Vector3(1.2, 0.4, 1.895)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t7ske"]
+data = PackedVector3Array(-0.675, 0.2, 1.09, 0.675, 0.2, 1.09, -0.675, -0.2, 1.09, 0.675, 0.2, 1.09, 0.675, -0.2, 1.09, -0.675, -0.2, 1.09, 0.675, 0.2, -1.09, -0.675, 0.2, -1.09, 0.675, -0.2, -1.09, -0.675, 0.2, -1.09, -0.675, -0.2, -1.09, 0.675, -0.2, -1.09, 0.675, 0.2, 1.09, 0.675, 0.2, -1.09, 0.675, -0.2, 1.09, 0.675, 0.2, -1.09, 0.675, -0.2, -1.09, 0.675, -0.2, 1.09, -0.675, 0.2, -1.09, -0.675, 0.2, 1.09, -0.675, -0.2, -1.09, -0.675, 0.2, 1.09, -0.675, -0.2, 1.09, -0.675, -0.2, -1.09, 0.675, 0.2, 1.09, -0.675, 0.2, 1.09, 0.675, 0.2, -1.09, -0.675, 0.2, 1.09, -0.675, 0.2, -1.09, 0.675, 0.2, -1.09, -0.675, -0.2, 1.09, 0.675, -0.2, 1.09, -0.675, -0.2, -1.09, 0.675, -0.2, 1.09, 0.675, -0.2, -1.09, -0.675, -0.2, -1.09)
+
+[node name="Bed" type="StaticBody3D" node_paths=PackedStringArray("player_spawn_position_marker")]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_30whl")
+player_spawn_position_marker = NodePath("Marker3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_fpssh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_t7ske")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.951678, 0.946562, 0)
+gizmo_extents = 0.65
