@@ -15,7 +15,7 @@ var splits : int = 1
 var spawn_count : int
 
 @export_range(100, 10000, 50)
-var spawn_radius : float
+var spawn_radius : float = 2000
 
 @export
 var count_per_multi_mesh : int :

@@ -1,10 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://de7igm5vd3snj"]
+[gd_scene load_steps=14 format=3 uid="uid://de7igm5vd3snj"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_lhy53"]
 [ext_resource type="Texture2D" uid="uid://blqb87iylpllj" path="res://scenes/world/textures/8k_mercury.jpg" id="2_voa2i"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="3_4w818"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_o80to"]
 [ext_resource type="AudioStream" uid="uid://b3lkbm7cylqcb" path="res://scenes/world/sounds/low resonance.wav" id="5_yb7p3"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="6_j61tg"]
+[ext_resource type="PackedScene" uid="uid://cvs3ny4t7xuyf" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/scatter-objects/DrifterRocks.tscn" id="7_o4kn7"]
+[ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageScatterSpawner.gd" id="9_rqvp0"]
+[ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageResource.gd" id="10_ic50r"]
+[ext_resource type="Resource" uid="uid://t1ha50funlye" path="res://scenes/environment/foliage/resources/RockResource.tres" id="11_uucuk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lqrpg"]
 diffuse_mode = 3
@@ -56,3 +61,22 @@ autoplay = true
 max_distance = 3000.0
 panning_strength = 0.0
 bus = &"Environment"
+
+[node name="SceneLoadingZone" type="Node3D" parent="."]
+script = ExtResource("6_j61tg")
+scene = ExtResource("7_o4kn7")
+activate_distance = 18200.0
+deactivate_distance = 25000.0
+update_time = 1.0
+
+[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("root", "planet_mesh_instance")]
+script = ExtResource("9_rqvp0")
+foliage_meshes = Array[ExtResource("10_ic50r")]([ExtResource("11_uucuk")])
+splits = 5
+spawn_count = 17600
+count_per_multi_mesh = 3520
+scale_variance = 0.11
+invert_scale = true
+root = NodePath("")
+planet_mesh_instance = NodePath("../MeshInstance3D")
+radius_modifier = 0.5
