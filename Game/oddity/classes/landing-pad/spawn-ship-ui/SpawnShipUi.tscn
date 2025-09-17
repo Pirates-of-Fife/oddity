@@ -46,13 +46,14 @@ script = ExtResource("1_jhslh")
 ship_scene = ExtResource("2_k281c")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.543172, 0)
 texture = SubResource("ViewportTexture_ixh8f")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
 transparent_bg = true
 gui_disable_input = true
-size = Vector2i(1022, 407)
+size = Vector2i(1022, 522)
 
 [node name="SpawnShipUi2d" parent="SubViewport" instance=ExtResource("1_s0u3q")]
 
@@ -134,6 +135,35 @@ volume_db = -32.0
 stream = ExtResource("7_7obba")
 volume_db = -32.0
 
+[node name="BlowShipUp" type="StaticBody3D" parent="." node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.176981, -2.19683, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_2l8jx")
+interaction_sound = NodePath("Spawn")
+entity_name = &"KABOOM"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlowShipUp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59397, -0.21738, 0)
+mesh = SubResource("BoxMesh_6wo3m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlowShipUp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59397, -0.21738, 0)
+shape = SubResource("ConcavePolygonShape3D_c3jfg")
+
+[node name="Label3D" type="Label3D" parent="BlowShipUp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55947, -0.199535, 0.0222267)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Remove"
+font = ExtResource("3_3l2da")
+font_size = 44
+
+[node name="Spawn" type="AudioStreamPlayer3D" parent="BlowShipUp"]
+stream = ExtResource("6_tw3n8")
+volume_db = -17.882
+pitch_scale = 0.65
+
 [connection signal="interacted" from="ClaimShip" to="." method="_on_claim_ship_interacted"]
 [connection signal="interacted" from="RequestNewShip" to="." method="_on_request_new_ship_interacted"]
 [connection signal="interacted" from="RequestNewShip2" to="." method="_on_request_new_ship_2_interacted"]
+[connection signal="interacted" from="BlowShipUp" to="." method="_on_blow_ship_up_interacted"]

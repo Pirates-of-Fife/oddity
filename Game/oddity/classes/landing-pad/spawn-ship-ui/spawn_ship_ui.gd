@@ -56,9 +56,7 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 	loadout_tools.load_loadout(starship, loadout)
 	$Spawn.play()
 	starship.ship_identification = starship.generate_ship_id()
-	
-	landing_pad.starship.landing_gear_on = true
-	
+		
 	loadout_tools.save_loadout(landing_pad.starship, true, true, true)
 	loadout_tools.save_loadout(landing_pad.starship)
 
@@ -112,3 +110,32 @@ func update_price_information() -> void:
 
 func _on_request_new_ship_2_interacted(player: Player, control_entity: ControlEntity) -> void:
 	update_price_information()
+
+
+var presses : int = 0
+
+func _on_blow_ship_up_interacted(player: Player, control_entity: ControlEntity) -> void:
+	
+	if landing_pad.starship == null:
+		presses = 0
+		return
+	
+	presses += 1
+	
+	if presses < 3:
+		return
+	
+	presses = 0
+	
+	landing_pad.starship.take_damage(landing_pad.starship.max_hull_health * 10)
+	
+	await get_tree().create_timer(2).timeout
+	
+	var ship : Starship = landing_pad.starship
+	
+	landing_pad.starship.apply_impulse(landing_pad.starship.global_basis.inverse() * Vector3(1, 0.3, 0) * 10000000)
+
+	await get_tree().create_timer(10).timeout
+	
+	ship.queue_free()
+	
