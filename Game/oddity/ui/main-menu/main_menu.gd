@@ -21,7 +21,7 @@ func load_last_possessed_starship() -> void:
 	var starship_scene : PackedScene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
 
 	if starship_scene:
-		var ship : Node3D = starship_scene.instantiate()
+		var ship : Starship = starship_scene.instantiate()
 
 		var loadout : StarshipLoadout
 
@@ -32,9 +32,10 @@ func load_last_possessed_starship() -> void:
 			loadout = load(Globals.PLAYER_SHIP_SAVE)
 
 		ship.default_loadout = loadout
-
+		ship.landing_gear_on = false
+		
 		add_child(ship)
-
+		
 		ship.global_position = Vector3(7, -1, -1)
 
 		ship_loaded = true

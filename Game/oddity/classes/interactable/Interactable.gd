@@ -10,6 +10,9 @@ var interaction_sound : AudioStreamPlayer3D
 @export
 var press_delay : float = 0.5
 
+@export
+var skip_delay : bool = false
+
 var can_press : bool = true
 
 func interact(player : Player, control_entity : ControlEntity) -> void:
@@ -20,6 +23,9 @@ func interact(player : Player, control_entity : ControlEntity) -> void:
 		return
 	
 	interacted.emit(player, control_entity)
+	
+	if skip_delay:
+		return
 	
 	can_press = false
 	

@@ -105,6 +105,8 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	loadout.max_fuel = starship.max_fuel
 	loadout.current_fuel = starship.current_fuel
 
+	loadout.landing_gear_on = starship.landing_gear_on
+
 	if save_as_player_ship_save:
 		loadout.apply_health = true
 		var err : Error = ResourceSaver.save(loadout, Globals.PLAYER_SHIP_SAVE)
@@ -161,9 +163,9 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		game_entity.value = entity.value
 	
 	starship.max_ammo = loadout.max_ammo
-	loadout.max_fuel = starship.max_fuel
+	starship.max_fuel = loadout.max_fuel
+	starship.landing_gear_on = loadout.landing_gear_on
 
-	
 	if apply_health:
 		starship.current_hull_health = loadout.current_health
 		starship.current_ammo = loadout.current_ammo

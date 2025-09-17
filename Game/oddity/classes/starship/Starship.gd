@@ -609,9 +609,6 @@ func _starship_ready() -> void:
 	power_on_sound_player.finished.connect(sound_power_state_change_complete)
 
 	fuel_empty.connect(on_fuel_empty)
-	
-	if !landing_gear_on:
-		toggle_landing_gear()
 
 	name_label.text = ship_name
 	ship_identification_label.text = ship_identification
@@ -676,6 +673,9 @@ func _starship_ready() -> void:
 	shield_online.connect(shield.on_shield_online)
 
 	loadout_tools.load_loadout(self, default_loadout, apply_loadout_health)
+
+	if !landing_gear_on:
+		toggle_landing_gear()
 
 	if module_node != null:
 		for node : Node in module_node.get_children():

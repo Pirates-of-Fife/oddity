@@ -45,6 +45,9 @@ var current_fuel : float = 10800
 @export
 var max_fuel : float = 10800
 
+@export
+var landing_gear_on : bool = false
+
 func get_module_by_id(id : int) -> PackedScene:
 	for slot : ModuleSlotLoadoutResource in module_slots:
 		if slot.id == id:

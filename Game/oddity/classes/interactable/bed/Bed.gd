@@ -20,6 +20,7 @@ var player_spawn_position : Vector3 :
 
 func _ready() -> void:
 	interacted.connect(_on_interact)
+	skip_delay = true
 
 func _on_interact(player : Player, control_entity : ControlEntity) -> void:
 	print("BED")

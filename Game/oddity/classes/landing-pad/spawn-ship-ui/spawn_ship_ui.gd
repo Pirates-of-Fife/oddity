@@ -57,6 +57,8 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 	$Spawn.play()
 	starship.ship_identification = starship.generate_ship_id()
 	
+	landing_pad.starship.landing_gear_on = true
+	
 	loadout_tools.save_loadout(landing_pad.starship, true, true, true)
 	loadout_tools.save_loadout(landing_pad.starship)
 
@@ -73,6 +75,7 @@ func _on_request_new_ship_interacted(player: Player, control_entity: ControlEnti
 	starship.landing_gear_on = true
 	get_tree().get_first_node_in_group("StarSystem").add_child(starship)
 	get_tree().get_first_node_in_group("World").player_ship = starship
+	starship.landing_gear_on = true
 
 	
 	starship.global_position = landing_pad.starship_spawn_marker.global_position
