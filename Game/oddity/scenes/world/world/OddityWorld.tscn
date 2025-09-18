@@ -10,12 +10,11 @@
 [ext_resource type="Resource" uid="uid://0wtfxp7u6y8l" path="res://scenes/world/mirage/MirageResource.tres" id="6_56n3f"]
 [ext_resource type="Resource" uid="uid://bhr768vxa5a12" path="res://scenes/world/kyloadai-rx-t-d3-8/KyloadaiResource.tres" id="7_q2man"]
 
-[node name="OddityWorld" type="Node3D" node_paths=PackedStringArray("player", "player_control_entity", "spawn_station")]
+[node name="OddityWorld" type="Node3D" node_paths=PackedStringArray("player", "player_control_entity")]
 script = ExtResource("1_wgmgi")
 star_systems = [ExtResource("2_rqxl3"), ExtResource("3_imvkk"), ExtResource("4_owmr8"), ExtResource("5_15hgi"), ExtResource("6_56n3f"), ExtResource("7_q2man")]
 player = NodePath("Player")
 player_control_entity = NodePath("Humanoid")
-spawn_station = NodePath("")
 
 [node name="Humanoid" parent="." instance=ExtResource("3_5uyom")]
 transform = Transform3D(0.65343, -0.115594, 0.748109, 0.216027, 0.97565, -0.0379356, -0.725507, 0.1864, 0.662491, 0, 0, 0)

@@ -38,12 +38,12 @@ func _check_landing_status() -> void:
 		starship_landed.emit(starship)
 	else:
 		starship_took_off.emit(starship)
-
+	
 func _on_body_entered(body : Node3D) -> void:
 	if body is Starship:
 		if starship != null:
 			return
-		
+				
 		starship = body
 
 		starship.landing_gear_deployed.connect(_on_starship_landing_gear_deployed)

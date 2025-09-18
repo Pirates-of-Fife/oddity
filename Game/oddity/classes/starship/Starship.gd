@@ -673,7 +673,7 @@ func _starship_ready() -> void:
 	shield_online.connect(shield.on_shield_online)
 
 	loadout_tools.load_loadout(self, default_loadout, apply_loadout_health)
-
+	
 	if !landing_gear_on:
 		toggle_landing_gear()
 
@@ -1284,7 +1284,7 @@ func lock_ship() -> void:
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
 
-func toggle_landing_gear() -> void:
+func toggle_landing_gear(force : bool = false) -> void:
 	pass
 
 func initiate_abyssal_travel() -> void:

@@ -115,6 +115,7 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 		else:
 			print("Failed to save loadout")
 	else:
+		loadout.landing_gear_on = true
 		var err : Error = ResourceSaver.save(loadout, Globals.STARSHIP_SAVED_LOADOUT)
 		if err == OK:
 			print("Loadout saved successfully")
