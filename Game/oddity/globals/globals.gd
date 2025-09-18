@@ -12,6 +12,7 @@ const STARSHIP_SAVED_LOADOUT : String = "user://saved_loadout.tres"
 const PLAYER_SHIP_SAVE : String = "user://player_saved_ship.tres"
 const PLAYER_MONEY : String = "user://player_money.tres"
 const PLAYER_INVENTORY : String = "user://player_inventory.tres"
+const PLAYER_POSITION_SAVE : String = "user://player-position.tres"
 
 func _ready() -> void:
 	load_settings()

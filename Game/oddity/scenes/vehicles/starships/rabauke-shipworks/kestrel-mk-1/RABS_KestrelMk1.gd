@@ -427,7 +427,7 @@ func on_damaged() -> void:
 
 	damaged_label.show()
 
-func toggle_landing_gear() -> void:
+func toggle_landing_gear(force : bool = false) -> void:
 	if $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 0 and $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 1:
 		return
 

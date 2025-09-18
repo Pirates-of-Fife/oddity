@@ -2,13 +2,13 @@
 
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="1_a0ndc"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_q0njx"]
-font = ExtResource("1_a0ndc")
-font_size = 25
-
 [sub_resource type="LabelSettings" id="LabelSettings_6vber"]
 font = ExtResource("1_a0ndc")
 font_color = Color(1, 0.376471, 0.235294, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q0njx"]
+font = ExtResource("1_a0ndc")
+font_size = 25
 
 [node name="SpawnShipUi2d" type="Control"]
 layout_mode = 3
@@ -23,6 +23,15 @@ layout_mode = 0
 offset_right = 1019.0
 offset_bottom = 310.0
 color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[node name="new ship2" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 531.0
+offset_top = 72.0
+offset_right = 980.0
+offset_bottom = 142.0
+text = "Info : doesn't clear old saved ship"
+label_settings = SubResource("LabelSettings_6vber")
 
 [node name="Claim Ship" type="Label" parent="."]
 layout_mode = 0
@@ -52,11 +61,27 @@ text = "Request new Ship
 "
 label_settings = SubResource("LabelSettings_q0njx")
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 509.0
+offset_bottom = 516.0
+color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
 [node name="new ship2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 531.0
-offset_top = 72.0
-offset_right = 980.0
-offset_bottom = 142.0
-text = "Info : doesn't clear old saved ship"
+offset_left = 26.0
+offset_top = 350.0
+offset_right = 475.0
+offset_bottom = 420.0
+text = "Press three times to confirm"
 label_settings = SubResource("LabelSettings_6vber")
+
+[node name="new ship3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 298.0
+offset_right = 384.0
+offset_bottom = 368.0
+text = "Remove Current Ship"
+label_settings = SubResource("LabelSettings_q0njx")

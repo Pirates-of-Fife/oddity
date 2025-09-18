@@ -366,6 +366,7 @@ func _process(delta: float) -> void:
 
 func on_posses(control_entity : ControlEntity) -> void:
 	if control_entity is Starship:
+		get_tree().get_first_node_in_group("World").player_ship = control_entity
 		save_last_possessed_starship(control_entity)
 
 func save_last_possessed_starship(starship : Starship) -> void:

@@ -481,6 +481,10 @@ enum BountyDifficulty
 	EXTREME
 }
 
+@export_category("Beds")
+@export
+var beds : Array[Bed]
+
 @export_category("Other")
 
 @export
@@ -521,6 +525,13 @@ func sound_power_state_change_complete() -> void:
 
 	power_state_change_complete = true
 
+func get_bed(index : int) -> Bed:
+	for b : Bed in beds:
+		if b.bed_index == index:
+			return b
+	
+	return null
+	
 func toggle_power_state() -> void:
 	if !power_state_change_complete:
 		return
@@ -598,9 +609,6 @@ func _starship_ready() -> void:
 	power_on_sound_player.finished.connect(sound_power_state_change_complete)
 
 	fuel_empty.connect(on_fuel_empty)
-	
-	if !landing_gear_on:
-		toggle_landing_gear()
 
 	name_label.text = ship_name
 	ship_identification_label.text = ship_identification
@@ -665,6 +673,9 @@ func _starship_ready() -> void:
 	shield_online.connect(shield.on_shield_online)
 
 	loadout_tools.load_loadout(self, default_loadout, apply_loadout_health)
+	
+	if !landing_gear_on:
+		toggle_landing_gear()
 
 	if module_node != null:
 		for node : Node in module_node.get_children():
@@ -1273,7 +1284,7 @@ func lock_ship() -> void:
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
 
-func toggle_landing_gear() -> void:
+func toggle_landing_gear(force : bool = false) -> void:
 	pass
 
 func initiate_abyssal_travel() -> void:
