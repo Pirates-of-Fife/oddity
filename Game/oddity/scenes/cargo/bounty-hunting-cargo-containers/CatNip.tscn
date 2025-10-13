@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3qm8n7ld9wxa"]
+
+[ext_resource type="Script" path="res://classes/cargo/CargoContainer.gd" id="1_catnip"]
+[ext_resource type="Resource" uid="uid://c0py8h3mkd8sa" path="res://resources/resources/trade/trade-items/cargo/TradeResourceCatNip.tres" id="2_catnip"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_catnip"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[node name="Cu1Container" type="RigidBody3D"]
+collision_layer = 537921029
+collision_mask = 537921025
+mass = 10.0
+contact_monitor = true
+script = ExtResource("1_catnip")
+contents = "Cat Nip"
+value = 100000
+trade_information = ExtResource("2_catnip")
+can_be_picked_up = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_catnip")
