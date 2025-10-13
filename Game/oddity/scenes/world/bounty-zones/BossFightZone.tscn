@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq7j2x3k8m9p5"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/bounty-hunting-zone/BossFightZone.gd" id="1_boss"]
+[ext_resource type="Resource" uid="uid://b1pldqyejslhf" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_1_Loadout.tres" id="2_loadout1"]
+[ext_resource type="Resource" uid="uid://ca4wmcu2s8h2s" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_2_Loadout.tres" id="3_loadout2"]
+[ext_resource type="Resource" uid="uid://bxsbx566gtyon" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_3_Loadout.tres" id="4_loadout3"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="5_marker"]
+
+[sub_resource type="AudioStream" id="AudioStream_boss"]
+
+[node name="BossFightZone" type="Node3D" node_paths=PackedStringArray("distant_sprite", "music_player")]
+script = ExtResource("1_boss")
+difficulty = 1
+possible_loadouts = [ExtResource("2_loadout1"), ExtResource("3_loadout2"), ExtResource("4_loadout3")]
+boss_loadout = ExtResource("4_loadout3")
+ship_count = 3
+spawn_radius = 1000.0
+max_active_ships = 3
+activate_distance = 8000.0
+deactivate_distance = 25000.0
+one_shot = true
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+music_player = NodePath("BossMusicPlayer")
+sprite_distance = 10000.0
+sprite_max_distance = 200000.0
+
+[node name="MarkerSprite" parent="." instance=ExtResource("5_marker")]
+text = &"Signal [BOSS FIGHT]"
+
+[node name="BossMusicPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStream_boss")
+attenuation_model = 3
+unit_size = 10000.0
+max_distance = 50000.0

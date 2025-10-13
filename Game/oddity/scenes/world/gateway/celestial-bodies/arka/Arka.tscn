@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_73v81"]
 [ext_resource type="Script" path="res://classes/star-system/planet/AsteroidBelt.gd" id="5_30sjd"]
 [ext_resource type="PackedScene" uid="uid://bnymcx1rpfcjb" path="res://scenes/world/bounty-zones/LowDifficultyZone.tscn" id="11_5v5kk"]
+[ext_resource type="PackedScene" uid="uid://bq7j2x3k8m9p5" path="res://scenes/world/bounty-zones/BossFightZone.tscn" id="11_boss"]
 [ext_resource type="PackedScene" uid="uid://cj27np7373glj" path="res://scenes/world/gateway/celestial-bodies/arka/AbyssalGatewayToFederation.tscn" id="12_j0y2h"]
 [ext_resource type="Script" path="res://classes/star-system/planet/CloudRotation.gd" id="13_lidqh"]
 [ext_resource type="AudioStream" uid="uid://ckb3h6y50om1r" path="res://scenes/world/sounds/wind3.wav" id="13_yu31m"]
@@ -9272,6 +9273,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31497, 49281.2, -28383.7)
 [node name="LowDifficultyZone2" parent="." instance=ExtResource("11_5v5kk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22642.8, -43975.1, 35873.4)
 ship_count = 2
+
+[node name="BossFightZone" parent="." instance=ExtResource("11_boss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25000, -40000, 30000)
 
 [node name="AbyssalGatewayToFederation" parent="." instance=ExtResource("12_j0y2h")]
 transform = Transform3D(0.668339, 0, 0.743857, 0, 1, 0, -0.743857, 0, 0.668339, 0, 2174.6, -72918.1)
