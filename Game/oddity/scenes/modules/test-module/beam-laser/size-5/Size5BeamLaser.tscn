@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://ujks7sjcf8jg"]
 
-[ext_resource type="Script" path="res://classes/module/weapon/MiningLaser.gd" id="1_ue4p0"]
-[ext_resource type="Resource" uid="uid://blt132nd84dk1" path="res://scenes/modules/test-module/mining-laser/size-5/Size5MiningLaserResource.tres" id="2_wo50u"]
-[ext_resource type="Resource" uid="uid://ccvrdyr0p3o78" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter5.tres" id="3_3ne2m"]
+[ext_resource type="Script" path="res://classes/module/weapon/BeamWeapon.gd" id="1_r4yvb"]
+[ext_resource type="Resource" uid="uid://cg2dp3o7ntg5s" path="res://scenes/modules/test-module/beam-laser/size-5/Size5RealBeamLaser.tres" id="2_oapg6"]
+[ext_resource type="Resource" uid="uid://c31fg4gx4h81s" path="res://resources/resources/trade/trade-items/modules/rapid-engagement-armament-lasers/b-series/Real5B15MW.tres" id="3_fm8vf"]
 [ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="5_caj0r"]
-[ext_resource type="PackedScene" uid="uid://cfn6xc5cqonls" path="res://scenes/modules/test-module/mining-laser/mining-laser/MiningLaser.tscn" id="6_xuiqf"]
+[ext_resource type="PackedScene" uid="uid://cufeaqh7iop5" path="res://scenes/modules/test-module/beam-laser/laser-projectile/RealLaserProjectile.tscn" id="6_7e4kp"]
 [ext_resource type="PackedScene" uid="uid://b8gpxqrf85iso" path="res://scenes/modules/test-module/beam-laser/size-5/RealBeamLaser5.glb" id="7_835a0"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c5665"]
@@ -14,20 +14,22 @@ points = PackedVector3Array(0.479688, 0.533973, -0.615659, -0.3309, -0.512835, -
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 30.0
-script = ExtResource("1_ue4p0")
-beam_laser = NodePath("MiningLaser")
+script = ExtResource("1_r4yvb")
+beam_laser = NodePath("RealLaserProjectile")
 beam_sound = NodePath("AudioStreamPlayer3D")
 size = 5
 nozzle = NodePath("Nozzle")
-module_resource = ExtResource("2_wo50u")
+module_resource = ExtResource("2_oapg6")
 value = 40000
-trade_information = ExtResource("3_3ne2m")
+sellable = true
+trade_information = ExtResource("3_fm8vf")
 can_be_picked_up = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_caj0r")
-volume_db = -8.0
-pitch_scale = 0.3
+volume_db = -4.235
+unit_size = 16.46
+pitch_scale = 1.82
 bus = &"Weapon"
 
 [node name="Nozzle" type="Marker3D" parent="."]
@@ -40,6 +42,6 @@ shape = SubResource("ConvexPolygonShape3D_c5665")
 [node name="RealBeamLaser5" parent="." instance=ExtResource("7_835a0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229539)
 
-[node name="MiningLaser" parent="." instance=ExtResource("6_xuiqf")]
+[node name="RealLaserProjectile" parent="." instance=ExtResource("6_7e4kp")]
 
 [editable path="RealBeamLaser5"]
