@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4ysd3qpv8ktx"]
+
+[ext_resource type="Script" path="res://classes/module/weapon/BeamWeapon.gd" id="1_iqsum"]
+[ext_resource type="Resource" uid="uid://cjmfrdibnsk5e" path="res://scenes/modules/test-module/beam-laser/size-6/Size6RealBeamLaser.tres" id="2_u1tla"]
+[ext_resource type="Resource" uid="uid://djdv4bjle7ure" path="res://resources/resources/trade/trade-items/modules/rapid-engagement-armament-lasers/b-series/Real6B35MW.tres" id="3_app5t"]
+[ext_resource type="PackedScene" uid="uid://touvbt2pt8t5" path="res://scenes/modules/test-module/beam-laser/size-6/RealBeamLaser6.glb" id="5_aby7a"]
+[ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="5_ax1qq"]
+[ext_resource type="PackedScene" uid="uid://cufeaqh7iop5" path="res://scenes/modules/test-module/beam-laser/laser-projectile/RealLaserProjectile.tscn" id="6_ba3ps"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gh7xa"]
+points = PackedVector3Array(0.724934, 0.820404, -0.880556, -0.4993, -0.760601, -2.28999, -0.531713, -0.58438, -2.5615, -0.566084, 0.825425, 2.13246, 0.360705, -0.633695, 1.88084, 0.771604, -0.676212, -2.53405, -0.531713, 0.776322, -2.5615, -0.566084, -0.70446, 2.13246, 0.373924, 0.773248, 1.96547, -0.807764, -0.301612, -1.32982, 0.531529, 0.554258, -2.88604, 0.720775, -0.63048, -0.0833329, 0.771604, 0.794227, -2.53405, -0.807764, 0.422751, -1.32982, -0.308194, -0.361984, -2.89161, 0.4975, -0.765563, -2.30171, -0.516988, 0.8289, -2.35569, 0.722273, 0.744902, -0.0825848, 0.531973, -0.361431, -2.88807, -0.307498, 0.554258, -2.88604, 0.732658, 0.8289, -2.35523, 0.430469, -0.629298, 1.64862, -0.459963, -0.589574, -2.65614, -0.67426, 0.393428, -2.01229, 0.533177, 0.785496, -2.58719, 0.683848, -0.589695, -2.65598, 0.430463, 0.741909, 1.64859, 0.660053, -0.715828, -2.35794, 0.686413, 0.785613, -2.58704, 0.575811, -0.630347, 0.7838)
+
+[node name="Size6RealLaser" type="RigidBody3D" node_paths=PackedStringArray("beam_laser", "beam_sound", "nozzle")]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 60.0
+script = ExtResource("1_iqsum")
+beam_laser = NodePath("RealLaserProjectile")
+beam_sound = NodePath("AudioStreamPlayer3D")
+size = 6
+nozzle = NodePath("Nozzle")
+module_resource = ExtResource("2_u1tla")
+value = 70000
+sellable = true
+trade_information = ExtResource("3_app5t")
+can_be_picked_up = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.703248)
+stream = ExtResource("5_ax1qq")
+volume_db = -6.0
+pitch_scale = 2.0
+bus = &"Weapon"
+
+[node name="Nozzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0299217, 0.182126, 1.94128)
+
+[node name="RealBeamLaser6" parent="." instance=ExtResource("5_aby7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0994885, -0.0432976)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0994885, -0.0432976)
+shape = SubResource("ConvexPolygonShape3D_gh7xa")
+
+[node name="RealLaserProjectile" parent="." instance=ExtResource("6_ba3ps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0255569, 0.158833, 2.02554)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://classes/projectile/MiningLaserProjectile.gd" id="1_elvi0"]
 [ext_resource type="PackedScene" uid="uid://g4p0b74y3usy" path="res://scenes/modules/test-module/mining-laser/mining-laser/LaserHitPartcle.tscn" id="2_x8j23"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhuw7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vu1f0"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.388235, 0.333333, 1, 1)
@@ -12,7 +12,7 @@ emission = Color(0.388235, 0.333333, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_8pvud"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_mhuw7")
+material = SubResource("StandardMaterial3D_vu1f0")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.1
