@@ -33,27 +33,31 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"Base": {
-"use_external/enabled": true,
-"use_external/path": "res://scenes/modules/test-module/beam-laser/materials/RealLaserBaseMaterial.tres"
-},
-"Glass": {
-"use_external/enabled": true,
-"use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponGlassMaterial.tres"
-},
-"Lens": {
-"use_external/enabled": true,
-"use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponLensMaterial.tres"
-},
-"Metal": {
+"Base.001": {
 "use_external/enabled": true,
 "use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponMetalMaterial.tres"
 },
-"Pipes": {
+"Farg'oth Gold.001": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/modules/test-module/beam-laser/materials/RealLaserPipeMaterial.tres"
+"use_external/path": "res://scenes/modules/test-module/fargoth-beam-laser/materials/FargothGoldMaterial.tres"
 },
-"Radiators": {
+"Farg'oth Metal.001": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/fargoth-beam-laser/materials/FargothMetal.tres"
+},
+"Farg'oth Purple.001": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/fargoth-beam-laser/materials/FargothPurpleMaterial.tres"
+},
+"Glass.002": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/fargoth-beam-laser/materials/FargothGlass.tres"
+},
+"Pipes.001": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/fargoth-beam-laser/materials/FargothPipes.tres"
+},
+"Radiators.001": {
 "use_external/enabled": true,
 "use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponRadiatorMaterial.tres"
 }
