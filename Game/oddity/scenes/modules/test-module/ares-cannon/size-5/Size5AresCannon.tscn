@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://i0j1k2l3m4n5o"]
+
+[ext_resource type="Script" path="res://scenes/modules/test-module/ares-cannon/ares_cannon.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://c4d5e6f7g8h9i" path="res://scenes/modules/test-module/ares-cannon/ares_cannon.glb" id="2_model"]
+[ext_resource type="PackedScene" uid="uid://e6f7g8h9i0j1k" path="res://scenes/modules/test-module/ares-cannon/AresCannonSound.tscn" id="3_sound"]
+[ext_resource type="Resource" uid="uid://g8h9i0j1k2l3m" path="res://scenes/modules/test-module/ares-cannon/size-5/Size5AresCannon.tres" id="4_resource"]
+[ext_resource type="Resource" uid="uid://j1k2l3m4n5o6p" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/ares-cannon/TradeResourceAresCannon5.tres" id="5_trade"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_placeholder"]
+size = Vector3(0.6, 0.6, 2.5)
+
+[node name="Size5AresCannon" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 25.0
+script = ExtResource("1_script")
+shot_audio = ExtResource("3_sound")
+size = 5
+nozzle = NodePath("Marker3D")
+module_resource = ExtResource("4_resource")
+trade_information = ExtResource("5_trade")
+can_be_picked_up = true
+
+[node name="ares_cannon" parent="." instance=ExtResource("2_model")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_placeholder")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2)
+
+[editable path="ares_cannon"]

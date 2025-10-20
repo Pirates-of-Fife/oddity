@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://g8h9i0j1k2l3m"]
+
+[ext_resource type="Resource" uid="uid://f7g8h9i0j1k2l" path="res://scenes/modules/test-module/ares-cannon/AresCannonProjectile.tres" id="1_projectile"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://hlsfp2t6f64" path="res://scenes/modules/test-module/rotary-autocannon/ciws_single_shot.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+projectile = ExtResource("1_projectile")
+weapon_force = 2500.0
+cooldown = 2.5
+heat_per_shot = 1500.0
+ammo_usage = 50.0
+damage = 2500.0
+penetration = 15.0
+sound = ExtResource("3_sound")
+type = &"Heavy Cannon"
+manufacturer = &"Ares Industrial Co."
+model = &"Ares Cannon"
+size = &"5"
+release_year = &"42"
