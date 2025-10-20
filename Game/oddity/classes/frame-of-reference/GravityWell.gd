@@ -92,14 +92,10 @@ func calculate_gravity_strength(body : GameEntity) -> float:
 	
 	# Calculate distance from center
 	var to_point_dist_sq : float = to_point.length_squared()
-	var real_t_DCMP_EPSILON : float = 0.00001
 	
-	# Check if we're at the point gravity position
+	# Check if we're at the point gravity position (avoid division by zero)
 	if to_point_dist_sq == 0.0:
 		return gravity_strength
-	
-	# Calculate direction to point
-	var to_point_dir : Vector3 = to_point / sqrt(to_point_dist_sq)
 	
 	# Calculate gravity distance squared based on point_gravity_distance
 	var point_gravity_distance : float = radius * (1 + gravity_attraction_from_surface_max / 100.0)
