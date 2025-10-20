@@ -96,7 +96,7 @@ func calculate_gravity_strength(body : GameEntity) -> float:
 	
 	# Check if we're at the point gravity position
 	if to_point_dist_sq == 0.0:
-		return to_point * gravity_strength
+		return gravity_strength
 	
 	# Calculate direction to point
 	var to_point_dir : Vector3 = to_point / sqrt(to_point_dist_sq)
