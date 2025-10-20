@@ -1,20 +1,20 @@
 [gd_resource type="Resource" script_class="BeamWeaponResource" load_steps=3 format=3 uid="uid://dh4pr8y5mnqst"]
 
-[ext_resource type="Script" path="res://resources/classes/module/component/weapon/BeamWeaponResource.gd" id="1_totel"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/BeamWeaponResource.gd" id="1_ta07r"]
 
 [sub_resource type="Curve" id="Curve_4nvlh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.700935, 0.646477), -1.58074, -1.58074, 0, 0, Vector2(1, 0), -3.00529, 0.0, 0, 0]
 point_count = 3
 
 [resource]
-script = ExtResource("1_totel")
+script = ExtResource("1_ta07r")
 max_beam_length = 10000.0
 damage_fall_off = SubResource("Curve_4nvlh")
 heat_generation = 1300.0
 damage = 2500.0
 penetration = 2.0
 type = &"Beam Laser"
-manufacturer = &"Farg'oth"
-model = &"6-Royal Beam"
+manufacturer = &"Farg\'oth"
+model = &"Amor Aeternus"
 size = &"6"
 release_year = &"145"
