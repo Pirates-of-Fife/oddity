@@ -83,23 +83,30 @@ func apply_gravity() -> void:
 func calculate_gravity_vector(body : GameEntity) -> Vector3:
 	return (global_position - body.global_position).normalized()
 
-#*********************************************************************************#
-# INFO WARNING not working right now, so just applying full gravity all the time. #
-#*********************************************************************************#
-
+## Calculate gravity strength based on distance from the gravity well center
+## Implementation based on Godot Jolt's compute_gravity method
 func calculate_gravity_strength(body : GameEntity) -> float:
-	#var distance_from_center : float = (body.global_position - global_position).length()
-	#var distance_from_surface : float = max(0, distance_from_center - radius)
-
-	#var distance_max_gravity_attraction : float = radius * (1 + gravity_attraction_from_surface_max / 100.0)
-	#var distance_min_gravity_attraction : float = radius * (1 + gravity_attraction_from_surface_start / 100.0)
-
-	#if distance_from_surface <= distance_min_gravity_attraction:
-	#	return (distance_from_surface / distance_min_gravity_attraction) * gravity_strength
-	#else:
-	#	return 0.0
-
-	return gravity_strength
+	# Get the point in the gravity well's local space
+	var point : Vector3 = body.global_position
+	var to_point : Vector3 = point - global_position
+	
+	# Calculate distance from center
+	var to_point_dist_sq : float = to_point.length_squared()
+	var real_t_DCMP_EPSILON : float = 0.00001
+	
+	# Check if we're at the point gravity position
+	if to_point_dist_sq == 0.0:
+		return to_point * gravity_strength
+	
+	# Calculate direction to point
+	var to_point_dir : Vector3 = to_point / sqrt(to_point_dist_sq)
+	
+	# Calculate gravity distance squared based on point_gravity_distance
+	var point_gravity_distance : float = radius * (1 + gravity_attraction_from_surface_max / 100.0)
+	var gravity_dist_sq : float = point_gravity_distance * point_gravity_distance
+	
+	# Apply inverse square law for gravity falloff
+	return (gravity_strength * gravity_dist_sq / to_point_dist_sq)
 
 func _on_body_entered(body : Node3D) -> void:
 	on_body_entered(body)

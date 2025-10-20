@@ -20,6 +20,8 @@ var current_max_velocity : float
 var throttle : float
 @export
 var velocity : float
+@export
+var gravity_strength : float
 
 @export
 var velocity_mfd : VelocityMFD
@@ -34,3 +36,4 @@ func _process(delta: float) -> void:
 	velocity_mfd.current_max_velocity = current_max_velocity
 	velocity_mfd.throttle = throttle
 	velocity_mfd.velocity = velocity
+	velocity_mfd.gravity_strength = gravity_strength

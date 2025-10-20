@@ -12,6 +12,7 @@ var forwards_velocity : float
 var velocity : float
 var max_velocity : float
 var current_max_velocity : float
+var gravity_strength : float
 
 @export
 var vertical_velocity_up_progress_bar : ProgressBar
@@ -36,6 +37,9 @@ var max_velocity_progress_bar : ProgressBar
 
 @export
 var velocity_label : RichTextLabel
+
+@export
+var gravity_label : RichTextLabel
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:	
@@ -71,6 +75,14 @@ func _process(delta: float) -> void:
 		forwards_backwards_velocity_progress_bar.fill_mode = ProgressBar.FillMode.FILL_END_TO_BEGIN
 
 	velocity_label.text = str(int(roundf(velocity))) + " m/s"
+
+	# Update gravity display
+	if gravity_label != null:
+		if gravity_strength > 0:
+			var gravity_in_g : float = gravity_strength / 9.8
+			gravity_label.text = "G: %.2f" % gravity_in_g
+		else:
+			gravity_label.text = "G: 0.00"
 
 	throttle_progress_bar.value = absf(throttle)
 

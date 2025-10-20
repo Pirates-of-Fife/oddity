@@ -262,6 +262,7 @@ func update_ui() -> void:
 	velocity_mfd.current_max_velocity = current_max_velocity
 	velocity_mfd.throttle = target_thrust_vector.z
 	velocity_mfd.velocity = local_linear_velocity.length()
+	velocity_mfd.gravity_strength = gravity_strength
 
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		super_cruise_mfd.velocity = current_super_cruise_speed
