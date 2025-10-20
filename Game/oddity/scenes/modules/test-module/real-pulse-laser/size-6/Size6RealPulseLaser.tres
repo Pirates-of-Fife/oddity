@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PulseLaserWeaponResource" load_steps=3 format=3 uid="uid://c8qdmf0pv5jy1"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/PulseLaserWeaponResource.gd" id="1_totel"]
+
+[sub_resource type="Curve" id="Curve_4nvlh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.700935, 0.646477), -1.58074, -1.58074, 0, 0, Vector2(1, 0), -3.00529, 0.0, 0, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("1_totel")
+max_beam_length = 8000.0
+damage_fall_off = SubResource("Curve_4nvlh")
+heat_generation = 1200.0
+damage = 2500.0
+penetration = 2.0
+type = &"Pulse Laser"
+manufacturer = &"R.E.A.L."
+model = &"6-P40MW"
+size = &"6"
+release_year = &"140"
+cooldown = 2.0
+fire_time = 0.5

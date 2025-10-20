@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsxwq0jtxn8vu"]
+
+[ext_resource type="Script" path="res://classes/projectile/BeamLaserProjectile.gd" id="1_tfop2"]
+[ext_resource type="PackedScene" uid="uid://d0qyvu2cnqj8w" path="res://scenes/modules/test-module/real-pulse-laser/laser-projectile/PulseLaserHitParticle.tscn" id="2_5kw1g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bet6"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.9, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.6, 0.1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tpqw7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6bet6")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.1
+radial_segments = 6
+
+[node name="PulseLaserProjectile" type="Node3D" node_paths=PackedStringArray("particles", "raycast", "beam_mesh")]
+script = ExtResource("1_tfop2")
+particles = NodePath("PulseLaserHitParticle")
+raycast = NodePath("RayCast3D")
+beam_mesh = NodePath("MeshInstance3D")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
+target_position = Vector3(0, 0, 12.405)
+collision_mask = 24117248
+hit_back_faces = false
+debug_shape_custom_color = Color(0.9, 0.6, 0.2, 1)
+debug_shape_thickness = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_tpqw7")
+
+[node name="PulseLaserHitParticle" parent="." instance=ExtResource("2_5kw1g")]
