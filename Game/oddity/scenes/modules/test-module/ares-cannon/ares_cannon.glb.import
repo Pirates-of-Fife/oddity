@@ -33,21 +33,17 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"Accent1": {
+"CannonBase": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/modules/test-module/ares-cannon/AresCannonAccent1Material.tres"
+"use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponMetalMaterial.tres"
 },
-"Accent2": {
+"Metal": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/modules/test-module/ares-cannon/AresCannonAccent2Material.tres"
+"use_external/path": "res://scenes/modules/test-module/rotary-autocannon/RotaryCannonBaseMaterial.tres"
 },
-"Barrel": {
+"Radiators": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/modules/test-module/ares-cannon/AresCannonBarrelMaterial.tres"
-},
-"BaseMaterial": {
-"use_external/enabled": true,
-"use_external/path": "res://scenes/modules/test-module/ares-cannon/AresCannonBaseMaterial.tres"
+"use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponRadiatorMaterial.tres"
 }
 }
 }
