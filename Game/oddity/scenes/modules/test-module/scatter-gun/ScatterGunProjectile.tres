@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=3 format=3 uid="uid://cl6m8n9o0p1q2"]
+
+[ext_resource type="PackedScene" uid="uid://bm5g7h8i9j0k1" path="res://scenes/modules/test-module/scatter-gun/ScatterGunProjectile.tscn" id="1_projectile"]
+[ext_resource type="Script" path="res://resources/classes/projectile/ProjectileResource.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+projectile_scene_file = ExtResource("1_projectile")
