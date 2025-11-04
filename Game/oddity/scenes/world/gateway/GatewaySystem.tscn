@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c6fr87c666t64"]
+[gd_scene load_steps=25 format=3 uid="uid://c6fr87c666t64"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_rfo0q"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_1xiln"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cjuue14xnwrxc" path="res://scenes/world/gateway/celestial-bodies/arka/ArkaZone.tscn" id="5_dbwvd"]
 [ext_resource type="Resource" uid="uid://dgyuae7g547cv" path="res://resources/resources/trade/trade-items/stations/KintilloDockTradeList.tres" id="7_4gm3a"]
 [ext_resource type="PackedScene" uid="uid://crojdgkgwr1f8" path="res://scenes/world/gateway/celestial-bodies/alcolin/AlcolinZone.tscn" id="8_lc1q5"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="9_n1ioy"]
 [ext_resource type="PackedScene" uid="uid://cffn5ri2p6nrr" path="res://scenes/world/gateway/celestial-bodies/alcolin/AvantZone.tscn" id="10_ulerh"]
 [ext_resource type="PackedScene" uid="uid://n8b0kumefmg0" path="res://scenes/world/gateway/celestial-bodies/alcolin/LogiZone.tscn" id="11_damws"]
+[ext_resource type="PackedScene" uid="uid://d2emxty85isb7" path="res://scenes/modules/test-module/ares-cannon/size-6/Size6AresCannon.tscn" id="11_lyx6i"]
 [ext_resource type="PackedScene" uid="uid://dtg1up7xr7k15" path="res://scenes/world/gateway/celestial-bodies/alcolin/RataZone.tscn" id="12_rvpmt"]
 [ext_resource type="PackedScene" uid="uid://mvlkl5w1pgts" path="res://scenes/world/gateway/celestial-bodies/seraphis/SeraphisZone.tscn" id="13_vlrcf"]
 [ext_resource type="PackedScene" uid="uid://cys7hpq6o76yy" path="res://scenes/world/gateway/celestial-bodies/verit/CrestZone.tscn" id="14_3ctes"]
@@ -88,8 +90,22 @@ mesh = SubResource("BoxMesh_pteku")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ArkaZone/StaticGameEntity"]
 shape = SubResource("ConcavePolygonShape3D_lgtgt")
 
-[node name="MarkerSprite" parent="ArkaZone/StaticGameEntity" instance=ExtResource("17_54u7k")]
+[node name="PlayerDetectionZone" type="Node3D" parent="ArkaZone/StaticGameEntity" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("9_n1ioy")
+update_time = 1.0
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 2900.0
+sprite_max_distance = 40000.0
+
+[node name="MarkerSprite" parent="ArkaZone/StaticGameEntity/PlayerDetectionZone" instance=ExtResource("17_54u7k")]
 text = &"Luna Cube"
+
+[node name="Size6AresCannon" parent="ArkaZone" instance=ExtResource("11_lyx6i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.582, 76.3515, 398072)
+
+[node name="Size6AresCannon2" parent="ArkaZone" instance=ExtResource("11_lyx6i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.433, 83.393, 398058)
 
 [node name="AlcolinZone" parent="." instance=ExtResource("8_lc1q5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61142e+07, 40, -3.96306e+06)
