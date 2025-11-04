@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2emxty85isb7"]
+
+[ext_resource type="Script" path="res://scenes/modules/test-module/ares-cannon/ares_cannon.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://0bt5jyw2m8r" path="res://scenes/modules/test-module/ares-cannon/ares_cannon_size6.glb" id="2_model"]
+[ext_resource type="PackedScene" uid="uid://bb1cu6k0xsoas" path="res://scenes/modules/test-module/ares-cannon/AresCannonSound.tscn" id="3_sound"]
+[ext_resource type="Resource" uid="uid://jpadwqkhovl4" path="res://scenes/modules/test-module/ares-cannon/size-6/Size6AresCannon.tres" id="4_resource"]
+[ext_resource type="Resource" uid="uid://dcsdg0tnkryo7" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/blast-cannon/TradeResourceAresCannon6.tres" id="5_trade"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0dep2"]
+points = PackedVector3Array(0.281962, 0.834006, -1.03278, -0.565002, -0.860366, -2.44513, -0.753266, -0.38967, -2.7276, -0.188475, -0.10722, 3.01437, 0.752842, -0.38967, -2.7276, -0.565002, 0.645429, -2.63324, 0.564579, -0.860366, -0.844667, 0.752842, 0.363144, -0.562198, 0.187904, 0.174899, 3.01437, -0.565002, 0.645429, -0.656551, 0.752842, 0.363144, -2.82136, -0.565002, -0.860366, -0.844667, -0.753266, 0.363144, -0.562198, 0.752842, -0.38967, -0.562198, 0.0938461, -0.201425, 3.01437, -0.753266, -0.38967, -0.562198, 0.564579, -0.860366, -2.44513, -0.188475, 0.174899, 3.01437, 0.470373, 0.7398, -2.53889, -0.282386, 0.834006, -1.03278, -0.753266, 0.363144, -2.82136, 0.564579, 0.645429, -0.656551, 0.187904, -0.10722, 3.01437, -0.470797, 0.7398, -2.53889, -0.0942699, -0.201425, 3.01437, 0.470373, 0.7398, -0.750904, -0.470797, 0.7398, -0.750904, 0.564579, 0.645429, -2.63324)
+
+[node name="Size6AresCannon" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 30.0
+script = ExtResource("1_script")
+shot_audio = ExtResource("3_sound")
+size = 6
+nozzle = NodePath("Marker3D")
+module_resource = ExtResource("4_resource")
+trade_information = ExtResource("5_trade")
+can_be_picked_up = true
+
+[node name="ares_cannon" parent="." instance=ExtResource("2_model")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0951243, -0.0996414)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0951243, -0.0996414)
+shape = SubResource("ConvexPolygonShape3D_0dep2")
+
+[editable path="ares_cannon"]
