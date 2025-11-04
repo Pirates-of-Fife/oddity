@@ -26,6 +26,9 @@ var beam_mesh : MeshInstance3D
 var mining_efficiency : float
 
 @export
+var damage_rate : float = 0.15
+
+@export
 var can_extract_resources : bool = false
 
 var timer : Timer = Timer.new()
@@ -48,7 +51,7 @@ func _beam_laser_projectile_ready() -> void:
 
 	timer.autostart = false
 	timer.one_shot = false
-	timer.wait_time = 0.15
+	timer.wait_time = damage_rate
 	timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
