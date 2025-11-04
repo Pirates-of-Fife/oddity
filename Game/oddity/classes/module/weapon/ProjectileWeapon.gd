@@ -37,7 +37,6 @@ func shoot() -> void:
 		return
 	
 	module_slot.vehicle.current_ammo -= (module_resource as ProjectileWeaponResource).ammo_usage
-	print((module_resource as ProjectileWeaponResource).ammo_usage)
 	
 	# spawn projectile
 

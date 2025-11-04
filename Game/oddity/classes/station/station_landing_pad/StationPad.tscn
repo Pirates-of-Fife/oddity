@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=26 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -16,8 +16,7 @@
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_clb07"]
 [ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="15_ikxe5"]
 [ext_resource type="PackedScene" uid="uid://bvs0cmfbgiyy3" path="res://scenes/trade-terminal/scene/TradeTerminal.tscn" id="16_1wsuf"]
-[ext_resource type="PackedScene" uid="uid://c8mtd4qrxakuy" path="res://scenes/modules/test-module/fargoth-beam-laser/size-6/Size6FargothBeamLaser.tscn" id="17_teed6"]
-[ext_resource type="PackedScene" uid="uid://b7ktasjdgaklm" path="res://scenes/modules/test-module/fargoth-beam-laser/size-5/Size5FargothBeamLaser.tscn" id="18_p8wah"]
+[ext_resource type="PackedScene" uid="uid://cpjem7ixry514" path="res://scenes/modules/test-module/real-pulse-laser/size-6/Size6PulseLaser.tscn" id="17_i1r72"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w6y13"]
 size = Vector3(5, 4.585, 4.16)
@@ -363,11 +362,11 @@ module_spawn_position_marker = NodePath("Marker3D")
 transform = Transform3D(-1.66667, 0, 2.04108e-16, 0, 1.66667, 0, -2.04108e-16, 0, -1.66667, 19.9487, 5.35965, 11.2398)
 gizmo_extents = 2.5
 
-[node name="Size6FargothBeamLaser" parent="." instance=ExtResource("17_teed6")]
-transform = Transform3D(-0.0622505, 0, 0.998061, 0, 1, 0, -0.998061, 0, -0.0622505, -2.30353, 0, -7.14189)
+[node name="Size6PulseLaser" parent="." instance=ExtResource("17_i1r72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7476, 2.39047, -9.01472)
 
-[node name="Size5FargothBeamLaser" parent="." instance=ExtResource("18_p8wah")]
-transform = Transform3D(0.0238564, 0, 0.999715, 0, 1, 0, -0.999715, 0, 0.0238564, -2.78748, 0, -10.223)
+[node name="Size6PulseLaser2" parent="." instance=ExtResource("17_i1r72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.748849, 2.39047, -9.01747)
 
 [connection signal="starship_landed" from="LandingPad" to="." method="_on_landing_pad_starship_landed"]
 [connection signal="starship_took_off" from="LandingPad" to="." method="_on_landing_pad_starship_took_off"]
