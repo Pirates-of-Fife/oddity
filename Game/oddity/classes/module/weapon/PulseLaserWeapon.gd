@@ -31,7 +31,7 @@ func _beam_weapon_ready() -> void:
 	weapon_cooldown_timer.timeout.connect(on_weapon_cooldown_timer_timeout)
 	weapon_cooldown_timer.wait_time = pulse_laser_weapon_resource.cooldown
 	
-	weapon_fire_time_timer= Timer.new()
+	weapon_fire_time_timer = Timer.new()
 	add_child(weapon_fire_time_timer)
 	weapon_fire_time_timer.one_shot = true
 	weapon_fire_time_timer.timeout.connect(on_weapon_shoot_timer_timeout)
