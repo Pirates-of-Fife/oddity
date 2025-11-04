@@ -50,9 +50,6 @@ func on_weapon_shoot_timer_timeout() -> void:
 	if weapon_cooldown_timer.is_stopped():
 		weapon_cooldown_timer.start()
 	
-# my codebase is such a mess dkoghsdlkghsdlghsdlhkds
-# FUCK ME (sideways and call me a bitch)
-
 func shoot() -> void:
 	if cooldown_complete == false:
 		return
