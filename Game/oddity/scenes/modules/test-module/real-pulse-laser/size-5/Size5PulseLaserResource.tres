@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PulseLaserWeaponResource" load_steps=3 format=3 uid="uid://bxcjjgy2dbigg"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/PulseLaserWeaponResource.gd" id="1_tfatp"]
+
+[sub_resource type="Curve" id="Curve_n4ejy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_tfatp")
+cooldown = 0.1
+fire_time = 0.1
+max_beam_length = 1500.0
+damage_fall_off = SubResource("Curve_n4ejy")
+heat_generation = 180.0
+damage = 80.0
+penetration = 1.0
+type = &"Pulse Laser"
+manufacturer = &"R.E.A.L."
+model = &"5-P35MW"
+size = &"5"
+release_year = &"150"

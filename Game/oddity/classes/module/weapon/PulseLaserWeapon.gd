@@ -30,6 +30,12 @@ func _beam_weapon_ready() -> void:
 	weapon_cooldown_timer.one_shot = true
 	weapon_cooldown_timer.timeout.connect(on_weapon_cooldown_timer_timeout)
 	weapon_cooldown_timer.wait_time = pulse_laser_weapon_resource.cooldown
+	
+	weapon_fire_time_timer= Timer.new()
+	add_child(weapon_fire_time_timer)
+	weapon_fire_time_timer.one_shot = true
+	weapon_fire_time_timer.timeout.connect(on_weapon_shoot_timer_timeout)
+	weapon_fire_time_timer.wait_time = pulse_laser_weapon_resource.fire_time
 
 func on_weapon_cooldown_timer_timeout() -> void:
 	weapon_cooldown_complete.emit()
@@ -38,15 +44,37 @@ func on_weapon_cooldown_timer_timeout() -> void:
 func on_weapon_shoot_timer_timeout() -> void:
 	weapon_stop_firing.emit()
 	weapon_shot_complete = true
+	cooldown_complete = false
+	stop_shooting()
+	
+	if weapon_cooldown_timer.is_stopped():
+		weapon_cooldown_timer.start()
+	
+# my codebase is such a mess dkoghsdlkghsdlghsdlhkds
+# FUCK ME (sideways and call me a bitch)
 
 func shoot() -> void:
 	if cooldown_complete == false:
 		return
 	
 	beam_laser.start_beam()
-	if !beam_sound.playing:
-		beam_sound.play()
+	
+	if weapon_fire_time_timer.is_stopped():
+		weapon_fire_time_timer.start()
+		var new_beam_sound : AudioStreamPlayer3D = beam_sound.duplicate()
+		add_child(new_beam_sound)
+		new_beam_sound.play()
 
+		# Connect to the "finished" signal to free the sound after it plays
+		new_beam_sound.finished.connect(func() -> void :
+			new_beam_sound.queue_free()
+		)
+	
+	#if !beam_sound.playing:
+	#	beam_sound.play()
+		
+
+	
 func stop_shooting() -> void:
 	beam_laser.stop_beam()
 	beam_sound.stop()
