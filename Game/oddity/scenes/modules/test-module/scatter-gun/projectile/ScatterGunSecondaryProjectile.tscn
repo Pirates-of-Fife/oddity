@@ -16,14 +16,15 @@ margin = 1.0
 points = PackedVector3Array(0.15, 0.15, 1, 0.15, -0.15, 1, 0.15, 0.15, -1, -0.15, 0.15, 1, -0.15, -0.15, 1, 0.15, -0.15, -1, -0.15, 0.15, -1, -0.15, -0.15, -1)
 
 [node name="ScatterGunSecondaryProjectile" type="RigidBody3D"]
-collision_layer = 8388608
-collision_mask = 8388608
+collision_layer = 7340032
+collision_mask = 7340032
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_tkhfp")
 timeout = 10.0
 on_hit_sound = ExtResource("2_p8o6p")
+collision_timeout = 0.01
 projectile_collision_layer = 7340032
 projectile_hit_particle = ExtResource("3_2mysv")
 
