@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm7n9o0p1q2r3"]
+[gd_scene load_steps=2 format=3 uid="uid://dm7oao0p1q2r3"]
 
-[ext_resource type="AudioStream" uid="uid://hlsfp2t6f64" path="res://scenes/modules/test-module/rotary-autocannon/ciws_single_shot.wav" id="1_sound"]
+[ext_resource type="AudioStream" uid="uid://dsnypcl763sx" path="res://scenes/modules/test-module/scatter-gun/sounds/scatter_gun.wav" id="1_qm8rw"]
 
 [node name="ScatterGunSound" type="AudioStreamPlayer3D"]
-stream = ExtResource("1_sound")
-volume_db = -2.0
+stream = ExtResource("1_qm8rw")
 unit_size = 18.0
+pitch_scale = 1.83
 bus = &"Weapon"

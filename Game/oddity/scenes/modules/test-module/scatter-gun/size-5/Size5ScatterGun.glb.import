@@ -31,6 +31,25 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"BarrelThings": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponMetalMaterial.tres"
+},
+"CannonBase.001": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/scatter-gun/materials/ScatterGunHullMaterial.tres"
+},
+"Metal.002": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/ShieldGenerator/ShieldGrey.tres"
+},
+"Radiators": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponRadiatorMaterial.tres"
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

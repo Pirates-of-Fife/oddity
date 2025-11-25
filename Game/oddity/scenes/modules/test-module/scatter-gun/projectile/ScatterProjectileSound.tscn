@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1g2hg6qha52s"]
+
+[ext_resource type="AudioStream" uid="uid://hlsfp2t6f64" path="res://scenes/modules/test-module/rotary-autocannon/ciws_single_shot.wav" id="1_tomax"]
+[ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeaponShootAudioStreamPlayer3D.gd" id="2_qwppp"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_tomax")
+bus = &"Weapon"
+script = ExtResource("2_qwppp")

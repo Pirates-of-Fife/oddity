@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3 uid="uid://bm5g7h8jaj0k1"]
+
+[ext_resource type="Script" path="res://scenes/modules/test-module/scatter-gun/projectile/ScatterProjectile.gd" id="1_vbslc"]
+[ext_resource type="Resource" uid="uid://x2l2cxnk55hs" path="res://scenes/modules/test-module/scatter-gun/projectile/ScatterGunSecondaryProjectile.tres" id="2_iy8xa"]
+[ext_resource type="PackedScene" uid="uid://cdq5yxu5omvtc" path="res://scenes/modules/test-module/rotary-autocannon/ProjectileHitPartcle.tscn" id="3_4yxqj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c1boy"]
+size = Vector3(0.3, 0.3, 0.76)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_na2yh"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.366688, 0.41185, 0, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8833c"]
+margin = 1.0
+points = PackedVector3Array(0.15, 0.15, 1, 0.15, -0.15, 1, 0.15, 0.15, -1, -0.15, 0.15, 1, -0.15, -0.15, 1, 0.15, -0.15, -1, -0.15, 0.15, -1, -0.15, -0.15, -1)
+
+[sub_resource type="Gradient" id="Gradient_d0vkd"]
+offsets = PackedFloat32Array(0.238095, 1)
+colors = PackedColorArray(1, 0.760784, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5bxa0"]
+gradient = SubResource("Gradient_d0vkd")
+
+[sub_resource type="Curve" id="Curve_ufvsq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_stkqu"]
+curve = SubResource("Curve_ufvsq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pyem4"]
+angle_min = -720.0
+angle_max = 1120.5
+spread = 180.0
+initial_velocity_min = 28.17
+initial_velocity_max = 85.09
+gravity = Vector3(0, 0, 0)
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_stkqu")
+color_ramp = SubResource("GradientTexture1D_5bxa0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vk5mh"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_i6wwy"]
+material = SubResource("StandardMaterial3D_vk5mh")
+size = Vector2(0.32, 0.62)
+
+[node name="ScatterGunProjectile" type="RigidBody3D" node_paths=PackedStringArray("spawn_positions", "scatter_particles")]
+collision_layer = 8388608
+collision_mask = 8388608
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_vbslc")
+scattered_projectile = ExtResource("2_iy8xa")
+spawn_positions = [NodePath("Marker3D9"), NodePath("Marker3D4"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D"), NodePath("Marker3D5"), NodePath("Marker3D6"), NodePath("Marker3D7"), NodePath("Marker3D8")]
+scatter_particles = NodePath("ScatterParticle")
+timeout = 10.0
+projectile_collision_layer = 7340032
+projectile_hit_particle = ExtResource("3_4yxqj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.875, 0, 0, 0, 1.975, 0, 0, 0, 3.605, 0, 0, 0)
+mesh = SubResource("BoxMesh_c1boy")
+surface_material_override/0 = SubResource("StandardMaterial3D_na2yh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_8833c")
+
+[node name="ScatterParticle" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.24
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_pyem4")
+draw_pass_1 = SubResource("QuadMesh_i6wwy")
+
+[node name="Marker3D9" type="Marker3D" parent="."]
+transform = Transform3D(0.983915, -0.0564382, 0.169489, 0.0525903, 0.998248, 0.0271111, -0.170722, -0.0177616, 0.985159, -0.05363, 1.46082, -0.795933)
+
+[node name="Marker3D4" type="Marker3D" parent="."]
+transform = Transform3D(0.995958, -0.0330451, 0.083517, 0.0420299, 0.993238, -0.108222, -0.0793761, 0.111295, 0.990612, -0.0382842, -1.49292, -0.317901)
+
+[node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(0.995958, -0.0330451, 0.083517, 0.0209969, 0.989755, 0.141223, -0.0873281, -0.138899, 0.986449, 1.25505, -0.0814799, -0.317901)
+
+[node name="Marker3D3" type="Marker3D" parent="."]
+transform = Transform3D(0.998926, -0.00867559, -0.0455127, 0.0118789, 0.997435, 0.070592, 0.0447835, -0.0710568, 0.996466, -1.1453, 1.25371, -0.11099)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(0.996528, 0, -0.0832604, 0, 1, 0, 0.0832604, 0, 0.996528, -1.33305, 0, 0)
+
+[node name="Marker3D5" type="Marker3D" parent="."]
+transform = Transform3D(0.995958, -0.0330451, 0.083517, 0.0420299, 0.993238, -0.108222, -0.0793761, 0.111295, 0.990612, 2.29915, -1.88895, -0.317901)
+
+[node name="Marker3D6" type="Marker3D" parent="."]
+transform = Transform3D(0.995958, -0.0330451, 0.083517, 0.0209969, 0.989755, 0.141223, -0.0873281, -0.138899, 0.986449, -2.0641, -1.74488, 0.694269)
+
+[node name="Marker3D7" type="Marker3D" parent="."]
+transform = Transform3D(0.998926, -0.00867559, -0.0455127, 0.0118789, 0.997435, 0.070592, 0.0447835, -0.0710568, 0.996466, 1.19213, 1.44135, -0.11099)
+
+[node name="Marker3D8" type="Marker3D" parent="."]
+transform = Transform3D(0.996528, 0, -0.0832604, 0, 1, 0, 0.0832604, 0, 0.996528, 1.00439, -1.09842, 0)
+
+[connection signal="finished" from="ScatterParticle" to="." method="_on_scatter_particle_finished"]

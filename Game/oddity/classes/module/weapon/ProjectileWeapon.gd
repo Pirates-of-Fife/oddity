@@ -6,6 +6,7 @@ var weapon_cooldown_timer : Timer
 var cooldown_complete : bool = true
 
 signal weapon_cooldown_complete
+signal projectile_created(projectile : Projectile, weapon : ProjectileWeapon)
 
 @export
 var shot_audio : PackedScene
@@ -42,6 +43,8 @@ func shoot() -> void:
 
 	var projectile_scene : PackedScene = (module_resource as WeaponResource).projectile.projectile_scene_file
 	var projectile : Projectile = projectile_scene.instantiate()
+
+	projectile_created.emit(projectile, self)
 
 	add_child(projectile)
 
