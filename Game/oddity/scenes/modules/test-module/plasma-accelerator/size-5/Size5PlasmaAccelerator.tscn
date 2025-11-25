@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cplasmaweap5sc"]
+[gd_scene load_steps=7 format=3 uid="uid://cfpi73l3fhrva"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/plasma-accelerator/plasma_accelerator.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://dpla5maaccel5" path="res://scenes/modules/test-module/plasma-accelerator/size-5/plasma_accelerator.glb" id="2_model"]
-[ext_resource type="PackedScene" uid="uid://cplasmaaudio01" path="res://scenes/modules/test-module/plasma-accelerator/PlasmaAcceleratorSound.tscn" id="3_sound"]
-[ext_resource type="Resource" uid="uid://cplasmaweap5rs" path="res://scenes/modules/test-module/plasma-accelerator/size-5/Size5PlasmaAccelerator.tres" id="4_resource"]
-[ext_resource type="Resource" uid="uid://cplasmatrade5r" path="res://resources/resources/trade/trade-items/modules/plasma-laboratories-corporation/accelerator/TradeResourcePlasmaAccelerator5.tres" id="5_trade"]
+[ext_resource type="PackedScene" uid="uid://cfpi72ykiab3y" path="res://scenes/modules/test-module/plasma-accelerator/PlasmaAcceleratorSound.tscn" id="3_sound"]
+[ext_resource type="Resource" uid="uid://cfpi73l3fhruq" path="res://scenes/modules/test-module/plasma-accelerator/size-5/Size5PlasmaAccelerator.tres" id="4_resource"]
+[ext_resource type="Resource" uid="uid://cfpi73jhe308p" path="res://resources/resources/trade/trade-items/modules/plasma-laboratories-corporation/accelerator/TradeResourcePlasmaAccelerator5.tres" id="5_trade"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_plasma5"]
-size = Vector3(1.0, 1.0, 4.0)
+size = Vector3(1, 1, 4)
 
 [node name="Size5PlasmaAccelerator" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
 collision_layer = 537396737
