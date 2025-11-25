@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://cfpi73l3fhsuq"]
+
+[ext_resource type="Resource" uid="uid://cfpi73fhtbm30" path="res://scenes/modules/test-module/plasma-accelerator/PlasmaAcceleratorProjectile.tres" id="1_projectile"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://hlsfp2t6f64" path="res://scenes/modules/test-module/rotary-autocannon/ciws_single_shot.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+projectile = ExtResource("1_projectile")
+weapon_force = 1800.0
+cooldown = 2.0
+heat_per_shot = 3000.0
+ammo_usage = 50.0
+damage = 12000.0
+penetration = 30.0
+sound = ExtResource("3_sound")
+type = &"Plasma Weapon"
+manufacturer = &"Plasma Laboratories Corporation"
+model = &"Accelerator 6"
+size = &"6"
+release_year = &"43"
