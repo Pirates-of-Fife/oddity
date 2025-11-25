@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bm5g7h8jaj0k1"]
+[gd_scene load_steps=16 format=3 uid="uid://bm5g7h8jaj0k1"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/scatter-gun/projectile/ScatterProjectile.gd" id="1_vbslc"]
 [ext_resource type="Resource" uid="uid://x2l2cxnk55hs" path="res://scenes/modules/test-module/scatter-gun/projectile/ScatterGunSecondaryProjectile.tres" id="2_iy8xa"]
+[ext_resource type="PackedScene" uid="uid://bejivpu8nqi63" path="res://scenes/modules/test-module/rotary-autocannon/RotaryAutoCannonProjectileHitSound.tscn" id="2_ll7fv"]
 [ext_resource type="PackedScene" uid="uid://cdq5yxu5omvtc" path="res://scenes/modules/test-module/rotary-autocannon/ProjectileHitPartcle.tscn" id="3_4yxqj"]
+[ext_resource type="PackedScene" uid="uid://c1g2hg6qha52s" path="res://scenes/modules/test-module/scatter-gun/projectile/ScatterProjectileSound.tscn" id="3_7s2of"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c1boy"]
 size = Vector3(0.3, 0.3, 0.76)
@@ -62,9 +64,11 @@ contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_vbslc")
 scattered_projectile = ExtResource("2_iy8xa")
-spawn_positions = [NodePath("Marker3D9"), NodePath("Marker3D4"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D"), NodePath("Marker3D5"), NodePath("Marker3D6"), NodePath("Marker3D7"), NodePath("Marker3D8")]
+spawn_positions = [NodePath("ScatterPositions/Marker3D9"), NodePath("ScatterPositions/Marker3D4"), NodePath("ScatterPositions/Marker3D2"), NodePath("ScatterPositions/Marker3D3"), NodePath("ScatterPositions/Marker3D"), NodePath("ScatterPositions/Marker3D5"), NodePath("ScatterPositions/Marker3D6"), NodePath("ScatterPositions/Marker3D7"), NodePath("ScatterPositions/Marker3D8"), NodePath("ScatterPositions/Marker3D10"), NodePath("ScatterPositions/Marker3D11"), NodePath("ScatterPositions/Marker3D12"), NodePath("ScatterPositions/Marker3D13"), NodePath("ScatterPositions/Marker3D14"), NodePath("ScatterPositions/Marker3D15"), null, null, null, null, null, null, null, null, null, null]
+secondary_projectile_audio = ExtResource("3_7s2of")
 scatter_particles = NodePath("ScatterParticle")
 timeout = 10.0
+on_hit_sound = ExtResource("2_ll7fv")
 projectile_collision_layer = 7340032
 projectile_hit_particle = ExtResource("3_4yxqj")
 
@@ -86,31 +90,102 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_pyem4")
 draw_pass_1 = SubResource("QuadMesh_i6wwy")
 
-[node name="Marker3D9" type="Marker3D" parent="."]
-transform = Transform3D(0.983915, -0.0564382, 0.169489, 0.0525903, 0.998248, 0.0271111, -0.170722, -0.0177616, 0.985159, -0.05363, 1.46082, -0.795933)
+[node name="ScatterPositions" type="Node3D" parent="."]
 
-[node name="Marker3D4" type="Marker3D" parent="."]
-transform = Transform3D(0.995958, -0.0330451, 0.083517, 0.0420299, 0.993238, -0.108222, -0.0793761, 0.111295, 0.990612, -0.0382842, -1.49292, -0.317901)
+[node name="Marker3D9" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986709, -0.162493, 0.00141806, 0.162499, 0.986671, -0.00861055, 0, 0.00872654, 0.999962, -0.299991, 1.38499, -0.795933)
 
-[node name="Marker3D2" type="Marker3D" parent="."]
-transform = Transform3D(0.995958, -0.0330451, 0.083517, 0.0209969, 0.989755, 0.141223, -0.0873281, -0.138899, 0.986449, 1.25505, -0.0814799, -0.317901)
+[node name="Marker3D4" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986709, -0.162493, -0.00141806, 0.162499, 0.986671, 0.00861055, 0, -0.00872654, 0.999962, 0.195132, -1.25046, -0.725429)
 
-[node name="Marker3D3" type="Marker3D" parent="."]
-transform = Transform3D(0.998926, -0.00867559, -0.0455127, 0.0118789, 0.997435, 0.070592, 0.0447835, -0.0710568, 0.996466, -1.1453, 1.25371, -0.11099)
+[node name="Marker3D2" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986703, -0.162499, -0.00344426, 0.162498, 0.986709, -0.000567229, 0.00349065, 0, 0.999994, 1.24192, 0.0758512, -0.317901)
 
-[node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(0.996528, 0, -0.0832604, 0, 1, 0, 0.0832604, 0, 0.996528, -1.33305, 0, 0)
+[node name="Marker3D3" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986703, -0.16251, -0.00287701, 0.162498, 0.986701, -0.00401148, 0.00349065, 0.00349063, 0.999988, -1.3435, 1.00324, -0.11099)
 
-[node name="Marker3D5" type="Marker3D" parent="."]
-transform = Transform3D(0.995958, -0.0330451, 0.083517, 0.0420299, 0.993238, -0.108222, -0.0793761, 0.111295, 0.990612, 2.29915, -1.88895, -0.317901)
+[node name="Marker3D" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986707, -0.162496, 0.00200574, 0.162499, 0.986708, -0.00143852, -0.00174533, 0.00174533, 0.999997, -1.32502, -0.264317, 0)
 
-[node name="Marker3D6" type="Marker3D" parent="."]
-transform = Transform3D(0.995958, -0.0330451, 0.083517, 0.0209969, 0.989755, 0.141223, -0.0873281, -0.138899, 0.986449, -2.0641, -1.74488, 0.694269)
+[node name="Marker3D5" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986707, -0.162504, -0.00115489, 0.162499, 0.986702, -0.00372787, 0.00174533, 0.00349065, 0.999992, 1.97846, -1.15411, 0.1624)
 
-[node name="Marker3D7" type="Marker3D" parent="."]
-transform = Transform3D(0.998926, -0.00867559, -0.0455127, 0.0118789, 0.997435, 0.070592, 0.0447835, -0.0710568, 0.996466, 1.19213, 1.44135, -0.11099)
+[node name="Marker3D6" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986703, -0.16251, 0.00287701, 0.162498, 0.986701, 0.00401148, -0.00349065, -0.00349063, 0.999988, -1.20018, -1.21505, 0.286741)
 
-[node name="Marker3D8" type="Marker3D" parent="."]
-transform = Transform3D(0.996528, 0, -0.0832604, 0, 1, 0, 0.0832604, 0, 0.996528, 1.00439, -1.09842, 0)
+[node name="Marker3D7" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986558, -0.162559, -0.0166531, 0.162475, 0.986693, -0.00628024, 0.0174524, 0.00349012, 0.999842, 0.932378, 1.56821, -0.11099)
+
+[node name="Marker3D8" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986558, -0.162174, 0.0200538, 0.162475, 0.986608, -0.0143849, -0.0174524, 0.0174497, 0.999695, 0.351222, -0.584486, 0.482038)
+
+[node name="Marker3D12" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.980567, -0.155312, 0.119863, 0.166112, 0.982345, -0.0860485, -0.104382, 0.104287, 0.989054, -1.41421, 0.400985, -0.47857)
+
+[node name="Marker3D11" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.984009, -0.159101, 0.08008, 0.163906, 0.9848, -0.0574702, -0.0697193, 0.0696768, 0.99513, 0.151447, 0.413724, -0.569242)
+
+[node name="Marker3D14" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.980567, -0.155312, 0.119863, 0.166112, 0.982345, -0.0860485, -0.104382, 0.104287, 0.989054, -0.198418, -0.732381, 0.46907)
+
+[node name="Marker3D15" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.975739, -0.15014, 0.159345, 0.169313, 0.978897, -0.114429, -0.138802, 0.138632, 0.980569, -0.0837028, 1.20445, 0.639792)
+
+[node name="Marker3D13" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.984009, -0.159101, 0.08008, 0.163906, 0.9848, -0.0574702, -0.0697193, 0.0696768, 0.99513, -0.346288, -0.805625, 0.415129)
+
+[node name="Marker3D10" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986058, -0.161499, 0.0400932, 0.162701, 0.986256, -0.028764, -0.0348968, 0.0348862, 0.998782, 1.87302, -0.464275, -0.0349599)
+
+[node name="Marker3D16" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.986058, -0.161499, 0.0400932, 0.162701, 0.986256, -0.028764, -0.0348968, 0.0348862, 0.998782, 0.776168, 0.938487, 0.0728618)
+
+[node name="Marker3D17" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.586118, 0.810195, -0.00707046, -0.810226, 0.586096, -0.00511478, 0, 0.00872654, 0.999962, 0.870529, 0.581642, -0.794197)
+
+[node name="Marker3D18" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.586118, 0.810195, 0.00707046, -0.810226, 0.586096, 0.00511478, 0, -0.00872654, 0.999962, -1.51367, -1.16203, 0.164136)
+
+[node name="Marker3D19" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.446664, 0.894701, -0.00155916, -0.894695, 0.446666, 0.00312309, 0.00349065, 0, 0.999994, 0.172498, -1.14125, -0.723693)
+
+[node name="Marker3D20" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.446664, 0.89469, -0.00468223, -0.894695, 0.446675, 0.00156391, 0.00349065, 0.00349063, 0.999988, 0.294938, 1.3262, -0.109254)
+
+[node name="Marker3D21" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.446666, 0.894701, -0.000781968, -0.894699, 0.446663, -0.00234112, -0.00174533, 0.00174533, 0.999997, -0.910621, 0.934189, 0.00173625)
+
+[node name="Marker3D22" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.446666, 0.894692, -0.00390266, -0.894699, 0.446669, 2.38035e-06, 0.00174533, 0.00349065, 0.999992, -0.415642, -1.64931, -0.723693)
+
+[node name="Marker3D23" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.446664, 0.89469, 0.00468223, -0.894695, 0.446675, -0.00156391, -0.00349065, -0.00349063, 0.999988, 0.085795, 0.808885, 0.696006)
+
+[node name="Marker3D24" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.143885, 0.989576, -0.00596583, -0.98944, 0.143967, 0.0167683, 0.0174524, 0.00349012, 0.999842, 0.867043, -0.647223, 0.371047)
+
+[node name="Marker3D25" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.143885, 0.989484, -0.0147596, -0.98944, 0.143584, -0.0197796, -0.0174524, 0.0174497, 0.999695, -0.523279, -0.597535, 0.482038)
+
+[node name="Marker3D26" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.147634, 0.985094, -0.0882884, -0.983518, 0.136803, -0.118223, -0.104382, 0.104287, 0.989054, 0.327397, 1.1159, -0.47857)
+
+[node name="Marker3D27" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.145364, 0.987619, -0.0589666, -0.986919, 0.140545, -0.0789846, -0.0697193, 0.0696768, 0.99513, 0.793254, -2.34044, -0.569242)
+
+[node name="Marker3D28" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.147634, 0.985094, -0.0882884, -0.983518, 0.136803, -0.118223, -0.104382, 0.104287, 0.989054, -0.828642, -0.078354, -0.0112311)
+
+[node name="Marker3D29" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.150925, 0.981548, -0.117407, -0.978752, 0.131696, -0.157164, -0.138802, 0.138632, 0.980569, 1.10569, -0.229488, 0.639792)
+
+[node name="Marker3D30" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.447213, 0.893881, -0.0312556, -0.891706, 0.442856, -0.0934811, -0.0697193, 0.0696768, 0.99513, -1.60418, -0.0156795, -0.0669084)
+
+[node name="Marker3D31" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.446667, 0.894564, -0.0156397, -0.89402, 0.445577, -0.0468, -0.0348968, 0.0348862, 0.998782, 0.12942, -1.49486, -0.444224)
+
+[node name="Marker3D32" type="Marker3D" parent="ScatterPositions"]
+transform = Transform3D(0.446667, 0.894564, -0.0156397, -0.89402, 0.445577, -0.0468, -0.0348968, 0.0348862, 0.998782, 0.558272, -0.545571, 0.551427)
 
 [connection signal="finished" from="ScatterParticle" to="." method="_on_scatter_particle_finished"]

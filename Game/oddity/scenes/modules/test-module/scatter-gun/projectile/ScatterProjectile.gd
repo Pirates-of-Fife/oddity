@@ -22,6 +22,7 @@ var scatter_timer : Timer
 
 var original_weapon : ProjectileWeapon
 
+@export
 var secondary_projectile_audio : PackedScene
 
 @export
@@ -33,11 +34,11 @@ func _ready() -> void:
 func _scatter_projectile_ready() -> void:
 	_projectile_ready()
 	
-	add_child(scatter_timer)
+
 
 # once this method gets executed, all properties are already set.
 func scatter_projectiles() -> void:
-	for scatter_position_marker : Marker3D in spawn_positions:
+	for scatter_position_marker : Marker3D in $ScatterPositions.get_children():
 		var projectile_scene : PackedScene = scattered_projectile.projectile_scene_file
 		var projectile : Projectile = projectile_scene.instantiate()
 		
@@ -63,10 +64,13 @@ func scatter_projectiles() -> void:
 	
 	
 func set_up_timer() -> void:
+	scatter_timer = Timer.new()
 	scatter_timer.one_shot = true
 	scatter_timer.wait_time = scatter_time
 	scatter_timer.timeout.connect(_on_scatter_timer_timeout)
-	scatter_timer.start()
+	scatter_timer.autostart = true
+	add_child(scatter_timer)
+
 	
 func _on_scatter_timer_timeout() -> void:
 	scatter_projectiles()

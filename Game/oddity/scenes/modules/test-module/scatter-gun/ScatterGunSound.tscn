@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm7oao0p1q2r3"]
+[gd_scene load_steps=3 format=3 uid="uid://dm7oao0p1q2r3"]
 
 [ext_resource type="AudioStream" uid="uid://dsnypcl763sx" path="res://scenes/modules/test-module/scatter-gun/sounds/scatter_gun.wav" id="1_qm8rw"]
+[ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeaponShootAudioStreamPlayer3D.gd" id="2_alnv3"]
 
 [node name="ScatterGunSound" type="AudioStreamPlayer3D"]
 stream = ExtResource("1_qm8rw")
-unit_size = 18.0
+volume_db = -6.0
 pitch_scale = 1.83
 bus = &"Weapon"
+script = ExtResource("2_alnv3")

@@ -21,5 +21,7 @@ func _on_projectile_created(projectile : Projectile, original_weapon : Projectil
 	scatter_projectile.projectile_sound = (module_resource as ScatterGunResource).secondary_projectile_sound
 	scatter_projectile.scattered_projectile = (module_resource as ScatterGunResource).secondary_projectile
 	scatter_projectile.secondary_projectile_damage = (module_resource as ScatterGunResource).secondary_projectile_damage
+	scatter_projectile.scatter_time = (module_resource as ScatterGunResource).scatter_time
 	scatter_projectile.original_weapon = original_weapon
 	
+	scatter_projectile.set_up_timer()
