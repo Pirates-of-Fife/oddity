@@ -33,17 +33,33 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"CannonBase": {
+"Accent1.001": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/plasma-accelerator/materials/PlasmaAcceleratorRedMaterial.tres"
+},
+"BarrelThings.001": {
 "use_external/enabled": true,
 "use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponMetalMaterial.tres"
 },
-"Metal": {
+"Glass.001": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/plasma-accelerator/materials/PlasmaAcceleratorGlass.tres"
+},
+"Metal.003": {
 "use_external/enabled": true,
 "use_external/path": "res://scenes/modules/test-module/rotary-autocannon/RotaryCannonBaseMaterial.tres"
 },
-"Radiators": {
+"Plasma.001": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/plasma-accelerator/materials/PlasmaMaterial.tres"
+},
+"Radiators.002": {
 "use_external/enabled": true,
 "use_external/path": "res://scenes/modules/test-module/beam-laser/materials/WeaponRadiatorMaterial.tres"
+},
+"WhiteAccent.001": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/modules/test-module/ShieldGenerator/ShieldGrey.tres"
 }
 }
 }

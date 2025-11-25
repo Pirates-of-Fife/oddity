@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfpi73l3fhrva"]
+[gd_scene load_steps=8 format=3 uid="uid://cfpi73l3fhrva"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/plasma-accelerator/plasma_accelerator.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://dpla5maaccel5" path="res://scenes/modules/test-module/plasma-accelerator/size-5/plasma_accelerator.glb" id="2_model"]
@@ -6,8 +6,11 @@
 [ext_resource type="Resource" uid="uid://cfpi73l3fhruq" path="res://scenes/modules/test-module/plasma-accelerator/size-5/Size5PlasmaAccelerator.tres" id="4_resource"]
 [ext_resource type="Resource" uid="uid://cfpi73jhe308p" path="res://resources/resources/trade/trade-items/modules/plasma-laboratories-corporation/accelerator/TradeResourcePlasmaAccelerator5.tres" id="5_trade"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_plasma5"]
-size = Vector3(1, 1, 4)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a5dma"]
+points = PackedVector3Array(-0.330478, -0.5557, -1.70625, -0.490518, -0.442624, -1.92236, 0.485047, 0.499525, -1.96612, -0.494411, 0.498614, -0.142217, 0.413605, -0.375906, 0.153801, 0.482578, -0.444585, -1.92713, -0.42385, -0.375885, 0.154045, -0.5003, 0.504705, -1.9426, 0.32033, -0.5557, -0.713038, -0.431411, 0.435992, 0.173407, 0.485371, 0.49986, -0.140306, -0.486285, -0.438829, -0.188366, 0.428137, 0.443033, 0.191007, 0.485452, -0.413354, -0.140178, -0.393749, -0.34526, -1.99969, -0.330478, -0.5557, -0.713038, 0.32033, -0.5557, -1.70625, 0.318707, 0.401655, -2.00924, 0.383505, -0.34526, -1.99969, -0.494411, -0.412184, -0.142217, -0.394271, 0.398619, -2.00115, 0.2036, 0.506488, -0.500686, 0.485438, -0.413342, -1.96695, -0.466722, -0.417627, -1.9783, 0.324959, 0.444279, 0.193809, 0.476142, -0.438816, -0.188212, 0.2036, 0.506488, -1.59279, -0.461417, 0.499525, -1.96612, 0.385632, 0.400187, -2.00561, 0.319669, -0.417699, -1.97821)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aqq81"]
+points = PackedVector3Array(0.495058, 0.0887406, 1.02726, 0.495058, -0.0851057, 1.02726, -0.491423, 0.0887406, 1.02726, 0.0887406, 0.495058, -1.75828, 0.262973, -0.433378, -1.75828, -0.201196, -0.491423, 0.969086, -0.143248, 0.262973, 1.72392, 0.495058, 0.0887406, -1.75828, -0.433378, 0.262973, -1.75828, -0.143248, 0.495058, 0.969086, 0.378967, 0.378967, 0.969086, -0.433378, -0.259338, -1.75828, 0.378967, -0.375333, 0.969086, 0.262973, -0.143248, 1.72392, -0.259338, -0.143248, 1.72392, -0.491423, -0.201196, 0.969086, -0.0851057, -0.491423, -1.75828, 0.437013, -0.259338, -1.75828, 0.146883, -0.491423, 0.969086, -0.375333, 0.378967, 0.969086, -0.259338, 0.437013, -1.75828, 0.437013, 0.262973, -1.75828, 0.19573, 0.140379, -1.90735, -0.491423, 0.0887406, -1.75828, 0.146883, 0.262973, 1.72392, 0.146883, 0.495058, 0.969086, 0.146883, -0.259338, 1.72392, 0.262973, 0.437013, -1.75828, -0.375333, -0.375333, 0.214252, -0.259338, -0.433378, -1.75828, -0.192301, -0.136891, -1.90924, -0.259338, 0.146883, 1.72392)
 
 [node name="Size5PlasmaAccelerator" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
 collision_layer = 537396737
@@ -25,10 +28,14 @@ can_be_picked_up = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.96339)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
-shape = SubResource("BoxShape3D_plasma5")
+shape = SubResource("ConvexPolygonShape3D_a5dma")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
+shape = SubResource("ConvexPolygonShape3D_aqq81")
 
 [editable path="plasma_accelerator"]
