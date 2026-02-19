@@ -13,6 +13,8 @@ var index : int = 0
 @export
 var star_systems : Array[StarSystemResource]
 
+var in_range_systems : Array[StarSystemResource]
+
 var abyss_entered : bool = false
 var new_system_loaded : bool = false
 
@@ -34,12 +36,14 @@ var auto_save_timer : Timer = Timer.new()
 var is_main_menu_world : bool = false
 
 func cycle_system() -> StarSystemResource:
-	var size : int = star_systems.size()
+	in_range_systems = get_star_systems_in_range()
+	
+	var size : int = in_range_systems.size()
 
 	if size == 0:
-		return
+		return get_current_star_sytem_resource()
 
-	var system : StarSystemResource = star_systems[index]
+	var system : StarSystemResource = in_range_systems[index]
 
 	index += 1
 
@@ -67,6 +71,24 @@ func get_star_system_resource(system_name : String) -> StarSystemResource:
 			
 	return star_systems[0]
 
+func get_star_systems_in_range() -> Array[StarSystemResource]:
+	var systems_in_range : Array[StarSystemResource]
+	var current : StarSystemResource = get_current_star_sytem_resource()
+	
+	if player_ship == null:
+		return systems_in_range
+	
+	for system : StarSystemResource in star_systems:
+		var distance : float = calculate_star_system_distance(current, system)
+		
+		if (distance <= player_ship.jump_range and distance > 0):
+			systems_in_range.append(system)
+	
+	return systems_in_range
+	
+func calculate_star_system_distance(current : StarSystemResource, target : StarSystemResource) -> float:
+	return current.position.distance_to(target.position)
+
 func _ready() -> void:
 	add_to_group("World")
 
@@ -83,6 +105,7 @@ func _ready() -> void:
 
 	spawn_player()
 
+## loads the last star system the player was in before quitting the game
 func load_last_star_system() -> void:
 	if !player_position_save_exists():
 		load_star_system(get_star_system_resource("Gateway"))
@@ -188,6 +211,9 @@ func load_new_system(destination_star_system : PackedScene, starship : Starship)
 		
 	var abyss : Abyss = get_tree().get_first_node_in_group("Abyss")
 	abyss.queue_free()
+	
+	in_range_systems = get_star_systems_in_range()
+
 
 
 func load_star_system(star_system_resource : StarSystemResource) -> void:
@@ -210,7 +236,7 @@ func load_star_system(star_system_resource : StarSystemResource) -> void:
 
 	
 	player_control_entity.reparent(star_system)
-
+	
 func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	abyssal_tunnel.starship.is_in_abyss = false
 
