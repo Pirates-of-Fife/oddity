@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_400cp"]
 bg_color = Color(0, 0.470848, 0.856842, 1)
 
-[node name="AbyssalMFD" type="Control" node_paths=PackedStringArray("current_system", "selected_system", "gateway_open", "gateway_closed")]
+[node name="AbyssalMFD" type="Control" node_paths=PackedStringArray("current_system", "selected_system", "gateway_open", "gateway_closed", "distance_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,10 +19,11 @@ current_system = NodePath("CurrentSystem")
 selected_system = NodePath("SelectedSystem")
 gateway_open = NodePath("GatwayOpen")
 gateway_closed = NodePath("GatwayCLosed")
+distance_label = NodePath("Distance")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 2
-offset_right = 757.0
+offset_right = 925.0
 offset_bottom = 480.0
 color = Color(0, 0, 0, 0.560784)
 
@@ -92,11 +93,22 @@ theme = ExtResource("2_7wq40")
 theme_override_colors/default_color = Color(0.972549, 0, 0, 1)
 text = "Portal CLOSED"
 
+[node name="DistanceLabel" type="RichTextLabel" parent="."]
+offset_left = 638.0
+offset_top = 56.0
+offset_right = 813.0
+offset_bottom = 127.0
+scale = Vector2(1.69, 1.69)
+theme = ExtResource("2_7wq40")
+theme_override_colors/default_color = Color(0.326424, 0.532407, 1, 1)
+text = "Distance
+"
+
 [node name="label" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 57.0
-offset_right = 508.0
+offset_right = 185.0
 offset_bottom = 128.0
 scale = Vector2(1.69, 1.69)
 theme = ExtResource("2_7wq40")
@@ -108,7 +120,7 @@ text = "Current
 layout_mode = 0
 offset_left = 17.0
 offset_top = 183.0
-offset_right = 507.0
+offset_right = 170.0
 offset_bottom = 254.0
 scale = Vector2(1.69, 1.69)
 theme = ExtResource("2_7wq40")
@@ -119,3 +131,12 @@ text = "Selected"
 position = Vector2(46, 46)
 scale = Vector2(0.0368282, 0.0368282)
 texture = ExtResource("3_rmhko")
+
+[node name="Distance" type="RichTextLabel" parent="."]
+offset_left = 719.0
+offset_top = 119.0
+offset_right = 831.0
+offset_bottom = 190.0
+scale = Vector2(1.69, 1.69)
+theme = ExtResource("2_7wq40")
+text = "0 LY"

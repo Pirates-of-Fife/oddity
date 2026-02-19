@@ -11,7 +11,9 @@ var abyssal_tunnel_scene : PackedScene = preload("res://classes/abyss/abyssal-tu
 var index : int = 0
 
 @export
-var star_systems : Array
+var star_systems : Array[StarSystemResource]
+
+var in_range_systems : Array[StarSystemResource]
 
 var abyss_entered : bool = false
 var new_system_loaded : bool = false
@@ -34,13 +36,15 @@ var auto_save_timer : Timer = Timer.new()
 var is_main_menu_world : bool = false
 
 func cycle_system() -> StarSystemResource:
-	var size : int = star_systems.size()
+	in_range_systems = get_star_systems_in_range()
+	
+	var size : int = in_range_systems.size()
 
 	if size == 0:
-		return
+		return get_current_star_sytem_resource()
 
-	var system : StarSystemResource = star_systems[index]
-
+	var system : StarSystemResource = in_range_systems[index]
+	
 	index += 1
 
 	if index == size:
@@ -67,6 +71,24 @@ func get_star_system_resource(system_name : String) -> StarSystemResource:
 			
 	return star_systems[0]
 
+func get_star_systems_in_range() -> Array[StarSystemResource]:
+	var systems_in_range : Array[StarSystemResource]
+	var current : StarSystemResource = get_current_star_sytem_resource()
+	
+	if player_ship == null:
+		return systems_in_range
+	
+	for system : StarSystemResource in star_systems:
+		var distance : float = calculate_star_system_distance(current, system)
+		
+		if (distance <= player_ship.jump_range and distance > 0):
+			systems_in_range.append(system)
+	
+	return systems_in_range
+	
+func calculate_star_system_distance(current : StarSystemResource, target : StarSystemResource) -> float:
+	return current.position.distance_to(target.position)
+
 func _ready() -> void:
 	add_to_group("World")
 
@@ -83,6 +105,7 @@ func _ready() -> void:
 
 	spawn_player()
 
+## loads the last star system the player was in before quitting the game
 func load_last_star_system() -> void:
 	if !player_position_save_exists():
 		load_star_system(get_star_system_resource("Gateway"))
@@ -198,19 +221,21 @@ func load_star_system(star_system_resource : StarSystemResource) -> void:
 	if old_star_system != null:
 		old_star_system.queue_free()
 	
-	var star_system : StarSystem = star_system_resource.scene_file.instantiate()
+	var system_scene : PackedScene = load(star_system_resource.scene_file)
+	
+	var star_system : StarSystem = system_scene.instantiate()
 	
 	add_child(star_system)
 	
 	if star_system.spawn_station == null:
-		player.respawn_star_system = star_systems[0].scene_file
+		player.respawn_star_system = load(star_systems[0].scene_file)
 	else:
 		spawn_station = star_system.spawn_station
-		player.respawn_star_system = star_system_resource.scene_file
+		player.respawn_star_system = load(star_system_resource.scene_file)
 
 	
 	player_control_entity.reparent(star_system)
-
+	
 func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	abyssal_tunnel.starship.is_in_abyss = false
 

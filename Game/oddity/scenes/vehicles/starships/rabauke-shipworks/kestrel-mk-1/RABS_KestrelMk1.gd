@@ -12,6 +12,9 @@ var crosshair : Crosshair3d
 var abyssal_mfd : AbyssalMFD3D
 
 @export
+var star_system_map : StarSystemMap3D
+
+@export
 var super_cruise_mfd : SuperCruiseMFD3D
 
 @export
@@ -371,7 +374,14 @@ func on_power_off() -> void:
 func update_abyssal_mfd() -> void:
 	abyssal_mfd.set_current_system(current_star_system.system_name)
 	abyssal_mfd.set_selected_system(selected_system.name)
-
+	
+	var current_system_resource : StarSystemResource = (get_tree().get_first_node_in_group("World") as World).get_current_star_sytem_resource()
+	
+	abyssal_mfd.set_distance((get_tree().get_first_node_in_group("World") as World).calculate_star_system_distance(current_system_resource, selected_system))
+	
+	star_system_map.update_map(current_system_resource, jump_range)
+	
+	
 func on_destroyed() -> void:
 	for fire : GPUParticles3D in destroyed_fires.get_children():
 		fire.start_fire()
