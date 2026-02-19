@@ -7,3 +7,6 @@ var name : String
 
 @export
 var scene_file : PackedScene
+
+@export
+var position : Vector2

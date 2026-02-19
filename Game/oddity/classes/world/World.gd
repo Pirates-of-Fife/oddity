@@ -11,7 +11,7 @@ var abyssal_tunnel_scene : PackedScene = preload("res://classes/abyss/abyssal-tu
 var index : int = 0
 
 @export
-var star_systems : Array
+var star_systems : Array[StarSystemResource]
 
 var abyss_entered : bool = false
 var new_system_loaded : bool = false
