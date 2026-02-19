@@ -1331,7 +1331,7 @@ func initiate_abyssal_travel() -> void:
 	get_tree().get_first_node_in_group("StarSystem").add_child(abyssal_portal)
 	abyssal_portal.global_position = abyssal_portal_spawn_point.global_position
 	abyssal_portal.global_rotation = abyssal_portal_spawn_point.global_rotation
-	abyssal_portal.destination_star_system = selected_system.scene_file
+	abyssal_portal.destination_star_system = load(selected_system.scene_file)
 	abyssal_portal.starship = self
 
 func initiate_super_cruise() -> void:

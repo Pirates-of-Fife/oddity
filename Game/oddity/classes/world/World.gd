@@ -221,15 +221,17 @@ func load_star_system(star_system_resource : StarSystemResource) -> void:
 	if old_star_system != null:
 		old_star_system.queue_free()
 	
-	var star_system : StarSystem = star_system_resource.scene_file.instantiate()
+	var system_scene : PackedScene = load(star_system_resource.scene_file)
+	
+	var star_system : StarSystem = system_scene.instantiate()
 	
 	add_child(star_system)
 	
 	if star_system.spawn_station == null:
-		player.respawn_star_system = star_systems[0].scene_file
+		player.respawn_star_system = load(star_systems[0].scene_file)
 	else:
 		spawn_station = star_system.spawn_station
-		player.respawn_star_system = star_system_resource.scene_file
+		player.respawn_star_system = load(star_system_resource.scene_file)
 
 	
 	player_control_entity.reparent(star_system)
