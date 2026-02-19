@@ -147,6 +147,15 @@ var module_slots : Array = Array()
 @export
 var abyss_drive_slot : AbyssalJumpDriveSlot
 
+var jump_range : float :
+	get():
+		if (abyss_drive_slot.module == null):
+			return 0
+		
+		var abyss_drive_resource : AbyssalJumpDriveResource = (abyss_drive_slot.module as AbyssalJumpDrive).module_resource
+		
+		return abyss_drive_resource.jump_range
+
 @export
 var abyssal_portal_spawn_point : Marker3D
 
