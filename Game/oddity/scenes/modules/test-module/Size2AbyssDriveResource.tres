@@ -1,10 +1,16 @@
-[gd_resource type="Resource" script_class="AbyssalJumpDriveResource" load_steps=2 format=3 uid="uid://bpcgarimmtf5x"]
+[gd_resource type="Resource" script_class="AbyssalJumpDriveResource" load_steps=3 format=3 uid="uid://bqtvefx4wlr3u"]
 
 [ext_resource type="Script" path="res://resources/classes/module/component/abyssal-jump-drive/AbyssalJumpDriveResource.gd" id="1_svedo"]
+
+[sub_resource type="Curve" id="Curve_b6q7v"]
+_data = [Vector2(0, 0.143973), 0.0, 0.0, 0, 0, Vector2(0.217143, 0.426897), 2.11589, 2.11589, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [resource]
 script = ExtResource("1_svedo")
 jump_range = 39.0
+fuel_per_ly = 150.0
+fuel_usage_modifier = SubResource("Curve_b6q7v")
 type = &"Abyssal Jump Drive"
 manufacturer = &"Meean’kar Corporation"
 model = &"Coreline"

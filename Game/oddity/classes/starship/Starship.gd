@@ -1316,8 +1316,10 @@ func initiate_abyssal_travel() -> void:
 		current_abyss_portal = null
 		abyssal_portal_active = false
 		return
-
-	if current_fuel <= (abyss_drive_slot.module as AbyssalJumpDrive).fuel_per_jump:
+	
+	var fuel_cost : float = ((abyss_drive_slot.module as AbyssalJumpDrive).module_resource as AbyssalJumpDriveResource).get_fuel_usage(distance_to_target_star_system)
+	
+	if current_fuel <= fuel_cost:
 		return
 
 	var abyssal_portal_scene : PackedScene = preload("res://classes/abyss/abyssal-portal/AbyssalPortal.tscn")
@@ -1326,7 +1328,7 @@ func initiate_abyssal_travel() -> void:
 	current_abyss_portal = abyssal_portal
 	abyssal_portal_active = true
 
-	current_fuel -= (abyss_drive_slot.module as AbyssalJumpDrive).fuel_per_jump
+	current_fuel -= fuel_cost
 
 	get_tree().get_first_node_in_group("StarSystem").add_child(abyssal_portal)
 	abyssal_portal.global_position = abyssal_portal_spawn_point.global_position
