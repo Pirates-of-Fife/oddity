@@ -211,9 +211,6 @@ func load_new_system(destination_star_system : PackedScene, starship : Starship)
 		
 	var abyss : Abyss = get_tree().get_first_node_in_group("Abyss")
 	abyss.queue_free()
-	
-	in_range_systems = get_star_systems_in_range()
-
 
 
 func load_star_system(star_system_resource : StarSystemResource) -> void:
