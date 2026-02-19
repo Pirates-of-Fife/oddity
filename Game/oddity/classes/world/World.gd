@@ -44,7 +44,7 @@ func cycle_system() -> StarSystemResource:
 		return get_current_star_sytem_resource()
 
 	var system : StarSystemResource = in_range_systems[index]
-
+	
 	index += 1
 
 	if index == size:

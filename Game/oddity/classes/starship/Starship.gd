@@ -156,6 +156,8 @@ var jump_range : float :
 		
 		return abyss_drive_resource.jump_range
 
+var distance_to_target_star_system : float = 0
+
 @export
 var abyssal_portal_spawn_point : Marker3D
 

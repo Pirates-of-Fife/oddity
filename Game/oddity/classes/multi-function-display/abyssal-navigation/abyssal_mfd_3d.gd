@@ -19,3 +19,6 @@ func set_gateway_closed() -> void:
 func set_gateway_open() -> void:
 	abyssal_mfd.set_gateway_open()
 	$AudioStreamPlayer3D.play()
+
+func set_distance(distance : float) -> void:
+	abyssal_mfd.set_distance(distance)
