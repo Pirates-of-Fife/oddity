@@ -34,16 +34,10 @@ var ship_color : Color
 var current_ammo : float = 10000
 
 @export
-var max_ammo : float = 10000
-
-@export
 var current_heat : float = 0
 
 @export
 var current_fuel : float = 10800
-
-@export
-var max_fuel : float = 10800
 
 @export
 var landing_gear_on : bool = false
