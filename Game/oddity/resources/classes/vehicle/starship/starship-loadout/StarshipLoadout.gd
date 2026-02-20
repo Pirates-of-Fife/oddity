@@ -44,17 +44,17 @@ var landing_gear_on : bool = false
 
 @export_category("Upgrades")
 
-@export
-var current_health_upgrade : ShipUpgrades.ShipHealthUpgrade
+@export_range(0, 5, 1, "suffix:Grade")
+var current_health_upgrade : int
 
-@export
-var current_heat_capacity_upgrade : ShipUpgrades.ShipHeatCapacityUpgrade
+@export_range(0, 5, 1, "suffix:Grade")
+var current_heat_capacity_upgrade : int
 
-@export
-var current_fuel_capacity_upgrade : ShipUpgrades.ShipFuelCapacityUpgrade
+@export_range(0, 5, 1, "suffix:Grade")
+var current_fuel_capacity_upgrade : int
 
-@export
-var current_ammo_capacity_upgrade : ShipUpgrades.ShipAmmoCapacityUpgrade
+@export_range(0, 5, 1, "suffix:Grade")
+var current_ammo_capacity_upgrade : int
 
 
 func get_module_by_id(id : int) -> PackedScene:

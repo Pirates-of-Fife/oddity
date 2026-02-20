@@ -203,13 +203,13 @@ var hardpoints : Array
 
 signal max_ammo_changed(ammo : float)
 
+@onready
+var base_max_ammo : float = ship_info.max_ammo
+
 @export
-var max_ammo : float = 10000 :  #max ammo in IFU
-	set(value):
-		max_ammo = value
-		max_ammo_changed.emit(value)
+var max_ammo : float :  #max ammo in IFU
 	get():
-		return max_ammo
+		return base_max_ammo * ShipUpgrades.ship_ammo_capacity_upgrade[current_ammo_capacity_upgrade]
 	
 signal current_ammo_changed(ammo : float)
 
@@ -295,7 +295,14 @@ var shield_break_cooldown_complete : bool = true
 @export_subgroup("Hull")
 
 @onready
-var max_hull_health : float = ship_info.max_health
+var base_max_hull_health : float = ship_info.max_health
+
+@onready
+var max_hull_health : float :
+	get():
+		return base_max_hull_health * ShipUpgrades.ship_health_upgrade[current_health_upgrade] + hull_reeinforcement_health_addition
+
+var hull_reeinforcement_health_addition : float = 0
 
 var hull_reinforcements : Array = Array()
 
@@ -335,9 +342,15 @@ signal exited_pressure_zone
 @export
 var passive_heat_generation : float = 0
 
-@export
-var maximum_heat_capacity : float
+@onready
+var base_maximum_heat_capacity : float = ship_info.max_heat
 
+@export
+var maximum_heat_capacity : float :
+	get():
+		return base_maximum_heat_capacity * ShipUpgrades.ship_heat_capacity_upgrade[current_heat_capacity_upgrade]
+
+signal max_heat_capacity_changed(max_capacity : float)
 signal heat_changed(heat : float)
 signal overheating_start
 signal overheating_stop
@@ -393,13 +406,13 @@ signal current_fuel_changed(fuel : float)
 
 signal fuel_empty
 
+@onready
+var base_max_fuel : float = ship_info.max_fuel
+
 @export
 var max_fuel : float : 
-	set(value):
-		max_fuel = value
-		max_fuel_changed.emit(max_fuel)
 	get():
-		return max_fuel
+		return base_max_fuel * ShipUpgrades.ship_fuel_capacity_upgrade[current_fuel_capacity_upgrade]
 
 @export
 var current_fuel : float : 
@@ -416,17 +429,17 @@ var current_fuel : float :
 
 @export_category("Upgrades")
 
-@export
-var current_health_upgrade : ShipUpgrades.ShipHealthUpgrade
+@export_range(0, 5, 1, "suffix:Grade")
+var current_health_upgrade : int
 
-@export
-var current_heat_capacity_upgrade : ShipUpgrades.ShipHeatCapacityUpgrade
+@export_range(0, 5, 1, "suffix:Grade")
+var current_heat_capacity_upgrade : int
 
-@export
-var current_fuel_capacity_upgrade : ShipUpgrades.ShipFuelCapacityUpgrade
+@export_range(0, 5, 1, "suffix:Grade")
+var current_fuel_capacity_upgrade : int
 
-@export
-var current_ammo_capacity_upgrade : ShipUpgrades.ShipAmmoCapacityUpgrade
+@export_range(0, 5, 1, "suffix:Grade")
+var current_ammo_capacity_upgrade : int
 
 @export_category("Cargo")
 @export
@@ -530,6 +543,21 @@ var altitude : float :
 		
 func _ready() -> void:
 	_starship_ready()
+
+func upgrade_fuel() -> void:
+	current_fuel_capacity_upgrade = min(current_fuel_capacity_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	max_fuel_changed.emit(max_fuel)
+
+func upgrade_health() -> void:
+	current_health_upgrade = min(current_health_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+
+func upgrade_heat() -> void:
+	current_heat_capacity_upgrade = min(current_heat_capacity_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	max_heat_capacity_changed.emit(maximum_heat_capacity)
+	
+func upgrade_ammo() -> void:
+	current_ammo_capacity_upgrade = min(current_ammo_capacity_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	max_ammo_changed.emit(max_ammo)
 
 func update_module_stats() -> void:
 	passive_heat_generation = 0
@@ -715,7 +743,7 @@ func _starship_ready() -> void:
 				node.module_inserted.connect(_on_module_insert)
 				node.module_removed.connect(_on_module_uninserted)
 
-	max_hull_health = ship_info.max_health
+	#max_hull_health = ship_info.max_health
 
 	for module_slot : ModuleSlot in module_slots:
 		if module_slot is DynamicModuleSlot:
@@ -764,11 +792,15 @@ func _starship_ready() -> void:
 	if !is_bounty_target:
 		heat_damage_timer.start()
 	
+	base_max_ammo = ship_info.max_ammo
+
 	current_ammo_changed.emit(current_ammo)
 	max_ammo_changed.emit(max_ammo)
 	
 	current_fuel_changed.emit(current_fuel)
 	max_fuel_changed.emit(max_fuel)
+	max_heat_capacity_changed.emit(maximum_heat_capacity)
+
 	
 func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:
@@ -1003,7 +1035,7 @@ func _on_module_insert(module : Module) -> void:
 
 	if module is HullReinforcement:
 		hull_reinforcements.append(module)
-		max_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
+		hull_reeinforcement_health_addition += (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
 
@@ -1026,10 +1058,9 @@ func _on_module_uninserted(module : Module) -> void:
 
 	if module is HullReinforcement:
 		hull_reinforcements.erase(module)
-		max_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
+		hull_reeinforcement_health_addition -= (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
 		hull_hardness -= (module.module_resource as HullReinforcementResource).additional_hardness
-
 
 		if current_hull_health <= 0:
 			current_hull_health = 1
@@ -1037,7 +1068,7 @@ func _on_module_uninserted(module : Module) -> void:
 
 func _starship_process(delta: float) -> void:
 	_vehicle_process(delta)
-
+	
 func update_shield_stats() -> void:
 	shield_max_health = 0
 	shield_charge_rate = 0

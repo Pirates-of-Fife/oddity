@@ -22,10 +22,14 @@ func _ship_ready() -> void:
 	ship.cooler_update.connect(_on_cooler_update)
 	ship.on_cooler_config_changed.connect(_on_cooler_configuration_changed)
 	heat_ui_2d.max_cool = ship.current_heat_sink_capacity
+	ship.max_heat_capacity_changed.connect(_on_max_heat_changed)
 	_on_cooler_configuration_changed()
 
 func _on_heat_changed(heat : float) -> void:
 	heat_ui_2d.current_heat = heat
+
+func _on_max_heat_changed(heat : float) -> void:
+	heat_ui_2d.max_heat = heat
 
 func _on_cooler_update() -> void:
 	heat_ui_2d.current_cool = ship.current_heat_sink_usage

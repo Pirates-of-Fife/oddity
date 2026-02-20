@@ -85,6 +85,8 @@ func _process(delta: float) -> void:
 
 func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	_starship_process(delta)
+	
+	print(ammo_ui.ammo_ui_2d.ammo_bar.value)
 
 	if player == null:
 		return

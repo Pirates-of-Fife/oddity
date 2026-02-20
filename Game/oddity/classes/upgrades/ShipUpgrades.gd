@@ -2,42 +2,12 @@ extends Node
 
 class_name ShipUpgrades
 
-enum ShipHealthUpgrade
-{
-	LEVEL_0 = 0,
-	LEVEL_1 = 10,
-	LEVEL_2 = 20,
-	LEVEL_3 = 30,
-	LEVEL_4 = 40,
-	LEVEL_5 = 50
-}
+const MAX_UPGRADE : int = 5
 
-enum ShipAmmoCapacityUpgrade
-{
-	LEVEL_0 = 0,
-	LEVEL_1 = 10,
-	LEVEL_2 = 20,
-	LEVEL_3 = 30,
-	LEVEL_4 = 40,
-	LEVEL_5 = 50
-}
+const ship_health_upgrade : Array[float] = [0, 1.1, 1.2, 1.3, 1.4, 1.5]
 
-enum ShipHeatCapacityUpgrade
-{
-	LEVEL_0 = 0,
-	LEVEL_1 = 10,
-	LEVEL_2 = 20,
-	LEVEL_3 = 30,
-	LEVEL_4 = 40,
-	LEVEL_5 = 50
-}
+const ship_ammo_capacity_upgrade : Array[float] = [0, 1.1, 1.2, 1.3, 1.4, 1.5]
 
-enum ShipFuelCapacityUpgrade
-{
-	LEVEL_0 = 0,
-	LEVEL_1 = 10,
-	LEVEL_2 = 20,
-	LEVEL_3 = 30,
-	LEVEL_4 = 40,
-	LEVEL_5 = 50
-}
+const ship_fuel_capacity_upgrade : Array[float] = [0, 1.1, 1.2, 1.3, 1.4, 1.5]
+
+const ship_heat_capacity_upgrade : Array[float] = [0, 1.1, 1.2, 1.3, 1.4, 100.5]
