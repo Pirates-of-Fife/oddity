@@ -106,6 +106,11 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	loadout.current_fuel = starship.current_fuel
 
 	loadout.landing_gear_on = starship.landing_gear_on
+	
+	loadout.current_ammo_capacity_upgrade = starship.current_ammo_capacity_upgrade
+	loadout.current_fuel_capacity_upgrade = starship.current_fuel_capacity_upgrade
+	loadout.current_health_upgrade = starship.current_health_upgrade
+	loadout.current_heat_capacity_upgrade = starship.current_heat_capacity_upgrade
 
 	if save_as_player_ship_save:
 		loadout.apply_health = true
@@ -166,6 +171,11 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 	starship.max_ammo = loadout.max_ammo
 	starship.max_fuel = loadout.max_fuel
 	starship.landing_gear_on = loadout.landing_gear_on
+	
+	starship.current_ammo_capacity_upgrade = loadout.current_ammo_capacity_upgrade
+	starship.current_fuel_capacity_upgrade = loadout.current_fuel_capacity_upgrade
+	starship.current_health_upgrade = loadout.current_health_upgrade
+	starship.current_heat_capacity_upgrade = loadout.current_heat_capacity_upgrade
 
 	if apply_health:
 		starship.current_hull_health = loadout.current_health

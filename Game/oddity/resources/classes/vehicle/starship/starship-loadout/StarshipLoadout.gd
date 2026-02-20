@@ -48,6 +48,21 @@ var max_fuel : float = 10800
 @export
 var landing_gear_on : bool = false
 
+@export_category("Upgrades")
+
+@export
+var current_health_upgrade : ShipUpgrades.ShipHealthUpgrade
+
+@export
+var current_heat_capacity_upgrade : ShipUpgrades.ShipHeatCapacityUpgrade
+
+@export
+var current_fuel_capacity_upgrade : ShipUpgrades.ShipFuelCapacityUpgrade
+
+@export
+var current_ammo_capacity_upgrade : ShipUpgrades.ShipAmmoCapacityUpgrade
+
+
 func get_module_by_id(id : int) -> PackedScene:
 	for slot : ModuleSlotLoadoutResource in module_slots:
 		if slot.id == id:

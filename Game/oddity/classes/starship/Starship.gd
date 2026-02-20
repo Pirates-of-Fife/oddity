@@ -414,6 +414,20 @@ var current_fuel : float :
 	get():
 		return current_fuel
 
+@export_category("Upgrades")
+
+@export
+var current_health_upgrade : ShipUpgrades.ShipHealthUpgrade
+
+@export
+var current_heat_capacity_upgrade : ShipUpgrades.ShipHeatCapacityUpgrade
+
+@export
+var current_fuel_capacity_upgrade : ShipUpgrades.ShipFuelCapacityUpgrade
+
+@export
+var current_ammo_capacity_upgrade : ShipUpgrades.ShipAmmoCapacityUpgrade
+
 @export_category("Cargo")
 @export
 var cargo_grids : Array = Array()
