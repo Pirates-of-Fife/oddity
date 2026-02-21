@@ -16,3 +16,12 @@ var max_angular_roll_velocity : float
 
 @export
 var max_health : float
+
+@export
+var max_fuel : float
+
+@export
+var max_ammo : float
+
+@export
+var max_heat : float

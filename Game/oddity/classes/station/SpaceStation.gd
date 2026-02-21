@@ -67,11 +67,15 @@ func _on_player_exit_station(body : Node3D) -> void:
 			rotate_on = false
 
 func player_near_station() -> void:
+	if !donau_walzer_player:
+		return
+		
 	if !donau_walzer_player.playing:
 		donau_walzer_player.resume_playing()
 
 func player_stop_music() -> void:
-	donau_walzer_player.pause_playing()
+	if donau_walzer_player:
+		donau_walzer_player.pause_playing()
 
 func _process(delta: float) -> void:
 	_space_station_process(delta)

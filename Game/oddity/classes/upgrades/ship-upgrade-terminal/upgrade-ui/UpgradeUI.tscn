@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://xnd1h51ttv62"]
+
+[ext_resource type="PackedScene" uid="uid://bsgsmtikad2xo" path="res://classes/station/trade-terminal/trade-ui/trade-change-amount-buttons/TradeChangeAmmountButtons.tscn" id="1_jdk7b"]
+[ext_resource type="Script" path="res://classes/upgrades/ship-upgrade-terminal/upgrade-ui/UpgradeUI.gd" id="1_sj65u"]
+[ext_resource type="Script" path="res://classes/upgrades/ship-upgrade-terminal/upgrade-ui/UpgradeButton.gd" id="3_0a3jp"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_hyfme"]
+
+[node name="UpgradeUi" type="Node3D" node_paths=PackedStringArray("_price_label", "_description_label", "_name_label", "_current_multiplier_label", "_next_multiplier_label", "_counter")]
+script = ExtResource("1_sj65u")
+_price_label = NodePath("Price")
+_description_label = NodePath("Description")
+_name_label = NodePath("Name")
+_current_multiplier_label = NodePath("CurrentMultiplier")
+_next_multiplier_label = NodePath("NextMultiplier")
+_counter = NodePath("TradeChangeAmmountButtons")
+
+[node name="TradeChangeAmmountButtons" parent="." node_paths=PackedStringArray("upgrade_ui") instance=ExtResource("1_jdk7b")]
+script = ExtResource("3_0a3jp")
+upgrade_ui = NodePath("..")
+min_value = 0
+max_value = 5
+
+[node name="Add" parent="TradeChangeAmmountButtons" index="0"]
+transform = Transform3D(1.36, 0, 0, 0, 1.36, 0, 0, 0, 1.36, 1.33803, -0.0853181, 0)
+
+[node name="MeshInstance3D" parent="TradeChangeAmmountButtons/Add" index="0"]
+transform = Transform3D(2.925, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+
+[node name="CollisionShape3D" parent="TradeChangeAmmountButtons/Add" index="1"]
+transform = Transform3D(2.925, 0, 0, 0, 1.02, 0, 0, 0, 4.57, 0, 0.110527, 0)
+
+[node name="Remove" parent="TradeChangeAmmountButtons" index="2"]
+visible = false
+collision_layer = 0
+collision_mask = 0
+input_ray_pickable = false
+
+[node name="Label3D" parent="TradeChangeAmmountButtons" index="4"]
+transform = Transform3D(2.225, 0, 0, 0, 2.225, 0, 0, 0, 2.225, 4.27824, 0.249943, 0.0148309)
+
+[node name="Price" type="Label3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, -0.0987154, 0.649431, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "100m Cr"
+font = ExtResource("3_hyfme")
+font_size = 76
+horizontal_alignment = 0
+
+[node name="Name" type="Label3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, -0.104935, 1.0444, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Upgrade Name"
+font = ExtResource("3_hyfme")
+font_size = 76
+horizontal_alignment = 0
+
+[node name="Description" type="Label3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, -0.107729, 0.852627, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Upgrade Description Upgrade Description "
+font = ExtResource("3_hyfme")
+font_size = 76
+horizontal_alignment = 0
+line_spacing = -99.49
+autowrap_mode = 2
+width = 1500.0
+
+[node name="CurrentMultiplier" type="Label3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0.512591, 0.282182, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1.5X"
+font = ExtResource("3_hyfme")
+font_size = 76
+horizontal_alignment = 0
+
+[node name="CurrentMultiplierLabel" type="Label3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0.184351, 0.293669, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Current:"
+font = ExtResource("3_hyfme")
+font_size = 76
+
+[node name="NextMultiplier" type="Label3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0.620002, 0.474917, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "1.5X"
+font = ExtResource("3_hyfme")
+font_size = 76
+
+[node name="NextMultiplierLabel" type="Label3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0.0884608, 0.483275, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Next: "
+font = ExtResource("3_hyfme")
+font_size = 76
+
+[editable path="TradeChangeAmmountButtons"]
