@@ -64,7 +64,7 @@ var current_upgrade_level : int :
 		return current_upgrade_level
 	set(value):
 		current_upgrade_level = value
-		_counter.counter = value
+		_counter.initialize_counter(value)
 
 var max_upgrade_level : int :
 	get:

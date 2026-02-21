@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://87h5uigosd87"]
+[gd_scene load_steps=15 format=3 uid="uid://87h5uigosd87"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/StaticGameEntity.gd" id="1_ygnqt"]
 [ext_resource type="PackedScene" uid="uid://cmkomt705gvx6" path="res://classes/upgrades/ship-upgrade-terminal/ShipUpgradeTerminal.tscn" id="2_0iaha"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://classes/station/SpaceStation.gd" id="6_258dd"]
 [ext_resource type="Resource" uid="uid://ccjtq86n0uwk8" path="res://resources/resources/trade/trade-items/stations/GhostsBeaconTradeList.tres" id="7_4df7n"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="7_ayqsm"]
-[ext_resource type="PackedScene" uid="uid://oj7tc4oxwdby" path="res://classes/station/BlueDanubePlayer.tscn" id="8_u2pop"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/station-zone/SpaceStationZone.gd" id="9_p7bls"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4t54e"]
@@ -59,6 +58,9 @@ shape = SubResource("BoxShape3D_q0ggi")
 [node name="Marker3D" parent="StationPad/LandingPad" index="1"]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 20.3688, 4.87441, 39.6564)
 
+[node name="SpotLight3D2" parent="StationPad" index="11"]
+light_energy = 16.0
+
 [node name="CollisionShape3D" parent="StationPad/GravityGrid" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7501, 4.2438, -14.9036)
 shape = SubResource("BoxShape3D_5g4tn")
@@ -74,14 +76,13 @@ sprite_max_distance = 1e+06
 [node name="MarkerSprite" parent="PlayerDetectionZone" instance=ExtResource("5_ybbqa")]
 text = &"Engineering"
 
-[node name="SpaceStation" type="StaticBody3D" parent="." node_paths=PackedStringArray("space_station_zone", "station_frame_of_reference", "station_label_1", "station_label_2", "donau_walzer_player")]
+[node name="SpaceStation" type="StaticBody3D" parent="." node_paths=PackedStringArray("space_station_zone", "station_frame_of_reference", "station_label_1", "station_label_2")]
 script = ExtResource("6_258dd")
 station_name = &"Engineering"
 space_station_zone = NodePath("SpaceStationZone")
 station_frame_of_reference = NodePath("../StationPad/GravityGrid")
 station_label_1 = NodePath("Label3D")
 station_label_2 = NodePath("Label3D2")
-donau_walzer_player = NodePath("BlueDanubePlayer")
 speed_limit = 150.0
 buy_markup = 2.34
 sell_markup = 1.33
@@ -104,8 +105,6 @@ outline_modulate = Color(1, 1, 1, 0)
 text = "Station Name"
 font = ExtResource("7_ayqsm")
 font_size = 25
-
-[node name="BlueDanubePlayer" parent="SpaceStation" instance=ExtResource("8_u2pop")]
 
 [node name="PlayerForceSpeedLimit" type="Node3D" parent="SpaceStation"]
 script = ExtResource("9_p7bls")

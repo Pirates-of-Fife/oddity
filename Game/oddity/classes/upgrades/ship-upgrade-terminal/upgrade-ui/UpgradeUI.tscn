@@ -17,6 +17,7 @@ _counter = NodePath("TradeChangeAmmountButtons")
 [node name="TradeChangeAmmountButtons" parent="." node_paths=PackedStringArray("upgrade_ui") instance=ExtResource("1_jdk7b")]
 script = ExtResource("3_0a3jp")
 upgrade_ui = NodePath("..")
+min_value = 0
 max_value = 5
 
 [node name="Add" parent="TradeChangeAmmountButtons" index="0"]

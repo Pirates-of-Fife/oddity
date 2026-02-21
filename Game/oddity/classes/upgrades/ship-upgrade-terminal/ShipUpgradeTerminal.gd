@@ -177,7 +177,7 @@ func update_heat() -> void:
 		heat_upgrade_ui.max_upgrade_reached = true
 		
 func _on_heat_upgrade() -> void:
-	player.remove_credits(ShipUpgrades.ship_heat_capacity_upgrade_price[starship.ship_heat_capacity_upgrade + 1])
+	player.remove_credits(ShipUpgrades.ship_heat_capacity_upgrade_price[starship.current_heat_capacity_upgrade + 1])
 	starship.upgrade_heat()
 	update_heat()
 	
