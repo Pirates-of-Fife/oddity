@@ -30,7 +30,7 @@ mesh = SubResource("BoxMesh_brbos")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0511023, 0)
+transform = Transform3D(1.22, 0, 0, 0, 1.615, 0, 0, 0, 11.27, 0, -0.0511023, 0)
 shape = SubResource("ConcavePolygonShape3D_ka5vo")
 
 [node name="ON" type="Label3D" parent="."]

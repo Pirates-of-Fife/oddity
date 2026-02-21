@@ -4,13 +4,19 @@ class_name TradeChangeAmmountButtons
 
 signal counter_changed(counter : int)
 
+@export_range(0, 99, 1)
+var min_value : int = 1
+
+@export_range(0, 99, 1)
+var max_value : int = 30
+
 var counter : int = 1 :
 	set(value):
-		if value < 1:
-			$Decline.play()
+		if value < min_value:
+			play_decline_sound()
 			return
-		if value > 30:
-			$Decline.play()
+		if value > max_value:
+			play_decline_sound()
 			return
 		
 		counter = value
@@ -39,3 +45,6 @@ func _add(player : Player, control_entity : ControlEntity) -> void:
 	
 func _remove(player : Player, control_entity : ControlEntity) -> void:
 	counter -= 1
+
+func play_decline_sound() -> void:
+	$Decline.play()

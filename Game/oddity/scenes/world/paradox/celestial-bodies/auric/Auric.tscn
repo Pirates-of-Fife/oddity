@@ -1,4 +1,4 @@
-[gd_scene load_steps=19192 format=4 uid="uid://b6d6qs4q1ex02"]
+[gd_scene load_steps=19193 format=4 uid="uid://b6d6qs4q1ex02"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_gj25k"]
 [ext_resource type="Texture2D" uid="uid://yytepgw33l3n" path="res://scenes/world/textures/8k_mars.jpg" id="2_ngjce"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageResource.gd" id="24_8wo42"]
 [ext_resource type="Resource" uid="uid://b416p5k3fq6d2" path="res://scenes/environment/foliage/resources/RedGrassResource.tres" id="25_8j1jc"]
 [ext_resource type="Resource" uid="uid://t1ha50funlye" path="res://scenes/environment/foliage/resources/RockResource.tres" id="26_u7b81"]
+[ext_resource type="PackedScene" uid="uid://87h5uigosd87" path="res://classes/upgrades/ship-upgrade-terminal/UpgradeExampleScene.tscn" id="28_a8ynb"]
 [ext_resource type="Resource" uid="uid://caoc2b63dq3pq" path="res://scenes/environment/foliage/resources/SpaceDustResource.tres" id="28_i2fxe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cp52"]
@@ -115054,6 +115055,7 @@ deactivate_distance = 19000.0
 [node name="AsteroidRing" type="Node3D" parent="."]
 transform = Transform3D(8413.43, -18144.3, 0, 18144.3, 8413.43, 0, 0, 0, 20000, 0, 0, 0)
 script = ExtResource("5_vchrb")
+belt_rotation = Vector3(0, 0, 1.13661)
 outer_radius = 100000.0
 inner_radius = 50000.0
 
@@ -115456,7 +115458,7 @@ script = ExtResource("19_a25a4")
 activate_distance = 39948.8
 deactivate_distance = 40048.8
 
-[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("root", "planet_mesh_instance")]
+[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("planet_mesh_instance")]
 script = ExtResource("23_j4kn5")
 foliage_meshes = Array[ExtResource("24_8wo42")]([ExtResource("25_8j1jc"), ExtResource("26_u7b81")])
 splits = 10
@@ -115465,11 +115467,10 @@ count_per_multi_mesh = 2000
 scale_multiplier = 8.0
 scale_variance = 0.24
 invert_scale = true
-root = NodePath("")
 planet_mesh_instance = NodePath("../MeshInstance3D")
 radius_modifier = -3.66
 
-[node name="FoliageScatterSpawner2" type="Node3D" parent="." node_paths=PackedStringArray("root", "asteroid_belt")]
+[node name="FoliageScatterSpawner2" type="Node3D" parent="." node_paths=PackedStringArray("asteroid_belt")]
 script = ExtResource("23_j4kn5")
 foliage_meshes = Array[ExtResource("24_8wo42")]([ExtResource("28_i2fxe")])
 spawn_type = 0
@@ -115477,6 +115478,8 @@ splits = 10
 spawn_count = 25000
 count_per_multi_mesh = 2500
 scale_variance = 0.47
-root = NodePath("")
 asteroid_belt = NodePath("../AsteroidRing")
 vertical_variance = 315.0
+
+[node name="UpgradeExampleScene" parent="." instance=ExtResource("28_a8ynb")]
+transform = Transform3D(0.986615, -0.144351, 0.0758536, 0.162517, 0.832248, -0.530049, 0.0133842, 0.535282, 0.844568, -2176.68, 11504.5, 7667.65)
