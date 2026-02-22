@@ -96,3 +96,6 @@ func _on_timer_timeout() -> void:
 		var fuel_multiplier : float = (module_resource as AlcubierreDriveResource).fuel_curve.sample(current_speed / max_speed)
 		
 		ship.current_fuel -= (module_resource as AlcubierreDriveResource).fuel_per_second * fuel_multiplier
+
+func use_special() -> void:
+	pass
