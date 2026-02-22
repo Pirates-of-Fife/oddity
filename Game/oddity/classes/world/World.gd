@@ -236,6 +236,8 @@ func load_star_system(star_system_resource : StarSystemResource) -> void:
 	
 	player_control_entity.reparent(star_system)
 	
+	index = 0
+	
 func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	abyssal_tunnel.starship.is_in_abyss = false
 

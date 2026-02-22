@@ -377,7 +377,9 @@ func update_abyssal_mfd() -> void:
 	
 	var current_system_resource : StarSystemResource = (get_tree().get_first_node_in_group("World") as World).get_current_star_sytem_resource()
 	
-	abyssal_mfd.set_distance((get_tree().get_first_node_in_group("World") as World).calculate_star_system_distance(current_system_resource, selected_system))
+	var dist : float = (get_tree().get_first_node_in_group("World") as World).calculate_star_system_distance(current_system_resource, selected_system)
+	abyssal_mfd.set_distance(dist)
+	distance_to_target_star_system = dist
 	
 	star_system_map.update_map(current_system_resource, jump_range)
 	
