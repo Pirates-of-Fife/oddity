@@ -309,6 +309,9 @@ func _starship_controller_process(delta : float) -> void:
 			starship_focus_target_command.execute(control_entity)
 			
 		if Input.is_action_just_pressed("starship_alcubierre_drive_special"):
+			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+				return
+				
 			starship_alcubierre_drive_use_special_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
