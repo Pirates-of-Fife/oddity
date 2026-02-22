@@ -14,4 +14,8 @@ var fuel_per_ly : float
 var fuel_usage_modifier : Curve
 
 func get_fuel_usage(ly : float) -> float:
+	print(fuel_per_ly * ly * fuel_usage_modifier.sample(ly / jump_range))
+	print("fuel " + str(fuel_per_ly))
+	print("ly " + str(ly))
+	print("mod: " + str(fuel_usage_modifier.sample(ly / jump_range)))
 	return fuel_per_ly * ly * fuel_usage_modifier.sample(ly / jump_range)

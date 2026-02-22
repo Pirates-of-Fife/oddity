@@ -31,6 +31,10 @@ func _ready() -> void:
 	original_value = value
 	original_health = health
 	
+	if is_on_tree:
+		skip_process = true
+		skip_physics_process = true
+	
 func _seed_pod_ready() -> void:
 	_cargo_container_ready()
 
@@ -39,6 +43,8 @@ func despawn() -> void:
 
 func fall() -> void:
 	if is_on_tree:
+		skip_process = false
+		skip_physics_process = false
 		freeze = false
 		is_on_tree = false
 		take_damage(randf_range(100, 1000))

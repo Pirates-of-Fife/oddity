@@ -42,6 +42,8 @@ var starship_focus_target_command : StarshipFocusTargetCommand = StarshipFocusTa
 
 var starship_toggle_headlights_command : StarshipToggleHeadlightsCommand = StarshipToggleHeadlightsCommand.new()
 
+var starship_alcubierre_drive_use_special_command : StarshipAlcubierreDriveUseSpecialCommand = StarshipAlcubierreDriveUseSpecialCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -275,19 +277,11 @@ func _starship_controller_process(delta : float) -> void:
 					control_entity.alcubierre_drive_charge_start()
 
 		if (Input.is_action_just_released("starship_initiate_super_cruise")):
-			print("WORK")
-			
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				return
-			
-			print("super")
-			
+						
 			if control_entity.is_in_abyss:
 				return
-			
-			print("abyss")
-			
-			print(starship_ready_to_supercruise)
 			
 			if starship_ready_to_supercruise:
 				supercruise_initialization_timer.stop()
@@ -313,6 +307,12 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_just_released("starship_focus_target")):
 			starship_focus_target_command.execute(control_entity)
+			
+		if Input.is_action_just_pressed("starship_alcubierre_drive_special"):
+			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+				return
+				
+			starship_alcubierre_drive_use_special_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

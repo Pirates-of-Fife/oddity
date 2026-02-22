@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ModuleTradeResource" load_steps=2 format=3 uid="uid://bxuvxyjesisct"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/ModuleTradeResource.gd" id="1_ddj7s"]
+
+[resource]
+script = ExtResource("1_ddj7s")
+scene = "res://scenes/modules/test-module/alcubierre-drives/modified-alcubierre-drive/ModifiedAlcubierreDrive.tscn"
+name = &"Modified Alcubierre Drive"
+description = "A modified Ox'vic Pyrr alcubierre drive, allowing it to do almost instant short jumps"
+value = 5000000
+preview_distance = 3.0
