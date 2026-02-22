@@ -71,10 +71,22 @@ var can_freeze : bool = true
 @export
 var debug : bool
 
+@export
+var skip_physics_process : bool = false
+
+@export
+var skip_process : bool = false
+
 func _physics_process(delta: float) -> void:
+	if skip_physics_process:
+		return
+		
 	_default_physics_process(delta)
 
 func _process(delta: float) -> void:
+	if skip_process:
+		return
+		
 	_default_process(delta)
 
 func _ready() -> void:
