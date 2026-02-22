@@ -93,7 +93,7 @@ sprite_distance = 160000.0
 sprite_max_distance = 1.45e+06
 
 [node name="TempestZone" parent="." instance=ExtResource("16_u444p")]
-transform = Transform3D(1, 0, 0, 0, 0.671358, -0.741133, 0, 0.741133, 0.671358, -7.2e+06, -7.2e+06, -7.2e+06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2e+06, -7.2e+06, -7.2e+06)
 activate_distance = 3.5e+07
 deactivate_distance = 3.8e+07
 sprite_distance = 400000.0
@@ -114,5 +114,3 @@ sprite_max_distance = 1.45e+06
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)
-
-[connection signal="tree_exiting" from="AuricZone/SpaceStationLoadingZone/SpaceStation" to="AuricZone/SpaceStationLoadingZone/SpaceStation" method="_on_tree_exiting"]
