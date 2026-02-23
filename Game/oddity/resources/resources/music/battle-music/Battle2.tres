@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MusicResource" load_steps=3 format=3 uid="uid://csjwdtwbvcmlu"]
+
+[ext_resource type="AudioStream" uid="uid://cak3g5fnghkkw" path="res://resources/resources/music/music/battle-1-crystal.wav" id="1_mybct"]
+[ext_resource type="Script" path="res://classes/music-player/MusicResource.gd" id="2_i03w3"]
+
+[resource]
+script = ExtResource("2_i03w3")
+music = ExtResource("1_mybct")
+volume_modifier = -12.0
+fade_in_time = 10.0
+fade_out_time = 10.0
+override_current_track = true
+loop = true

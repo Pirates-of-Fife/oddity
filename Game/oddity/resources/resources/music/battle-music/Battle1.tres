@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MusicResource" load_steps=3 format=3 uid="uid://ci7b32ibd7d2q"]
+
+[ext_resource type="AudioStream" uid="uid://dhkuk5hxvbm1e" path="res://resources/resources/music/music/Battle-1-calm.wav" id="1_mhylj"]
+[ext_resource type="Script" path="res://classes/music-player/MusicResource.gd" id="1_xp33j"]
+
+[resource]
+script = ExtResource("1_xp33j")
+music = ExtResource("1_mhylj")
+volume_modifier = -12.0
+fade_in_time = 10.0
+fade_out_time = 10.0
+override_current_track = true
+loop = true

@@ -35,6 +35,9 @@ var auto_save_timer : Timer = Timer.new()
 @export
 var is_main_menu_world : bool = false
 
+@export
+var music_player : MusicPlayer
+
 func cycle_system() -> StarSystemResource:
 	in_range_systems = get_star_systems_in_range()
 	

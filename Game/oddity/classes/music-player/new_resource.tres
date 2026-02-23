@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MusicResource" load_steps=3 format=3 uid="uid://d0cy5gd3wp2bn"]
+
+[ext_resource type="Script" path="res://classes/music-player/MusicResource.gd" id="1_a4uq7"]
+[ext_resource type="AudioStream" uid="uid://cwdj0pha03wa1" path="res://classes/abyss/abyss/ambiance.wav" id="1_ikaw1"]
+
+[resource]
+script = ExtResource("1_a4uq7")
+music = ExtResource("1_ikaw1")
+volume_modifier = -1.2
+fade_in_time = 3.2
+fade_out_time = 0.0
+override_current_track = true
+loop = true
