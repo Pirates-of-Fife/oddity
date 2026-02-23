@@ -69,6 +69,10 @@ func use_special() -> void:
 		deny()
 		return
 	
+	if ship.is_in_abyss:
+		deny()
+		return
+	
 	if charging:
 		return
 	
