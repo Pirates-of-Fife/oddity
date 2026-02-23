@@ -7,7 +7,11 @@ var creature_controller_sensitivity : float = 0.001
 var starship_controller_sensitity : float = 0.1
 
 @export
-var music_volume : float = 1
+var music_volume : float = 1 : 
+	get:
+		return lerpf(-32, 0, music_volume)
+	set(value):
+		music_volume = maxf(0, minf(1, value))
 
 @export
 var music_disabled : float = false
