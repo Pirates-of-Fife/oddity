@@ -7,6 +7,10 @@ var music_track : MusicResource :
 		return music_track
 	set(value):
 		music_track = value
+		
+		if value == null:
+			return
+			
 		stream = value.music
 
 const db_mute : float = -72
@@ -27,6 +31,8 @@ func play_track(track : MusicResource) -> void:
 	if playing and !track.override_current_track:
 		return
 	
+	print("playing : " + str(track.music))
+	
 	music_track = track
 	
 	volume_db = db_mute
@@ -43,7 +49,7 @@ func stop_track() -> void:
 	
 	var tween : Tween = get_tree().create_tween()
 	tween.tween_property(self, "volume_db", db_mute, music_track.fade_out_time)
-	tween.tween_callback(tween_finished)
+	tween.finished.connect(tween_finished)
 
 func tween_finished() -> void:
 	stop()

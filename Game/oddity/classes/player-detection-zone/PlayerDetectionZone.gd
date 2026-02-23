@@ -40,6 +40,10 @@ var sprite_distance : float
 @export_range(0, 20000, 100, "or_greater")
 var sprite_max_distance : float
 
+var world : World : 
+	get:
+		return get_tree().get_first_node_in_group("World")
+
 func _ready() -> void:
 	_player_detection_zone_ready()
 

@@ -25,7 +25,8 @@ func play_music(music : MusicResource) -> void:
 	current_audio_player = audio_player
 
 func stop_music() -> void:
-	current_audio_player.stop_track()
+	if current_audio_player != null:
+		current_audio_player.stop_track()
 
 func play_random_battle_music() -> void:
 	if battle_music == null:

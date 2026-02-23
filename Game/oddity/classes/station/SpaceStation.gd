@@ -69,7 +69,9 @@ func _on_player_exit_station(body : Node3D) -> void:
 func player_near_station() -> void:
 	if !donau_walzer_player:
 		return
-		
+	
+	world.music_player.stop_music()
+	
 	if !donau_walzer_player.playing:
 		donau_walzer_player.resume_playing()
 

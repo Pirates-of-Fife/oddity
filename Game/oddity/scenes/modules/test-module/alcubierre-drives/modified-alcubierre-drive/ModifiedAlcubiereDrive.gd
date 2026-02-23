@@ -39,6 +39,9 @@ var jump_rotation : float
 @export
 var heat_build_up : float
 
+@export
+var fuel_per_jump : float
+
 func _ready() -> void:
 	super._ready()
 	
@@ -100,7 +103,8 @@ func jump() -> void:
 	
 	cooled_down = false
 	cool_down_timer.start()
-
+	
+	ship.current_fuel -= fuel_per_jump
 
 
 func _on_cooldown_timer_finished() -> void:

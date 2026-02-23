@@ -24,6 +24,8 @@ var spawn_radius : float
 
 var spawned_ships : Array = Array()
 
+var destroyed_ships : int = 0
+
 func _ready() -> void:
 	_bounty_hunting_zone_ready()
 
@@ -34,10 +36,13 @@ func _bounty_hunting_zone_ready() -> void:
 	deactivate.connect(_on_deactivate)
 
 func spawn_ships() -> void:
+	world.music_player.play_random_battle_music()
+	
 	for i : int in ship_count:
 		spawn_bounty_target()
 
 func spawn_bounty_target() -> void:
+	
 	var ship : Starship = ship_scene.instantiate()
 	ship.default_loadout = possible_loadouts.pick_random()
 	ship.is_bounty_target = true
@@ -45,12 +50,14 @@ func spawn_bounty_target() -> void:
 	ship.current_state = Starship.State.POWER_ON
 	ship.landing_gear_on = false
 	get_tree().get_first_node_in_group("StarSystem").add_child(ship)
-
+	
+	ship.state_changed_to_destroyed.connect(_on_bounty_ship_destroyed)
+	
 	var ai : Ai = ai_scene.instantiate()
 	ai.control_entity = ship
 	get_tree().get_first_node_in_group("StarSystem").add_child(ai)
 
-	var spawn_position : Vector3 = Vector3(randf_range(0, spawn_radius), randf_range(0, spawn_radius), randf_range(0, spawn_radius))
+	var spawn_position : Vector3 = Vector3(randf_range(-spawn_radius, spawn_radius), randf_range(-spawn_radius, spawn_radius), randf_range(-spawn_radius, spawn_radius))
 	
 	ship.global_position = global_position + spawn_position
 
@@ -64,7 +71,15 @@ func spawn_bounty_target() -> void:
 func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 	spawn_ships()
 
+func _on_bounty_ship_destroyed() -> void:
+	destroyed_ships += 1
+	
+	if destroyed_ships == ship_count:
+		world.music_player.stop_music()
+
 func _on_deactivate(player : Player, control_entity : ControlEntity) -> void:
 	for s : Starship in spawned_ships:
-		if s.current_state == Starship.State.DESTROYED:
-			s.queue_free()
+		#if s.current_state == Starship.State.DESTROYED:
+		s.queue_free()
+	
+	world.music_player.stop_music()
