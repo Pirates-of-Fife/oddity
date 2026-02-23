@@ -12,6 +12,10 @@ var music_volume : float = 1 :
 		return lerpf(-32, 0, music_volume)
 	set(value):
 		music_volume = maxf(0, minf(1, value))
+		music_volume_normalized = value
+
+## only used for the settings
+var music_volume_normalized : float
 
 @export
 var music_disabled : float = false
@@ -32,7 +36,7 @@ func save_settings() -> void:
 
 	config.set_value("mouse", "creature_controller_sensitivity", creature_controller_sensitivity)
 	config.set_value("mouse", "starship_controller_sensitity", starship_controller_sensitity)
-	config.set_value("audio", "music_volume", music_volume)
+	config.set_value("audio", "music_volume", music_volume_normalized)
 	config.set_value("audio", "music_disabled", music_disabled)
 
 	config.save(SETTINGS_FILE)

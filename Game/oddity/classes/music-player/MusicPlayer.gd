@@ -10,6 +10,9 @@ var battle_music : Array[MusicResource]
 var current_audio_player : MusicStreamPlayer
 
 func play_music(music : MusicResource) -> void:
+	if Globals.music_disabled:
+		return
+	
 	if current_audio_player != null:
 		if current_audio_player.playing and !music.override_current_track:
 			return
