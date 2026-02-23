@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ba5evvevagnhw"]
+[gd_scene load_steps=22 format=3 uid="uid://ba5evvevagnhw"]
 
 [ext_resource type="Texture2D" uid="uid://vdqa5pcoa462" path="res://project-images/OddityLogo-04.png" id="1_edjeb"]
 [ext_resource type="Script" path="res://ui/main-menu/main_menu_ui.gd" id="1_wya4y"]
@@ -153,7 +153,7 @@ tracks/3/keys = {
 "times": PackedFloat64Array(0, 1.26667),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector2(-1226, 196), Vector2(-480, 250)]
+"values": [Vector2(-1226, 196), Vector2(-480, 300)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_882nw"]
@@ -209,6 +209,37 @@ func _on_value_changed(value: float) -> void:
 
 
 func _on_drag_ended(value_changed: bool) -> void:
+	Globals.save_settings()
+"
+
+[sub_resource type="GDScript" id="GDScript_120uq"]
+resource_name = "Music Volume"
+script/source = "extends HSlider
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	value = Globals.music_volume_normalized
+
+func _on_value_changed(value: float) -> void:
+	Globals.music_volume = value
+	tooltip_text = \"Volume: \" + str(value)
+
+func _on_drag_ended(value_changed: bool) -> void:
+	Globals.save_settings()
+"
+
+[sub_resource type="GDScript" id="GDScript_xsduu"]
+resource_name = "MusicCheckButton"
+script/source = "extends CheckButton
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	button_pressed = Globals.music_disabled
+
+func _on_toggled(toggled_on: bool) -> void:
+	Globals.music_disabled = toggled_on
 	Globals.save_settings()
 "
 
@@ -323,7 +354,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
 theme_override_font_sizes/font_size = 8
-text = "Player"
+text = "Player Sensitivity"
 
 [node name="CreatureSensitivity" type="HSlider" parent="Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -342,7 +373,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7jeg0")
 theme_override_font_sizes/font_size = 8
-text = "Ship"
+text = "Ship Sensitivity"
 
 [node name="StarshipSensitivity" type="HSlider" parent="Control/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -353,6 +384,36 @@ step = 0.01
 value = 0.05
 tick_count = 10
 script = SubResource("GDScript_chui5")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
+text = "Music Volume"
+
+[node name="MusicVolume" type="HSlider" parent="Control/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+tick_count = 10
+script = SubResource("GDScript_120uq")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
+text = "Disable Music"
+
+[node name="CheckButton" type="CheckButton" parent="Control/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+script = SubResource("GDScript_xsduu")
 
 [node name="ButtonClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_l73e1")
@@ -561,4 +622,7 @@ text = "LOADING"
 [connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" to="Control/VBoxContainer/HBoxContainer/CreatureSensitivity" method="_on_value_changed"]
 [connection signal="drag_ended" from="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" to="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" method="_on_drag_ended"]
 [connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" to="Control/VBoxContainer/HBoxContainer2/StarshipSensitivity" method="_on_value_changed"]
+[connection signal="drag_ended" from="Control/VBoxContainer/HBoxContainer3/MusicVolume" to="Control/VBoxContainer/HBoxContainer3/MusicVolume" method="_on_drag_ended"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer3/MusicVolume" to="Control/VBoxContainer/HBoxContainer3/MusicVolume" method="_on_value_changed"]
+[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer4/CheckButton" to="Control/VBoxContainer/HBoxContainer4/CheckButton" method="_on_toggled"]
 [connection signal="pressed" from="Credits/Back" to="." method="_on_back_pressed"]
