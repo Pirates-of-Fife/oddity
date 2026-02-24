@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmlnwra7tw5cn"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/boss-fight-zone/DespawnShipParticles.gd" id="1_t6lmr"]
+
+[sub_resource type="Gradient" id="Gradient_k3b7d"]
+offsets = PackedFloat32Array(0, 0.444444, 1)
+colors = PackedColorArray(0, 0.12549, 1, 0.447059, 0.929412, 0.141176, 0.886275, 0.568627, 1, 0, 0.231373, 0.823529)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rxutn"]
+gradient = SubResource("Gradient_k3b7d")
+
+[sub_resource type="Curve" id="Curve_tbn7y"]
+_data = [Vector2(0, 0.43956), 0.0, 0.0, 0, 0, Vector2(0.475862, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3fpas"]
+curve = SubResource("Curve_tbn7y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lbwl1"]
+emission_shape = 2
+emission_sphere_radius = 27.68
+angle_min = 1.07288e-05
+angle_max = 23.9
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 61.88
+radial_accel_min = -100.0
+radial_accel_max = 15.05
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 100.0
+scale_min = 0.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_3fpas")
+color_ramp = SubResource("GradientTexture1D_rxutn")
+hue_variation_min = -0.03
+hue_variation_max = 0.17
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdt6e"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+disable_fog = true
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_bh0uy"]
+material = SubResource("StandardMaterial3D_jdt6e")
+
+[node name="DespawnShipParticles" type="GPUParticles3D"]
+emitting = false
+amount = 1500
+randomness = 1.0
+fixed_fps = 60
+visibility_aabb = AABB(-60, -60, -60, 120, 120, 120)
+process_material = SubResource("ParticleProcessMaterial_lbwl1")
+draw_pass_1 = SubResource("SphereMesh_bh0uy")
+script = ExtResource("1_t6lmr")

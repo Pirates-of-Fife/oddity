@@ -8,7 +8,7 @@ class_name BountyHuntingZone
 var difficulty : Starship.BountyDifficulty
 
 @export
-var possible_loadouts : Array = Array()
+var possible_loadouts : StarshipLoadoutSelection
 
 @export
 var ship_scene : PackedScene = preload("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
@@ -16,10 +16,10 @@ var ship_scene : PackedScene = preload("res://scenes/vehicles/starships/rabauke-
 @export
 var ai_scene : PackedScene = preload("res://classes/mind/ai/Ai.tscn")
 
-@export_range(0, 3, 1)
+@export_range(0, 3, 1, "suffix:Ships")
 var ship_count : int
 
-@export_range(0, 30000, 100, "or_greater")
+@export_range(0, 30000, 100, "or_greater", "suffix:m")
 var spawn_radius : float
 
 var spawned_ships : Array = Array()
@@ -44,7 +44,7 @@ func spawn_ships() -> void:
 func spawn_bounty_target() -> void:
 	
 	var ship : Starship = ship_scene.instantiate()
-	ship.default_loadout = possible_loadouts.pick_random()
+	ship.default_loadout = possible_loadouts.loadouts.pick_random()
 	ship.is_bounty_target = true
 	ship.difficulty = difficulty
 	ship.current_state = Starship.State.POWER_ON
@@ -62,9 +62,7 @@ func spawn_bounty_target() -> void:
 	ship.global_position = global_position + spawn_position
 
 	spawned_ships.append(ship)
-	
-	var p : Player = get_tree().get_first_node_in_group("Player")
-	
+		
 	ship.ship_identification = ship.generate_ship_id()
 	
 

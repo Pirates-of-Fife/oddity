@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StarshipLoadoutSelection" load_steps=7 format=3 uid="uid://c6ma50s6g2ir"]
+
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="1_4ffy6"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadoutSelection.gd" id="2_e6iy2"]
+[ext_resource type="Resource" uid="uid://b1pldqyejslhf" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_1_Loadout.tres" id="2_hdst5"]
+[ext_resource type="Resource" uid="uid://ca4wmcu2s8h2s" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_2_Loadout.tres" id="3_sv2me"]
+[ext_resource type="Resource" uid="uid://bxsbx566gtyon" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_3_Loadout.tres" id="4_kl1yn"]
+[ext_resource type="Resource" uid="uid://d4kj1o1a18i2o" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_4_Loadout.tres" id="5_r0gba"]
+
+[resource]
+script = ExtResource("2_e6iy2")
+loadouts = Array[ExtResource("1_4ffy6")]([ExtResource("2_hdst5"), ExtResource("3_sv2me"), ExtResource("4_kl1yn"), ExtResource("5_r0gba")])

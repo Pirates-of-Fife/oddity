@@ -507,6 +507,9 @@ enum State
 var is_bounty_target : bool = false
 
 @export
+var is_boss : bool = false
+
+@export
 var difficulty : BountyDifficulty
 
 var reward : int = 0
