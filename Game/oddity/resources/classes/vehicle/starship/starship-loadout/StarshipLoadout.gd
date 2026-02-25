@@ -2,6 +2,8 @@ extends Resource
 
 class_name StarshipLoadout
 
+@export_category("Objects")
+
 @export
 var module_slots : Array[ModuleSlotLoadoutResource] = []
 
@@ -10,6 +12,8 @@ var cargo : Array[CargoContainerLoadoutResource] = []
 
 @export
 var entities : Array[GameEntityLoadoutResource] = []
+
+@export_category("info")
 
 @export
 var ship_name : StringName
@@ -38,6 +42,9 @@ var current_heat : float = 0
 
 @export
 var current_fuel : float = 10800
+
+@export
+var is_boss : bool = false
 
 @export
 var landing_gear_on : bool = false

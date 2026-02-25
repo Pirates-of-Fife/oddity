@@ -39,3 +39,6 @@ func play_random_battle_music() -> void:
 		return
 	
 	play_music(battle_music.pick_random())
+
+func play_boss_music() -> void:
+	play_random_battle_music()

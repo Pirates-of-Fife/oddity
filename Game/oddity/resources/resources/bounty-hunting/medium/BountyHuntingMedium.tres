@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StarshipLoadoutSelection" load_steps=8 format=3 uid="uid://dc28ufdv2di50"]
+
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="1_dltqp"]
+[ext_resource type="Resource" uid="uid://b4ib3lsww33hn" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_1_Loadout.tres" id="2_t8in8"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadoutSelection.gd" id="2_ycdnd"]
+[ext_resource type="Resource" uid="uid://df1cwvhxsy02u" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_2_Loadout.tres" id="3_yfvyd"]
+[ext_resource type="Resource" uid="uid://dt126675t14xe" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_3_Loadout.tres" id="4_qemkt"]
+[ext_resource type="Resource" uid="uid://c16d15b15gtlo" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_4_Loadout.tres" id="5_rp2jq"]
+[ext_resource type="Resource" uid="uid://dar1u2a1o2pis" path="res://resources/resources/bounty-hunting/medium/RABS_Kestrel_MK1_Bounty_Medium_5_Loadout.tres" id="6_gw2sc"]
+
+[resource]
+script = ExtResource("2_ycdnd")
+loadouts = Array[ExtResource("1_dltqp")]([ExtResource("2_t8in8"), ExtResource("3_yfvyd"), ExtResource("4_qemkt"), ExtResource("5_rp2jq"), ExtResource("6_gw2sc")])

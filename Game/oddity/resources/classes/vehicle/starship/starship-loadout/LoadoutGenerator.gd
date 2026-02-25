@@ -172,6 +172,8 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 	starship.current_fuel_capacity_upgrade = loadout.current_fuel_capacity_upgrade
 	starship.current_health_upgrade = loadout.current_health_upgrade
 	starship.current_heat_capacity_upgrade = loadout.current_heat_capacity_upgrade
+	
+	starship.is_boss = loadout.is_boss
 
 	if apply_health:
 		starship.current_hull_health = loadout.current_health

@@ -29,8 +29,9 @@ func _ready() -> void:
 func update_radar_blips() -> void:
 	for radar_blip : RadarBlip in $RadarBlips.get_children():
 		if is_instance_valid(radar_blip):
-			
-			if !radar_blip.entity.is_inside_tree():
+			if radar_blip.entity == null:
+				_on_radar_area_exited(radar_blip.entity)
+			elif !radar_blip.entity.is_inside_tree():
 				_on_radar_area_exited(radar_blip.entity)
 			
 			var relative_position : Vector3 = starship.to_local(radar_blip.entity.global_position)

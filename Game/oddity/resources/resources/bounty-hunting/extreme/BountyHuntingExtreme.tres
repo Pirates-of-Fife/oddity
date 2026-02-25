@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StarshipLoadoutSelection" load_steps=9 format=3 uid="uid://dx62pmvcxko5c"]
+
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="1_j6ct0"]
+[ext_resource type="Resource" uid="uid://hu5gqe83uwsy" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_1_Loadout.tres" id="2_englf"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadoutSelection.gd" id="2_tucht"]
+[ext_resource type="Resource" uid="uid://xh2efbrk3clj" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_2_Loadout.tres" id="3_aogtx"]
+[ext_resource type="Resource" uid="uid://b4nc2y5nss3v0" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_3_Loadout.tres" id="4_pe1bt"]
+[ext_resource type="Resource" uid="uid://cw5ypqunlmkk7" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_4_Loadout.tres" id="5_uv60g"]
+[ext_resource type="Resource" uid="uid://x01t8bceapmv" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_5_Loadout.tres" id="6_jex8h"]
+[ext_resource type="Resource" uid="uid://dkn5t8ulgw3qq" path="res://resources/resources/bounty-hunting/extreme/RABS_Kestrel_MK1_Bounty_Extreme_6_Loadout.tres" id="7_sfki7"]
+
+[resource]
+script = ExtResource("2_tucht")
+loadouts = Array[ExtResource("1_j6ct0")]([ExtResource("2_englf"), ExtResource("3_aogtx"), ExtResource("4_pe1bt"), ExtResource("5_uv60g"), ExtResource("6_jex8h"), ExtResource("7_sfki7")])
