@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b3x2bgp6b0ev6" path="res://scenes/modules/test-module/ShieldGenerator/size-2/Size2ShieldGenerator.tscn" id="12_tipvu"]
 [ext_resource type="PackedScene" uid="uid://c8q0kmhpluwao" path="res://scenes/modules/test-module/ShieldGenerator/size-3/Size3ShieldGenerator.tscn" id="13_4ja5m"]
 [ext_resource type="PackedScene" uid="uid://cpnhg66txfjsk" path="res://scenes/modules/test-module/ShieldGenerator/size-1/Size1ShieldGenerator.tscn" id="14_ba8aa"]
-[ext_resource type="PackedScene" uid="uid://ssxap6l3wimu" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="15_sc64h"]
+[ext_resource type="PackedScene" uid="uid://ddu7wrgyowti8" path="res://scenes/modules/test-module/alcubierre-drives/modified-alcubierre-drive/ModifiedAlcubierreDrive.tscn" id="15_bt1sh"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AlcubierreDriveSlotLoadoutResource.gd" id="16_tws81"]
 [ext_resource type="PackedScene" uid="uid://csxjtno0xrxmo" path="res://scenes/modules/test-module/Size2AbyssDrive.tscn" id="17_mugh1"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="18_xg6lr"]
@@ -346,7 +346,7 @@ id = 36
 script = ExtResource("16_tws81")
 size = 2
 name = &"AlcubierreDriveSlot"
-module = ExtResource("15_sc64h")
+module = ExtResource("15_bt1sh")
 value = 0
 id = 37
 

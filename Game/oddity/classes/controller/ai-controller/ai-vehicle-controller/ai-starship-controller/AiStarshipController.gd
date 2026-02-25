@@ -22,6 +22,8 @@ var starship_shoot_primary_command : StarshipShootPrimaryCommand = StarshipShoot
 var starship_shoot_secondary_command : StarshipShootSecondaryCommand = StarshipShootSecondaryCommand.new()
 var starship_shoot_tertiary_command : StarshipShootTertiaryCommand = StarshipShootTertiaryCommand.new()
 
+var starship_alcubierre_drive_use_special_command : StarshipAlcubierreDriveUseSpecialCommand = StarshipAlcubierreDriveUseSpecialCommand.new()
+
 
 @export_category("AI Settings")
 
@@ -41,6 +43,9 @@ var roll_timer : Timer = Timer.new()
 
 @onready
 var roll_exit_timer : Timer = Timer.new()
+
+@onready
+var special_timer : Timer = Timer.new()
 
 var current_roll : RollManouver = RollManouver.NONE
 
@@ -95,7 +100,16 @@ func _ai_starship_controller_ready() -> void:
 	roll_exit_timer.one_shot = true
 	roll_exit_timer.autostart = false
 	roll_exit_timer.timeout.connect(stop_roll)
-
+	
+	special_timer.autostart = true
+	special_timer.one_shot = false
+	special_timer.wait_time = 30
+	special_timer.timeout.connect(use_special)
+	
+	add_child(special_timer)
+	add_child(roll_timer)
+	add_child(roll_exit_timer)
+	
 	add_child(timer)
 
 	change_evasion()
@@ -301,3 +315,9 @@ func evade() -> void:
 			starship_thrust_up_command.execute(control_entity, StarshipThrustUpCommand.Params.new(evasion_amount))
 		EvasionDirection.EVADE_DOWN:
 			starship_thrust_down_command.execute(control_entity, StarshipThrustDownCommand.Params.new(evasion_amount))
+
+func use_special() -> void:
+	starship_alcubierre_drive_use_special_command.execute(control_entity)
+	
+	special_timer.wait_time = randf_range(3, 20)
+	special_timer.start()

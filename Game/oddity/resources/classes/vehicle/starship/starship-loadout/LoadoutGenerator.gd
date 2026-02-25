@@ -182,7 +182,11 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		starship.current_ammo = loadout.current_ammo
 		starship.current_heat = loadout.current_heat
 		starship.current_fuel = loadout.current_fuel
-	
+	else:
+		starship.current_hull_health = starship.max_hull_health
+		starship.current_ammo = starship.max_ammo
+		starship.current_fuel = starship.max_fuel
+		
 	starship.set_material_to_hull(starship.create_new_hull_material())
 	starship.update_color(loadout.ship_color)
 
