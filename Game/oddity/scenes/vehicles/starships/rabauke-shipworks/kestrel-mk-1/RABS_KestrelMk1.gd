@@ -220,8 +220,6 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		_on_color_dark()
 
 func _on_color_white() -> void:
-	print("dark")
-	
 	ship_identification_label.modulate = Color(0, 0, 0, 1)
 	name_label.modulate = Color(0, 0, 0, 1)
 	
@@ -231,8 +229,6 @@ func _on_color_white() -> void:
 	$Mesh/Decal4.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-03.png")
 	
 func _on_color_dark() -> void:
-	print("white")
-	
 	ship_identification_label.modulate = Color(1, 1, 1, 1)
 	name_label.modulate = Color(1, 1, 1, 1)
 	
@@ -366,6 +362,8 @@ func on_power_on() -> void:
 		ui_elements.append($Interior/Bridge/DamagedLabel)
 	if landing_gear_on:
 		ui_elements.append($Interior/Bridge/LandingGearLabel)
+	if headlight_left.visible:
+		ui_elements.append(headlight_icon)
 	
 	await get_tree().create_timer(3.5).timeout
 	
@@ -397,7 +395,8 @@ func on_power_off() -> void:
 	$Interior/Bridge/AltLabel.hide()
 	$Interior/Bridge/GravityLabel.hide()
 	$Interior/Bridge/LandingGearLabel.hide()
-
+	headlight_icon.hide()
+	
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()
