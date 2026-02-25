@@ -133,7 +133,8 @@ func _process(delta: float) -> void:
 
 func change_state_to_flee() -> void:
 	if (control_entity as Starship).current_hull_health <= (control_entity as Starship).hull_health_damaged_state:
-		current_ai_state = AiState.FLEE
+		if randf_range(1, 100) <= 50:
+			current_ai_state = AiState.FLEE
 
 func change_state_back_to_none() -> void:
 	current_ai_state = AiState.NONE
@@ -289,7 +290,7 @@ func shoot_player() -> void:
 	starship_shoot_tertiary_command.execute(control_entity)
 
 func evade() -> void:
-	var evasion_amount : float = randf_range(0.1, 0.5)
+	var evasion_amount : float = randf_range(0.2, 0.7)
 
 	match current_evasion:
 		EvasionDirection.EVADE_LEFT:
