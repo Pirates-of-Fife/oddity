@@ -127,6 +127,9 @@ func spawn_enemy_ship(spawn_boss : bool = false) -> void:
 		
 	ship.ship_identification = ship.generate_ship_id()
 	
+	ship.update_color(Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
+
+	
 func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 	world.music_player.play_boss_music()
 	

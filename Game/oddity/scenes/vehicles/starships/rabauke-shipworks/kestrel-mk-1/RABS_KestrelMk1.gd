@@ -124,6 +124,11 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Yaw/Blend3/blend_amount", -actual_rotation_vector_unit.y)
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Roll/Blend3/blend_amount", -actual_rotation_vector_unit.z)
 
+func set_material_to_hull(material : StandardMaterial3D) -> void:
+	$Mesh/Exterior/BridgeExterior/Cockpit.set_surface_override_material(0, material)
+	$Mesh/Exterior/Hull2/Hull.set_surface_override_material(0, material) 
+	current_hull_material = material
+	
 func _overheat_start() -> void:
 	if (is_bounty_target):
 		return
@@ -205,6 +210,37 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		ammo_ui.hide()
 	else:
 		power_screen.set_state_power_on()
+		
+	color_changed_to_dark.connect(_on_color_dark)
+	color_changed_to_light.connect(_on_color_white)
+	
+	if is_color_light(current_hull_material.albedo_color):
+		_on_color_white()
+	else:
+		_on_color_dark()
+
+func _on_color_white() -> void:
+	print("dark")
+	
+	ship_identification_label.modulate = Color(0, 0, 0, 1)
+	name_label.modulate = Color(0, 0, 0, 1)
+	
+	$Mesh/Decal.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-04.png")
+	$Mesh/Decal2.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-04.png")
+	$Mesh/Decal3.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-03.png")
+	$Mesh/Decal4.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-03.png")
+	
+func _on_color_dark() -> void:
+	print("white")
+	
+	ship_identification_label.modulate = Color(1, 1, 1, 1)
+	name_label.modulate = Color(1, 1, 1, 1)
+	
+	$Mesh/Decal.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png")
+	$Mesh/Decal2.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png")
+	$Mesh/Decal3.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png")
+	$Mesh/Decal4.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png")
+
 
 func _on_pressure_zone_entered() -> void:
 	$Interior/Bridge/PressureLabel.show()
@@ -345,7 +381,6 @@ func on_power_on() -> void:
 
 	for element : Node3D in ui_elements:
 		element.show()
-
 
 
 func on_power_off() -> void:

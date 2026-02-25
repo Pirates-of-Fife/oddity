@@ -42,7 +42,6 @@ func spawn_ships() -> void:
 		spawn_bounty_target()
 
 func spawn_bounty_target() -> void:
-	
 	var ship : Starship = ship_scene.instantiate()
 	ship.default_loadout = possible_loadouts.loadouts.pick_random()
 	ship.is_bounty_target = true
@@ -64,6 +63,8 @@ func spawn_bounty_target() -> void:
 	spawned_ships.append(ship)
 		
 	ship.ship_identification = ship.generate_ship_id()
+		
+	ship.update_color(Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
 	
 
 func _on_activate(player : Player, control_entity : ControlEntity) -> void:
