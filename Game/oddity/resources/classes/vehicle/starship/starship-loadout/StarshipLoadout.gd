@@ -30,9 +30,8 @@ var apply_health : bool = false
 @export
 var current_health : float
 
-## not implemented yet
 @export
-var ship_color : Color
+var ship_color : Color = Color("e7bd74")
 
 @export
 var current_ammo : float = 10000

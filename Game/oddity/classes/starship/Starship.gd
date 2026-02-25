@@ -306,8 +306,15 @@ var hull_reeinforcement_health_addition : float = 0
 
 var hull_reinforcements : Array = Array()
 
+signal current_health_changed
+
 @export
-var current_hull_health : float
+var current_hull_health : float : 
+	get:
+		return current_hull_health
+	set(value):
+		current_hull_health = value
+		current_health_changed.emit()
 
 @export
 var hull_health_damaged_state : float
@@ -522,6 +529,22 @@ enum BountyDifficulty
 	EXTREME
 }
 
+@export_category("Color")
+
+@export
+var original_hull_color : Color
+
+@export
+var dev_override_color : Color :
+	set(value):
+		dev_override_color = value
+		update_color(value)
+
+var current_hull_material : StandardMaterial3D
+
+signal color_changed_to_dark
+signal color_changed_to_light
+
 @export_category("Beds")
 @export
 var beds : Array[Bed]
@@ -546,6 +569,57 @@ var altitude : float :
 		
 func _ready() -> void:
 	_starship_ready()
+
+## to be implemented in child class
+func set_material_to_hull(material : StandardMaterial3D) -> void:
+	pass
+
+func _on_current_health_changed() -> void:
+	update_material_saturation_based_on_hull_damage()
+
+func update_material_saturation_based_on_hull_damage() -> void:
+	if current_hull_material == null:
+		return
+	
+	print("satur: " + str(lerpf(0, original_hull_color.s, current_hull_health / max_hull_health)))
+	current_hull_material.albedo_color.s = lerpf(0, original_hull_color.s, current_hull_health / max_hull_health)
+	current_hull_material.roughness = lerpf(0.1, 0.5, current_hull_health / max_hull_health)
+
+func update_color(new_color : Color) -> void:
+	original_hull_color = new_color
+	
+	if is_color_light(new_color):
+		color_changed_to_light.emit()
+	else:
+		color_changed_to_dark.emit()
+	
+	if current_hull_material != null:
+		current_hull_material.albedo_color = original_hull_color
+			
+	update_material_saturation_based_on_hull_damage()
+
+func is_color_light(color : Color) -> bool:
+	var luma : float = sqrt(0.299 * pow(color.r, 2) + 0.587 * pow(color.g, 2) + 0.114 * pow(color.b, 2))
+	
+	print("Luna" + str(luma))
+	
+	if luma > 0.5:
+		return true
+	
+	return false
+
+func create_new_hull_material() -> StandardMaterial3D:
+	var new_material : StandardMaterial3D = StandardMaterial3D.new()
+	
+	new_material.albedo_color = Color(0.5, 0.5, 0.5, 1)
+	new_material.diffuse_mode = BaseMaterial3D.DIFFUSE_TOON
+	new_material.specular_mode = BaseMaterial3D.SPECULAR_TOON
+	new_material.metallic = 0.7
+	new_material.metallic_specular = 1
+	new_material.roughness = 0.1
+	new_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	
+	return new_material
 
 func upgrade_fuel() -> void:
 	current_fuel_capacity_upgrade = min(current_fuel_capacity_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
@@ -653,13 +727,15 @@ var apply_loadout_health : bool = false
 
 func _starship_ready() -> void:
 	_default_ready()
-
+	
 	toggle_third_person_view.connect(on_third_person)
 	increase_third_person_distance.connect(on_increase_distance)
 	decrease_third_person_distance.connect(on_decrease_distance)
 
 	body_entered.connect(on_collision)
 	on_damage_taken.connect(ship_take_damage)
+	
+	current_health_changed.connect(_on_current_health_changed)
 
 	power_off_sound_player.finished.connect(sound_power_state_change_complete)
 	power_on_sound_player.finished.connect(sound_power_state_change_complete)
@@ -804,6 +880,7 @@ func _starship_ready() -> void:
 	max_fuel_changed.emit(max_fuel)
 	max_heat_capacity_changed.emit(maximum_heat_capacity)
 
+	update_material_saturation_based_on_hull_damage()
 	
 func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:

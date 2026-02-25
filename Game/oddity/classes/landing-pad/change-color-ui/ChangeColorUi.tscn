@@ -1,0 +1,247 @@
+[gd_scene load_steps=11 format=3 uid="uid://5csa4btpg6tx"]
+
+[ext_resource type="Script" path="res://classes/landing-pad/change-color-ui/ChangeColorUI.gd" id="1_kltnx"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_8the6"]
+[ext_resource type="Script" path="res://classes/landing-pad/change-color-ui/ColorComponentPickerUI.gd" id="3_3jcu0"]
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="3_3ksav"]
+[ext_resource type="AudioStream" uid="uid://x76m6bo76mxm" path="res://classes/landing-pad/change-ship-name-ui/click.wav" id="4_nshqo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxhdi"]
+albedo_color = Color(0.299547, 0.299547, 0.299547, 1)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_k522k"]
+material = SubResource("StandardMaterial3D_uxhdi")
+size = Vector3(1, 1, 0.06)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c2tb2"]
+data = PackedVector3Array(-0.5, 0.5, 0.03, 0.5, 0.5, 0.03, -0.5, -0.5, 0.03, 0.5, 0.5, 0.03, 0.5, -0.5, 0.03, -0.5, -0.5, 0.03, 0.5, 0.5, -0.03, -0.5, 0.5, -0.03, 0.5, -0.5, -0.03, -0.5, 0.5, -0.03, -0.5, -0.5, -0.03, 0.5, -0.5, -0.03, 0.5, 0.5, 0.03, 0.5, 0.5, -0.03, 0.5, -0.5, 0.03, 0.5, 0.5, -0.03, 0.5, -0.5, -0.03, 0.5, -0.5, 0.03, -0.5, 0.5, -0.03, -0.5, 0.5, 0.03, -0.5, -0.5, -0.03, -0.5, 0.5, 0.03, -0.5, -0.5, 0.03, -0.5, -0.5, -0.03, 0.5, 0.5, 0.03, -0.5, 0.5, 0.03, 0.5, 0.5, -0.03, -0.5, 0.5, 0.03, -0.5, 0.5, -0.03, 0.5, 0.5, -0.03, -0.5, -0.5, 0.03, 0.5, -0.5, 0.03, -0.5, -0.5, -0.03, 0.5, -0.5, 0.03, 0.5, -0.5, -0.03, -0.5, -0.5, -0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqbkp"]
+diffuse_mode = 3
+specular_mode = 1
+metallic = 0.7
+metallic_specular = 1.0
+roughness = 0.1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2j1vb"]
+material = SubResource("StandardMaterial3D_bqbkp")
+size = Vector2(3.285, 1.105)
+
+[node name="ChangeColorUi" type="Node3D" node_paths=PackedStringArray("hue_comp", "saturation_comp", "value_comp", "preview_mesh")]
+script = ExtResource("1_kltnx")
+hue_comp = NodePath("Hue")
+saturation_comp = NodePath("Saturation")
+value_comp = NodePath("Value")
+preview_mesh = NodePath("Preview")
+
+[node name="Hue" type="Node3D" parent="." node_paths=PackedStringArray("decrease_value_button", "increase_value_button", "label")]
+script = ExtResource("3_3jcu0")
+decrease_value_button = NodePath("InteractionButton")
+increase_value_button = NodePath("InteractionButton2")
+label = NodePath("Label3D")
+max_value = 360.0
+increment = 10.0
+
+[node name="InteractionButton" type="StaticBody3D" parent="Hue" node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.129, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("3_3ksav")
+interaction_sound = NodePath("../../Click")
+press_delay = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hue/InteractionButton"]
+mesh = SubResource("BoxMesh_k522k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hue/InteractionButton"]
+shape = SubResource("ConcavePolygonShape3D_c2tb2")
+
+[node name="Label3D" type="Label3D" parent="Hue/InteractionButton"]
+transform = Transform3D(1.875, 0, 0, 0, 1.875, 0, 0, 0, 1.875, 0, 0.0625281, 0.0338608)
+outline_modulate = Color(0, 0, 0, 0)
+text = "<"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Label3D" type="Label3D" parent="Hue"]
+transform = Transform3D(0.81, 0, 0, 0, 0.81, 0, 0, 0, 0.81, 0, 0.0500412, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "360"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="InteractionButton2" type="StaticBody3D" parent="Hue" node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(-1, 1.22465e-16, 0, -1.22465e-16, -1, 0, 0, 0, 1, 1.09299, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("3_3ksav")
+interaction_sound = NodePath("../../Click")
+press_delay = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hue/InteractionButton2"]
+mesh = SubResource("BoxMesh_k522k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hue/InteractionButton2"]
+shape = SubResource("ConcavePolygonShape3D_c2tb2")
+
+[node name="Label3D" type="Label3D" parent="Hue/InteractionButton2"]
+transform = Transform3D(1.875, 0, 0, 0, 1.875, 0, 0, 0, 1.875, 0, 0.0625281, 0.0338608)
+outline_modulate = Color(0, 0, 0, 0)
+text = "<"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Label3D2" type="Label3D" parent="Hue"]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, -1.82107, 0.0198667, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "H"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Click" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_nshqo")
+volume_db = -36.0
+bus = &"Environment"
+
+[node name="Saturation" type="Node3D" parent="." node_paths=PackedStringArray("decrease_value_button", "increase_value_button", "label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07511, 0)
+script = ExtResource("3_3jcu0")
+decrease_value_button = NodePath("InteractionButton")
+increase_value_button = NodePath("InteractionButton2")
+label = NodePath("Label3D")
+max_value = 100.0
+increment = 10.0
+
+[node name="InteractionButton" type="StaticBody3D" parent="Saturation" node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.129, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("3_3ksav")
+interaction_sound = NodePath("../../Click")
+press_delay = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Saturation/InteractionButton"]
+mesh = SubResource("BoxMesh_k522k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Saturation/InteractionButton"]
+shape = SubResource("ConcavePolygonShape3D_c2tb2")
+
+[node name="Label3D" type="Label3D" parent="Saturation/InteractionButton"]
+transform = Transform3D(1.875, 0, 0, 0, 1.875, 0, 0, 0, 1.875, 0, 0.0625281, 0.0338608)
+outline_modulate = Color(0, 0, 0, 0)
+text = "<"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Label3D" type="Label3D" parent="Saturation"]
+transform = Transform3D(0.81, 0, 0, 0, 0.81, 0, 0, 0, 0.81, 0, 0.0500412, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "360"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="InteractionButton2" type="StaticBody3D" parent="Saturation" node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(-1, 1.22465e-16, 0, -1.22465e-16, -1, 0, 0, 0, 1, 1.09299, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("3_3ksav")
+interaction_sound = NodePath("../../Click")
+press_delay = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Saturation/InteractionButton2"]
+mesh = SubResource("BoxMesh_k522k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Saturation/InteractionButton2"]
+shape = SubResource("ConcavePolygonShape3D_c2tb2")
+
+[node name="Label3D" type="Label3D" parent="Saturation/InteractionButton2"]
+transform = Transform3D(1.875, 0, 0, 0, 1.875, 0, 0, 0, 1.875, 0, 0.0625281, 0.0338608)
+outline_modulate = Color(0, 0, 0, 0)
+text = "<"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Label3D2" type="Label3D" parent="Saturation"]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, -1.82107, 0.0711503, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "S
+"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Value" type="Node3D" parent="." node_paths=PackedStringArray("decrease_value_button", "increase_value_button", "label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.19563, 0)
+script = ExtResource("3_3jcu0")
+decrease_value_button = NodePath("InteractionButton")
+increase_value_button = NodePath("InteractionButton2")
+label = NodePath("Label3D")
+max_value = 100.0
+increment = 10.0
+
+[node name="InteractionButton" type="StaticBody3D" parent="Value" node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.129, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("3_3ksav")
+interaction_sound = NodePath("../../Click")
+press_delay = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Value/InteractionButton"]
+mesh = SubResource("BoxMesh_k522k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Value/InteractionButton"]
+shape = SubResource("ConcavePolygonShape3D_c2tb2")
+
+[node name="Label3D" type="Label3D" parent="Value/InteractionButton"]
+transform = Transform3D(1.875, 0, 0, 0, 1.875, 0, 0, 0, 1.875, 0, 0.0625281, 0.0338608)
+outline_modulate = Color(0, 0, 0, 0)
+text = "<"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Label3D" type="Label3D" parent="Value"]
+transform = Transform3D(0.81, 0, 0, 0, 0.81, 0, 0, 0, 0.81, 0, 0.0500412, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "360"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="InteractionButton2" type="StaticBody3D" parent="Value" node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(-1, 1.22465e-16, 0, -1.22465e-16, -1, 0, 0, 0, 1, 1.09299, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("3_3ksav")
+interaction_sound = NodePath("../../Click")
+press_delay = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Value/InteractionButton2"]
+mesh = SubResource("BoxMesh_k522k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Value/InteractionButton2"]
+shape = SubResource("ConcavePolygonShape3D_c2tb2")
+
+[node name="Label3D" type="Label3D" parent="Value/InteractionButton2"]
+transform = Transform3D(1.875, 0, 0, 0, 1.875, 0, 0, 0, 1.875, 0, 0.0625281, 0.0338608)
+outline_modulate = Color(0, 0, 0, 0)
+text = "<"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Label3D3" type="Label3D" parent="Value"]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, -1.82107, 0.189483, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "V"
+font = ExtResource("2_8the6")
+font_size = 76
+
+[node name="Preview" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 1.14823, 0)
+mesh = SubResource("PlaneMesh_2j1vb")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.358009, 0.933718, 0, -0.933718, 0.358009, 0.0631016, 2.3141, 0.643856)
+light_energy = 0.086
+spot_range = 2.872

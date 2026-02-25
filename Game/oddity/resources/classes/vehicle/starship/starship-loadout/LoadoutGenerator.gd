@@ -109,7 +109,9 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	loadout.current_fuel_capacity_upgrade = starship.current_fuel_capacity_upgrade
 	loadout.current_health_upgrade = starship.current_health_upgrade
 	loadout.current_heat_capacity_upgrade = starship.current_heat_capacity_upgrade
-
+	
+	loadout.ship_color = starship.original_hull_color
+	
 	if save_as_player_ship_save:
 		loadout.apply_health = true
 		var err : Error = ResourceSaver.save(loadout, Globals.PLAYER_SHIP_SAVE)
@@ -180,6 +182,13 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		starship.current_ammo = loadout.current_ammo
 		starship.current_heat = loadout.current_heat
 		starship.current_fuel = loadout.current_fuel
+	else:
+		starship.current_hull_health = starship.max_hull_health
+		starship.current_ammo = starship.max_ammo
+		starship.current_fuel = starship.max_fuel
+		
+	starship.set_material_to_hull(starship.create_new_hull_material())
+	starship.update_color(loadout.ship_color)
 
 func editor_save_current_load_out() -> void:
 	if starship == null:
