@@ -6,6 +6,18 @@ class_name PlayerPositionSave
 var respawn_at_station : bool = true
 
 @export
+var position_delta : Vector3
+
+@export
+var rotation_delta : Vector3
+
+@export
+var station_position : Vector3
+
+@export
+var station_rotation : Vector3
+
+@export
 var star_system : StarSystemResource
 
 @export
