@@ -40,10 +40,6 @@ var color : Color :
 		return color
 	
 func _ready() -> void:
-	hue_comp.value_changed.connect(_on_hue_changed)
-	saturation_comp.value_changed.connect(_on_saturation_changed)
-	value_comp.value_changed.connect(_on_value_changed)
-	
 	landing_pad.starship_landed.connect(on_ship_landed)
 	landing_pad.starship_took_off.connect(on_ship_took_off)
 
@@ -55,11 +51,24 @@ func on_ship_landed(starship : Starship) -> void:
 	saturation_comp.color_value = ship.original_hull_color.s * 100
 	value_comp.color_value = ship.original_hull_color.v * 100
 	
+	hue_comp.value_changed.connect(_on_hue_changed)
+	saturation_comp.value_changed.connect(_on_saturation_changed)
+	value_comp.value_changed.connect(_on_value_changed)
+	
 	init_completed = true
 	
 func on_ship_took_off(starship : Starship) -> void:
 	ship = null
 	init_completed = false
+	
+	if hue_comp.value_changed.is_connected(_on_hue_changed):
+		hue_comp.value_changed.disconnect(_on_hue_changed)
+	
+	if saturation_comp.value_changed.is_connected(_on_saturation_changed):
+		saturation_comp.value_changed.disconnect(_on_saturation_changed)
+	
+	if value_comp.value_changed.is_connected(_on_value_changed):
+		value_comp.value_changed.disconnect(_on_value_changed)
 
 func _on_hue_changed(value : float) -> void:
 	color.h = value
