@@ -6,13 +6,10 @@ class_name PlayerPositionSave
 var respawn_at_station : bool = true
 
 @export
-var position_delta : Vector3
+var station_relative_transform : Transform3D 
 
 @export
-var rotation_delta : Vector3
-
-@export
-var station_position : Vector3
+var station_transform : Transform3D
 
 @export
 var station_rotation : Vector3

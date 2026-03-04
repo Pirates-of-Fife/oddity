@@ -374,8 +374,7 @@ func spawn_player_ship_at_player_position(ship : Starship) -> void:
 	star_system.add_child(ship)
 	
 	if player_position_save.respawn_at_station:
-		ship.global_position = player_position_save.station_position + player_position_save.position_delta
-		ship.global_rotation = player_position_save.station_rotation + player_position_save.rotation_delta
+		ship.global_transform = player_position_save.station_transform * player_position_save.station_relative_transform
 	else:
 		ship.global_position = player_position_save.position
 		ship.global_rotation = player_position_save.rotation
@@ -405,14 +404,11 @@ func save_player_position_information() -> void:
 	player_position_resource.star_system = get_current_star_sytem_resource()
 	
 	if player_ship.current_station != null:
-		var position_delta : Vector3 = player_ship.current_station.global_position - player_ship.global_position
-		var rotation_delta : Vector3 = player_ship.current_station.global_rotation - player_ship.global_rotation
+		var relative_transform : Transform3D = player_ship.current_station.global_transform.affine_inverse() * player_ship.global_transform
 		
+		player_position_resource.station_relative_transform = relative_transform
+		player_position_resource.station_transform = player_ship.current_station.global_transform
 		player_position_resource.respawn_at_station = true
-		player_position_resource.position_delta = position_delta
-		player_position_resource.rotation_delta = rotation_delta
-		player_position_resource.station_position = player_ship.current_station.global_position
-		player_position_resource.station_rotation = player_ship.current_station.original_global_rotation
 	else:
 		player_position_resource.respawn_at_station = false
 	
