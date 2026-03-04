@@ -412,7 +412,7 @@ func save_player_position_information() -> void:
 		player_position_resource.position_delta = position_delta
 		player_position_resource.rotation_delta = rotation_delta
 		player_position_resource.station_position = player_ship.current_station.global_position
-		player_position_resource.station_rotation = player_ship.current_station.global_rotation
+		player_position_resource.station_rotation = player_ship.current_station.original_global_rotation
 	else:
 		player_position_resource.respawn_at_station = false
 	

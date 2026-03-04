@@ -45,16 +45,12 @@ size = Vector3(2.505, 97.12, 350)
 collision_layer = 2097409
 collision_mask = 2097409
 script = ExtResource("1_inwp3")
-station_name = null
 space_station_zone = NodePath("SpaceStationZone")
 station_frame_of_reference = NodePath("FrameOfReference")
 rotation_speed = 0.05
 station_label_1 = NodePath("Label3D")
 station_label_2 = NodePath("Label3D2")
 donau_walzer_player = NodePath("BlueDanubePlayer")
-speed_limit = null
-buy_markup = null
-sell_markup = null
 trade_items = ExtResource("2_b30wo")
 
 [node name="SpaceStationZone" type="Node3D" parent="."]

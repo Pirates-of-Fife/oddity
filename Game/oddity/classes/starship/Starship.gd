@@ -584,7 +584,6 @@ func update_material_saturation_based_on_hull_damage() -> void:
 	if current_hull_material == null:
 		return
 	
-	print("satur: " + str(lerpf(0, original_hull_color.s, current_hull_health / max_hull_health)))
 	current_hull_material.albedo_color.s = lerpf(0, original_hull_color.s, current_hull_health / max_hull_health)
 	current_hull_material.roughness = lerpf(0.1, 0.5, current_hull_health / max_hull_health)
 
@@ -603,9 +602,7 @@ func update_color(new_color : Color) -> void:
 
 func is_color_light(color : Color) -> bool:
 	var luma : float = sqrt(0.299 * pow(color.r, 2) + 0.587 * pow(color.g, 2) + 0.114 * pow(color.b, 2))
-	
-	print("Luna" + str(luma))
-	
+		
 	if luma > 0.5:
 		return true
 	
