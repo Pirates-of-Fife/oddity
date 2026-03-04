@@ -566,7 +566,10 @@ var altitude : float :
 		if active_frame_of_reference is GravityWell:
 			return distance_to(active_frame_of_reference.global_position) - active_frame_of_reference.radius
 		return -1
-		
+
+## for saving the player position
+var current_station : SpaceStation 
+
 func _ready() -> void:
 	_starship_ready()
 

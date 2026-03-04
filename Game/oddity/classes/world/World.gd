@@ -404,6 +404,18 @@ func save_player_position_information() -> void:
 	player_position_resource.respawn_at_station = false
 	player_position_resource.star_system = get_current_star_sytem_resource()
 	
+	if player_ship.current_station != null:
+		var position_delta : Vector3 = player_ship.current_station.global_position - player_ship.global_position
+		var rotation_delta : Vector3 = player_ship.current_station.global_rotation - player_ship.global_rotation
+		
+		player_position_resource.respawn_at_station = true
+		player_position_resource.position_delta = position_delta
+		player_position_resource.rotation_delta = rotation_delta
+		player_position_resource.station_position = player_ship.current_station.global_position
+		player_position_resource.station_rotation = player_ship.current_station.global_rotation
+	else:
+		player_position_resource.respawn_at_station = false
+	
 	ResourceSaver.save(player_position_resource, Globals.PLAYER_POSITION_SAVE)
 
 func bed_exit(bed_index : int) -> void:

@@ -60,10 +60,7 @@ func _on_player_enter_station(body : Node3D) -> void:
 			rotate_on = false
 		
 		if i is Starship:
-			var position_delta : Vector3 = global_position - i.global_position
-			var rotation_delta : Vector3 = global_rotation - i.global_rotation
-			
-			world.set_player_position_spawn_at_station(true, position_delta, rotation_delta, global_position, global_rotation)
+			i.current_station = self
 			
 func _on_player_exit_station(body : Node3D) -> void:
 	rotate_on = true
@@ -71,6 +68,9 @@ func _on_player_exit_station(body : Node3D) -> void:
 	for i : Node3D in station_frame_of_reference.bodies_in_reference_frame:
 		if i is Creature or i is Starship:
 			rotate_on = false
+			
+			if i is Starship:
+				i.current_station = null
 			
 			world.set_player_position_spawn_at_station(false)
 			
