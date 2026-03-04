@@ -43,7 +43,10 @@ var sell_markup : float = 1
 @export
 var trade_items : TradeResourceList
 
+var original_global_rotation : Vector3
+
 func _ready() -> void:
+	original_global_rotation = global_rotation
 	_space_station_ready()
 
 func _space_station_ready() -> void:
@@ -58,14 +61,22 @@ func _on_player_enter_station(body : Node3D) -> void:
 	for i : Node3D in station_frame_of_reference.bodies_in_reference_frame:
 		if i is Creature or i is Starship:
 			rotate_on = false
-
+			
+		if i is Starship:
+			i.current_station = self
+			
 func _on_player_exit_station(body : Node3D) -> void:
 	rotate_on = true
+
+	if body is Starship:
+		body.current_station = null
 
 	for i : Node3D in station_frame_of_reference.bodies_in_reference_frame:
 		if i is Creature or i is Starship:
 			rotate_on = false
+			
 
+			
 func player_near_station() -> void:
 	if !donau_walzer_player:
 		return

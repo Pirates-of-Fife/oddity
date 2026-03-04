@@ -6,6 +6,15 @@ class_name PlayerPositionSave
 var respawn_at_station : bool = true
 
 @export
+var station_relative_transform : Transform3D 
+
+@export
+var station_transform : Transform3D
+
+@export
+var station_rotation : Vector3
+
+@export
 var star_system : StarSystemResource
 
 @export

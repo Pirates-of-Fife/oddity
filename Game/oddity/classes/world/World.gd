@@ -107,6 +107,9 @@ func _ready() -> void:
 	load_last_star_system()
 
 	spawn_player()
+	
+	if player_ship != null:
+		player_ship.freeze = false
 
 ## loads the last star system the player was in before quitting the game
 func load_last_star_system() -> void:
@@ -126,11 +129,19 @@ func player_position_save_exists() -> bool:
 	else:
 		return true
 
-func set_player_position_spawn_at_station(spawn_at_station : bool) -> void:
+func set_player_position_spawn_at_station(spawn_at_station : bool, position_delta : Vector3 = Vector3.ZERO, rotation_delta : Vector3 = Vector3.ZERO, station_position : Vector3 = Vector3.ZERO, station_rotation : Vector3 = Vector3.ZERO) -> void:
 	if !player_position_save_exists():
 		return
 	
 	var player_position_resource : PlayerPositionSave = load(Globals.PLAYER_POSITION_SAVE)
+	
+	player_position_resource.respawn_at_station = spawn_at_station
+	player_position_resource.position_delta = position_delta
+	player_position_resource.rotation_delta = rotation_delta
+	player_position_resource.station_position = station_position
+	player_position_resource.station_rotation = station_rotation
+	
+	update_player_position_save(player_position_resource)
 	
 func get_player_position_save() -> PlayerPositionSave:
 	if !player_position_save_exists():
@@ -332,13 +343,15 @@ func spawn_player_ship() -> void:
 
 	ship.current_state = Starship.State.POWER_OFF
 	ship.landing_gear_on = true
+	ship.freeze_mode = ship.FreezeMode.FREEZE_MODE_STATIC
+	ship.freeze = true
 	
 	if player_position_save_exists():
 		spawn_player_ship_at_player_position(ship)
 	else:
-		spawn_player_ship_at_station(ship)
+		spawn_player_ship_at_station_no_save_file(ship)
 
-func spawn_player_ship_at_station(ship : Starship) -> void:
+func spawn_player_ship_at_station_no_save_file(ship : Starship) -> void:
 	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
 	star_system.add_child(ship)
 
@@ -349,19 +362,22 @@ func spawn_player_ship_at_station(ship : Starship) -> void:
 	player_control_entity.global_rotation = spawn_station.player_spawn_marker.global_rotation
 
 	player_ship = ship
-		
+
 func spawn_player_ship_at_player_position(ship : Starship) -> void:
 	if !player_position_save_exists():
-		spawn_player_ship_at_station(ship)
+		spawn_player_ship_at_station_no_save_file(ship)
 		return
 	
 	var player_position_save : PlayerPositionSave = load(Globals.PLAYER_POSITION_SAVE)
 	
 	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
 	star_system.add_child(ship)
-
-	ship.global_position = player_position_save.position
-	ship.global_rotation = player_position_save.rotation
+	
+	if player_position_save.respawn_at_station:
+		ship.global_transform = player_position_save.station_transform * player_position_save.station_relative_transform
+	else:
+		ship.global_position = player_position_save.position
+		ship.global_rotation = player_position_save.rotation
 		
 	player_control_entity.global_position = ship.get_bed(player_position_save.last_used_bed_index).player_spawn_position
 	player_control_entity.global_rotation = ship.get_bed(player_position_save.last_used_bed_index).player_spawn_position_marker.global_rotation
@@ -386,6 +402,15 @@ func save_player_position_information() -> void:
 	player_position_resource.rotation = player_ship.global_rotation
 	player_position_resource.respawn_at_station = false
 	player_position_resource.star_system = get_current_star_sytem_resource()
+	
+	if player_ship.current_station != null:
+		var relative_transform : Transform3D = player_ship.current_station.global_transform.affine_inverse() * player_ship.global_transform
+		
+		player_position_resource.station_relative_transform = relative_transform
+		player_position_resource.station_transform = player_ship.current_station.global_transform
+		player_position_resource.respawn_at_station = true
+	else:
+		player_position_resource.respawn_at_station = false
 	
 	ResourceSaver.save(player_position_resource, Globals.PLAYER_POSITION_SAVE)
 
