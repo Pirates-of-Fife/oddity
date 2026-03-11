@@ -141,8 +141,13 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 
 			if module_scene != null:
 				var module : Module = module_scene.instantiate()
+				
+				module.quiet_insert = true
+				
 				starship.add_child(module)
 				module.insert(node)
+				
+				module.quiet_insert = false
 				
 				if module is Weapon:
 					(node as Hardpoint).assignment = (loadout.get_entry_by_id(node.id) as HardpointLoadoutResource).hardpoint_assignment
