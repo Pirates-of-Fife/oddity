@@ -1,4 +1,4 @@
-[gd_scene load_steps=1692 format=3 uid="uid://bhgjbgxytykt6"]
+[gd_scene load_steps=1695 format=3 uid="uid://bhgjbgxytykt6"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_irt5n"]
 [ext_resource type="Texture2D" uid="uid://bmgfn4wgyi1w4" path="res://scenes/world/textures/4k_ceres_fictional.jpg" id="2_cykle"]
@@ -13,8 +13,11 @@
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/minable/MinableTransform.gd" id="14_3vwix"]
 [ext_resource type="ArrayMesh" uid="uid://cbkeh2ttub5mu" path="res://scenes/minables/void-diamonds/mineables/VoidDiamondLowLod.tres" id="15_gjxft"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="16_63mul"]
+[ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageScatterSpawner.gd" id="17_mk0ob"]
 [ext_resource type="ArrayMesh" uid="uid://blcwrw143tx8d" path="res://scenes/minables/obelisk/mineables/ObeliskLOD.tres" id="17_wnh1o"]
+[ext_resource type="Script" path="res://classes/object-scatter/foliage/FoliageResource.gd" id="18_4uogd"]
 [ext_resource type="PackedScene" uid="uid://jvkm5urg8eq0" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/scatter-objects/Kyloadai1Foliage.tscn" id="18_5gcg4"]
+[ext_resource type="Resource" uid="uid://t1ha50funlye" path="res://scenes/environment/foliage/resources/RockResource.tres" id="19_o61oq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blna1"]
 diffuse_mode = 3
@@ -10326,3 +10329,17 @@ scene = ExtResource("18_5gcg4")
 activate_distance = 25000.0
 deactivate_distance = 25500.0
 update_time = 1.0
+
+[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("root", "planet_mesh_instance")]
+script = ExtResource("17_mk0ob")
+foliage_meshes = Array[ExtResource("18_4uogd")]([ExtResource("19_o61oq")])
+splits = 30
+spawn_count = 12400
+spawn_radius = 3500.0
+count_per_multi_mesh = 413
+scale_multiplier = 3.0
+scale_variance = 0.14
+invert_scale = true
+root = NodePath("")
+planet_mesh_instance = NodePath("../MeshInstance3D")
+radius_modifier = -3.0
