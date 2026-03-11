@@ -35,3 +35,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.257017, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.22465e-16, 0, 2, 0, 2, 0, -2, 0, 1.22465e-16, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_nvj01")
+
+[editable path="CoolerBody/CoolerFan"]
+[editable path="CoolerBody/CoolerFan/Fan"]

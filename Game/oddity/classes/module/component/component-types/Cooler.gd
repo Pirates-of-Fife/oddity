@@ -37,16 +37,34 @@ func _cooler_ready() -> void:
 	cooling_interval_timer.timeout.connect(_cooling_timer_timeout)
 	cooling_interval_timer.wait_time = cooler_resource.cooling_interval
 	add_child(cooling_interval_timer)
-
-
+	
+	for i : Node in $CoolerBody.get_children(true):
+		for n : Node in i.get_children(true):
+			if n is AnimationPlayer:
+				n.speed_scale = 0
+	
+	
 func _on_insert(slot : ModuleSlot) -> void:
 	if slot.vehicle == null:
 		return
 
 	cooling_interval_timer.start()
 
+	for i : Node in $CoolerBody.get_children(true):
+		for n : Node in i.get_children(true):
+			if n is AnimationPlayer:
+				n.speed_scale = 1
+	
+
 func _on_uninsert(slot : ModuleSlot) -> void:
 	cooling_interval_timer.stop()
+	
+	for i : Node in $CoolerBody.get_children(true):
+		print(i)
+		for n : Node in i.get_children(true):
+			if n is AnimationPlayer:
+				n.speed_scale = 0
+				print("o")
 
 func _cooling_timer_timeout() -> void:
 	if !can_cool:
