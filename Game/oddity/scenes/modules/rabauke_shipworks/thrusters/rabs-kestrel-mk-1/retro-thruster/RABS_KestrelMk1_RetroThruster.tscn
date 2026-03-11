@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://v6gv82xubo7h"]
+[gd_scene load_steps=16 format=3 uid="uid://v6gv82xubo7h"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/thruster/RetroThruster.gd" id="1_4xny5"]
 [ext_resource type="PackedScene" uid="uid://qlpo6mpoc0gd" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RetroThruster.glb" id="2_vipiq"]
 [ext_resource type="AudioStream" uid="uid://bk0pe8kc0frrc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/retro_thruster-001.wav" id="3_6uag6"]
+[ext_resource type="Texture2D" uid="uid://b61ge42edi1vy" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic black.png" id="4_mlycf"]
 
 [sub_resource type="Curve" id="Curve_de3bc"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.766537, 1), 0.0, 0.0, 0, 0]
@@ -72,6 +73,9 @@ value = 15000
 
 [node name="RetroThruster" parent="." instance=ExtResource("2_vipiq")]
 
+[node name="Retro Thruster_002" parent="RetroThruster" index="0"]
+layers = 3
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_pe7na")
 
@@ -88,3 +92,21 @@ draw_pass_1 = SubResource("SphereMesh_1vfnt")
 stream = ExtResource("3_6uag6")
 max_distance = 500.0
 bus = &"Thruster"
+
+[node name="Decal4" type="Decal" parent="."]
+transform = Transform3D(2.60237e-17, -0.425, -2.60237e-17, 0, 2.60237e-17, -0.425, 0.425, 2.60237e-17, 1.59349e-33, 0.257159, 1.091, -1.39707)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("4_mlycf")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[node name="Decal5" type="Decal" parent="."]
+transform = Transform3D(2.60237e-17, -0.425, -2.60237e-17, 5.20475e-17, -2.60237e-17, 0.425, -0.425, -2.60237e-17, 5.20475e-17, 0.257159, -1.15201, -1.39707)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("4_mlycf")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[editable path="RetroThruster"]
