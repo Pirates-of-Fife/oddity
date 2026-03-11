@@ -63,7 +63,7 @@ func _uninsert_fx(slot : ModuleSlot) -> void:
 	
 	fx.insert_fx = false
 	
-	add_child(fx)
+	slot.add_child(fx)
 	
 func insert(slot : DynamicModuleSlot) -> void:
 	can_freeze = false
