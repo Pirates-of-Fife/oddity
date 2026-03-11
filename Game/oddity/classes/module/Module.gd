@@ -88,9 +88,7 @@ func uninsert() -> void:
 func add_heat(heat : float) -> void:
 	if (module_slot == null):
 		return
-
-
-
+		
 	module_slot.add_heat(heat)
 
 func _on_interact() -> void:
