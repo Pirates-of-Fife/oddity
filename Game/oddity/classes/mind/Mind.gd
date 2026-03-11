@@ -50,7 +50,25 @@ func possess(control_entity : ControlEntity) -> void:
 
 	reparent.call_deferred(control_entity.anchor.camera_anchor)
 
-	self.position = self.control_entity.anchor.camera_anchor.global_position
-	self.rotation = self.control_entity.anchor.camera_anchor.global_rotation
-
 	posses.emit(self.control_entity)
+	
+	var target_anchor : Node3D = self.control_entity.anchor.camera_anchor
+
+	var tween : Tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(
+		self,
+		"global_position",
+		target_anchor.global_position,
+		0.4
+	)
+
+	tween.tween_property(
+		self,
+		"global_rotation",
+		target_anchor.global_rotation,
+		0.4
+	)

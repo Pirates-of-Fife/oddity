@@ -45,6 +45,7 @@ func enter_seat(player : Mind, control_entity : ControlEntity) -> void:
 	entity_using_seat.reparent.call_deferred(self)
 	entity_using_seat.freeze_static()
 	entity_using_seat.hide()
+	entity_using_seat.global_position = spawn_location.global_position
 	
 	if target_control_entity is Vehicle:
 		target_control_entity.active_control_seat = self
