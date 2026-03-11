@@ -25,9 +25,12 @@ var min_distance : float = 10
 @export
 var max_distance : float = 100
 
+var original_anchor_position : Vector3 = Vector3(0, 1.021, 0)
+
 func _ready() -> void:
 	add_to_group("ControlSeat")
-
+	original_anchor_position = control_seat_anchor.position
+	
 func interact(player : Mind, control_entity : ControlEntity) -> void:
 	enter_seat(player, control_entity)
 	interacted.emit(player, control_entity)
@@ -51,24 +54,63 @@ func enter_seat(player : Mind, control_entity : ControlEntity) -> void:
 		target_control_entity.active_control_seat = self
 	
 func exit_seat() -> void:
-	reset_view()
-	
 	entity_using_seat.unfreeze()
 	entity_using_seat.reparent.call_deferred(entity_parent)
 	player_using_seat.possess(entity_using_seat)
+	
+	target_control_entity.third_person = false
 	
 	entity_using_seat.global_position = spawn_location.global_position
 	entity_using_seat.show()
 
 	if target_control_entity is Vehicle:
 		target_control_entity.active_control_seat = null
+		
+	await get_tree().create_timer(0.45).timeout
 	
+	control_seat_anchor.position = original_anchor_position
+	control_seat_anchor.camera_anchor.position = Vector3.ZERO
+	control_seat_anchor.reset()
 
 func enter_third_person_view() -> void:
-	control_seat_anchor.camera_anchor.position.z = 50
+	var tween : Tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(
+		control_seat_anchor.camera_anchor,
+		"position",
+		Vector3(control_seat_anchor.camera_anchor.position.x, control_seat_anchor.camera_anchor.position.y, 50),
+		0.4
+	)
+	
+	tween.tween_property(
+		control_seat_anchor,
+		"global_position",
+		target_control_entity.global_position,
+		0.4
+	)
 	
 func reset_view() -> void:
-	control_seat_anchor.camera_anchor.position = Vector3.ZERO
+	var tween : Tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(
+		control_seat_anchor.camera_anchor,
+		"position",
+		 Vector3.ZERO,
+		0.4
+	)
+	
+	tween.tween_property(
+		control_seat_anchor,
+		"position",
+		original_anchor_position,
+		0.4
+	)
 
 func increase_distance(distance : float) -> void:
 	control_seat_anchor.camera_anchor.position.z += distance

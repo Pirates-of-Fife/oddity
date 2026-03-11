@@ -2318,6 +2318,13 @@ target_control_entity = NodePath("../../..")
 [node name="Crosshair3d" parent="Interior/Bridge/RabsControlSeat" instance=ExtResource("28_d5q2q")]
 transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 2.22045e-16, 0.955146, -1.17446)
 
+[node name="Decal2" type="Decal" parent="Interior/Bridge/RabsControlSeat"]
+transform = Transform3D(-1, -8.06289e-18, -1.22199e-16, 1.22465e-16, -0.0658385, -0.99783, 0, -0.99783, 0.0658385, 0, 0.439176, 0.0902275)
+size = Vector3(0.1, 0.02, 0.1)
+texture_albedo = ExtResource("34_wxlvq")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+
 [node name="RabsControlSeat2" parent="Interior/Bridge" node_paths=PackedStringArray("target_control_entity") instance=ExtResource("26_c1av6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.813212, 0.841768, -27.2382)
 target_control_entity = NodePath("../../..")
