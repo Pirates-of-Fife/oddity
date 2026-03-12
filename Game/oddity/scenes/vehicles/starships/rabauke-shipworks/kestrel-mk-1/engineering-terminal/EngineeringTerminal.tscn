@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://drx47dwgn5q4j"]
+[gd_scene load_steps=6 format=3 uid="uid://drx47dwgn5q4j"]
 
+[ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminal.gd" id="1_k3oly"]
 [ext_resource type="PackedScene" uid="uid://3p4j6abqalln" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminal.glb" id="1_v4vim"]
 [ext_resource type="Texture2D" uid="uid://baq6nihwjnn2v" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.svg" id="2_dx1h5"]
+[ext_resource type="PackedScene" uid="uid://b4bex6bieelre" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminalScreen.tscn" id="4_5tno4"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uoq6v"]
+viewport_path = NodePath("SubViewport")
 
 [node name="EngineeringTerminal" type="Node3D"]
+script = ExtResource("1_k3oly")
 
 [node name="EngineeringTerminal2" parent="." instance=ExtResource("1_v4vim")]
 
@@ -23,5 +29,12 @@ size = Vector3(0.07, 0.02, 0.07)
 texture_albedo = ExtResource("2_dx1h5")
 upper_fade = 0.0039417
 lower_fade = 1e-05
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="EngineeringTerminalScreen" parent="SubViewport" instance=ExtResource("4_5tno4")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_uoq6v")
 
 [editable path="EngineeringTerminal2"]
