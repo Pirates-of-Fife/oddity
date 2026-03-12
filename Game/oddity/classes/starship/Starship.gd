@@ -771,7 +771,7 @@ func _starship_ready() -> void:
 	alcubierre_drive_slot.module_inserted.connect(on_alcubierre_drive_inserted)
 
 	if alcubierre_drive_slot.module != null:
-		on_alcubierre_drive_inserted(alcubierre_drive_slot.module)
+		on_alcubierre_drive_inserted(alcubierre_drive_slot.module, alcubierre_drive_slot.id)
 
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
@@ -1303,11 +1303,11 @@ func stop_shooting_tertiary() -> void:
 			if hardpoint.module != null:
 				hardpoint.module.stop_shooting()
 
-func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
-	alcubierre_drive_removed.emit(alcubierre_drive)
+func on_alcubierre_drive_removed(alcubierre_drive : Module, id : int) -> void:
+	alcubierre_drive_removed.emit(alcubierre_drive, id)
 
-func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
-	alcubierre_drive_inserted.emit(alcubierre_drive)
+func on_alcubierre_drive_inserted(alcubierre_drive : Module, id : int) -> void:
+	alcubierre_drive_inserted.emit(alcubierre_drive, id)
 
 func alcubierre_drive_charge_start() -> void:
 	if alcubierre_drive_slot.module == null:

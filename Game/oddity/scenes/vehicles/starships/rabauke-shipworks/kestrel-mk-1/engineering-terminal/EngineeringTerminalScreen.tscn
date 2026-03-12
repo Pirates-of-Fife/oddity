@@ -1,16 +1,112 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4bex6bieelre"]
+[gd_scene load_steps=4 format=3 uid="uid://b4bex6bieelre"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminalScreen.gd" id="1_nhgbd"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_pkm0m"]
+[ext_resource type="PackedScene" uid="uid://4kkebi6ea2lm" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/ModuleLabel.tscn" id="3_vif84"]
 
 [node name="EngineeringTerminalScreen" type="Node2D"]
 script = ExtResource("1_nhgbd")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 974.619
-color = Color(0, 0, 0, 1)
+visible = false
+offset_right = 2096.0
+offset_bottom = 975.0
+color = Color(0.462745, 0, 0, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_right = 599.0
 offset_bottom = 76.0
+scale = Vector2(1.8, 1.8)
+theme_override_fonts/normal_font = ExtResource("2_pkm0m")
+theme_override_font_sizes/normal_font_size = 20
 text = "~$: starship status -l "
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="ModuleLabel" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 96.0
+offset_bottom = 160.0
+
+[node name="ModuleLabel2" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 168.0
+offset_bottom = 232.0
+
+[node name="ModuleLabel3" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 244.0
+offset_bottom = 308.0
+
+[node name="ModuleLabel4" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 313.0
+offset_bottom = 377.0
+
+[node name="ModuleLabel5" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 386.0
+offset_bottom = 450.0
+
+[node name="ModuleLabel6" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 458.0
+offset_bottom = 522.0
+
+[node name="ModuleLabel7" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 534.0
+offset_bottom = 598.0
+
+[node name="ModuleLabel8" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 603.0
+offset_bottom = 667.0
+
+[node name="ModuleLabel9" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_left = 1078.0
+offset_top = 96.0
+offset_right = 1599.0
+offset_bottom = 160.0
+
+[node name="ModuleLabel10" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_left = 1078.0
+offset_top = 168.0
+offset_right = 1599.0
+offset_bottom = 232.0
+
+[node name="ModuleLabel11" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_left = 1078.0
+offset_top = 244.0
+offset_right = 1599.0
+offset_bottom = 308.0
+
+[node name="ModuleLabel12" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_left = 1078.0
+offset_top = 313.0
+offset_right = 1599.0
+offset_bottom = 377.0
+
+[node name="ModuleLabel13" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_left = 1078.0
+offset_top = 386.0
+offset_right = 1599.0
+offset_bottom = 450.0
+
+[node name="ModuleLabel14" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_left = 1078.0
+offset_top = 458.0
+offset_right = 1599.0
+offset_bottom = 522.0
+
+[node name="ModuleLabel15" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_left = 1078.0
+offset_top = 534.0
+offset_right = 1599.0
+offset_bottom = 598.0
+
+[node name="ModuleLabel16" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_left = 1078.0
+offset_top = 603.0
+offset_right = 1599.0
+offset_bottom = 667.0
+
+[node name="ModuleLabel17" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 718.0
+offset_bottom = 782.0
+
+[node name="ModuleLabel18" parent="Node2D" instance=ExtResource("3_vif84")]
+offset_top = 777.0
+offset_bottom = 841.0
