@@ -7,6 +7,9 @@ var starship : Starship
 
 var player_control_entity : ControlEntity
 
+@export
+var screen : EngineeringTerminalScreen
+
 func _ready() -> void:
 	super._ready()
 	

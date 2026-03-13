@@ -16,11 +16,12 @@ size = Vector3(0.241, 0.241, 0.241)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ckd5k"]
 size = Vector3(1.14437, 1.0506, 0.337598)
 
-[node name="EngineeringTerminal" type="RigidBody3D" node_paths=PackedStringArray("anchor")]
+[node name="EngineeringTerminal" type="RigidBody3D" node_paths=PackedStringArray("screen", "anchor")]
 disable_mode = 1
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_k3oly")
+screen = NodePath("SubViewport/EngineeringTerminalScreen")
 controller_reference = "res://classes/command/engineering-terminal-commands/EngineeringTerminalController.tscn"
 anchor = NodePath("Anchor")
 
@@ -45,9 +46,11 @@ lower_fade = 1e-05
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
+handle_input_locally = false
 size = Vector2i(2065, 975)
 
-[node name="EngineeringTerminalScreen" parent="SubViewport" instance=ExtResource("4_5tno4")]
+[node name="EngineeringTerminalScreen" parent="SubViewport" node_paths=PackedStringArray("engineering_terminal") instance=ExtResource("4_5tno4")]
+engineering_terminal = NodePath("../..")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-0.05, 2.62664e-19, 5.55616e-18, 2.57354e-18, 0.0453695, 0.0210146, -4.9312e-18, 0.0210146, -0.0453695, 0.00258564, 0.711625, 0.194686)

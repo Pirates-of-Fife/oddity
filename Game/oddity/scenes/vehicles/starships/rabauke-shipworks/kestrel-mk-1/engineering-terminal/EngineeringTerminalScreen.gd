@@ -7,6 +7,9 @@ var engineering_terminal : EngineeringTerminal
 
 var starship : Starship
 
+func type(key : String) -> void:
+	$RichTextLabel.add_text(key)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if engineering_terminal == null:
@@ -28,6 +31,11 @@ func connect_component_slots() -> void:
 			node.module_removed.connect(_on_module_removed)
 		
 
+func focus() -> void:
+	var textedit : TextEdit = $TextEdit
+	
+	#textedit.focus_mode = Control.FOCUS_ALL
+	textedit.grab_focus()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
