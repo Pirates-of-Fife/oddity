@@ -61,6 +61,12 @@ func draw_connecting_line(from : StarSystemResource, to : StarSystemResource) ->
 	var line : Line2D = Line2D.new()
 	
 	line.default_color = line_color
+	
+	if from == null:
+		from = load("res://scenes/world/gateway/GatewayResource.tres")
+	elif from.name.to_lower() == "empty" or from.name.is_empty():
+		from = load("res://scenes/world/gateway/GatewayResource.tres")
+		
 	line.add_point(get_icon(from).position)
 	line.add_point(get_icon(to).position)
 	
