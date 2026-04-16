@@ -18,8 +18,9 @@ var current_stored_heat : float = 0 :
 		else:
 			can_cool = true
 
-		if module_slot.vehicle != null:
-			module_slot.vehicle.cooler_update.emit()
+		if module_slot != null:
+			if module_slot.vehicle != null:
+				module_slot.vehicle.cooler_update.emit()
 	get():
 		return current_stored_heat
 

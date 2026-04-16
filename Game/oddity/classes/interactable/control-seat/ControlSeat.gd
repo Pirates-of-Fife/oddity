@@ -87,8 +87,8 @@ func enter_third_person_view() -> void:
 	
 	tween.tween_property(
 		control_seat_anchor,
-		"global_position",
-		target_control_entity.global_position,
+		"position",
+		control_seat_anchor.to_local(target_control_entity.global_position),
 		0.4
 	)
 	

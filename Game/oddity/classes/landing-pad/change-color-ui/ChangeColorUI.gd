@@ -44,6 +44,8 @@ func _ready() -> void:
 	landing_pad.starship_took_off.connect(on_ship_took_off)
 
 func on_ship_landed(starship : Starship) -> void:
+	init_completed = false
+	
 	ship = starship
 	
 	preview_mesh.get_active_material(0).albedo_color = ship.original_hull_color
