@@ -552,6 +552,9 @@ var beds : Array[Bed]
 @export_category("Other")
 
 @export
+var ship_horn : ShipHorn
+
+@export
 var headlight_left : SpotLight3D
 
 @export
@@ -1695,6 +1698,17 @@ func use_interact() -> void:
 
 		if collider is Interactable:
 			collider.interact(player, self)
+
+var is_horn_playing : bool = false
+
+func start_horn() -> void:
+	ship_horn.start_horn()
+	is_horn_playing = true
+
+func end_horn() -> void:
+	print("END HORNY")
+	ship_horn.end_horn()
+	is_horn_playing = false
 
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO

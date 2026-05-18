@@ -44,6 +44,9 @@ var starship_toggle_headlights_command : StarshipToggleHeadlightsCommand = Stars
 
 var starship_alcubierre_drive_use_special_command : StarshipAlcubierreDriveUseSpecialCommand = StarshipAlcubierreDriveUseSpecialCommand.new()
 
+var starship_start_horn_command : StarshipStartHornCommand = StarshipStartHornCommand.new()
+var starship_end_horn_command : StarshipEndHornCommand = StarshipEndHornCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -139,7 +142,10 @@ func _starship_controller_process(delta : float) -> void:
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			if control_entity.relative_linear_velocity.length() < 20 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				vehicle_exit_seat_command.execute(control_entity)
-
+				
+				if (control_entity.is_horn_playing):
+					starship_end_horn_command.execute(control_entity)
+				
 				if control_entity is RABS_KestrelMk1:
 					control_entity.show_interior()
 
@@ -178,7 +184,13 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_just_pressed("ship_toggle_headlights")):
 			starship_toggle_headlights_command.execute(control_entity)
-
+		
+		if (Input.is_action_just_pressed("ship_horn")):
+			starship_start_horn_command.execute(control_entity)
+			
+		if (Input.is_action_just_released("ship_horn")):
+			starship_end_horn_command.execute(control_entity)
+		
 		current_throttle_forwards_axis = starship_last_throttle_value #control_entity.target_thrust_vector.z
 
 		if (Input.is_action_pressed("starship_throttle_forward")):
