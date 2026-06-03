@@ -833,7 +833,7 @@ func _starship_ready() -> void:
 				shield_generators.append(module_slot.module)
 
 			if module_slot.module is HullReinforcement:
-				_on_module_insert(module_slot.module)
+				_on_module_insert(module_slot.module, module_slot.id)
 
 			if module_slot.module is Cooler:
 				coolers.append(module_slot.module)
@@ -1107,7 +1107,7 @@ func shield_charge_cooldown_finished() -> void:
 	if shield.collision_mask == shield.layer_mask_offline and shield_current_health > 0:
 		shield.collision_mask = shield.layer_mask_online
 
-func _on_module_insert(module : Module) -> void:
+func _on_module_insert(module : Module, slot_id : int) -> void:
 	passive_heat_generation += module.passive_heat_generation
 	current_heat += module.passive_heat_generation
 
@@ -1127,7 +1127,7 @@ func _on_module_insert(module : Module) -> void:
 		on_cooler_config_changed.emit()
 
 
-func _on_module_uninserted(module : Module) -> void:
+func _on_module_uninserted(module : Module, slot_id : int) -> void:
 	passive_heat_generation -= module.passive_heat_generation
 	current_heat -= module.passive_heat_generation
 
