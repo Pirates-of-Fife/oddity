@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://ddvpx7ldofuyc"]
+[gd_scene load_steps=16 format=3 uid="uid://ddvpx7ldofuyc"]
 
 [ext_resource type="Script" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.gd" id="1_rxy08"]
 [ext_resource type="PackedScene" uid="uid://be1lhilrvjun7" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/KestrelMk1MainThruster.glb" id="2_38npm"]
 [ext_resource type="AudioStream" uid="uid://3flkfd04wo4m" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/main_thruster-001.wav" id="3_2tohx"]
+[ext_resource type="Texture2D" uid="uid://b61ge42edi1vy" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic black.png" id="4_e0wgd"]
 
 [sub_resource type="Curve" id="Curve_3ecll"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.077821, 0.273096), 0.0, 0.0, 0, 0, Vector2(0.505837, 0.761103), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -71,6 +72,21 @@ value = 70000
 [node name="KestrelMk1MainThruster" parent="." instance=ExtResource("2_38npm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140154, -1.77636e-15, 0.0986767)
 
+[node name="Main Thruster" parent="KestrelMk1MainThruster" index="0"]
+layers = 3
+
+[node name="Flap" parent="KestrelMk1MainThruster/Main Thruster" index="0"]
+layers = 3
+
+[node name="Flap_001" parent="KestrelMk1MainThruster/Main Thruster" index="1"]
+layers = 3
+
+[node name="Flap_002" parent="KestrelMk1MainThruster/Main Thruster" index="2"]
+layers = 3
+
+[node name="Flap_003" parent="KestrelMk1MainThruster/Main Thruster" index="3"]
+layers = 3
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123499, -0.0113469, 0.113469)
 shape = SubResource("BoxShape3D_oj6mv")
@@ -89,3 +105,37 @@ draw_pass_1 = SubResource("SphereMesh_tlo6e")
 stream = ExtResource("3_2tohx")
 max_distance = 500.0
 bus = &"Thruster"
+
+[node name="Decal2" type="Decal" parent="."]
+transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, -0.0811232, 1.92691, 5.48308)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("4_e0wgd")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[node name="Decal3" type="Decal" parent="."]
+transform = Transform3D(-0.595, 7.28665e-17, 0, -7.28665e-17, -0.595, 0, 0, 0, 0.595, -0.0811232, -2.13318, 5.48308)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("4_e0wgd")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[node name="Decal4" type="Decal" parent="."]
+transform = Transform3D(3.64332e-17, -0.595, 0, 0.595, 3.64332e-17, 0, 0, 0, 0.595, -2.34769, 0.00202571, 5.55483)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("4_e0wgd")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[node name="Decal5" type="Decal" parent="."]
+transform = Transform3D(-3.64332e-17, 0.595, -7.28665e-17, 0.595, 3.64332e-17, 0, 4.46179e-33, -7.28665e-17, -0.595, 2.11552, 0.00202571, 5.50733)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("4_e0wgd")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[editable path="KestrelMk1MainThruster"]

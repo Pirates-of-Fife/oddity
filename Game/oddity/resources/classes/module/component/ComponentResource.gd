@@ -18,3 +18,6 @@ var size : StringName
 
 @export
 var release_year : StringName
+
+func display_module_stats() -> String:
+	return super.display_module_stats()

@@ -24,6 +24,8 @@ var starship_shoot_tertiary_command : StarshipShootTertiaryCommand = StarshipSho
 
 var starship_alcubierre_drive_use_special_command : StarshipAlcubierreDriveUseSpecialCommand = StarshipAlcubierreDriveUseSpecialCommand.new()
 
+var starship_start_horn_command : StarshipStartHornCommand = StarshipStartHornCommand.new()
+var starship_end_horn_command : StarshipEndHornCommand = StarshipEndHornCommand.new()
 
 @export_category("AI Settings")
 
@@ -122,6 +124,12 @@ func _ai_starship_controller_ready() -> void:
 		(control_entity as Starship).shield_online.connect(change_state_back_to_none)
 
 	evade_change_time = randf_range(0, 60)
+	
+	starship_start_horn_command.execute(control_entity)
+	
+	await get_tree().create_timer(randf_range(0.5, 5)).timeout
+	
+	starship_end_horn_command.execute(control_entity)
 
 
 func start_roll() -> void:

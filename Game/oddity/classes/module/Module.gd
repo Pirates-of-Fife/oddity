@@ -23,6 +23,7 @@ var passive_heat_generation : float = 0
 var is_being_held_after_uninsert : bool  = false
 
 var module_fx_scene : String = "res://classes/module/module-fx/ModuleFx.tscn"
+var quiet_insert : bool = false
 
 func _ready() -> void:
 	_module_ready()
@@ -47,16 +48,22 @@ func _on_uninsert(slot : ModuleSlot) -> void:
 	pass
 
 func _insert_fx(slot : ModuleSlot) -> void:
+	if quiet_insert:
+		return
+	
 	var fx : ModuleFX = load(module_fx_scene).instantiate()
 	
 	add_child(fx)
 	
 func _uninsert_fx(slot : ModuleSlot) -> void:
+	if quiet_insert:
+		return
+	
 	var fx : ModuleFX = load(module_fx_scene).instantiate()
 	
 	fx.insert_fx = false
 	
-	add_child(fx)
+	slot.add_child(fx)
 	
 func insert(slot : DynamicModuleSlot) -> void:
 	can_freeze = false
@@ -72,13 +79,13 @@ func insert(slot : DynamicModuleSlot) -> void:
 	if get_parent_node_3d() != module_slot:
 		reparent.call_deferred(module_slot)
 
-	module_slot.module_inserted.emit(self)
+	module_slot.module_inserted.emit(self, module_slot.id)
 	inserted.emit(module_slot)
 
 
 func uninsert() -> void:
 	uninserted.emit(module_slot)
-	module_slot.module_removed.emit(self)
+	module_slot.module_removed.emit(self, module_slot.id)
 	module_slot.module = null
 	module_slot = null
 	reparent.call_deferred(get_tree().get_first_node_in_group("StarSystem"))
@@ -88,9 +95,7 @@ func uninsert() -> void:
 func add_heat(heat : float) -> void:
 	if (module_slot == null):
 		return
-
-
-
+		
 	module_slot.add_heat(heat)
 
 func _on_interact() -> void:

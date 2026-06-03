@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4bex6bieelre"]
+
+[ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminalScreen.gd" id="1_nhgbd"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_pkm0m"]
+
+[node name="EngineeringTerminalScreen" type="Node2D"]
+script = ExtResource("1_nhgbd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 2096.0
+offset_bottom = 975.0
+color = Color(0.462745, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 1068.0
+offset_bottom = 596.0
+scale = Vector2(1.8, 1.8)
+theme_override_fonts/normal_font = ExtResource("2_pkm0m")
+theme_override_font_sizes/normal_font_size = 20
+text = "~$: starship status -l "
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 398.0
+offset_top = 348.0
+offset_right = 1284.0
+offset_bottom = 538.0
+theme_override_colors/background_color = Color(0.345098, 0.431373, 0, 1)
+theme_override_font_sizes/font_size = 60
+placeholder_text = "sdsd"

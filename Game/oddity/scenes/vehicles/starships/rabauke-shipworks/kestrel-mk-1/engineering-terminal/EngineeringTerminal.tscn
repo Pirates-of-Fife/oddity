@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://drx47dwgn5q4j"]
+
+[ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminal.gd" id="1_k3oly"]
+[ext_resource type="PackedScene" uid="uid://3p4j6abqalln" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminal.glb" id="1_v4vim"]
+[ext_resource type="Texture2D" uid="uid://baq6nihwjnn2v" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.svg" id="2_dx1h5"]
+[ext_resource type="PackedScene" uid="uid://b4bex6bieelre" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminalScreen.tscn" id="4_5tno4"]
+[ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/mind/player/anchor/Anchor.tscn" id="5_woxks"]
+[ext_resource type="Script" path="res://classes/interactable/Interactable.gd" id="6_80j38"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uoq6v"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_njc1m"]
+size = Vector3(0.241, 0.241, 0.241)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ckd5k"]
+size = Vector3(1.14437, 1.0506, 0.337598)
+
+[node name="EngineeringTerminal" type="RigidBody3D" node_paths=PackedStringArray("screen", "anchor")]
+disable_mode = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_k3oly")
+screen = NodePath("SubViewport/EngineeringTerminalScreen")
+controller_reference = "res://classes/command/engineering-terminal-commands/EngineeringTerminalController.tscn"
+anchor = NodePath("Anchor")
+
+[node name="EngineeringTerminal2" parent="." instance=ExtResource("1_v4vim")]
+
+[node name="EngineeringTerminal" parent="EngineeringTerminal2" index="0"]
+lod_bias = 10.0
+
+[node name="Decal2" type="Decal" parent="."]
+transform = Transform3D(-1, -8.06289e-18, -1.22199e-16, 1.22465e-16, -0.0658385, -0.99783, 0, -0.99783, 0.0658385, 0, 0.442369, 0.0902275)
+size = Vector3(0.1, 0.02, 0.1)
+texture_albedo = ExtResource("2_dx1h5")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+
+[node name="Decal3" type="Decal" parent="."]
+transform = Transform3D(-1, -8.06289e-18, -1.22199e-16, 3.061e-32, 0.99783, -0.0658385, 1.22465e-16, -0.0658385, -0.99783, 0.120928, 0.406173, -0.0570994)
+size = Vector3(0.07, 0.02, 0.07)
+texture_albedo = ExtResource("2_dx1h5")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(2065, 975)
+
+[node name="EngineeringTerminalScreen" parent="SubViewport" node_paths=PackedStringArray("engineering_terminal") instance=ExtResource("4_5tno4")]
+engineering_terminal = NodePath("../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-0.05, 2.62664e-19, 5.55616e-18, 2.57354e-18, 0.0453695, 0.0210146, -4.9312e-18, 0.0210146, -0.0453695, 0.00258564, 0.711625, 0.194686)
+texture = SubResource("ViewportTexture_uoq6v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00653964, 0.436616, 0.200086)
+shape = SubResource("BoxShape3D_njc1m")
+
+[node name="Anchor" parent="." instance=ExtResource("5_woxks")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -1.01174e-17, 0.949466, -0.213347)
+enable_twist_limit = true
+enable_pitch_limit = true
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_80j38")
+press_delay = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000993207, 0.443415, 0.151787)
+shape = SubResource("BoxShape3D_ckd5k")
+
+[connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
+
+[editable path="EngineeringTerminal2"]
