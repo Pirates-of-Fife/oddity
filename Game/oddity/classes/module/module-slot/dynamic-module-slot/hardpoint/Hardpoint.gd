@@ -21,7 +21,7 @@ func _module_fits(module : Module) -> bool:
 		return false
 
 	if module is Weapon:
-		if module.size == size:
+		if module.size <= size:
 			return true
 	return false
 
