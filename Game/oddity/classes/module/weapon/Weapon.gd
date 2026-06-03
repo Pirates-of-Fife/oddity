@@ -22,6 +22,17 @@ func _ready() -> void:
 func _weapon_ready() -> void:
 	_module_ready()
 	
+	inserted.connect(_on_weapon_inserted)
+	
+
+func _on_weapon_inserted(slot : ModuleSlot) -> void:
+	if slot is Hardpoint:
+		if slot.size == ModuleSize.HardpointSize.SIZE_6 and size == ModuleSize.HardpointSize.SIZE_5:
+			position.z = -0.336
+			position.y = -0.268
+			print("this should work??")
+	
+	
 func shoot() -> void:
 	pass
 
