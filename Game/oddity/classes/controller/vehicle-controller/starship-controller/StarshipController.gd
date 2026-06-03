@@ -148,6 +148,8 @@ func _starship_controller_process(delta : float) -> void:
 				
 				if control_entity is RABS_KestrelMk1:
 					control_entity.show_interior()
+					
+				control_entity.reset_thrust_vectors()
 
 		if (Input.is_action_just_pressed("starship_cycle_power_state")):
 			starship_cycle_power_state_command.execute(control_entity)
@@ -218,21 +220,34 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_pressed("starship_throttle_left")):
 			starship_thrust_left_command.execute(control_entity, StarshipThrustLeftCommand.Params.new(Input.get_action_strength("starship_throttle_left")))
+		elif (Input.is_action_just_released("starship_throttle_left")):
+			starship_thrust_left_command.execute(control_entity, StarshipThrustLeftCommand.Params.new(0))
 
 		if (Input.is_action_pressed("starship_throttle_right")):
 			starship_thrust_right_command.execute(control_entity, StarshipThrustRightCommand.Params.new(Input.get_action_strength("starship_throttle_right")))
+		elif (Input.is_action_just_released("starship_throttle_right")):
+			starship_thrust_right_command.execute(control_entity, StarshipThrustRightCommand.Params.new(0))
 
 		if (Input.is_action_pressed("starship_throttle_up")):
 			starship_thrust_up_command.execute(control_entity, StarshipThrustUpCommand.Params.new(Input.get_action_strength("starship_throttle_up")))
+		elif (Input.is_action_just_released("starship_throttle_up")):
+			starship_thrust_up_command.execute(control_entity, StarshipThrustUpCommand.Params.new(0))
+
 
 		if (Input.is_action_pressed("starship_throttle_down")):
 			starship_thrust_down_command.execute(control_entity, StarshipThrustDownCommand.Params.new(Input.get_action_strength("starship_throttle_down")))
-
+		elif (Input.is_action_just_released("starship_throttle_down")):
+			starship_thrust_down_command.execute(control_entity, StarshipThrustDownCommand.Params.new(0))
+			
 		if (Input.is_action_pressed("starship_rotate_roll_left")):
 			starship_roll_left_command.execute(control_entity, StarshipRollLeftCommand.Params.new(Input.get_action_strength("starship_rotate_roll_left")))
+		elif (Input.is_action_just_released("starship_rotate_roll_left")):
+			starship_roll_left_command.execute(control_entity, StarshipRollLeftCommand.Params.new(0))
 
 		if (Input.is_action_pressed("starship_rotate_roll_right")):
 			starship_roll_right_command.execute(control_entity, StarshipRollRightCommand.Params.new(Input.get_action_strength("starship_rotate_roll_right")))
+		elif (Input.is_action_just_released("starship_rotate_roll_right")):
+			starship_roll_right_command.execute(control_entity, StarshipRollRightCommand.Params.new(0))
 
 		# Starship Mouse Pitch
 

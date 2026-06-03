@@ -1422,6 +1422,8 @@ func lock_ship() -> void:
 		axis_lock_linear_x = true
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
+		
+		reset_thrust_vectors()
 
 func toggle_landing_gear(force : bool = false) -> void:
 	pass
@@ -1506,6 +1508,8 @@ func exit_super_cruise(force_exit : bool = false) -> void:
 	collision_mask = super_cruise_exit_collision_mask
 
 	super_cruise_disengaged.emit()
+	
+	reset_thrust_vectors()
 
 func cruise_travel(delta : float) -> void:
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
@@ -1652,8 +1656,8 @@ func _physics_process(delta: float) -> void:
 	update_ui()
 
 
-		# reset thrust vector
-	reset_thrust_vectors()
+	# resetting is shit dont do it...
+	# reset_thrust_vectors()
 
 	relative_gravity_vector = Vector3.ZERO
 
