@@ -123,7 +123,7 @@ func _ai_starship_controller_ready() -> void:
 		(control_entity as Starship).change_to_damaged_state.connect(change_state_to_flee)
 		(control_entity as Starship).shield_online.connect(change_state_back_to_none)
 
-	evade_change_time = randf_range(0, 60)
+	evade_change_time = randf_range(10, 60)
 	
 	starship_start_horn_command.execute(control_entity)
 	
@@ -145,7 +145,7 @@ func stop_roll() -> void:
 func change_evasion() -> void:
 	current_evasion = get_random_evasion()
 
-	timer.wait_time = randf_range(1, 20)
+	timer.wait_time = randf_range(3, 30)
 
 func get_random_evasion() -> EvasionDirection:
 	return randi_range(0, 3)
@@ -170,7 +170,7 @@ func _ai_starship_controller_process(delta : float) -> void:
 	if distance_to_player > 12000:
 		(control_entity as Starship).current_max_velocity = (control_entity as Starship).ship_info.max_linear_velocity
 	else:
-		(control_entity as Starship).current_max_velocity = 250
+		(control_entity as Starship).current_max_velocity = 170
 	
 	if current_ai_state == AiState.FLEE:
 		thrust_towards()
@@ -247,8 +247,8 @@ func rotate_towards_player() -> void:
 
 func aim_towards_player() -> void:
 	# --- TUNABLES (tweak to taste) ---
-	var max_lead_time: float = 2.0    # seconds max to look ahead
-	var lead_scale: float = 0.5       # 0..1 reduces/increases how strongly we lead
+	var max_lead_time: float = 1.0    # seconds max to look ahead
+	var lead_scale: float = 0.2      # 0..1 reduces/increases how strongly we lead
 	var min_rel_speed: float = 0.1    # avoid division by near-zero
 
 	# --- POS & VELOCITY (using your original movement fields) ---
@@ -312,7 +312,7 @@ func shoot_player() -> void:
 	starship_shoot_tertiary_command.execute(control_entity)
 
 func evade() -> void:
-	var evasion_amount : float = randf_range(0.2, 0.7)
+	var evasion_amount : float = randf_range(0.2, 0.5)
 
 	match current_evasion:
 		EvasionDirection.EVADE_LEFT:
