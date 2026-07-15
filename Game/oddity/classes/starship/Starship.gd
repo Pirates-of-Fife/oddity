@@ -1548,7 +1548,7 @@ func initiate_super_cruise() -> void:
 func exit_super_cruise(force_exit : bool = false) -> void:
 
 	if !force_exit:
-		if current_super_cruise_speed > 1500:
+		if current_super_cruise_speed > 300000:
 			return
 
 	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_end()
@@ -1678,7 +1678,7 @@ func super_cruise_travel(delta : float) -> void:
 
 	(alcubierre_drive_slot.module as AlcubierreDrive).travelling_sound.pitch_scale = lerpf(0.7, 4, current_super_cruise_speed / alcubierre_drive_slot.module.module_resource.max_speed)
 
-	global_position += global_transform.basis.z * current_super_cruise_speed
+	global_position += global_transform.basis.z * current_super_cruise_speed * delta
 
 	current_super_cruise_speed_in_c = ((((global_position - last_position) / delta) / 299_792_458.0) * 1000).length()
 

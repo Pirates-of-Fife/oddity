@@ -14,7 +14,7 @@ var timeout : float
 var on_hit_sound : PackedScene
 
 @export
-var collision_timeout : float = 0.05
+var collision_timeout : float = 0.02
 
 @export_flags_3d_physics
 var projectile_collision_layer : int
@@ -44,9 +44,12 @@ func remove() -> void:
 
 func activate_collision() -> void:
 	collision_layer = projectile_collision_layer
-	collision_mask = projectile_collision_layer
+	collision_mask = projectile_collision_layer 
 
-func _on_body_entered(body : Node) -> void:	
+func _on_body_entered(body : Node) -> void:		
+	if body is Projectile:
+		return
+
 	if body is GameEntity or body is StaticGameEntity:
 		body.take_damage(damage)
 		if body is GameEntity:
