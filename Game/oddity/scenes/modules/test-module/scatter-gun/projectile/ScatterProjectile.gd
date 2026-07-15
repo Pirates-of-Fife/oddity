@@ -47,12 +47,6 @@ func scatter_projectiles() -> void:
 		projectile.global_position = scatter_position_marker.global_position
 		projectile.global_rotation = scatter_position_marker.global_rotation
 		projectile.linear_velocity = linear_velocity
-
-		# apply force
-
-		# projectile.apply_central_impulse(Vector3(0, 0, projectile_speed) * projectile.global_basis.inverse())
-		#projectile.projectile_speed = projectile_speed
-		
 		
 		projectile.apply_central_impulse(projectile_speed * projectile.mass)
 		

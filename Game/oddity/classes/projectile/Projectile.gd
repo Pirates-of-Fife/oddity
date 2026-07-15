@@ -27,14 +27,6 @@ var damage : float
 func _ready() -> void:
 	_projectile_ready()
 	
-#func _process(delta: float) -> void:
-	#global_position += projectile_speed * delta	
-
-func _physics_process(delta: float) -> void:
-	#global_position += projectile_speed * delta	
-	#print(linear_velocity.length())
-	pass
-	
 func _projectile_ready() -> void:
 	body_entered.connect(_on_body_entered)
 		

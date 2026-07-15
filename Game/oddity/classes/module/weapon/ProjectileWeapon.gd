@@ -12,7 +12,7 @@ signal projectile_created(projectile : Projectile, weapon : ProjectileWeapon)
 var shot_audio : PackedScene
 
 var aim_point : Pip
-var aim_assist : float = 6.7
+var aim_assist : float = 10
 
 func _ready() -> void:
 	__projectile_weapon_ready()
@@ -48,15 +48,13 @@ func shoot() -> void:
 	var mod : float = 1
 	
 	if (module_slot.vehicle as Starship).is_bounty_target:
-		aim_assist = 50
+		aim_assist = 60
 	
 	if (aim_point != null):
 		var angle : float = nozzle.global_position.angle_to(aim_point.global_position)
 		
 		angle = nozzle.global_basis.z.angle_to(aim_point.global_position - nozzle.global_position)
-		
-		print("angle" + str(angle))
-		
+				
 		if (angle <= deg_to_rad(aim_assist)):		
 			nozzle.look_at(aim_point.global_position)
 			mod = -1
@@ -77,16 +75,8 @@ func shoot() -> void:
 	projectile.global_rotation = nozzle.global_rotation
 	projectile.linear_velocity = module_slot.vehicle.linear_velocity
 
-	# apply force
 
-	# projectile.apply_central_impulse(Vector3(0, 0, (module_resource as ProjectileWeaponResource).projectile_speed) * global_basis.inverse())
-	
-	#projectile.projectile_speed = (module_resource as ProjectileWeaponResource).projectile_speed + (module_slot.vehicle.relative_linear_velocity * module_slot.vehicle.global_basis.inverse())
-	
-	#projectile.projectile_speed = Vector3(0, 0, mod * (module_resource as ProjectileWeaponResource).projectile_speed) * nozzle.global_basis.inverse()
-	
 	var velocity : Vector3 = nozzle.global_basis * Vector3(0, 0, mod * (module_resource as ProjectileWeaponResource).projectile_speed)
-	velocity +=  module_slot.vehicle.linear_velocity
 	
 	projectile.apply_central_impulse(velocity * projectile.mass)
 	
