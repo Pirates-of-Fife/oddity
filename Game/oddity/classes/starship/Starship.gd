@@ -698,6 +698,22 @@ func on_decrease_distance() -> void:
 	if third_person:
 		active_control_seat.decrease_distance(third_person_distance_change_sensitivity)
 
+func force_focus(ship : Starship) -> void:
+	if ship == null:
+		if focused_starship != null:
+			unfocus_target(focused_starship)
+		return
+
+	if ship == focused_starship:
+		unfocus_target(focused_starship)
+	
+	create_pips(ship)
+	
+	focused_starship = ship
+	focused_target.emit(focused_starship)
+	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
+	focused_starship.is_targeted = true
+
 func focus_target() -> void:
 	var ship : Starship = radar_focus_area.focus_target()
 
@@ -725,9 +741,6 @@ func focused_ship_destroyed() -> void:
 var pips : Array[Pip]
 
 func create_pips(target : Starship) -> void:
-	if is_bounty_target:
-		return
-
 	var weapons : Array[Weapon]
 	
 	for hp : Hardpoint in hardpoints:
@@ -738,12 +751,14 @@ func create_pips(target : Starship) -> void:
 	
 	for w : Weapon in weapons:
 		if w.module_resource is ProjectileWeaponResource:
-
 			var p_scene : PackedScene = load("res://classes/pip/Pip.tscn")
 			var p : Pip = p_scene.instantiate()
 			p.projectile_speed = (w.module_resource as ProjectileWeaponResource).projectile_speed
 			p.aimer = self
 			p.target = target
+			
+			if is_bounty_target:
+				p.enemy_pip = true
 			
 			w.aim_point = p
 			
