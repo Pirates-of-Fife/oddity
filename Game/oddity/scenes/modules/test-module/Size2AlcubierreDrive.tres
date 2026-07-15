@@ -13,11 +13,11 @@ point_count = 3
 [resource]
 script = ExtResource("1_pcsd4")
 spool_time = 6.0
-acceleration = 2.0
-deacceleration = 40.0
+acceleration = 20.0
+deacceleration = 400.0
 max_speed = 25000.0
-max_turn_speed = 0.015
-fuel_per_second = 1.0
+max_turn_speed = 0.15
+fuel_per_second = 10.0
 fuel_curve = SubResource("Curve_y0by7")
 charging_start = ExtResource("3_fctay")
 charging_sound = ExtResource("2_oqoog")
