@@ -738,18 +738,20 @@ func create_pips(target : Starship) -> void:
 	
 	for w : Weapon in weapons:
 		if w.module_resource is ProjectileWeaponResource:
-			if !projectile_speeds.has((w.module_resource as ProjectileWeaponResource).projectile_speed):
-				projectile_speeds.append((w.module_resource as ProjectileWeaponResource).projectile_speed)
 
-	for s : float in projectile_speeds:
-		var p_scene : PackedScene = load("res://classes/pip/Pip.tscn")
-		var p : Pip = p_scene.instantiate()
-		p.projectile_speed = s
-		p.aimer = self
-		p.target = target
+			var p_scene : PackedScene = load("res://classes/pip/Pip.tscn")
+			var p : Pip = p_scene.instantiate()
+			p.projectile_speed = (w.module_resource as ProjectileWeaponResource).projectile_speed
+			p.aimer = self
+			p.target = target
+			
+			w.aim_point = p
+			
+			pips.append(p)
+			world.add_child(p)
+			
+	#for s : float in projectile_speeds:
 		
-		pips.append(p)
-		world.add_child(p)
 	
 func remove_pips() -> void:
 	for p : Pip in pips:
@@ -1653,9 +1655,9 @@ func super_cruise_travel(delta : float) -> void:
 	var turning_multiplier : float =  manouvarability_curve.sample((current_super_cruise_speed / alcubierre_drive_slot.module.module_resource.max_speed))
 
 	if current_super_cruise_speed > target_velocity:
-		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale
+		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale * delta
 	if current_super_cruise_speed < target_velocity:
-		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale
+		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale * delta
 
 	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_slot.module.module_resource.max_speed)
 
@@ -1667,9 +1669,9 @@ func super_cruise_travel(delta : float) -> void:
 
 	last_position = global_position
 
-	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
-	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
-	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
+	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier * delta)
+	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier * delta)
+	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier * delta)
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)

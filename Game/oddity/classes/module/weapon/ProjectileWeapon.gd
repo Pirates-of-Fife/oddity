@@ -11,6 +11,8 @@ signal projectile_created(projectile : Projectile, weapon : ProjectileWeapon)
 @export
 var shot_audio : PackedScene
 
+var aim_point : Pip
+
 func _ready() -> void:
 	__projectile_weapon_ready()
 
@@ -40,7 +42,24 @@ func shoot() -> void:
 	module_slot.vehicle.current_ammo -= (module_resource as ProjectileWeaponResource).ammo_usage
 	
 	# spawn projectile
-
+	
+	nozzle.rotation = Vector3.ZERO
+	var mod : float = 1
+	
+	if (aim_point != null):
+		var angle : float = nozzle.global_position.angle_to(aim_point.global_position)
+		
+		angle = nozzle.global_basis.z.angle_to(aim_point.global_position - nozzle.global_position)
+		
+		print("angle" + str(angle))
+		
+		if (angle <= deg_to_rad(6.7)):		
+			nozzle.look_at(aim_point.global_position)
+			mod = -1
+	else:
+		nozzle.rotation = Vector3.ZERO
+		mod = 1
+	
 	var projectile_scene : PackedScene = (module_resource as WeaponResource).projectile.projectile_scene_file
 	var projectile : Projectile = projectile_scene.instantiate()
 
@@ -59,10 +78,8 @@ func shoot() -> void:
 	
 	#projectile.projectile_speed = (module_resource as ProjectileWeaponResource).projectile_speed + (module_slot.vehicle.relative_linear_velocity * module_slot.vehicle.global_basis.inverse())
 	
-	projectile.projectile_speed = module_slot.vehicle.relative_linear_velocity + Vector3(0, 0, (module_resource as ProjectileWeaponResource).projectile_speed) * module_slot.vehicle.global_basis.inverse()
+	projectile.projectile_speed = module_slot.vehicle.relative_linear_velocity + Vector3(0, 0, mod * (module_resource as ProjectileWeaponResource).projectile_speed) * nozzle.global_basis.inverse()
 	
-	print(projectile.projectile_speed)
-
 	var audio : ProjectileWeaponShootAudioStreamPlayer3D = shot_audio.instantiate()
 	audio.pitch_scale = randf_range(0.7, 1.3)
 	audio.sound = (module_resource as WeaponResource).sound
