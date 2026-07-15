@@ -24,7 +24,11 @@ func _process(delta: float) -> void:
 	if target == null:
 		queue_free()
 		return
-		
+	
+	if aimer == null:
+		queue_free()
+		return
+	
 	var projectile_vector : Vector3 = aimer.relative_linear_velocity + Vector3(0, 0, projectile_speed) * aimer.global_basis.inverse()
 	
 	global_position = get_intercept(aimer.global_position, projectile_vector.length(), target.global_position, target.linear_velocity - aimer.linear_velocity)

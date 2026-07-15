@@ -74,6 +74,7 @@ func shoot() -> void:
 	projectile.hit.connect(on_hit)
 	projectile.damage = module_resource.damage
 	projectile.global_position = nozzle.global_position
+	projectile.global_rotation = nozzle.global_rotation
 	projectile.linear_velocity = module_slot.vehicle.linear_velocity
 
 	# apply force
@@ -82,7 +83,7 @@ func shoot() -> void:
 	
 	#projectile.projectile_speed = (module_resource as ProjectileWeaponResource).projectile_speed + (module_slot.vehicle.relative_linear_velocity * module_slot.vehicle.global_basis.inverse())
 	
-	projectile.projectile_speed = module_slot.vehicle.relative_linear_velocity + Vector3(0, 0, mod * (module_resource as ProjectileWeaponResource).projectile_speed) * nozzle.global_basis.inverse()
+	projectile.projectile_speed = Vector3(0, 0, mod * (module_resource as ProjectileWeaponResource).projectile_speed) * nozzle.global_basis.inverse()
 	
 	var audio : ProjectileWeaponShootAudioStreamPlayer3D = shot_audio.instantiate()
 	audio.pitch_scale = randf_range(0.7, 1.3)
