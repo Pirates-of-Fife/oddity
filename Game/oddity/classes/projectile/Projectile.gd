@@ -5,6 +5,9 @@ class_name Projectile
 signal hit(game_entity : GameEntity)
 
 @export
+var projectile_speed : Vector3
+
+@export
 var timeout : float
 
 @export
@@ -24,6 +27,10 @@ var damage : float
 func _ready() -> void:
 	_projectile_ready()
 	
+func _process(delta: float) -> void:
+	global_position += projectile_speed * delta	
+
+
 func _projectile_ready() -> void:
 	body_entered.connect(_on_body_entered)
 	
