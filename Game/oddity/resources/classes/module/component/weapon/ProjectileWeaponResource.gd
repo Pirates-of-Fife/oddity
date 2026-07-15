@@ -8,7 +8,7 @@ class_name ProjectileWeaponResource
 var projectile : ProjectileResource
 
 @export
-var weapon_force : float
+var projectile_speed : float
 
 @export
 var cooldown : float

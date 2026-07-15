@@ -10,7 +10,7 @@ var scattered_projectile : ProjectileResource
 @export
 var spawn_positions : Array[Marker3D]
 
-var projectile_force : float
+
 
 var projectile_sound : AudioStream
 
@@ -33,8 +33,6 @@ func _ready() -> void:
 	
 func _scatter_projectile_ready() -> void:
 	_projectile_ready()
-	
-
 
 # once this method gets executed, all properties are already set.
 func scatter_projectiles() -> void:
@@ -52,8 +50,9 @@ func scatter_projectiles() -> void:
 
 		# apply force
 
-		projectile.apply_central_impulse(Vector3(0, 0, projectile_force) * projectile.global_basis.inverse())
-
+		# projectile.apply_central_impulse(Vector3(0, 0, projectile_speed) * projectile.global_basis.inverse())
+		projectile.projectile_speed = projectile_speed
+		
 	var audio : ProjectileWeaponShootAudioStreamPlayer3D = secondary_projectile_audio.instantiate()
 	audio.pitch_scale = randf_range(0.7, 1.3)
 	audio.sound = projectile_sound
