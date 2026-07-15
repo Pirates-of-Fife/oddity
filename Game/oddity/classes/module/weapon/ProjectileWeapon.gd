@@ -83,7 +83,12 @@ func shoot() -> void:
 	
 	#projectile.projectile_speed = (module_resource as ProjectileWeaponResource).projectile_speed + (module_slot.vehicle.relative_linear_velocity * module_slot.vehicle.global_basis.inverse())
 	
-	projectile.projectile_speed = Vector3(0, 0, mod * (module_resource as ProjectileWeaponResource).projectile_speed) * nozzle.global_basis.inverse()
+	#projectile.projectile_speed = Vector3(0, 0, mod * (module_resource as ProjectileWeaponResource).projectile_speed) * nozzle.global_basis.inverse()
+	
+	var velocity : Vector3 = nozzle.global_basis * Vector3(0, 0, mod * (module_resource as ProjectileWeaponResource).projectile_speed)
+	velocity +=  module_slot.vehicle.linear_velocity
+	
+	projectile.apply_central_impulse(velocity * projectile.mass)
 	
 	var audio : ProjectileWeaponShootAudioStreamPlayer3D = shot_audio.instantiate()
 	audio.pitch_scale = randf_range(0.7, 1.3)

@@ -51,7 +51,10 @@ func scatter_projectiles() -> void:
 		# apply force
 
 		# projectile.apply_central_impulse(Vector3(0, 0, projectile_speed) * projectile.global_basis.inverse())
-		projectile.projectile_speed = projectile_speed
+		#projectile.projectile_speed = projectile_speed
+		
+		
+		projectile.apply_central_impulse(projectile_speed * projectile.mass)
 		
 	var audio : ProjectileWeaponShootAudioStreamPlayer3D = secondary_projectile_audio.instantiate()
 	audio.pitch_scale = randf_range(0.7, 1.3)
