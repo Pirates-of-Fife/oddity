@@ -708,7 +708,9 @@ func focus_target() -> void:
 
 	if ship == focused_starship:
 		unfocus_target(focused_starship)
-
+	
+	create_pips(ship)
+	
 	focused_starship = ship
 	focused_target.emit(focused_starship)
 	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
@@ -720,11 +722,46 @@ func focus_target() -> void:
 func focused_ship_destroyed() -> void:
 	unfocus_target(focused_starship)
 
+var pips : Array[Pip]
+
+func create_pips(target : Starship) -> void:
+	if is_bounty_target:
+		return
+
+	var weapons : Array[Weapon]
+	
+	for hp : Hardpoint in hardpoints:
+		if hp.module != null:
+			weapons.append(hp.module)
+		
+	var projectile_speeds : Array[float]
+	
+	for w : Weapon in weapons:
+		if w.module_resource is ProjectileWeaponResource:
+			if !projectile_speeds.has((w.module_resource as ProjectileWeaponResource).projectile_speed):
+				projectile_speeds.append((w.module_resource as ProjectileWeaponResource).projectile_speed)
+
+	for s : float in projectile_speeds:
+		var p_scene : PackedScene = load("res://classes/pip/Pip.tscn")
+		var p : Pip = p_scene.instantiate()
+		p.projectile_speed = s
+		p.aimer = self
+		p.target = target
+		
+		pips.append(p)
+		world.add_child(p)
+	
+func remove_pips() -> void:
+	for p : Pip in pips:
+		if is_instance_valid(p):
+			p.queue_free()
+
 func unfocus_target(starship : Starship) -> void:
 	unfocused_target.emit(starship)
 	focused_starship.is_targeted = false
 	focused_starship.state_changed_to_destroyed.disconnect(focused_ship_destroyed)
 	focused_starship = null
+	remove_pips()
 
 var apply_loadout_health : bool = false
 

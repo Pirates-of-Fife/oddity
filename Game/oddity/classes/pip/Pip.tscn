@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dajloj641flvj"]
+
+[ext_resource type="Texture2D" uid="uid://bfy78ajf8o4tw" path="res://classes/pip/pip.png" id="1_ix4em"]
+[ext_resource type="Script" path="res://classes/pip/Pip.gd" id="2_abbgb"]
+
+[node name="Pip" type="Sprite3D"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 2
+texture = ExtResource("1_ix4em")
+script = ExtResource("2_abbgb")
