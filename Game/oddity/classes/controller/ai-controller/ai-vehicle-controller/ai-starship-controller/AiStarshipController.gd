@@ -261,14 +261,14 @@ func get_average_pip_position() -> Vector3:
 
 func aim_towards_player() -> void:
 
-	var average_pip_position : Vector3 = control_entity.to_local(get_average_pip_position())
+	#var average_pip_position : Vector3 = control_entity.to_local(get_average_pip_position())
 	
 	var direction_to_player : Vector3 = control_entity.to_local(player.control_entity.global_position)
 		
-	print("pips: " + str(average_pip_position))
+	#print("pips: " + str(average_pip_position))
 	
-	if (average_pip_position == Vector3.ZERO):
-		average_pip_position = (control_entity as Starship).focused_starship.global_position
+	#if (average_pip_position == Vector3.ZERO):
+	#	average_pip_position = (control_entity as Starship).focused_starship.global_position
 	
 	var direction_to_aim: Vector3 = direction_to_player
 
@@ -279,9 +279,9 @@ func aim_towards_player() -> void:
 	var yaw_intensity: float = pow(abs(normalized_direction.x), 0.6)
 	var pitch_intensity: float = pow(abs(normalized_direction.y), 0.6)
 	
-	print("intentsiesi")
-	print(yaw_intensity)
-	print(pitch_intensity)
+	#print("intentsiesi")
+	#print(yaw_intensity)
+	#print(pitch_intensity)
 
 	if direction_to_aim.x > 0:
 		starship_yaw_right_command.execute(control_entity, StarshipYawRightCommand.Params.new(yaw_intensity))
@@ -289,9 +289,9 @@ func aim_towards_player() -> void:
 		starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(yaw_intensity))
 
 	if direction_to_aim.y > 0:
-		starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(yaw_intensity))
+		starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(pitch_intensity))
 	elif direction_to_aim.y < 0:
-		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(yaw_intensity))
+		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(pitch_intensity))
 	
 func thrust_towards() -> void:
 	starship_thrust_forward_command.execute(control_entity, StarshipThrustForwardCommand.Params.new(1))
