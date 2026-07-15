@@ -170,7 +170,7 @@ func _ai_starship_controller_process(delta : float) -> void:
 	if distance_to_player > 12000:
 		(control_entity as Starship).current_max_velocity = (control_entity as Starship).ship_info.max_linear_velocity
 	else:
-		(control_entity as Starship).current_max_velocity = 170
+		(control_entity as Starship).current_max_velocity = 110
 	
 	if current_ai_state == AiState.FLEE:
 		thrust_towards()
