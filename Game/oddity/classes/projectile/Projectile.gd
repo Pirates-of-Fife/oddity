@@ -34,6 +34,8 @@ func _process(delta: float) -> void:
 func _projectile_ready() -> void:
 	body_entered.connect(_on_body_entered)
 	
+	collision_timeout = 0.001
+	
 	var timer : Timer = Timer.new()
 	var timer_collision : Timer = Timer.new()
 	
