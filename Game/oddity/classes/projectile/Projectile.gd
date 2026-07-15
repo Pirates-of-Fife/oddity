@@ -35,9 +35,7 @@ func _physics_process(delta: float) -> void:
 
 func _projectile_ready() -> void:
 	body_entered.connect(_on_body_entered)
-	
-	activate_collision()
-	
+		
 	var timer : Timer = Timer.new()
 	var timer_collision : Timer = Timer.new()
 	
@@ -51,12 +49,10 @@ func remove() -> void:
 	queue_free()
 
 func activate_collision() -> void:
-	#collision_layer = projectile_collision_layer
+	collision_layer = projectile_collision_layer
 	collision_mask = projectile_collision_layer
 
 func _on_body_entered(body : Node) -> void:	
-	print(body)
-
 	if body is GameEntity or body is StaticGameEntity:
 		body.take_damage(damage)
 		if body is GameEntity:
