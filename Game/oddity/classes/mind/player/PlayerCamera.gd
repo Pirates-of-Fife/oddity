@@ -74,6 +74,9 @@ func _process(delta : float) -> void:
 			first_person_switch(true)
 			return
 	
+	if player.control_entity == null:
+		return
+	
 	if player.control_entity.active_frame_of_reference is GravityWell:
 		acceleration = Vector3.ZERO
 	else:

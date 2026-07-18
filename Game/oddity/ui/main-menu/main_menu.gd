@@ -10,6 +10,8 @@ var orbit_speed : float = 0.1    # Speed of orbit in radians per second
 var ship_loaded : bool = false
 var orbit_angle : float = 25.0       # Keeps track of the orbit angle
 
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_main_menu_ui_animation_started() -> void:
 	load_last_possessed_starship()

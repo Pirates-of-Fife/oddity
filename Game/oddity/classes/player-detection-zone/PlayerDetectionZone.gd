@@ -64,6 +64,12 @@ func update() -> void:
 
 	if !is_instance_valid(player):
 		return
+	
+	if player == null:
+		return
+
+	if player.control_entity == null:
+		return
 
 	if use_distance_display:
 		if player.control_entity.third_person or player.control_entity is not Starship:

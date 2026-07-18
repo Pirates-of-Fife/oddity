@@ -128,6 +128,9 @@ func _on_supercruise_exit_timer_timeout() -> void:
 	starship_ready_to_supercruise = true
 
 func _starship_controller_process(delta : float) -> void:
+	if control_entity == null:
+		return
+
 	if control_entity is Starship:
 
 		if (Input.is_action_just_pressed("player_interact")):

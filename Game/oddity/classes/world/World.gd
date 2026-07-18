@@ -429,26 +429,15 @@ func bed_exit(bed_index : int) -> void:
 	exit_to_main_menu()
 
 func exit_to_main_menu() -> void:
-	print("exit to main main")
-
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	print("mouse")
-	
-	for node : Node in get_tree().get_nodes_in_group("Starship"):
-		if node is Starship:
-			node.remove_pips()
-			print("pip rempve")
-
-		
 	save_player_stats()
 	
-	print("save player")
-
-	get_node("/root/MainScene").free()
-
-	var result : int = get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")
-
-	print(result)
-
-	print("should never print")
+	get_tree().get_first_node_in_group("Player").reparent(self)
+		
+	for node : Node in get_tree().get_nodes_in_group("Starship"):
+		node.queue_free()
+		
+	await get_tree().create_timer(0.5).timeout
+	
+	get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")
