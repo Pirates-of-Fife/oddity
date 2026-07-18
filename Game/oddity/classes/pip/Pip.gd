@@ -9,6 +9,9 @@ var aimer : Starship
 var target : Starship
 
 @export
+var gun : ProjectileWeapon
+
+@export
 var projectile_speed : float
 
 var enemy_pip : bool = false
@@ -17,7 +20,6 @@ var enemy_pip : bool = false
 func _ready() -> void:
 	if enemy_pip:
 		texture = null
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -32,8 +34,14 @@ func _process(delta: float) -> void:
 	var projectile_vector : Vector3 = aimer.linear_velocity + Vector3(0, 0, projectile_speed) * aimer.global_basis
 	
 	global_position = get_intercept(aimer.global_position, projectile_vector.length(), target.global_position, target.linear_velocity - aimer.linear_velocity)
-
 	
+	if gun != null:
+		gun.aim_point = global_position
+
+func _exit_tree() -> void:
+	if gun != null:
+		gun.aim_point = Vector3.ZERO
+
 func get_intercept(shooter_position : Vector3, projectile_speed : float, target_position : Vector3, target_velocity : Vector3) -> Vector3:
 	var a : float = projectile_speed * projectile_speed - target_velocity.dot(target_velocity)
 	var b : float = 2 * target_velocity.dot(target_position - shooter_position)

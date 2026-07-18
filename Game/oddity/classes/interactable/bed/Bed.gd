@@ -23,7 +23,6 @@ func _ready() -> void:
 	skip_delay = true
 
 func _on_interact(player : Player, control_entity : ControlEntity) -> void:
-	print("BED")
 	var world : World = get_tree().get_first_node_in_group("World")
 	
 	world.bed_exit(bed_index)

@@ -27,13 +27,22 @@ func _ready() -> void:
 	radar_surrounding.entity_exited_radar_area.connect(_on_radar_area_exited)
 	
 func update_radar_blips() -> void:
+	if starship == null:
+		return
+	
+	if !is_instance_valid(starship):
+		return
+		
 	for radar_blip : RadarBlip in $RadarBlips.get_children():
 		if is_instance_valid(radar_blip):
 			if radar_blip.entity == null:
-				_on_radar_area_exited(radar_blip.entity)
+				$BlipExit.play()
+				radar_blip.queue_free()
+				_on_radar_area_exited(null)
+				continue
 			elif !radar_blip.entity.is_inside_tree():
 				_on_radar_area_exited(radar_blip.entity)
-			
+				
 			var relative_position : Vector3 = starship.to_local(radar_blip.entity.global_position)
 
 			relative_position = log_transform(relative_position) 
@@ -76,6 +85,9 @@ func _on_rader_area_entered(entity : GameEntity) -> void:
 	
 func _on_radar_area_exited(entity : GameEntity) -> void:
 	for radar_blip : RadarBlip in $RadarBlips.get_children():
+		if entity == null:
+			return
+		
 		if radar_blip.entity == entity:
 			radar_blip.queue_free()
 			$BlipExit.play()

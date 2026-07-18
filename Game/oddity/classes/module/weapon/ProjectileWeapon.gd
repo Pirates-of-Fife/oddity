@@ -11,7 +11,7 @@ signal projectile_created(projectile : Projectile, weapon : ProjectileWeapon)
 @export
 var shot_audio : PackedScene
 
-var aim_point : Pip
+var aim_point : Vector3
 var aim_assist : float = 10
 
 func _ready() -> void:
@@ -50,13 +50,13 @@ func shoot() -> void:
 	if (module_slot.vehicle as Starship).is_bounty_target:
 		aim_assist = 60
 	
-	if (aim_point != null):
-		var angle : float = nozzle.global_position.angle_to(aim_point.global_position)
+	if (aim_point != Vector3.ZERO):
+		var angle : float = nozzle.global_position.angle_to(aim_point)
 		
-		angle = nozzle.global_basis.z.angle_to(aim_point.global_position - nozzle.global_position)
+		angle = nozzle.global_basis.z.angle_to(aim_point - nozzle.global_position)
 				
 		if (angle <= deg_to_rad(aim_assist)):		
-			nozzle.look_at(aim_point.global_position)
+			nozzle.look_at(aim_point)
 			mod = -1
 	else:
 		nozzle.rotation = Vector3.ZERO

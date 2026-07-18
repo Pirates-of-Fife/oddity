@@ -760,7 +760,7 @@ func create_pips(target : Starship) -> void:
 			if is_bounty_target:
 				p.enemy_pip = true
 			
-			w.aim_point = p
+			p.gun = w
 			
 			pips.append(p)
 			world.add_child(p)

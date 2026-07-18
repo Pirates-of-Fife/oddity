@@ -18,6 +18,9 @@ func _mind_ready() -> void:
 		possess(control_entity)
 
 func _physics_process(delta: float) -> void:
+	if (control_entity == null):
+		return
+	
 	self.global_position = control_entity.anchor.camera_anchor.global_position
 	self.global_rotation = control_entity.anchor.camera_anchor.global_rotation
 
