@@ -49,7 +49,7 @@ func activate_collision() -> void:
 func _on_body_entered(body : Node) -> void:		
 	if body is Projectile:
 		return
-
+		
 	if body is GameEntity or body is StaticGameEntity:
 		body.take_damage(damage)
 		if body is GameEntity:

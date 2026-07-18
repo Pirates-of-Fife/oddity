@@ -178,6 +178,12 @@ func enter_abyss(destination_star_system : PackedScene, starship : Starship, por
 		return
 
 	abyss_entered = true
+	
+	music_player.stop_music()
+	
+	for node : Node in get_tree().get_nodes_in_group("Starship"):
+		if node != player_ship:
+			node.queue_free()
 
 	var old_star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
 	starship.reparent.call_deferred(self)
@@ -298,13 +304,9 @@ func save_player_stats() -> void:
 		return
 
 	var loadout_generator : LoadoutGenerator = LoadoutGenerator.new()
-	
-	print("loadout before")
-	
+		
 	loadout_generator.save_loadout(player_ship, true, true, true)
-	
-	print("Loadout saved")
-	
+		
 	save_player_position_information()
 	
 	player.save_inventory()
