@@ -1083,6 +1083,8 @@ func restock() -> void:
 	current_ammo = max_ammo
 
 func destroyed() -> void:
+	remove_pips()
+
 	stop_shooting_primary()
 	stop_shooting_secondary()
 	stop_shooting_tertiary()

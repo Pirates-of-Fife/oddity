@@ -1,8 +1,7 @@
-[gd_scene load_steps=29 format=4 uid="uid://ddu7wrgyowti8"]
+[gd_scene load_steps=28 format=4 uid="uid://ddu7wrgyowti8"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/alcubierre-drives/modified-alcubierre-drive/ModifiedAlcubiereDrive.gd" id="1_tb3d6"]
 [ext_resource type="Resource" uid="uid://o3s312vr1or5" path="res://scenes/modules/test-module/alcubierre-drives/modified-alcubierre-drive/ModifiedAlcubierreDriveResource.tres" id="2_qp6o5"]
-[ext_resource type="Resource" uid="uid://bxuvxyjesisct" path="res://resources/resources/trade/trade-items/modules/other/ModifiedAlcubierreDriveTradeResource.tres" id="3_rnghd"]
 [ext_resource type="AudioStream" uid="uid://m28ripgucnhk" path="res://classes/module/component/component-types/alcubierre-drive/sounds/entering/entering.wav" id="4_ykx8h"]
 [ext_resource type="AudioStream" uid="uid://w7ugwc1jp6kj" path="res://scenes/modules/test-module/alcubierre-drives/modified-alcubierre-drive/ShortJump.wav" id="5_pqjcc"]
 [ext_resource type="AudioStream" uid="uid://dvlvt3f3w5rue" path="res://scenes/modules/test-module/alcubierre-drives/modified-alcubierre-drive/Deny.wav" id="6_d5jej"]
@@ -228,11 +227,6 @@ charging_end = NodePath("ChargeEnd")
 travelling_sound = NodePath("Travelling")
 module_resource = ExtResource("2_qp6o5")
 passive_heat_generation = 150.0
-entity_name = &"Modified Alcubierre Drive"
-value = 5000000
-sellable = true
-trade_information = ExtResource("3_rnghd")
-can_be_picked_up = true
 
 [node name="alcubierre_drive" type="Node3D" parent="."]
 transform = Transform3D(9.18485e-17, -1.5, 0, 1.5, 9.18485e-17, 0, 0, 0, 1.5, 0, -0.0260223, 0)

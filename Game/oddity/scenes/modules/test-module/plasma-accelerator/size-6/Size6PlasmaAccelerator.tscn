@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfpi73l3fhsva"]
+[gd_scene load_steps=7 format=3 uid="uid://cfpi73l3fhsva"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/plasma-accelerator/plasma_accelerator.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://dpla6maaccel6" path="res://scenes/modules/test-module/plasma-accelerator/size-6/plasma_accelerator_size6.glb" id="2_model"]
 [ext_resource type="PackedScene" uid="uid://cfpi72ykiab3y" path="res://scenes/modules/test-module/plasma-accelerator/PlasmaAcceleratorSound.tscn" id="3_sound"]
 [ext_resource type="Resource" uid="uid://cfpi73l3fhsuq" path="res://scenes/modules/test-module/plasma-accelerator/size-6/Size6PlasmaAccelerator.tres" id="4_resource"]
-[ext_resource type="Resource" uid="uid://cfpi73jhe31ap" path="res://resources/resources/trade/trade-items/modules/plasma-laboratories-corporation/accelerator/TradeResourcePlasmaAccelerator6.tres" id="5_trade"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eadoc"]
 points = PackedVector3Array(-0.487794, -0.8202, -2.51833, -0.723871, -0.653338, -2.83736, 0.715917, 0.737249, -2.90191, -0.729584, 0.735887, -0.209933, 0.610371, -0.554756, 0.226724, 0.712241, -0.656188, -2.84429, -0.625355, -0.554756, 0.226724, -0.7384, 0.745007, -2.86741, 0.472811, -0.8202, -1.05242, -0.636724, 0.643433, 0.255835, 0.716364, 0.737711, -0.207136, -0.717592, -0.647708, -0.278046, 0.476848, -0.469983, -2.9872, 0.631859, 0.653798, 0.281744, 0.716492, -0.610104, -0.206933, -0.487794, -0.8202, -1.05242, -0.581805, 0.588152, -2.95359, 0.472811, -0.8202, -2.51833, -0.688774, -0.616493, -2.91965, -0.729584, -0.608539, -0.209933, 0.569185, 0.590618, -2.96017, 0.3005, 0.747409, -0.739088, 0.71644, -0.610061, -2.90303, -0.581768, -0.460502, -2.95349, 0.479628, 0.655673, 0.285965, 0.702758, -0.647688, -0.277819, 0.3005, 0.747409, -2.35074, -0.681036, 0.737235, -2.90188, 0.569137, -0.462187, -2.96004)
@@ -21,8 +20,6 @@ shot_audio = ExtResource("3_sound")
 size = 6
 nozzle = NodePath("Marker3D")
 module_resource = ExtResource("4_resource")
-trade_information = ExtResource("5_trade")
-can_be_picked_up = true
 
 [node name="plasma_accelerator_size6" parent="." instance=ExtResource("2_model")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
