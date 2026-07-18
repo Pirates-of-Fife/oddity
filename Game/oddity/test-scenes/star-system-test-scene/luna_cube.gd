@@ -6,7 +6,7 @@ var damage_timer: Timer
 var total_damage : float = 0
 
 func _on_damage_timer_timeout() -> void:
-	#print("DPS: " + str(damage_in_last_second))
+	#print("DPS: " + str(damage_in_last_second / 2))
 	damage_in_last_second = 0
 
 func _ready() -> void:
@@ -17,7 +17,7 @@ func _ready() -> void:
 	if damage_timer == null:
 		damage_timer = Timer.new()
 		damage_timer.name = "DamageTimer"
-		damage_timer.wait_time = 1.0
+		damage_timer.wait_time = 2.0
 		damage_timer.one_shot = false
 		damage_timer.autostart = true
 		add_child(damage_timer)
@@ -34,7 +34,7 @@ func on_damaged(damage : float) -> void:
 	#print("Total damage: " + str(total_damage))
 	damage_in_last_second += damage
 	
-	if (total_damage) > 200000:
+	if (total_damage) > 2000000:
 		total_damage = 0
 	
 	#var random2 : int = randi_range(0, 100)

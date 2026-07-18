@@ -1711,7 +1711,7 @@ size = Vector3(28.065, 10.7102, 37.6769)
 radius = 2000.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fwwub"]
-size = Vector3(60, 60, 1819.25)
+size = Vector3(100, 100, 1956.83)
 
 [node name="RabsKestrelMk1" type="RigidBody3D" node_paths=PackedStringArray("velocity_mfd", "crosshair", "abyssal_mfd", "star_system_map", "super_cruise_mfd", "shield_and_health_ui", "heat_ui", "targeting", "damaged_label", "super_cruise_label", "ammo_ui", "fuel_ui", "interior_lights", "power_screen", "damaged_fires", "destroyed_fires", "alarm_sound_player", "explosion_partcle", "name_label", "ship_identification_label", "module_node", "abyss_drive_slot", "abyssal_portal_spawn_point", "alcubierre_drive_slot", "hardpoints_root", "thruster_slots_root", "shield", "radar_surrounding_area", "radar_focus_area", "focus_player", "hull_collision_player", "super_cruise_enter", "super_cruise_exit", "explosion_sound_player", "power_on_sound_player", "power_off_sound_player", "radio_chatter", "beds", "ship_horn", "headlight_left", "headlight_right", "headlight_icon", "anchor") groups=["Starship"]]
 collision_layer = 2097412
@@ -1719,7 +1719,7 @@ collision_mask = 2097408
 mass = 5000.0
 continuous_cd = true
 contact_monitor = true
-max_contacts_reported = 10
+max_contacts_reported = 100
 script = ExtResource("1_pouwl")
 velocity_mfd = NodePath("Interior/Bridge/VelocityMfd3d")
 crosshair = NodePath("Interior/Bridge/RabsControlSeat/Crosshair3d")
@@ -3802,7 +3802,7 @@ script = ExtResource("84_qfylt")
 starship = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Radar/RadarFocusARea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 935.108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1006.69)
 shape = SubResource("BoxShape3D_fwwub")
 
 [node name="Decal" type="Decal" parent="."]

@@ -724,7 +724,12 @@ func focus_target() -> void:
 
 	if ship == focused_starship:
 		unfocus_target(focused_starship)
+		return
 	
+	if focused_starship != null:
+		unfocus_target(focused_starship)
+		return
+		
 	create_pips(ship)
 	
 	focused_starship = ship
