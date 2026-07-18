@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkvastwu4s12v"]
+[gd_scene load_steps=8 format=3 uid="uid://bkvastwu4s12v"]
 
 [ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeapon.gd" id="1_sl6ec"]
 [ext_resource type="PackedScene" uid="uid://5kbn7vpbbjm6" path="res://scenes/modules/test-module/Size6Weapon/Size6WeaponSound.tscn" id="2_prkwe"]
 [ext_resource type="Resource" uid="uid://d0swmobju4op7" path="res://scenes/modules/test-module/Size6Weapon/Size6WeaponResource.tres" id="2_ys687"]
-[ext_resource type="Resource" uid="uid://dgu3wlrgwyj8h" path="res://resources/resources/trade/trade-items/modules/ox-vic-pyrr/dread/TradeResourceDread6.tres" id="4_h564l"]
 [ext_resource type="PackedScene" uid="uid://pjimcldb2p2a" path="res://scenes/modules/test-module/Size6Weapon/size-6.glb" id="4_n0yfi"]
 [ext_resource type="Texture2D" uid="uid://b61ge42edi1vy" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic black.png" id="6_8hx8s"]
 
@@ -22,9 +21,6 @@ shot_audio = ExtResource("2_prkwe")
 size = 6
 nozzle = NodePath("Nozzle")
 module_resource = ExtResource("2_ys687")
-value = 35000
-trade_information = ExtResource("4_h564l")
-can_be_picked_up = true
 
 [node name="Nozzle" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196321, 2.71022)

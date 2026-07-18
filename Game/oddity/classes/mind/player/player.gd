@@ -335,6 +335,7 @@ func _process(delta: float) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	if (Input.is_action_just_released("ui_cancel")):
+		print("exit is pressed")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_tree().get_first_node_in_group("World").exit_to_main_menu()
 

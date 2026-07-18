@@ -298,8 +298,12 @@ func save_player_stats() -> void:
 		return
 
 	var loadout_generator : LoadoutGenerator = LoadoutGenerator.new()
-
+	
+	print("loadout before")
+	
 	loadout_generator.save_loadout(player_ship, true, true, true)
+	
+	print("Loadout saved")
 	
 	save_player_position_information()
 	
@@ -425,6 +429,26 @@ func bed_exit(bed_index : int) -> void:
 	exit_to_main_menu()
 
 func exit_to_main_menu() -> void:
+	print("exit to main main")
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	print("mouse")
+	
+	for node : Node in get_tree().get_nodes_in_group("Starship"):
+		if node is Starship:
+			node.remove_pips()
+			print("pip rempve")
+
+		
 	save_player_stats()
-	get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")
+	
+	print("save player")
+
+	get_node("/root/MainScene").free()
+
+	var result : int = get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")
+
+	print(result)
+
+	print("should never print")
