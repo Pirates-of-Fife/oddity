@@ -19,10 +19,10 @@ mass = 35.0
 script = ExtResource("1_script")
 shot_audio = ExtResource("3_sound")
 size = 6
+nozzle = NodePath("Marker3D")
 module_resource = ExtResource("4_resource")
 trade_information = ExtResource("5_trade")
 can_be_picked_up = true
-nozzle = NodePath("Marker3D")
 
 [node name="plasma_accelerator_size6" parent="." instance=ExtResource("2_model")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
