@@ -78,34 +78,34 @@ buy_markup = 1.1
 sell_markup = 0.8
 metadata/_edit_group_ = true
 
-[node name="StaticGameEntity" type="StaticBody3D" parent="ArkaZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 398059)
-collision_layer = 2097153
-collision_mask = 2097153
-script = ExtResource("16_wrpcj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ArkaZone/StaticGameEntity"]
-mesh = SubResource("BoxMesh_pteku")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ArkaZone/StaticGameEntity"]
-shape = SubResource("ConcavePolygonShape3D_lgtgt")
-
-[node name="PlayerDetectionZone" type="Node3D" parent="ArkaZone/StaticGameEntity" node_paths=PackedStringArray("distant_sprite")]
-script = ExtResource("9_n1ioy")
-update_time = 1.0
-use_distance_display = true
-distant_sprite = NodePath("MarkerSprite")
-sprite_distance = 14000.0
-sprite_max_distance = 400000.0
-
-[node name="MarkerSprite" parent="ArkaZone/StaticGameEntity/PlayerDetectionZone" instance=ExtResource("17_54u7k")]
-text = &"Luna Cube"
-
 [node name="Size6AresCannon" parent="ArkaZone" instance=ExtResource("11_lyx6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.582, 76.3515, 398072)
 
 [node name="Size6AresCannon2" parent="ArkaZone" instance=ExtResource("11_lyx6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.433, 83.393, 398058)
+
+[node name="luna cube" type="StaticBody3D" parent="ArkaZone"]
+transform = Transform3D(1, 2.77556e-17, -6.93889e-18, 2.77556e-17, 1, -2.77556e-17, 0, 0, 1, 32081, 93442.4, -6794.27)
+collision_layer = 2097153
+collision_mask = 2097153
+script = ExtResource("16_wrpcj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArkaZone/luna cube"]
+mesh = SubResource("BoxMesh_pteku")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArkaZone/luna cube"]
+shape = SubResource("ConcavePolygonShape3D_lgtgt")
+
+[node name="PlayerDetectionZone" type="Node3D" parent="ArkaZone/luna cube" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("9_n1ioy")
+update_time = 1.0
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 100.0
+sprite_max_distance = 400000.0
+
+[node name="MarkerSprite" parent="ArkaZone/luna cube/PlayerDetectionZone" instance=ExtResource("17_54u7k")]
+text = &"Luna Cube"
 
 [node name="AlcolinZone" parent="." instance=ExtResource("8_lc1q5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61142e+07, 40, -3.96306e+06)

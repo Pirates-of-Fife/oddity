@@ -11,15 +11,14 @@ signal projectile_created(projectile : Projectile, weapon : ProjectileWeapon)
 @export
 var shot_audio : PackedScene
 
-var aim_point : Vector3
-var aim_assist : float = 10
-
 func _ready() -> void:
 	__projectile_weapon_ready()
 
 func __projectile_weapon_ready() -> void:
 	_weapon_ready()
-
+	
+	aim_assist = 10
+	
 	weapon_cooldown_timer = Timer.new()
 	add_child(weapon_cooldown_timer)
 	weapon_cooldown_timer.one_shot = true

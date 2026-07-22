@@ -9,7 +9,7 @@ var aimer : Starship
 var target : Starship
 
 @export
-var gun : ProjectileWeapon
+var gun : Weapon
 
 @export
 var projectile_speed : float

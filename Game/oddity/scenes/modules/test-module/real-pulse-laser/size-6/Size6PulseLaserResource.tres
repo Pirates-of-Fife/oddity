@@ -9,11 +9,12 @@ point_count = 2
 [resource]
 script = ExtResource("1_67rly")
 cooldown = 0.2
-fire_time = 0.1
+fire_time = 0.2
 max_beam_length = 2500.0
 damage_fall_off = SubResource("Curve_n4ejy")
-heat_generation = 250.0
-damage = 120.0
+heat_generation = 2000.0
+hull_damage = 100.0
+shield_damage = 600.0
 penetration = 1.0
 type = &"Pulse Laser"
 manufacturer = &"R.E.A.L."
