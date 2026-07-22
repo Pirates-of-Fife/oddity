@@ -21,7 +21,8 @@ func _beam_weapon_ready() -> void:
 
 	var pulse_laser_weapon_resource : PulseLaserWeaponResource = module_resource as PulseLaserWeaponResource
 
-	beam_laser.damage = pulse_laser_weapon_resource.damage
+	beam_laser.hull_damage = pulse_laser_weapon_resource.hull_damage
+	beam_laser.shield_damage = pulse_laser_weapon_resource.shield_damage
 	beam_laser.damage_fall_off = pulse_laser_weapon_resource.damage_fall_off
 	beam_laser.max_beam_length = pulse_laser_weapon_resource.max_beam_length
 	

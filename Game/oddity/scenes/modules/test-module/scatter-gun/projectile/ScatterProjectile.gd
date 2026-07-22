@@ -15,6 +15,7 @@ var spawn_positions : Array[Marker3D]
 var projectile_sound : AudioStream
 
 var secondary_projectile_damage : float
+var secondary_projectile_shield_damage : float
 
 var scatter_time : float 
 
@@ -43,7 +44,8 @@ func scatter_projectiles() -> void:
 		get_tree().get_first_node_in_group("World").add_child(projectile)
 
 		projectile.hit.connect(original_weapon.on_hit)
-		projectile.damage = secondary_projectile_damage
+		projectile.hull_damage = secondary_projectile_damage
+		projectile.shield_damage = secondary_projectile_shield_damage
 		projectile.global_position = scatter_position_marker.global_position
 		projectile.global_rotation = scatter_position_marker.global_rotation
 		projectile.linear_velocity = linear_velocity
