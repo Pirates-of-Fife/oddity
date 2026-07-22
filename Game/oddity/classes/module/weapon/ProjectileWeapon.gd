@@ -70,7 +70,8 @@ func shoot() -> void:
 	add_child(projectile)
 
 	projectile.hit.connect(on_hit)
-	projectile.damage = module_resource.damage
+	projectile.hull_damage = module_resource.hull_damage
+	projectile.shield_damage = module_resource.shield_damage
 	projectile.global_position = nozzle.global_position
 	projectile.global_rotation = nozzle.global_rotation
 	projectile.linear_velocity = module_slot.vehicle.linear_velocity

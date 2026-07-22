@@ -755,22 +755,22 @@ func create_pips(target : Starship) -> void:
 	var projectile_speeds : Array[float]
 	
 	for w : Weapon in weapons:
+		var p_scene : PackedScene = load("res://classes/pip/Pip.tscn")
+		var p : Pip = p_scene.instantiate()
 		if w.module_resource is ProjectileWeaponResource:
-			var p_scene : PackedScene = load("res://classes/pip/Pip.tscn")
-			var p : Pip = p_scene.instantiate()
 			p.projectile_speed = (w.module_resource as ProjectileWeaponResource).projectile_speed
-			p.aimer = self
-			p.target = target
-			
-			if is_bounty_target:
-				p.enemy_pip = true
-			
-			p.gun = w
-			
-			pips.append(p)
-			world.add_child(p)
-			
-	#for s : float in projectile_speeds:
+		else:
+			p.projectile_speed = 300000000
+		p.aimer = self
+		p.target = target
+		
+		if is_bounty_target:
+			p.enemy_pip = true
+		
+		p.gun = w
+		
+		pips.append(p)
+		world.add_child(p)
 		
 	
 func remove_pips() -> void:
