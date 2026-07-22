@@ -5,7 +5,10 @@ class_name BeamLaserProjectile
 signal hit(game_entity : GameEntity)
 
 @export
-var damage : float
+var hull_damage : float
+
+@export
+var shield_damage : float
 
 @export
 var max_beam_length : float
@@ -61,16 +64,17 @@ func _on_timer_timeout() -> void:
 	if last_hit == null:
 		return
 
-	var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * damage
-
 	if last_hit is GameEntity:
+		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
 		last_hit.take_damage(damage_at_distance)
 		hit.emit(last_hit)
 
 	if last_hit is Shield:
+		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
 		last_hit.take_damage(damage_at_distance)
 
 	if last_hit is StaticGameEntity:
+		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
 		last_hit.take_damage(damage_at_distance)
 		hit.emit(last_hit)
 

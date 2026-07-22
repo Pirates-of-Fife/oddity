@@ -22,7 +22,8 @@ var projectile_collision_layer : int
 @export
 var projectile_hit_particle : PackedScene
 
-var damage : float
+var hull_damage : float
+var shield_damage : float
 
 func _ready() -> void:
 	_projectile_ready()
@@ -51,7 +52,7 @@ func _on_body_entered(body : Node) -> void:
 		return
 		
 	if body is GameEntity or body is StaticGameEntity:
-		body.take_damage(damage)
+		body.take_damage(hull_damage)
 		if body is GameEntity:
 			hit.emit(body)
 		
@@ -60,7 +61,7 @@ func _on_body_entered(body : Node) -> void:
 		hit_sound.global_position = global_position
 	
 	if body is Shield:
-		body.take_damage(damage)
+		body.take_damage(shield_damage)
 		hit.emit(body.game_entity)
 	
 	var particles : GPUParticles3D = projectile_hit_particle.instantiate()

@@ -320,7 +320,7 @@ var current_hull_health : float :
 var hull_health_damaged_state : float
 
 @export
-var hull_hardness : float
+var hull_hardness : float = 0
 
 @export_subgroup("Radar")
 
@@ -1403,7 +1403,7 @@ func ship_take_damage(damage : float, ignore_shield : bool = false) -> void:
 	if shield_current_health > 0 and ignore_shield == false:
 		return
 
-	current_hull_health -= calculate_final_damage(damage)
+	current_hull_health -= damage * (1 - hull_hardness)
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
 
 	if current_hull_health <= hull_health_damaged_state and damaged == false:
@@ -1455,22 +1455,6 @@ func on_collision(body : Node3D) -> void:
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound
 		hull_collision_player.play()
-
-func calculate_final_damage(base_damage: float) -> float:
-	var max_hardness: float = 164
-	var max_reduction: float = 0.6
-
-	var linear_factor: float = hull_hardness / max_hardness  # Pure linear scaling (0 to 1)
-	var log_factor: float = log(1 + hull_hardness) / log(1 + max_hardness)  # Log scaling
-
-	# Blend the two (adjust weight to control effect)
-	var blend_ratio: float = 0.6  # Higher = more linear, Lower = more logarithmic
-	var reduction: float = max_reduction * ((blend_ratio * linear_factor) + ((1 - blend_ratio) * log_factor))
-
-	var final_damage: float = base_damage * (1.0 - reduction)
-
-	return final_damage
-
 
 func update_abyssal_mfd() -> void:
 	pass
