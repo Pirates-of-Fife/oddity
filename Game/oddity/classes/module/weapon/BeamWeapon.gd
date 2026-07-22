@@ -10,6 +10,9 @@ var beam_laser : BeamLaserProjectile
 @export
 var beam_sound : AudioStreamPlayer3D
 
+var aim_point : Vector3
+var aim_assist : float = 5
+
 func _ready() -> void:
 	_beam_weapon_ready()
 
@@ -24,8 +27,25 @@ func _beam_weapon_ready() -> void:
 	beam_laser.hull_damage = beam_weapon_resource.hull_damage
 	beam_laser.damage_fall_off = beam_weapon_resource.damage_fall_off
 	beam_laser.max_beam_length = beam_weapon_resource.max_beam_length
+	
+	beam_laser.reparent(nozzle)
 
 func shoot() -> void:
+	nozzle.rotation = Vector3.ZERO
+	
+	if (module_slot.vehicle as Starship).is_bounty_target:
+		aim_assist = 30
+	
+	if (aim_point != Vector3.ZERO):
+		var angle : float = nozzle.global_position.angle_to(aim_point)
+		
+		angle = nozzle.global_basis.z.angle_to(aim_point - nozzle.global_position)
+				
+		if (angle <= deg_to_rad(aim_assist)):		
+			nozzle.look_at(aim_point)
+	else:
+		nozzle.rotation = Vector3.ZERO
+
 	beam_laser.start_beam()
 	if !beam_sound.playing:
 		beam_sound.play()
