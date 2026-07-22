@@ -99,7 +99,13 @@ func _space_station_process(delta : float) -> void:
 
 	if enforce_speed_limit:
 		var player : Player = get_tree().get_first_node_in_group("Player")
-
+		
+		if player == null:
+			return
+		
+		if player.control_entity == null:
+			return
+		
 		if player.control_entity is Starship:
 			var ship : Starship = player.control_entity
 			if ship.current_max_velocity > 100:

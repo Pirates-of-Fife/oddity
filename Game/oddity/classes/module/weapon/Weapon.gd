@@ -28,10 +28,8 @@ func _weapon_ready() -> void:
 func _on_weapon_inserted(slot : ModuleSlot) -> void:
 	if slot is Hardpoint:
 		if slot.size == ModuleSize.HardpointSize.SIZE_6 and size == ModuleSize.HardpointSize.SIZE_5:
-			position.z = -0.336
-			position.y = -0.268
-			print("this should work??")
-	
+			global_position.z = slot.global_position.z + -0.336
+			global_position.y = slot.global_position.y + -0.268	
 	
 func shoot() -> void:
 	pass
