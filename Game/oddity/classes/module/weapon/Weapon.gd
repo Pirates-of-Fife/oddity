@@ -12,6 +12,9 @@ var size : ModuleSize.HardpointSize
 @export
 var nozzle : Marker3D
 
+var aim_point : Vector3
+var aim_assist : float
+
 signal weapon_shot
 signal weapon_stopped_shooting
 signal weapon_hit(target : GameEntity)
@@ -24,6 +27,7 @@ func _weapon_ready() -> void:
 	
 	inserted.connect(_on_weapon_inserted)
 	
+	can_be_picked_up = true
 
 func _on_weapon_inserted(slot : ModuleSlot) -> void:
 	if slot is Hardpoint:

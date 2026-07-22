@@ -17,6 +17,8 @@ func _ready() -> void:
 func _beam_weapon_ready() -> void:
 	_weapon_ready()
 	
+	aim_assist = 7
+	
 	beam_laser.beam_weapon = self
 
 	var pulse_laser_weapon_resource : PulseLaserWeaponResource = module_resource as PulseLaserWeaponResource
@@ -37,6 +39,8 @@ func _beam_weapon_ready() -> void:
 	weapon_fire_time_timer.one_shot = true
 	weapon_fire_time_timer.timeout.connect(on_weapon_shoot_timer_timeout)
 	weapon_fire_time_timer.wait_time = pulse_laser_weapon_resource.fire_time
+	
+	beam_laser.reparent(nozzle)
 
 func on_weapon_cooldown_timer_timeout() -> void:
 	weapon_cooldown_complete.emit()
@@ -51,12 +55,12 @@ func on_weapon_shoot_timer_timeout() -> void:
 	if weapon_cooldown_timer.is_stopped():
 		weapon_cooldown_timer.start()
 	
+	print("fuck")
+	
 func shoot() -> void:
 	if cooldown_complete == false:
 		return
-	
-	nozzle.rotation = Vector3.ZERO
-	
+				
 	if (module_slot.vehicle as Starship).is_bounty_target:
 		aim_assist = 30
 	
@@ -66,7 +70,7 @@ func shoot() -> void:
 		angle = nozzle.global_basis.z.angle_to(aim_point - nozzle.global_position)
 				
 		if (angle <= deg_to_rad(aim_assist)):		
-			nozzle.look_at(aim_point)
+			nozzle.look_at(to_global(-to_local(aim_point)))			
 	else:
 		nozzle.rotation = Vector3.ZERO
 	

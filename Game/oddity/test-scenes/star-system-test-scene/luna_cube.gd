@@ -6,7 +6,7 @@ var damage_timer: Timer
 var total_damage : float = 0
 
 func _on_damage_timer_timeout() -> void:
-	#print("DPS: " + str(damage_in_last_second / 2))
+	print("DPS: " + str(damage_in_last_second / 2))
 	damage_in_last_second = 0
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func _ready() -> void:
 func on_damaged(damage : float) -> void:
 	#_ready()
 	
-	#print("Damage: " + str(damage))
+	print("Damage: " + str(damage))
 	total_damage += damage
 	
 	#print("Total damage: " + str(total_damage))

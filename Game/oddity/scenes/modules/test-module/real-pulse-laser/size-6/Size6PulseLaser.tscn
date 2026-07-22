@@ -33,11 +33,11 @@ unit_size = 16.46
 pitch_scale = 1.48
 bus = &"Weapon"
 
-[node name="Nozzle" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0501663, 2.81769)
-
 [node name="RealLaserProjectile" parent="." instance=ExtResource("5_fyisx")]
 damage_rate = 0.01
+
+[node name="Nozzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0501663, 2.66435)
 
 [node name="Size6RealPulseLaser2" parent="." instance=ExtResource("7_e2gul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0954692, 0)

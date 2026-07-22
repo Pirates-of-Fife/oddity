@@ -63,16 +63,18 @@ func _beam_laser_projectile_ready() -> void:
 func _on_timer_timeout() -> void:
 	if last_hit == null:
 		return
-
+	
 	if last_hit is GameEntity:
 		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
 		last_hit.take_damage(damage_at_distance)
+		
 		hit.emit(last_hit)
 
 	if last_hit is Shield:
-		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
+		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * shield_damage
 		last_hit.take_damage(damage_at_distance)
-
+		hit.emit(last_hit)
+	
 	if last_hit is StaticGameEntity:
 		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
 		last_hit.take_damage(damage_at_distance)
