@@ -21,6 +21,7 @@ shot_audio = ExtResource("2_prkwe")
 size = 6
 nozzle = NodePath("Nozzle")
 module_resource = ExtResource("2_ys687")
+can_be_picked_up = true
 
 [node name="Nozzle" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196321, 2.71022)

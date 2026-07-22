@@ -20,6 +20,7 @@ size = Vector3(1.14437, 1.0506, 0.337598)
 disable_mode = 1
 collision_layer = 0
 collision_mask = 0
+freeze = true
 script = ExtResource("1_k3oly")
 screen = NodePath("SubViewport/EngineeringTerminalScreen")
 controller_reference = "res://classes/command/engineering-terminal-commands/EngineeringTerminalController.tscn"
@@ -50,6 +51,7 @@ handle_input_locally = false
 size = Vector2i(2065, 975)
 
 [node name="EngineeringTerminalScreen" parent="SubViewport" node_paths=PackedStringArray("engineering_terminal") instance=ExtResource("4_5tno4")]
+visible = false
 engineering_terminal = NodePath("../..")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -66,8 +68,8 @@ enable_twist_limit = true
 enable_pitch_limit = true
 
 [node name="Interactable" type="StaticBody3D" parent="."]
-collision_layer = 536870912
-collision_mask = 536870912
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("6_80j38")
 press_delay = 0.2
 

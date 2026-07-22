@@ -227,6 +227,7 @@ charging_end = NodePath("ChargeEnd")
 travelling_sound = NodePath("Travelling")
 module_resource = ExtResource("2_qp6o5")
 passive_heat_generation = 150.0
+can_be_picked_up = true
 
 [node name="alcubierre_drive" type="Node3D" parent="."]
 transform = Transform3D(9.18485e-17, -1.5, 0, 1.5, 9.18485e-17, 0, 0, 0, 1.5, 0, -0.0260223, 0)

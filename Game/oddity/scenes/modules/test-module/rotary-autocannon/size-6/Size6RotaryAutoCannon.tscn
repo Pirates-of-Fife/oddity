@@ -21,6 +21,7 @@ shot_audio = ExtResource("2_vxkxq")
 size = 6
 nozzle = NodePath("Marker3D")
 module_resource = ExtResource("2_43rva")
+can_be_picked_up = true
 
 [node name="rotary_cannon" parent="." instance=ExtResource("3_3hcin")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

@@ -23,6 +23,8 @@ var passive_heat_generation : float = 0
 var is_being_held_after_uninsert : bool  = false
 
 var module_fx_scene : String = "res://classes/module/module-fx/ModuleFx.tscn"
+
+@export
 var quiet_insert : bool = false
 
 func _ready() -> void:
@@ -49,8 +51,9 @@ func _on_uninsert(slot : ModuleSlot) -> void:
 
 func _insert_fx(slot : ModuleSlot) -> void:
 	if quiet_insert:
+		quiet_insert = false
 		return
-	
+
 	var fx : ModuleFX = load(module_fx_scene).instantiate()
 	
 	add_child(fx)
@@ -64,7 +67,7 @@ func _uninsert_fx(slot : ModuleSlot) -> void:
 	fx.insert_fx = false
 	
 	slot.add_child(fx)
-	
+		
 func insert(slot : DynamicModuleSlot) -> void:
 	can_freeze = false
 
@@ -81,7 +84,6 @@ func insert(slot : DynamicModuleSlot) -> void:
 
 	module_slot.module_inserted.emit(self, module_slot.id)
 	inserted.emit(module_slot)
-
 
 func uninsert() -> void:
 	uninserted.emit(module_slot)
