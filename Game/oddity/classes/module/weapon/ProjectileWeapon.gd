@@ -50,10 +50,11 @@ func shoot() -> void:
 		aim_assist = 60
 	
 	if (aim_point != Vector3.ZERO):
-		var angle : float = nozzle.global_position.angle_to(aim_point)
+		var angle : float = nozzle.global_basis.z.angle_to(aim_point - nozzle.global_position)
+
 		
-		angle = nozzle.global_basis.z.angle_to(aim_point - nozzle.global_position)
-				
+		print("projectile angle: " + str(rad_to_deg(angle)) + " " + str(aim_point))
+		
 		if (angle <= deg_to_rad(aim_assist)):		
 			nozzle.look_at(aim_point)
 			mod = -1
