@@ -187,16 +187,20 @@ _data = {
 "open": SubResource("Animation_yg165")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_heqg5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_deado"]
 transparency = 1
+shading_mode = 0
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0, 0.180392, 0.847059, 1)
-distance_fade_mode = 2
-distance_fade_max_distance = 20.0
+albedo_color = Color(0.44, 0.617333, 1, 0.113725)
+refraction_scale = 1.0
+texture_filter = 2
+disable_receive_shadows = true
+proximity_fade_distance = 10.0
+distance_fade_mode = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_hl8ha"]
-material = SubResource("StandardMaterial3D_heqg5")
+material = SubResource("StandardMaterial3D_deado")
 size = Vector3(0.035, 2.3, 1.485)
 
 [node name="RabsKestrelMk1Elevator" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
