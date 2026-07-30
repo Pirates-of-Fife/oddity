@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://coyru7cl34b2q"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/ShieldGenerator.gd" id="1_fummq"]
+[ext_resource type="Resource" uid="uid://crkb725ayctw0" path="res://scenes/modules/test-module/protectec/Protectec3.tres" id="2_debf4"]
+[ext_resource type="PackedScene" uid="uid://cuejgv3xjaj0j" path="res://scenes/modules/test-module/protectec/mesh/WolframIndustrialProtecTec.tscn" id="2_i7g8w"]
+
+[node name="ProtecTec3" type="RigidBody3D"]
+collision_layer = 537396737
+collision_mask = 537396737
+script = ExtResource("1_fummq")
+size = 3
+module_resource = ExtResource("2_debf4")
+
+[node name="WolframIndustrialProtecTec" parent="." instance=ExtResource("2_i7g8w")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
