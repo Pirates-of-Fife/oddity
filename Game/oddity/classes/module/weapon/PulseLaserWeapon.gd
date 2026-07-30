@@ -64,13 +64,13 @@ func shoot() -> void:
 	if (module_slot.vehicle as Starship).is_bounty_target:
 		aim_assist = 30
 	
+	nozzle.rotation = Vector3.ZERO
+	
 	if (aim_point != Vector3.ZERO):
-		var angle : float = nozzle.global_position.angle_to(aim_point)
-		
-		angle = nozzle.global_basis.z.angle_to(aim_point - nozzle.global_position)
+		var angle : float = nozzle.global_basis.z.angle_to(aim_point - nozzle.global_position)
 				
 		if (angle <= deg_to_rad(aim_assist)):		
-			nozzle.look_at(to_global(-to_local(aim_point)))			
+			nozzle.look_at(to_global(-to_local(aim_point)))		
 	else:
 		nozzle.rotation = Vector3.ZERO
 	
