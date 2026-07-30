@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://brgr84uhy1tq2"]
+
+[ext_resource type="ArrayMesh" uid="uid://cwlyraavy4n66" path="res://scenes/modules/test-module/mercury/meshes/AresIndustrialMercuryMain.mesh" id="1_60qmr"]
+[ext_resource type="ArrayMesh" uid="uid://dcypedubv1ka1" path="res://scenes/modules/test-module/mercury/meshes/AresIndustrialMercuryBarrel.mesh" id="2_vvkvd"]
+[ext_resource type="ArrayMesh" uid="uid://ra5bciyqwlqs" path="res://scenes/modules/test-module/mercury/meshes/AresIndustrialMercuryBarrels2.mesh" id="3_wk8ky"]
+
+[node name="MercuryMesh" type="Node3D"]
+
+[node name="Mercury" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_60qmr")
+skeleton = NodePath("")
+
+[node name="BarrelStuff" type="MeshInstance3D" parent="Mercury"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.237217, -1.26318)
+mesh = ExtResource("2_vvkvd")
+skeleton = NodePath("")
+
+[node name="Barrels" type="MeshInstance3D" parent="Mercury/BarrelStuff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000424176, 0.406435)
+mesh = ExtResource("3_wk8ky")
+skeleton = NodePath("")
