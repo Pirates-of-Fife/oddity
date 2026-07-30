@@ -15,3 +15,9 @@ const ship_fuel_capacity_upgrade_price : Array[int] = [0, 100_000, 300_000, 1_35
 
 const ship_heat_capacity_upgrade : Array[float] = [1, 1.2, 1.5, 2, 2.2, 3]
 const ship_heat_capacity_upgrade_price : Array[int] = [0, 100_000, 300_000, 1_350_000, 5_005_000, 35_009_000]
+
+const ship_turning_upgrade : Array[float] = [1, 1.1, 1.2, 1.6, 1.8, 2]
+const ship_turning_upgrade_price : Array[int] = [0, 100_000, 300_000, 1_350_000, 5_005_000, 35_009_000]
+
+const ship_thruster_upgrade : Array[float] = [0.75, 1, 1.1, 1.2, 1.3, 1.4]
+const ship_thruster_upgrade_price : Array[int] = [0, 100_000, 300_000, 1_350_000, 5_005_000, 35_009_000]

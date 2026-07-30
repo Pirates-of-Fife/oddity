@@ -62,6 +62,11 @@ var current_fuel_capacity_upgrade : int
 @export_range(0, 5, 1, "suffix:Grade")
 var current_ammo_capacity_upgrade : int
 
+@export_range(0, 5, 1, "suffix:Grade")
+var current_turning_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_thruster_upgrade : int
 
 func get_module_by_id(id : int) -> PackedScene:
 	for slot : ModuleSlotLoadoutResource in module_slots:

@@ -56,7 +56,11 @@ var alarm_sound_player : AudioStreamPlayer3D
 @export
 var explosion_partcle : GPUParticles3D
 
+@export
+var landing_cam : Sprite3D
 
+@export
+var landing_cam_marker : Marker3D
 
 var interior_shown : bool = true
 var player_reference : Player
@@ -179,7 +183,10 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	alcubierre_drive_charging_ended.connect(on_super_cruise_charging_stopped)
 
 	_starship_ready()
-
+	
+	if is_bounty_target:
+		landing_cam.get_children()[0].queue_free()
+	
 	player_reference = get_tree().get_first_node_in_group("Player")
 
 	overheating_start.connect(_overheat_start)
@@ -199,6 +206,7 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		$Interior/Bridge/MassLockedLabel.hide()
 		$Interior/Bridge/CruiseLabel.hide()
 		$Interior/Bridge/LandingGearLabel.hide()
+		landing_cam.hide()
 		fuel_ui.hide()
 		heat_ui.hide()
 		if damaged:
@@ -362,6 +370,7 @@ func on_power_on() -> void:
 		ui_elements.append($Interior/Bridge/DamagedLabel)
 	if landing_gear_on:
 		ui_elements.append($Interior/Bridge/LandingGearLabel)
+		ui_elements.append(landing_cam)
 	if headlight_left.visible:
 		ui_elements.append(headlight_icon)
 	
@@ -396,6 +405,8 @@ func on_power_off() -> void:
 	$Interior/Bridge/GravityLabel.hide()
 	$Interior/Bridge/LandingGearLabel.hide()
 	headlight_icon.hide()
+	
+	landing_cam.hide()
 	
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
@@ -488,10 +499,12 @@ func toggle_landing_gear(force : bool = false) -> void:
 	if $Interior/Bridge/LandingGearLabel.visible:
 		$Interior/Bridge/LandingGearLabel.hide()
 		landing_gear_on = false
+		landing_cam.hide()
 		landing_gear_retracted.emit()
 	else:
 		$Interior/Bridge/LandingGearLabel.show()
 		landing_gear_on = true
+		landing_cam.show()
 		landing_gear_deployed.emit()
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
