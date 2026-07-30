@@ -109,7 +109,9 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	loadout.current_fuel_capacity_upgrade = starship.current_fuel_capacity_upgrade
 	loadout.current_health_upgrade = starship.current_health_upgrade
 	loadout.current_heat_capacity_upgrade = starship.current_heat_capacity_upgrade
-	
+	loadout.current_turning_upgrade = starship.current_turning_upgrade
+	loadout.current_thruster_upgrade = starship.current_thruster_upgrade
+
 	loadout.ship_color = starship.original_hull_color
 	
 	if save_as_player_ship_save:
@@ -177,6 +179,8 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 	starship.current_fuel_capacity_upgrade = loadout.current_fuel_capacity_upgrade
 	starship.current_health_upgrade = loadout.current_health_upgrade
 	starship.current_heat_capacity_upgrade = loadout.current_heat_capacity_upgrade
+	starship.current_turning_upgrade = loadout.current_turning_upgrade
+	starship.current_thruster_upgrade = loadout.current_thruster_upgrade
 	
 	starship.is_boss = loadout.is_boss
 

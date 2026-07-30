@@ -46,6 +46,24 @@ var heat_upgrade_name : String
 @export
 var heat_upgrade_description : String
 
+@export
+var turning_upgrade_ui : UpgradeUI
+
+@export
+var turning_upgrade_name : String
+
+@export
+var turning_upgrade_description : String
+
+@export
+var thrust_upgrade_ui : UpgradeUI
+
+@export
+var thrust_upgrade_name : String
+
+@export
+var thrust_upgrade_description : String
+
 @export_category("UI")
 
 @export
@@ -84,6 +102,8 @@ func _on_ship_landed(ship : Starship) -> void:
 	set_up_ammo()
 	set_up_fuel()
 	set_up_heat()
+	set_up_thrust()
+	set_up_turning()
 	
 func _on_ship_take_off(ship : Starship) -> void:
 	starship = null
@@ -97,6 +117,8 @@ func _on_ship_take_off(ship : Starship) -> void:
 	set_down_ammo()
 	set_down_fuel()
 	set_down_heat()
+	set_down_thrust()
+	set_down_turning()
 
 func set_up_health() -> void:
 	health_upgrade_ui.show()
@@ -213,3 +235,62 @@ func _on_fuel_upgrade() -> void:
 func set_down_fuel() -> void:
 	fuel_upgrade_ui.hide()
 	fuel_upgrade_ui.upgrade.disconnect(_on_fuel_upgrade)
+
+
+func set_up_turning() -> void:
+	turning_upgrade_ui.show()
+	turning_upgrade_ui.upgrade.connect(_on_turning_upgrade)
+	turning_upgrade_ui.max_upgrade_level = ShipUpgrades.MAX_UPGRADE
+	turning_upgrade_ui.upgrade_name = turning_upgrade_name
+	turning_upgrade_ui.upgrade_description = turning_upgrade_description
+	
+	update_turning()
+		
+func update_turning() -> void:
+	turning_upgrade_ui.current_upgrade_level = starship.current_turning_upgrade
+	turning_upgrade_ui.upgrade_current_multiplier = ShipUpgrades.ship_turning_upgrade[starship.current_turning_upgrade]
+	
+	if starship.current_turning_upgrade < ShipUpgrades.MAX_UPGRADE:
+		turning_upgrade_ui.upgrade_next_multiplier = ShipUpgrades.ship_turning_upgrade[starship.current_turning_upgrade + 1]
+		turning_upgrade_ui.upgrade_price = ShipUpgrades.ship_turning_upgrade_price[starship.current_turning_upgrade + 1]
+	
+	if starship.current_turning_upgrade == ShipUpgrades.MAX_UPGRADE:
+		turning_upgrade_ui.max_upgrade_reached = true
+			
+func _on_turning_upgrade() -> void:
+	player.remove_credits(ShipUpgrades.ship_turning_upgrade_price[starship.current_turning_upgrade + 1])
+	starship.upgrade_turning()
+	update_turning()
+	
+func set_down_turning() -> void:
+	turning_upgrade_ui.hide()
+	turning_upgrade_ui.upgrade.disconnect(_on_turning_upgrade)
+	
+func set_up_thrust() -> void:
+	thrust_upgrade_ui.show()
+	thrust_upgrade_ui.upgrade.connect(_on_thrust_upgrade)
+	thrust_upgrade_ui.max_upgrade_level = ShipUpgrades.MAX_UPGRADE
+	thrust_upgrade_ui.upgrade_name = thrust_upgrade_name
+	thrust_upgrade_ui.upgrade_description = thrust_upgrade_description
+	
+	update_thrust()
+		
+func update_thrust() -> void:
+	thrust_upgrade_ui.current_upgrade_level = starship.current_thruster_upgrade
+	thrust_upgrade_ui.upgrade_current_multiplier = ShipUpgrades.ship_thruster_upgrade[starship.current_thruster_upgrade]
+	
+	if starship.current_thruster_upgrade < ShipUpgrades.MAX_UPGRADE:
+		thrust_upgrade_ui.upgrade_next_multiplier = ShipUpgrades.ship_thruster_upgrade[starship.current_thruster_upgrade + 1]
+		thrust_upgrade_ui.upgrade_price = ShipUpgrades.ship_thruster_upgrade_price[starship.current_thruster_upgrade + 1]
+	
+	if starship.current_thruster_upgrade == ShipUpgrades.MAX_UPGRADE:
+		thrust_upgrade_ui.max_upgrade_reached = true
+	
+func _on_thrust_upgrade() -> void:
+	player.remove_credits(ShipUpgrades.ship_thruster_upgrade_price[starship.current_thruster_upgrade + 1])
+	starship.upgrade_thruster()
+	update_thrust()	
+	
+func set_down_thrust() -> void:
+	thrust_upgrade_ui.hide()
+	thrust_upgrade_ui.upgrade.disconnect(_on_thrust_upgrade)

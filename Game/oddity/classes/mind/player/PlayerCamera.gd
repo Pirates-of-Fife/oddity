@@ -95,7 +95,7 @@ func _process(delta : float) -> void:
 		camera_shake()
 
 func adjust_camera_position() -> void:
-	position = position.lerp(acceleration + defaultPosition, get_process_delta_time() * 2.0)
+	position = position.lerp(acceleration / 2 + defaultPosition, get_process_delta_time() * 2.0)
 
 func adjust_fov() -> void:
 	# Define the minimum and maximum speeds for mapping
@@ -112,6 +112,7 @@ func camera_shake() -> void:
 	var offset : Vector2 =  Vector2(randf(), randf()) * acceleration.length() / current_camera_shake_strength
 	h_offset = offset.x
 	v_offset = offset.y
+
 
 func logarithmicTransform(vector : Vector3) -> Vector3:
 	var transformedVector : Vector3 = Vector3()

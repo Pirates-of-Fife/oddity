@@ -1,4 +1,4 @@
-[gd_scene load_steps=1552 format=4 uid="uid://rb8yfa4ux5r7"]
+[gd_scene load_steps=1553 format=4 uid="uid://rb8yfa4ux5r7"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_q4nax"]
 [ext_resource type="Texture2D" uid="uid://byf7mmfg26l48" path="res://scenes/world/textures/8k_earth_daymap.jpg" id="2_xqvdc"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://b8q66q6eop8h7" path="res://resources/resources/mineable/Mineables/AsteroidMineableResource.tres" id="19_puhgr"]
 [ext_resource type="PackedScene" uid="uid://e10kuiin0vgc" path="res://scenes/world/boss-zones/TestBossFight.tscn" id="20_3mu72"]
 [ext_resource type="Script" path="res://resources/resources/mineable/MineableSector.gd" id="20_jne51"]
+[ext_resource type="PackedScene" uid="uid://87h5uigosd87" path="res://classes/upgrades/ship-upgrade-terminal/UpgradeExampleScene.tscn" id="21_eeapo"]
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/minable/MinableTransform.gd" id="21_xpr6q"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="22_fubnj"]
 [ext_resource type="PackedScene" uid="uid://bgmmbupac43ws" path="res://scenes/world/gateway/celestial-bodies/arka/scatter-objects/ArkaFoliage1.tscn" id="23_cfpg2"]
@@ -10165,3 +10166,6 @@ deactivate_distance = 25500.0
 
 [node name="TestBossFight" parent="." instance=ExtResource("20_3mu72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41589, -21774.4, -35052.7)
+
+[node name="UpgradeExampleScene" parent="." instance=ExtResource("21_eeapo")]
+transform = Transform3D(0.829652, -0.541254, 0.136828, 0, 0.245087, 0.969501, -0.558281, -0.804348, 0.203337, -8317.85, 3356.93, -12018.4)

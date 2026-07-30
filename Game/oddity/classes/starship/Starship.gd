@@ -36,6 +36,12 @@ var ship_identification : StringName = "Default Starship" :
 
 
 @export
+var turning_modifier : float = 1
+
+@export
+var thruster_modifier : float = 1
+
+@export
 var cruise_speed : float = 300.1234
 
 @export
@@ -448,6 +454,12 @@ var current_fuel_capacity_upgrade : int
 @export_range(0, 5, 1, "suffix:Grade")
 var current_ammo_capacity_upgrade : int
 
+@export_range(0, 5, 1, "suffix:Grade")
+var current_turning_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_thruster_upgrade : int
+
 @export_category("Cargo")
 @export
 var cargo_grids : Array = Array()
@@ -639,6 +651,12 @@ func upgrade_ammo() -> void:
 	current_ammo_capacity_upgrade = min(current_ammo_capacity_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
 	max_ammo_changed.emit(max_ammo)
 
+func upgrade_thruster() -> void:
+	current_thruster_upgrade = min(current_thruster_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	
+func upgrade_turning() -> void:
+	current_turning_upgrade = min(current_turning_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	
 func update_module_stats() -> void:
 	passive_heat_generation = 0
 	current_heat = 0
@@ -1641,9 +1659,9 @@ func cruise_travel(delta : float) -> void:
 		roll_left(thrust)
 
 
-	apply_central_force(actual_thrust_vector * global_basis.inverse())
+	apply_central_force(actual_thrust_vector * ShipUpgrades.ship_thruster_upgrade[current_thruster_upgrade] * global_basis.inverse())
 
-	apply_torque(actual_rotation_vector * global_basis.inverse())
+	apply_torque(actual_rotation_vector * ShipUpgrades.ship_turning_upgrade[current_turning_upgrade] * global_basis.inverse())
 
 var last_position : Vector3 = Vector3.ZERO
 
