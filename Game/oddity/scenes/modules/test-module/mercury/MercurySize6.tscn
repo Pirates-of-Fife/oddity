@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://buw41xdigwss2"]
+
+[ext_resource type="Script" path="res://scenes/modules/test-module/rotary-autocannon/rotary_auto_cannon.gd" id="1_ixnsb"]
+[ext_resource type="PackedScene" uid="uid://dg1js6615uhdr" path="res://scenes/modules/test-module/rotary-autocannon/RotaryCannonSoundSize5.tscn" id="2_afrfr"]
+[ext_resource type="Resource" uid="uid://uldcpjf34ler" path="res://scenes/modules/test-module/mercury/Mercury6.tres" id="3_apvrw"]
+[ext_resource type="PackedScene" uid="uid://brgr84uhy1tq2" path="res://scenes/modules/test-module/mercury/meshes/MercuryMesh.tscn" id="3_gujtd"]
+[ext_resource type="Resource" uid="uid://df2herb57slhc" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/mercury/Mercury6TradeResource.tres" id="4_apetx"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2jrtj"]
+points = PackedVector3Array(-1.9096e-05, -0.0975425, -0.0975425, -0.0689748, -0.0689748, -0.0975425, 0.0689557, -0.0689748, -0.0975425, -1.9096e-05, -0.0975425, 0.781252, -0.0975425, -1.90997e-05, -0.0975425, -0.0689748, -0.0689748, 0.781252, 0.0975234, -1.90997e-05, -0.0975425, 0.0975425, -1.90997e-05, 0.407661, 0.0689557, -0.0689748, 0.781252, -0.0689748, 0.0689557, -0.0975425, -0.0975425, -1.90997e-05, 0.781252, 0.0689557, 0.0689557, -0.0975425, 0.0975425, -1.90997e-05, 0.781252, -1.9096e-05, 0.0975234, -0.0975425, -0.0689748, 0.0689557, 0.781252, -1.9096e-05, 0.0975425, 0.407661, 0.0689557, 0.0689557, 0.781252, -1.9096e-05, 0.0975234, 0.781252)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mwm68"]
+points = PackedVector3Array(-0.198153, -0.00203247, -0.276984, -0.236653, 0.0400473, -0.331552, -0.109014, 0.135148, -0.598685, 0.198107, -0.00203247, -0.276984, -0.198153, -0.00203247, 0.283851, -0.236653, 0.0400473, 0.338419, -0.236653, 0.0854935, -0.331552, -0.164379, 0.0988187, -0.483509, -0.109014, 0.338907, -0.598685, 0.108968, 0.135148, -0.598685, 0.236607, 0.0400473, -0.331552, 0.236653, 0.0400473, 0.338419, 0.198107, -0.00203247, 0.283851, -0.037064, 0.161611, 0.522985, -0.0924745, 0.184615, 0.522985, -0.115454, 0.24002, 0.522985, -0.236653, 0.0854935, 0.338419, -0.20223, 0.430314, -0.331552, -0.131531, 0.357843, -0.549167, 0.108968, 0.338907, -0.598685, 0.164332, 0.0988187, -0.483509, 0.236607, 0.0854935, -0.331552, 0.236653, 0.0854935, 0.338419, 0.115408, 0.24002, 0.522985, 0.0924281, 0.184615, 0.522985, 0.0369712, 0.161611, 0.522985, -0.115454, 0.336242, 0.522985, -0.20223, 0.430314, 0.189537, -0.103872, 0.47562, -0.204739, 0.131484, 0.357843, -0.549167, 0.202184, 0.430314, -0.331552, 0.202184, 0.430314, 0.189537, 0.115408, 0.336242, 0.522985, -0.0924745, 0.391647, 0.522985, -0.037064, 0.414651, 0.522985, -0.103872, 0.47562, 0.0627229, 0.103779, 0.47562, -0.204739, 0.103779, 0.47562, 0.0627229, 0.0369712, 0.414651, 0.522985, 0.0924281, 0.391647, 0.522985)
+
+[node name="MercurySize6" type="RigidBody3D" node_paths=PackedStringArray("barrel_mesh", "nozzle")]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 20.0
+script = ExtResource("1_ixnsb")
+barrel_mesh = NodePath("MercuryMesh/Mercury/BarrelStuff")
+shot_audio = ExtResource("2_afrfr")
+size = 6
+nozzle = NodePath("Marker3D")
+module_resource = ExtResource("3_apvrw")
+entity_name = &"Mercury 6"
+sellable = true
+trade_information = ExtResource("4_apetx")
+can_be_picked_up = true
+
+[node name="MercuryMesh" parent="." instance=ExtResource("3_gujtd")]
+transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, 0, -0.815788, -1.77848)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0865349, 2.49072)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, -3.0939e-16, -0.0726153, 2.08507)
+shape = SubResource("ConvexPolygonShape3D_2jrtj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, 0.00547691, -0.811765, -1.78614)
+shape = SubResource("ConvexPolygonShape3D_mwm68")
+
+[editable path="MercuryMesh"]
