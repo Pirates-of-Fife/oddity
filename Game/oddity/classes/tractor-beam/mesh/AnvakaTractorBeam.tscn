@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://dj5emjn3ylomv"]
+
+[ext_resource type="ArrayMesh" uid="uid://cic2qkttx0cuc" path="res://classes/tractor-beam/mesh/meshes/anvaka_base.mesh" id="1_r651b"]
+[ext_resource type="ArrayMesh" uid="uid://b2o81ecvtx280" path="res://classes/tractor-beam/mesh/meshes/anvaka_yaw.mesh" id="2_2clke"]
+[ext_resource type="ArrayMesh" uid="uid://bkpplpm2x3bop" path="res://classes/tractor-beam/mesh/meshes/anvaka_pitch.mesh" id="3_sk8ha"]
+[ext_resource type="ArrayMesh" uid="uid://cbes0v1eili8k" path="res://classes/tractor-beam/mesh/meshes/anvaka_arms.mesh" id="4_4qxqf"]
+[ext_resource type="ArrayMesh" uid="uid://o60tbr28uo6e" path="res://classes/tractor-beam/mesh/meshes/anvaka_pitch2.mesh" id="5_vm1q3"]
+[ext_resource type="ArrayMesh" uid="uid://dlo7xi04ji8up" path="res://classes/tractor-beam/mesh/meshes/anvaka_casing.mesh" id="6_228f2"]
+[ext_resource type="ArrayMesh" uid="uid://djcfefaqjdcf5" path="res://classes/tractor-beam/mesh/meshes/anvaka_tractor.mesh" id="7_d68f5"]
+[ext_resource type="ArrayMesh" uid="uid://c64nmuoag5hgr" path="res://classes/tractor-beam/mesh/meshes/anvaka_power.mesh" id="8_3k8bg"]
+
+[node name="AnvakaTractorBeam" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="Mounting" type="MeshInstance3D" parent="Node3D"]
+mesh = ExtResource("1_r651b")
+skeleton = NodePath("")
+
+[node name="Yaw" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0185399, 0)
+mesh = ExtResource("2_2clke")
+skeleton = NodePath("")
+
+[node name="Pitch" type="MeshInstance3D" parent="Node3D/Yaw"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.0299187, 0)
+mesh = ExtResource("3_sk8ha")
+skeleton = NodePath("")
+
+[node name="Arms" type="MeshInstance3D" parent="Node3D/Yaw/Pitch"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.00145028, -0.00132152)
+mesh = ExtResource("4_4qxqf")
+skeleton = NodePath("")
+
+[node name="Pitch 2" type="MeshInstance3D" parent="Node3D/Yaw/Pitch/Arms"]
+transform = Transform3D(-1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, -1, 0, 0.00368508, -0.354723)
+mesh = ExtResource("5_vm1q3")
+skeleton = NodePath("")
+
+[node name="Casing" type="MeshInstance3D" parent="Node3D/Yaw/Pitch/Arms/Pitch 2"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0.000363395, 4.12464e-05)
+mesh = ExtResource("6_228f2")
+skeleton = NodePath("")
+
+[node name="Tractor Beam" type="MeshInstance3D" parent="Node3D/Yaw/Pitch/Arms/Pitch 2/Casing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000354715, -0.123294)
+mesh = ExtResource("7_d68f5")
+skeleton = NodePath("")
+
+[node name="Power Unit" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0606083, 0)
+mesh = ExtResource("8_3k8bg")
+skeleton = NodePath("")
