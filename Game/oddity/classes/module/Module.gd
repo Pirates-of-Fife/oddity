@@ -27,6 +27,8 @@ var module_fx_scene : String = "res://classes/module/module-fx/ModuleFx.tscn"
 @export
 var quiet_insert : bool = false
 
+var insert_modifications : Vector3 = Vector3.ZERO
+
 func _ready() -> void:
 	_module_ready()
 
@@ -74,14 +76,22 @@ func insert(slot : DynamicModuleSlot) -> void:
 	module_slot = slot
 
 	freeze_static()
-
+	
+	if self is Weapon:
+		if slot.size == ModuleSize.HardpointSize.SIZE_6 and self.size == ModuleSize.HardpointSize.SIZE_5:
+			if self is MiningLaser:
+				insert_modifications = Vector3(0, -0.302, -0.516)
+			else:
+				insert_modifications = Vector3(0, - 0.336, - 0.268)
+				
 	global_position = module_slot.global_position
 	global_rotation = module_slot.global_rotation
 	module_slot.module = self
 
 	if get_parent_node_3d() != module_slot:
-		reparent.call_deferred(module_slot)
-
+		reparent(module_slot)
+	
+	position = insert_modifications
 	module_slot.module_inserted.emit(self, module_slot.id)
 	inserted.emit(module_slot)
 
