@@ -8,12 +8,12 @@ point_count = 3
 
 [resource]
 script = ExtResource("1_dl71s")
-mining_efficiency = 150.0
-max_beam_length = 2000.0
+mining_efficiency = 200.0
+max_beam_length = 5000.0
 damage_fall_off = SubResource("Curve_8douu")
-heat_generation = 600.0
-hull_damage = 0.0
-shield_damage = 0.0
+heat_generation = 1000.0
+hull_damage = 150.0
+shield_damage = 1500.0
 penetration = 10.0
 type = &"Mining Laser"
 manufacturer = &"Ares Industrial Co."
