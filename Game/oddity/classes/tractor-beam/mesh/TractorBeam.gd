@@ -10,6 +10,9 @@ var animator : AnimationPlayer
 @export
 var yaw : MeshInstance3D
 
+@export
+var casing : MeshInstance3D
+
 @export_category("Tractor Beam Laser")
 
 @export
@@ -39,6 +42,9 @@ var area : Area3D
 var intermediate_position : Marker3D
 
 @export
+var skip_drop_off : bool = false
+
+@export
 var cargo_bay_drop_off_position : Marker3D
 
 @export
@@ -53,6 +59,9 @@ var timer_to_start_picking : Timer
 @export
 var timer_between_picks : Timer
 
+@export
+var collision_shapes : Array[CollisionShape3D]
+
 var active : bool
 var entities : Array[GameEntity]
 var grabbed : GameEntity
@@ -66,7 +75,9 @@ func _ready() -> void:
 	area.body_exited.connect(_on_area_exited)
 	timer_to_start_picking.timeout.connect(on_start_picking)
 	timer_between_picks.timeout.connect(on_pick_next)
-	ramp.openable_opened.connect(on_ramp_open)
+	
+	for c : CollisionShape3D in collision_shapes:
+		c.reparent(area)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -83,6 +94,7 @@ func on_start_picking() -> void:
 	var entity_to_grab : GameEntity = pick_entity_to_take()
 	
 	if entity_to_grab == null:
+		timer_to_start_picking.start()
 		return
 		
 	grab(entity_to_grab)
@@ -94,12 +106,14 @@ func on_pick_next() -> void:
 	var entity_to_grab : GameEntity = pick_entity_to_take()
 	
 	if entity_to_grab == null:
+		timer_to_start_picking.start()
 		return
 		
 	grab(entity_to_grab)
 	
 func grab(game_entity : GameEntity) -> void:
 	game_entity.can_be_picked_up = false
+	game_entity.gravity_scale = 0
 	grabbed = game_entity
 	
 	move_to_intermediate()
@@ -138,11 +152,24 @@ func move_to_destination() -> void:
 	current_tween = tween
 
 func on_intermediate_reached() -> void:
+	if skip_drop_off: 
+		stop_tractor_beam_effects()
+		
+		current_tween.stop()
+		grabbed.can_be_picked_up = true
+		grabbed.gravity_scale = 1
+		entities.erase(grabbed)
+		grabbed = null
+		
+		timer_between_picks.start()
+		
+		return
+		
 	move_to_destination()
 
 func on_destination_reached() -> void:
 	grabbed.can_be_picked_up = true
-	
+	grabbed.gravity_scale = 1
 	if grabbed is CargoContainer:
 		cargo_grid.add_cargo_container(grabbed)
 	
@@ -172,12 +199,19 @@ func tractor_beam_effects(game_entity : GameEntity) -> void:
 	rotation_vec.y = 0
 	var angle : float = yaw.global_basis.z.angle_to(yaw.global_position - yaw.to_global(rotation_vec))
 	yaw.rotation.y = -angle
+	
+	casing.rotation = Vector3.ZERO
+	rotation_vec = casing.to_local(game_entity.global_position)# + yaw.global_position - game_entity.global_position * 1000)
+	rotation_vec.x = 0
+	angle = casing.global_basis.z.angle_to(casing.global_position - casing.to_global(rotation_vec))
+	casing.rotation.x = -angle
 
 func stop_tractor_beam_effects() -> void:
 	particles.emitting = false
 	audio.stop()
 	mesh.hide()
 	yaw.rotation = Vector3.ZERO
+	casing.rotation = Vector3.ZERO
 	
 func pick_entity_to_take() -> GameEntity:
 	if cargo_grid.cargo_areas_left == 0:
@@ -193,11 +227,15 @@ func pick_entity_to_take() -> GameEntity:
 	if closest.is_being_held and entities.size() > 1: 
 		closest = entities[1] # fool proof, no way the player can hold two entities right?
 	
+	if !closest.can_be_picked_up:
+		return null
+	
 	return closest
 
 func sort_entities(a : GameEntity, b : GameEntity) -> bool:
 	if a.distance_to(global_position) < b.distance_to(global_position):
-		return true
+		if a.can_be_picked_up > b.can_be_picked_up:
+			return true
 	return false
 
 func _on_area_entered(body : Node) -> void:
@@ -205,13 +243,11 @@ func _on_area_entered(body : Node) -> void:
 		timer_to_start_picking.start()
 
 	if body is GameEntity:
-		if body.can_be_picked_up:
-			entities.append(body)
+		entities.append(body)
 
 func _on_area_exited(body : Node) -> void:
 	if body is GameEntity:
-		if body.can_be_picked_up:
-			entities.erase(body)
+		entities.erase(body)
 
 func activate() -> void:
 	if is_door_closed():
@@ -231,6 +267,11 @@ func deactivate() -> void:
 	
 	if current_tween != null:
 		current_tween.stop()
+	if grabbed != null:
+		grabbed.can_be_picked_up = true
+		grabbed.gravity_scale = 1
+		entities.erase(grabbed)
+		grabbed = null
 	
 	stop_tractor_beam_effects()
 	animator.play("TractorBeamRetract")
@@ -238,9 +279,6 @@ func deactivate() -> void:
 	
 func on_ramp_closing() -> void:
 	deactivate()
-
-func on_ramp_open() -> void:
-	activate()
 
 func is_door_closed() -> bool:
 	return ramp.state == Openable.State.CLOSED or ramp.state == Openable.State.CLOSING

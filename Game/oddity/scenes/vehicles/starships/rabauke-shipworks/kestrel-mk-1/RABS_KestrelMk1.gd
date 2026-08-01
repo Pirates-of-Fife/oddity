@@ -62,6 +62,12 @@ var landing_cam : Sprite3D
 @export
 var landing_cam_marker : Marker3D
 
+@export
+var cargo_bay : RABS_KestrelMk1_Ramp
+
+@export
+var tractor_beams : Array[TractorBeam]
+
 var interior_shown : bool = true
 var player_reference : Player
 
@@ -186,6 +192,8 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	
 	if is_bounty_target:
 		landing_cam.get_children()[0].queue_free()
+		for t : TractorBeam in tractor_beams:
+			t.queue_free()
 	
 	player_reference = get_tree().get_first_node_in_group("Player")
 
@@ -510,3 +518,15 @@ func toggle_landing_gear(force : bool = false) -> void:
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is Projectile:
 		body.activate_collision()
+
+func toggle_tractor_beams() -> void:
+	for t : TractorBeam in tractor_beams:
+		if t.visible:
+			if !t.active:
+				t.activate()
+			else:
+				t.deactivate()
+				
+func toggle_cargo_bay() -> void:
+	cargo_bay.toggle_open_state()
+	

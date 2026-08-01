@@ -129,6 +129,8 @@ func is_entity_storable(entity : Node3D, show_error : bool = false) -> bool:
 				inventory_hud.show_error("Cannot store large cargo containers")
 			return false
 	
+	return true
+	
 	if entity is Component:
 		if entity is AbyssalJumpDrive:
 			if show_error:
