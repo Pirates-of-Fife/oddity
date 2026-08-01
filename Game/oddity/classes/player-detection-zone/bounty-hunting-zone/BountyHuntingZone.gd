@@ -31,7 +31,7 @@ func _ready() -> void:
 
 func _bounty_hunting_zone_ready() -> void:
 	_player_detection_zone_ready()
-
+		
 	activate.connect(_on_activate)
 	deactivate.connect(_on_deactivate)
 
@@ -77,8 +77,9 @@ func _on_bounty_ship_destroyed() -> void:
 		world.music_player.stop_music()
 
 func _on_deactivate(player : Player, control_entity : ControlEntity) -> void:
-	for s : Starship in spawned_ships:
-		#if s.current_state == Starship.State.DESTROYED:
-		s.queue_free()
+	for i : int in range(spawned_ships.size()):
+		if spawned_ships[i] != null:
+			if is_instance_valid(spawned_ships[i]):
+				spawned_ships[i].queue_free()
 	
 	world.music_player.stop_music()

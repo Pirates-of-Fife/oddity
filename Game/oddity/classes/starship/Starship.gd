@@ -322,8 +322,9 @@ var current_hull_health : float :
 		current_hull_health = value
 		current_health_changed.emit()
 
-@export
-var hull_health_damaged_state : float
+var hull_health_damaged_state : float :
+	get:
+		return max_hull_health * 0.25
 
 @export
 var hull_hardness : float = 0
@@ -1773,10 +1774,15 @@ func start_horn() -> void:
 	is_horn_playing = true
 
 func end_horn() -> void:
-	print("END HORNY")
 	ship_horn.end_horn()
 	is_horn_playing = false
 
+func toggle_cargo_bay() -> void:
+	pass
+	
+func toggle_tractor_beams() -> void:
+	pass
+	
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO
 	target_rotational_thrust_vector = Vector3.ZERO

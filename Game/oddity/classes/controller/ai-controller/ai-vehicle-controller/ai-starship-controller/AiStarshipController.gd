@@ -30,10 +30,10 @@ var starship_end_horn_command : StarshipEndHornCommand = StarshipEndHornCommand.
 @export_category("AI Settings")
 
 @export
-var player_detection_range : float = 20000
+var player_detection_range : float = 50000
 
 @export
-var player_engagement_range : float = 1000
+var player_engagement_range : float = 900
 
 var evade_change_time : float = 15
 
@@ -174,7 +174,7 @@ func _ai_starship_controller_process(delta : float) -> void:
 	if distance_to_player > 12000:
 		(control_entity as Starship).current_max_velocity = (control_entity as Starship).ship_info.max_linear_velocity
 	else:
-		(control_entity as Starship).current_max_velocity = maxf(minf(110, (player.control_entity.linear_velocity.length())), 10)
+		(control_entity as Starship).current_max_velocity = maxf(minf(180, (player.control_entity.linear_velocity.length())), 10)
 	
 	if current_ai_state == AiState.FLEE:
 		thrust_towards()
@@ -297,9 +297,10 @@ func thrust_towards() -> void:
 	starship_thrust_forward_command.execute(control_entity, StarshipThrustForwardCommand.Params.new(1))
 
 func shoot_player() -> void:
-	starship_shoot_primary_command.execute(control_entity)
-	starship_shoot_secondary_command.execute(control_entity)
-	starship_shoot_tertiary_command.execute(control_entity)
+	if distance_to_player >= 600:
+		starship_shoot_primary_command.execute(control_entity)
+		starship_shoot_secondary_command.execute(control_entity)
+		starship_shoot_tertiary_command.execute(control_entity)
 
 func evade() -> void:
 	var evasion_amount : float = randf_range(0.1, 0.4)

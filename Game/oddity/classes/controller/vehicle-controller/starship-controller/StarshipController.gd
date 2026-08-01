@@ -47,6 +47,9 @@ var starship_alcubierre_drive_use_special_command : StarshipAlcubierreDriveUseSp
 var starship_start_horn_command : StarshipStartHornCommand = StarshipStartHornCommand.new()
 var starship_end_horn_command : StarshipEndHornCommand = StarshipEndHornCommand.new()
 
+var starship_tractor_beam_command : StarshipTractorBeamCommand = StarshipTractorBeamCommand.new()
+var starship_cargo_bay_command : StarshipCargoBayCommand = StarshipCargoBayCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
@@ -137,7 +140,6 @@ func _starship_controller_process(delta : float) -> void:
 			starship_player_interact_command.execute(control_entity)
 		
 		if (Input.is_key_label_pressed(KEY_0)):
-			#control_entity.global_position = Vector3(-4409300 + 15000, 2041180, -1091460)
 			control_entity.repair()
 			control_entity.restock()
 			control_entity.refuel()
@@ -166,6 +168,11 @@ func _starship_controller_process(delta : float) -> void:
 			mouse_pitch = 0
 			general_toggle_look_around_command.execute(control_entity)
 			look_around = !look_around
+
+		if (Input.is_action_just_pressed("starship_tractor_beams")):
+			starship_tractor_beam_command.execute(control_entity)
+		if (Input.is_action_just_pressed("starship_cargo_bay")):
+			starship_cargo_bay_command.execute(control_entity)
 
 		if look_around:
 			if control_entity.active_control_seat != null:

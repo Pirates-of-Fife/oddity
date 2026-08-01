@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dj5emjn3ylomv"]
+[gd_scene load_steps=24 format=3 uid="uid://dj5emjn3ylomv"]
 
 [ext_resource type="Script" path="res://classes/tractor-beam/mesh/TractorBeam.gd" id="1_lhk2p"]
 [ext_resource type="ArrayMesh" uid="uid://cic2qkttx0cuc" path="res://classes/tractor-beam/mesh/meshes/anvaka_base.mesh" id="1_r651b"]
@@ -25,9 +25,6 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 0.1
 radial_segments = 6
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jhccn"]
-size = Vector3(1000, 1000, 1894.12)
 
 [sub_resource type="Animation" id="Animation_110mw"]
 length = 0.001
@@ -128,10 +125,11 @@ material = SubResource("StandardMaterial3D_e316f")
 size = Vector2(0.755, 1.085)
 orientation = 1
 
-[node name="AnvakaTractorBeam" type="Node3D" node_paths=PackedStringArray("animator", "yaw", "nozzle", "raycast", "mesh", "audio", "particles", "area", "intermediate_position", "cargo_bay_drop_off_position", "timer_to_start_picking", "timer_between_picks")]
+[node name="AnvakaTractorBeam" type="Node3D" node_paths=PackedStringArray("animator", "yaw", "casing", "nozzle", "raycast", "mesh", "audio", "particles", "area", "intermediate_position", "cargo_bay_drop_off_position", "timer_to_start_picking", "timer_between_picks")]
 script = ExtResource("1_lhk2p")
 animator = NodePath("AnimationPlayer")
 yaw = NodePath("Mesh/Yaw")
+casing = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2/Casing")
 nozzle = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle")
 raycast = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle/RayCast3D")
 mesh = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle/Node3D/MeshInstance3D2")
@@ -139,8 +137,8 @@ audio = NodePath("AudioStreamPlayer3D")
 particles = NodePath("Particles")
 movement_speed = 10.0
 area = NodePath("Area3D")
-intermediate_position = NodePath("Intermediate")
-cargo_bay_drop_off_position = NodePath("Drop Off")
+intermediate_position = NodePath("")
+cargo_bay_drop_off_position = NodePath("")
 timer_to_start_picking = NodePath("TimerToStartPicking")
 timer_between_picks = NodePath("TimerBetweenPicks")
 
@@ -212,10 +210,6 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, -1.386
 collision_layer = 538443777
 collision_mask = 538443777
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04871e-29, 236.945, -964.015)
-shape = SubResource("BoxShape3D_jhccn")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_4uvvl")
@@ -238,15 +232,9 @@ process_material = SubResource("ParticleProcessMaterial_ucfvb")
 draw_pass_1 = SubResource("QuadMesh_yq71f")
 
 [node name="TimerToStartPicking" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 3.5
 one_shot = true
 
 [node name="TimerBetweenPicks" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
-
-[node name="Intermediate" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27289e-19, 2.73785, 6.2013)
-
-[node name="Drop Off" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.14446e-19, 1.75971, -2.84883)
