@@ -107,12 +107,18 @@ func grab(game_entity : GameEntity) -> void:
 	
 func move_to_intermediate() -> void:
 	var tween : Tween = get_tree().create_tween()
+	
+	var speed : float = movement_speed
+	
+	if grabbed.global_position.distance_to(intermediate_position.global_position) > 200:
+		speed = movement_speed * 10
+	
 	tween.set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(
 		grabbed,
 		"global_position",
 		intermediate_position.global_position,
-		grabbed.global_position.distance_to(intermediate_position.global_position) / movement_speed
+		grabbed.global_position.distance_to(intermediate_position.global_position) / (speed)
 	)
 	tween.finished.connect(on_intermediate_reached)
 	
@@ -155,20 +161,17 @@ func start_tractor_beam_effects(game_entity : GameEntity) -> void:
 	mesh.show()
 	
 func tractor_beam_effects(game_entity : GameEntity) -> void:
-	var local_position : Vector3 = mesh.to_local(game_entity.global_position)
 	nozzle.look_at((game_entity.global_position) + (nozzle.global_position - game_entity.global_position) * 1000)
 	var distance : float = nozzle.global_position.distance_to(game_entity.global_position)
 	mesh.mesh.height = distance
 	mesh.position.z = distance / 2 / 5
 	particles.global_position = game_entity.global_position
+	
 	yaw.rotation = Vector3.ZERO
 	var rotation_vec : Vector3 = yaw.to_local(game_entity.global_position)# + yaw.global_position - game_entity.global_position * 1000)
 	rotation_vec.y = 0
-	
 	var angle : float = yaw.global_basis.z.angle_to(yaw.global_position - yaw.to_global(rotation_vec))
-		
 	yaw.rotation.y = -angle
-	#yaw.look_at(yaw.to_global(rotation_vec))
 
 func stop_tractor_beam_effects() -> void:
 	particles.emitting = false
