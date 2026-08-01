@@ -39,6 +39,8 @@ func enter_seat(player : Mind, control_entity : ControlEntity) -> void:
 	if target_control_entity.player != null:
 		return
 	
+	$Sprite3D.show()
+	
 	entity_parent = control_entity.get_parent_node_3d()
 	entity_using_seat = control_entity
 	player_using_seat = player
@@ -57,6 +59,8 @@ func exit_seat() -> void:
 	entity_using_seat.unfreeze()
 	entity_using_seat.reparent.call_deferred(entity_parent)
 	player_using_seat.possess(entity_using_seat)
+	
+	$Sprite3D.hide()
 	
 	target_control_entity.third_person = false
 	

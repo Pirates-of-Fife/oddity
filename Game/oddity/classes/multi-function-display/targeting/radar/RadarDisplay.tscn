@@ -22,7 +22,7 @@ height = 0.8
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(2.98411e-06, 0.669639, 0.768851, 1)
+albedo_color = Color(0.513333, 0.77, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_o67g4"]
 material = SubResource("StandardMaterial3D_rof1o")
@@ -38,6 +38,7 @@ targeted_radar_blip_scene = ExtResource("3_30had")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.275, 0, 0, 0, 1.68389e-17, -0.275, 0, 0.275, 1.68389e-17, 0, -0.498, 0.647)
+modulate = Color(0.27, 1, 0.343, 1)
 texture_filter = 0
 texture = ExtResource("1_0pmr2")
 

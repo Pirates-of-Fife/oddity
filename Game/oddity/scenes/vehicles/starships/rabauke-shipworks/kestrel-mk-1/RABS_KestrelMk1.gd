@@ -530,3 +530,6 @@ func toggle_tractor_beams() -> void:
 func toggle_cargo_bay() -> void:
 	cargo_bay.toggle_open_state()
 	
+
+func _on_tractorbeam_button_interacted(player:Player, control_entity:ControlEntity) -> void:
+	toggle_tractor_beams()
