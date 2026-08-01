@@ -86,8 +86,47 @@ func _process(delta : float) -> void:
 
 	first_person_switch(!player.control_entity.third_person)
 
+	if player.control_entity.third_person:
+		if Input.is_action_pressed("ui_right"):
+			position.x += 5 * delta	
+		if Input.is_action_pressed("ui_left"):
+			position.x -= 5 * delta	
+		if Input.is_action_pressed("camera_up"):
+			position.y += 5 * delta	
+		if Input.is_action_pressed("camera_down"):
+			position.y -= 5 * delta				
+		if Input.is_action_pressed("ui_up"):
+			position.z -= 5 * delta	
+		if Input.is_action_pressed("ui_down"):
+			position.z += 5 * delta							
+		if Input.is_action_pressed("ui_accept"):
+			position.y = 0
+			position.x = 0
+		if Input.is_action_pressed("fov_up"):
+			fov += 10 * delta
+		if Input.is_action_pressed("fov_down"):
+			fov -= 10 * delta
+			
+		var rotation_speed : float = 1
+		
 
-	adjust_fov()
+		if Input.is_physical_key_pressed(KEY_KP_8):
+			rotate_object_local(Vector3.RIGHT, rotation_speed * delta)
+		if Input.is_physical_key_pressed(KEY_KP_5):
+			rotate_object_local(Vector3.RIGHT, -rotation_speed * delta)
+		if Input.is_physical_key_pressed(KEY_KP_4):
+			rotate_object_local(Vector3.UP, rotation_speed * delta)
+		if Input.is_physical_key_pressed(KEY_KP_6):
+			rotate_object_local(Vector3.UP, -rotation_speed * delta)
+		if Input.is_physical_key_pressed(KEY_KP_7):
+			rotate_object_local(Vector3.FORWARD, -rotation_speed * delta)
+		if Input.is_physical_key_pressed(KEY_KP_9):
+			rotate_object_local(Vector3.FORWARD, rotation_speed * delta)
+	else:
+		rotation = Vector3.ZERO
+	
+	if !player.control_entity.third_person:
+		adjust_fov()
 
 	adjust_camera_position()
 
@@ -95,7 +134,8 @@ func _process(delta : float) -> void:
 		camera_shake()
 
 func adjust_camera_position() -> void:
-	position = position.lerp(acceleration / 2 + defaultPosition, get_process_delta_time() * 2.0)
+	if !player.control_entity.third_person:
+		position = position.lerp(acceleration / 2 + defaultPosition, get_process_delta_time() * 2.0)
 
 func adjust_fov() -> void:
 	# Define the minimum and maximum speeds for mapping
