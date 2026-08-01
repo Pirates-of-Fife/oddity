@@ -7,6 +7,9 @@ class_name TractorBeam
 @export
 var animator : AnimationPlayer
 
+@export
+var yaw : MeshInstance3D
+
 @export_category("Tractor Beam Laser")
 
 @export
@@ -77,8 +80,6 @@ func on_start_picking() -> void:
 	if !active:
 		return
 	
-	print("wah")
-
 	var entity_to_grab : GameEntity = pick_entity_to_take()
 	
 	if entity_to_grab == null:
@@ -157,15 +158,23 @@ func tractor_beam_effects(game_entity : GameEntity) -> void:
 	var local_position : Vector3 = mesh.to_local(game_entity.global_position)
 	nozzle.look_at((game_entity.global_position) + (nozzle.global_position - game_entity.global_position) * 1000)
 	var distance : float = nozzle.global_position.distance_to(game_entity.global_position)
-	print(distance)
 	mesh.mesh.height = distance
 	mesh.position.z = distance / 2 / 5
 	particles.global_position = game_entity.global_position
+	yaw.rotation = Vector3.ZERO
+	var rotation_vec : Vector3 = yaw.to_local(game_entity.global_position)# + yaw.global_position - game_entity.global_position * 1000)
+	rotation_vec.y = 0
+	
+	var angle : float = yaw.global_basis.z.angle_to(yaw.global_position - yaw.to_global(rotation_vec))
+		
+	yaw.rotation.y = -angle
+	#yaw.look_at(yaw.to_global(rotation_vec))
 
 func stop_tractor_beam_effects() -> void:
 	particles.emitting = false
 	audio.stop()
 	mesh.hide()
+	yaw.rotation = Vector3.ZERO
 	
 func pick_entity_to_take() -> GameEntity:
 	if cargo_grid.cargo_areas_left == 0:
@@ -189,14 +198,11 @@ func sort_entities(a : GameEntity, b : GameEntity) -> bool:
 	return false
 
 func _on_area_entered(body : Node) -> void:
-	print("ented" + str(body))
-
 	if entities.size() == 0:
 		timer_to_start_picking.start()
 
 	if body is GameEntity:
 		if body.can_be_picked_up:
-			print("added thingy")
 			entities.append(body)
 
 func _on_area_exited(body : Node) -> void:
