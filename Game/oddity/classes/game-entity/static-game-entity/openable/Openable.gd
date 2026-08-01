@@ -64,6 +64,7 @@ func open() -> void:
 		if open_sound != null:
 			open_sound.play()
 		state = State.OPENING
+		openable_opening.emit()
 	
 	elif state == State.CLOSING:
 		animation_player.queue("open")
@@ -74,6 +75,7 @@ func close() -> void:
 		if close_sound != null:
 			close_sound.play()
 		state = State.CLOSING
+		openable_closing.emit()
 	
 	elif state == State.OPENING:
 		animation_player.queue("close")
