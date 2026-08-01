@@ -117,6 +117,12 @@ func is_entity_storable(entity : Node3D, show_error : bool = false) -> bool:
 			inventory_hud.show_error("Cannot store " + str(entity.entity_name))
 		return false
 		
+	if entity is GameEntity:
+		if !entity.can_be_picked_up:
+			if show_error:
+				inventory_hud.show_error("Cannot store " + str(entity.entity_name))
+			return false
+		
 	if entity is CargoContainer:
 		if entity.container_size != CargoUnit.ContainerSize.CU_1:
 			if show_error:
