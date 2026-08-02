@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dj5emjn3ylomv"]
+[gd_scene load_steps=25 format=3 uid="uid://dj5emjn3ylomv"]
 
 [ext_resource type="Script" path="res://classes/tractor-beam/mesh/TractorBeam.gd" id="1_lhk2p"]
 [ext_resource type="ArrayMesh" uid="uid://cic2qkttx0cuc" path="res://classes/tractor-beam/mesh/meshes/anvaka_base.mesh" id="1_r651b"]
@@ -10,6 +10,7 @@
 [ext_resource type="ArrayMesh" uid="uid://djcfefaqjdcf5" path="res://classes/tractor-beam/mesh/meshes/anvaka_tractor.mesh" id="7_d68f5"]
 [ext_resource type="ArrayMesh" uid="uid://c64nmuoag5hgr" path="res://classes/tractor-beam/mesh/meshes/anvaka_power.mesh" id="8_3k8bg"]
 [ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="9_ysjd1"]
+[ext_resource type="AudioStream" uid="uid://dqgqhjqod613c" path="res://classes/tractor-beam/mesh/tractor.wav" id="11_fqrm1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8l2v"]
 diffuse_mode = 3
@@ -42,6 +43,18 @@ tracks/1/path = NodePath("Mesh/Yaw/Pitch")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat64Array(0, 1, 0, 1, 0, 4.37114e-08)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_2v31b"]
 resource_name = "TractorBeamExtend"
@@ -60,6 +73,18 @@ tracks/1/path = NodePath("Mesh/Yaw/Pitch")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat64Array(0, 1, 0, 1, 0, 4.37114e-08, 1.0323, 1, 8.56957e-09, 0.980594, 0.196049, 4.28631e-08)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0.0333),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_rpi61"]
 resource_name = "TractorBeamRetract"
@@ -78,6 +103,18 @@ tracks/1/path = NodePath("Mesh/Yaw/Pitch")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat64Array(0, 1, 8.56957e-09, 0.980594, 0.196049, 4.28631e-08, 2.2977, 1, 0, 1, 0, 4.37114e-08)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4uvvl"]
 _data = {
@@ -113,17 +150,13 @@ scale_curve = SubResource("CurveTexture_wot8r")
 color_ramp = SubResource("GradientTexture1D_uvrdy")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e316f"]
+transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
+albedo_color = Color(1, 1, 1, 0.407843)
 
-[sub_resource type="QuadMesh" id="QuadMesh_yq71f"]
+[sub_resource type="SphereMesh" id="SphereMesh_dmhje"]
 material = SubResource("StandardMaterial3D_e316f")
-size = Vector2(0.755, 1.085)
-orientation = 1
 
 [node name="AnvakaTractorBeam" type="Node3D" node_paths=PackedStringArray("animator", "yaw", "casing", "nozzle", "raycast", "mesh", "audio", "particles", "area", "timer_to_start_picking", "timer_between_picks")]
 script = ExtResource("1_lhk2p")
@@ -224,10 +257,10 @@ bus = &"Weapon"
 [node name="Particles" type="GPUParticles3D" parent="."]
 transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 0, 0)
 emitting = false
-amount = 100
+amount = 200
 lifetime = 0.46
 process_material = SubResource("ParticleProcessMaterial_ucfvb")
-draw_pass_1 = SubResource("QuadMesh_yq71f")
+draw_pass_1 = SubResource("SphereMesh_dmhje")
 
 [node name="TimerToStartPicking" type="Timer" parent="."]
 wait_time = 3.5
@@ -236,3 +269,13 @@ one_shot = true
 [node name="TimerBetweenPicks" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_fqrm1")
+volume_db = -8.0
+unit_size = 24.8
+pitch_scale = 0.82
+max_distance = 10.0
+max_polyphony = 4
+panning_strength = 2.0
+bus = &"Environment"

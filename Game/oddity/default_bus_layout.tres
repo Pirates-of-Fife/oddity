@@ -1,4 +1,10 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://cnhy7ykkayrmx"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://cnhy7ykkayrmx"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3ff4"]
+resource_name = "Reverb"
+room_size = 0.1
+damping = 0.0
+spread = 0.0
 
 [resource]
 bus/1/name = &"Weapon"
@@ -41,8 +47,10 @@ bus/7/name = &"Thruster"
 bus/7/solo = false
 bus/7/mute = false
 bus/7/bypass_fx = false
-bus/7/volume_db = 0.0
+bus/7/volume_db = -2.71024
 bus/7/send = &"Master"
+bus/7/effect/0/effect = SubResource("AudioEffectReverb_j3ff4")
+bus/7/effect/0/enabled = true
 bus/8/name = &"Music"
 bus/8/solo = false
 bus/8/mute = false

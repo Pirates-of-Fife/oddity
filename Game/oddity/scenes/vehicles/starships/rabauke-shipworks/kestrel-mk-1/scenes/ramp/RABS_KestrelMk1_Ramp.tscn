@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d03gmuy718ifl"]
+[gd_scene load_steps=20 format=3 uid="uid://d03gmuy718ifl"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/scenes/ramp/RABS_KestrelMk1_Ramp.gd" id="1_iikxa"]
 [ext_resource type="PackedScene" uid="uid://d3gggk22a5tty" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/meshes/Ramp.glb" id="2_slpdt"]
@@ -101,6 +101,53 @@ points = PackedVector3Array(-5.09443, -0.000353813, -8.24571e-06, -5.09443, -0.0
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p6had"]
 points = PackedVector3Array(-4.59499, -0.000254746, -8.24571e-06, -4.59499, -0.000254746, 6.28817, -4.59499, 0.0960865, -8.24571e-06, 4.60131, -0.000254746, -8.24571e-06, -4.59499, 0.0960865, 6.28817, 4.60131, -0.000254746, 6.28817, 4.60131, 0.0960865, -8.24571e-06, 4.60131, 0.0960865, 6.28817)
 
+[sub_resource type="Curve" id="Curve_ba2tj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_puolu"]
+curve = SubResource("Curve_ba2tj")
+
+[sub_resource type="Gradient" id="Gradient_dc0ls"]
+offsets = PackedFloat32Array(0, 0.170213, 0.41844, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.244776, 0.244776, 0.244776, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5eqx7"]
+gradient = SubResource("Gradient_dc0ls")
+
+[sub_resource type="Curve" id="Curve_axo72"]
+_data = [Vector2(0, 0.593407), 0.0, 0.0, 0, 0, Vector2(0.526627, 0.186813), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_njkq1"]
+curve = SubResource("Curve_axo72")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_exg8y"]
+resource_local_to_scene = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.1, 1)
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 0.1
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.9
+scale_curve = SubResource("CurveTexture_njkq1")
+color_ramp = SubResource("GradientTexture1D_5eqx7")
+alpha_curve = SubResource("CurveTexture_puolu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oeuv4"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.145098)
+
+[sub_resource type="SphereMesh" id="SphereMesh_j0wfv"]
+material = SubResource("StandardMaterial3D_oeuv4")
+radial_segments = 12
+rings = 6
+
 [node name="RabsKestrelMk1Ramp" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
 collision_layer = 512
 collision_mask = 512
@@ -136,5 +183,30 @@ transform = Transform3D(1, 0, 0, 0, 0.71934, -0.694658, 0, 0.694658, 0.71934, 0,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.84687, -0.29209)
 stream = ExtResource("4_cln7y")
 volume_db = -6.0
-max_distance = 20.0
+max_distance = 200.0
 bus = &"Interior"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51482, 0.0662971, -0.0873393)
+emitting = false
+amount = 300
+lifetime = 7.0
+fixed_fps = 15
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_exg8y")
+draw_pass_1 = SubResource("SphereMesh_j0wfv")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.63995, 0.0662971, -0.0873393)
+emitting = false
+amount = 300
+lifetime = 7.0
+fixed_fps = 15
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_exg8y")
+draw_pass_1 = SubResource("SphereMesh_j0wfv")
+
+[connection signal="openable_closed" from="." to="." method="_on_openable_closed"]
+[connection signal="openable_closing" from="." to="." method="_on_openable_closing"]
+[connection signal="openable_opened" from="." to="." method="_on_openable_opened"]
+[connection signal="openable_opening" from="." to="." method="_on_openable_opening"]
