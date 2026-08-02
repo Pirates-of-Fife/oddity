@@ -171,11 +171,16 @@ func _ai_starship_controller_process(delta : float) -> void:
 
 	distance_to_player = (control_entity.global_position - player.global_position).length()
 	
+	(control_entity as Starship).current_ammo = 10000
+	
 	if distance_to_player > 12000:
 		(control_entity as Starship).current_max_velocity = (control_entity as Starship).ship_info.max_linear_velocity
 	else:
-		(control_entity as Starship).current_max_velocity = maxf(minf(180, (player.control_entity.linear_velocity.length())), 10)
-	
+		(control_entity as Starship).current_max_velocity = maxf(minf(180, (player.control_entity.linear_velocity.length())), 50)
+		
+		if player.control_entity.linear_velocity.length() < 50:
+			(control_entity as Starship).current_max_velocity = 100
+		
 	if current_ai_state == AiState.FLEE:
 		thrust_towards()
 		rotate_away_from_player()
@@ -297,7 +302,7 @@ func thrust_towards() -> void:
 	starship_thrust_forward_command.execute(control_entity, StarshipThrustForwardCommand.Params.new(1))
 
 func shoot_player() -> void:
-	if distance_to_player >= 600:
+	if distance_to_player <= 600:
 		starship_shoot_primary_command.execute(control_entity)
 		starship_shoot_secondary_command.execute(control_entity)
 		starship_shoot_tertiary_command.execute(control_entity)
