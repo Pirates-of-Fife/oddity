@@ -15,21 +15,21 @@ size = Vector3(0.706493, 0.343999, 1.79583)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_tn6gg"]
+[sub_resource type="CurveTexture" id="CurveTexture_itvvj"]
 curve = SubResource("Curve_vmsmf")
 
 [sub_resource type="Gradient" id="Gradient_5pgcp"]
 offsets = PackedFloat32Array(0, 0.170213, 0.41844, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1.92523e-07, 0.700133, 0.91534, 1, 0.550567, 0.923217, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_jqjwl"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_orfoo"]
 gradient = SubResource("Gradient_5pgcp")
 
 [sub_resource type="Curve" id="Curve_n776p"]
 _data = [Vector2(0, 0.593407), 0.0, 0.0, 0, 0, Vector2(0.526627, 0.186813), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_4qpqu"]
+[sub_resource type="CurveTexture" id="CurveTexture_uv8hq"]
 curve = SubResource("Curve_n776p")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_anxn1"]
@@ -43,17 +43,17 @@ initial_velocity_max = 30.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_4qpqu")
-color_ramp = SubResource("GradientTexture1D_jqjwl")
-alpha_curve = SubResource("CurveTexture_tn6gg")
+scale_curve = SubResource("CurveTexture_uv8hq")
+color_ramp = SubResource("GradientTexture1D_orfoo")
+alpha_curve = SubResource("CurveTexture_itvvj")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cytp2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fevh"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_xn41a"]
-material = SubResource("StandardMaterial3D_cytp2")
+material = SubResource("StandardMaterial3D_1fevh")
 radial_segments = 12
 rings = 6
 
@@ -79,8 +79,8 @@ shape = SubResource("BoxShape3D_0otn4")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0662971, -0.0873393)
+emitting = false
 amount = 160
-amount_ratio = 0.0
 lifetime = 0.15
 fixed_fps = 15
 local_coords = true

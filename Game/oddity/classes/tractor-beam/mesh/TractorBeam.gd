@@ -164,6 +164,8 @@ func on_intermediate_reached() -> void:
 		timer_between_picks.start()
 		
 		return
+	
+	grabbed.linear_velocity = Vector3.ZERO
 		
 	move_to_destination()
 
