@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/RABS_KestrelMk1_MainThruster.gd" id="1_rxy08"]
 [ext_resource type="PackedScene" uid="uid://be1lhilrvjun7" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/KestrelMk1MainThruster.glb" id="2_38npm"]
-[ext_resource type="AudioStream" uid="uid://3flkfd04wo4m" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/main_thruster-001.wav" id="3_2tohx"]
+[ext_resource type="AudioStream" uid="uid://d28ii6r30ptf7" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/main-thruster/thruster_loop.wav" id="3_4grn6"]
 [ext_resource type="Texture2D" uid="uid://b61ge42edi1vy" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic black.png" id="4_e0wgd"]
 
 [sub_resource type="Curve" id="Curve_3ecll"]
@@ -62,10 +62,10 @@ mass = 15000.0
 script = ExtResource("1_rxy08")
 size = 5
 thruster_sound = NodePath("AudioStreamPlayer3D")
-modifier = 4.6
+modifier = 3.5
 thruster_heat_curve = SubResource("Curve_3ecll")
-thruster_heat_multiplier = 15.0
-fuel_usage = 0.3
+thruster_heat_multiplier = 100.0
+fuel_usage = 0.7
 thruster_particles = NodePath("GPUParticles3D")
 value = 70000
 
@@ -102,7 +102,8 @@ process_material = SubResource("ParticleProcessMaterial_6yadg")
 draw_pass_1 = SubResource("SphereMesh_tlo6e")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_2tohx")
+stream = ExtResource("3_4grn6")
+pitch_scale = 1.98
 max_distance = 500.0
 bus = &"Thruster"
 

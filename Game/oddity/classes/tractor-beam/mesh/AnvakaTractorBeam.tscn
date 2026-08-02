@@ -125,7 +125,7 @@ material = SubResource("StandardMaterial3D_e316f")
 size = Vector2(0.755, 1.085)
 orientation = 1
 
-[node name="AnvakaTractorBeam" type="Node3D" node_paths=PackedStringArray("animator", "yaw", "casing", "nozzle", "raycast", "mesh", "audio", "particles", "area", "intermediate_position", "cargo_bay_drop_off_position", "timer_to_start_picking", "timer_between_picks")]
+[node name="AnvakaTractorBeam" type="Node3D" node_paths=PackedStringArray("animator", "yaw", "casing", "nozzle", "raycast", "mesh", "audio", "particles", "area", "timer_to_start_picking", "timer_between_picks")]
 script = ExtResource("1_lhk2p")
 animator = NodePath("AnimationPlayer")
 yaw = NodePath("Mesh/Yaw")
@@ -137,8 +137,6 @@ audio = NodePath("AudioStreamPlayer3D")
 particles = NodePath("Particles")
 movement_speed = 10.0
 area = NodePath("Area3D")
-intermediate_position = NodePath("")
-cargo_bay_drop_off_position = NodePath("")
 timer_to_start_picking = NodePath("TimerToStartPicking")
 timer_between_picks = NodePath("TimerBetweenPicks")
 
