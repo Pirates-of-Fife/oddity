@@ -38,10 +38,11 @@ resource_local_to_scene = true
 emission_shape = 3
 emission_box_extents = Vector3(0.3, 1, 1)
 direction = Vector3(0, 0, -1)
-spread = 5.0
+spread = 3.0
 initial_velocity_min = 120.0
 initial_velocity_max = 180.0
 gravity = Vector3(0, 0, 0)
+scale_min = 2.0
 scale_max = 5.0
 scale_curve = SubResource("CurveTexture_gojhc")
 color_ramp = SubResource("GradientTexture1D_cx1jj")
@@ -81,10 +82,11 @@ shape = SubResource("ConvexPolygonShape3D_pe7na")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.932175, -0.187925, -2.42456)
-amount = 300
+amount = 800
 amount_ratio = 0.0
-lifetime = 0.17
+lifetime = 0.26
 fixed_fps = 15
+visibility_aabb = AABB(-4, -4, -34.99, 8.645, 8.675, 43.58)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_7unsp")
 draw_pass_1 = SubResource("SphereMesh_1vfnt")

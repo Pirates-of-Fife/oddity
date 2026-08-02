@@ -37,8 +37,8 @@ curve = SubResource("Curve_bach7")
 resource_local_to_scene = true
 direction = Vector3(0, 0, 1)
 spread = 5.0
-initial_velocity_min = 100.0
-initial_velocity_max = 130.0
+initial_velocity_min = 350.0
+initial_velocity_max = 500.0
 gravity = Vector3(0, 0, 0)
 scale_max = 10.0
 scale_curve = SubResource("CurveTexture_7mvij")
@@ -93,8 +93,9 @@ shape = SubResource("BoxShape3D_oj6mv")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.0959)
-amount = 1000
+amount = 1500
 amount_ratio = 0.0
+lifetime = 2.0
 speed_scale = 2.21
 fixed_fps = 15
 local_coords = true
