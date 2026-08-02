@@ -26,6 +26,7 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.765115, 0.489178, 0.968944, 1)
 albedo_texture = ExtResource("2_yujcs")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_weu2r"]
 material = SubResource("StandardMaterial3D_cbgp6")
@@ -4375,8 +4376,9 @@ deactivate_distance = 19000.0
 [node name="AsteroidRing" type="Node3D" parent="."]
 transform = Transform3D(-3.66366, 362.531, 1966.87, -1275.21, -1515.63, 276.983, 1540.72, -1253.58, 233.928, 0, 0, 0)
 script = ExtResource("5_aulfc")
+belt_rotation = Vector3(-1.5708, -1.5809, 0)
 outer_radius = 10000.0
-inner_radius = 5000.0
+inner_radius = 5000.01
 
 [node name="AsteroidRing" type="Node3D" parent="AsteroidRing"]
 
@@ -4392,7 +4394,7 @@ shape = SubResource("ConcavePolygonShape3D_ddulp")
 [node name="MediumDifficultyZone" parent="." instance=ExtResource("11_yxr8d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 852.279, 5033.4, 5501.03)
 
-[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("root", "planet_mesh_instance")]
+[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("planet_mesh_instance")]
 script = ExtResource("7_up2wv")
 foliage_meshes = Array[ExtResource("8_h3vxy")]([ExtResource("9_6d5c7")])
 splits = 10
@@ -4400,10 +4402,9 @@ spawn_count = 10000
 count_per_multi_mesh = 1000
 scale_variance = 0.08
 invert_scale = true
-root = NodePath("")
 planet_mesh_instance = NodePath("../MeshInstance3D")
 
-[node name="FoliageScatterSpawner2" type="Node3D" parent="." node_paths=PackedStringArray("root", "asteroid_belt")]
+[node name="FoliageScatterSpawner2" type="Node3D" parent="." node_paths=PackedStringArray("asteroid_belt")]
 script = ExtResource("7_up2wv")
 foliage_meshes = Array[ExtResource("8_h3vxy")]([ExtResource("10_u1is7")])
 spawn_type = 0
@@ -4412,7 +4413,6 @@ spawn_count = 8800
 count_per_multi_mesh = 880
 scale_multiplier = 0.735
 scale_variance = 0.19
-root = NodePath("")
 asteroid_belt = NodePath("../AsteroidRing")
 vertical_variance = 150.0
 

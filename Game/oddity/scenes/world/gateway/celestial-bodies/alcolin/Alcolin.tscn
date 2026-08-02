@@ -25,6 +25,7 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.635294, 0.462745, 0.788235, 1)
 albedo_texture = ExtResource("2_uunwd")
+texture_filter = 2
 distance_fade_mode = 2
 distance_fade_min_distance = 100.0
 distance_fade_max_distance = 1000.0
@@ -46459,6 +46460,7 @@ deactivate_distance = 50000.0
 [node name="AsteroidRing" type="Node3D" parent="."]
 transform = Transform3D(41041, -28108.4, -5054.97, 28559.3, 40393.1, 7264.21, 0, -8849.94, 49210.6, 0, 0, 0)
 script = ExtResource("5_lxmwi")
+belt_rotation = Vector3(-1.5708, 0.60051, 0)
 outer_radius = 250000.0
 inner_radius = 125000.0
 
