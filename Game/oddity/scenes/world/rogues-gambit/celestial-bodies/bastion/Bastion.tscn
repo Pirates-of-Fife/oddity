@@ -33,6 +33,7 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.371221, 0.729726, 1, 1)
 albedo_texture = ExtResource("2_io2ir")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_251hj"]
 material = SubResource("StandardMaterial3D_xnnmy")
@@ -36196,6 +36197,7 @@ deactivate_distance = 19000.0
 [node name="AsteroidRing" type="Node3D" parent="."]
 transform = Transform3D(12000, 0, 0, 0, 7300.65, -9523.68, 0, 9523.68, 7300.65, 0, 0, 0)
 script = ExtResource("5_c8i55")
+belt_rotation = Vector3(1.5708, 0, 0)
 outer_radius = 60000.0
 inner_radius = 30000.0
 
@@ -36256,7 +36258,7 @@ max_distance = 19000.0
 panning_strength = 0.0
 bus = &"Environment"
 
-[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("root", "asteroid_belt")]
+[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("asteroid_belt")]
 script = ExtResource("11_7l18q")
 foliage_meshes = Array[ExtResource("12_yb2ee")]([ExtResource("13_4ahw2")])
 spawn_type = 0
@@ -36264,11 +36266,10 @@ splits = 5
 spawn_count = 20000
 count_per_multi_mesh = 4000
 scale_variance = 0.53
-root = NodePath("")
 asteroid_belt = NodePath("../AsteroidRing")
 vertical_variance = 370.0
 
-[node name="FoliageScatterSpawner2" type="Node3D" parent="." node_paths=PackedStringArray("root", "planet_mesh_instance")]
+[node name="FoliageScatterSpawner2" type="Node3D" parent="." node_paths=PackedStringArray("planet_mesh_instance")]
 script = ExtResource("11_7l18q")
 foliage_meshes = Array[ExtResource("12_yb2ee")]([ExtResource("14_1oyqn"), ExtResource("15_wqx66")])
 splits = 5
@@ -36277,7 +36278,6 @@ count_per_multi_mesh = 2480
 scale_multiplier = 6.0
 scale_variance = 0.14
 invert_scale = true
-root = NodePath("")
 planet_mesh_instance = NodePath("../MeshInstance3D")
 radius_modifier = -3.0
 

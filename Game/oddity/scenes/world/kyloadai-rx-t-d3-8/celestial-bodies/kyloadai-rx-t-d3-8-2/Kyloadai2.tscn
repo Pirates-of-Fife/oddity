@@ -28,6 +28,7 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.735878, 0.998, 0.34761, 1)
 albedo_texture = ExtResource("2_r82iu")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_wph4k"]
 material = SubResource("StandardMaterial3D_yhjqc")
@@ -48499,6 +48500,7 @@ deactivate_distance = 19000.0
 [node name="AsteroidRing" type="Node3D" parent="."]
 transform = Transform3D(16780.6, 24867.9, 0, -24867.9, 16780.6, 0, 0, 0, 30000, 0, 0, 0)
 script = ExtResource("5_m4jnm")
+belt_rotation = Vector3(0, 0, -0.977191)
 outer_radius = 150000.0
 inner_radius = 75000.0
 

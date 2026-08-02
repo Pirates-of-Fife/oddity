@@ -36,6 +36,7 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.638916, 0.432584, 0.875368, 1)
 albedo_texture = ExtResource("2_mlex6")
+texture_filter = 2
 distance_fade_mode = 2
 distance_fade_min_distance = 100.0
 distance_fade_max_distance = 1000.0
@@ -120447,6 +120448,7 @@ deactivate_distance = 50000.0
 [node name="AsteroidRing" type="Node3D" parent="."]
 transform = Transform3D(30000, 0, 0, 0, -11321.6, -27781.7, 0, 27781.7, -11321.6, 0, 0, 0)
 script = ExtResource("5_awtxw")
+belt_rotation = Vector3(1.5708, 0, 0)
 outer_radius = 150000.0
 inner_radius = 75000.1
 
@@ -120581,7 +120583,7 @@ max_distance = 38000.0
 panning_strength = 0.0
 bus = &"Environment"
 
-[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("root", "asteroid_belt")]
+[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("asteroid_belt")]
 script = ExtResource("17_3h1cb")
 foliage_meshes = Array[ExtResource("18_5g1oo")]([ExtResource("19_85jqe")])
 spawn_type = 0
@@ -120589,7 +120591,6 @@ splits = 5
 spawn_count = 20000
 count_per_multi_mesh = 4000
 scale_variance = 0.36
-root = NodePath("")
 asteroid_belt = NodePath("../AsteroidRing")
 vertical_variance = 340.0
 

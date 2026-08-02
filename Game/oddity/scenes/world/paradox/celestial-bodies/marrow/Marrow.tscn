@@ -25,6 +25,7 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.17314, 0.785388, 0.817034, 1)
 albedo_texture = ExtResource("2_4dj5q")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_8xnis"]
 material = SubResource("StandardMaterial3D_8cp52")
@@ -16749,7 +16750,7 @@ count_per_multi_mesh = 110
 root = NodePath("../Harrows")
 planet_mesh_instance = NodePath("../MeshInstance3D")
 
-[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("root", "planet_mesh_instance")]
+[node name="FoliageScatterSpawner" type="Node3D" parent="." node_paths=PackedStringArray("planet_mesh_instance")]
 script = ExtResource("9_x0sji")
 foliage_meshes = Array[ExtResource("10_f5duy")]([ExtResource("11_4aveq"), ExtResource("12_f4x1q")])
 splits = 10
@@ -16758,7 +16759,6 @@ count_per_multi_mesh = 2000
 scale_multiplier = 3.53
 scale_variance = 0.3
 invert_scale = true
-root = NodePath("")
 planet_mesh_instance = NodePath("../MeshInstance3D")
 radius_modifier = -1.22
 
