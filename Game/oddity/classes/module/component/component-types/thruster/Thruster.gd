@@ -38,7 +38,10 @@ var current_thrust : float :
 		current_thrust = clampf(value, 0, 1)
 
 		if thruster_particles != null:
-			thruster_particles.amount_ratio = current_thrust
+			var t : float = current_thrust
+			if current_thrust > 0.01 and current_thrust <= 0.05:
+				current_thrust = 0.05
+			thruster_particles.amount_ratio = t 
 
 		if thruster_sound != null:
 			thruster_sound.volume_db = lerpf(thruster_sound.volume_db, lerpf(-20, 20, current_thrust * modifier), 0.2)
