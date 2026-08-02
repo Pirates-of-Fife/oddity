@@ -10,15 +10,15 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g14yq"]
 shader = ExtResource("2_igqkf")
-shader_parameter/sky_color = Color(0.013851, 0, 0.000919866, 1)
+shader_parameter/sky_color = Color(0, 0, 0, 1)
 shader_parameter/star_base_color = Color(1, 1, 1, 1)
 shader_parameter/star_hue_offset = 0.6
 shader_parameter/star_intensity = 0.08
-shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_speed = 0.01
 shader_parameter/star_twinkle_intensity = 0.2
 shader_parameter/layer_scale = 20.0
 shader_parameter/layer_scale_step = 10.0
-shader_parameter/layers_count = 3
+shader_parameter/layers_count = 10
 
 [sub_resource type="Sky" id="Sky_qgo0g"]
 sky_material = SubResource("ShaderMaterial_g14yq")
