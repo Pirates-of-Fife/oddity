@@ -39,7 +39,7 @@ var current_thrust : float :
 
 		if thruster_particles != null:
 			var t : float = current_thrust
-			if current_thrust > 0.01 and current_thrust <= 0.05:
+			if current_thrust >= 0.01 and current_thrust <= 0.05:
 				current_thrust = 0.05
 			thruster_particles.amount_ratio = t 
 
