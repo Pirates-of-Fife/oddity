@@ -1,14 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://cop5lcnhf25yd"]
+[gd_scene load_steps=30 format=3 uid="uid://cop5lcnhf25yd"]
 
 [ext_resource type="Script" path="res://classes/creature/humanoid/Humanoid.gd" id="1_enw0c"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/mind/player/anchor/Anchor.tscn" id="2_a7dfl"]
 [ext_resource type="AudioStream" uid="uid://cd6cjm86lqkou" path="res://classes/multi-function-display/targeting/radar/select.wav" id="3_5xttm"]
+[ext_resource type="Texture2D" uid="uid://5hfhka3qqas7" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/seats/jade_transparent.png" id="4_erf0a"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nhlgx"]
 friction = 0.2
 rough = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7syud"]
+radius = 0.229203
 height = 1.6
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8wi0c"]
@@ -125,9 +127,11 @@ continuous_cd = true
 linear_damp = 10.0
 angular_damp = 10.0
 script = ExtResource("1_enw0c")
+eva_speed = 7.0
 store_particles = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2/StoreParticles")
 retrieve_particles = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2/RetrieveParticles")
-jump_force = 300.0
+walk_force = 600.0
+jump_force = 350.0
 grounded_marker = NodePath("Marker3D")
 interaction_length = 6.0
 pick_up_distance = 2.0
@@ -200,5 +204,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.033, 0)
 shape = SubResource("CapsuleShape3D_6r51v")
 collision_mask = 525825
 debug_shape_custom_color = Color(0, 0.67451, 0, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0.130737, 0.092653, 0.0776592)
+visibility_range_begin = 2.0
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("4_erf0a")
 
 [editable path="Anchor"]
