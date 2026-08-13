@@ -110,17 +110,17 @@ func _process(delta : float) -> void:
 		var rotation_speed : float = 1
 		
 
-		if Input.is_physical_key_pressed(KEY_KP_8):
+		if Input.is_action_pressed("cam_rotate_up"):
 			rotate_object_local(Vector3.RIGHT, rotation_speed * delta)
-		if Input.is_physical_key_pressed(KEY_KP_5):
+		if Input.is_action_pressed("cam_rotate_down"):
 			rotate_object_local(Vector3.RIGHT, -rotation_speed * delta)
-		if Input.is_physical_key_pressed(KEY_KP_4):
+		if Input.is_action_pressed("cam_rotate_right"):
 			rotate_object_local(Vector3.UP, rotation_speed * delta)
-		if Input.is_physical_key_pressed(KEY_KP_6):
+		if Input.is_action_pressed("cam_rotate_left"):
 			rotate_object_local(Vector3.UP, -rotation_speed * delta)
-		if Input.is_physical_key_pressed(KEY_KP_7):
+		if Input.is_action_pressed("cam_roll_left"):
 			rotate_object_local(Vector3.FORWARD, -rotation_speed * delta)
-		if Input.is_physical_key_pressed(KEY_KP_9):
+		if Input.is_action_pressed("cam_roll_right"):
 			rotate_object_local(Vector3.FORWARD, rotation_speed * delta)
 	else:
 		rotation = Vector3.ZERO
