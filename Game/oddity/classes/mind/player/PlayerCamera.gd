@@ -114,9 +114,9 @@ func _process(delta : float) -> void:
 			rotate_object_local(Vector3.RIGHT, rotation_speed * delta)
 		if Input.is_action_pressed("cam_rotate_down"):
 			rotate_object_local(Vector3.RIGHT, -rotation_speed * delta)
-		if Input.is_action_pressed("cam_rotate_right"):
-			rotate_object_local(Vector3.UP, rotation_speed * delta)
 		if Input.is_action_pressed("cam_rotate_left"):
+			rotate_object_local(Vector3.UP, rotation_speed * delta)
+		if Input.is_action_pressed("cam_rotate_right"):
 			rotate_object_local(Vector3.UP, -rotation_speed * delta)
 		if Input.is_action_pressed("cam_roll_left"):
 			rotate_object_local(Vector3.FORWARD, -rotation_speed * delta)

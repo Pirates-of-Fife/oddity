@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bwho7y2mkwclo"]
+[gd_scene load_steps=18 format=3 uid="uid://bwho7y2mkwclo"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_boynr"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_wsrd6"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="8_r18gy"]
 [ext_resource type="PackedScene" uid="uid://bn8jhywmokb1j" path="res://scenes/world/paradox/celestial-bodies/eldritch/EldritchZone.tscn" id="10_1va2b"]
 [ext_resource type="PackedScene" uid="uid://brj78otnh04wn" path="res://scenes/world/paradox/celestial-bodies/marrow/MarrowZone.tscn" id="12_rtn27"]
+[ext_resource type="PackedScene" uid="uid://uph5ipthsigr" path="res://scenes/world/paradox/celestial-bodies/Paradox2.tscn" id="14_son14"]
 [ext_resource type="PackedScene" uid="uid://ti4vralo41jf" path="res://scenes/world/paradox/celestial-bodies/marrow/GravemZone.tscn" id="14_txhdx"]
 [ext_resource type="PackedScene" uid="uid://meboekwfd8f5" path="res://scenes/world/paradox/celestial-bodies/tempest/TempestZone.tscn" id="16_u444p"]
 [ext_resource type="PackedScene" uid="uid://bhm37nu60jpg1" path="res://scenes/world/paradox/celestial-bodies/tempest/WhirlpoolZone.tscn" id="18_13w8n"]
@@ -111,3 +112,6 @@ sprite_max_distance = 1.45e+06
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)
+
+[node name="Paradox2" parent="." instance=ExtResource("14_son14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5e+06, 1000, 5.00069e+06)
