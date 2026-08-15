@@ -18,6 +18,10 @@ var current_cooldown : float
 @export
 var cooldown_time : float
 
+var current_armour_health : float
+var max_armour_health : float
+var current_armour_rating : float
+
 @export_category("Ui")
 @export
 var ui : ShieldAndHullUi
@@ -32,7 +36,12 @@ func _ready() -> void:
 
 	ui.shield_charge.max_value = cooldown_time
 	ui.shield_charge.value = cooldown_time
+	
+	ui.current_armour_rating = current_armour_rating
+	ui.current_armour_health = current_armour_health
+	ui.max_armour_health = max_armour_health
 
+	ui.update_armour()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -44,3 +53,10 @@ func _process(delta: float) -> void:
 
 	ui.cooldown_time = cooldown_time
 	ui.current_cooldown = current_cooldown
+
+func _update_armour() -> void:
+	ui.current_armour_rating = current_armour_rating
+	ui.current_armour_health = current_armour_health
+	ui.max_armour_health = max_armour_health
+
+	ui.update_armour()

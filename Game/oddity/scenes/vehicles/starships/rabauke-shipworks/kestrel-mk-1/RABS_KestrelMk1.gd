@@ -206,6 +206,10 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	entered_pressure_zone.connect(_on_pressure_zone_entered)
 	exited_pressure_zone.connect(_on_pressure_zone_exited)
 	
+	current_armour_health_changed.connect(_update_armour_ui)
+	
+	_update_armour_ui()
+	
 	if current_state == State.POWER_OFF:
 		$Interior/Bridge/ShieldAndHullUi3d.hide()
 		$Interior/Bridge/VelocityMfd3d.hide()
@@ -537,3 +541,8 @@ func _on_tractorbeam_button_interacted(player:Player, control_entity:ControlEnti
 func enable_tractor_beam_upgrade() -> void:
 	for t : TractorBeam in tractor_beams:
 		t.enable()
+		
+func _update_armour_ui() -> void:
+	shield_and_health_ui.current_armour_rating = current_armour_rating
+	shield_and_health_ui.current_armour_health = current_armour_health
+	shield_and_health_ui.max_armour_health = max_armour_health

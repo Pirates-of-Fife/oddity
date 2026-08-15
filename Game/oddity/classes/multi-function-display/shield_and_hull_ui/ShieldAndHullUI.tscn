@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dynh8g426n3gq"]
+[gd_scene load_steps=10 format=3 uid="uid://dynh8g426n3gq"]
 
 [ext_resource type="Script" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldAndHullUi.gd" id="1_ddf0y"]
 [ext_resource type="Texture2D" uid="uid://idh2x2dvxvt" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldIcon.svg" id="2_squ0k"]
 [ext_resource type="Texture2D" uid="uid://bu2kbxefxdcae" path="res://classes/multi-function-display/shield_and_hull_ui/HeartIcon.svg" id="3_c1u6k"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="4_wmscu"]
+[ext_resource type="Texture2D" uid="uid://rhvfx707aiic" path="res://classes/multi-function-display/shield_and_hull_ui/ArmourIcon.svg" id="5_vydms"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvm3n"]
 bg_color = Color(1, 0.266667, 0, 1)
@@ -11,53 +12,49 @@ bg_color = Color(1, 0.266667, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mf5m"]
 bg_color = Color(1.92523e-05, 0.911912, 0.998518, 1)
 
-[node name="ShieldAndHullUi" type="Control" node_paths=PackedStringArray("hull_health_bar", "shield_health_bar", "shield_charge", "shield_health_label", "hull_health_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l233b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t26tg"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ShieldAndHullUi" type="Control" node_paths=PackedStringArray("hull_health_bar", "shield_health_bar", "shield_charge", "shield_health_label", "hull_health_label", "armour_bar", "armour_rating")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_right = 1.08698
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
 script = ExtResource("1_ddf0y")
 hull_health_bar = NodePath("HullHealthBar")
 shield_health_bar = NodePath("ShieldHealthBar")
 shield_charge = NodePath("ShieldCharge")
 shield_health_label = NodePath("ShieldHealthLabel")
 hull_health_label = NodePath("HullHealthLabel")
+armour_bar = NodePath("Armour Health")
+armour_rating = NodePath("ArmourLabel")
 
 [node name="HullHealthBar" type="ProgressBar" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -806.0
-offset_top = -30.0
-offset_right = 806.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = -1
+anchor_left = 0.0716675
+anchor_top = 0.472222
+anchor_right = 0.843258
+anchor_bottom = 0.527778
 theme_override_styles/fill = SubResource("StyleBoxFlat_kvm3n")
 max_value = 0.0
 show_percentage = false
 
 [node name="ShieldHealthBar" type="ProgressBar" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -806.0
-offset_top = -110.0
-offset_right = 806.0
-offset_bottom = -50.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = -1
+anchor_left = 0.0716675
+anchor_top = 0.398148
+anchor_right = 0.843258
+anchor_bottom = 0.453704
 theme_override_styles/fill = SubResource("StyleBoxFlat_8mf5m")
 max_value = 0.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="ShieldIcon" type="Sprite2D" parent="."]
 position = Vector2(1800, 461)
@@ -70,33 +67,79 @@ scale = Vector2(0.151, 0.151)
 texture = ExtResource("3_c1u6k")
 
 [node name="ShieldCharge" type="TextureProgressBar" parent="."]
-layout_mode = 0
-offset_left = -7.0
-offset_top = 418.0
-offset_right = 493.0
-offset_bottom = 918.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0033541
+anchor_top = 0.387037
+anchor_right = 0.0781025
+anchor_bottom = 0.544444
+offset_right = 330.0
+offset_bottom = 330.0
 scale = Vector2(0.34, 0.34)
 max_value = 0.0
 step = 0.01
 fill_mode = 4
 texture_progress = ExtResource("2_squ0k")
+metadata/_edit_use_anchors_ = true
 
 [node name="ShieldHealthLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 177.0
-offset_top = 392.0
-offset_right = 647.0
-offset_bottom = 586.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0848107
+anchor_top = 0.362963
+anchor_right = 0.666962
+anchor_bottom = 0.827306
+offset_right = -744.95
+offset_bottom = -307.49
 scale = Vector2(2.585, 2.585)
 theme_override_fonts/normal_font = ExtResource("4_wmscu")
 text = "10000 / 10000"
+metadata/_edit_use_anchors_ = true
 
 [node name="HullHealthLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 174.0
-offset_top = 471.0
-offset_right = 646.0
-offset_bottom = 571.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0833733
+anchor_top = 0.436111
+anchor_right = 0.668002
+anchor_bottom = 0.675463
+offset_right = -748.12
+offset_bottom = -158.5
 scale = Vector2(2.585, 2.585)
 theme_override_fonts/normal_font = ExtResource("4_wmscu")
 text = "10000 / 10000"
+metadata/_edit_use_anchors_ = true
+
+[node name="Armour Health" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0723527
+anchor_top = 0.54537
+anchor_right = 0.85242
+anchor_bottom = 0.569444
+theme_override_styles/background = SubResource("StyleBoxFlat_l233b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t26tg")
+value = 50.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Armour" type="Sprite2D" parent="."]
+position = Vector2(1955, 499)
+scale = Vector2(0.612573, 0.612573)
+texture = ExtResource("5_vydms")
+
+[node name="ArmourLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.911835
+anchor_top = 0.399074
+anchor_right = 0.983675
+anchor_bottom = 0.511569
+offset_right = -91.93
+offset_bottom = -74.495
+scale = Vector2(2.585, 2.585)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_wmscu")
+theme_override_font_sizes/normal_font_size = 15
+text = "500"
+metadata/_edit_use_anchors_ = true
