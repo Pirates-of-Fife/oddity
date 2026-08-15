@@ -15,12 +15,15 @@ var target_rotational_thrust_vector : Vector3 = Vector3.ZERO
 
 @export_category("Info")
 
+signal ship_name_changed(ship_name : String)
+
 @export
 var ship_name : StringName = "Default Starship" :
 	set(value):
 		ship_name = value
 		if name_label != null:
 			name_label.text = value
+			ship_name_changed.emit(value)
 	get:
 		return ship_name
 
