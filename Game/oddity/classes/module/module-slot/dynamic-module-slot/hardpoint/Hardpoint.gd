@@ -9,6 +9,9 @@ var size : ModuleSize.HardpointSize
 @export
 var assignment : HardpointAssignment 
 
+@export
+var mounting_position : Marker3D
+
 enum HardpointAssignment
 {
 	PRIMARY,
