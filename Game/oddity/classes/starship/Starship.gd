@@ -321,8 +321,44 @@ var hull_health_damaged_state : float :
 	get:
 		return max_hull_health * 0.25
 
+@export_subgroup("Armour")
+
+signal current_armour_health_changed
+
+@onready
+var max_armour_health : float :
+	get:
+		return base_armour_health + additional_armour_health
+
 @export
-var hull_hardness : float = 0
+var current_armour_health : float :
+	set(value):
+		current_armour_health = value
+		current_armour_health_changed.emit()
+	get:
+		return current_armour_health
+		
+@onready
+var base_armour_health : float  = ship_info.base_armour_health
+
+@export
+var additional_armour_health : float = 0
+
+@export
+var max_armour_rating : float :
+	get:
+		return base_armour_rating + additional_armour_rating
+
+@onready
+var base_armour_rating : float = ship_info.base_armour_rating
+
+@export
+var additional_armour_rating : float = 0
+
+@export
+var current_armour_rating : float :
+	get:
+		return current_armour_health / max_armour_health * max_armour_rating
 
 @export_subgroup("Radar")
 
@@ -968,7 +1004,7 @@ func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:
 		return
 
-	ship_take_damage(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity), true)
+	ship_take_damage(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity), 30, true)
 
 func add_heat(heat : float) -> void:
 	current_heat += heat
@@ -1088,7 +1124,7 @@ func on_fuel_empty() -> void:
 	
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		exit_super_cruise(true)
-		ship_take_damage(current_super_cruise_speed * 6, true)
+		ship_take_damage(current_super_cruise_speed, 100, true)
 		(player.current_controller as StarshipController).supercruise_exit_timer.start()
 		
 		if current_state != State.POWER_OFF:
@@ -1136,7 +1172,7 @@ func destroyed() -> void:
 		var p : Player = get_tree().get_first_node_in_group("Player")
 		if (p.global_position - global_position).length() <= blast_radius:
 			if p.control_entity is Starship:
-				p.control_entity.take_damage(5000)
+				p.control_entity.take_damage(5000, 10)
 			else:
 				p.die()
 
@@ -1201,7 +1237,12 @@ func _on_module_insert(module : Module, slot_id : int) -> void:
 		hull_reinforcements.append(module)
 		hull_reeinforcement_health_addition += (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
-		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
+		
+		additional_armour_rating += (module.module_resource as HullReinforcementResource).additional_armour_rating
+		
+		additional_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
+		current_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
+		
 
 	if module is Cooler:
 		coolers.append(module)
@@ -1224,8 +1265,12 @@ func _on_module_uninserted(module : Module, slot_id : int) -> void:
 		hull_reinforcements.erase(module)
 		hull_reeinforcement_health_addition -= (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
-		hull_hardness -= (module.module_resource as HullReinforcementResource).additional_hardness
-
+		
+		additional_armour_rating -= (module.module_resource as HullReinforcementResource).additional_armour_rating
+		
+		additional_armour_health -= (module.module_resource as HullReinforcementResource).additional_armour_health
+		current_armour_health -= (module.module_resource as HullReinforcementResource).additional_armour_health
+		
 		if current_hull_health <= 0:
 			current_hull_health = 1
 
@@ -1416,15 +1461,25 @@ func cycle_selected_system() -> void:
 	selected_system = world.cycle_system()
 	update_abyssal_mfd()
 
-func ship_take_damage(damage : float, ignore_shield : bool = false) -> void:
+func ship_take_damage(damage : float, penetration : float, ignore_shield : bool = false) -> void:
 	if current_state == State.DESTROYED:
 		return
 
 	if shield_current_health > 0 and ignore_shield == false:
 		return
 
-	current_hull_health -= damage * (1 - hull_hardness)
+	var proportional_armour_difference : float = penetration - current_armour_rating
+	
+	# weapon doesn't penetrate armour -> only damage armour
+	if (proportional_armour_difference <= 0):
+		current_armour_health -= (clampf(1 - (absf(proportional_armour_difference) / current_armour_rating), 0, 1)) * damage
+	# weapon penetrates armour -> do full armour damage, only damage hull proportionally
+	elif (proportional_armour_difference > 0):
+		current_armour_health -= damage
+		current_hull_health -= (clampf(1 - (absf(proportional_armour_difference) / current_armour_rating), 0, 1)) * damage
+
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
+	current_armour_health = clampf(current_armour_health, 0, max_armour_health)
 
 	if current_hull_health <= hull_health_damaged_state and damaged == false:
 		change_to_damaged_state.emit()
@@ -1438,8 +1493,8 @@ func on_collision(body : Node3D) -> void:
 		return
 
 	if body is AbyssalTunnelCollider:
-		shield.take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
-		take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
+		shield.take_damage(pow(relative_linear_velocity.length(), 4) * 0.12)
+		take_damage(pow(relative_linear_velocity.length(), 4) * 0.08, 500)
 
 
 	if landing_gear_on and relative_linear_velocity.length() <= 50:
@@ -1449,8 +1504,8 @@ func on_collision(body : Node3D) -> void:
 	var hull_damage : float = pow(relative_linear_velocity.length(), 2) * 0.15
 
 	if body is GameEntity:
-		shield_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.35
-		hull_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.15
+		shield_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.55
+		hull_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.25
 
 
 	if shield_current_health > 0:
@@ -1459,7 +1514,7 @@ func on_collision(body : Node3D) -> void:
 		shield.take_damage(shield_damage)
 
 		if shield_damage / 4 > shield_max_health:
-			take_damage(shield_damage - old_health)
+			take_damage(shield_damage - old_health, 100)
 
 		return
 
@@ -1470,7 +1525,7 @@ func on_collision(body : Node3D) -> void:
 	if (current_hull_health - hull_damage) <= 0 and body is not Starship:
 		reward = 10000
 
-	take_damage(hull_damage)
+	take_damage(hull_damage, 500)
 
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound
