@@ -76,7 +76,7 @@ func insert(slot : DynamicModuleSlot) -> void:
 	freeze_static()
 	
 	if self is Weapon:
-		global_position = (module_slot as Hardpoint).mounting_position.global_positionl
+		global_position = (module_slot as Hardpoint).mounting_position.global_position
 		global_rotation = (module_slot as Hardpoint).mounting_position.global_rotation
 	else:
 		global_position = module_slot.global_position

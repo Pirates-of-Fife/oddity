@@ -4029,10 +4029,11 @@ mesh = SubResource("BoxMesh_5jnal")
 
 [node name="Hardpoints" type="Node3D" parent="Modules"]
 
-[node name="ExternalHardpoint" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("vehicle")]
+[node name="ExternalHardpoint" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("mounting_position", "vehicle")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 1.27989, 5.12507, -20.5662)
 script = ExtResource("50_7psx4")
 size = 6
+mounting_position = NodePath("Marker3D")
 vehicle = NodePath("../../..")
 id = 39
 
@@ -4040,10 +4041,11 @@ id = 39
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.816745, -1.56816)
 gizmo_extents = 0.87
 
-[node name="ExternalHardpoint2" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("vehicle")]
+[node name="ExternalHardpoint2" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("mounting_position", "vehicle")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -1.26183, 5.12507, -20.5662)
 script = ExtResource("50_7psx4")
 size = 6
+mounting_position = NodePath("Marker3D")
 vehicle = NodePath("../../..")
 id = 40
 
@@ -4051,10 +4053,11 @@ id = 40
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.816745, -1.56816)
 gizmo_extents = 0.87
 
-[node name="ExternalHardpoint3" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("vehicle")]
+[node name="ExternalHardpoint3" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("mounting_position", "vehicle")]
 transform = Transform3D(1, 1.22465e-16, 1.22465e-16, 1.22465e-16, -1, 1.49978e-32, 1.22465e-16, -1.54623e-37, -1, -1.14893, -1.41196, -24.2296)
 script = ExtResource("50_7psx4")
 size = 6
+mounting_position = NodePath("Marker3D")
 vehicle = NodePath("../../..")
 id = 41
 
@@ -4062,10 +4065,11 @@ id = 41
 transform = Transform3D(1, -2.75466e-80, 0, 0, 1, 0, 0, 0, 1, 6.66134e-16, -0.733068, -1.90477)
 gizmo_extents = 0.87
 
-[node name="ExternalHardpoint4" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("vehicle")]
+[node name="ExternalHardpoint4" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("mounting_position", "vehicle")]
 transform = Transform3D(1, 1.22465e-16, 1.22465e-16, 1.22465e-16, -1, 1.49978e-32, 1.22465e-16, -1.54623e-37, -1, 1.15287, -1.41196, -24.1872)
 script = ExtResource("50_7psx4")
 size = 6
+mounting_position = NodePath("Marker3D")
 vehicle = NodePath("../../..")
 id = 42
 
@@ -4073,10 +4077,11 @@ id = 42
 transform = Transform3D(1, -2.75466e-80, 0, 0, 1, 0, 0, 0, 1, 4.44089e-16, -0.727888, -1.84814)
 gizmo_extents = 0.87
 
-[node name="ExternalHardpoint5" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("vehicle")]
+[node name="ExternalHardpoint5" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("mounting_position", "vehicle")]
 transform = Transform3D(-6.12323e-17, 1, 1.22465e-16, 1, 6.12323e-17, 0, -7.4988e-33, 1.22465e-16, -1, 2.51003, 7.51187, 3.62305)
 script = ExtResource("50_7psx4")
 size = 5
+mounting_position = NodePath("Marker3D")
 vehicle = NodePath("../../..")
 id = 43
 
@@ -4084,10 +4089,11 @@ id = 43
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.525635, -1.27603)
 gizmo_extents = 0.87
 
-[node name="ExternalHardpoint6" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("vehicle")]
+[node name="ExternalHardpoint6" type="Node3D" parent="Modules/Hardpoints" node_paths=PackedStringArray("mounting_position", "vehicle")]
 transform = Transform3D(-6.12323e-17, -1, 1.22465e-16, -1, 6.12323e-17, 1.22465e-16, -1.22465e-16, -1.22465e-16, -1, -2.45279, 7.51187, 3.62305)
 script = ExtResource("50_7psx4")
 size = 5
+mounting_position = NodePath("Marker3D")
 vehicle = NodePath("../../..")
 id = 44
 
