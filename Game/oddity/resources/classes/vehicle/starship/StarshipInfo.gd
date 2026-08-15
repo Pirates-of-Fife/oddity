@@ -25,3 +25,9 @@ var max_ammo : float
 
 @export
 var max_heat : float
+
+@export
+var base_armour_health : float
+
+@export
+var base_armour_rating : float
