@@ -11,7 +11,7 @@ rough = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7syud"]
 radius = 0.229203
-height = 1.6
+height = 1.7
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8wi0c"]
 height = 1.6
@@ -144,6 +144,7 @@ controller_reference = "res://classes/controller/creature-controller/humanoid-co
 anchor = NodePath("Anchor")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0374836, 0)
 shape = SubResource("CapsuleShape3D_7syud")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
@@ -152,7 +153,7 @@ mesh = SubResource("CapsuleMesh_8wi0c")
 skeleton = NodePath("../..")
 
 [node name="Anchor" parent="." instance=ExtResource("2_a7dfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.697968, 0)
 enable_pitch_limit = true
 pitch_limit = 90.0
 
@@ -185,6 +186,14 @@ volume_db = -3.0
 pitch_scale = 3.0
 bus = &"Environment"
 
+[node name="Sprite3D" type="Sprite3D" parent="Anchor/TwistPivot/PitchPivot/CameraAnchor" index="1"]
+transform = Transform3D(0.103, 0, 0, 0, 0.103, 0, 0, 0, 0.103, -0.0805412, -0.539968, 0.078)
+visibility_range_begin = 2.0
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("4_0nywi")
+
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.711, 0)
 gizmo_extents = 1.06
@@ -204,13 +213,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.033, 0)
 shape = SubResource("CapsuleShape3D_6r51v")
 collision_mask = 525825
 debug_shape_custom_color = Color(0, 0.67451, 0, 1)
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0.130737, 0.092653, 0.0776592)
-visibility_range_begin = 2.0
-shaded = true
-alpha_cut = 1
-texture_filter = 0
-texture = ExtResource("4_0nywi")
 
 [editable path="Anchor"]
