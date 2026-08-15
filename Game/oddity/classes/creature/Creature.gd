@@ -184,7 +184,7 @@ func creature_physics_process(delta : float) -> void:
 		$CollisionShape3D.position.y = 0.4
 	else:
 		$CollisionShape3D.shape = orignal_collision_shape
-		$CollisionShape3D.position.y = 0
+		$CollisionShape3D.position.y = 0.037
 
 
 	is_running = false
