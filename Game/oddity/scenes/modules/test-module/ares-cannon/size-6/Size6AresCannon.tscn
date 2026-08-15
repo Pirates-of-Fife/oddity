@@ -19,13 +19,13 @@ nozzle = NodePath("Marker3D")
 module_resource = ExtResource("4_resource")
 
 [node name="ares_cannon" parent="." instance=ExtResource("2_model")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0951243, -0.0996414)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.783018, 1.67939)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.105407, 2.92529)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.793301, 4.70433)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0951243, -0.0996414)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.783018, 1.67939)
 shape = SubResource("ConvexPolygonShape3D_0dep2")
 
 [editable path="ares_cannon"]

@@ -22,13 +22,13 @@ trade_information = ExtResource("5_trade")
 can_be_picked_up = true
 
 [node name="ares_cannon" parent="." instance=ExtResource("2_model")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549085, 1.18417)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.24518)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549085, 3.20099)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549085, 1.18417)
 shape = SubResource("ConvexPolygonShape3D_i6l1x")
 
 [editable path="ares_cannon"]

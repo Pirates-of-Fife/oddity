@@ -26,16 +26,17 @@ trade_information = ExtResource("4_7y6lo")
 can_be_picked_up = true
 
 [node name="rotary_cannon" parent="." instance=ExtResource("2_11502")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544656, 1.19184)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0487026, 0.919267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.495953, 2.1111)
 shape = SubResource("ConvexPolygonShape3D_ojavx")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0487026, -1.8136)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.495953, -0.621765)
 shape = SubResource("ConvexPolygonShape3D_x36h5")
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.03863)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544656, 3.23047)
 
 [editable path="rotary_cannon"]
