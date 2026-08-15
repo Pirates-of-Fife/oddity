@@ -134,6 +134,28 @@ text = "Restock"
 font = ExtResource("3_qbdml")
 font_size = 76
 
+[node name="InteractionButton4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63241, -0.85594, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("2_hkmx1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionButton4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+mesh = SubResource("BoxMesh_w2nf3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionButton4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+shape = SubResource("ConvexPolygonShape3D_ybk2b")
+
+[node name="Label3D" type="Label3D" parent="InteractionButton4"]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 0.0189547, 0.152324, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Armour"
+font = ExtResource("3_qbdml")
+font_size = 76
+
 [connection signal="interacted" from="InteractionButton" to="." method="_on_interaction_button_interacted"]
 [connection signal="interacted" from="InteractionButton2" to="." method="_on_interaction_button_2_interacted"]
 [connection signal="interacted" from="InteractionButton3" to="." method="_on_interaction_button_3_interacted"]
+[connection signal="interacted" from="InteractionButton4" to="." method="_on_interaction_button_4_interacted"]

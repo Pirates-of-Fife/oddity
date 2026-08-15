@@ -115,7 +115,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0723527
 anchor_top = 0.54537
-anchor_right = 0.85242
+anchor_right = 0.843794
 anchor_bottom = 0.569444
 theme_override_styles/background = SubResource("StyleBoxFlat_l233b")
 theme_override_styles/fill = SubResource("StyleBoxFlat_t26tg")
@@ -124,8 +124,8 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Armour" type="Sprite2D" parent="."]
-position = Vector2(1955, 499)
-scale = Vector2(0.612573, 0.612573)
+position = Vector2(1961, 502)
+scale = Vector2(0.592377, 0.592377)
 texture = ExtResource("5_vydms")
 
 [node name="ArmourLabel" type="RichTextLabel" parent="."]
@@ -135,11 +135,16 @@ anchor_left = 0.911835
 anchor_top = 0.399074
 anchor_right = 0.983675
 anchor_bottom = 0.511569
-offset_right = -91.93
-offset_bottom = -74.495
-scale = Vector2(2.585, 2.585)
+offset_left = -16.0011
+offset_top = 1.00008
+offset_right = -107.931
+offset_bottom = -73.4949
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.651, 2.651)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_wmscu")
 theme_override_font_sizes/normal_font_size = 15
-text = "500"
-metadata/_edit_use_anchors_ = true
+bbcode_enabled = true
+text = "[center]5[/center]"
+scroll_active = false

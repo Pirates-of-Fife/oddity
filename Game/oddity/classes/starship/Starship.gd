@@ -63,6 +63,7 @@ signal state_changed_to_power_off
 signal state_changed_to_power_on
 signal state_changed_to_destroyed
 signal repaired
+signal armour_restored
 signal change_to_damaged_state
 
 signal restocked
@@ -846,6 +847,8 @@ var apply_loadout_health : bool = false
 func _starship_ready() -> void:
 	_default_ready()
 	
+	current_armour_health = ship_info.base_armour_health
+	
 	toggle_third_person_view.connect(on_third_person)
 	increase_third_person_distance.connect(on_increase_distance)
 	decrease_third_person_distance.connect(on_decrease_distance)
@@ -922,6 +925,8 @@ func _starship_ready() -> void:
 	shield_broken.connect(shield.on_shield_broken)
 	shield_online.connect(shield.on_shield_online)
 
+	
+	
 	loadout_tools.load_loadout(self, default_loadout, apply_loadout_health)
 	
 	if !landing_gear_on:
@@ -963,6 +968,7 @@ func _starship_ready() -> void:
 
 	if default_loadout.apply_health:
 		current_hull_health = default_loadout.current_health
+		current_armour_health = default_loadout.current_armour_health
 
 	if is_bounty_target:
 		match difficulty:
@@ -1116,6 +1122,11 @@ func refuel() -> void:
 	current_fuel = max_fuel
 	refueled.emit()
 	linear_damp = 0
+	
+func restore_armour() -> void:
+	current_armour_health = max_armour_health
+	current_armour_health_changed.emit()
+	armour_restored.emit()
 
 func on_fuel_empty() -> void:
 	var starship_cycle_power_state_command : StarshipCyclePowerStateCommand = StarshipCyclePowerStateCommand.new()
@@ -1243,7 +1254,6 @@ func _on_module_insert(module : Module, slot_id : int) -> void:
 		additional_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
 		current_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
 		
-
 	if module is Cooler:
 		coolers.append(module)
 		on_cooler_config_changed.emit()
@@ -1273,6 +1283,8 @@ func _on_module_uninserted(module : Module, slot_id : int) -> void:
 		
 		if current_hull_health <= 0:
 			current_hull_health = 1
+		if current_armour_health <= 0:
+			current_armour_health = 0
 
 
 func _starship_process(delta: float) -> void:
@@ -1543,8 +1555,6 @@ func lock_ship() -> void:
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
 		
-		reset_thrust_vectors()
-
 func toggle_landing_gear(force : bool = false) -> void:
 	pass
 
@@ -1775,6 +1785,7 @@ func _physics_process(delta: float) -> void:
 
 	update_ui()
 
+	#print(target_rotation_speed_vector)
 
 	# resetting is shit dont do it...
 	# reset_thrust_vectors()
@@ -1865,7 +1876,7 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 	new_target_vector.x *= ship_info.max_angular_pitch_velocity
 	new_target_vector.y *= ship_info.max_angular_yaw_velocity
 	new_target_vector.z *= ship_info.max_angular_roll_velocity
-
+	
 	return new_target_vector
 
 #===========================================================================#
@@ -1957,7 +1968,8 @@ func set_target_rotation_pitch_up(thrust : float) -> void:
 
 func set_target_rotation_pitch_down(thrust : float) -> void:
 	target_rotational_thrust_vector.x = -thrust
-
+	
+	
 func set_target_rotation_yaw_left(thrust : float) -> void:
 	target_rotational_thrust_vector.y = -thrust
 

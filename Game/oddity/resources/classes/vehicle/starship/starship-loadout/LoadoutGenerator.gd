@@ -102,6 +102,8 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	loadout.current_heat = starship.current_heat
 
 	loadout.current_fuel = starship.current_fuel
+	
+	loadout.current_armour_health = starship.current_armour_health
 
 	loadout.landing_gear_on = starship.landing_gear_on
 	
@@ -192,6 +194,7 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		starship.current_ammo = loadout.current_ammo
 		starship.current_heat = loadout.current_heat
 		starship.current_fuel = loadout.current_fuel
+		starship.current_armour_health = loadout.current_armour_health
 	else:
 		starship.current_hull_health = starship.max_hull_health
 		starship.current_ammo = starship.max_ammo

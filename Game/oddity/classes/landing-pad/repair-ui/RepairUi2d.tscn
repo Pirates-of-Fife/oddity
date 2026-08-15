@@ -17,7 +17,7 @@ font = ExtResource("1_a7nro")
 font_size = 25
 font_color = Color(0.209399, 0.607089, 3.85046e-07, 1)
 
-[node name="RepairUi2d" type="Control" node_paths=PackedStringArray("ship_not_landed_ui", "ship_name", "refuel_ui", "refuel_cost_label", "ship_refueled_ui", "repair_ui", "repair_cost_label", "ship_repaired_ui", "restock_ui", "restock_cost_label", "ship_restocked_ui")]
+[node name="RepairUi2d" type="Control" node_paths=PackedStringArray("ship_not_landed_ui", "ship_name", "refuel_ui", "refuel_cost_label", "ship_refueled_ui", "repair_ui", "repair_cost_label", "ship_repaired_ui", "restock_ui", "restock_cost_label", "ship_restocked_ui", "armour_ui", "armour_cost_label", "armour_restored_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,6 +36,9 @@ ship_repaired_ui = NodePath("ShipRepaired")
 restock_ui = NodePath("Restock")
 restock_cost_label = NodePath("Restock/Cost3")
 ship_restocked_ui = NodePath("ShipRestocked")
+armour_ui = NodePath("Armour")
+armour_cost_label = NodePath("Armour/Cost")
+armour_restored_label = NodePath("Armour2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -79,8 +82,10 @@ label_settings = SubResource("LabelSettings_7qp6s")
 [node name="Repair" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -1.0
+offset_top = -13.0
+offset_right = 39.0
+offset_bottom = 27.0
 
 [node name="CostLabel" type="Label" parent="Repair"]
 layout_mode = 0
@@ -104,9 +109,10 @@ label_settings = SubResource("LabelSettings_1q5ux")
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_top = 54.0
-offset_right = 40.0
-offset_bottom = 94.0
+offset_left = -1.0
+offset_top = 41.0
+offset_right = 39.0
+offset_bottom = 81.0
 
 [node name="Ship" type="Label" parent="ShipRepaired"]
 layout_mode = 0
@@ -120,8 +126,10 @@ label_settings = SubResource("LabelSettings_f2bnv")
 [node name="Refuel" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -1.0
+offset_top = -13.0
+offset_right = 39.0
+offset_bottom = 27.0
 
 [node name="CostLabel2" type="Label" parent="Refuel"]
 layout_mode = 0
@@ -144,8 +152,10 @@ label_settings = SubResource("LabelSettings_1q5ux")
 [node name="Restock" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -1.0
+offset_top = -13.0
+offset_right = 39.0
+offset_bottom = 27.0
 
 [node name="CostLabel3" type="Label" parent="Restock"]
 layout_mode = 0
@@ -169,9 +179,10 @@ label_settings = SubResource("LabelSettings_1q5ux")
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_top = 96.0
-offset_right = 40.0
-offset_bottom = 136.0
+offset_left = -1.0
+offset_top = 83.0
+offset_right = 39.0
+offset_bottom = 123.0
 
 [node name="Ship" type="Label" parent="ShipRefueled"]
 layout_mode = 0
@@ -186,9 +197,10 @@ label_settings = SubResource("LabelSettings_f2bnv")
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_top = 142.0
-offset_right = 40.0
-offset_bottom = 182.0
+offset_left = -1.0
+offset_top = 129.0
+offset_right = 39.0
+offset_bottom = 169.0
 
 [node name="Ship" type="Label" parent="ShipRestocked"]
 layout_mode = 0
@@ -197,4 +209,47 @@ offset_top = 60.0
 offset_right = 225.0
 offset_bottom = 130.0
 text = "Ship Restocked"
+label_settings = SubResource("LabelSettings_f2bnv")
+
+[node name="Armour" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 116.0
+offset_right = 40.0
+offset_bottom = 156.0
+
+[node name="CostLabel" type="Label" parent="Armour"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 114.0
+offset_right = 224.0
+offset_bottom = 184.0
+text = "Armour:"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Cost" type="Label" parent="Armour"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 115.0
+offset_right = 495.0
+offset_bottom = 185.0
+text = "25k Credits"
+label_settings = SubResource("LabelSettings_1q5ux")
+
+[node name="Armour2" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 170.0
+offset_right = 40.0
+offset_bottom = 210.0
+
+[node name="Ship" type="Label" parent="Armour2"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 130.0
+text = "Armour Restored"
 label_settings = SubResource("LabelSettings_f2bnv")

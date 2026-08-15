@@ -31,6 +31,9 @@ var apply_health : bool = false
 var current_health : float
 
 @export
+var current_armour_health : float
+
+@export
 var ship_color : Color = Color("e7bd74")
 
 @export
