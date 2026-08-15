@@ -27,7 +27,7 @@ func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 			(player.current_controller as StarshipController).supercruise_exit_timer.start()
 			
 			if control_entity.current_super_cruise_speed > 500:
-				control_entity.take_damage(control_entity.current_super_cruise_speed * 6)
+				control_entity.take_damage(control_entity.current_super_cruise_speed * 6, 100)
 		
 		activate_distance = planet_gravity.radius * 1.1
 

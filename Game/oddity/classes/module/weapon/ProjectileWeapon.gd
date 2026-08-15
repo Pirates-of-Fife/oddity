@@ -51,9 +51,6 @@ func shoot() -> void:
 	
 	if (aim_point != Vector3.ZERO):
 		var angle : float = nozzle.global_basis.z.angle_to(aim_point - nozzle.global_position)
-
-		
-		print("projectile angle: " + str(rad_to_deg(angle)) + " " + str(aim_point))
 		
 		if (angle <= deg_to_rad(aim_assist)):		
 			nozzle.look_at(aim_point)
@@ -72,6 +69,7 @@ func shoot() -> void:
 	projectile.hit.connect(on_hit)
 	projectile.hull_damage = module_resource.hull_damage
 	projectile.shield_damage = module_resource.shield_damage
+	projectile.penetration = module_resource.penetration
 	projectile.global_position = nozzle.global_position
 	projectile.global_rotation = nozzle.global_rotation
 	projectile.linear_velocity = module_slot.vehicle.linear_velocity

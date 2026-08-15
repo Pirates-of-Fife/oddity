@@ -16,6 +16,7 @@ var projectile_sound : AudioStream
 
 var secondary_projectile_damage : float
 var secondary_projectile_shield_damage : float
+var secondary_projectile_penetration : float
 
 var scatter_time : float 
 
@@ -45,6 +46,7 @@ func scatter_projectiles() -> void:
 
 		projectile.hit.connect(original_weapon.on_hit)
 		projectile.hull_damage = secondary_projectile_damage
+		projectile.penetration = secondary_projectile_penetration
 		projectile.shield_damage = secondary_projectile_shield_damage
 		projectile.global_position = scatter_position_marker.global_position
 		projectile.global_rotation = scatter_position_marker.global_rotation

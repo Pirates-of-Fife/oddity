@@ -11,6 +11,9 @@ var hull_damage : float
 var shield_damage : float
 
 @export
+var penetration : float
+
+@export
 var max_beam_length : float
 
 @export
@@ -66,7 +69,7 @@ func _on_timer_timeout() -> void:
 	
 	if last_hit is GameEntity:
 		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
-		last_hit.take_damage(damage_at_distance)
+		last_hit.take_damage(damage_at_distance, penetration)
 		
 		hit.emit(last_hit)
 
@@ -77,7 +80,7 @@ func _on_timer_timeout() -> void:
 	
 	if last_hit is StaticGameEntity:
 		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
-		last_hit.take_damage(damage_at_distance)
+		last_hit.take_damage(damage_at_distance, penetration)
 		hit.emit(last_hit)
 
 	# Mining Stuff here later

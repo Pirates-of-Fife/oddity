@@ -24,6 +24,7 @@ var projectile_hit_particle : PackedScene
 
 var hull_damage : float
 var shield_damage : float
+var penetration : float
 
 func _ready() -> void:
 	_projectile_ready()
@@ -52,7 +53,7 @@ func _on_body_entered(body : Node) -> void:
 		return
 		
 	if body is GameEntity or body is StaticGameEntity:
-		body.take_damage(hull_damage)
+		body.take_damage(hull_damage, penetration)
 		if body is GameEntity:
 			hit.emit(body)
 		

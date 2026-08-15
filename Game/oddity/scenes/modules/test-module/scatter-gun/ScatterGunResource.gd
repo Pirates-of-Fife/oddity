@@ -12,6 +12,9 @@ var secondary_projectile_sound : AudioStream
 var secondary_projectile_damage : float
 
 @export
+var secondary_projetile_penetration : float
+
+@export
 var secondary_projectile_shield_damage : float
 
 @export

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://4i0cdaflf1uc"]
+[gd_scene load_steps=13 format=3 uid="uid://4i0cdaflf1uc"]
 
 [ext_resource type="Theme" uid="uid://cnkijshs3vtdk" path="res://ui/themes/BasicMFDTheme.tres" id="1_6ph4f"]
 [ext_resource type="Script" path="res://classes/multi-function-display/targeting/starship_target_mfd_2d.gd" id="1_26te2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://idh2x2dvxvt" path="res://classes/multi-function-display/shield_and_hull_ui/ShieldIcon.svg" id="3_ef5ph"]
 [ext_resource type="Texture2D" uid="uid://bu2kbxefxdcae" path="res://classes/multi-function-display/shield_and_hull_ui/HeartIcon.svg" id="4_q0vja"]
 [ext_resource type="Texture2D" uid="uid://yk8lck1fg04t" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png" id="6_l35kr"]
+[ext_resource type="Texture2D" uid="uid://rhvfx707aiic" path="res://classes/multi-function-display/shield_and_hull_ui/ArmourIcon.svg" id="6_ms5li"]
 
 [sub_resource type="Theme" id="Theme_nmlx8"]
 default_font = ExtResource("2_ivteq")
@@ -17,7 +18,13 @@ bg_color = Color(1, 0, 0.164706, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0ai2"]
 bg_color = Color(1.92523e-05, 0.911912, 0.998518, 1)
 
-[node name="StarshipTargetMfd2d" type="Control" node_paths=PackedStringArray("ship_name", "hull_health_bar", "shield_health_bar", "shield_charge", "shield_health_label", "hull_health_label", "ship_focused_display", "no_target_display")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mag8u"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrirr"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="StarshipTargetMfd2d" type="Control" node_paths=PackedStringArray("ship_name", "hull_health_bar", "shield_health_bar", "shield_charge", "shield_health_label", "hull_health_label", "armour_bar", "armour_rating_label", "ship_focused_display", "no_target_display")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,6 +38,8 @@ shield_health_bar = NodePath("ShipFocused/ShieldHealthBar")
 shield_charge = NodePath("ShipFocused/ShieldCharge")
 shield_health_label = NodePath("ShipFocused/ShieldHealthLabel")
 hull_health_label = NodePath("ShipFocused/HullHealthLabel")
+armour_bar = NodePath("ShipFocused/Armour Health")
+armour_rating_label = NodePath("ShipFocused/Armour Rating")
 ship_focused_display = NodePath("ShipFocused")
 no_target_display = NodePath("NoTarget")
 
@@ -57,10 +66,10 @@ offset_bottom = 40.0
 
 [node name="Ship Name" type="RichTextLabel" parent="ShipFocused"]
 layout_mode = 0
-offset_left = 26.0
-offset_top = 127.0
-offset_right = 347.0
-offset_bottom = 171.0
+offset_left = 31.0
+offset_top = 84.0
+offset_right = 352.0
+offset_bottom = 128.0
 scale = Vector2(2.235, 2.235)
 theme = SubResource("Theme_nmlx8")
 text = "Ship Name
@@ -74,10 +83,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 84.0
-offset_top = 340.0
-offset_right = 654.385
-offset_bottom = 400.0
+offset_left = 75.0
+offset_top = 255.0
+offset_right = 645.385
+offset_bottom = 315.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_1ubvq")
@@ -91,10 +100,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 84.0
-offset_top = 260.0
-offset_right = 654.385
-offset_bottom = 320.0
+offset_left = 75.0
+offset_top = 175.0
+offset_right = 645.385
+offset_bottom = 235.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_j0ai2")
@@ -102,21 +111,21 @@ max_value = 0.0
 show_percentage = false
 
 [node name="ShieldIcon" type="Sprite2D" parent="ShipFocused"]
-position = Vector2(720, 311)
+position = Vector2(711, 226)
 scale = Vector2(0.156, 0.156)
 texture = ExtResource("3_ef5ph")
 
 [node name="HeartIcon" type="Sprite2D" parent="ShipFocused"]
-position = Vector2(723, 394)
+position = Vector2(714, 309)
 scale = Vector2(0.151, 0.151)
 texture = ExtResource("4_q0vja")
 
 [node name="ShieldCharge" type="TextureProgressBar" parent="ShipFocused"]
 layout_mode = 0
-offset_left = -2.0
-offset_top = 301.0
-offset_right = 498.0
-offset_bottom = 801.0
+offset_left = -11.0
+offset_top = 216.0
+offset_right = 489.0
+offset_bottom = 716.0
 scale = Vector2(0.205, 0.205)
 max_value = 0.0
 step = 0.01
@@ -125,23 +134,56 @@ texture_progress = ExtResource("3_ef5ph")
 
 [node name="ShieldHealthLabel" type="RichTextLabel" parent="ShipFocused"]
 layout_mode = 0
-offset_left = 115.0
-offset_top = 242.0
-offset_right = 585.0
-offset_bottom = 436.0
+offset_left = 106.0
+offset_top = 157.0
+offset_right = 576.0
+offset_bottom = 351.0
 scale = Vector2(2.585, 2.585)
 theme_override_fonts/normal_font = ExtResource("2_ivteq")
 text = "10000 / 10000"
 
 [node name="HullHealthLabel" type="RichTextLabel" parent="ShipFocused"]
 layout_mode = 0
-offset_left = 116.0
-offset_top = 321.0
-offset_right = 588.0
-offset_bottom = 421.0
+offset_left = 107.0
+offset_top = 236.0
+offset_right = 579.0
+offset_bottom = 336.0
 scale = Vector2(2.585, 2.585)
 theme_override_fonts/normal_font = ExtResource("2_ivteq")
 text = "10000 / 10000"
+
+[node name="Armour Health" type="ProgressBar" parent="ShipFocused"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.45
+anchor_top = 9.3
+anchor_right = 16.725
+anchor_bottom = 10.0
+offset_left = -3.0
+offset_top = -27.0
+offset_right = -3.0
+offset_bottom = -27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_mag8u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hrirr")
+value = 50.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Armour" type="Sprite2D" parent="ShipFocused"]
+position = Vector2(119, 411)
+scale = Vector2(0.133772, 0.133772)
+texture = ExtResource("6_ms5li")
+
+[node name="Armour Rating" type="RichTextLabel" parent="ShipFocused"]
+offset_left = 158.0
+offset_top = 357.0
+offset_right = 406.0
+offset_bottom = 401.0
+scale = Vector2(2.235, 2.235)
+theme = SubResource("Theme_nmlx8")
+text = "24
+"
+autowrap_mode = 0
 
 [node name="NoTarget" type="Control" parent="."]
 anchors_preset = 0
