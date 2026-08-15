@@ -127,7 +127,7 @@ func _on_blow_ship_up_interacted(player: Player, control_entity: ControlEntity) 
 	
 	presses = 0
 	
-	landing_pad.starship.take_damage(landing_pad.starship.max_hull_health * 10)
+	landing_pad.starship.take_damage(landing_pad.starship.max_hull_health * 10, 1000000)
 	
 	await get_tree().create_timer(2).timeout
 	

@@ -35,6 +35,12 @@ var shield_health_label : RichTextLabel
 @export
 var hull_health_label : RichTextLabel
 
+@export
+var armour_bar : ProgressBar
+
+@export
+var armour_rating_label : RichTextLabel
+
 @export_category("Displays")
 @export
 var ship_focused_display : Control
@@ -66,6 +72,10 @@ func update_target_info(starship : Starship) -> void:
 	hull_health_label.text = str(roundf(current_hull_health)) + " / " + str(roundf(max_hull_health))
 
 	ship_name.text = starship.ship_name
+	
+	armour_bar.max_value = starship.max_armour_health
+	armour_bar.value = starship.current_armour_health
+	armour_rating_label.text = str(roundf(starship.current_armour_rating))
 
 	if (max_shield_health == 0):
 		shield_health_bar.hide()
