@@ -28,17 +28,17 @@ trade_information = ExtResource("4_apetx")
 can_be_picked_up = true
 
 [node name="MercuryMesh" parent="." instance=ExtResource("3_gujtd")]
-transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, 0, -0.815788, -1.77848)
+transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, 0, -0.012497, -0.0193743)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0865349, 2.49072)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.716756, 4.24983)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, -3.0939e-16, -0.0726153, 2.08507)
+transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, -3.0939e-16, 0.730676, 3.84418)
 shape = SubResource("ConvexPolygonShape3D_2jrtj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, 0.00547691, -0.811765, -1.78614)
+transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, 0.00547691, -0.00847397, -0.0270343)
 shape = SubResource("ConvexPolygonShape3D_mwm68")
 
 [editable path="MercuryMesh"]

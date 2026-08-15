@@ -24,24 +24,24 @@ module_resource = ExtResource("2_ys687")
 can_be_picked_up = true
 
 [node name="Nozzle" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196321, 2.71022)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63321, 4.24842)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.00785285, -0.321967)
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.837384, 1.21624)
 shape = SubResource("ConvexPolygonShape3D_x62t2")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.00785285, -0.321967)
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.837384, 1.21624)
 shape = SubResource("ConvexPolygonShape3D_jmki0")
 
 [node name="size-6" parent="." instance=ExtResource("4_n0yfi")]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.00785285, -0.321967)
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.837384, 1.21624)
 
 [node name="laserWeapon6" parent="size-6" index="0"]
 layers = 3
 
 [node name="Decal4" type="Decal" parent="."]
-transform = Transform3D(2.32683e-17, -3.66638e-33, -0.38, -2.32683e-17, 0.38, -5.09115e-33, 0.38, 2.32683e-17, 2.32683e-17, 0.270744, 0.368725, -1.56541)
+transform = Transform3D(2.32683e-17, -3.66638e-33, -0.38, -2.32683e-17, 0.38, -5.09115e-33, 0.38, 2.32683e-17, 2.32683e-17, 0.270744, 1.19826, -0.0272064)
 size = Vector3(4.115, 1.076, 2)
 texture_albedo = ExtResource("6_8hx8s")
 upper_fade = 0.0039417

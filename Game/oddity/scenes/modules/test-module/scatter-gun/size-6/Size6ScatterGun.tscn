@@ -23,20 +23,20 @@ trade_information = ExtResource("5_trade")
 can_be_picked_up = true
 
 [node name="Size6ScatterGun" parent="." instance=ExtResource("2_model")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.261069)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.803291, 2.01001)
 
 [node name="Size6ScatterGun" parent="Size6ScatterGun" index="0"]
 layers = 3
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.958709)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.803291, 2.70765)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.261069)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.803291, 2.01001)
 shape = SubResource("ConvexPolygonShape3D_31lbf")
 
 [node name="Decal4" type="Decal" parent="."]
-transform = Transform3D(-2.32683e-17, 0.38, -2.32683e-17, -2.32683e-17, -2.32683e-17, -0.38, -0.38, -2.32683e-17, 2.32683e-17, 0.519769, 0.0587505, -1.71753)
+transform = Transform3D(-2.32683e-17, 0.38, -2.32683e-17, -2.32683e-17, -2.32683e-17, -0.38, -0.38, -2.32683e-17, 2.32683e-17, 0.519769, 0.862042, 0.0314074)
 size = Vector3(4.115, 1.076, 2)
 texture_albedo = ExtResource("6_1840j")
 upper_fade = 0.0039417
@@ -44,7 +44,7 @@ lower_fade = 1e-05
 cull_mask = 1048574
 
 [node name="Decal5" type="Decal" parent="."]
-transform = Transform3D(-2.32683e-17, -0.38, 2.32683e-17, -2.32683e-17, -2.32683e-17, -0.38, 0.38, -2.32683e-17, -2.32683e-17, -0.447378, 0.0587505, -1.71753)
+transform = Transform3D(-2.32683e-17, -0.38, 2.32683e-17, -2.32683e-17, -2.32683e-17, -0.38, 0.38, -2.32683e-17, -2.32683e-17, -0.447378, 0.862042, 0.0314074)
 size = Vector3(4.115, 1.076, 2)
 texture_albedo = ExtResource("6_1840j")
 upper_fade = 0.0039417

@@ -26,21 +26,21 @@ trade_information = ExtResource("3_app5t")
 can_be_picked_up = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.703248)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.701609, 1.1067)
 stream = ExtResource("5_ax1qq")
 volume_db = -6.0
 pitch_scale = 2.0
 bus = &"Weapon"
 
 [node name="Nozzle" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0299217, 0.182126, 1.94128)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0299217, 0.883735, 3.75123)
 
 [node name="RealBeamLaser6" parent="." instance=ExtResource("5_aby7a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0994885, -0.0432976)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801097, 1.76665)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0994885, -0.0432976)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801097, 1.76665)
 shape = SubResource("ConvexPolygonShape3D_gh7xa")
 
 [node name="RealLaserProjectile" parent="." instance=ExtResource("6_ba3ps")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0255569, 0.158833, 2.02554)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0255569, 0.860442, 3.83549)

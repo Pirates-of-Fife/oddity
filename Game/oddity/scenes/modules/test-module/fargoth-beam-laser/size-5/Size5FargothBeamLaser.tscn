@@ -26,6 +26,7 @@ trade_information = ExtResource("3_fm8vf")
 can_be_picked_up = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544656, 0.961157)
 stream = ExtResource("4_34hl0")
 volume_db = -2.0
 unit_size = 16.46
@@ -33,15 +34,16 @@ pitch_scale = 1.4
 bus = &"Weapon"
 
 [node name="Nozzle" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0111996, 2.27424)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555856, 3.2354)
 
 [node name="Size5FargothBeamLaser" parent="." instance=ExtResource("7_835a0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229539)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544656, 1.1907)
 
 [node name="FargothLaserProjectile" parent="." instance=ExtResource("6_7e4kp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544656, 0.961157)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229539)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544656, 1.1907)
 shape = SubResource("ConvexPolygonShape3D_3f74u")
 
 [editable path="Size5FargothBeamLaser"]

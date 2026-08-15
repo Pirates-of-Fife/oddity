@@ -22,17 +22,17 @@ nozzle = NodePath("Marker3D")
 module_resource = ExtResource("4_resource")
 
 [node name="plasma_accelerator" parent="." instance=ExtResource("2_model")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549085, 1.2033)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.96339)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549085, 2.93833)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549085, 1.2033)
 shape = SubResource("ConvexPolygonShape3D_a5dma")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.228359)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549085, 1.2033)
 shape = SubResource("ConvexPolygonShape3D_aqq81")
 
 [editable path="plasma_accelerator"]
