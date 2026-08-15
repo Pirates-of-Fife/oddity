@@ -535,3 +535,7 @@ func toggle_cargo_bay() -> void:
 
 func _on_tractorbeam_button_interacted(player:Player, control_entity:ControlEntity) -> void:
 	toggle_tractor_beams()
+
+func enable_tractor_beam_upgrade() -> void:
+	for t : TractorBeam in tractor_beams:
+		t.enable()

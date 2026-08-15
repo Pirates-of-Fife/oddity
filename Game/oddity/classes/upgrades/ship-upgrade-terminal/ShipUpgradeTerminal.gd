@@ -64,6 +64,9 @@ var thrust_upgrade_name : String
 @export
 var thrust_upgrade_description : String
 
+@export
+var tractor_beam_upgrade_ui : TractorBeamUpgradeUI
+
 @export_category("UI")
 
 @export
@@ -104,6 +107,7 @@ func _on_ship_landed(ship : Starship) -> void:
 	set_up_heat()
 	set_up_thrust()
 	set_up_turning()
+	set_up_tractor()
 	
 func _on_ship_take_off(ship : Starship) -> void:
 	starship = null
@@ -119,6 +123,7 @@ func _on_ship_take_off(ship : Starship) -> void:
 	set_down_heat()
 	set_down_thrust()
 	set_down_turning()
+	set_down_tractor()
 
 func set_up_health() -> void:
 	health_upgrade_ui.show()
@@ -294,3 +299,18 @@ func _on_thrust_upgrade() -> void:
 func set_down_thrust() -> void:
 	thrust_upgrade_ui.hide()
 	thrust_upgrade_ui.upgrade.disconnect(_on_thrust_upgrade)
+
+func set_up_tractor() -> void:
+	if !starship.supports_tractor_beam_upgrade:
+		return
+	
+	tractor_beam_upgrade_ui.show()
+	tractor_beam_upgrade_ui.tractor_beam_upgraded.connect(_on_tractor_upgrade)
+
+func _on_tractor_upgrade() -> void:
+	starship.enable_tractor_beam_upgrade()
+	starship.tractor_beams_upgraded = true
+	
+func set_down_tractor() -> void:
+	tractor_beam_upgrade_ui.hide()
+	tractor_beam_upgrade_ui.tractor_beam_upgraded.disconnect(_on_tractor_upgrade)
