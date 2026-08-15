@@ -96,6 +96,8 @@ func _process(delta: float) -> void:
 func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	_starship_process(delta)
 
+	print(acceleration.length() / 9.81)
+
 	if player == null:
 		return
 
