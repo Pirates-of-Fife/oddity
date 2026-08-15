@@ -2,6 +2,9 @@ extends Node3D
 
 class_name TractorBeam
 
+@export
+var disabled : bool = false
+
 @export_category("Animation Stuff")
 
 @export
@@ -78,17 +81,30 @@ func _ready() -> void:
 	
 	for c : CollisionShape3D in collision_shapes:
 		c.reparent(area)
+		
+	if disabled:
+		hide()
+
+func enable() -> void:
+	disabled = false
+	show()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if !active:
 		return
-
+	
+	if disabled:
+		return
+	
 	if grabbed != null:
 		tractor_beam_effects(grabbed)
 
 func on_start_picking() -> void:
 	if !active:
+		return
+	
+	if disabled:
 		return
 	
 	var entity_to_grab : GameEntity = pick_entity_to_take()
@@ -101,6 +117,9 @@ func on_start_picking() -> void:
 
 func on_pick_next() -> void:
 	if !active:
+		return
+
+	if disabled:
 		return
 
 	var entity_to_grab : GameEntity = pick_entity_to_take()
@@ -265,6 +284,9 @@ func activate() -> void:
 	
 func deactivate() -> void:	
 	if !active:
+		return
+	
+	if disabled:
 		return
 	
 	if current_tween != null:

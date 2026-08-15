@@ -24,7 +24,6 @@ var ship_name : StringName = "Default Starship" :
 	get:
 		return ship_name
 
-
 @export
 var ship_identification : StringName = "Default Starship" :
 	set(value):
@@ -33,13 +32,6 @@ var ship_identification : StringName = "Default Starship" :
 			ship_identification_label.text = value
 	get:
 		return ship_identification
-
-
-@export
-var turning_modifier : float = 1
-
-@export
-var thruster_modifier : float = 1
 
 @export
 var cruise_speed : float = 300.1234
@@ -460,6 +452,12 @@ var current_turning_upgrade : int
 
 @export_range(0, 5, 1, "suffix:Grade")
 var current_thruster_upgrade : int
+
+@export
+var supports_tractor_beam_upgrade : bool = false
+
+@export
+var tractor_beams_upgraded : bool = false
 
 @export_category("Cargo")
 @export
@@ -1783,6 +1781,9 @@ func toggle_cargo_bay() -> void:
 func toggle_tractor_beams() -> void:
 	pass
 	
+func enable_tractor_beam_upgrade() -> void:
+	pass	
+
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO
 	target_rotational_thrust_vector = Vector3.ZERO

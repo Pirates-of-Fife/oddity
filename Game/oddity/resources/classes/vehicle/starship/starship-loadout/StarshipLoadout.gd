@@ -68,6 +68,9 @@ var current_turning_upgrade : int
 @export_range(0, 5, 1, "suffix:Grade")
 var current_thruster_upgrade : int
 
+@export
+var tractor_beams_upgraded : bool
+
 func get_module_by_id(id : int) -> PackedScene:
 	for slot : ModuleSlotLoadoutResource in module_slots:
 		if slot.id == id:
