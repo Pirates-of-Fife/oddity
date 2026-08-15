@@ -58,7 +58,7 @@ func _ready() -> void:
 func update_armour() -> void:
 	armour_bar.max_value = max_armour_health
 	armour_bar.value = current_armour_health
-	armour_rating.text = str(roundf(current_armour_rating))
+	armour_rating.text = "[center]" + str(roundf(current_armour_rating)) + "[/center]"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

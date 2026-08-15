@@ -25,7 +25,7 @@ func _ready() -> void:
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
 	damage_timer.start()
 
-func on_damaged(damage : float) -> void:
+func on_damaged(damage : float, penetration : float) -> void:
 	#_ready()
 	
 	#print("Damage: " + str(damage))

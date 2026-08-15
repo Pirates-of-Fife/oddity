@@ -277,7 +277,7 @@ func _starship_controller_process(delta : float) -> void:
 				starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(abs(deazoned_pitch)))
 
 			# Starship Mouse Yaw
-
+						
 			if (mouse_yaw > 0):
 				starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(abs(deadzoned_yaw)))
 			else:

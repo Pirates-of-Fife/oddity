@@ -47,7 +47,7 @@ func fall() -> void:
 		skip_physics_process = false
 		freeze = false
 		is_on_tree = false
-		take_damage(randf_range(100, 1000))
+		take_damage(randf_range(100, 1000), 10)
 	
 func destroyed() -> void:
 	seedpod_destroyed.emit(self)
@@ -58,10 +58,13 @@ func destroyed() -> void:
 func _on_seed_pod_interact() -> void:
 	fall()
 	
-func _on_seed_pod_damage_taken(damage : float) -> void:
+func _on_seed_pod_damage_taken(damage : float, penetration : float) -> void:
 	fall()
 	
 	health -= damage
+	
+	if penetration > 50:
+		destroyed()
 	
 	value = lerpf(0, original_value, health / original_health)
 	

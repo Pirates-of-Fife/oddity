@@ -94,8 +94,8 @@ func _process(delta: float) -> void:
 	_RABS_Kestrel_Mk1_process(delta)
 
 func _RABS_Kestrel_Mk1_process(delta : float) -> void:
-	_starship_process(delta)
-
+	_starship_process(delta)	
+	
 	if player == null:
 		return
 
@@ -361,6 +361,8 @@ func update_ui() -> void:
 
 			
 func on_power_on() -> void:
+	_update_armour_ui()
+
 	power_on_sound_player.play()
 	power_screen.power_on()
 
@@ -546,3 +548,4 @@ func _update_armour_ui() -> void:
 	shield_and_health_ui.current_armour_rating = current_armour_rating
 	shield_and_health_ui.current_armour_health = current_armour_health
 	shield_and_health_ui.max_armour_health = max_armour_health
+	shield_and_health_ui._update_armour()
