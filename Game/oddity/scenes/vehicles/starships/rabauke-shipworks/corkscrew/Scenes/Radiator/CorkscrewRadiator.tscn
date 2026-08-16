@@ -149,45 +149,6 @@ shadow_mesh = SubResource("ArrayMesh_sw5y0")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u1qof"]
 points = PackedVector3Array(-1.04614, 0.258021, -2.93996, -1.34909, 0.856094, -1.43534, -1.24406, 0.673792, -1.96275, 1.04337, 0.258021, -2.93996, -1.28813, 0.766465, -1.74477, 1.34685, 0.856094, -1.43534, 1.2413, 0.673792, -1.96275, 1.28563, 0.766465, -1.74477)
 
-[sub_resource type="Animation" id="Animation_4h253"]
-resource_name = "heat"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("radiator thingies_005:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.999),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.394252, 0, 0), Vector3(1.19122, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("radiator thingies_006:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 0.999),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.391408, 0, 0), Vector3(1.44285, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("radiator thingies_007:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat64Array(0, 0.999),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.389208, 0, 0), Vector3(1.35865, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_ue4bf"]
 length = 0.001
 tracks/0/type = "value"
@@ -227,6 +188,45 @@ tracks/2/keys = {
 "values": [Vector3(-0.389208, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_4h253"]
+resource_name = "heat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("radiator thingies_005:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.394252, 0, 0), Vector3(1.19122, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("radiator thingies_006:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.391408, 0, 0), Vector3(1.44285, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("radiator thingies_007:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.389208, 0, 0), Vector3(1.35865, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rwfhy"]
 _data = {
 "RESET": SubResource("Animation_ue4bf"),
@@ -238,7 +238,7 @@ collision_layer = 537395201
 collision_mask = 537395201
 script = ExtResource("1_elexi")
 heat_colors = SubResource("GradientTexture1D_hk3l4")
-cooling_capacity = 15.0
+cooling_capacity = 50.0
 cooling_rate = 0.15
 start_cooling_at_heat = 0.1
 radiator_animation = NodePath("AnimationPlayer")

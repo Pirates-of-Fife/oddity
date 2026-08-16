@@ -41,7 +41,7 @@ var current_thrust : float :
 			var t : float = current_thrust
 			if current_thrust >= 0.01 and current_thrust <= 0.05:
 				current_thrust = 0.05
-			thruster_particles.amount_ratio = t 
+			thruster_particles.amount_ratio = t * modifier
 
 		if thruster_sound != null:
 			thruster_sound.volume_db = lerpf(thruster_sound.volume_db, lerpf(-20, 20, current_thrust * modifier), 0.2)

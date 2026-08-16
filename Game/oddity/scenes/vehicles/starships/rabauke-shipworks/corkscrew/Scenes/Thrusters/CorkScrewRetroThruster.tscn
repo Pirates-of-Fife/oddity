@@ -7,26 +7,26 @@
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.766537, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Curve" id="Curve_74f36"]
+[sub_resource type="Curve" id="Curve_fpqxh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_hccu3"]
-curve = SubResource("Curve_74f36")
+curve = SubResource("Curve_fpqxh")
 
-[sub_resource type="Gradient" id="Gradient_lwnh2"]
+[sub_resource type="Gradient" id="Gradient_db5ds"]
 offsets = PackedFloat32Array(0, 0.170213, 0.41844, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 0.458824, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_aysjf"]
-gradient = SubResource("Gradient_lwnh2")
+gradient = SubResource("Gradient_db5ds")
 
-[sub_resource type="Curve" id="Curve_ue0bt"]
+[sub_resource type="Curve" id="Curve_m53ro"]
 _data = [Vector2(0, 0.274725), 0.0, 0.0, 0, 0, Vector2(0.526627, 0.186813), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_ohmxu"]
-curve = SubResource("Curve_ue0bt")
+curve = SubResource("Curve_m53ro")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fvh18"]
 resource_local_to_scene = true

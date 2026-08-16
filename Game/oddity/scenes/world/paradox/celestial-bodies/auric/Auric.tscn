@@ -1,4 +1,4 @@
-[gd_scene load_steps=19193 format=4 uid="uid://b6d6qs4q1ex02"]
+[gd_scene load_steps=19194 format=4 uid="uid://b6d6qs4q1ex02"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_gj25k"]
 [ext_resource type="Texture2D" uid="uid://yytepgw33l3n" path="res://scenes/world/textures/8k_mars.jpg" id="2_ngjce"]
@@ -28,6 +28,7 @@
 [ext_resource type="Resource" uid="uid://t1ha50funlye" path="res://scenes/environment/foliage/resources/RockResource.tres" id="26_u7b81"]
 [ext_resource type="PackedScene" uid="uid://87h5uigosd87" path="res://classes/upgrades/ship-upgrade-terminal/UpgradeExampleScene.tscn" id="28_a8ynb"]
 [ext_resource type="Resource" uid="uid://caoc2b63dq3pq" path="res://scenes/environment/foliage/resources/SpaceDustResource.tres" id="28_i2fxe"]
+[ext_resource type="PackedScene" uid="uid://db0lck8ekkalt" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/RABS_Corkscrew.tscn" id="29_e0tsb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cp52"]
 diffuse_mode = 3
@@ -115484,3 +115485,6 @@ vertical_variance = 315.0
 
 [node name="UpgradeExampleScene" parent="." instance=ExtResource("28_a8ynb")]
 transform = Transform3D(0.986615, -0.144351, 0.0758536, 0.162517, 0.832248, -0.530049, 0.0133842, 0.535282, 0.844568, -2176.68, 11504.5, 7667.65)
+
+[node name="RabsCorkscrew" parent="." instance=ExtResource("29_e0tsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2173.81, 11526.1, 7685.67)

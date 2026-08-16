@@ -9,26 +9,26 @@ point_count = 3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sacxg"]
 
-[sub_resource type="Curve" id="Curve_ch17j"]
+[sub_resource type="Curve" id="Curve_flkrn"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_v5ovw"]
-curve = SubResource("Curve_ch17j")
+curve = SubResource("Curve_flkrn")
 
-[sub_resource type="Gradient" id="Gradient_hbcrn"]
+[sub_resource type="Gradient" id="Gradient_qo8pa"]
 offsets = PackedFloat32Array(0, 0.170213, 0.41844, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1.92523e-07, 0.700133, 0.91534, 1, 0.550567, 0.923217, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_lb645"]
-gradient = SubResource("Gradient_hbcrn")
+gradient = SubResource("Gradient_qo8pa")
 
-[sub_resource type="Curve" id="Curve_r0vdt"]
+[sub_resource type="Curve" id="Curve_u8mpd"]
 _data = [Vector2(0, 0.593407), 0.0, 0.0, 0, 0, Vector2(0.526627, 0.186813), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_8dnmx"]
-curve = SubResource("Curve_r0vdt")
+curve = SubResource("Curve_u8mpd")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3d6mt"]
 resource_local_to_scene = true
@@ -59,7 +59,7 @@ rings = 6
 script = ExtResource("1_l6bxq")
 size = 1
 thruster_sound = NodePath("AudioStreamPlayer3D")
-modifier = 3.0
+modifier = 5.0
 thruster_heat_curve = SubResource("Curve_ddhb5")
 thruster_heat_multiplier = 0.1
 fuel_usage = 0.05

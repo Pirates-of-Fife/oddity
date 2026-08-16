@@ -190,7 +190,7 @@ func _overheat_start() -> void:
 	$UI/OverheatLabel.show()
 
 	for light : Node3D in interior_lights.get_children():
-		if light is OmniLight3D:
+		if light is SpotLight3D:
 			light.light_color = interior_lights.red_color
 			light.light_energy = interior_lights.dim_light_energy
 
@@ -214,7 +214,7 @@ func _overheat_stop() -> void:
 		fire.stop_fire()
 
 	for light : Node3D in interior_lights.get_children():
-		if light is OmniLight3D:
+		if light is SpotLight3D:
 			light.light_color = interior_lights.default_color
 			light.light_energy = interior_lights.default_light_energy
 			
@@ -264,12 +264,12 @@ func _on_fuel_empty() -> void:
 	ammo_ui.hide()
 	
 	for light : Node3D in interior_lights.get_children():
-		if light is OmniLight3D:
+		if light is SpotLight3D:
 			light.hide()
 		
 func _on_refueled() -> void:
 	for light : Node3D in interior_lights.get_children():
-		if light is OmniLight3D:
+		if light is SpotLight3D:
 			light.show()
 	power_screen.show()
 			
@@ -425,7 +425,7 @@ func on_destroyed() -> void:
 		fire.start_fire()
 
 	for light : Node3D in interior_lights.get_children():
-		if light is OmniLight3D:
+		if light is SpotLight3D:
 			light.light_color = interior_lights.red_color
 			light.light_energy = interior_lights.dim_light_energy
 
@@ -446,7 +446,7 @@ func on_destroyed() -> void:
 
 func on_repaired() -> void:
 	for light : Node3D in interior_lights.get_children():
-		if light is OmniLight3D:
+		if light is SpotLight3D:
 			light.light_color = interior_lights.default_color
 			light.light_energy = interior_lights.default_light_energy
 
@@ -462,7 +462,7 @@ func on_repaired() -> void:
 
 func on_damaged() -> void:
 	for light : Node3D in interior_lights.get_children():
-		if light is OmniLight3D:
+		if light is SpotLight3D:
 			light.light_color = interior_lights.red_color
 			light.light_energy = interior_lights.dim_light_energy
 
