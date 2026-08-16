@@ -1,7 +1,7 @@
 extends Camera3D
 
 @export
-var ships : RABS_KestrelMk1
+var ships : Starship
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -621,6 +621,9 @@ var altitude : float :
 			return distance_to(active_frame_of_reference.global_position) - active_frame_of_reference.radius
 		return -1
 
+@export
+var landing_cam_marker : Marker3D
+
 ## for saving the player position
 var current_station : SpaceStation 
 
@@ -983,7 +986,7 @@ func _starship_ready() -> void:
 
 	get_thrusters()
 
-	for c : Node3D in hardpoints_root.get_children():
+	for c : Node3D in hardpoints_root.find_children("*", "", true, false):
 		if c is Hardpoint:
 			hardpoints.append(c)
 

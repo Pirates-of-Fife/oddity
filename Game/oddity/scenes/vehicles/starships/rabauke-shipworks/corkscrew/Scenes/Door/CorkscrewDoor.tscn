@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://c6el2hbp45omx"]
+[gd_scene load_steps=18 format=4 uid="uid://c6el2hbp45omx"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_vxgnd"]
 [ext_resource type="Material" uid="uid://cwouke6lcxrcs" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Materials/CorkscrewInterior.material" id="2_w5nxu"]
@@ -42,9 +42,91 @@ data = PackedVector3Array(0.9466, 2.0036, 0.0417, 0.9466, 2.0743, -0.2929, 0.946
 
 [sub_resource type="Animation" id="Animation_n4cgc"]
 resource_name = "open"
+length = 1.13
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left Door:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.1665, 0.9657),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.221453, 1.30297, 0.108694), Vector3(-0.311338, 1.30297, 0.108694), Vector3(-1.25727, 1.30297, 0.108694)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right Door:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.5661, 1.0989),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.310861, 0.955471, -0.0224995), Vector3(0.625425, 0.955471, -0.0224995), Vector3(1.2565, 0.955471, -0.0224995)]
+}
+
+[sub_resource type="Animation" id="Animation_6ycbi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(-0.221453, 1.30297, 0.108694)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right Door:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.310861, 0.955471, -0.0224995)]
+}
+
+[sub_resource type="Animation" id="Animation_onshy"]
+resource_name = "close"
+length = 1.13
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left Door:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.4662, 1.0989),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.25727, 1.30297, 0.108694), Vector3(-0.311338, 1.30297, 0.108694), Vector3(-0.221453, 1.30297, 0.108694)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right Door:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.7326, 1.0989),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.2565, 0.955471, -0.0224995), Vector3(0.625425, 0.955471, -0.0224995), Vector3(0.310861, 0.955471, -0.0224995)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_37gku"]
 _data = {
+"RESET": SubResource("Animation_6ycbi"),
+"close": SubResource("Animation_onshy"),
 "open": SubResource("Animation_n4cgc")
 }
 
@@ -144,10 +226,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0i5jx")
 
-[node name="CorkscrewDoor" type="StaticBody3D" node_paths=PackedStringArray("open_sound", "close_sound")]
+[node name="CorkscrewDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
 collision_layer = 1024
 collision_mask = 1024
 script = ExtResource("1_vxgnd")
+animation_player = NodePath("AnimationPlayer")
 open_sound = NodePath("AudioStreamPlayer3D2")
 close_sound = NodePath("AudioStreamPlayer3D2")
 

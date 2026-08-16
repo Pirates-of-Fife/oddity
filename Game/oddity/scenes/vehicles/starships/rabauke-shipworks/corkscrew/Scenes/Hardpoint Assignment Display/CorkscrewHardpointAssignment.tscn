@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bug254wigvlyp"]
+
+[ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Scenes/Hardpoint Assignment Display/CorkscrewHardpointAssignment.gd" id="1_pxe7j"]
+[ext_resource type="PackedScene" uid="uid://djulhrtweiemd" path="res://classes/multi-function-display/hardpoint-assignment-screen/AssignmentButton.tscn" id="2_qa6w7"]
+[ext_resource type="Texture2D" uid="uid://di64cmylyt7cv" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Scenes/Hardpoint Assignment Display/CorkscrewHardpointUI-01.png" id="3_qid0c"]
+[ext_resource type="PackedScene" uid="uid://3p4j6abqalln" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/engineering-terminal/EngineeringTerminal.glb" id="4_xpn1k"]
+[ext_resource type="Texture2D" uid="uid://baq6nihwjnn2v" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.svg" id="5_xcqhq"]
+
+[node name="CorkscrewHardpointAssignment" type="Node3D"]
+script = ExtResource("1_pxe7j")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(-0.056, -2.20618e-19, -6.27303e-18, -2.77681e-18, 0.0510619, 0.0229931, 5.62928e-18, 0.0229931, -0.0510619, 0, 0.717671, 0.201328)
+texture = ExtResource("3_qid0c")
+
+[node name="EngineeringTerminal2" parent="." instance=ExtResource("4_xpn1k")]
+
+[node name="Decal2" type="Decal" parent="."]
+transform = Transform3D(-1, -8.06289e-18, -1.22199e-16, 1.22465e-16, -0.0658385, -0.99783, 0, -0.99783, 0.0658385, 0, 0.442369, 0.0902275)
+size = Vector3(0.1, 0.02, 0.1)
+texture_albedo = ExtResource("5_xcqhq")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+
+[node name="Decal3" type="Decal" parent="."]
+transform = Transform3D(-1, -8.06289e-18, -1.22199e-16, 3.061e-32, 0.99783, -0.0658385, 1.22465e-16, -0.0658385, -0.99783, 0.120928, 0.406173, -0.0570994)
+size = Vector3(0.07, 0.02, 0.07)
+texture_albedo = ExtResource("5_xcqhq")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+
+[node name="LeftWingRight" parent="." instance=ExtResource("2_qa6w7")]
+transform = Transform3D(-0.075, -2.4635e-19, -8.55459e-18, -3.34373e-18, 0.0698535, 0.0273036, 7.87789e-18, 0.0273036, -0.0698535, 0.484412, 0.593931, 0.146225)
+default_color = Color(0.266073, 0.707333, 0.301961, 1)
+selected_color = Color(0.801187, 0.681329, 0.0959251, 1)
+
+[node name="LeftWingLeft" parent="." instance=ExtResource("2_qa6w7")]
+transform = Transform3D(-0.075, -8.641e-20, -8.5577e-18, -3.34373e-18, 0.069331, 0.0286045, 7.87789e-18, 0.0286045, -0.069331, 0.484412, 0.834107, 0.253011)
+default_color = Color(0.266073, 0.707333, 0.301961, 1)
+selected_color = Color(0.801187, 0.681329, 0.0959251, 1)
+
+[node name="RightWingLeft" parent="." instance=ExtResource("2_qa6w7")]
+transform = Transform3D(-0.075, -8.641e-20, -8.5577e-18, -3.34373e-18, 0.069331, 0.0286045, 7.87789e-18, 0.0286045, -0.069331, -0.319576, 0.834107, 0.253011)
+default_color = Color(0.266073, 0.707333, 0.301961, 1)
+selected_color = Color(0.801187, 0.681329, 0.0959251, 1)
+
+[node name="RightWingRight" parent="." instance=ExtResource("2_qa6w7")]
+transform = Transform3D(-0.075, -8.641e-20, -8.5577e-18, -3.34373e-18, 0.069331, 0.0286045, 7.87789e-18, 0.0286045, -0.069331, -0.331343, 0.59596, 0.147022)
+default_color = Color(0.266073, 0.707333, 0.301961, 1)
+selected_color = Color(0.801187, 0.681329, 0.0959251, 1)
