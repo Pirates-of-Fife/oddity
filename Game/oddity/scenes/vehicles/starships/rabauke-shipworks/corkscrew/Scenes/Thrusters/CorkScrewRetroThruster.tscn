@@ -1,0 +1,87 @@
+[gd_scene load_steps=14 format=3 uid="uid://dpfjfquojc8lo"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/thruster/RetroThruster.gd" id="1_uu3op"]
+[ext_resource type="AudioStream" uid="uid://bsd7y2vwvi2qc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/thrust_deep_loop.wav" id="2_0fl4q"]
+
+[sub_resource type="Curve" id="Curve_dyvot"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.766537, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_74f36"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hccu3"]
+curve = SubResource("Curve_74f36")
+
+[sub_resource type="Gradient" id="Gradient_lwnh2"]
+offsets = PackedFloat32Array(0, 0.170213, 0.41844, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.458824, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aysjf"]
+gradient = SubResource("Gradient_lwnh2")
+
+[sub_resource type="Curve" id="Curve_ue0bt"]
+_data = [Vector2(0, 0.274725), 0.0, 0.0, 0, 0, Vector2(0.526627, 0.186813), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ohmxu"]
+curve = SubResource("Curve_ue0bt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fvh18"]
+resource_local_to_scene = true
+emission_shape = 3
+emission_box_extents = Vector3(0.14, 0.33, 0.335)
+direction = Vector3(0, 0, 1)
+spread = 2.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_ohmxu")
+color_ramp = SubResource("GradientTexture1D_aysjf")
+alpha_curve = SubResource("CurveTexture_hccu3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyxjl"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_3bqgj"]
+material = SubResource("StandardMaterial3D_tyxjl")
+radial_segments = 12
+rings = 6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yide1"]
+
+[node name="CorkScrewRetroThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_sound", "thruster_particles")]
+script = ExtResource("1_uu3op")
+size = 2
+thruster_sound = NodePath("AudioStreamPlayer3D")
+modifier = 2.0
+thruster_heat_curve = SubResource("Curve_dyvot")
+thruster_heat_multiplier = 2.0
+fuel_usage = 0.005
+thruster_particles = NodePath("GPUParticles3D")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 800
+amount_ratio = 0.0
+lifetime = 0.7
+speed_scale = 2.0
+fixed_fps = 15
+visibility_aabb = AABB(-4, -4, -2.31, 7.89, 8.865, 10.715)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_fvh18")
+draw_pass_1 = SubResource("SphereMesh_3bqgj")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_0fl4q")
+max_db = -6.0
+pitch_scale = 3.0
+max_distance = 500.0
+bus = &"Thruster"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yide1")
+disabled = true

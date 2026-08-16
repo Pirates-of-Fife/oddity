@@ -6,6 +6,9 @@ class_name RadiatorSlot
 @export
 var size : ModuleSize.ComponentSize
 
+@export
+var ignore_area_stuff : bool = false
+
 func _module_fits(module : Module) -> bool:
 	if self.module != null:
 		return false
@@ -19,6 +22,9 @@ func _radiator_slot_ready() -> void:
 	initialize_area_automatically = false
 	_dynamic_module_slot_ready()
 	add_to_group("ComponentSlot")
+	
+	if ignore_area_stuff:
+		return
 
 	var area : Area3D = $SlotArea
 
