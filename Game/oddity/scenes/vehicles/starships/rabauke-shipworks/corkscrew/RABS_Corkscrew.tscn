@@ -1,13 +1,15 @@
-[gd_scene load_steps=19 format=4 uid="uid://db0lck8ekkalt"]
+[gd_scene load_steps=21 format=4 uid="uid://db0lck8ekkalt"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/RABS_Corkscrew.gd" id="1_q7pe6"]
 [ext_resource type="PackedScene" uid="uid://bf5ld2nav8tx1" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/GLTF/CorkscrewExterior.glb" id="2_1yu31"]
 [ext_resource type="Texture2D" uid="uid://caoh17b6d4kvq" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Textures/Decals/name_dark.png" id="2_jhqtt"]
+[ext_resource type="PackedScene" uid="uid://dlffj8pwwwcfl" path="res://classes/pid-controller/ShipPidControllers.tscn" id="2_v6kch"]
 [ext_resource type="PackedScene" uid="uid://b7ivmf1d40vwp" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/GLTF/CorkscrewInterior.glb" id="3_ir41t"]
 [ext_resource type="Material" uid="uid://dmcxsgrqyavw0" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Materials/CorkscrewExterior.material" id="5_kv8tt"]
 [ext_resource type="PackedScene" uid="uid://4uby41fm4e75" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/GLTF/CorkscrewShield.glb" id="6_2nm0o"]
 [ext_resource type="PackedScene" uid="uid://b1cbmwaq1k7tu" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/GLTF/CorkscrewRadiator.glb" id="7_oiolu"]
 [ext_resource type="Texture2D" uid="uid://qaj5vjpa246q" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-04.png" id="8_cpo5y"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="10_alyfy"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_myak5"]
 _surfaces = [{
@@ -247,10 +249,74 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ewmxd")
 
-[node name="RabsCorkscrew" type="RigidBody3D"]
+[node name="RabsCorkscrew" type="RigidBody3D" node_paths=PackedStringArray("name_label", "ship_identification_label")]
 script = ExtResource("1_q7pe6")
 ship_name = &"Corkscrew"
 cruise_speed = 400.123
+name_label = NodePath("Ship Name/ShipName")
+ship_identification_label = NodePath("Ship Name/ShipId")
+
+[node name="ShipPidControllers" parent="." instance=ExtResource("2_v6kch")]
+
+[node name="PIDForward" parent="ShipPidControllers" index="0"]
+Kp = 500000.0
+Ki = 0.4
+Kd = 0.2
+
+[node name="PIDBackward" parent="ShipPidControllers" index="1"]
+Kp = 350000.0
+Ki = 0.4
+Kd = 0.2
+
+[node name="PIDUp" parent="ShipPidControllers" index="2"]
+Kp = 180000.0
+Ki = 0.3
+Kd = 0.15
+
+[node name="PIDDown" parent="ShipPidControllers" index="3"]
+Kp = 180000.0
+Ki = 0.3
+Kd = 0.15
+
+[node name="PIDLeft" parent="ShipPidControllers" index="4"]
+Kp = 180000.0
+Ki = 0.25
+Kd = 0.15
+
+[node name="PIDRight" parent="ShipPidControllers" index="5"]
+Kp = 180000.0
+Ki = 0.25
+Kd = 0.15
+
+[node name="PIDRollLeft" parent="ShipPidControllers" index="6"]
+Kp = 600000.0
+Ki = 0.3
+Kd = 0.05
+
+[node name="PIDRollRight" parent="ShipPidControllers" index="7"]
+Kp = 600000.0
+Ki = 0.3
+Kd = 0.05
+
+[node name="PIDYawLeft" parent="ShipPidControllers" index="8"]
+Kp = 600000.0
+Ki = 0.3
+Kd = 0.05
+
+[node name="PIDYawRight" parent="ShipPidControllers" index="9"]
+Kp = 600000.0
+Ki = 0.3
+Kd = 0.05
+
+[node name="PIDPitchUp" parent="ShipPidControllers" index="10"]
+Kp = 600000.0
+Ki = 0.3
+Kd = 0.05
+
+[node name="PIDPitchDown" parent="ShipPidControllers" index="11"]
+Kp = 600000.0
+Ki = 0.3
+Kd = 0.05
 
 [node name="Decals" type="Node3D" parent="."]
 
@@ -314,3 +380,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001118, 1.87198, 0.165922)
 layers = 5
 mesh = SubResource("ArrayMesh_cxixb")
 skeleton = NodePath("")
+
+[node name="Ship Name" type="Node3D" parent="."]
+
+[node name="ShipId" type="Label3D" parent="Ship Name"]
+transform = Transform3D(1.41546e-17, 0.0422969, -0.231162, -2.58994e-18, 0.231162, 0.0422969, 0.235, 0, 1.43896e-17, -2.40917, 2.70117, 0.265725)
+shaded = true
+outline_modulate = Color(0, 0, 0, 0)
+text = "RABS-XXX-123"
+font = ExtResource("10_alyfy")
+font_size = 157
+
+[node name="ShipName" type="Label3D" parent="Ship Name"]
+transform = Transform3D(1.42031e-17, 0.0377097, -0.231955, -2.30906e-18, 0.231955, 0.0377097, 0.235, 0, 1.43896e-17, -2.45961, 2.36071, 0.265725)
+shaded = true
+outline_modulate = Color(0, 0, 0, 0)
+text = "The Corscrew"
+font = ExtResource("10_alyfy")
+font_size = 157
+
+[editable path="ShipPidControllers"]
