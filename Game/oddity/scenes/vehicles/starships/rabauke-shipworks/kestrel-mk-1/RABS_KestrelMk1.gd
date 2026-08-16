@@ -60,9 +60,6 @@ var explosion_partcle : GPUParticles3D
 var landing_cam : Sprite3D
 
 @export
-var landing_cam_marker : Marker3D
-
-@export
 var cargo_bay : RABS_KestrelMk1_Ramp
 
 @export
