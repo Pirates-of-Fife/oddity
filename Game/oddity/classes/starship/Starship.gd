@@ -903,7 +903,6 @@ func _starship_ready() -> void:
 
 	get_cargo_grids()
 
-
 	shield.shield_hit.connect(shield_damage)
 
 	add_child(shield_cooldown_after_break_timer)
@@ -928,8 +927,6 @@ func _starship_ready() -> void:
 	shield_broken.connect(shield.on_shield_broken)
 	shield_online.connect(shield.on_shield_online)
 
-	
-	
 	loadout_tools.load_loadout(self, default_loadout, apply_loadout_health)
 	
 	if !landing_gear_on:
@@ -986,7 +983,7 @@ func _starship_ready() -> void:
 
 	get_thrusters()
 
-	for c : Node3D in hardpoints_root.find_children("*", "", true, false):
+	for c : Node in hardpoints_root.find_children("*", "", true, false):
 		if c is Hardpoint:
 			hardpoints.append(c)
 

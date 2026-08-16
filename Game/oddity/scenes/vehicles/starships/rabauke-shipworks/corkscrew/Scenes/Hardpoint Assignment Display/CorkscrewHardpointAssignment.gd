@@ -22,10 +22,9 @@ func _ship_ready() -> void:
 	$LeftWingLeft.hardpoint = left_wing_left
 	$LeftWingRight.hardpoint = left_wing_right
 	$RightWingLeft.hardpoint = right_wing_left
-	$RightWingLeft.hardpoint = right_wing_right
+	$RightWingRight.hardpoint = right_wing_right
 
 	$LeftWingLeft.set_ready()
 	$LeftWingRight.set_ready()
 	$RightWingLeft.set_ready()
-	$RightWingLeft.set_ready()
-
+	$RightWingRight.set_ready()

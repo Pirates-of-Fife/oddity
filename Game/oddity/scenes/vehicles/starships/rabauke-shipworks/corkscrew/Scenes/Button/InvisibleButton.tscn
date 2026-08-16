@@ -7,6 +7,8 @@
 size = Vector3(0.325309, 0.443775, 0.140392)
 
 [node name="InvisibleButton" type="StaticBody3D" node_paths=PackedStringArray("interaction_sound")]
+collision_layer = 536870912
+collision_mask = 536870912
 script = ExtResource("1_xa68h")
 interaction_sound = NodePath("AudioStreamPlayer3D")
 press_delay = 2.0
