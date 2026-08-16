@@ -1642,7 +1642,7 @@ func exit_super_cruise(force_exit : bool = false) -> void:
 	reset_thrust_vectors()
 
 func cruise_travel(delta : float) -> void:
-	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
+	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1 and local_angular_velocity.length() < 0.5:
 		if active_frame_of_reference is GravityGrid or active_frame_of_reference is GravityWell:
 			if active_frame_of_reference.enable_gravity == true:
 				if lock_timer.is_stopped():
