@@ -84,6 +84,9 @@ func get_star_systems_in_range() -> Array[StarSystemResource]:
 	var systems_in_range : Array[StarSystemResource]
 	var current : StarSystemResource = get_current_star_sytem_resource()
 	
+	if player == null:
+		return systems_in_range
+	
 	if !(player.control_entity is Starship):
 		return systems_in_range
 	

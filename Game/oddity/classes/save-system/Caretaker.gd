@@ -62,7 +62,7 @@ func save_player_position(used_bed : bool = false, bed_index : int = -1, ship_id
 func save_active_starships(saved_ships : Array[StarshipSave], starships_in_star_system : Array[Node]) -> Array[StarshipSave]:
 	var loadout_generator : LoadoutGenerator = LoadoutGenerator.new()
 
-	var array_copy : Array[GameEntitySave] = saved_ships.duplicate()
+	var array_copy : Array[StarshipSave] = saved_ships.duplicate()
 
 	for starship_save : StarshipSave in array_copy:
 		if starship_save.star_system.name == world.get_current_star_sytem_resource().name:

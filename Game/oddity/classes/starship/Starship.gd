@@ -168,7 +168,7 @@ var jump_range : float :
 	get():
 		if (abyss_drive_slot.module == null):
 			return 0
-		
+			
 		var abyss_drive_resource : AbyssalJumpDriveResource = (abyss_drive_slot.module as AbyssalJumpDrive).module_resource
 		
 		return abyss_drive_resource.jump_range
