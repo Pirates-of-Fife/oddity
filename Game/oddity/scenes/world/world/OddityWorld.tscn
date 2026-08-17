@@ -24,7 +24,6 @@ caretaker = NodePath("Caretaker")
 star_systems = Array[ExtResource("2_i2wjh")]([ExtResource("2_rqxl3"), ExtResource("3_imvkk"), ExtResource("4_owmr8"), ExtResource("5_15hgi"), ExtResource("6_56n3f"), ExtResource("7_q2man")])
 player = NodePath("Player")
 player_control_entity = NodePath("Humanoid")
-is_main_menu_world = null
 music_player = NodePath("MusicPlayer")
 
 [node name="Humanoid" parent="." instance=ExtResource("3_5uyom")]

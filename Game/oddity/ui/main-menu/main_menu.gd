@@ -20,7 +20,7 @@ func load_last_possessed_starship() -> void:
 	if ship_loaded:
 		return
 	
-	var last_used_starship : StarshipLoadout = get_tree().get_first_node_in_group("World").caretaker.get_save_file().last_used_starship
+	var last_used_starship : StarshipLoadout = $Caretaker.get_save_file().last_used_ship
 	
 	if last_used_starship == null:
 		return

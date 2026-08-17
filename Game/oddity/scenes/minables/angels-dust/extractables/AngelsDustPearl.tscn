@@ -11,7 +11,7 @@ points = PackedVector3Array(-0.114993, -0.613498, -0.0191005, 0.115094, 0.613488
 [sub_resource type="BoxShape3D" id="BoxShape3D_i4twb"]
 size = Vector3(1.25, 1.25, 1.25)
 
-[node name="AngelsDustPearl" type="RigidBody3D" node_paths=PackedStringArray("normal_container", "new_collider", "old_collider", "cardboard_box")]
+[node name="AngelsDustPearl" type="RigidBody3D" node_paths=PackedStringArray("normal_container", "new_collider", "old_collider", "cardboard_box") groups=["GameEntity"]]
 collision_layer = 537921029
 collision_mask = 537921025
 mass = 14.655
@@ -24,6 +24,7 @@ old_collider = NodePath("CollisionShape3D")
 cardboard_box = NodePath("AngelsDustCardboardBox")
 contents = "Angel's Dust Pearl"
 initialize_collision_shape_automatically = false
+save = true
 value = 64495
 can_be_picked_up = true
 

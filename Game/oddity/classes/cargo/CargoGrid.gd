@@ -49,7 +49,8 @@ var cargo_areas_left : int :
 
 var player_nearby : bool = false
 
-
+@export
+var ship_grid : bool = false
 
 @export
 var generate_grid : bool :

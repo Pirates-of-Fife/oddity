@@ -10,7 +10,7 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c5665"]
 points = PackedVector3Array(0.479688, 0.533973, -0.615659, -0.3309, -0.512835, -1.54883, -0.352369, -0.396277, -1.72864, -0.375136, 0.5373, 1.37936, 0.23853, -0.428847, 1.2128, 0.510577, -0.456971, -1.71045, -0.352369, 0.504775, -1.72864, -0.375136, -0.475688, 1.37936, 0.247265, 0.502732, 1.26873, -0.53516, -0.209064, -0.912801, 0.351638, 0.357759, -1.94359, 0.476956, -0.426721, -0.0877826, 0.510577, 0.516628, -1.71045, -0.53516, 0.270676, -0.912801, -0.204383, -0.248929, -1.94728, 0.3291, -0.516148, -1.55666, -0.342627, 0.5396, -1.59239, 0.477965, 0.48402, -0.0872787, 0.351917, -0.248551, -1.94487, -0.203922, 0.357759, -1.94359, 0.484804, 0.5396, -1.59209, 0.284674, -0.425999, 1.05924, -0.30485, -0.399701, -1.79124, -0.446839, 0.251302, -1.36489, 0.352717, 0.510855, -1.74566, 0.452489, -0.399701, -1.79124, 0.284695, 0.48213, 1.05935, 0.436743, -0.483229, -1.59392, 0.380961, -0.426626, 0.486686, 0.454178, 0.510932, -1.74556)
 
-[node name="Size5BeamLaser" type="RigidBody3D" node_paths=PackedStringArray("beam_laser", "beam_sound", "nozzle")]
+[node name="Size5BeamLaser" type="RigidBody3D" node_paths=PackedStringArray("beam_laser", "beam_sound", "nozzle") groups=["GameEntity"]]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 30.0
@@ -20,6 +20,7 @@ beam_sound = NodePath("AudioStreamPlayer3D")
 size = 5
 nozzle = NodePath("Nozzle")
 module_resource = ExtResource("2_oapg6")
+save = true
 value = 40000
 sellable = true
 trade_information = ExtResource("3_fm8vf")

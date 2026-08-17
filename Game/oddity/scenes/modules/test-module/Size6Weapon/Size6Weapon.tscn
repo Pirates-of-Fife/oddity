@@ -12,7 +12,7 @@ points = PackedVector3Array(2.50679, 0.143738, 0.5538, 0.215485, -0.5942, -0.758
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jmki0"]
 points = PackedVector3Array(-0.659806, -0.00366032, 0.247827, -0.570881, -0.359635, -0.286135, -0.570881, -0.00366032, -0.286135, -2.9736, -0.359635, -0.197124, -0.392781, -0.359635, 0.247827, -2.9736, -0.00366032, 0.158816, -2.9736, -0.359635, 0.158816, -2.9736, -0.00366032, -0.197124, -0.392781, -0.00366032, -0.286135, -0.392781, -0.00366032, 0.247827, -0.392781, -0.359635, -0.286135, -0.659806, -0.359635, 0.247827)
 
-[node name="Size6Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
+[node name="Size6Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle") groups=["GameEntity"]]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 100.0
@@ -21,6 +21,7 @@ shot_audio = ExtResource("2_prkwe")
 size = 6
 nozzle = NodePath("Nozzle")
 module_resource = ExtResource("2_ys687")
+save = true
 can_be_picked_up = true
 
 [node name="Nozzle" type="Marker3D" parent="."]

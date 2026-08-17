@@ -42,14 +42,10 @@ func _ready() -> void:
 func add_credits(credits : int) -> void:
 	self.credits += abs(credits)
 	credits_added.emit(abs(credits))
-	var world : World = get_tree().get_first_node_in_group("World")
-	world.save_player_money_state()
 
 func remove_credits(credits : int) -> void:
 	self.credits -= abs(credits)
 	credits_removed.emit(abs(credits))
-	var world : World = get_tree().get_first_node_in_group("World")
-	world.save_player_money_state()
 
 func _player_ready() -> void:
 	_mind_ready()

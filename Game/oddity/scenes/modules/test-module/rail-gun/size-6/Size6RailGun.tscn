@@ -13,7 +13,7 @@ points = PackedVector3Array(0.18397, 0.18397, 2.00512, -0.00172878, -0.18397, 2.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_idqlv"]
 points = PackedVector3Array(-0.334642, -0.538758, -0.50336, -0.420504, -8.7925e-09, -0.525677, -0.260716, -0.417691, -0.581146, 0.334559, -0.538758, -0.50336, -0.334642, -0.538758, 0.503204, -0.420504, -0.464992, -0.401956, -0.420504, 0.189102, -0.523294, -0.260716, -0.106168, -0.581146, 0.260633, -0.417691, -0.581146, 0.420504, -8.7925e-09, -0.525677, 0.420504, -0.464992, -0.401956, 0.334559, -0.538758, 0.503204, -0.366171, -0.502188, 0.520321, -0.420504, -0.464992, 0.401909, 0.420504, 0.189102, -0.523294, -0.420504, 0.52563, -0.236958, 0.260633, -0.106168, -0.581146, 0.420504, -0.464992, 0.401909, 0.366089, -0.502188, 0.520321, -0.420504, -0.404355, 0.52563, 0.420504, 0.52563, -0.236958, -0.236595, 0.332673, 0.214701, 0.420504, -0.404355, 0.52563, -0.236595, -0.140342, 0.437227, 0.236513, 0.332673, 0.214701, 0.236513, -0.140342, 0.437227)
 
-[node name="RailGun" type="RigidBody3D" node_paths=PackedStringArray("cooldown_complete_sound", "nozzle")]
+[node name="RailGun" type="RigidBody3D" node_paths=PackedStringArray("cooldown_complete_sound", "nozzle") groups=["GameEntity"]]
 collision_layer = 537396737
 collision_mask = 537396737
 script = ExtResource("1_2byvw")
@@ -22,6 +22,7 @@ shot_audio = ExtResource("2_kcyjo")
 size = 6
 nozzle = NodePath("Marker3D")
 module_resource = ExtResource("2_grniy")
+save = true
 value = 150000
 trade_information = ExtResource("4_j4rii")
 can_be_picked_up = true

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://btnir1eoca2nq" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard4.tres" id="3_2sj2e"]
 [ext_resource type="PackedScene" uid="uid://bf7s7vwhd8bfp" path="res://scenes/modules/test-module/ShieldGenerator/shield-modul.glb" id="3_4bt3o"]
 
-[node name="Size4ShieldGenerator" type="RigidBody3D"]
+[node name="Size4ShieldGenerator" type="RigidBody3D" groups=["GameEntity"]]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 50.0
@@ -13,6 +13,7 @@ script = ExtResource("1_xjh3r")
 size = 4
 module_resource = ExtResource("2_ujrrl")
 passive_heat_generation = 300.0
+save = true
 value = 80000
 trade_information = ExtResource("3_2sj2e")
 can_be_picked_up = true

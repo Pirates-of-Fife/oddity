@@ -216,6 +216,9 @@ func spawn_entities_in_system(star_system : String) -> void:
 	var save_file : SaveFile = caretaker.get_save_file()
 	var ships_in_system : Array[Starship] = spawn_active_ships(save_file.active_ships, save_file.player_position.star_system.name)
 	spawn_saved_game_entities(save_file.game_entities, save_file.player_position.star_system.name)
+	
+	print("Spawn")
+	
 
 func spawn_player_character(player_position_save : PlayerPositionSave, player_inventory : PlayerInventoryResource, credits : int, ships_in_system : Array[Starship]) -> void:
 	player.inventory = player_inventory
@@ -236,8 +239,8 @@ func spawn_player_character(player_position_save : PlayerPositionSave, player_in
 		player_control_entity.global_position = ship.get_bed(player_position_save.bed_index).player_spawn_position
 		player_control_entity.global_rotation = ship.get_bed(player_position_save.bed_index).player_spawn_position_marker.global_rotation
 	else:
-		player_control_entity.global_position = player_position_save.position
-		player_control_entity.global_rotation = player_position_save.rotation
+		player_control_entity.global_position = player_position_save.position.toVector3()
+		player_control_entity.global_rotation = player_position_save.rotation.toVector3()
 
 func spawn_active_ships(active_ships : Array[StarshipSave], star_system : String) -> Array[Starship]:
 	var ships_in_system : Array[Starship]
@@ -259,13 +262,13 @@ func spawn_starship(ship_save : StarshipSave) -> Starship:
 	
 	get_tree().get_first_node_in_group("StarSystem").add_child(ship)
 	
-	ship.global_rotation = ship_save.rotation
-	ship.global_position = ship_save.position			
+	ship.global_rotation = ship_save.rotation.toVector3()
+	ship.global_position = ship_save.position.toVector3()
 	
 	return ship
 	
 func spawn_saved_game_entities(saved_game_entities : Array[GameEntitySave], star_system : String) -> void:
-	for game_entity_save : StarshipSave in saved_game_entities:
+	for game_entity_save : GameEntitySave in saved_game_entities:
 		if game_entity_save.star_system.name == star_system:
 			var scene : PackedScene = load(game_entity_save.game_entity_scene)
 			var game_entity : GameEntity = scene.instantiate()
@@ -273,8 +276,10 @@ func spawn_saved_game_entities(saved_game_entities : Array[GameEntitySave], star
 			get_tree().get_first_node_in_group("StarSystem").add_child(game_entity)
 			
 			game_entity.value = game_entity_save.value
-			game_entity.global_position = game_entity_save.position
-			game_entity.global_rotation = game_entity_save.rotation
+			game_entity.global_position = game_entity_save.position.toVector3()
+			game_entity.global_rotation = game_entity_save.rotation.toVector3()
+			
+			print("spawned " + str(game_entity) + " " + str(game_entity.global_position))
 	
 func respawn_player() -> void:
 	if abyss_entered:
@@ -312,6 +317,8 @@ func bed_exit(bed_index : int, ship_id : String) -> void:
 
 func exit_to_main_menu() -> void:
 	caretaker.save()
+	
+	await get_tree().create_timer(0.5).timeout
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
