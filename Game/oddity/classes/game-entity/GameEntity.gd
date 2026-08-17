@@ -15,6 +15,12 @@ var is_mass_locked : bool :
 				return true
 		return false
 
+@export_category("Save")
+
+# also gets determined by freeze state. Frozen game entities are inside starships, where they get saved in the loadout instead of the regular game save. 
+@export
+var save : bool = false
+
 @export_category("Information")
 
 @export
@@ -183,6 +189,7 @@ func freeze_static() -> void:
 	freeze = true
 
 func freeze_in_reference_frame() -> void:
+	save = false
 	freeze_static()
 	reparent.call_deferred(active_frame_of_reference)
 
@@ -197,6 +204,7 @@ func unfreeze() -> void:
 	collision_mask = original_collision_mask
 
 	freeze = false
+	save = true
 
 func calculate_velocities(delta : float) -> void:
 	acceleration = (linear_velocity - last_linear_velocity) / delta

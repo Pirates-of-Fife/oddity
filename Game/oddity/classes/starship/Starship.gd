@@ -5,6 +5,11 @@ extends Vehicle
 
 class_name Starship
 
+@export_category("Save and Player Information")
+
+@export
+var is_player_ship : bool = false
+
 @export_category("Target Thrust Vector")
 
 @export
@@ -16,6 +21,16 @@ var target_rotational_thrust_vector : Vector3 = Vector3.ZERO
 @export_category("Info")
 
 signal ship_name_changed(ship_name : String)
+
+enum ShipType
+{
+	CORKSCREW,
+	KESTREL,
+	BLACKPOOL
+}
+
+@export
+var ship_type : ShipType
 
 @export
 var ship_name : StringName = "Default Starship" :

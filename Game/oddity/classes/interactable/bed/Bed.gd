@@ -3,7 +3,7 @@ extends Interactable
 class_name Bed
 
 @export
-var vehicle : Vehicle
+var vehicle : Starship
 
 @export
 var bed_index : int
@@ -22,7 +22,5 @@ func _ready() -> void:
 	interacted.connect(_on_interact)
 	skip_delay = true
 
-func _on_interact(player : Player, control_entity : ControlEntity) -> void:
-	var world : World = get_tree().get_first_node_in_group("World")
-	
-	world.bed_exit(bed_index)
+func _on_interact(player : Player, control_entity : ControlEntity) -> void:	
+	world.bed_exit(bed_index, vehicle.ship_identification)

@@ -2,6 +2,11 @@ extends Resource
 
 class_name StarshipLoadout
 
+@export_category("Ship")
+
+@export
+var ship_type : Starship.ShipType 
+
 @export_category("Objects")
 
 @export
@@ -16,6 +21,9 @@ var entities : Array[GameEntityLoadoutResource] = []
 @export_category("info")
 
 @export
+var is_player_ship : bool = false
+
+@export
 var ship_name : StringName
 
 @export
@@ -26,6 +34,9 @@ var value : int = 0
 
 @export
 var apply_health : bool = false
+
+@export
+var destroyed : bool = false
 
 @export
 var current_health : float
