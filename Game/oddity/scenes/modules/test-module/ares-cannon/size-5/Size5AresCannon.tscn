@@ -9,7 +9,7 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i6l1x"]
 points = PackedVector3Array(0.1927, 0.569883, -0.771007, -0.386021, -0.58786, -1.73604, -0.51476, -0.266239, -1.92905, -0.128745, -0.0732442, 1.99436, 0.514345, -0.266239, -1.92905, -0.386021, 0.441145, -1.86458, 0.385707, -0.58786, -0.64247, 0.514345, 0.248263, -0.449462, 0.128431, 0.119637, 1.99436, -0.386021, 0.441145, -0.513932, 0.514345, 0.248263, -1.99312, -0.386021, -0.58786, -0.64247, -0.51476, 0.248263, -0.449462, -0.51476, -0.266239, -0.449462, 0.514345, -0.266239, -0.449462, 0.0640615, -0.137614, 1.99436, 0.385707, -0.58786, -1.73604, -0.128745, 0.119637, 1.99436, 0.321338, 0.505514, -1.80011, -0.193013, 0.569883, -0.771007, -0.51476, 0.248263, -1.99312, 0.385707, 0.441145, -0.513932, 0.128431, -0.0732442, 1.99436, -0.321651, 0.505514, -1.80011, -0.0643751, -0.137614, 1.99436, 0.321338, 0.505514, -0.578402, -0.321651, 0.505514, -0.578402, 0.385707, 0.441145, -1.86458)
 
-[node name="Size5AresCannon" type="RigidBody3D" node_paths=PackedStringArray("nozzle")]
+[node name="Size5AresCannon" type="RigidBody3D" node_paths=PackedStringArray("nozzle") groups=["GameEntity"]]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 25.0
@@ -18,6 +18,7 @@ shot_audio = ExtResource("3_sound")
 size = 5
 nozzle = NodePath("Marker3D")
 module_resource = ExtResource("4_resource")
+save = true
 trade_information = ExtResource("5_trade")
 can_be_picked_up = true
 

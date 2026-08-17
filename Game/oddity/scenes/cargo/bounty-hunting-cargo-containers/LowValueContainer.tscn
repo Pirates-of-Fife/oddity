@@ -4,13 +4,14 @@
 [ext_resource type="Resource" uid="uid://nvakvaqc8kir" path="res://resources/resources/trade/trade-items/cargo/TradeResourceSalvagedBlackheartTitanium.tres" id="2_0eavq"]
 [ext_resource type="PackedScene" uid="uid://ulg2kmno66p8" path="res://scenes/cargo/bounty-hunting-cargo-containers/smallValueBox.glb" id="2_vxo01"]
 
-[node name="Cu1Container" type="RigidBody3D"]
+[node name="Cu1Container" type="RigidBody3D" groups=["GameEntity"]]
 collision_layer = 537921029
 collision_mask = 537921025
 mass = 10.0
 contact_monitor = true
 script = ExtResource("1_o0wl8")
 contents = "Salvaged Blackheart Titanium"
+save = true
 value = 5000
 trade_information = ExtResource("2_0eavq")
 can_be_picked_up = true

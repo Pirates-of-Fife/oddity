@@ -9,10 +9,10 @@ var game_entity_scene : String
 var value : int
 
 @export
-var position : Vector3
+var position : StringVector
 
 @export
-var rotation : Vector3
+var rotation : StringVector
 
 @export
 var star_system : StarSystemResource

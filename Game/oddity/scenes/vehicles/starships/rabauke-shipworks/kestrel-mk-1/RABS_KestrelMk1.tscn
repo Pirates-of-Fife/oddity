@@ -3016,6 +3016,7 @@ cargo_grid_physical_size = Vector3(8.215, 4.515, 4.5)
 total_cu_capacity = 54
 cu_x_y_z = Vector3(6, 3, 3)
 cargo_area_root = NodePath("Node3D")
+ship_grid = null
 
 [node name="Node3D" type="Node3D" parent="Interior/CargoGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.311183, -0.724969, 0.631458)

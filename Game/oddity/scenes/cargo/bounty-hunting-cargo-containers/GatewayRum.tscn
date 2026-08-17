@@ -4,13 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://4uebyrm0bxtw" path="res://scenes/cargo/bounty-hunting-cargo-containers/gatewayRum.glb" id="2_4qy0y"]
 [ext_resource type="Resource" uid="uid://h46qttbpv4el" path="res://resources/resources/trade/trade-items/cargo/TradeResourceGatewayRum.tres" id="2_507n5"]
 
-[node name="Cu1Container" type="RigidBody3D"]
+[node name="Cu1Container" type="RigidBody3D" groups=["GameEntity"]]
 collision_layer = 537921029
 collision_mask = 537921025
 mass = 10.0
 contact_monitor = true
 script = ExtResource("1_scknl")
 contents = "Gateway Rum"
+save = true
 value = 55000
 trade_information = ExtResource("2_507n5")
 can_be_picked_up = true

@@ -204,7 +204,7 @@ emission_energy_multiplier = 4.24
 material = SubResource("StandardMaterial3D_0gvc3")
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="ModifiedAlcubierreDrive" type="RigidBody3D" node_paths=PackedStringArray("special_charge_up_sound", "special_finished_sound", "special_charge_up_particles", "special_finish_particles", "deny_sound", "cool_down_timer", "charging_start", "charging_sound", "charging_end", "travelling_sound")]
+[node name="ModifiedAlcubierreDrive" type="RigidBody3D" node_paths=PackedStringArray("special_charge_up_sound", "special_finished_sound", "special_charge_up_particles", "special_finish_particles", "deny_sound", "cool_down_timer", "charging_start", "charging_sound", "charging_end", "travelling_sound") groups=["GameEntity"]]
 collision_layer = 537396225
 collision_mask = 537396225
 script = ExtResource("1_tb3d6")
@@ -227,6 +227,7 @@ charging_end = NodePath("ChargeEnd")
 travelling_sound = NodePath("Travelling")
 module_resource = ExtResource("2_qp6o5")
 passive_heat_generation = 150.0
+save = true
 can_be_picked_up = true
 
 [node name="alcubierre_drive" type="Node3D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfq2dmul5f7a8"]
+[gd_scene load_steps=13 format=3 uid="uid://dfq2dmul5f7a8"]
 
 [ext_resource type="Script" path="res://ui/main-menu/main_menu.gd" id="1_74355"]
 [ext_resource type="PackedScene" uid="uid://ba5evvevagnhw" path="res://ui/main-menu/MainMenuUI.tscn" id="1_gwx8j"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://classes/star-system/StarSystemResource.gd" id="4_hmx7i"]
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="5_r66er"]
 [ext_resource type="AudioStream" uid="uid://cak3g5fnghkkw" path="res://resources/resources/music/music/battle-1-crystal.wav" id="7_ps2xh"]
+[ext_resource type="Script" path="res://classes/save-system/Caretaker.gd" id="8_d88pb"]
 
 [sub_resource type="Resource" id="Resource_jce33"]
 script = ExtResource("4_hmx7i")
@@ -86,6 +87,10 @@ stream = ExtResource("7_ps2xh")
 volume_db = -6.0
 pitch_scale = 0.8
 autoplay = true
+
+[node name="Caretaker" type="Node" parent="."]
+script = ExtResource("8_d88pb")
+disable_auto_save = true
 
 [connection signal="animation_started" from="SubViewportContainer/MainMenuUi" to="." method="_on_main_menu_ui_animation_started"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

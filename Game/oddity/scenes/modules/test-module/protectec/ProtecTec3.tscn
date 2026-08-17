@@ -5,12 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://cuejgv3xjaj0j" path="res://scenes/modules/test-module/protectec/mesh/WolframIndustrialProtecTec.tscn" id="2_i7g8w"]
 [ext_resource type="Resource" uid="uid://ciwdksfmxlp17" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/protectec/ProtecTec3TradeResource.tres" id="3_6r6t2"]
 
-[node name="ProtecTec3" type="RigidBody3D"]
+[node name="ProtecTec3" type="RigidBody3D" groups=["GameEntity"]]
 collision_layer = 537396737
 collision_mask = 537396737
 script = ExtResource("1_fummq")
 size = 3
 module_resource = ExtResource("2_debf4")
+save = true
 sellable = true
 trade_information = ExtResource("3_6r6t2")
 can_be_picked_up = true

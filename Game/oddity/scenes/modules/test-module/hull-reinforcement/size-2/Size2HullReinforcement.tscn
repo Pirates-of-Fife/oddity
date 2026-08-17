@@ -5,13 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://sqlkqvg7d5tk" path="res://scenes/modules/test-module/hull-reinforcement/hullReinforcementModule.glb" id="3_de0ob"]
 [ext_resource type="Resource" uid="uid://bhguq6iupj3mx" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme2.tres" id="3_shjdb"]
 
-[node name="Size2HullReinforcement" type="RigidBody3D"]
+[node name="Size2HullReinforcement" type="RigidBody3D" groups=["GameEntity"]]
 collision_layer = 537396225
 collision_mask = 537396225
 mass = 100.0
 script = ExtResource("1_2xavw")
 size = 2
 module_resource = ExtResource("2_p38nl")
+save = true
 value = 4000
 trade_information = ExtResource("3_shjdb")
 can_be_picked_up = true

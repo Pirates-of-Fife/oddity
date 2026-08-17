@@ -6,10 +6,10 @@ class_name PlayerPositionSave
 var respawn_at_station : bool = true
 
 @export
-var position : Vector3
+var position : StringVector
 
 @export
-var rotation : Vector3
+var rotation : StringVector
 
 @export
 var star_system : StarSystemResource
