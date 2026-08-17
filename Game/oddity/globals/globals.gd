@@ -28,6 +28,8 @@ const PLAYER_MONEY : String = "user://player_money.tres"
 const PLAYER_INVENTORY : String = "user://player_inventory.tres"
 const PLAYER_POSITION_SAVE : String = "user://player-position.tres"
 
+const SAVE_FILE : String = "user://ODDITY.tres"
+
 func _ready() -> void:
 	load_settings()
 

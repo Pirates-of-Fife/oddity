@@ -19,21 +19,24 @@ func _on_main_menu_ui_animation_started() -> void:
 func load_last_possessed_starship() -> void:
 	if ship_loaded:
 		return
-
-	var starship_scene : PackedScene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
+	
+	var last_used_starship : StarshipLoadout = get_tree().get_first_node_in_group("World").caretaker.get_save_file().last_used_starship
+	
+	if last_used_starship == null:
+		return
+		
+	var starship_scene : PackedScene 
+	
+	match last_used_starship.ship_type:
+		Starship.ShipType.CORKSCREW:
+			starship_scene = load("res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/RABS_Corkscrew.tscn")
+		Starship.ShipType.KESTREL:
+			starship_scene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
 
 	if starship_scene:
 		var ship : Starship = starship_scene.instantiate()
 
-		var loadout : StarshipLoadout
-
-		var f : FileAccess = FileAccess.open(Globals.PLAYER_SHIP_SAVE, FileAccess.READ)
-		if f == null:
-			loadout = preload("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
-		else:
-			loadout = load(Globals.PLAYER_SHIP_SAVE)
-
-		ship.default_loadout = loadout
+		ship.default_loadout = last_used_starship
 		ship.landing_gear_on = false
 		
 		add_child(ship)

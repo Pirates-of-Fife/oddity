@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b66bgr1r1ypcb"]
+[gd_scene load_steps=18 format=3 uid="uid://b66bgr1r1ypcb"]
 
 [ext_resource type="Script" path="res://classes/world/World.gd" id="1_wgmgi"]
 [ext_resource type="Script" path="res://classes/star-system/StarSystemResource.gd" id="2_i2wjh"]
@@ -16,12 +16,15 @@
 [ext_resource type="Resource" uid="uid://csjwdtwbvcmlu" path="res://resources/resources/music/battle-music/Battle2.tres" id="14_m0o13"]
 [ext_resource type="Resource" uid="uid://ch0motjg4f25i" path="res://resources/resources/music/battle-music/Battle3.tres" id="15_041kg"]
 [ext_resource type="Resource" uid="uid://dwqx4g2bgx5j4" path="res://resources/resources/music/battle-music/Battle4.tres" id="16_yqbgp"]
+[ext_resource type="Script" path="res://classes/save-system/Caretaker.gd" id="17_iul4y"]
 
-[node name="OddityWorld" type="Node3D" node_paths=PackedStringArray("player", "player_control_entity", "music_player")]
+[node name="OddityWorld" type="Node3D" node_paths=PackedStringArray("caretaker", "player", "player_control_entity", "music_player")]
 script = ExtResource("1_wgmgi")
+caretaker = NodePath("Caretaker")
 star_systems = Array[ExtResource("2_i2wjh")]([ExtResource("2_rqxl3"), ExtResource("3_imvkk"), ExtResource("4_owmr8"), ExtResource("5_15hgi"), ExtResource("6_56n3f"), ExtResource("7_q2man")])
 player = NodePath("Player")
 player_control_entity = NodePath("Humanoid")
+is_main_menu_world = null
 music_player = NodePath("MusicPlayer")
 
 [node name="Humanoid" parent="." instance=ExtResource("3_5uyom")]
@@ -36,3 +39,8 @@ control_entity = NodePath("../Humanoid")
 [node name="MusicPlayer" type="Node3D" parent="."]
 script = ExtResource("11_3wer2")
 battle_music = Array[ExtResource("12_60a3j")]([ExtResource("13_dx34o"), ExtResource("14_m0o13"), ExtResource("15_041kg"), ExtResource("16_yqbgp")])
+
+[node name="Caretaker" type="Node" parent="." node_paths=PackedStringArray("world")]
+script = ExtResource("17_iul4y")
+world = NodePath("..")
+auto_save_time = 10.0

@@ -130,26 +130,6 @@ func is_entity_storable(entity : Node3D, show_error : bool = false) -> bool:
 			return false
 	
 	return true
-	
-	if entity is Component:
-		if entity is AbyssalJumpDrive:
-			if show_error:
-				inventory_hud.show_error("Cannot store large component: " +  str((entity.module_resource as ComponentResource).manufacturer + " " + (entity.module_resource as ComponentResource).model))
-		
-		if entity.size > ModuleSize.ComponentSize.SIZE_2:
-			if show_error:
-				inventory_hud.show_error("Cannot store large component: " +  str((entity.module_resource as ComponentResource).manufacturer + " " + (entity.module_resource as ComponentResource).model))
-			return false
-	
-	if entity is Weapon:
-		if entity.size != ModuleSize.HardpointSize.SIZE_5:
-			if show_error:
-				inventory_hud.show_error("Cannot store large weapon: " + str((entity.module_resource as ComponentResource).manufacturer + " " + (entity.module_resource as ComponentResource).model))
-			return false
-		else:
-			return true
-		
-	return true
 
 
 func retrieve_item_in_slot(slot : int) -> void:
@@ -249,39 +229,6 @@ func is_inventory_slot_occupied(slot : int) -> bool:
 	
 	return true
 
-func save_inventory() -> void:
-	var err : Error = ResourceSaver.save(inventory, Globals.PLAYER_INVENTORY)
-	
-	if err == OK:
-		print("Inventory saved successfully")
-	else:
-		printerr("Failed to save inventory")
-
-
-func load_inventory() -> void:
-	var f : FileAccess = FileAccess.open(Globals.PLAYER_INVENTORY, FileAccess.READ)
-
-	if f == null:
-		inventory = PlayerInventoryResource.new()
-	else:
-		inventory = load(Globals.PLAYER_INVENTORY)
-		
-	if inventory.inventory_slot_1 != null:
-		inventory_hud.store_item_in_slot(1, inventory.inventory_slot_1)
-
-	if inventory.inventory_slot_2 != null:
-		inventory_hud.store_item_in_slot(2, inventory.inventory_slot_2)
-
-	if inventory.inventory_slot_3 != null:
-		inventory_hud.store_item_in_slot(3, inventory.inventory_slot_3)
-
-	if inventory.inventory_slot_4 != null:
-		inventory_hud.store_item_in_slot(4, inventory.inventory_slot_4)
-
-	if inventory.inventory_slot_5 != null:
-		inventory_hud.store_item_in_slot(5, inventory.inventory_slot_5)
-
-
 func clear_inventory() -> void:
 	inventory.inventory_slot_1 = null
 	inventory.inventory_slot_2 = null
@@ -300,7 +247,6 @@ func die() -> void:
 		return
 	
 	clear_inventory()
-	save_inventory()
 
 	has_died = true
 	
@@ -344,7 +290,11 @@ func _process(delta: float) -> void:
 
 	if (Input.is_action_just_released("ui_cancel")):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		get_tree().get_first_node_in_group("World").exit_to_main_menu()
+		
+		if control_entity is Starship:
+			get_tree().get_first_node_in_group("World").bed_exit(0, control_entity.ship_identification)
+		else:
+			get_tree().get_first_node_in_group("World").exit_to_main_menu()
 
 	if (Input.is_action_just_pressed("hide_ui")):
 		if $HeadsUpDisplay.visible:
@@ -377,15 +327,7 @@ func _process(delta: float) -> void:
 
 func on_posses(control_entity : ControlEntity) -> void:
 	if control_entity is Starship:
-		get_tree().get_first_node_in_group("World").player_ship = control_entity
-		save_last_possessed_starship(control_entity)
+		save_last_possessed_starship(control_entity as Starship)
 
-func save_last_possessed_starship(starship : Starship) -> void:
-	var save_data : Dictionary = {}
-	save_data["scene_path"] = starship.scene_file_path  # Store scene path, or use a unique ID if preferred
-
-	var save_file : FileAccess = FileAccess.open("user://last_possessed_starship.save", FileAccess.WRITE)
-
-	if save_file:
-		save_file.store_var(save_data)
-		save_file.close()
+func save_last_possessed_starship(starship : Starship) -> void:	
+	get_tree().get_first_node_in_group("World").caretaker.update_last_used_starship(LoadoutGenerator.new().save_loadout(starship))
