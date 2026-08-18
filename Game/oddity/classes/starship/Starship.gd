@@ -1825,11 +1825,15 @@ func decrease_max_velocity(velocity : float) -> void:
 	current_max_velocity -= velocity
 
 func generate_ship_id() -> String:
-	var prefix : Array = ["RABS"]
+	var id_prefix : String = ""
+	if ship_type <= 1:
+		id_prefix = "RABS"
+	if ship_type == 2:
+		id_prefix = "OXPY"
+	
 	var letters : String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	var numbers : String = "0123456789"
 
-	var id_prefix : String = prefix[randi() % prefix.size()]
 	var id_letters : String = ""
 	for i : int in range(3):
 		id_letters += letters[randi() % letters.length()]
