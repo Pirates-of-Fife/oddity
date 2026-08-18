@@ -968,7 +968,7 @@ func _starship_ready() -> void:
 				shield_generators.append(module_slot.module)
 
 			if module_slot.module is HullReinforcement:
-				_on_module_insert(module_slot.module, module_slot.id)
+				_on_module_insert(module_slot.module, module_slot.id, true)
 
 			if module_slot.module is Cooler:
 				coolers.append(module_slot.module)
@@ -1020,7 +1020,7 @@ func _starship_ready() -> void:
 	max_heat_capacity_changed.emit(maximum_heat_capacity)
 
 	update_material_saturation_based_on_hull_damage()
-	
+		
 func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:
 		return
@@ -1250,29 +1250,29 @@ func shield_charge_cooldown_finished() -> void:
 	if shield.collision_mask == shield.layer_mask_offline and shield_current_health > 0:
 		shield.collision_mask = shield.layer_mask_online
 
-func _on_module_insert(module : Module, slot_id : int) -> void:
+func _on_module_insert(module : Module, slot_id : int, loading : bool = false) -> void:
 	passive_heat_generation += module.passive_heat_generation
 	current_heat += module.passive_heat_generation
-
 
 	if module is ShieldGenerator:
 		shield_generators.append(module)
 		update_shield_stats()
 
-	if module is HullReinforcement:
+	if module is HullReinforcement:	
 		hull_reinforcements.append(module)
-		hull_reeinforcement_health_addition += (module.module_resource as HullReinforcementResource).additional_hull_health
-		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
 		
+		hull_reeinforcement_health_addition += (module.module_resource as HullReinforcementResource).additional_hull_health
+		if !loading:
+			current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
+			current_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
+			
 		additional_armour_rating += (module.module_resource as HullReinforcementResource).additional_armour_rating
 		
 		additional_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
-		current_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
 		
 	if module is Cooler:
 		coolers.append(module)
 		on_cooler_config_changed.emit()
-
 
 func _on_module_uninserted(module : Module, slot_id : int) -> void:
 	passive_heat_generation -= module.passive_heat_generation
