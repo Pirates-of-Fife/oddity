@@ -258,6 +258,7 @@ func spawn_starship(ship_save : StarshipSave) -> Starship:
 
 	ship.default_loadout = ship_save.loadout
 	ship.apply_loadout_health = true
+	ship.is_player_ship = true
 	if !ship_save.loadout.destroyed:
 		ship.current_state = Starship.State.POWER_OFF
 	
