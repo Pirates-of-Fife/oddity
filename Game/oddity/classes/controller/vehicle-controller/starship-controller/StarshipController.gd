@@ -143,6 +143,7 @@ func _starship_controller_process(delta : float) -> void:
 			control_entity.repair()
 			control_entity.restock()
 			control_entity.refuel()
+			control_entity.restore_armour()
 			
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			if control_entity.relative_linear_velocity.length() < 285 and control_entity.relative_angular_velocity.length() < 0.1 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
