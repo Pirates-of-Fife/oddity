@@ -20,9 +20,10 @@ var disable_auto_save : bool = false
 
 func _ready() -> void:
 	if !disable_auto_save:
-		auto_save_timer.wait_time = auto_save_time
+		auto_save_timer.wait_time = auto_save_time * 60
 		auto_save_timer.autostart = true
 		auto_save_timer.timeout.connect(_auto_save_timeout)
+		add_child(auto_save_timer)
 
 func _auto_save_timeout() -> void:
 	print_rich("[color=green]Autosave Initiated[/color]")
@@ -70,15 +71,16 @@ func save_active_starships(saved_ships : Array[StarshipSave], starships_in_star_
 	
 	for entity : GameEntity in starships_in_star_system:
 		if entity is Starship:
-			var new_save : StarshipSave = StarshipSave.new()
-			new_save.star_system = world.get_current_star_sytem_resource()
-			new_save.position = StringVector.create(entity.global_position)
-			new_save.rotation = StringVector.create(entity.global_rotation)
-			new_save.game_entity_scene = entity.scene_file_path
-			new_save.value = entity.value
-			new_save.loadout = loadout_generator.save_loadout(entity as Starship, true, true)
-			
-			saved_ships.append(new_save)
+			if entity.is_player_ship:
+				var new_save : StarshipSave = StarshipSave.new()
+				new_save.star_system = world.get_current_star_sytem_resource()
+				new_save.position = StringVector.create(entity.global_position)
+				new_save.rotation = StringVector.create(entity.global_rotation)
+				new_save.game_entity_scene = entity.scene_file_path
+				new_save.value = entity.value
+				new_save.loadout = loadout_generator.save_loadout(entity as Starship, true, true)
+				
+				saved_ships.append(new_save)
 	
 	return saved_ships
 
@@ -154,7 +156,11 @@ func create_new_empty_save_file() -> SaveFile:
 	
 	new_save_file.active_ships = []
 	new_save_file.insured_ships = []
+	new_save_file.insured_ships.resize(10)
+	new_save_file.insured_ships.fill(null)
 	new_save_file.stored_ships = []
+	new_save_file.stored_ships.resize(10)
+	new_save_file.stored_ships.fill(null)
 	new_save_file.game_entities = []
 	
 	return new_save_file

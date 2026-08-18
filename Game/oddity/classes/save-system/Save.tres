@@ -10,21 +10,15 @@
 script = ExtResource("1_ot3uo")
 game_entity_scene = ""
 value = 0
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_f1he3"]
 script = ExtResource("2_rut7w")
 game_entity_scene = ""
 value = 0
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_cho7l"]
 script = ExtResource("4_n8te0")
 respawn_at_station = true
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
 used_a_bed = false
 bed_index = -1
 starship_slept_with = ""
@@ -34,6 +28,6 @@ script = ExtResource("4_owdn8")
 player_position = SubResource("Resource_cho7l")
 credits = 0
 active_ships = Array[ExtResource("1_ot3uo")]([SubResource("Resource_i2b35")])
-insured_ships = Array[ExtResource("3_v7qst")]([])
+insured_ships = Array[ExtResource("3_v7qst")]([null, null, null, null, null, null, null, null, null, null])
 stored_ships = Array[ExtResource("3_v7qst")]([])
 game_entities = Array[ExtResource("2_rut7w")]([SubResource("Resource_f1he3")])
