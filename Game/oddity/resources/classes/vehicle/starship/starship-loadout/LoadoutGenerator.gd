@@ -123,6 +123,8 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	
 	loadout.ship_type = starship.ship_type
 	
+	print("ship type loadout" + str(loadout.entities))
+	
 	return loadout
 
 func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health : bool = false) -> void:

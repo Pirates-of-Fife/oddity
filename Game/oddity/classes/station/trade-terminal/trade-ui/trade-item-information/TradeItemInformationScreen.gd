@@ -55,10 +55,10 @@ func spawn_trade_item() -> void:
 	var trade_item_scene : PackedScene = load(current_trade_item.scene)
 	var trade_item : GameEntity = trade_item_scene.instantiate()
 	
-	trade_item.save = false
-	
 	preview.add_child(trade_item)
-		
+	
+	trade_item.save = false	
+	
 	trade_item.owner = get_tree().edited_scene_root
 	
 	camera.position.z = current_trade_item.preview_distance

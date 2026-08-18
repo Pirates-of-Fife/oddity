@@ -84,8 +84,10 @@ var skip_physics_process : bool = false
 var skip_process : bool = false
 
 var world : World : 
-	get:	
-		return get_tree().get_first_node_in_group("World")
+	get:
+		if is_inside_tree():
+			return get_tree().get_first_node_in_group("World")
+		return World.new() # what the fuck
 
 func _physics_process(delta: float) -> void:
 	if skip_physics_process:

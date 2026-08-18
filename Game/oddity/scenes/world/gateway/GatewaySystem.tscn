@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c6fr87c666t64"]
+[gd_scene load_steps=24 format=3 uid="uid://c6fr87c666t64"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_rfo0q"]
 [ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_1xiln"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="9_n1ioy"]
 [ext_resource type="PackedScene" uid="uid://cffn5ri2p6nrr" path="res://scenes/world/gateway/celestial-bodies/alcolin/AvantZone.tscn" id="10_ulerh"]
 [ext_resource type="PackedScene" uid="uid://n8b0kumefmg0" path="res://scenes/world/gateway/celestial-bodies/alcolin/LogiZone.tscn" id="11_damws"]
-[ext_resource type="PackedScene" uid="uid://d2emxty85isb7" path="res://scenes/modules/test-module/ares-cannon/size-6/Size6AresCannon.tscn" id="11_lyx6i"]
 [ext_resource type="PackedScene" uid="uid://dtg1up7xr7k15" path="res://scenes/world/gateway/celestial-bodies/alcolin/RataZone.tscn" id="12_rvpmt"]
 [ext_resource type="PackedScene" uid="uid://mvlkl5w1pgts" path="res://scenes/world/gateway/celestial-bodies/seraphis/SeraphisZone.tscn" id="13_vlrcf"]
 [ext_resource type="PackedScene" uid="uid://cys7hpq6o76yy" path="res://scenes/world/gateway/celestial-bodies/verit/CrestZone.tscn" id="14_3ctes"]
@@ -77,12 +76,6 @@ trade_list = ExtResource("7_4gm3a")
 buy_markup = 1.1
 sell_markup = 0.8
 metadata/_edit_group_ = true
-
-[node name="Size6AresCannon" parent="ArkaZone" instance=ExtResource("11_lyx6i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.582, 76.3515, 398072)
-
-[node name="Size6AresCannon2" parent="ArkaZone" instance=ExtResource("11_lyx6i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.433, 83.393, 398058)
 
 [node name="luna cube" type="StaticBody3D" parent="ArkaZone"]
 transform = Transform3D(1, 2.77556e-17, -6.93889e-18, 2.77556e-17, 1, -2.77556e-17, 0, 0, 1, 32081, 93442.4, -6794.27)
