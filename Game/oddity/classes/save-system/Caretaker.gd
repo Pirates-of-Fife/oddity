@@ -113,9 +113,7 @@ func save_game_entities(saved_entities : Array[GameEntitySave], entities_in_star
 		new_save.position = StringVector.create(entity.global_position)
 		new_save.rotation = StringVector.create(entity.global_rotation)
 		new_save.value = entity.value
-		
-		print("Saving : " + str(entity.scene_file_path))
-		
+				
 		saved_entities.append(new_save)
 		
 	return saved_entities
