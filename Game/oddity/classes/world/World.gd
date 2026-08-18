@@ -222,6 +222,7 @@ func spawn_entities_in_system(star_system : String) -> void:
 
 func spawn_player_character(player_position_save : PlayerPositionSave, player_inventory : PlayerInventoryResource, credits : int, ships_in_system : Array[Starship]) -> void:
 	player.inventory = player_inventory
+	player.load_inventory()
 	player.credits = credits
 	player.hud.current_credits = player.credits
 	player.hud.displayed_credits = player.credits
