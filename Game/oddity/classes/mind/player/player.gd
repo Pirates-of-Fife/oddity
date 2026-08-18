@@ -237,6 +237,21 @@ func clear_inventory() -> void:
 	inventory_hud.retrieve_item_in_slot(4)
 	inventory_hud.retrieve_item_in_slot(5)
 
+func load_inventory() -> void:
+	if inventory.inventory_slot_1 != null:
+		inventory_hud.store_item_in_slot(1, inventory.inventory_slot_1)
+
+	if inventory.inventory_slot_2 != null:
+		inventory_hud.store_item_in_slot(2, inventory.inventory_slot_2)
+
+	if inventory.inventory_slot_3 != null:
+		inventory_hud.store_item_in_slot(3, inventory.inventory_slot_3)
+
+	if inventory.inventory_slot_4 != null:
+		inventory_hud.store_item_in_slot(4, inventory.inventory_slot_4)
+
+	if inventory.inventory_slot_5 != null:
+		inventory_hud.store_item_in_slot(5, inventory.inventory_slot_5)
 
 func die() -> void:
 	if has_died:
@@ -245,10 +260,6 @@ func die() -> void:
 	clear_inventory()
 
 	has_died = true
-	
-	var default_loadout : StarshipLoadout = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
-
-	ResourceSaver.save(default_loadout, Globals.PLAYER_SHIP_SAVE)
 	
 	current_controller.queue_free()
 
