@@ -218,10 +218,7 @@ func load_save() -> void:
 func spawn_entities_in_system(star_system : String) -> void:
 	var save_file : SaveFile = caretaker.get_save_file()
 	var ships_in_system : Array[Starship] = spawn_active_ships(save_file.active_ships, save_file.player_position.star_system.name)
-	spawn_saved_game_entities(save_file.game_entities, save_file.player_position.star_system.name)
-	
-	print("Spawn")
-	
+	spawn_saved_game_entities(save_file.game_entities, save_file.player_position.star_system.name)	
 
 func spawn_player_character(player_position_save : PlayerPositionSave, player_inventory : PlayerInventoryResource, credits : int, ships_in_system : Array[Starship]) -> void:
 	player.inventory = player_inventory
@@ -281,9 +278,7 @@ func spawn_saved_game_entities(saved_game_entities : Array[GameEntitySave], star
 			game_entity.value = game_entity_save.value
 			game_entity.global_position = game_entity_save.position.toVector3()
 			game_entity.global_rotation = game_entity_save.rotation.toVector3()
-			
-			print("spawned " + str(game_entity) + " " + str(game_entity.global_position))
-	
+				
 func respawn_player() -> void:
 	if abyss_entered:
 		get_node("AbyssalTunnel").queue_free()

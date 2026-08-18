@@ -92,23 +92,31 @@ func save_game_entities(saved_entities : Array[GameEntitySave], entities_in_star
 			saved_entities.erase(game_entity_save)	
 	
 	for entity : GameEntity in entities_in_star_system:
-		if !(entity is Starship):
-			if entity is Module:
-				if entity.module_slot != null:
+		if entity is Starship:
+			continue
+			
+		if entity is Module:
+			if entity.module_slot != null:
+				continue
+	
+		if entity is CargoContainer:
+			if entity.snapped_to != null:
+				if entity.snapped_to.cargo_grid.ship_grid:
 					continue
-			if entity is CargoContainer:
-				if entity.snapped_to != null:
-					if entity.snapped_to.cargo_grid.ship_grid:
-						continue
-			
-			var new_save : GameEntitySave = GameEntitySave.new()
-			new_save.star_system = world.get_current_star_sytem_resource()
-			new_save.game_entity_scene = entity.scene_file_path
-			new_save.position = StringVector.create(entity.global_position)
-			new_save.rotation = StringVector.create(entity.global_rotation)
-			new_save.value = entity.value
-			
-			saved_entities.append(new_save)
+					
+		if entity.freeze:
+			continue
+		
+		var new_save : GameEntitySave = GameEntitySave.new()
+		new_save.star_system = world.get_current_star_sytem_resource()
+		new_save.game_entity_scene = entity.scene_file_path
+		new_save.position = StringVector.create(entity.global_position)
+		new_save.rotation = StringVector.create(entity.global_rotation)
+		new_save.value = entity.value
+		
+		print("Saving : " + str(entity.scene_file_path))
+		
+		saved_entities.append(new_save)
 		
 	return saved_entities
 
