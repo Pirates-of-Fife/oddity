@@ -66,8 +66,6 @@ var interior_shown : bool = true
 var player_reference : Player
 
 func _ready() -> void:
-	super._ready()
-	
 	super_cruise_engaged.connect(on_supercruise_engaged)
 	super_cruise_disengaged.connect(on_supercruise_disengaged)
 	state_changed_to_power_on.connect(on_power_on)
@@ -128,6 +126,13 @@ func _ready() -> void:
 		_on_color_white()
 	else:
 		_on_color_dark()
+		
+	if wing_state:
+		$Wings/WingAnimator.play("wings_up")
+		$Wings/WingAnimator.seek(3)
+	else:
+		$Wings/WingAnimator.play("wings_down")
+		$Wings/WingAnimator.seek(3)
 
 func _process(delta: float) -> void:
 	super._process(delta)
@@ -504,7 +509,15 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 		body.activate_collision()
 
 func toggle_tractor_beams() -> void:
-	pass
+	if $Wings/WingAnimator.is_playing():
+		return
+	
+	if wing_state == false:
+		$Wings/WingAnimator.play("wings_up")
+		wing_state = true
+	else:
+		$Wings/WingAnimator.play("wings_down")
+		wing_state = false
 				
 func toggle_cargo_bay() -> void:
 	cargo_bay.toggle_open_state()

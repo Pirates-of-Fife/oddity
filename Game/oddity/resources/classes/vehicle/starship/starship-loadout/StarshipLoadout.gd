@@ -85,6 +85,9 @@ var current_thruster_upgrade : int
 @export
 var tractor_beams_upgraded : bool
 
+@export
+var wing_state : bool 
+
 func get_module_by_id(id : int) -> PackedScene:
 	for slot : ModuleSlotLoadoutResource in module_slots:
 		if slot.id == id:

@@ -63,6 +63,7 @@ thruster_heat_curve = SubResource("Curve_dyvot")
 thruster_heat_multiplier = 2.0
 fuel_usage = 0.005
 thruster_particles = NodePath("GPUParticles3D")
+quiet_insert = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 800

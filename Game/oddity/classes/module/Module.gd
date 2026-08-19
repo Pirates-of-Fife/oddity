@@ -40,34 +40,31 @@ func _module_ready() -> void:
 	inserted.connect(_on_insert)
 	uninserted.connect(_on_uninsert)
 	
-	inserted.connect(_insert_fx)
-	uninserted.connect(_uninsert_fx)
-
+	
 func _on_insert(slot : ModuleSlot) -> void:
 	pass
 
 func _on_uninsert(slot : ModuleSlot) -> void:
 	pass
 
-func _insert_fx(slot : ModuleSlot) -> void:
-	if quiet_insert:
-		quiet_insert = false
+func _insert_fx(slot : ModuleSlot, quiet : bool) -> void:
+	if quiet:
 		return
 
 	var fx : ModuleFX = load(module_fx_scene).instantiate()
 	
-	add_child(fx)
+	slot.add_child(fx)
 	
-func _uninsert_fx(slot : ModuleSlot) -> void:
-	if quiet_insert:
+func _uninsert_fx(slot : ModuleSlot, quiet : bool) -> void:
+	if quiet:
 		return
-	
+
 	var fx : ModuleFX = load(module_fx_scene).instantiate()
 	
 	fx.insert_fx = false
 	
 	slot.add_child(fx)
-		
+			
 func insert(slot : DynamicModuleSlot) -> void:
 	can_freeze = false
 
@@ -89,16 +86,23 @@ func insert(slot : DynamicModuleSlot) -> void:
 	
 	module_slot.module_inserted.emit(self, module_slot.id)
 	inserted.emit(module_slot)
+	
+	_insert_fx(slot, quiet_insert)
+	
+	quiet_insert = false
+	
 
 func uninsert() -> void:
-	uninserted.emit(module_slot)
 	module_slot.module_removed.emit(self, module_slot.id)
 	module_slot.module = null
+	uninserted.emit(module_slot)
+	
+	_uninsert_fx(module_slot, quiet_insert)
+	
 	module_slot = null
 	reparent(get_tree().get_first_node_in_group("StarSystem"))
 	can_freeze = true
-
-
+	
 func add_heat(heat : float) -> void:
 	if (module_slot == null):
 		return
