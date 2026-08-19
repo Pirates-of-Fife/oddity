@@ -85,7 +85,7 @@ func enter_third_person_view() -> void:
 	tween.tween_property(
 		control_seat_anchor.camera_anchor,
 		"position",
-		Vector3(control_seat_anchor.camera_anchor.position.x, control_seat_anchor.camera_anchor.position.y, 50),
+		Vector3(control_seat_anchor.camera_anchor.position.x, control_seat_anchor.camera_anchor.position.y, 20),
 		0.4
 	)
 	

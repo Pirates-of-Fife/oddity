@@ -45,7 +45,7 @@ func clear_modules(starship : Starship) -> void:
 		if node is DynamicModuleSlot:
 			if node.module != null:
 				var module : Module = node.module
-
+				module.quiet_insert = true
 				module.uninsert()
 				module.queue_free()
 
@@ -122,7 +122,9 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	loadout.destroyed = starship.current_state == starship.State.DESTROYED
 	
 	loadout.ship_type = starship.ship_type
-		
+	
+	loadout.wing_state = starship.wing_state
+	
 	return loadout
 
 func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health : bool = false) -> void:
@@ -142,12 +144,11 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 				
 				starship.add_child(module)
 				module.quiet_insert = true
-				
 				module.insert(node)
-				
+						
 				if module is Weapon:
 					(node as Hardpoint).assignment = (loadout.get_entry_by_id(node.id) as HardpointLoadoutResource).hardpoint_assignment
-
+					
 	for cargo_resource : CargoContainerLoadoutResource in loadout.cargo:
 		var cargo_grid : CargoGrid = null
 
@@ -198,6 +199,9 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		starship.current_fuel = starship.max_fuel
 	
 	starship.ship_type = loadout.ship_type
+	
+	starship.wing_state = loadout.wing_state
+
 	
 	starship.set_material_to_hull(starship.create_new_hull_material())
 	starship.update_color(loadout.ship_color)

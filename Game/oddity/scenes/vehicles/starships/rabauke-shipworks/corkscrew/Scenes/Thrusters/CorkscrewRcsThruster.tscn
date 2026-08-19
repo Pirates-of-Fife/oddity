@@ -64,6 +64,7 @@ thruster_heat_curve = SubResource("Curve_ddhb5")
 thruster_heat_multiplier = 0.1
 fuel_usage = 0.05
 thruster_particles = NodePath("GPUParticles3D")
+quiet_insert = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_sacxg")

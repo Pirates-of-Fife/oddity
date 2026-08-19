@@ -74,6 +74,8 @@ var thruster_force : ThrusterForces
 @export
 var current_state : State = State.POWER_OFF
 
+var wing_state : bool 
+
 signal state_changed_to_power_off
 signal state_changed_to_power_on
 signal state_changed_to_destroyed
@@ -955,10 +957,10 @@ func _starship_ready() -> void:
 					n.module_inserted.connect(_on_module_insert)
 					n.module_removed.connect(_on_module_uninserted)
 
-			if node is ModuleSlot:
-				module_slots.append(node)
-				node.module_inserted.connect(_on_module_insert)
-				node.module_removed.connect(_on_module_uninserted)
+			#if node is ModuleSlot:
+			#	module_slots.append(node)
+			#	node.module_inserted.connect(_on_module_insert)
+			#	node.module_removed.connect(_on_module_uninserted)
 
 	#max_hull_health = ship_info.max_health
 
