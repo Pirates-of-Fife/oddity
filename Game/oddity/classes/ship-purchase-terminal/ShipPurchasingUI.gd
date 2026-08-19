@@ -111,7 +111,7 @@ func purchase(player : Player, control_entity: ControlEntity) -> void:
 	ship_purchased.emit(selected_button.ship)
 
 func load_ui() -> void:
-	station_shop_title.text = station_name + " Ship Shop"
+	station_shop_title.text = station_name + " Shipyard"
 	load_ship_list()
 	
 func load_ship_list() -> void:
