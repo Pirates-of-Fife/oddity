@@ -55,9 +55,11 @@ func spawn_ship(loadout : StarshipLoadout) -> Starship:
 
 	var starship : Starship = starship_scene.instantiate()
 	starship.current_state = Starship.State.POWER_OFF
-	starship.landing_gear_on = true
 	
 	get_tree().get_first_node_in_group("StarSystem").add_child(starship)
+
+	starship.landing_gear_on = true
+	starship.is_player_ship = true
 
 	starship.global_position = landing_pad.starship_spawn_marker.global_position
 	starship.global_rotation = landing_pad.starship_spawn_marker.global_rotation

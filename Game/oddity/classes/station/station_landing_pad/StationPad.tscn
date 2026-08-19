@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=26 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -14,6 +14,7 @@
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="14_clb07"]
 [ext_resource type="AudioStream" uid="uid://c774tpnl7djwx" path="res://classes/landing-pad/spawn-ship-ui/powerUp.wav" id="15_ikxe5"]
 [ext_resource type="PackedScene" uid="uid://bvs0cmfbgiyy3" path="res://scenes/trade-terminal/scene/TradeTerminal.tscn" id="16_1wsuf"]
+[ext_resource type="PackedScene" uid="uid://dicp2mak5p5ry" path="res://classes/ship-purchase-terminal/ShipPurchasingTerminal.tscn" id="17_e76ww"]
 [ext_resource type="PackedScene" uid="uid://5csa4btpg6tx" path="res://classes/landing-pad/change-color-ui/ChangeColorUi.tscn" id="17_rxwmk"]
 [ext_resource type="PackedScene" uid="uid://bkxnod4n5pwv" path="res://classes/insurance-terminal/InsuranceTerminal.tscn" id="18_fwvjj"]
 
@@ -360,6 +361,11 @@ landing_pad = NodePath("../LandingPad")
 
 [node name="InsuranceTerminal" parent="." node_paths=PackedStringArray("landing_pad", "station_pad") instance=ExtResource("18_fwvjj")]
 transform = Transform3D(3.06162e-17, 0, -0.5, 0, 0.5, 0, 0.5, 0, 3.06162e-17, 11.295, 4.44089e-16, -4.52275)
+landing_pad = NodePath("../LandingPad")
+station_pad = NodePath("..")
+
+[node name="ShipPurchasingTerminal" parent="." node_paths=PackedStringArray("landing_pad", "station_pad") instance=ExtResource("17_e76ww")]
+transform = Transform3D(3.94949e-17, 0, -0.645, 0, 0.645, 0, 0.645, 0, 3.94949e-17, 14.9116, 0, -4.51936)
 landing_pad = NodePath("../LandingPad")
 station_pad = NodePath("..")
 
