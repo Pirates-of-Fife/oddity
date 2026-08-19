@@ -4,11 +4,10 @@ extends Node3D
 var camera : Camera3D
 
 
-var orbit_distance : float = 35.0   # Distance from the target
-var orbit_speed : float = 0.1    # Speed of orbit in radians per second
-
+var orbit_distance : float = 35.0  
+var orbit_speed : float = 0.1
 var ship_loaded : bool = false
-var orbit_angle : float = 25.0       # Keeps track of the orbit angle
+var orbit_angle : float = 20.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -30,8 +29,10 @@ func load_last_possessed_starship() -> void:
 	match last_used_starship.ship_type:
 		Starship.ShipType.CORKSCREW:
 			starship_scene = load("res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/RABS_Corkscrew.tscn")
+			orbit_distance = 10
 		Starship.ShipType.KESTREL:
 			starship_scene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
+			orbit_distance = 30
 
 	if starship_scene:
 		var ship : Starship = starship_scene.instantiate()
@@ -41,7 +42,7 @@ func load_last_possessed_starship() -> void:
 		
 		add_child(ship)
 		
-		ship.global_position = Vector3(7, -1, -1)
+		ship.global_position = Vector3(0, 0, 0)
 
 		ship_loaded = true
 
@@ -50,23 +51,17 @@ func _process(delta: float) -> void:
 		_orbit_camera(delta)
 
 func _orbit_camera(delta: float) -> void:
-	var target_position : Vector3 = Vector3.ZERO  # Point to orbit around
+	var target_position : Vector3 = Vector3.ZERO
 
-	# Increment the angle based on orbit speed and delta time
 	orbit_angle += orbit_speed * delta
 
-	# Calculate the new camera position using the orbit angle
 	var target_x : float = orbit_distance * cos(orbit_angle)
 	var target_z : float = orbit_distance * sin(orbit_angle)
-	var target_position_camera : Vector3 = Vector3(target_x, 7, target_z) + target_position
+	var target_position_camera : Vector3 = Vector3(target_x, 5, target_z) + target_position
 
+	camera.global_transform.origin = camera.global_transform.origin.lerp(target_position_camera, 0.1) 
 
-	# Update the camera’s position
-	camera.global_transform.origin = camera.global_transform.origin.lerp(target_position_camera, 0.1)  # Adjust 0.1 for smoothing speed
-
-	# Make the camera look at the target position for a continuous focus
 	camera.look_at(target_position, Vector3.UP)
-
 
 func _on_start_button_pressed() -> void:
 	$SubViewportContainer/MainMenuUi/LOADING.show()

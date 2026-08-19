@@ -37,25 +37,21 @@ func _ready() -> void:
 	power_button.power_switch_signal.connect(_on_power_switch)
 	terminal_power_on_animation.powered_on.connect(_on_power_animation_finished)
 
-func spawn_ship(loadout : StarshipLoadout) -> Starship:
-	var starship_scene : PackedScene 
-	
-	match loadout.ship_type:
-		Starship.ShipType.CORKSCREW:
-			starship_scene = load("res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/RABS_Corkscrew.tscn")
-		Starship.ShipType.KESTREL:
-			starship_scene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
+func spawn_ship(ship : StarshipTradeResource) -> Starship:
+	var starship_scene : PackedScene = load(ship.scene)
 
 	var starship : Starship = starship_scene.instantiate()
 	starship.current_state = Starship.State.POWER_OFF
-	starship.landing_gear_on = true
 	
+
 	get_tree().get_first_node_in_group("StarSystem").add_child(starship)
+
+	starship.is_player_ship = true
+	starship.landing_gear_on = true
 
 	starship.global_position = landing_pad.starship_spawn_marker.global_position
 	starship.global_rotation = landing_pad.starship_spawn_marker.global_rotation
-
-	loadout_tools.load_loadout(starship, loadout)
+	starship.ship_identification = starship.generate_ship_id()
 	
 	return starship
 
@@ -69,9 +65,9 @@ func _on_power_switch() -> void:
 		
 		ship_purchasing_ui = load(ui_scene).instantiate()
 		ship_purchasing_ui.ready.connect(_on_ui_load)
+		ship_purchasing_ui.ship_purchased.connect(spawn_ship)
 		ship_purchasing_ui.hide()
 		add_child(ship_purchasing_ui)
-		ship_purchasing_ui.rotation.y = deg_to_rad(-90)
 	else:
 		ship_purchasing_ui.hide()
 		is_on = false
@@ -82,6 +78,8 @@ func _on_ui_load() -> void:
 	ship_purchasing_ui.buy_markup = station_pad.station.buy_markup
 	ship_purchasing_ui.station_name = station_pad.station.station_name
 	ship_purchasing_ui.ship_trade_list = station_pad.station.trade_items.ships_buyable
+	
+	ship_purchasing_ui.load_ui()
 	
 func _on_power_animation_finished() -> void:
 	ship_purchasing_ui.show()
