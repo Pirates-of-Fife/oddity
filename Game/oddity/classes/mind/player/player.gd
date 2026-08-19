@@ -30,6 +30,9 @@ var hud : CreditHud
 var inventory_hud : InventoryHud
 
 @export
+var exit_ui : CanvasLayer
+
+@export
 var inventory : PlayerInventoryResource
 
 var force_respawn_pressed_count : int = 0
@@ -297,6 +300,8 @@ func _process(delta: float) -> void:
 
 	if (Input.is_action_just_released("ui_cancel")):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		
+		exit_ui.show()
 		
 		if control_entity is Starship:
 			get_tree().get_first_node_in_group("World").bed_exit(0, control_entity.ship_identification)
