@@ -250,7 +250,7 @@ func on_insurance_slot_pressed(loadout : StarshipLoadout, button_id : int) -> vo
 		selected_insurance_price_label.show()
 		selected_insurance_ship_name_label.show()
 		
-		selected_insurance_price_label.text = credit_hud.convert_to_human_readable(get_insurance_price(loadout))
+		selected_insurance_price_label.text = credit_hud.convert_to_human_readable(get_insurance_price(loadout)) + "Cr"
 		selected_insurance_ship_name_label.text = loadout.ship_name
 		
 func load_insurance_slots() -> void:
@@ -372,7 +372,7 @@ func on_storage_slot_pressed(loadout : StarshipLoadout, button_id : int) -> void
 		selected_stored_ship_name_label.show()
 		selected_stored_ship_value_label.show()
 		
-		selected_stored_ship_value_label.text = credit_hud.convert_to_human_readable(get_sell_price(selected_storage_button.loadout))
+		selected_stored_ship_value_label.text = credit_hud.convert_to_human_readable(get_sell_price(selected_storage_button.loadout)) + "Cr"
 		selected_stored_ship_name_label.text = loadout.ship_name
 		selected_stored_ship_id_label.text = loadout.ship_identification
 		

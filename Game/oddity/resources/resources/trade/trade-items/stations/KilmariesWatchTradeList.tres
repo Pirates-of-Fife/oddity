@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="TradeResourceList" load_steps=17 format=3 uid="uid://x2fvmriu228r"]
+[gd_resource type="Resource" script_class="TradeResourceList" load_steps=20 format=3 uid="uid://x2fvmriu228r"]
 
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResourceList.gd" id="1_lcg57"]
+[ext_resource type="Script" path="res://resources/classes/trade/StarshipTradeResource.gd" id="2_gexio"]
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="2_vge7l"]
 [ext_resource type="Resource" uid="uid://btnir1eoca2nq" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard4.tres" id="3_6khb5"]
+[ext_resource type="Resource" uid="uid://dhhjrqgs3wv5q" path="res://resources/resources/trade/trade-items/starships/CorkscrewTradeResource.tres" id="3_16qlq"]
+[ext_resource type="Resource" uid="uid://ppl8snve500v" path="res://resources/resources/trade/trade-items/starships/KestrelMk2TradeResource.tres" id="4_0hbfn"]
 [ext_resource type="Resource" uid="uid://nrrbpbnp06y7" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard3.tres" id="4_xpmk4"]
 [ext_resource type="Resource" uid="uid://dh615ypr4sxpy" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme4.tres" id="5_fumkl"]
 [ext_resource type="Resource" uid="uid://cy4k14rmehtui" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme3.tres" id="6_7tafu"]
@@ -20,3 +23,4 @@
 [resource]
 script = ExtResource("1_lcg57")
 trade_resources = Array[ExtResource("2_vge7l")]([ExtResource("3_6khb5"), ExtResource("4_xpmk4"), ExtResource("5_fumkl"), ExtResource("6_7tafu"), ExtResource("7_hjic0"), ExtResource("8_i75wq"), ExtResource("9_l6vew"), ExtResource("10_weiov"), ExtResource("11_e0grg"), ExtResource("12_sohta"), ExtResource("13_s613p"), ExtResource("14_omefd"), ExtResource("15_nh7ps"), ExtResource("16_chiog")])
+ships_buyable = Array[ExtResource("2_gexio")]([ExtResource("3_16qlq"), ExtResource("4_0hbfn")])

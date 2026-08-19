@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="TradeResourceList" load_steps=3 format=3 uid="uid://7scf6hab0feu"]
+[gd_resource type="Resource" script_class="TradeResourceList" load_steps=6 format=3 uid="uid://7scf6hab0feu"]
 
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResourceList.gd" id="1_67h36"]
 [ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="2_bdofi"]
+[ext_resource type="Script" path="res://resources/classes/trade/StarshipTradeResource.gd" id="2_gnvuo"]
+[ext_resource type="Resource" uid="uid://dhhjrqgs3wv5q" path="res://resources/resources/trade/trade-items/starships/CorkscrewTradeResource.tres" id="3_jtffv"]
+[ext_resource type="Resource" uid="uid://ppl8snve500v" path="res://resources/resources/trade/trade-items/starships/KestrelMk2TradeResource.tres" id="4_d0frs"]
 
 [resource]
 script = ExtResource("1_67h36")
 trade_resources = Array[ExtResource("2_bdofi")]([])
+ships_buyable = Array[ExtResource("2_gnvuo")]([ExtResource("3_jtffv"), ExtResource("4_d0frs")])

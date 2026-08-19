@@ -6,6 +6,9 @@ class_name StarshipTradeResource
 var manufacturer_logo : Texture2D
 
 @export
+var logo_scale : float
+
+@export
 var component_description : PackedStringArray
 
 var forwards_accelleration : float = snappedf(thruster_force.forward_thrust * 0.75 / 5000 / 9.81, 0.1)
