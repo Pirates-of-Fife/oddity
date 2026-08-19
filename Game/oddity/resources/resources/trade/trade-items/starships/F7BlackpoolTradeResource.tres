@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="StarshipTradeResource" load_steps=3 format=3 uid="uid://b5ot5wjf8fc8t"]
 
-[ext_resource type="Texture2D" uid="uid://buf6r5gkydash" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic color.png" id="1_8vtbv"]
+[ext_resource type="Texture2D" uid="uid://dj451soeu3qt5" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic white.png" id="1_1jh1j"]
 [ext_resource type="Script" path="res://resources/classes/trade/StarshipTradeResource.gd" id="2_en2ge"]
 
 [resource]
 script = ExtResource("2_en2ge")
-manufacturer_logo = ExtResource("1_8vtbv")
-component_description = PackedStringArray("1 x S3 - Alcubierre Drive", "1 X S3 - Abyssal Jump Drive")
+manufacturer_logo = ExtResource("1_1jh1j")
+logo_scale = 0.079
+component_description = PackedStringArray("1 x S3 - Alcubierre Drive", "1 X S3 - Abyssal Jump Drive", "8 X S5 - Hardpoints", "1 X S8 - Hardpoint")
 cargo_capacity = 0
 scene = ""
 name = &"Ox\'vic Pyrr F7 Blackpool"

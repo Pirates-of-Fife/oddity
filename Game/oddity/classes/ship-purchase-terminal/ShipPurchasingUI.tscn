@@ -1,0 +1,386 @@
+[gd_scene load_steps=17 format=3 uid="uid://cw23nncs5prug"]
+
+[ext_resource type="PackedScene" uid="uid://dgknkllc54236" path="res://scenes/trade-terminal/meshes/SellingTerminal.glb" id="1_0pyw1"]
+[ext_resource type="Script" path="res://classes/ship-purchase-terminal/ShipPurchasingUI.gd" id="1_s1rnb"]
+[ext_resource type="AudioStream" uid="uid://2w7aoby4ad1l" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/button.wav" id="2_go5s6"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="4_u6j5y"]
+[ext_resource type="Script" path="res://classes/ship-purchase-terminal/ShipPurchaseButton.gd" id="5_flq1y"]
+[ext_resource type="Script" path="res://classes/insurance-terminal/UiButton.gd" id="5_xq2t8"]
+[ext_resource type="Material" uid="uid://cpqklftecyhba" path="res://classes/insurance-terminal/UiButtonRegularMaterial.tres" id="6_56mpp"]
+[ext_resource type="Material" uid="uid://b3wkl5mhgp5v3" path="res://classes/insurance-terminal/UiButtonSelectedMaterial.tres" id="7_ssfhr"]
+[ext_resource type="Texture2D" uid="uid://dj451soeu3qt5" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic white.png" id="9_ttja8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0ugiv"]
+material = ExtResource("6_56mpp")
+size = Vector3(2.59, 0.375, 0.01)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tvp4b"]
+data = PackedVector3Array(-1.295, 0.1875, 0.005, 1.295, 0.1875, 0.005, -1.295, -0.1875, 0.005, 1.295, 0.1875, 0.005, 1.295, -0.1875, 0.005, -1.295, -0.1875, 0.005, 1.295, 0.1875, -0.005, -1.295, 0.1875, -0.005, 1.295, -0.1875, -0.005, -1.295, 0.1875, -0.005, -1.295, -0.1875, -0.005, 1.295, -0.1875, -0.005, 1.295, 0.1875, 0.005, 1.295, 0.1875, -0.005, 1.295, -0.1875, 0.005, 1.295, 0.1875, -0.005, 1.295, -0.1875, -0.005, 1.295, -0.1875, 0.005, -1.295, 0.1875, -0.005, -1.295, 0.1875, 0.005, -1.295, -0.1875, -0.005, -1.295, 0.1875, 0.005, -1.295, -0.1875, 0.005, -1.295, -0.1875, -0.005, 1.295, 0.1875, 0.005, -1.295, 0.1875, 0.005, 1.295, 0.1875, -0.005, -1.295, 0.1875, 0.005, -1.295, 0.1875, -0.005, 1.295, 0.1875, -0.005, -1.295, -0.1875, 0.005, 1.295, -0.1875, 0.005, -1.295, -0.1875, -0.005, 1.295, -0.1875, 0.005, 1.295, -0.1875, -0.005, -1.295, -0.1875, -0.005)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ylviw"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Environment" id="Environment_dwlsc"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="World3D" id="World3D_ah3g1"]
+environment = SubResource("Environment_dwlsc")
+
+[sub_resource type="BoxMesh" id="BoxMesh_pvbjg"]
+material = ExtResource("6_56mpp")
+size = Vector3(1.13, 0.2, 0.01)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jakyx"]
+data = PackedVector3Array(-0.565, 0.1, 0.005, 0.565, 0.1, 0.005, -0.565, -0.1, 0.005, 0.565, 0.1, 0.005, 0.565, -0.1, 0.005, -0.565, -0.1, 0.005, 0.565, 0.1, -0.005, -0.565, 0.1, -0.005, 0.565, -0.1, -0.005, -0.565, 0.1, -0.005, -0.565, -0.1, -0.005, 0.565, -0.1, -0.005, 0.565, 0.1, 0.005, 0.565, 0.1, -0.005, 0.565, -0.1, 0.005, 0.565, 0.1, -0.005, 0.565, -0.1, -0.005, 0.565, -0.1, 0.005, -0.565, 0.1, -0.005, -0.565, 0.1, 0.005, -0.565, -0.1, -0.005, -0.565, 0.1, 0.005, -0.565, -0.1, 0.005, -0.565, -0.1, -0.005, 0.565, 0.1, 0.005, -0.565, 0.1, 0.005, 0.565, 0.1, -0.005, -0.565, 0.1, 0.005, -0.565, 0.1, -0.005, 0.565, 0.1, -0.005, -0.565, -0.1, 0.005, 0.565, -0.1, 0.005, -0.565, -0.1, -0.005, 0.565, -0.1, 0.005, 0.565, -0.1, -0.005, -0.565, -0.1, -0.005)
+
+[node name="ShipPurchasingUi" type="Node3D" node_paths=PackedStringArray("purchase_list_root", "station_shop_title", "purchase_button", "thruster_performance", "modules", "cargo", "ship_name", "ship_price", "ship_description")]
+script = ExtResource("1_s1rnb")
+purchase_list_root = NodePath("Purchasable Ships")
+station_shop_title = NodePath("Title")
+purchase_button = NodePath("Purchase Ship")
+thruster_performance = NodePath("Specifications/Thruster Perfomance")
+modules = NodePath("Specifications/Modules")
+cargo = NodePath("Specifications/Cargo")
+ship_name = NodePath("Overview/Title - Ship Name")
+ship_price = NodePath("Overview/Value")
+ship_description = NodePath("Overview/Description")
+
+[node name="SellingTerminal" parent="." instance=ExtResource("1_0pyw1")]
+transform = Transform3D(1, 0, 0, 0, 1.1, 0, 0, 0, 1.2, 0, 0, 0)
+
+[node name="ButtonPress" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44865, 0)
+stream = ExtResource("2_go5s6")
+volume_db = 6.0
+pitch_scale = 0.5
+bus = &"Interior"
+
+[node name="Title" type="Label3D" parent="."]
+transform = Transform3D(1.46958e-17, 0, -0.24, 0, 0.24, 0, 0.24, 0, 1.46958e-17, -0.123411, 3.0366, -3.40204)
+text = "[STATION NAME] Ship Shop"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="Purchasable Ships" type="Node3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.125136, 2.70214, -2.3928)
+
+[node name="Retrieve Ship" type="StaticBody3D" parent="Purchasable Ships" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("5_flq1y")
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("6_56mpp")
+selected_material = ExtResource("7_ssfhr")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Purchasable Ships/Retrieve Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+mesh = SubResource("BoxMesh_0ugiv")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Purchasable Ships/Retrieve Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+shape = SubResource("ConcavePolygonShape3D_tvp4b")
+
+[node name="Label3D" type="Label3D" parent="Purchasable Ships/Retrieve Ship"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -0.953883, 0.0249569, 0.00583286)
+texture_filter = 2
+text = "Rabauke Shipworks Kestrel MKII
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="Retrieve Ship2" type="StaticBody3D" parent="Purchasable Ships" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.411183, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("5_flq1y")
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("6_56mpp")
+selected_material = ExtResource("7_ssfhr")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Purchasable Ships/Retrieve Ship2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+mesh = SubResource("BoxMesh_0ugiv")
+
+[node name="Label3D" type="Label3D" parent="Purchasable Ships/Retrieve Ship2"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -0.953883, 0.0249569, 0.00583286)
+texture_filter = 2
+text = "Rabauke Shipworks Kestrel MKII
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Purchasable Ships/Retrieve Ship2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+shape = SubResource("ConcavePolygonShape3D_tvp4b")
+
+[node name="Retrieve Ship4" type="StaticBody3D" parent="Purchasable Ships" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.807388, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("5_flq1y")
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("6_56mpp")
+selected_material = ExtResource("7_ssfhr")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Purchasable Ships/Retrieve Ship4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+mesh = SubResource("BoxMesh_0ugiv")
+
+[node name="Label3D" type="Label3D" parent="Purchasable Ships/Retrieve Ship4"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -0.953883, 0.0249569, 0.00583286)
+texture_filter = 2
+text = "Rabauke Shipworks Kestrel MKII
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Purchasable Ships/Retrieve Ship4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+shape = SubResource("ConcavePolygonShape3D_tvp4b")
+
+[node name="Retrieve Ship5" type="StaticBody3D" parent="Purchasable Ships" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2163, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("5_flq1y")
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("6_56mpp")
+selected_material = ExtResource("7_ssfhr")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Purchasable Ships/Retrieve Ship5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+mesh = SubResource("BoxMesh_0ugiv")
+
+[node name="Label3D" type="Label3D" parent="Purchasable Ships/Retrieve Ship5"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -0.953883, 0.0249569, 0.00583286)
+texture_filter = 2
+text = "Rabauke Shipworks Kestrel MKII
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Purchasable Ships/Retrieve Ship5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+shape = SubResource("ConcavePolygonShape3D_tvp4b")
+
+[node name="Retrieve Ship6" type="StaticBody3D" parent="Purchasable Ships" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.63473, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("5_flq1y")
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("6_56mpp")
+selected_material = ExtResource("7_ssfhr")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Purchasable Ships/Retrieve Ship6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+mesh = SubResource("BoxMesh_0ugiv")
+
+[node name="Label3D" type="Label3D" parent="Purchasable Ships/Retrieve Ship6"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -0.953883, 0.0249569, 0.00583286)
+texture_filter = 2
+text = "Rabauke Shipworks Kestrel MKII
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Purchasable Ships/Retrieve Ship6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.297131, 0, 2.77556e-17)
+shape = SubResource("ConcavePolygonShape3D_tvp4b")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3.27593e-17, 0, -0.535, 0, 0.535, 0, 0.535, 0, 3.27593e-17, -0.142888, 1.91022, 2.6424)
+texture_filter = 2
+texture = SubResource("ViewportTexture_ylviw")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+world_3d = SubResource("World3D_ah3g1")
+transparent_bg = true
+size = Vector2i(256, 256)
+
+[node name="Camera Root" type="Node3D" parent="SubViewport"]
+transform = Transform3D(-0.994522, 0.0416806, -0.0958589, 0, 0.91706, 0.398749, 0.104528, 0.396565, -0.912036, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/Camera Root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+cull_mask = 1
+fov = 60.0
+
+[node name="Ship Root" type="Node3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Purchase Ship" type="StaticBody3D" parent="." node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.118015, 1.00235, 2.62598)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("5_xq2t8")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("6_56mpp")
+selected_material = ExtResource("7_ssfhr")
+interaction_sound = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Purchase Ship"]
+mesh = SubResource("BoxMesh_pvbjg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Purchase Ship"]
+shape = SubResource("ConcavePolygonShape3D_jakyx")
+
+[node name="Label3D" type="Label3D" parent="Purchase Ship"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "Purchase
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+
+[node name="Logo" type="Sprite3D" parent="."]
+transform = Transform3D(-1.27042e-17, 0, -0.079, 0, 0.079, 0, 0.079, 0, -1.27042e-17, -0.153056, 2.90027, 2.61572)
+texture_filter = 2
+texture = ExtResource("9_ttja8")
+
+[node name="Specifications" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.11345, -0.765562)
+
+[node name="Thruster Perfomance" type="Label3D" parent="Specifications"]
+transform = Transform3D(8.57253e-18, 0, -0.14, 0, 0.14, 0, 0.14, 0, 8.57253e-18, -0.124646, -1.1592, 1.2606)
+texture_filter = 2
+text = "Forwards: X Gs
+Forwards: X Gs
+Forwards: X Gs
+Forwards: X Gs
+
+Forwards: X Gs
+Forwards: X Gs
+Forwards: X Gs"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+vertical_alignment = 0
+line_spacing = -102.815
+
+[node name="Title - Thruster" type="Label3D" parent="Specifications"]
+transform = Transform3D(8.57253e-18, 0, -0.14, 0, 0.14, 0, 0.14, 0, 8.57253e-18, -0.1217, -1.13972, 1.25941)
+texture_filter = 2
+modulate = Color(1, 0.33, 0.33, 1)
+text = "Thruster Performance
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Title - Components" type="Label3D" parent="Specifications"]
+transform = Transform3D(8.57253e-18, 0, -0.14, 0, 0.14, 0, 0.14, 0, 8.57253e-18, -0.1217, -0.262632, 2.48087)
+texture_filter = 2
+modulate = Color(1, 0.33, 0.33, 1)
+text = "Modules
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Title - Cargo" type="Label3D" parent="Specifications"]
+transform = Transform3D(8.57253e-18, 0, -0.14, 0, 0.14, 0, 0.14, 0, 8.57253e-18, -0.1217, -2.02446, 1.25384)
+texture_filter = 2
+modulate = Color(1, 0.33, 0.33, 1)
+text = "Cargo Capacity
+"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Cargo" type="Label3D" parent="Specifications"]
+transform = Transform3D(8.57253e-18, 0, -0.14, 0, 0.14, 0, 0.14, 0, 8.57253e-18, -0.1217, -2.13263, 1.25548)
+texture_filter = 2
+text = "XXX CU"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Modules" type="Label3D" parent="Specifications"]
+transform = Transform3D(8.57253e-18, 0, -0.14, 0, 0.14, 0, 0.14, 0, 8.57253e-18, -0.126056, -1.25783, 1.3208)
+texture_filter = 2
+text = "1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive
+1 X S2 - Abyssal Jump Drive"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="Overview" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62315, -0.834944)
+
+[node name="Title - Ship Name" type="Label3D" parent="Overview"]
+transform = Transform3D(8.57253e-18, 0, -0.14, -1.73472e-18, 0.14, 0, 0.14, 1.73472e-18, 8.57253e-18, -0.1217, 1.23317, 1.33879)
+texture_filter = 2
+modulate = Color(1, 0.33, 0.33, 1)
+text = "Manufacturer Ship names"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Description" type="Label3D" parent="Overview"]
+transform = Transform3D(8.57253e-18, 0, -0.14, 0, 0.14, 0, 0.14, 0, 8.57253e-18, -0.1217, 0.9272, 0.118517)
+texture_filter = 2
+text = "Bask in luxury with the Nebula Interstellar Trifid"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+autowrap_mode = 3
+width = 1700.0
+
+[node name="Value" type="Label3D" parent="Overview"]
+transform = Transform3D(8.57253e-18, 0, -0.14, 0, 0.14, 0, 0.14, 0, 8.57253e-18, -0.1217, 1.03067, 0.12053)
+texture_filter = 2
+text = "18.4 M Cr"
+font = ExtResource("4_u6j5y")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0

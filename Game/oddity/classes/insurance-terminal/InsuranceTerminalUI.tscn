@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://o23govmgfw8v"]
+[gd_scene load_steps=15 format=3 uid="uid://o23govmgfw8v"]
 
 [ext_resource type="Script" path="res://classes/insurance-terminal/InsuranceUi.gd" id="1_rg3j1"]
 [ext_resource type="Script" path="res://classes/insurance-terminal/UiButton.gd" id="1_u87fl"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_0mvqj"]
-[ext_resource type="PackedScene" uid="uid://dgknkllc54236" path="res://scenes/trade-terminal/meshes/SellingTerminal.glb" id="2_q1i6f"]
 [ext_resource type="AudioStream" uid="uid://2w7aoby4ad1l" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/button.wav" id="3_atb7a"]
 [ext_resource type="Material" uid="uid://cpqklftecyhba" path="res://classes/insurance-terminal/UiButtonRegularMaterial.tres" id="5_434mu"]
 [ext_resource type="Material" uid="uid://b3wkl5mhgp5v3" path="res://classes/insurance-terminal/UiButtonSelectedMaterial.tres" id="6_ghsc6"]
@@ -53,9 +52,6 @@ selected_stored_ship_id_label = NodePath("StorageUI/Selected Ship Id")
 selected_stored_ship_value_label = NodePath("StorageUI/Selected Ship Value")
 success_sound = NodePath("Success")
 decline_sound = NodePath("Decline")
-
-[node name="SellingTerminal2" parent="." instance=ExtResource("2_q1i6f")]
-transform = Transform3D(6.12323e-17, 0, 0.73, 0, 1.25, 0, -1, 0, 4.46996e-17, 0, 0, 0)
 
 [node name="ButtonPress" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44865, 0)
