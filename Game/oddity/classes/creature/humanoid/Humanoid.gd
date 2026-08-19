@@ -110,7 +110,8 @@ func humanoid_physics_process(delta : float) -> void:
 			linear_damp = zero_g_damp
 
 		apply_central_force(eva_movement_vector * eva_force * anchor.pitch_pivot.global_transform.basis.inverse())
-		apply_torque(eva_rotation_vector * eva_roll_force * anchor.pitch_pivot.global_transform.basis.inverse())
+		apply_torque(eva_rotation_vector * eva_roll_force * anchor.pitch_pivot.global_basis.inverse())
+		#rotate((eva_rotation_vector.z).normalized(), eva_roll_force * 0.0001)
 
 	eva_movement_vector = Vector3.ZERO
 	eva_rotation_vector = Vector3.ZERO

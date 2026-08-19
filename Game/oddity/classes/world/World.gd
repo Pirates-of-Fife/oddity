@@ -291,7 +291,7 @@ func respawn_player() -> void:
 	player.reparent(self)
 	add_child(player_body)
 	player.possess(player_body)
-
+	player_control_entity = player_body
 	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
 	star_system.queue_free()
 

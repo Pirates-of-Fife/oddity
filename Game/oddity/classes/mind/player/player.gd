@@ -261,7 +261,9 @@ func die() -> void:
 		return
 	
 	clear_inventory()
-
+	
+	get_tree().get_first_node_in_group("World").caretaker.save()
+	
 	has_died = true
 	
 	current_controller.queue_free()
