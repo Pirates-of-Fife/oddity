@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4ngoo5a5cmvu"]
+[gd_scene load_steps=25 format=3 uid="uid://c4ngoo5a5cmvu"]
 
 [ext_resource type="Script" path="res://classes/station/station_landing_pad/station_pad.gd" id="1_s3rvs"]
 [ext_resource type="PackedScene" uid="uid://0col2xp4383a" path="res://classes/station/meshes/house.glb" id="2_pbwp6"]
@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c0d3hia8voe4y" path="res://classes/cargo/cargo-selling-ui/CargoSellingUi.tscn" id="6_0yf10"]
 [ext_resource type="PackedScene" uid="uid://b1bi6doj50har" path="res://classes/landing-pad/repair-ui/RepairUi.tscn" id="7_dxdv7"]
 [ext_resource type="PackedScene" uid="uid://bokp84s0jmkuw" path="res://classes/landing-pad/change-ship-name-ui/ChangeShipNameUi.tscn" id="8_25bk5"]
-[ext_resource type="PackedScene" uid="uid://bwqnarhy6uxga" path="res://classes/landing-pad/save-ship-ui/SaveShipUi.tscn" id="9_yw76j"]
-[ext_resource type="PackedScene" uid="uid://bfxi85byqr0ku" path="res://classes/landing-pad/spawn-ship-ui/SpawnShipUi.tscn" id="10_p6mr5"]
 [ext_resource type="Script" path="res://classes/landing-pad/LandingPad.gd" id="11_feiv4"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="12_3xl3d"]
 [ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="13_vqirh"]
@@ -279,15 +277,6 @@ station_pad = NodePath("..")
 [node name="ChangeShipNameUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("8_25bk5")]
 transform = Transform3D(1.25526e-17, 0, -0.205, 0, 0.205, 0, 0.205, 0, 1.25526e-17, 5.30521, 0.706829, -4.52939)
 landing_pad = NodePath("../LandingPad")
-
-[node name="SaveShipUi" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("9_yw76j")]
-transform = Transform3D(-0.18, 0, 2.20436e-17, 0, 0.18, 0, -2.20436e-17, 0, -0.18, 1.94727, 0.524399, -4.54461)
-landing_pad = NodePath("../LandingPad")
-
-[node name="SpawnShipUi" parent="." node_paths=PackedStringArray("landing_pad", "station_pad") instance=ExtResource("10_p6mr5")]
-transform = Transform3D(-0.18, 0, -4.85723e-17, 0, 0.18, 0, 4.85723e-17, 0, -0.18, 2.39331, 1.00168, -4.53132)
-landing_pad = NodePath("../LandingPad")
-station_pad = NodePath("..")
 
 [node name="LandingPad" type="Area3D" parent="." node_paths=PackedStringArray("starship_spawn_marker")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60.7212)
