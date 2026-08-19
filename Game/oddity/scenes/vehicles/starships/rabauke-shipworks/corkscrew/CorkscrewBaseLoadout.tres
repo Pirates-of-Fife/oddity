@@ -317,13 +317,16 @@ id = 16
 
 [resource]
 script = ExtResource("10_v3tby")
+ship_type = 0
 module_slots = Array[ExtResource("3_l4yll")]([SubResource("Resource_to0un"), SubResource("Resource_se1vb"), SubResource("Resource_7yh5v"), SubResource("Resource_5prft"), SubResource("Resource_pcsg6"), SubResource("Resource_jba5x"), SubResource("Resource_ni7ab"), SubResource("Resource_0aswp"), SubResource("Resource_uf2ou"), SubResource("Resource_s8go5"), SubResource("Resource_u5lo4"), SubResource("Resource_si5ap"), SubResource("Resource_j0a1t"), SubResource("Resource_c2nvo"), SubResource("Resource_4c653"), SubResource("Resource_0b7lp"), SubResource("Resource_6r3vy"), SubResource("Resource_3s2h0"), SubResource("Resource_ccmpu"), SubResource("Resource_0pw3d"), SubResource("Resource_hsfpp"), SubResource("Resource_btoyk"), SubResource("Resource_up0y0"), SubResource("Resource_qwqhv"), SubResource("Resource_bg74a"), SubResource("Resource_woj7s"), SubResource("Resource_iy3d1"), SubResource("Resource_785kg"), SubResource("Resource_affrm"), SubResource("Resource_xf5pu"), SubResource("Resource_pdrkq"), SubResource("Resource_6xs07"), SubResource("Resource_h11jc"), SubResource("Resource_ui1b1"), SubResource("Resource_pnlqn"), SubResource("Resource_gcmyd"), SubResource("Resource_e8llx"), SubResource("Resource_pcqno"), SubResource("Resource_us660")])
 cargo = Array[ExtResource("1_1l20x")]([])
 entities = Array[ExtResource("2_7wk01")]([])
+is_player_ship = false
 ship_name = &"Corkscrew"
 ship_identification = &"Corkscrew"
 value = 0
 apply_health = false
+destroyed = false
 current_health = 0.0
 current_armour_health = 0.0
 ship_color = Color(0.905882, 0.741176, 0.454902, 1)
