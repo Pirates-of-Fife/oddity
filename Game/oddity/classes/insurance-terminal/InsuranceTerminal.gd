@@ -37,7 +37,14 @@ func _ready() -> void:
 	power_button.power_switch_signal.connect(_on_power_switch)
 	terminal_power_on_animation.powered_on.connect(_on_power_animation_finished)
 
-func spawn_ship(loadout : StarshipLoadout) -> void:
+func claim_ship(loadout : StarshipLoadout) -> void:
+	var ship : Starship = spawn_ship(loadout)
+	ship.ship_identification = ship.generate_ship_id()
+	
+func retrieve_ship(loadout : StarshipLoadout) -> void:
+	spawn_ship(loadout)
+
+func spawn_ship(loadout : StarshipLoadout) -> Starship:
 	var starship_scene : PackedScene 
 	
 	match loadout.ship_type:
@@ -56,15 +63,22 @@ func spawn_ship(loadout : StarshipLoadout) -> void:
 	starship.global_rotation = landing_pad.starship_spawn_marker.global_rotation
 
 	loadout_tools.load_loadout(starship, loadout)
-	starship.ship_identification = starship.generate_ship_id()
 	
+	return starship
+
+func store_ship() -> void:
+	if landed_ship != null:
+		landed_ship.queue_free()
+
 func _on_power_switch() -> void:
 	if !is_on:
 		terminal_power_on_animation.start_animation(station_pad.station.station_name)
 		
 		insurance_ui = load(ui_scene).instantiate()
 		insurance_ui.ready.connect(_on_ui_load)
-		insurance_ui.ship_claimed.connect(spawn_ship)
+		insurance_ui.ship_claimed.connect(claim_ship)
+		insurance_ui.ship_stored.connect(store_ship)
+		insurance_ui.ship_retrieved.connect(retrieve_ship)
 		insurance_ui.hide()
 		add_child(insurance_ui)
 		insurance_ui.rotation.y = deg_to_rad(-90)

@@ -29,7 +29,7 @@ points = PackedVector3Array(0.9155, 0.1, 0.005, 0.9155, 0.1, -0.005, -0.9155, 0.
 material = ExtResource("5_434mu")
 size = Vector3(1.985, 0.2, 0.01)
 
-[node name="InsuranceTerminalUi" type="Node3D" node_paths=PackedStringArray("landed_ship_name_label", "landed_ship_id_label", "insurance_tab", "storage_tab", "insurance_ui_root", "insurance_slots_root", "delete_insurance_button", "insure_button", "override_insurance_button", "claim_insurance_button", "selected_insurance_ship_name_label", "selected_insurance_price_label", "success_sound", "decline_sound")]
+[node name="InsuranceTerminalUi" type="Node3D" node_paths=PackedStringArray("landed_ship_name_label", "landed_ship_id_label", "insurance_tab", "storage_tab", "insurance_ui_root", "insurance_slots_root", "delete_insurance_button", "insure_button", "override_insurance_button", "claim_insurance_button", "selected_insurance_ship_name_label", "selected_insurance_price_label", "storage_ui_root", "storage_slots_root", "store_button", "retrieve_button", "sell_button", "selected_stored_ship_name_label", "selected_stored_ship_id_label", "selected_stored_ship_value_label", "success_sound", "decline_sound")]
 script = ExtResource("1_rg3j1")
 landed_ship_name_label = NodePath("CurrentShipNameLabel")
 landed_ship_id_label = NodePath("CurrentShipIDLabel")
@@ -43,6 +43,14 @@ override_insurance_button = NodePath("InsuranceUI/Override Button")
 claim_insurance_button = NodePath("InsuranceUI/Claim Button")
 selected_insurance_ship_name_label = NodePath("InsuranceUI/Selected Ship Name")
 selected_insurance_price_label = NodePath("InsuranceUI/Insurance Claim Price")
+storage_ui_root = NodePath("StorageUI")
+storage_slots_root = NodePath("StorageUI/StorageSlots")
+store_button = NodePath("StorageUI/Store Ship")
+retrieve_button = NodePath("StorageUI/Retrieve Ship")
+sell_button = NodePath("StorageUI/Sell Ship")
+selected_stored_ship_name_label = NodePath("StorageUI/Selected Ship Name")
+selected_stored_ship_id_label = NodePath("StorageUI/Selected Ship Id")
+selected_stored_ship_value_label = NodePath("StorageUI/Selected Ship Value")
 success_sound = NodePath("Success")
 decline_sound = NodePath("Decline")
 
@@ -61,6 +69,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58832, 3.42981, 0.11677)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_u87fl")
+toggleable = true
 button_mesh = NodePath("MeshInstance3D")
 start_material = ExtResource("5_434mu")
 selected_material = ExtResource("6_ghsc6")
@@ -79,12 +88,14 @@ font = ExtResource("2_0mvqj")
 font_size = 80
 outline_size = 0
 
-[node name="StorageTab" type="StaticBody3D" parent="." node_paths=PackedStringArray("button_text_label", "interaction_sound")]
+[node name="StorageTab" type="StaticBody3D" parent="." node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.650124, 3.42981, 0.11677)
 collision_layer = 536870912
 collision_mask = 536870912
 script = ExtResource("1_u87fl")
 button_text_label = NodePath("../InsuranceTab/Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
 start_material = ExtResource("5_434mu")
 selected_material = ExtResource("6_ghsc6")
 interaction_sound = NodePath("../ButtonPress")
@@ -512,6 +523,7 @@ outline_size = 0
 horizontal_alignment = 2
 
 [node name="StorageUI" type="Node3D" parent="."]
+visible = false
 
 [node name="StorageSlots" type="Node3D" parent="StorageUI"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.718877, 0)
@@ -786,7 +798,6 @@ horizontal_alignment = 2
 
 [node name="Selected Ship Name" type="Label3D" parent="StorageUI"]
 transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 2.44841, 0.129233)
-visible = false
 text = "Current Ship Name"
 font = ExtResource("2_0mvqj")
 font_size = 80
@@ -795,7 +806,15 @@ horizontal_alignment = 2
 
 [node name="Selected Ship Id" type="Label3D" parent="StorageUI"]
 transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 2.27578, 0.129233)
-visible = false
+text = "59M Cr
+"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Selected Ship Value" type="Label3D" parent="StorageUI"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 2.12646, 0.129233)
 text = "59M Cr
 "
 font = ExtResource("2_0mvqj")
@@ -848,6 +867,30 @@ shape = SubResource("ConvexPolygonShape3D_fn5pj")
 [node name="Label3D" type="Label3D" parent="StorageUI/Store Ship"]
 transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
 text = "Store Landed Ship "
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Sell Ship" type="StaticBody3D" parent="StorageUI" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973924, 1.7511, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/Sell Ship"]
+mesh = SubResource("BoxMesh_vlfe6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/Sell Ship"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/Sell Ship"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "Sell Stored Ship"
 font = ExtResource("2_0mvqj")
 font_size = 80
 outline_size = 0
