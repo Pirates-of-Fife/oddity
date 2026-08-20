@@ -130,9 +130,11 @@ func _ready() -> void:
 	if wing_state:
 		$Wings/WingAnimator.play("wings_up")
 		$Wings/WingAnimator.seek(3)
+		set_shield_to_wings_up()
 	else:
 		$Wings/WingAnimator.play("wings_down")
 		$Wings/WingAnimator.seek(3)
+		set_shield_to_wings_down()
 
 func _process(delta: float) -> void:
 	super._process(delta)
@@ -171,7 +173,10 @@ func _process(delta: float) -> void:
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Roll/Blend3/blend_amount", -actual_rotation_vector_unit.z)
 
 func set_material_to_hull(material : StandardMaterial3D) -> void:
-	#$Body.set_surface_override_material(1, material) 
+	$Body.get_surface_override_material(1).albedo_color = material.albedo_color
+	$Wings/LeftWing.get_surface_override_material(1).albedo_color = material.albedo_color
+	$Wings/RightWing.get_surface_override_material(1).albedo_color = material.albedo_color
+	
 	current_hull_material = material
 
 func on_super_cruise_charging() -> void:
@@ -227,20 +232,16 @@ func _on_color_white() -> void:
 	ship_identification_label.modulate = Color(0, 0, 0, 1)
 	name_label.modulate = Color(0, 0, 0, 1)
 	
-	#$Mesh/Decal.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-04.png")
-	#$Mesh/Decal2.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-04.png")
-	#$Mesh/Decal3.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-03.png")
-	#$Mesh/Decal4.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-03.png")
+	$Decals/Decal.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Textures/Decals/name_dark.png")
+	$Decals/Decal2.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-04.png")
+
 	
 func _on_color_dark() -> void:
 	ship_identification_label.modulate = Color(1, 1, 1, 1)
 	name_label.modulate = Color(1, 1, 1, 1)
 	
-	#$Mesh/Decal.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png")
-	#$Mesh/Decal2.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png")
-	#$Mesh/Decal3.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png")
-	#$Mesh/Decal4.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png")
-
+	$Decals/Decal.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Textures/Decals/name_light.png")
+	$Decals/Decal2.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png")
 
 func _on_pressure_zone_entered() -> void:
 	$UI/PressureLabel.show()
@@ -515,10 +516,28 @@ func toggle_tractor_beams() -> void:
 	if wing_state == false:
 		$Wings/WingAnimator.play("wings_up")
 		wing_state = true
+		set_shield_to_wings_up()
 	else:
 		$Wings/WingAnimator.play("wings_down")
 		wing_state = false
-				
+		set_shield_to_wings_down()
+
+func set_shield_to_wings_down() -> void:
+	shield.mesh_instance = $TestShield/ShieldMesh
+	$TestShield/CollisionShape3D.disabled = false
+	$TestShield/ShieldMesh.show()
+	
+	$TestShield/ShieldMeshWings.hide()
+	$TestShield/ShapeWings.disabled = true
+	
+func set_shield_to_wings_up() -> void:
+	shield.mesh_instance = $TestShield/ShieldMeshWings
+	$TestShield/CollisionShape3D.disabled = true
+	$TestShield/ShieldMesh.hide()
+	
+	$TestShield/ShieldMeshWings.show()
+	$TestShield/ShapeWings.disabled = false
+
 func toggle_cargo_bay() -> void:
 	cargo_bay.toggle_open_state()
 

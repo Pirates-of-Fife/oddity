@@ -30,9 +30,7 @@ var init_completed : bool = false
 var color : Color :
 	set(value):
 		color = value
-		
-		print("color changed: " + str(color))
-		
+				
 		if ship != null and init_completed:
 			preview_mesh.get_active_material(0).albedo_color = color
 			ship.update_color(color)
