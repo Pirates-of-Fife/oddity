@@ -530,13 +530,18 @@ func set_shield_to_wings_down() -> void:
 	$TestShield/ShieldMeshWings.hide()
 	$TestShield/ShapeWings.disabled = true
 	
+	shield.update_mesh()
+	
 func set_shield_to_wings_up() -> void:
 	shield.mesh_instance = $TestShield/ShieldMeshWings
+	
 	$TestShield/CollisionShape3D.disabled = true
 	$TestShield/ShieldMesh.hide()
 	
 	$TestShield/ShieldMeshWings.show()
 	$TestShield/ShapeWings.disabled = false
+	
+	shield.update_mesh()
 
 func toggle_cargo_bay() -> void:
 	cargo_bay.toggle_open_state()

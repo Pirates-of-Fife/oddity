@@ -81,7 +81,7 @@ func save_active_starships(saved_ships : Array[StarshipSave], starships_in_star_
 				new_save.loadout = loadout_generator.save_loadout(entity as Starship, true, true)
 				
 				saved_ships.append(new_save)
-	
+		
 	return saved_ships
 
 func save_game_entities(saved_entities : Array[GameEntitySave], entities_in_star_system : Array[Node]) -> Array[GameEntitySave]:	
@@ -94,6 +94,9 @@ func save_game_entities(saved_entities : Array[GameEntitySave], entities_in_star
 			saved_entities.erase(game_entity_save)	
 	
 	for entity : GameEntity in entities_in_star_system:
+		if !entity.save:
+			continue
+			
 		if entity is Starship:
 			continue
 			

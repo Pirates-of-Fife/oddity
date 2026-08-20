@@ -60,8 +60,8 @@ size = 2
 thruster_sound = NodePath("AudioStreamPlayer3D")
 modifier = 3.5
 thruster_heat_curve = SubResource("Curve_cfow7")
-thruster_heat_multiplier = 2.0
-fuel_usage = 0.01
+thruster_heat_multiplier = 4.0
+fuel_usage = 0.005
 thruster_particles = NodePath("GPUParticles3D")
 quiet_insert = true
 

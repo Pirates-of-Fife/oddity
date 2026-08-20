@@ -198,6 +198,13 @@ func create_entity_from_inventory_slot_resource(slot : InventoryGameEntitySlot) 
 	
 	return entity
 
+func is_inventory_used() -> bool:
+	for i : int in range(1, 5):
+		if is_inventory_slot_occupied(i):
+			return true
+			
+	return false
+
 func is_inventory_slot_occupied(slot : int) -> bool:
 	match slot:
 		1:
@@ -262,7 +269,7 @@ func die() -> void:
 	
 	clear_inventory()
 	
-	get_tree().get_first_node_in_group("World").caretaker.save()
+	(get_tree().get_first_node_in_group("World") as World).caretaker.save()
 	
 	has_died = true
 	

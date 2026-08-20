@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b4rqsv1kqush4" path="res://scenes/modules/test-module/alcubierre_drive.glb" id="3_g72co"]
 
 [sub_resource type="Curve" id="Curve_ceube"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.104247, 0.739165), -4.46458, -4.46458, 0, 0, Vector2(0.50193, 0.0827011), 0.0, 0.0, 0, 0, Vector2(1, 0.0629742), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Size2AlcubierrreDrive" type="RigidBody3D" node_paths=PackedStringArray("charging_start", "charging_sound", "charging_end", "travelling_sound")]
 collision_layer = 537396225
