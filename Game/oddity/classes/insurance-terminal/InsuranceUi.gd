@@ -205,6 +205,9 @@ func override_insurance(player : Player, control_entity: ControlEntity) -> void:
 		return
 	
 	selected_insurance_button.loadout = loadout_tools.save_loadout(landed_ship)
+	
+	save_insurance_slots()
+	load_insurance_slots()
 		
 func claim_ship(player : Player, control_entity: ControlEntity) -> void:
 	if landed_ship:
@@ -255,17 +258,14 @@ func on_insurance_slot_pressed(loadout : StarshipLoadout, button_id : int) -> vo
 		
 func load_insurance_slots() -> void:
 	var insurance : Array[StarshipLoadout] = caretaker.get_save_file().insured_ships
-	
+		
 	var i : int = 0
 	
 	for button : LoadoutSlotButton in insurance_slots:
 		if !button.loadoutSelected.is_connected(on_insurance_slot_pressed):
 			button.loadoutSelected.connect(on_insurance_slot_pressed)
-		button.deselect()
-		
-		if insurance[i] == null:
-			continue
-		
+		button.deselect() 
+				
 		button.loadout = insurance[i]
 		
 		i += 1
@@ -308,12 +308,8 @@ func load_storage_slots() -> void:
 		if !button.loadoutSelected.is_connected(on_storage_slot_pressed):
 			button.loadoutSelected.connect(on_storage_slot_pressed)
 		button.deselect()
-		
-		if storage[i] == null:
-			continue
-		
+				
 		button.loadout = storage[i]
-		
 		i += 1
 
 	store_button.hide()

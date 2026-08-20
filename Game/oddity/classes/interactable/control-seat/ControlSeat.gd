@@ -39,6 +39,11 @@ func enter_seat(player : Mind, control_entity : ControlEntity) -> void:
 	if target_control_entity.player != null:
 		return
 	
+	if player is Player:
+		if player.is_inventory_used():
+			player.inventory_hud.show_error("Drop items before piloting!")
+			return
+	
 	$Sprite3D.show()
 	
 	entity_parent = control_entity.get_parent_node_3d()

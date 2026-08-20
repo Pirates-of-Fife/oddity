@@ -376,7 +376,7 @@ var additional_armour_rating : float = 0
 @export
 var current_armour_rating : float :
 	get:
-		return current_armour_health / max_armour_health * max_armour_rating
+		return clampf(current_armour_health / max_armour_health * max_armour_rating, 0, 100000)
 
 @export_subgroup("Radar")
 
@@ -1498,17 +1498,22 @@ func ship_take_damage(damage : float, penetration : float, ignore_shield : bool 
 
 	if shield_current_health > 0 and ignore_shield == false:
 		return
+	
+	var armour_rating_in_damage : float = clampf(current_armour_rating, 1, 100000000000)
 
 	var proportional_armour_difference : float = penetration - current_armour_rating
 	
+	if current_armour_health <= 0:
+		current_hull_health -= damage
 	# weapon doesn't penetrate armour -> only damage armour
-	if (proportional_armour_difference <= 0):
-		current_armour_health -= (clampf(1 - (absf(proportional_armour_difference) / current_armour_rating), 0, 1)) * damage
+	elif (proportional_armour_difference <= 0):
+		current_armour_health -= (clampf(1 - (absf(proportional_armour_difference) / armour_rating_in_damage), 0, 1)) * damage
+		current_hull_health -= (clampf(1 - (absf(proportional_armour_difference) / armour_rating_in_damage), 0, 1)) * damage / 10
 	# weapon penetrates armour -> do full armour damage, only damage hull proportionally
 	elif (proportional_armour_difference > 0):
 		current_armour_health -= damage
-		current_hull_health -= (clampf(1 - (absf(proportional_armour_difference) / current_armour_rating), 0, 1)) * damage
-
+		current_hull_health -= (clampf(1 - armour_rating_in_damage / (absf(proportional_armour_difference)), 0, 1)) * damage
+	
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
 	current_armour_health = clampf(current_armour_health, 0, max_armour_health)
 
@@ -1754,7 +1759,7 @@ var last_position : Vector3 = Vector3.ZERO
 func super_cruise_travel(delta : float) -> void:
 	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed + 250
 	
-	if current_fuel < 100 and target_velocity > 500:
+	if current_fuel < 10 and target_velocity > 500:
 		target_velocity = 500
 	
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)

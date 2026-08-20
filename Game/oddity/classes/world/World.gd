@@ -217,8 +217,9 @@ func load_save() -> void:
 
 func spawn_entities_in_system(star_system : String) -> void:
 	var save_file : SaveFile = caretaker.get_save_file()
-	var ships_in_system : Array[Starship] = spawn_active_ships(save_file.active_ships, save_file.player_position.star_system.name)
+	spawn_active_ships(save_file.active_ships, save_file.player_position.star_system.name)
 	spawn_saved_game_entities(save_file.game_entities, save_file.player_position.star_system.name)	
+	
 
 func spawn_player_character(player_position_save : PlayerPositionSave, player_inventory : PlayerInventoryResource, credits : int, ships_in_system : Array[Starship]) -> void:
 	player.inventory = player_inventory
@@ -293,7 +294,7 @@ func respawn_player() -> void:
 	player.possess(player_body)
 	player_control_entity = player_body
 	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
-	star_system.queue_free()
+	star_system.free()
 
 	var new_star_system : StarSystem = player.respawn_star_system.instantiate()
 	add_child(new_star_system)
@@ -305,6 +306,7 @@ func respawn_player() -> void:
 	player_body.global_rotation = spawn_station.player_spawn_marker.global_rotation
 	
 	spawn_entities_in_system(new_star_system.name)
+	
 
 func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:		
