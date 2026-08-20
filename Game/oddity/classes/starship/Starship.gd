@@ -660,6 +660,8 @@ func update_material_saturation_based_on_hull_damage() -> void:
 	
 	current_hull_material.albedo_color.s = lerpf(0, original_hull_color.s, current_hull_health / max_hull_health)
 	current_hull_material.roughness = lerpf(0.1, 0.5, current_hull_health / max_hull_health)
+	
+	set_material_to_hull(current_hull_material)
 
 func update_color(new_color : Color) -> void:
 	original_hull_color = new_color
@@ -673,7 +675,7 @@ func update_color(new_color : Color) -> void:
 		current_hull_material.albedo_color = original_hull_color
 			
 	update_material_saturation_based_on_hull_damage()
-
+	
 func is_color_light(color : Color) -> bool:
 	var luma : float = sqrt(0.299 * pow(color.r, 2) + 0.587 * pow(color.g, 2) + 0.114 * pow(color.b, 2))
 		

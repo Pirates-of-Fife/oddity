@@ -135,7 +135,7 @@ func set_material_to_hull(material : StandardMaterial3D) -> void:
 	$Mesh/Exterior/BridgeExterior/Cockpit.set_surface_override_material(0, material)
 	$Mesh/Exterior/Hull2/Hull.set_surface_override_material(0, material) 
 	current_hull_material = material
-	
+		
 func _overheat_start() -> void:
 	if (is_bounty_target):
 		return
