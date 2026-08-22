@@ -31,6 +31,9 @@ func _auto_save_timeout() -> void:
 	auto_save_timer.start()
 
 func save(used_bed : bool = false, bed_index : int = -1, ship_id : String = "") -> void:
+	if world.abyss_entered:
+		return
+
 	var entities_in_star_system : Array[Node] = get_tree().get_nodes_in_group("GameEntity")
 	var starships_in_star_system : Array[Node] = get_tree().get_nodes_in_group("Starship")
 		

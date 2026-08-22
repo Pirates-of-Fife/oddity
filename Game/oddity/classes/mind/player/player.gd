@@ -39,6 +39,9 @@ var force_respawn_pressed_count : int = 0
 var force_respawn_timer : Timer = Timer.new()
 var has_died : bool = false
 
+var current_marker_category : int = 0
+var max_marker_category : int = 1
+
 func _ready() -> void:
 	_player_ready()
 
@@ -334,6 +337,14 @@ func _process(delta: float) -> void:
 		if force_respawn_pressed_count >= 5:
 			die()
 	
+	if (Input.is_action_just_pressed("switch_marker_category")):
+		current_marker_category += 1
+
+		if current_marker_category > max_marker_category:
+			current_marker_category = -1
+		
+		switch_marker_category(current_marker_category)
+	
 	if control_entity == null:
 		return
 	
@@ -345,6 +356,13 @@ func _process(delta: float) -> void:
 	if control_entity == null:
 		return
 
+func switch_marker_category(category : int) -> void:
+	var markers : Array[Node] = get_tree().get_nodes_in_group("Marker")
+	
+	for m : Node in markers:
+		if m is MarkerSprite:
+			if m.category != category:
+				m.hide()
 
 func on_posses(control_entity : ControlEntity) -> void:
 	if control_entity is Starship:

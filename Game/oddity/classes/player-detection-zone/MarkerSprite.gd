@@ -20,3 +20,6 @@ var distance : float :
 
 @export
 var marker_sprite_2d : MarkerSprite2d
+
+@export
+var category : int = 0

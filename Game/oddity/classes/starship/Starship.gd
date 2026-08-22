@@ -1805,6 +1805,9 @@ func super_cruise_travel(delta : float) -> void:
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
+
+	if current_state == State.DESTROYED or current_state == State.POWER_OFF:
+		return
 	
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
@@ -1821,8 +1824,9 @@ func _physics_process(delta: float) -> void:
 			cruise_travel(delta)
 		elif travel_mode == starship_travel_modes.TravelMode.SUPER_CRUISE:
 			super_cruise_travel(delta)
-
-	update_ui()
+	
+	if is_player_ship:
+		update_ui()
 
 	#print(target_rotation_speed_vector)
 
