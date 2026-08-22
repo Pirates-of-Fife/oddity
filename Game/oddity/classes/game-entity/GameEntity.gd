@@ -135,6 +135,15 @@ func _default_ready() -> void:
 	
 	if entity_name.is_empty():
 		entity_name = name
+		
+	if save and !(self is Starship):
+		var zone : PlayerDetectionZone = PlayerDetectionZone.new()
+		zone.activate_distance = 4500
+		zone.deactivate_distance = 5000
+		zone.update_time = 1
+		zone.always_deactivate = true
+		add_child(zone)
+		zone.deactivate.connect(despawn_game_entity)
 
 func on_interact_self() -> void:
 	unfreeze()
@@ -229,3 +238,48 @@ func load_nodes(node_paths: Array) -> Array:
 		if node != null:
 			nodes.append(node)
 	return nodes
+
+var despawned : bool = false
+
+func despawn_game_entity(player : Player, control_entity : ControlEntity) -> void:
+	if !save:
+		return
+	
+	if despawned:
+		return
+		
+	if !save:
+		return
+		
+	if self is Module:
+		if self.module_slot != null:
+			return
+
+	if self is CargoContainer:
+		if self.snapped_to != null:
+			if self.snapped_to.cargo_grid.ship_grid:
+				return
+				
+	if freeze:
+		return
+
+	var new_save : GameEntitySave = GameEntitySave.new()
+	new_save.star_system = world.get_current_star_sytem_resource()
+	new_save.game_entity_scene = scene_file_path
+	new_save.position = StringVector.create(global_position)
+	new_save.rotation = StringVector.create(global_rotation)
+	new_save.value = value
+	
+	var game_entity_zone : GameEntityZone = GameEntityZone.new()
+	game_entity_zone.game_entity_save = new_save
+	
+	get_tree().get_first_node_in_group("StarSystem").add_child(game_entity_zone)
+	
+	game_entity_zone.name = new_save.game_entity_scene
+	
+	game_entity_zone.global_position = global_position
+	game_entity_zone.global_rotation = global_rotation
+	
+	despawned = true
+	
+	queue_free()

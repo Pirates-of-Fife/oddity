@@ -193,6 +193,7 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		
 		if loadout.destroyed:
 			starship.current_state = starship.State.DESTROYED
+			starship.destroyed_on_load = true
 	else:
 		starship.current_hull_health = starship.max_hull_health
 		starship.current_ammo = starship.max_ammo
