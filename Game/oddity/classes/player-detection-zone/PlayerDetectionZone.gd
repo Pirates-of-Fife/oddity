@@ -73,7 +73,7 @@ func update() -> void:
 
 	if player.control_entity == null:
 		return
-
+	
 	if use_distance_display:
 		if player.control_entity.third_person or player.control_entity is not Starship:
 			distant_sprite.hide()
@@ -87,7 +87,10 @@ func update() -> void:
 
 			if distance > sprite_max_distance and sprite_max_distance > 0:
 				distant_sprite.hide()
-
+		
+		if player.current_marker_category != distant_sprite.category:
+			distant_sprite.hide()
+		
 	if !active:
 		if one_shot:
 			if has_been_activated:

@@ -93,12 +93,12 @@ func _process(delta: float) -> void:
 func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	_starship_process(delta)	
 	
-	if player == null:
+	if player_reference == null:
 		return
 
-	var distance_to_player : float = (global_position - player_reference.control_entity.global_position).length_squared()
+	var distance_to_player : float = (global_position - player_reference.global_position).length_squared()
 
-	if distance_to_player < 625:
+	if distance_to_player < 3000:
 		if !interior_shown:
 			show_interior()
 			interior_shown = true
@@ -441,17 +441,17 @@ func update_abyssal_mfd() -> void:
 	
 	
 func on_destroyed() -> void:
-	for fire : GPUParticles3D in destroyed_fires.get_children():
-		fire.start_fire()
-
 	for light : Node3D in interior_lights.get_children():
 		if light is OmniLight3D:
 			light.light_color = interior_lights.red_color
 			light.light_energy = interior_lights.dim_light_energy
-
-	for fire : GPUParticles3D in damaged_fires.get_children():
-		fire.start_fire()
-
+			
+	if !destroyed_on_load:
+		for fire : GPUParticles3D in damaged_fires.get_children():
+			fire.start_fire()
+		for fire : GPUParticles3D in destroyed_fires.get_children():
+			fire.start_fire()
+		
 	alarm_sound_player.play()
 	
 	if !destroyed_on_load:
@@ -464,6 +464,13 @@ func on_destroyed() -> void:
 	super_cruise_mfd.hide()
 	shield_and_health_ui.hide()
 	damaged_label.hide()
+	
+	await get_tree().create_timer(20).timeout
+	
+	for fire : GPUParticles3D in destroyed_fires.get_children():
+		fire.stop_fire()
+	for fire : GPUParticles3D in damaged_fires.get_children():
+		fire.stop_fire()
 
 func on_repaired() -> void:
 	for light : Node3D in interior_lights.get_children():

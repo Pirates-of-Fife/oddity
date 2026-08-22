@@ -201,7 +201,6 @@ func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	abyss_entered = false
 	new_system_loaded = false
 
-
 	abyssal_tunnel.queue_free()
 
 func load_save() -> void:
@@ -289,8 +288,6 @@ func respawn_player() -> void:
 		get_node("AbyssalTunnel").queue_free()
 		get_node("AbyssalAmbiance").queue_free()
 		abyss_entered = false
-
-	print("RESPAWN")
 
 	var player_body : Creature = player.respawn_body.instantiate()
 	player.reparent(self)

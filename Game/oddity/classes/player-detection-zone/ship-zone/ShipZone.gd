@@ -31,6 +31,8 @@ func _create_distance_display() -> MarkerSprite:
 	if loadout.destroyed:
 		sprite.text += " - Wreckage"
 	
+	sprite.category = 1
+	
 	add_child(sprite)
 	
 	return sprite

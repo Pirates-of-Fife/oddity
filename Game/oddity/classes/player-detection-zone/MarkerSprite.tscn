@@ -6,15 +6,18 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_mfdtl"]
 viewport_path = NodePath("SubViewport")
 
-[node name="MarkerSprite" type="Node3D" node_paths=PackedStringArray("marker_sprite_2d")]
+[node name="MarkerSprite" type="Node3D" node_paths=PackedStringArray("marker_sprite_2d") groups=["Marker"]]
 script = ExtResource("1_1rd7p")
 marker_sprite_2d = NodePath("SubViewport/MarkerSprite2d")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+cast_shadow = 0
+extra_cull_margin = 16384.0
 offset = Vector2(481.82, -211.385)
-pixel_size = 0.0006
+pixel_size = 0.0007
 billboard = 1
 fixed_size = true
+texture_filter = 2
 texture = SubResource("ViewportTexture_mfdtl")
 
 [node name="SubViewport" type="SubViewport" parent="."]
