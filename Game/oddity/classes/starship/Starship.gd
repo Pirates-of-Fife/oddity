@@ -568,6 +568,8 @@ var current_max_velocity : float = ship_info.max_linear_velocity
 
 var damaged : bool = false
 
+var destroyed_on_load : bool = false
+
 var lock_timer : Timer = Timer.new()
 
 enum State
@@ -616,6 +618,11 @@ signal color_changed_to_light
 @export_category("Beds")
 @export
 var beds : Array[Bed]
+
+@export_category("Save stuff")
+
+@export
+var zone : PlayerDetectionZone
 
 @export_category("Other")
 
@@ -1024,6 +1031,8 @@ func _starship_ready() -> void:
 	max_heat_capacity_changed.emit(maximum_heat_capacity)
 
 	update_material_saturation_based_on_hull_damage()
+	
+	zone.deactivate.connect(despawn_ship)
 		
 func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:
@@ -1192,23 +1201,29 @@ func destroyed() -> void:
 	actual_rotation_vector_unit = Vector3.ZERO
 	actual_thrust_vector = Vector3.ZERO
 	actual_thrust_vector_unit = Vector3.ZERO
+	
+	shield.collision_mask = shield.layer_mask_offline
+	shield.collision_layer = shield.layer_mask_offline
+	shield.hide()
+	
+	shield_current_health = 0
+	
+	if !destroyed_on_load:
+		explosion_sound_player.stream = explosion_sounds.pick_random()
+		explosion_sound_player.play()
 
-	explosion_sound_player.stream = explosion_sounds.pick_random()
-	explosion_sound_player.play()
-
-	if player != null:
-		player.die()
-	else:
-		var p : Player = get_tree().get_first_node_in_group("Player")
-		if (p.global_position - global_position).length() <= blast_radius:
-			if p.control_entity is Starship:
-				p.control_entity.take_damage(5000, 10)
-			else:
-				p.die()
-
-
-	if is_bounty_target:
-		get_tree().get_first_node_in_group("Player").add_credits(reward)
+		if player != null:
+			player.die()
+		else:
+			var p : Player = get_tree().get_first_node_in_group("Player")
+			if (p.global_position - global_position).length() <= blast_radius:
+				if p.control_entity is Starship:
+					p.control_entity.take_damage(5000, 10)
+				else:
+					p.die()
+	
+		if is_bounty_target:
+			get_tree().get_first_node_in_group("Player").add_credits(reward)
 
 
 func shield_damage(damage : float) -> void:
@@ -1833,6 +1848,26 @@ func decrease_max_velocity(velocity : float) -> void:
 
 	current_max_velocity -= velocity
 
+func despawn_ship(player : Player, control_entity : ControlEntity) -> void:
+	if !is_player_ship:
+		return
+	
+	if despawned:
+		return
+
+	var ship_zone : ShipZone = ShipZone.new()
+	
+	ship_zone.loadout = loadout_tools.save_loadout(self, true, true)
+	
+	get_tree().get_first_node_in_group("StarSystem").add_child(ship_zone)
+	
+	ship_zone.global_position = global_position
+	ship_zone.global_rotation = global_rotation
+	
+	despawned = true
+	
+	queue_free()
+
 func generate_ship_id() -> String:
 	var id_prefix : String = ""
 	if ship_type <= 1:
@@ -2009,3 +2044,12 @@ func set_target_rotation_roll_left(thrust : float) -> void:
 
 func set_target_rotation_roll_right(thrust : float) -> void:
 	target_rotational_thrust_vector.z = thrust
+	
+static func get_ship_scene(type : ShipType) -> String:
+	match type:
+		ShipType.CORKSCREW:
+			return "res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/RABS_Corkscrew.tscn"
+		ShipType.KESTREL:
+			return "res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn"
+	
+	return ""

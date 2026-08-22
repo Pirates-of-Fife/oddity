@@ -22,6 +22,9 @@ var update_time : float = 0.5
 @export
 var one_shot : bool = false
 
+@export
+var always_deactivate : bool = false
+
 var has_been_activated : bool = false
 
 var active : bool = false
@@ -98,8 +101,13 @@ func update() -> void:
 		if distance > deactivate_distance:
 			deactivate.emit(player, player.control_entity)
 			active = false
-
-func get_player_distance() -> float:
+	
+	if always_deactivate:
+		if distance > deactivate_distance:
+			deactivate.emit(player, player.control_entity)
+			active = false
+	
+func get_player_distance() -> float:	
 	if player == null:
 		return 100000000
 

@@ -105,6 +105,8 @@ func enter_abyss(destination_star_system : PackedScene, starship : Starship, por
 	if abyss_entered:
 		return
 
+	caretaker.save()
+
 	abyss_entered = true
 	
 	music_player.stop_music()
@@ -287,6 +289,8 @@ func respawn_player() -> void:
 		get_node("AbyssalTunnel").queue_free()
 		get_node("AbyssalAmbiance").queue_free()
 		abyss_entered = false
+
+	print("RESPAWN")
 
 	var player_body : Creature = player.respawn_body.instantiate()
 	player.reparent(self)

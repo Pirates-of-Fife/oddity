@@ -440,7 +440,8 @@ func on_destroyed() -> void:
 
 	alarm_sound_player.play()
 
-	$States/ExplosionParticle.emitting = true
+	if !destroyed_on_load:
+		$States/ExplosionParticle.emitting = true
 
 	power_screen.hide()
 	velocity_mfd.hide()

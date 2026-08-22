@@ -69,7 +69,7 @@ func save_active_starships(saved_ships : Array[StarshipSave], starships_in_star_
 		if starship_save.star_system.name == world.get_current_star_sytem_resource().name:
 			saved_ships.erase(starship_save)
 	
-	for entity : GameEntity in starships_in_star_system:
+	for entity : Node in starships_in_star_system:
 		if entity is Starship:
 			if entity.is_player_ship:
 				var new_save : StarshipSave = StarshipSave.new()
@@ -81,6 +81,16 @@ func save_active_starships(saved_ships : Array[StarshipSave], starships_in_star_
 				new_save.loadout = loadout_generator.save_loadout(entity as Starship, true, true)
 				
 				saved_ships.append(new_save)
+		if entity is ShipZone:
+			var new_save : StarshipSave = StarshipSave.new()
+			new_save.star_system = world.get_current_star_sytem_resource()
+			new_save.position = StringVector.create(entity.global_position)
+			new_save.rotation = StringVector.create(entity.global_rotation)
+			new_save.game_entity_scene = Starship.get_ship_scene(entity.loadout.ship_type)
+			new_save.value = entity.loadout.value
+			new_save.loadout = entity.loadout
+			
+			saved_ships.append(new_save)
 		
 	return saved_ships
 
@@ -93,7 +103,11 @@ func save_game_entities(saved_entities : Array[GameEntitySave], entities_in_star
 		if game_entity_save.star_system.name == system:
 			saved_entities.erase(game_entity_save)	
 	
-	for entity : GameEntity in entities_in_star_system:
+	for entity : Node in entities_in_star_system:
+		if entity is GameEntityZone:
+			saved_entities.append(entity.game_entity_save)
+			continue
+	
 		if !entity.save:
 			continue
 			

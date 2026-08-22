@@ -103,6 +103,9 @@ func on_shield_broken() -> void:
 	shield_break_sound.play()
 
 func on_shield_online() -> void:
+	if (game_entity as Starship).destroyed_on_load:
+		return
+
 	if (game_entity as Starship).shield_max_health <= 0:
 		return
 
