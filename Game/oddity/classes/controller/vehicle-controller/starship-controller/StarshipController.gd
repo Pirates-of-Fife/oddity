@@ -56,7 +56,7 @@ var current_throttle_forwards_axis : float = 0
 @export_category("Control Settings")
 
 @export
-var mouse_joystick_deadzone : float = 0.04
+var mouse_joystick_deadzone : float = 0.01
 
 @export
 var ship_mouse_controls_sensitivity : float = Globals.starship_controller_sensitity
@@ -144,6 +144,7 @@ func _starship_controller_process(delta : float) -> void:
 			control_entity.restock()
 			control_entity.refuel()
 			control_entity.restore_armour()
+			control_entity.current_heat = 0
 			
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
 			if control_entity.relative_linear_velocity.length() < 285 and control_entity.relative_angular_velocity.length() < 0.1 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
