@@ -21,8 +21,7 @@ shape = SubResource("ConcavePolygonShape3D_528wt")
 light_color = Color(0.839438, 0.127332, 0.306508, 1)
 light_energy = 2.0
 shadow_enabled = true
-shadow_opacity = 0.97
-directional_shadow_max_distance = 1000.0
+directional_shadow_max_distance = 10000.0
 script = ExtResource("3_m4ke7")
 
 [node name="Node3D" type="Node3D" parent="."]

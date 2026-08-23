@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://4tkfssij1ske"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/navigation-bars/NavigationBars.gd" id="1_efh1m"]
+[ext_resource type="Texture2D" uid="uid://dd34wglwir3lb" path="res://classes/multi-function-display/navigation-bars/bar-01.png" id="1_eum28"]
+
+[node name="NavigationBars" type="Node3D"]
+script = ExtResource("1_efh1m")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0001
+texture_filter = 2
+texture = ExtResource("1_eum28")
