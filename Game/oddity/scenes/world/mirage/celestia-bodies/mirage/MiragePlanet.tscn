@@ -1,4 +1,4 @@
-[gd_scene load_steps=7046 format=4 uid="uid://cmpi0goqqv3pp"]
+[gd_scene load_steps=7047 format=4 uid="uid://cmpi0goqqv3pp"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_3dig4"]
 [ext_resource type="Texture2D" uid="uid://byf7mmfg26l48" path="res://scenes/world/textures/8k_earth_daymap.jpg" id="2_txvwq"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="22_oeo6d"]
 [ext_resource type="PackedScene" uid="uid://e2cgytmxdooi" path="res://scenes/world/mirage/celestia-bodies/mirage/scatter-objects/MirageSpaceDust.tscn" id="23_1vc0k"]
 [ext_resource type="Resource" uid="uid://caoc2b63dq3pq" path="res://scenes/environment/foliage/resources/SpaceDustResource.tres" id="24_gu74l"]
+[ext_resource type="PackedScene" uid="uid://87h5uigosd87" path="res://classes/upgrades/ship-upgrade-terminal/UpgradeExampleScene.tscn" id="25_e2e3p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hiqp"]
 diffuse_mode = 3
@@ -42524,3 +42525,6 @@ count_per_multi_mesh = 4000
 scale_variance = 0.66
 asteroid_belt = NodePath("../AsteroidRing")
 vertical_variance = 315.0
+
+[node name="UpgradeExampleScene" parent="." instance=ExtResource("25_e2e3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45981, 15499.2, -2.58454)
