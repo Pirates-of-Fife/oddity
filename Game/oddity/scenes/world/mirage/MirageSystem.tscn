@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://c61qdki0q0p1b"]
+[gd_scene load_steps=13 format=3 uid="uid://c61qdki0q0p1b"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_16yi2"]
-[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_vascq"]
+[ext_resource type="Environment" uid="uid://d0pqik8jwcpxd" path="res://scenes/world/mirage/MirageEnvironment.tres" id="2_lxkie"]
 [ext_resource type="PackedScene" uid="uid://c5qou1irssard" path="res://scenes/world/mirage/celestia-bodies/Mirage.tscn" id="3_sahsf"]
 [ext_resource type="PackedScene" uid="uid://btqrtt2reo8uq" path="res://scenes/world/mirage/celestia-bodies/mirage/MirageZone.tscn" id="4_lichq"]
 [ext_resource type="PackedScene" uid="uid://y13m0gm0utk0" path="res://scenes/world/mirage/celestia-bodies/mirage/PhantomZone.tscn" id="6_s5lqx"]
@@ -12,28 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://blq0p2lrhxs8a" path="res://scenes/world/mirage/celestia-bodies/colossus/GaleZone.tscn" id="10_sggck"]
 [ext_resource type="PackedScene" uid="uid://bblcs7gvy7v1l" path="res://scenes/world/mirage/celestia-bodies/colossus/TorrentZone.tscn" id="12_2426o"]
 [ext_resource type="PackedScene" uid="uid://c7ibe2vyuxfw3" path="res://scenes/world/mirage/celestia-bodies/omen/OmenZone.tscn" id="14_l5kh6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hp5j"]
-shader = ExtResource("2_vascq")
-shader_parameter/sky_color = Color(0.0156863, 0, 0.0627451, 1)
-shader_parameter/star_base_color = Color(1, 1, 1, 1)
-shader_parameter/star_hue_offset = 0.6
-shader_parameter/star_intensity = 0.08
-shader_parameter/star_twinkle_speed = 0.01
-shader_parameter/star_twinkle_intensity = 0.2
-shader_parameter/layer_scale = 20.0
-shader_parameter/layer_scale_step = 10.0
-shader_parameter/layers_count = 3
-
-[sub_resource type="Sky" id="Sky_sxt0v"]
-sky_material = SubResource("ShaderMaterial_8hp5j")
-
-[sub_resource type="Environment" id="Environment_xarcs"]
-background_mode = 2
-sky = SubResource("Sky_sxt0v")
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_length = 200000.0
 
 [node name="MirageSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
 script = ExtResource("1_16yi2")
@@ -46,7 +24,7 @@ player_respawn_position = Vector3(-2.77895e+06, 0, 0)
 spawn_station = NodePath("MirageZone/SpaceStationLoadingZone")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_xarcs")
+environment = ExtResource("2_lxkie")
 
 [node name="Mirage" parent="." instance=ExtResource("3_sahsf")]
 
