@@ -1,0 +1,25 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://ckjrj6wdl8r5c"]
+
+[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="1_biihn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjkre"]
+shader = ExtResource("1_biihn")
+shader_parameter/sky_color = Color(0, 0.0329535, 0, 1)
+shader_parameter/star_base_color = Color(1, 1, 1, 1)
+shader_parameter/star_hue_offset = 0.6
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.01
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 5
+
+[sub_resource type="Sky" id="Sky_u01oc"]
+sky_material = SubResource("ShaderMaterial_jjkre")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_u01oc")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 200000.0

@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bwho7y2mkwclo"]
+[gd_scene load_steps=15 format=3 uid="uid://bwho7y2mkwclo"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_boynr"]
-[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_wsrd6"]
+[ext_resource type="Environment" uid="uid://ckjrj6wdl8r5c" path="res://scenes/world/paradox/ParadoxEnvironment.tres" id="2_5can4"]
 [ext_resource type="PackedScene" uid="uid://bv8hby1uoyvhj" path="res://scenes/world/paradox/celestial-bodies/Paradox.tscn" id="3_164d5"]
 [ext_resource type="PackedScene" uid="uid://bna5l6mg5rq5c" path="res://scenes/world/paradox/celestial-bodies/auric/AuricZone.tscn" id="4_23hwr"]
 [ext_resource type="PackedScene" uid="uid://5a2fhh6a1a3j" path="res://scenes/world/paradox/celestial-bodies/auric/SolsticeZone.tscn" id="5_d5fx4"]
@@ -15,28 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://bhm37nu60jpg1" path="res://scenes/world/paradox/celestial-bodies/tempest/WhirlpoolZone.tscn" id="18_13w8n"]
 [ext_resource type="PackedScene" uid="uid://chx75n3352av6" path="res://scenes/world/paradox/celestial-bodies/tempest/MaelstromZone.tscn" id="20_sll35"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjkre"]
-shader = ExtResource("2_wsrd6")
-shader_parameter/sky_color = Color(0, 0.0329535, 0, 1)
-shader_parameter/star_base_color = Color(1, 1, 1, 1)
-shader_parameter/star_hue_offset = 0.6
-shader_parameter/star_intensity = 0.08
-shader_parameter/star_twinkle_speed = 0.01
-shader_parameter/star_twinkle_intensity = 0.2
-shader_parameter/layer_scale = 20.0
-shader_parameter/layer_scale_step = 10.0
-shader_parameter/layers_count = 5
-
-[sub_resource type="Sky" id="Sky_u01oc"]
-sky_material = SubResource("ShaderMaterial_jjkre")
-
-[sub_resource type="Environment" id="Environment_trn0h"]
-background_mode = 2
-sky = SubResource("Sky_u01oc")
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_length = 200000.0
-
 [node name="ParadoxSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
 script = ExtResource("1_boynr")
 system_name = &"Paradox"
@@ -48,7 +26,7 @@ player_respawn_position = Vector3(-2.77895e+06, 0, 0)
 spawn_station = NodePath("AuricZone/SpaceStationLoadingZone")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_trn0h")
+environment = ExtResource("2_5can4")
 
 [node name="Paradox" parent="." instance=ExtResource("3_164d5")]
 
