@@ -20,6 +20,7 @@ data = PackedVector3Array(-1.295, 0.1875, 0.005, 1.295, 0.1875, 0.005, -1.295, -
 [sub_resource type="Environment" id="Environment_dwlsc"]
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.5
 
 [sub_resource type="World3D" id="World3D_ah3g1"]
 environment = SubResource("Environment_dwlsc")
@@ -248,12 +249,11 @@ cull_mask = 1
 fov = 60.0
 
 [node name="Ship Root" type="Node3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="UI Root" type="Node3D" parent="."]
 visible = false
 
-[node name="Purchase Ship" type="StaticBody3D" parent="UI Root" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+[node name="Purchase Ship" type="StaticBody3D" parent="UI Root" node_paths=PackedStringArray("button_text_label", "button_mesh")]
 transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.118015, 1.00235, 2.62598)
 collision_layer = 536870912
 collision_mask = 536870912
@@ -262,7 +262,6 @@ button_text_label = NodePath("Label3D")
 button_mesh = NodePath("MeshInstance3D")
 start_material = ExtResource("6_56mpp")
 selected_material = ExtResource("7_ssfhr")
-interaction_sound = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="UI Root/Purchase Ship"]
 mesh = SubResource("BoxMesh_pvbjg")
