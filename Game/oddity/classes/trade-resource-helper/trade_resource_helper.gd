@@ -138,6 +138,8 @@ func balance() -> void:
 			8:
 				w.value = weapon_8_value
 				w.preview_distance = weapon_8_preview_distance
+			0:
+				printerr(w.scene)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
