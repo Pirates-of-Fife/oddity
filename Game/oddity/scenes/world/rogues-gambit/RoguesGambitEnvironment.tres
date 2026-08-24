@@ -1,0 +1,16 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://uk2doeoe4da3"]
+
+[ext_resource type="Texture2D" uid="uid://bt6uhloj8g1p4" path="res://scenes/world/rogues-gambit/Rogues.png" id="1_80xu7"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kwec3"]
+panorama = ExtResource("1_80xu7")
+
+[sub_resource type="Sky" id="Sky_88kih"]
+sky_material = SubResource("PanoramaSkyMaterial_kwec3")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_88kih")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 200000.0

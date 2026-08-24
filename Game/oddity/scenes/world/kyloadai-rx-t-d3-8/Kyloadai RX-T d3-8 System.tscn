@@ -1,34 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3v26w8qkcgf2"]
+[gd_scene load_steps=8 format=3 uid="uid://d3v26w8qkcgf2"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_uw0bv"]
-[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_igqkf"]
+[ext_resource type="Environment" uid="uid://c7fe35cbax3xe" path="res://scenes/world/kyloadai-rx-t-d3-8/Kyloadai RX-T d3-8 Environment.tres" id="2_k5kid"]
 [ext_resource type="PackedScene" uid="uid://8rwcs2d5ajpx" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/KyloadiaRxTD38.tscn" id="3_7jbth"]
 [ext_resource type="PackedScene" uid="uid://d2kvl8wv1vwnt" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/Kyloadai1Zone.tscn" id="4_mcte5"]
 [ext_resource type="PackedScene" uid="uid://dojnmqagc6udm" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/Kyloadai1BZone.tscn" id="5_s831a"]
 [ext_resource type="PackedScene" uid="uid://crld0e6pc2tl4" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-1/Kyloadai1AZone.tscn" id="7_32jiq"]
 [ext_resource type="PackedScene" uid="uid://cc81y86yxt4qd" path="res://scenes/world/kyloadai-rx-t-d3-8/celestial-bodies/kyloadai-rx-t-d3-8-2/Kyloadai2Zone.tscn" id="10_aq6li"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g14yq"]
-shader = ExtResource("2_igqkf")
-shader_parameter/sky_color = Color(0, 0, 0, 1)
-shader_parameter/star_base_color = Color(1, 1, 1, 1)
-shader_parameter/star_hue_offset = 0.6
-shader_parameter/star_intensity = 0.08
-shader_parameter/star_twinkle_speed = 0.01
-shader_parameter/star_twinkle_intensity = 0.2
-shader_parameter/layer_scale = 20.0
-shader_parameter/layer_scale_step = 10.0
-shader_parameter/layers_count = 10
-
-[sub_resource type="Sky" id="Sky_qgo0g"]
-sky_material = SubResource("ShaderMaterial_g14yq")
-
-[sub_resource type="Environment" id="Environment_p7b43"]
-background_mode = 2
-sky = SubResource("Sky_qgo0g")
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_length = 200000.0
 
 [node name="KyloadaiRx-tD3-8System" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker")]
 script = ExtResource("1_uw0bv")
@@ -40,7 +18,7 @@ player_respawn_marker = NodePath("Marker3D")
 player_respawn_position = Vector3(-2.77895e+06, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_p7b43")
+environment = ExtResource("2_k5kid")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77895e+06, 0, 0)

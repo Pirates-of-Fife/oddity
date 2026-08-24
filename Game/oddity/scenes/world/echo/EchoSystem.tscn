@@ -1,35 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1x5jomuyohr6"]
+[gd_scene load_steps=9 format=3 uid="uid://c1x5jomuyohr6"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_mdave"]
-[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_c4ioh"]
+[ext_resource type="Environment" uid="uid://3dfpgkhus3kk" path="res://scenes/world/echo/EchoEnvironment.tres" id="2_brq3t"]
 [ext_resource type="PackedScene" uid="uid://x1ps87x6yhq6" path="res://scenes/world/echo/celestial-bodies/Echo.tscn" id="3_341i7"]
 [ext_resource type="PackedScene" uid="uid://dsq6mo1hm2w2j" path="res://scenes/world/echo/celestial-bodies/goliath/GoliathZone.tscn" id="4_v7bva"]
 [ext_resource type="PackedScene" uid="uid://dvfis284n2kiq" path="res://scenes/world/echo/celestial-bodies/goliath/RumbleZone.tscn" id="5_uo2ft"]
 [ext_resource type="Resource" uid="uid://lnu3li625jjm" path="res://resources/resources/trade/trade-items/stations/NewHorizonTradeList.tres" id="8_bdmsb"]
 [ext_resource type="PackedScene" uid="uid://bngue56ck5wut" path="res://scenes/world/echo/celestial-bodies/resonance/ResonanceZone.tscn" id="8_pluxd"]
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="10_u488v"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qypl4"]
-shader = ExtResource("2_c4ioh")
-shader_parameter/sky_color = Color(0.0594096, 0.00378071, 0.0834829, 1)
-shader_parameter/star_base_color = Color(1, 1, 1, 1)
-shader_parameter/star_hue_offset = 0.6
-shader_parameter/star_intensity = 0.08
-shader_parameter/star_twinkle_speed = 0.01
-shader_parameter/star_twinkle_intensity = 0.2
-shader_parameter/layer_scale = 20.0
-shader_parameter/layer_scale_step = 10.0
-shader_parameter/layers_count = 3
-
-[sub_resource type="Sky" id="Sky_6a56t"]
-sky_material = SubResource("ShaderMaterial_qypl4")
-
-[sub_resource type="Environment" id="Environment_f6j25"]
-background_mode = 2
-sky = SubResource("Sky_6a56t")
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_length = 200000.0
 
 [node name="AbyssalEchoesSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
 script = ExtResource("1_mdave")
@@ -42,7 +20,7 @@ player_respawn_position = Vector3(-2.77895e+06, 0, 0)
 spawn_station = NodePath("ResonanceZone/SpaceStationLoadingZone")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_f6j25")
+environment = ExtResource("2_brq3t")
 
 [node name="Echo" parent="." instance=ExtResource("3_341i7")]
 
