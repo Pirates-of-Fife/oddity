@@ -1225,6 +1225,19 @@ func destroyed() -> void:
 		if is_bounty_target:
 			get_tree().get_first_node_in_group("Player").add_credits(reward)
 
+	var destruction_percentage : float = 0.5
+	
+	for slot : ModuleSlot in module_slots:
+		if slot is DynamicModuleSlot:
+			if slot.module != null:
+				var destroy : bool = randf_range(0, 1) >= destruction_percentage
+				
+				if destroy:
+					var module : Module = slot.module
+					slot.module.quiet_insert = true
+					slot.module.uninsert()
+					
+					module.queue_free()
 
 func shield_damage(damage : float) -> void:
 	shield_current_health -= damage

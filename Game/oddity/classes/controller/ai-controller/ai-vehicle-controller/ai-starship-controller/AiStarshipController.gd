@@ -180,9 +180,7 @@ func _ai_starship_controller_process(delta : float) -> void:
 		
 		if player.control_entity.linear_velocity.length() < 50:
 			(control_entity as Starship).current_max_velocity = 100
-	
-	current_ai_state = AiState.FLEE
-	
+		
 	if current_ai_state == AiState.FLEE:
 		(control_entity as Starship).current_max_velocity = (control_entity as Starship).ship_info.max_linear_velocity * 0.75
 		thrust_towards()
