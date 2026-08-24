@@ -30,9 +30,6 @@ environment = ExtResource("2_lxkie")
 
 [node name="MirageZone" parent="." instance=ExtResource("4_lichq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4e+06, 200000, 100000)
-activate_distance = 1e+07
-deactivate_distance = 1.1e+07
-sprite_distance = 200000.0
 
 [node name="PhantomZone" parent="MirageZone" instance=ExtResource("6_s5lqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60964.8, 52990.2, -150693)
