@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://wanq2hxulkqi"]
+[gd_scene load_steps=10 format=3 uid="uid://wanq2hxulkqi"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_gyh23"]
-[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_38nfj"]
+[ext_resource type="Environment" uid="uid://uk2doeoe4da3" path="res://scenes/world/rogues-gambit/RoguesGambitEnvironment.tres" id="2_jyc5u"]
 [ext_resource type="PackedScene" uid="uid://yalrqm6ps4np" path="res://scenes/world/rogues-gambit/celestial-bodies/RoguesGambit.tscn" id="3_qhgbd"]
 [ext_resource type="PackedScene" uid="uid://dwhxklunfv4wc" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/BastionZone.tscn" id="4_ynaga"]
 [ext_resource type="PackedScene" uid="uid://dbhb7jrm8wt22" path="res://scenes/world/rogues-gambit/celestial-bodies/bastion/DrifterZone.tscn" id="5_d5b27"]
@@ -9,28 +9,6 @@
 [ext_resource type="Resource" uid="uid://x2fvmriu228r" path="res://resources/resources/trade/trade-items/stations/KilmariesWatchTradeList.tres" id="9_8emv1"]
 [ext_resource type="PackedScene" uid="uid://b5fmks2ayyeqc" path="res://scenes/world/rogues-gambit/celestial-bodies/leviathan/KrakenZone.tscn" id="10_rylj1"]
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="12_apxux"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ysfo"]
-shader = ExtResource("2_38nfj")
-shader_parameter/sky_color = Color(0, 0.0185491, 0.02405, 1)
-shader_parameter/star_base_color = Color(1, 1, 1, 1)
-shader_parameter/star_hue_offset = 0.6
-shader_parameter/star_intensity = 0.08
-shader_parameter/star_twinkle_speed = 0.01
-shader_parameter/star_twinkle_intensity = 0.2
-shader_parameter/layer_scale = 20.0
-shader_parameter/layer_scale_step = 10.0
-shader_parameter/layers_count = 7
-
-[sub_resource type="Sky" id="Sky_88kih"]
-sky_material = SubResource("ShaderMaterial_4ysfo")
-
-[sub_resource type="Environment" id="Environment_oemom"]
-background_mode = 2
-sky = SubResource("Sky_88kih")
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_length = 200000.0
 
 [node name="RoguesGambitSystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
 script = ExtResource("1_gyh23")
@@ -43,7 +21,7 @@ player_respawn_position = Vector3(-1.3079e+06, 0, 0)
 spawn_station = NodePath("LeviathanZone/KrakenZone/SpaceStationLoadingZone")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_oemom")
+environment = ExtResource("2_jyc5u")
 
 [node name="RoguesGambit" parent="." instance=ExtResource("3_qhgbd")]
 

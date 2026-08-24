@@ -1,0 +1,16 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://c7fe35cbax3xe"]
+
+[ext_resource type="Texture2D" uid="uid://cpwel2wfm6e6y" path="res://scenes/world/kyloadai-rx-t-d3-8/kyloadai.png" id="1_x1a0d"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3xcdi"]
+panorama = ExtResource("1_x1a0d")
+
+[sub_resource type="Sky" id="Sky_qgo0g"]
+sky_material = SubResource("PanoramaSkyMaterial_3xcdi")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_qgo0g")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 200000.0
