@@ -34,10 +34,15 @@ sky_material = SubResource("ShaderMaterial_pcbll")
 background_mode = 2
 sky = SubResource("Sky_naasy")
 
-[node name="MainMenu" type="Node3D" node_paths=PackedStringArray("camera")]
+[node name="MainMenu" type="Node3D" node_paths=PackedStringArray("camera", "caretaker")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.57402, -1.64476, -1.94297)
 script = ExtResource("1_74355")
 camera = NodePath("SubViewportContainer/SubViewport/World/Camera3D")
+caretaker = NodePath("Caretaker")
+
+[node name="Caretaker" type="Node" parent="."]
+script = ExtResource("8_d88pb")
+disable_auto_save = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -87,10 +92,6 @@ stream = ExtResource("7_ps2xh")
 volume_db = -6.0
 pitch_scale = 0.8
 autoplay = true
-
-[node name="Caretaker" type="Node" parent="."]
-script = ExtResource("8_d88pb")
-disable_auto_save = true
 
 [connection signal="animation_started" from="SubViewportContainer/MainMenuUi" to="." method="_on_main_menu_ui_animation_started"]
 [connection signal="pressed" from="SubViewportContainer/MainMenuUi/Control/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

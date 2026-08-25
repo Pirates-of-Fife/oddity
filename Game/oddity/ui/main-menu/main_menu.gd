@@ -3,6 +3,8 @@ extends Node3D
 @export
 var camera : Camera3D
 
+@export
+var caretaker : Caretaker
 
 var orbit_distance : float = 35.0  
 var orbit_speed : float = 0.1
@@ -18,8 +20,8 @@ func _on_main_menu_ui_animation_started() -> void:
 func load_last_possessed_starship() -> void:
 	if ship_loaded:
 		return
-	
-	var last_used_starship : StarshipLoadout = $Caretaker.get_save_file().last_used_ship
+		
+	var last_used_starship : StarshipLoadout = caretaker.get_save_file().last_used_ship
 	
 	if last_used_starship == null:
 		return
