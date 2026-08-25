@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b7ktasjdgaklm"]
 
 [ext_resource type="Script" path="res://classes/module/weapon/BeamWeapon.gd" id="1_r4yvb"]
-[ext_resource type="Resource" uid="uid://c7yg8hj3ktl6r" path="res://scenes/modules/test-module/fargoth-beam-laser/size-5/Size5FargothBeamLaser.tres" id="2_oapg6"]
+[ext_resource type="Resource" uid="uid://c7yg8hj3ktl6r" path="res://scenes/modules/test-module/fargoth-beam-laser/Size5FargothBeamLaser.tres" id="2_oapg6"]
 [ext_resource type="Resource" uid="uid://bkm8oap0q1r2s" path="res://resources/resources/trade/trade-items/modules/fargoth-armaments/royal-beam/Fargoth5RoyalBeam.tres" id="3_fm8vf"]
 [ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="4_34hl0"]
 [ext_resource type="PackedScene" uid="uid://bvqrkt7ynfsva" path="res://scenes/modules/test-module/fargoth-beam-laser/laser-projectile/FargothLaserProjectile.tscn" id="6_7e4kp"]
@@ -46,5 +46,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544656, 0.961157)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544656, 1.1907)
 shape = SubResource("ConvexPolygonShape3D_3f74u")
-
-[editable path="Size5FargothBeamLaser"]
