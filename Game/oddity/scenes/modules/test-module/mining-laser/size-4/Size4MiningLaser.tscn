@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhxkqq6nqgqw3"]
+[gd_scene load_steps=9 format=3 uid="uid://dhxkqq6nqgqw3"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/mining-laser/size-5/size_5_mining_laser.gd" id="1_xc1yw"]
 [ext_resource type="Resource" uid="uid://bpo7jgn7tvrj3" path="res://scenes/modules/test-module/mining-laser/Size4MiningLaserResource.tres" id="2_5pq7b"]
 [ext_resource type="Resource" uid="uid://bkugbyf8yv1ce" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/rock-hunter/TradeResourceRockHunter4.tres" id="3_y0rq5"]
 [ext_resource type="PackedScene" uid="uid://jubrpulvdctu" path="res://scenes/modules/test-module/mining-laser/size-5/mining_laser_5.glb" id="4_f6bj5"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="5_8n1v2"]
 [ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="5_wry3b"]
 [ext_resource type="PackedScene" uid="uid://cfn6xc5cqonls" path="res://scenes/modules/test-module/mining-laser/mining-laser/MiningLaser.tscn" id="6_f6xbf"]
 
@@ -27,6 +28,15 @@ can_be_picked_up = true
 
 [node name="mining_laser_5" parent="." instance=ExtResource("4_f6bj5")]
 transform = Transform3D(4.59243e-17, 0, 0.75, 0, 0.75, 0, -0.75, 0, 4.59243e-17, 0, 0.38961, 0.731506)
+
+[node name="Label3D" type="Label3D" parent="mining_laser_5"]
+transform = Transform3D(-0.254782, 0.00268784, -0.0102012, 1.14902e-17, 0.246584, 0.0649708, 0.0105493, 0.0649152, -0.246373, 0.715826, 0, -0.344815)
+shaded = true
+modulate = Color(1, 0.905333, 0.29, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "ARES ROCK HUNTER"
+font = ExtResource("5_8n1v2")
+font_size = 80
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(4.59243e-17, 0, 0.75, 0, 0.75, 0, -0.75, 0, 4.59243e-17, 0, 0.38961, 0.731506)
