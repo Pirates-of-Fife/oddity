@@ -161,7 +161,7 @@ func get_save_file() -> SaveFile:
 	
 	if f == null:
 		return create_new_empty_save_file()
-		
+				
 	return load(Globals.SAVE_FILE)
 	
 func create_new_empty_save_file() -> SaveFile:
@@ -172,7 +172,7 @@ func create_new_empty_save_file() -> SaveFile:
 	new_save_file.player_position.star_system = load("res://scenes/world/gateway/GatewayResource.tres")
 	
 	new_save_file.inventory = PlayerInventoryResource.new()
-	new_save_file.credits = 10_000_000 # WARNING - reduce!
+	new_save_file.credits = 500_000_000 # WARNING - reduce!
 	
 	new_save_file.active_ships = []
 	new_save_file.insured_ships = []
