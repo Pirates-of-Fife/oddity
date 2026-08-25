@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cpjem7ixry514"]
 
 [ext_resource type="Script" path="res://classes/module/weapon/PulseLaserWeapon.gd" id="1_s6vgp"]
-[ext_resource type="Resource" uid="uid://bs4hythysp0aa" path="res://scenes/modules/test-module/real-pulse-laser/size-6/Size6PulseLaserResource.tres" id="2_kvtri"]
+[ext_resource type="Resource" uid="uid://bs4hythysp0aa" path="res://scenes/modules/test-module/real-pulse-laser/Size6PulseLaserResource.tres" id="2_kvtri"]
 [ext_resource type="Resource" uid="uid://c31fg4gx4h81s" path="res://resources/resources/trade/trade-items/modules/rapid-engagement-armament-lasers/b-series/Real5B15MW.tres" id="3_3ji7p"]
 [ext_resource type="AudioStream" uid="uid://cehcna8fjfm3g" path="res://scenes/modules/test-module/dread/Size6Weapon/laser_ausbereitung.wav" id="4_j5ixe"]
 [ext_resource type="PackedScene" uid="uid://cufeaqh7iop5" path="res://scenes/modules/test-module/beam-laser/laser-projectile/RealLaserProjectile.tscn" id="5_fyisx"]
-[ext_resource type="PackedScene" uid="uid://dgf0vqfyumtms" path="res://scenes/modules/test-module/real-pulse-laser/size-6/Size6RealPulseLaser.glb" id="7_e2gul"]
+[ext_resource type="PackedScene" uid="uid://dgf0vqfyumtms" path="res://scenes/modules/test-module/real-pulse-laser/mesh/Size6RealPulseLaser.glb" id="7_e2gul"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vug6y"]
 points = PackedVector3Array(-0.494304, -0.8324, -2.45897, 0.476071, -0.8324, -2.45897, -0.0532666, -0.692591, 2.80971, -0.79826, 0.610829, -2.96411, -0.612012, 0.145236, 2.80971, 0.598357, 0.238424, 2.80971, 0.784933, 0.704191, -2.87076, -0.0532666, 0.610829, 2.80971, -0.79747, -0.531381, -0.65583, 0.707872, -0.713004, -2.6987, 0.598357, -0.320012, 2.80971, -0.332557, 0.890567, -2.3124, -0.725558, -0.708531, -2.68239, -0.518806, -0.4132, 2.80971, -0.539108, 0.694095, -0.400872, 0.513311, 0.694067, -0.400859, 0.132818, -0.692591, 2.80971, -0.332557, -0.599229, 2.80971, -0.332557, 0.517815, 2.80971, 0.319066, 0.517815, 2.80971, -0.784365, 0.2087, -0.645641, 0.598357, 0.797379, -2.68464, 0.600544, -0.611645, 0.2127, -0.664747, 0.5024, 0.15123, -0.612012, 0.797379, -2.68464, -0.612012, -0.226997, 2.80971, 0.0396114, 0.610829, 2.80971, -0.634375, -0.611645, 0.2127, -0.518806, 0.331438, 2.80971, 0.412108, -0.506388, 2.80971, -0.0532666, -0.53543, -2.7432)
@@ -36,7 +36,7 @@ pitch_scale = 1.48
 bus = &"Weapon"
 
 [node name="RealLaserProjectile" parent="." instance=ExtResource("5_fyisx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733126, 1.78775)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733126, 4.60093)
 damage_rate = 0.01
 
 [node name="Nozzle" type="Marker3D" parent="."]
