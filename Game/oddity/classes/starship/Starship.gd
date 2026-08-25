@@ -26,7 +26,10 @@ enum ShipType
 {
 	CORKSCREW,
 	KESTREL,
-	BLACKPOOL
+	BLACKPOOL,
+	ACI,
+	KANARA,
+	TRIFID
 }
 
 @export
