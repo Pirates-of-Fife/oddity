@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ShieldGeneratorResource" load_steps=2 format=3 uid="uid://b41klwqufvg0q"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/shield-generator/ShieldGeneratorResource.gd" id="1_tbfly"]
+
+[resource]
+script = ExtResource("1_tbfly")
+max_shield_health = 900.0
+charge_rate = 30.0
+cooldown_time_after_break = 10.0
+cooldown_time_after_hit = 1.0
+charge_time = 0.1
+shield_color = Color(0.382477, 0.696373, 0.267697, 1)
+shield_offline_color = Color(0.775856, 0.346588, 0.178094, 1)
+shield_heat_per_charge = 10.0
+shield_heat_per_full_recharge = 200.0
+type = &"Shield Generator"
+manufacturer = &"Wolfram Industrial"
+model = &"ProtecTec"
+size = &"0"
+release_year = &"200"
+power_usage = 0.0
