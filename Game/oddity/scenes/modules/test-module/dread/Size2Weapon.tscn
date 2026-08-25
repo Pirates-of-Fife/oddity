@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://x88nd68bot6m"]
+[gd_scene load_steps=10 format=3 uid="uid://bkt7bwdlhp0jh"]
 
-[ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeapon.gd" id="1_70ix1"]
-[ext_resource type="PackedScene" uid="uid://qrehj8v1p47o" path="res://scenes/modules/test-module/dread/Size5Weapon/Size5WeaponAudio.tscn" id="2_0yn4e"]
-[ext_resource type="Resource" uid="uid://c5ty3dn338c3x" path="res://scenes/modules/test-module/dread/resources/Size5WeaponResource.tres" id="3_7cdp6"]
-[ext_resource type="Resource" uid="uid://c3nvkl1ilmbb4" path="res://resources/resources/trade/trade-items/modules/ox-vic-pyrr/dread/TradeResourceDread5.tres" id="4_vnvwd"]
-[ext_resource type="PackedScene" uid="uid://cbysuhn5p35if" path="res://scenes/modules/test-module/dread/Size5Weapon/size-5.glb" id="5_hrpp8"]
-[ext_resource type="Texture2D" uid="uid://b61ge42edi1vy" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic black.png" id="6_n2shc"]
-[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="7_1tk84"]
+[ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeapon.gd" id="1_0l12u"]
+[ext_resource type="PackedScene" uid="uid://qrehj8v1p47o" path="res://scenes/modules/test-module/dread/Size5Weapon/Size5WeaponAudio.tscn" id="2_yrqy3"]
+[ext_resource type="Resource" uid="uid://bhvtw4ynjdgpt" path="res://scenes/modules/test-module/dread/resources/Size2WeaponResource.tres" id="3_o0wdg"]
+[ext_resource type="Resource" uid="uid://c3nvkl1ilmbb4" path="res://resources/resources/trade/trade-items/modules/ox-vic-pyrr/dread/TradeResourceDread5.tres" id="4_8626j"]
+[ext_resource type="PackedScene" uid="uid://cbysuhn5p35if" path="res://scenes/modules/test-module/dread/Size5Weapon/size-5.glb" id="5_1rxxk"]
+[ext_resource type="Texture2D" uid="uid://b61ge42edi1vy" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic black.png" id="6_5p1k5"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="7_ktwe1"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_08hxi"]
 points = PackedVector3Array(1.6533, 0.145038, 0.3653, 0.142276, -0.3417, -0.500483, 0.360243, -0.504758, -0.3367, -0.0241548, 0.223944, 0.456933, 1.44319, 0.34135, -0.423367, 1.3308, -0.498391, 0.311547, 1.50296, -0.3417, -0.500483, -0.0241548, 0.223944, -0.482105, -0.0241548, -0.362996, 0.456933, 1.44319, -0.186841, 0.574409, -0.200333, -0.24559, -0.188526, 1.50796, 0.2045, 0.482614, 1.6802, -0.277973, -0.269763, -0.259059, 0.106537, 0.163463, 1.50796, 0.2045, -0.504003, 1.3308, -0.498391, -0.33153, 1.2817, 0.363155, -0.280613, 1.6802, -0.277973, 0.303317, 0.355516, -0.5098, 0.31939, 0.340136, 0.283, 0.344022, 1.6802, 0.13892, -0.269763, -0.0241548, -0.362996, -0.482105, 1.34734, 0.283, 0.344022, -0.259059, 0.106537, -0.188526, 1.44319, 0.0478802, 0.574409, 1.50296, -0.3417, 0.479464, -0.200333, -0.24559, 0.222092, 0.340136, 0.283, -0.360868, 0.138016, 0.2045, -0.504003, 0.138016, 0.2045, 0.482614, 0.142276, -0.3417, 0.479464, 1.63874, -0.28056, -0.3788)
@@ -14,33 +14,33 @@ points = PackedVector3Array(1.6533, 0.145038, 0.3653, 0.142276, -0.3417, -0.5004
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ltfh3"]
 points = PackedVector3Array(-0.435198, 0.0478802, 0.163487, -0.376541, -0.186933, -0.188733, -0.376541, 0.0478802, -0.188733, -1.96145, -0.186933, -0.130018, -0.25906, -0.186933, 0.163487, -1.96145, 0.0478802, 0.104772, -1.96145, -0.186933, 0.104772, -1.96145, 0.0478802, -0.130018, -0.25906, 0.0478802, -0.188733, -0.25906, 0.0478802, 0.163487, -0.25906, -0.186933, -0.188733, -0.435198, -0.186933, 0.163487)
 
-[node name="Size5Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle") groups=["GameEntity"]]
+[node name="Size2Weapon" type="RigidBody3D" node_paths=PackedStringArray("nozzle") groups=["GameEntity"]]
 collision_layer = 537396737
 collision_mask = 537396737
 mass = 100.0
-script = ExtResource("1_70ix1")
-shot_audio = ExtResource("2_0yn4e")
-size = 5
+script = ExtResource("1_0l12u")
+shot_audio = ExtResource("2_yrqy3")
+size = 2
 nozzle = NodePath("Nozzle")
-module_resource = ExtResource("3_7cdp6")
+module_resource = ExtResource("3_o0wdg")
 save = true
 value = 10000
-trade_information = ExtResource("4_vnvwd")
+trade_information = ExtResource("4_8626j")
 can_be_picked_up = true
 
 [node name="Nozzle" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.434569, 2.80189)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.141734, 0.907614)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.501182, 0.82765)
+transform = Transform3D(1.99005e-17, 0, 0.325, 0, 0.325, 0, -0.325, 0, 1.99005e-17, 0, 0.162906, 0.268372)
 shape = SubResource("ConvexPolygonShape3D_08hxi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.501182, 0.82765)
+transform = Transform3D(1.99005e-17, 0, 0.325, 0, 0.325, 0, -0.325, 0, 1.99005e-17, 0, 0.162906, 0.268372)
 shape = SubResource("ConvexPolygonShape3D_ltfh3")
 
-[node name="size-5" parent="." instance=ExtResource("5_hrpp8")]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.501182, 0.82765)
+[node name="size-5" parent="." instance=ExtResource("5_1rxxk")]
+transform = Transform3D(1.99005e-17, 0, 0.325, 0, 0.325, 0, -0.325, 0, 1.99005e-17, 0, 0.162906, 0.268372)
 
 [node name="laserWeapon5" parent="size-5" index="0"]
 layers = 3
@@ -48,7 +48,7 @@ layers = 3
 [node name="Decal4" type="Decal" parent="size-5"]
 transform = Transform3D(-0.23, -1.40834e-17, -1.40834e-17, -1.40834e-17, 0.23, -3.08149e-33, 1.40834e-17, -2.21913e-33, -0.23, 0.846462, 0.288605, 0.170028)
 size = Vector3(4.115, 1.076, 2)
-texture_albedo = ExtResource("6_n2shc")
+texture_albedo = ExtResource("6_5p1k5")
 upper_fade = 0.0039417
 lower_fade = 1e-05
 cull_mask = 1048574
@@ -59,7 +59,7 @@ shaded = true
 texture_filter = 2
 outline_modulate = Color(0, 0, 0, 0)
 text = "DREAD"
-font = ExtResource("7_1tk84")
+font = ExtResource("7_ktwe1")
 font_size = 80
 
 [editable path="size-5"]

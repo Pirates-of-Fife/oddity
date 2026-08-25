@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://csya3tvxj3jj5"]
+
+[ext_resource type="Resource" uid="uid://b8upd32uo0ce1" path="res://scenes/modules/test-module/dread/Size6Weapon/SmallLaserProjectile.tres" id="1_7ub7v"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_mkrul"]
+[ext_resource type="AudioStream" uid="uid://b7txiup6nktni" path="res://scenes/modules/test-module/dread/Size5Weapon/laser_ausbereitung.wav" id="3_4m588"]
+
+[resource]
+script = ExtResource("2_mkrul")
+projectile = ExtResource("1_7ub7v")
+projectile_speed = 1300.0
+cooldown = 0.3
+heat_per_shot = 30.0
+ammo_usage = 0.0
+hull_damage = 120.0
+shield_damage = 200.0
+penetration = 12.0
+sound = ExtResource("3_4m588")
+type = &"Photonic Conversion Weapon"
+manufacturer = &"Ox\'vic Pyrr"
+model = &"Dread 3"
+size = &"3"
+release_year = &"200"
+power_usage = 0.0
