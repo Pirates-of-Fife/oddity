@@ -15,12 +15,10 @@ albedo_color = Color(0.0760969, 0.478001, 0, 1)
 emission_enabled = true
 emission = Color(1.82897e-06, 0.737886, 0.462717, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_eyb11"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_xfmgf"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_6bet6")
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.1
+height = 0.5
 radial_segments = 6
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_awy1y"]
@@ -59,8 +57,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36708, 7.61767)
 damage_rate = 0.01
 
 [node name="MeshInstance3D" parent="RealLaserProjectile" index="1"]
-transform = Transform3D(5.12, 0, 0, 0, 3.1351e-16, -5.12, 0, 5.12, 3.1351e-16, 0, 0, 0)
-mesh = SubResource("CylinderMesh_eyb11")
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_xfmgf")
 
 [node name="RealPulseLaser" parent="." instance=ExtResource("6_d5a0s")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 1.38043, 2.97646)

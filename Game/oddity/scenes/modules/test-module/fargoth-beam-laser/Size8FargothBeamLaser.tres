@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="BeamWeaponResource" load_steps=3 format=3 uid="uid://b2r1r1xlbmbdg"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/BeamWeaponResource.gd" id="1_1rquq"]
+
+[sub_resource type="Curve" id="Curve_4nvlh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.700935, 0.646477), -1.58074, -1.58074, 0, 0, Vector2(1, 0), -3.00529, 0.0, 0, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("1_1rquq")
+max_beam_length = 5000.0
+damage_fall_off = SubResource("Curve_4nvlh")
+heat_generation = 3800.0
+hull_damage = 20000.0
+shield_damage = 36000.0
+penetration = 38.0
+type = &"Beam Laser"
+manufacturer = &"Farg\'oth"
+model = &"Ai\'re Fwen\'ra"
+size = &"8"
+release_year = &"145"
+power_usage = 0.0

@@ -18,12 +18,10 @@ albedo_color = Color(0.0760969, 0.478001, 0, 1)
 emission_enabled = true
 emission = Color(1.82897e-06, 0.737886, 0.462717, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_evgi6"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_vb6mj"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_6bet6")
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.1
+height = 0.5
 radial_segments = 6
 
 [node name="Size8RealLaser" type="RigidBody3D" node_paths=PackedStringArray("beam_laser", "beam_sound", "nozzle") groups=["GameEntity"]]
@@ -60,8 +58,8 @@ shape = SubResource("ConvexPolygonShape3D_gh7xa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0255569, 1.39448, 6.52899)
 
 [node name="MeshInstance3D" parent="RealLaserProjectile" index="1"]
-transform = Transform3D(5.19, 0, 0, 0, 3.17796e-16, -5.19, 0, 5.19, 3.17796e-16, 0, 0, 0)
-mesh = SubResource("CylinderMesh_evgi6")
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_vb6mj")
 
 [node name="RealBeamLaser" parent="." instance=ExtResource("6_ogent")]
 transform = Transform3D(1.667, 0, 0, 0, 1.667, 0, 0, 0, 1.667, 0, 1.35603, 2.93865)
