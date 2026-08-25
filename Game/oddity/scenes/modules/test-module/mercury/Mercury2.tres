@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://divqyh688u2b2"]
+
+[ext_resource type="Resource" uid="uid://cneq73kfrluso" path="res://scenes/modules/test-module/rotary-autocannon/RotaryAutoCannonProjectileSmall.tres" id="1_shakb"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_u77s6"]
+[ext_resource type="AudioStream" uid="uid://hlsfp2t6f64" path="res://scenes/modules/test-module/rotary-autocannon/ciws_single_shot.wav" id="3_0ov1h"]
+
+[resource]
+script = ExtResource("2_u77s6")
+projectile = ExtResource("1_shakb")
+projectile_speed = 1600.0
+cooldown = 0.06
+heat_per_shot = 0.5
+ammo_usage = 0.05
+hull_damage = 33.0
+shield_damage = 15.0
+penetration = 3.0
+sound = ExtResource("3_0ov1h")
+type = &"Gun"
+manufacturer = &"Ares Industrial"
+model = &"Mercury"
+size = &"2"
+release_year = &"180"
+power_usage = 0.0
