@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://rswvlnyxltl4"]
+
+[ext_resource type="Resource" uid="uid://cneq73kfrluso" path="res://scenes/modules/test-module/rotary-autocannon/RotaryAutoCannonProjectileSmall.tres" id="1_664g0"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://hlsfp2t6f64" path="res://scenes/modules/test-module/rotary-autocannon/ciws_single_shot.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+projectile = ExtResource("1_664g0")
+projectile_speed = 2000.0
+cooldown = 0.5
+heat_per_shot = 100.0
+ammo_usage = 6.0
+hull_damage = 400.0
+shield_damage = 300.0
+penetration = 20.0
+sound = ExtResource("3_sound")
+type = &"Heavy Cannon"
+manufacturer = &"Ares Industrial Co."
+model = &"Blast-3"
+size = &"3"
+release_year = &"42"
+power_usage = 0.0
