@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b52bxawdsa6y6"]
+[gd_scene load_steps=5 format=3 uid="uid://b52bxawdsa6y6"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/AbyssalJumpDrive.gd" id="1_d4kv4"]
 [ext_resource type="Resource" uid="uid://37pudlwsijiq" path="res://scenes/modules/test-module/abyss-drives/coreline/Size1CorelineResource.tres" id="2_cd2mn"]
-[ext_resource type="PackedScene" uid="uid://d3qowdbvmnoir" path="res://scenes/modules/test-module/abyss_drive.glb" id="2_cyi87"]
+[ext_resource type="PackedScene" uid="uid://d3qowdbvmnoir" path="res://scenes/modules/test-module/abyss-drives/coreline/abyss_drive.glb" id="2_cyi87"]
+[ext_resource type="Resource" uid="uid://byw28x4vmbija" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/coreline/TradeResourceCoreLine1.tres" id="3_fukro"]
 
 [node name="Size1CoreLine" type="RigidBody3D"]
 collision_layer = 537396225
@@ -11,6 +12,7 @@ script = ExtResource("1_d4kv4")
 size = 1
 module_resource = ExtResource("2_cd2mn")
 save = true
+trade_information = ExtResource("3_fukro")
 can_be_picked_up = true
 
 [node name="abyss_drive" parent="." instance=ExtResource("2_cyi87")]
