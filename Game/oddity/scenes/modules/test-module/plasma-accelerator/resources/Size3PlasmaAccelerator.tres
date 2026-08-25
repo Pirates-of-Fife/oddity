@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://dsautcshqdnra"]
+
+[ext_resource type="Resource" uid="uid://5i5fnrni8ql1" path="res://scenes/modules/test-module/plasma-accelerator/projectiles/Sie3PlasmaAcceleratorProjectile.tres" id="1_gc3nt"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_m03dx"]
+[ext_resource type="AudioStream" uid="uid://bgyqdefvrh8ex" path="res://scenes/modules/test-module/plasma-accelerator/sounds/plasma_accelerator_fire.wav" id="3_0bgh8"]
+
+[resource]
+script = ExtResource("2_m03dx")
+projectile = ExtResource("1_gc3nt")
+projectile_speed = 800.0
+cooldown = 1.8
+heat_per_shot = 1800.0
+ammo_usage = 60.0
+hull_damage = 1500.0
+shield_damage = 2000.0
+penetration = 25.0
+sound = ExtResource("3_0bgh8")
+type = &"Plasma Weapon"
+manufacturer = &"Plasma Laboratories Corporation"
+model = &"Accelerator 3"
+size = &"3"
+release_year = &"43"
+power_usage = 0.0
