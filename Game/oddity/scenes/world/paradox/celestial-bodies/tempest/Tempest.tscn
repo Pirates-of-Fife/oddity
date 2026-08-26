@@ -52,6 +52,7 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.194245, 0.196243, 0.516079, 0.658824)
 metallic_specular = 0.0
+rim_enabled = true
 proximity_fade_distance = 657.9
 distance_fade_mode = 1
 distance_fade_min_distance = 400.0
@@ -120210,6 +120211,9 @@ planet_name = &"Tempest"
 is_rocky_body = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_begin = 23500.0
+visibility_range_begin_margin = 100.0
+visibility_range_fade_mode = 1
 mesh = SubResource("SphereMesh_irnyl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
