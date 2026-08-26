@@ -10,9 +10,7 @@ func calculate_angle() -> float:
 	var ship_up_vector : Vector3 = Vector3(0, 1, 0) * ship.global_basis.inverse()
 	
 	var facing_down : bool = rad_to_deg(ship_up_vector.angle_to(ship.global_position - ship.active_frame_of_reference.global_position)) >= 90
-	
-	print(rad_to_deg(ship_up_vector.angle_to(ship.global_position - ship.active_frame_of_reference.global_position)))
-		
+			
 	if facing_down:
 		return ship.global_basis.x.angle_to(ship.active_frame_of_reference.global_position - ship.global_position) - PI / 2
 	
