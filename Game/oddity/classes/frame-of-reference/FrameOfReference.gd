@@ -70,11 +70,10 @@ func _enter_tree() -> void:
 	last_rotation = global_basis.get_rotation_quaternion().normalized()
 
 func _physics_process(delta: float) -> void:
-	calculate_movement_deltas(delta)
-	move_bodies_in_frame_of_reference()
-
 	if physics_parent != null:
+		calculate_movement_deltas(delta)
 		relative_velocity = physics_parent.relative_linear_velocity
+		move_bodies_in_frame_of_reference()
 
 func calculate_movement_deltas(delta : float) -> void:
 	velocity = movement_delta / delta

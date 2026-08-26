@@ -126,9 +126,12 @@ func _process(delta : float) -> void:
 	else:
 		rotation = Vector3.ZERO
 	
+	if player.control_entity is not Starship:
+		return
+	
 	if !player.control_entity.third_person:
 		adjust_fov()
-
+	
 	adjust_camera_position()
 
 	if (enable_screen_shake):

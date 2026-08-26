@@ -187,13 +187,17 @@ func creature_physics_process(delta : float) -> void:
 
 	# reduce size of collision shape if in zero-g environment
 	if !is_in_gravity():
-		$CollisionShape3D.shape = SphereShape3D.new()
-		($CollisionShape3D.shape as SphereShape3D).radius = 0.4
-		$CollisionShape3D.position.y = 0.4
+		$GShape.disabled = false
+		$CollisionShape3D.disabled = true
+		
+		#$CollisionShape3D.shape.height = 0.4
+		#($CollisionShape3D.shape as SphereShape3D).radius = 0.4
+		#$CollisionShape3D.position.y = 0.773
 	else:
-		$CollisionShape3D.shape = orignal_collision_shape
-		$CollisionShape3D.position.y = 0.037
-
+		#$CollisionShape3D.shape.height = 1.7
+		#$CollisionShape3D.position.y = 0
+		$GShape.disabled = true
+		$CollisionShape3D.disabled = false
 
 	is_running = false
 

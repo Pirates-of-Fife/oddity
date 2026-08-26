@@ -119,11 +119,27 @@ func humanoid_physics_process(delta : float) -> void:
 			linear_damp = zero_g_damp
 
 		apply_central_force(eva_movement_vector * eva_force * anchor.pitch_pivot.global_transform.basis.inverse())
-		apply_torque(eva_rotation_vector * eva_roll_force * anchor.pitch_pivot.global_basis.inverse())
-		#rotate((eva_rotation_vector.z).normalized(), eva_roll_force * 0.0001)
+		apply_torque(-eva_rotation_vector.z * -anchor.pitch_pivot.global_transform.basis.z * eva_roll_force)		
 
 	eva_movement_vector = Vector3.ZERO
 	eva_rotation_vector = Vector3.ZERO
+	
+	if !is_in_gravity():	
+		$Anchor/TwistPivot/Sprite3D.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+				
+		if !third_person:
+			$Anchor/TwistPivot/Sprite3D.hide()
+		else:
+			$Anchor/TwistPivot/Sprite3D.show()
+	else:
+		$Anchor/TwistPivot/Sprite3D.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		$Anchor/TwistPivot/Sprite3D.show()
+		
+		if !third_person:
+			if $Anchor/TwistPivot/PitchPivot.rotation.x >= 1.19246299346156:
+				$Anchor/TwistPivot/Sprite3D.hide()
+			else:
+				$Anchor/TwistPivot/Sprite3D.show()
 
 func eva_move_backwards() -> void:
 	eva_movement_vector.z = 1
