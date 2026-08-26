@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://7p3cyme718o4"]
+[gd_scene load_steps=6 format=3 uid="uid://7p3cyme718o4"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/ShieldGenerator.gd" id="1_1gnbc"]
 [ext_resource type="Resource" uid="uid://ddq68c148mgg0" path="res://scenes/modules/test-module/ShieldGenerator/resources/Size6Shield.tres" id="2_n6i3h"]
 [ext_resource type="Resource" uid="uid://d05hh5m3e4680" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard6.tres" id="3_7q34n"]
 [ext_resource type="PackedScene" uid="uid://bf7s7vwhd8bfp" path="res://scenes/modules/test-module/ShieldGenerator/shield-modul.glb" id="4_p02h0"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xu5pn"]
+points = PackedVector3Array(0.5, 0.423869, 0.939815, 0.299922, 0.567051, 0.710567, -0.5, 0.423869, 0.939815, 0.415916, 0.352569, 1.02615, 0.5, -0.423876, 0.939815, 0.5, 0.423869, -0.940177, -0.30002, 0.567051, 0.710567, 0.299922, 0.567051, -0.690373, -0.5, -0.423876, 0.939815, -0.416014, 0.352569, 1.02615, -0.5, 0.423869, -0.940177, 0.415916, -0.352673, 1.02615, 0.5, -0.423876, -0.940177, 0.116973, 0.0991861, -0.97385, -0.30002, 0.567051, -0.690373, -0.416014, -0.352673, 1.02615, -0.5, -0.423876, -0.940177, -0.117071, 0.0991861, -0.97385, 0.116973, -0.0992904, -0.97385, -0.117071, -0.0992904, -0.97385)
 
 [node name="Size6ShieldGenerator" type="RigidBody3D" groups=["GameEntity"]]
 collision_layer = 537396737
@@ -11,6 +14,7 @@ collision_mask = 537396737
 mass = 50.0
 script = ExtResource("1_1gnbc")
 size = 6
+initialize_collision_shape_automatically = false
 module_resource = ExtResource("2_n6i3h")
 passive_heat_generation = 300.0
 save = true
@@ -20,3 +24,7 @@ can_be_picked_up = true
 
 [node name="shield-modul" parent="." instance=ExtResource("4_p02h0")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.20991, -0.0699701)
+shape = SubResource("ConvexPolygonShape3D_xu5pn")

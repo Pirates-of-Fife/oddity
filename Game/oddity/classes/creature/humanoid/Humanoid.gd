@@ -32,7 +32,16 @@ func _humanoid_ready() -> void:
 	creature_ready()
 	
 	can_interact_with_entity.connect(_interaction_entity_found)
-	
+	toggle_third_person_view.connect(_humanoid_third_person)
+
+func _humanoid_third_person() -> void:
+	if third_person:
+		$Anchor/TwistPivot/Sprite3D.rotation.y = 0
+		$Anchor/TwistPivot/Sprite3D.position.x = 0
+	else:
+		$Anchor/TwistPivot/Sprite3D.rotation.y = deg_to_rad(180)
+		$Anchor/TwistPivot/Sprite3D.position.x = 0.119
+
 func _interaction_entity_found(entity : Node3D) -> void:
 	if player == null:
 		return

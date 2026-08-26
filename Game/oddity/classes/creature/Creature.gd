@@ -2,6 +2,11 @@ extends ControlEntity
 
 class_name Creature
 
+@export
+var camera_anchor : Node3D
+
+var original_anchor_position : Vector3 = Vector3(0, 0, 0) 
+
 @export_category("Movement")
 @export
 var walk_speed : float = 3
@@ -109,6 +114,10 @@ func creature_ready() -> void:
 	interaction_probe_timer.timeout.connect(interaction_probe_timeout)
 	interaction_probe_timer.wait_time = interaction_probe_timeout_time
 	add_child(interaction_probe_timer)
+	
+	toggle_third_person_view.connect(on_third_person)
+	increase_third_person_distance.connect(on_increase_distance)
+	decrease_third_person_distance.connect(on_decrease_distance)
 
 func fall_timer_timeout() -> void:
 	if !is_grounded():
@@ -126,11 +135,10 @@ func creature_physics_process(delta : float) -> void:
 		local_ang_vel.y = 0
 		angular_velocity = (local_ang_vel * basis)
 
-
-
 	is_on_ground = is_grounded()
 
 	# INFO The damping code is a bit confusing and definetely is gonna need an overhaul in the future
+	# INFO future zoe here: don't care it works
 
 	# reduce damping if not in gravity
 	if !is_in_gravity():
@@ -242,6 +250,7 @@ func use_interact() -> void:
 
 		if collider is GameEntity:
 			if collider.can_be_picked_up == true:
+				pick_up_location.global_position = collider.global_position
 				game_entity_being_picked_up = collider
 				game_entity_being_picked_up.is_being_held = true
 				game_entity_being_picked_up.on_interact.emit()
@@ -314,3 +323,60 @@ func keep_upright(delta: float) -> void:
 
 	if tilt_angle < 0.01:
 		upright_integral = 0.0
+
+func on_third_person() -> void:
+	if third_person:
+		reset_view()
+		third_person = false
+	else:
+		enter_third_person_view()
+		third_person = true
+
+func on_increase_distance() -> void:
+	if third_person:
+		increase_distance(1)
+		
+func on_decrease_distance() -> void:
+	if third_person:
+		decrease_distance(1)
+		
+func enter_third_person_view() -> void:
+	var tween : Tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(
+		camera_anchor,
+		"position",
+		Vector3(camera_anchor.position.x, camera_anchor.position.y, 4),
+		0.4
+	)
+	
+	#tween.tween_property(
+	#	camera_anchor,
+	#	"position",
+	#	camera_anchor.to_local(self.global_position),
+	#	0.4
+	#)
+	
+func reset_view() -> void:
+	var tween : Tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(
+		camera_anchor,
+		"position",
+		original_anchor_position,
+		0.4
+	)
+
+func increase_distance(distance : float) -> void:
+	camera_anchor.position.z += distance
+	camera_anchor.position.z = clampf(camera_anchor.position.z, 2, 10)
+
+func decrease_distance(distance : float) -> void:
+	camera_anchor.position.z -= distance
+	camera_anchor.position.z = clampf(camera_anchor.position.z, 2, 10)
