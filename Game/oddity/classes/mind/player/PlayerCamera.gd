@@ -67,12 +67,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void:
-	if player.control_entity != null:
-		if player.control_entity is not Starship:
-			position = Vector3.ZERO
-			rotation = Vector3.ZERO
-			first_person_switch(true)
-			return
+	#if player.control_entity != null:
+	#	return
+		#if player.control_entity is not Starship:
+		#	position = Vector3.ZERO
+		#	rotation = Vector3.ZERO
+		#	first_person_switch(true)
+		#	return
 	
 	if player.control_entity == null:
 		return
