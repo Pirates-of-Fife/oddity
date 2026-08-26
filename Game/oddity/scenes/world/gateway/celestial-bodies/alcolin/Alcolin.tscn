@@ -46436,6 +46436,8 @@ planet_name = &"Alcolin"
 is_rocky_body = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_begin = 40500.0
+visibility_range_begin_margin = 100.0
 mesh = SubResource("SphereMesh_irnyl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

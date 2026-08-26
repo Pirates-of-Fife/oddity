@@ -101,7 +101,7 @@ data = PackedVector3Array(-2.4032, -0.1293, 0.478, -4.8918, -0.1293, 0, -4.7979,
 
 [sub_resource type="FogMaterial" id="FogMaterial_hgn6g"]
 density = 0.0024
-albedo = Color(0.996583, 0.916243, 0.926322, 1)
+albedo = Color(0.90351, 0.954914, 0.914801, 1)
 edge_fade = 0.443827
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4nnw5"]
@@ -116,7 +116,7 @@ noise = SubResource("FastNoiseLite_4nnw5")
 
 [sub_resource type="FogMaterial" id="FogMaterial_d73tl"]
 density = 0.0026
-albedo = Color(0.987096, 0.717211, 0.707556, 1)
+albedo = Color(1, 0.744396, 0.340909, 1)
 height_falloff = 1e-05
 edge_fade = 0.360509
 density_texture = SubResource("NoiseTexture3D_aayuf")
@@ -133,7 +133,7 @@ noise = SubResource("FastNoiseLite_vsotk")
 
 [sub_resource type="FogMaterial" id="FogMaterial_0vm02"]
 density = 0.0023
-albedo = Color(0.771087, 0.797387, 0.852762, 1)
+albedo = Color(1.00112e-05, 0.922191, 0.806264, 1)
 height_falloff = 1e-05
 edge_fade = 0.303151
 density_texture = SubResource("NoiseTexture3D_j63kn")
@@ -121443,9 +121443,13 @@ planet_name = &"Colossus"
 is_rocky_body = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_begin = 56000.0
+visibility_range_begin_margin = 50.0
+visibility_range_fade_mode = 1
 mesh = SubResource("SphereMesh_7r5sf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("ConcavePolygonShape3D_k2nkq")
 
 [node name="GravityWell" type="Area3D" parent="."]
@@ -121535,10 +121539,10 @@ bus = &"Environment"
 [node name="PressureZone" type="Node3D" parent="."]
 script = ExtResource("15_0yci3")
 damage_timer = 0.5
-pressure_heat = 9088.28
+pressure_heat = 4000.0
 pressure_damage_curve = SubResource("Curve_ugpfv")
-activate_distance = 40000.0
-deactivate_distance = 41000.0
+activate_distance = 30000.0
+deactivate_distance = 31000.0
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("17_12w8y")
