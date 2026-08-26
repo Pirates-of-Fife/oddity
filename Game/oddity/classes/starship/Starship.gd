@@ -1134,9 +1134,7 @@ func power_off() -> void:
 
 	current_state = State.POWER_OFF
 	power_state_change_complete = true
-	axis_lock_linear_x = false
-	axis_lock_linear_y = false
-	axis_lock_linear_z = false
+	unlock_ship()
 
 	actual_rotation_vector = Vector3.ZERO
 	actual_rotation_vector_unit = Vector3.ZERO
@@ -1192,10 +1190,13 @@ func destroyed() -> void:
 	stop_shooting_secondary()
 	stop_shooting_tertiary()
 
+	is_player_ship = true
+
+	if is_bounty_target:
+		pass
+
 	current_state = State.DESTROYED
-	axis_lock_linear_x = false
-	axis_lock_linear_y = false
-	axis_lock_linear_z = false
+	unlock_ship()
 	state_changed_to_destroyed.emit()
 	linear_damp = 0.3
 	angular_damp = 0.3
@@ -1604,12 +1605,19 @@ func update_abyssal_mfd() -> void:
 func lock_ship() -> void:
 	if !is_powered_on():
 		return
-
+	
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
 		axis_lock_linear_x = true
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
-		
+
+func unlock_ship() -> void:
+	axis_lock_linear_x = false
+	axis_lock_linear_y = false
+	axis_lock_linear_z = false
+	
+	print("unlocked")
+
 func toggle_landing_gear(force : bool = false) -> void:
 	pass
 
@@ -1697,15 +1705,13 @@ func exit_super_cruise(force_exit : bool = false) -> void:
 	reset_thrust_vectors()
 
 func cruise_travel(delta : float) -> void:
-	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1 and local_angular_velocity.length() < 0.5:
+	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1 and local_angular_velocity.length() < 0.1:
 		if active_frame_of_reference is GravityGrid or active_frame_of_reference is GravityWell:
 			if active_frame_of_reference.enable_gravity == true:
 				if lock_timer.is_stopped():
 					lock_timer.start()
 	else:
-		axis_lock_linear_x = false
-		axis_lock_linear_y = false
-		axis_lock_linear_z = false
+		unlock_ship()
 
 	target_speed_vector = calculate_target_speed_vector()
 	target_rotation_speed_vector = calculate_target_rotation_speed_vector()
@@ -1980,7 +1986,7 @@ func thrust_forward(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.forward_thrust)
 	actual_thrust_vector.z = thrust
 	actual_thrust_vector_unit.z = thrust / thruster_force.forward_thrust
-
+	
 func thrust_backward(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.backward_thrust)
 	actual_thrust_vector.z = -thrust

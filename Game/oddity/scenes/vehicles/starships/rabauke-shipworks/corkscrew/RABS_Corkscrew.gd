@@ -139,7 +139,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super._process(delta)
 	_starship_process(delta)
-	
+		
 	if player_reference == null:
 		return
 
@@ -164,7 +164,7 @@ func _process(delta: float) -> void:
 	else:
 		if $UI/CruiseLabel.visible:
 			$UI/CruiseLabel.hide()
-
+		
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Pitch/Blend3/blend_amount", actual_rotation_vector_unit.x )
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Vertical/Blend3/blend_amount", -actual_thrust_vector_unit.y)
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Forwards/Blend3/blend_amount", -actual_thrust_vector_unit.z)
