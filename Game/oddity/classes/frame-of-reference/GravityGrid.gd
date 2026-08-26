@@ -20,7 +20,9 @@ func _physics_process(delta: float) -> void:
 	calculate_movement_deltas(delta)
 	move_bodies_in_frame_of_reference()
 	set_local_gravity_direction()
-	apply_gravity()
+	
+	if enable_gravity and gravity_strength != 0:
+		apply_gravity()
 
 func apply_gravity() -> void:
 	for body : GameEntity in bodies_in_reference_frame:
