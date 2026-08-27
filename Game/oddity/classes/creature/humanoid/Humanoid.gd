@@ -25,6 +25,12 @@ var retrieve_particles : GPUParticles3D
 var eva_movement_vector : Vector3
 var eva_rotation_vector : Vector3
 
+@export
+var meows : Array[AudioStreamWAV]
+
+@export
+var meow_player : AudioStreamPlayer3D
+
 func _ready() -> void:
 	_humanoid_ready()
 
@@ -142,7 +148,11 @@ func humanoid_physics_process(delta : float) -> void:
 				$Anchor/TwistPivot/Sprite3D.show()
 
 func meow() -> void:
-	pass
+	if meow_player.playing:
+		return
+		
+	meow_player.stream = meows.pick_random()
+	meow_player.play()
 
 func eva_move_backwards() -> void:
 	eva_movement_vector.z = 1
