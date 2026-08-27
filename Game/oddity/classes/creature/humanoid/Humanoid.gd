@@ -130,6 +130,13 @@ func humanoid_physics_process(delta : float) -> void:
 	eva_movement_vector = Vector3.ZERO
 	eva_rotation_vector = Vector3.ZERO
 	
+	if game_entity_being_picked_up != null:
+		$Anchor/TwistPivot/PitchPivot/Hands.show()
+		$Anchor/TwistPivot/PitchPivot/Hands2.show()
+	else:
+		$Anchor/TwistPivot/PitchPivot/Hands.hide()
+		$Anchor/TwistPivot/PitchPivot/Hands2.hide()
+		
 	if !is_in_gravity():	
 		$Anchor/TwistPivot/Sprite3D.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 				
@@ -177,3 +184,6 @@ func eva_roll_left() -> void:
 
 func eva_roll_right() -> void:
 	eva_rotation_vector.z = 1
+
+func interaction_animation() -> void:
+	$AnimationPlayer.play("pick_up")
