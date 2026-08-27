@@ -18,18 +18,18 @@ var humanoid_inventory_slot_3_command : HumanoidInventorySlot3Command = Humanoid
 var humanoid_inventory_slot_4_command : HumanoidInventorySlot4Command = HumanoidInventorySlot4Command.new()
 var humanoid_inventory_slot_5_command : HumanoidInventorySlot5Command = HumanoidInventorySlot5Command.new()
 
+var humanoid_meow_command : HumanoidMeowCommand = HumanoidMeowCommand.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_humanoid_process(delta)
 
-
 func _humanoid_process(delta : float) -> void:
 	_creature_process(delta)
 
 	if control_entity is Humanoid:
-		if Input.is_key_pressed(KEY_6):
-			control_entity.global_position = Vector3(-4410289.92348768, 2041153.14906927, -1136750.91651972)
+		if Input.is_action_just_pressed("meow"):
+			humanoid_meow_command.execute(control_entity)
 		
 		if Input.is_action_just_pressed("humanoid_inventory_slot_1"):
 			humanoid_inventory_slot_1_command.execute(control_entity)

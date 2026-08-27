@@ -141,6 +141,9 @@ func humanoid_physics_process(delta : float) -> void:
 			else:
 				$Anchor/TwistPivot/Sprite3D.show()
 
+func meow() -> void:
+	pass
+
 func eva_move_backwards() -> void:
 	eva_movement_vector.z = 1
 
