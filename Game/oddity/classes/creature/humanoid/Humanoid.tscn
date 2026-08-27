@@ -145,7 +145,7 @@ tracks/0/keys = {
 "times": PackedFloat64Array(0, 0.1332, 0.2664),
 "transitions": PackedFloat64Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.09, -0.097, -0.017), Vector3(0.09, -0.097, -0.017), Vector3(0.09, -0.097, -0.017)]
+"values": [Vector3(0.037, -0.097, -0.017), Vector3(0.037, -0.097, -0.202), Vector3(0.037, -0.097, -0.017)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -290,13 +290,21 @@ texture = ExtResource("14_xr0yj")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="Anchor/TwistPivot" index="1"]
 transform = Transform3D(-0.103, 0, 1.26139e-17, 0, 0.103, 0, -1.26139e-17, 0, -0.103, 0.118885, -0.52731, 0.078)
+layers = 524289
 cast_shadow = 2
 shaded = true
-alpha_cut = 2
+alpha_cut = 1
 texture_filter = 0
 sprite_frames = ExtResource("14_4d5fh")
 autoplay = "default"
 speed_scale = 1.2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Anchor/TwistPivot/Sprite3D"]
+transform = Transform3D(9.70874, 0, -5.91646e-31, 0, 9.70874, 0, 5.91646e-31, 0, 9.70874, 0.391714, 1.30188, 8.6069)
+layers = 524288
+light_energy = 0.5
+light_cull_mask = 4294443008
+omni_range = 4096.0
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.559475, 0)
