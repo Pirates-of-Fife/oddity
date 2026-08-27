@@ -2981,6 +2981,9 @@ planet_name = &"Resonance"
 is_rocky_body = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_begin = 23000.0
+visibility_range_begin_margin = 500.0
+visibility_range_fade_mode = 1
 mesh = SubResource("SphereMesh_eu4ps")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
