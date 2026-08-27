@@ -189,13 +189,7 @@ func creature_physics_process(delta : float) -> void:
 	if !is_in_gravity():
 		$GShape.disabled = false
 		$CollisionShape3D.disabled = true
-		
-		#$CollisionShape3D.shape.height = 0.4
-		#($CollisionShape3D.shape as SphereShape3D).radius = 0.4
-		#$CollisionShape3D.position.y = 0.773
 	else:
-		#$CollisionShape3D.shape.height = 1.7
-		#$CollisionShape3D.position.y = 0
 		$GShape.disabled = true
 		$CollisionShape3D.disabled = false
 
@@ -241,7 +235,7 @@ func is_in_gravity() -> bool:
 
 func use_interact() -> void:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor.camera_anchor, interaction_length)
-
+	
 	if (game_entity_being_picked_up != null):
 		drop()
 		return
@@ -251,7 +245,8 @@ func use_interact() -> void:
 
 		if collider is Interactable:
 			collider.interact(player, self)
-
+			interaction_animation()
+			
 		if collider is GameEntity:
 			if collider.can_be_picked_up == true:
 				pick_up_location.global_position = collider.global_position
@@ -260,6 +255,7 @@ func use_interact() -> void:
 				game_entity_being_picked_up.on_interact.emit()
 				game_entity_being_picked_up.on_game_entity_drop_request.connect(drop)
 				rotation_offset = pick_up_location.global_transform.basis.inverse() * game_entity_being_picked_up.global_transform.basis
+		
 
 func interaction_probe() -> Node3D:
 	var result : Dictionary = raycast_helper.cast_raycast_from_node(anchor.camera_anchor, interaction_length)
@@ -288,7 +284,9 @@ func pick_up(game_entity : GameEntity, delta : float) -> void:
 	game_entity.global_basis = pick_up_location.global_basis * rotation_offset
 
 	game_entity.angular_velocity = Vector3.ZERO
-
+	
+func interaction_animation() -> void:
+	pass
 
 func drop() -> void:
 	game_entity_being_picked_up.on_game_entity_drop_request.disconnect(drop)

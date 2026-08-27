@@ -1,11 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://cop5lcnhf25yd"]
+[gd_scene load_steps=44 format=3 uid="uid://cop5lcnhf25yd"]
 
 [ext_resource type="Script" path="res://classes/creature/humanoid/Humanoid.gd" id="1_enw0c"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/mind/player/anchor/Anchor.tscn" id="2_a7dfl"]
 [ext_resource type="AudioStream" uid="uid://ryk1bmdutpjx" path="res://classes/creature/humanoid/meows/meow1.wav" id="2_rha74"]
 [ext_resource type="AudioStream" uid="uid://ebjuh1kgd1ck" path="res://classes/creature/humanoid/meows/meow2.wav" id="3_2s7er"]
 [ext_resource type="AudioStream" uid="uid://cd6cjm86lqkou" path="res://classes/multi-function-display/targeting/radar/select.wav" id="3_5xttm"]
-[ext_resource type="Texture2D" uid="uid://e2xd8xyv6vsk" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/seats/Mina1.png" id="4_0nywi"]
 [ext_resource type="AudioStream" uid="uid://d4i3ciyikeiom" path="res://classes/creature/humanoid/meows/meow3.wav" id="4_vrh8h"]
 [ext_resource type="AudioStream" uid="uid://corl3g1jqmqj" path="res://classes/creature/humanoid/meows/meow4.wav" id="5_6fdbr"]
 [ext_resource type="AudioStream" uid="uid://crw2cnxtui3sp" path="res://classes/creature/humanoid/meows/meow5.wav" id="6_p1trb"]
@@ -13,6 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://dc4en1jdutixo" path="res://classes/creature/humanoid/meows/meow7.wav" id="8_rf642"]
 [ext_resource type="AudioStream" uid="uid://dviqsuejtb4vp" path="res://classes/creature/humanoid/meows/meow8.wav" id="9_jq4sk"]
 [ext_resource type="AudioStream" uid="uid://dxdrtl0obewgf" path="res://classes/creature/humanoid/meows/meow9.wav" id="10_4vuxm"]
+[ext_resource type="SpriteFrames" uid="uid://cfwfcl7uu64t8" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaClothedIdle.tres" id="14_4d5fh"]
+[ext_resource type="Texture2D" uid="uid://dm72hd2s2vtte" path="res://classes/creature/humanoid/Mina/sprites/MinaHands.png" id="14_xr0yj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nhlgx"]
 friction = 0.2
@@ -131,6 +132,67 @@ radius = 0.6
 [sub_resource type="SphereShape3D" id="SphereShape3D_nv1ya"]
 radius = 0.4
 
+[sub_resource type="Animation" id="Animation_yjj6o"]
+resource_name = "pick_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.1332, 0.2664),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.09, -0.097, -0.017), Vector3(0.09, -0.097, -0.017), Vector3(0.09, -0.097, -0.017)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.2664),
+"transitions": PackedFloat64Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_273vi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.117108, -0.0971466, -0.0167599)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_indff"]
+_data = {
+"RESET": SubResource("Animation_273vi"),
+"pick_up": SubResource("Animation_yjj6o")
+}
+
 [node name="Humanoid" type="RigidBody3D" node_paths=PackedStringArray("store_particles", "retrieve_particles", "meow_player", "camera_anchor", "grounded_marker", "pick_up_location", "fall_timer", "ground_shape_cast", "stand_up_shape_cast", "anchor")]
 collision_layer = 268436993
 collision_mask = 268436993
@@ -147,7 +209,7 @@ meows = Array[AudioStreamWAV]([ExtResource("2_rha74"), ExtResource("3_2s7er"), E
 meow_player = NodePath("AudioStreamPlayer3D")
 camera_anchor = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor")
 walk_force = 600.0
-jump_force = 250.0
+jump_force = 300.0
 grounded_marker = NodePath("Marker3D")
 interaction_length = 6.0
 pick_up_distance = 2.0
@@ -205,13 +267,36 @@ volume_db = -3.0
 pitch_scale = 3.0
 bus = &"Environment"
 
-[node name="Sprite3D" type="Sprite3D" parent="Anchor/TwistPivot" index="1"]
-transform = Transform3D(-0.103, 0, 1.26139e-17, 0, 0.103, 0, -1.26139e-17, 0, -0.103, 0.118885, -0.52731, 0.078)
-visibility_range_fade_mode = 2
+[node name="Hands" type="Sprite3D" parent="Anchor/TwistPivot/PitchPivot" index="1"]
+transform = Transform3D(-0.025, 2.94968e-18, 8.20293e-19, 0, 0.0066982, -0.024086, -3.06162e-18, -0.024086, -0.0066982, 0.117108, -0.0971466, -0.180664)
+visible = false
 shaded = true
-alpha_cut = 1
 texture_filter = 0
-texture = ExtResource("4_0nywi")
+texture = ExtResource("14_xr0yj")
+
+[node name="Hands2" type="Sprite3D" parent="Anchor/TwistPivot/PitchPivot" index="2"]
+transform = Transform3D(-0.025, 2.94968e-18, 8.20293e-19, 0, 0.0066982, -0.024086, -3.06162e-18, -0.024086, -0.0066982, -0.133095, -0.0971466, -0.180664)
+visible = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("14_xr0yj")
+
+[node name="PickUpHand" type="Sprite3D" parent="Anchor/TwistPivot/PitchPivot" index="3"]
+transform = Transform3D(-0.025, 2.94968e-18, 8.20293e-19, 0, 0.0066982, -0.024086, -3.06162e-18, -0.024086, -0.0066982, 0.117108, -0.0971466, -0.0167599)
+visible = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("14_xr0yj")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="Anchor/TwistPivot" index="1"]
+transform = Transform3D(-0.103, 0, 1.26139e-17, 0, 0.103, 0, -1.26139e-17, 0, -0.103, 0.118885, -0.52731, 0.078)
+cast_shadow = 2
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+sprite_frames = ExtResource("14_4d5fh")
+autoplay = "default"
+speed_scale = 1.2
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.559475, 0)
@@ -240,5 +325,10 @@ disabled = true
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.814575, 0)
 volume_db = 6.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_indff")
+}
 
 [editable path="Anchor"]
