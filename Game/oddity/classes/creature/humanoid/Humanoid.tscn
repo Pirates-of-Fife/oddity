@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cop5lcnhf25yd"]
+[gd_scene load_steps=46 format=3 uid="uid://cop5lcnhf25yd"]
 
 [ext_resource type="Script" path="res://classes/creature/humanoid/Humanoid.gd" id="1_enw0c"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/mind/player/anchor/Anchor.tscn" id="2_a7dfl"]
@@ -15,6 +15,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dsgh52priqn71" path="res://classes/creature/humanoid/Mina/sprites/MinaGlasses.tres" id="14_d1boj"]
 [ext_resource type="Texture2D" uid="uid://dm72hd2s2vtte" path="res://classes/creature/humanoid/Mina/sprites/MinaHands.png" id="14_xr0yj"]
 [ext_resource type="Script" path="res://classes/creature/humanoid/Mina/Mina.gd" id="15_neqo6"]
+[ext_resource type="PackedScene" uid="uid://wx7jfprk5l2v" path="res://classes/creature/humanoid/Mina/sprites/MeowParticles.tscn" id="16_45a1k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nhlgx"]
 friction = 0.2
@@ -208,6 +209,7 @@ store_particles = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2/
 retrieve_particles = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2/RetrieveParticles")
 meows = Array[AudioStreamWAV]([ExtResource("2_rha74"), ExtResource("3_2s7er"), ExtResource("4_vrh8h"), ExtResource("5_6fdbr"), ExtResource("6_p1trb"), ExtResource("7_on4xy"), ExtResource("8_rf642"), ExtResource("9_jq4sk"), ExtResource("10_4vuxm")])
 meow_player = NodePath("AudioStreamPlayer3D")
+meow_particles = ExtResource("16_45a1k")
 camera_anchor = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor")
 walk_force = 600.0
 jump_force = 300.0
