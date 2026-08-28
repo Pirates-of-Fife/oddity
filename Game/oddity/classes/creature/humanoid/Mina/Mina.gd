@@ -56,11 +56,10 @@ func change_state(old_state : State, new_state : State, atmo_switch : bool = fal
 	if new_state == State.IDLE:
 		idle()
 	elif new_state == State.FALLING:
-		# falling()
-		idle()
+		falling()
 	elif new_state == State.FLOATING:
 		# floating()
-		idle()
+		falling()
 
 func idle() -> void:
 	if in_habitable_atmo:	
