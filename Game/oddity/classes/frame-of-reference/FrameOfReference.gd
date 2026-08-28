@@ -131,7 +131,7 @@ func on_body_entered(body : Node3D) -> void:
 		bodies_in_reference_frame.append(body)
 		body.in_frame_of_references.append(self)
 		body.evaluate_active_frame_of_reference()
-
+		
 func on_body_exited(body : Node3D) -> void:
 	if (body is GameEntity):
 		bodies_in_reference_frame.erase(body)

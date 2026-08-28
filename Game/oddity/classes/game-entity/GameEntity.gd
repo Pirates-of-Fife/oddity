@@ -3,6 +3,7 @@ extends RigidBody3D
 class_name GameEntity
 
 signal on_interact
+signal frame_of_reference_changed
 
 signal on_game_entity_drop_request
 
@@ -176,7 +177,7 @@ func freeze_timer_timeout() -> void:
 		if freeze == false and can_freeze == true and active_frame_of_reference.physics_parent != null and !is_being_held:
 			if relative_linear_velocity.length() < freeze_velocity_limit:
 				freeze_in_reference_frame()
-
+	
 
 func evaluate_active_frame_of_reference() -> void:
 	if in_frame_of_references.size() > 0:
@@ -185,6 +186,8 @@ func evaluate_active_frame_of_reference() -> void:
 
 	if in_frame_of_references.size() == 0:
 		active_frame_of_reference = null
+
+	frame_of_reference_changed.emit()
 
 func _sort_frame_of_references(a : FrameOfReference, b : FrameOfReference) -> bool:
 	return a.size < b.size
