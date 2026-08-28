@@ -8,10 +8,16 @@ var humanoid : Humanoid
 @export
 var hand_sprites : Array[Sprite3D]
 
+@onready
 var hand_texture : Texture2D = preload("res://classes/creature/humanoid/Mina/sprites/MinaHands.png")
+
+@onready
 var suit_hand_texture : Texture2D = preload("res://classes/creature/humanoid/Mina/sprites/MinaHandsSuit.png")
 
+@onready
 var glasses_textures : SpriteFrames = preload("res://classes/creature/humanoid/Mina/sprites/MinaGlasses.tres")
+
+@onready
 var no_glasses_texture : SpriteFrames = preload("res://classes/creature/humanoid/Mina/sprites/Mina.tres")
 
 var in_habitable_atmo : bool
