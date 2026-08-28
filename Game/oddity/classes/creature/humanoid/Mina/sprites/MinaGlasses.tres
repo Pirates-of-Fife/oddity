@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=53 format=3 uid="uid://dsgh52priqn71"]
+[gd_resource type="SpriteFrames" load_steps=57 format=3 uid="uid://dsgh52priqn71"]
 
 [ext_resource type="Texture2D" uid="uid://db2ridut5w4fh" path="res://classes/creature/humanoid/Mina/sprites/glasses/fall/MinaFallGlasses1.png" id="1_j6lpu"]
 [ext_resource type="Texture2D" uid="uid://sl62pqci3n5r" path="res://classes/creature/humanoid/Mina/sprites/glasses/fall/MinaFallGlasses2.png" id="2_51ivu"]
@@ -12,8 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://nmg2x14se7s2" path="res://classes/creature/humanoid/Mina/sprites/glasses/fallSuit/MinaFallSuitGlasses4.png" id="10_3dwhc"]
 [ext_resource type="Texture2D" uid="uid://brmvbwoxccb2x" path="res://classes/creature/humanoid/Mina/sprites/glasses/fallSuit/MinaFallSuitGlasses5.png" id="11_ebsp8"]
 [ext_resource type="Texture2D" uid="uid://52ghqu4rx351" path="res://classes/creature/humanoid/Mina/sprites/glasses/fallSuit/MinaFallSuitGlasses6.png" id="12_twnof"]
+[ext_resource type="Texture2D" uid="uid://brg8pgygvw0dx" path="res://classes/creature/humanoid/Mina/sprites/glasses/floatSuit/MinaFloatSuit1.png" id="17_cfn68"]
+[ext_resource type="Texture2D" uid="uid://cjwqyto4dojwl" path="res://classes/creature/humanoid/Mina/sprites/glasses/floatSuit/MinaFloatSuit2.png" id="18_7e1k7"]
+[ext_resource type="Texture2D" uid="uid://bwvyfxsk4yftk" path="res://classes/creature/humanoid/Mina/sprites/glasses/floatSuit/MinaFloatSuit3.png" id="19_742s6"]
 [ext_resource type="Texture2D" uid="uid://d1iqnm8i6muad" path="res://classes/creature/humanoid/Mina/sprites/glasses/float/MinaFloat1.png" id="19_pvl8k"]
 [ext_resource type="Texture2D" uid="uid://j2t7e5cpsswy" path="res://classes/creature/humanoid/Mina/sprites/glasses/float/MinaFloat2.png" id="20_cm62j"]
+[ext_resource type="Texture2D" uid="uid://daxoq0hlfsdxd" path="res://classes/creature/humanoid/Mina/sprites/glasses/floatSuit/MinaFloatSuit4.png" id="20_wlg2c"]
 [ext_resource type="Texture2D" uid="uid://dx41mxhyqbwb3" path="res://classes/creature/humanoid/Mina/sprites/glasses/float/MinaFloat3.png" id="21_hyu3o"]
 [ext_resource type="Texture2D" uid="uid://bp11cv8fy4jt8" path="res://classes/creature/humanoid/Mina/sprites/glasses/float/MinaFloat4.png" id="22_suf7r"]
 [ext_resource type="Texture2D" uid="uid://64yfvrfbx8yt" path="res://classes/creature/humanoid/Mina/sprites/glasses/idle/MinaIdleGlasses1.png" id="23_8t2iq"]
@@ -116,12 +120,24 @@ animations = [{
 }],
 "loop": true,
 "name": &"floatAtmo",
-"speed": 5.0
+"speed": 2.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_cfn68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_7e1k7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_742s6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_wlg2c")
+}],
 "loop": true,
 "name": &"floatSuit",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,

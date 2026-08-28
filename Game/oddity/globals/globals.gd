@@ -20,6 +20,9 @@ var music_volume_normalized : float
 @export
 var music_disabled : float = false
 
+@export
+var wearing_glasses : bool = false
+
 const SETTINGS_FILE: String = "user://settings.cfg"
 
 const STARSHIP_SAVED_LOADOUT : String = "user://saved_loadout.tres"
@@ -40,6 +43,7 @@ func save_settings() -> void:
 	config.set_value("mouse", "starship_controller_sensitity", starship_controller_sensitity)
 	config.set_value("audio", "music_volume", music_volume_normalized)
 	config.set_value("audio", "music_disabled", music_disabled)
+	config.set_value("misc", "glasses", wearing_glasses)
 
 	config.save(SETTINGS_FILE)
 
@@ -52,5 +56,5 @@ func load_settings() -> void:
 	starship_controller_sensitity = config.get_value("mouse", "starship_controller_sensitity", 0.1)
 	music_volume = config.get_value("audio", "music_volume", 1)
 	music_disabled = config.get_value("audio", "music_disabled", false)
-
+	wearing_glasses = config.get_value("misc", "glasses", false)
 	

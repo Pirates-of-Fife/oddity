@@ -44,9 +44,11 @@ func _humanoid_third_person() -> void:
 	if third_person:
 		$Anchor/TwistPivot/Sprite3D.rotation.y = 0
 		$Anchor/TwistPivot/Sprite3D.position.x = 0
+		(player as Player).hide_ui()
 	else:
 		$Anchor/TwistPivot/Sprite3D.rotation.y = deg_to_rad(180)
 		$Anchor/TwistPivot/Sprite3D.position.x = 0.119
+		(player as Player).show_ui()
 
 func _interaction_entity_found(entity : Node3D) -> void:
 	if player == null:

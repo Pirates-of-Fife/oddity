@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ba5evvevagnhw"]
+[gd_scene load_steps=30 format=3 uid="uid://ba5evvevagnhw"]
 
 [ext_resource type="Texture2D" uid="uid://vdqa5pcoa462" path="res://project-images/OddityLogo-04.png" id="1_edjeb"]
 [ext_resource type="Script" path="res://ui/main-menu/main_menu_ui.gd" id="1_wya4y"]
@@ -249,6 +249,19 @@ func _on_toggled(toggled_on: bool) -> void:
 	Globals.save_settings()
 "
 
+[sub_resource type="GDScript" id="GDScript_irxlg"]
+resource_name = "GlassesButton"
+script/source = "extends CheckButton
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	button_pressed = Globals.wearing_glasses
+
+func _on_toggled(toggled_on: bool) -> void:
+	Globals.wearing_glasses = toggled_on
+	Globals.save_settings()
+"
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_m5klv"]
 animations = [{
 "frames": [{
@@ -447,6 +460,19 @@ text = "Disable Music"
 layout_mode = 2
 script = SubResource("GDScript_xsduu")
 
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7jeg0")
+theme_override_font_sizes/font_size = 8
+text = "Wear Glasses"
+
+[node name="CheckButton" type="CheckButton" parent="Control/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+script = SubResource("GDScript_irxlg")
+
 [node name="ButtonClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_l73e1")
 volume_db = 16.0
@@ -616,4 +642,5 @@ text = "LOADING"
 [connection signal="drag_ended" from="Control/VBoxContainer/HBoxContainer3/MusicVolume" to="Control/VBoxContainer/HBoxContainer3/MusicVolume" method="_on_drag_ended"]
 [connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer3/MusicVolume" to="Control/VBoxContainer/HBoxContainer3/MusicVolume" method="_on_value_changed"]
 [connection signal="toggled" from="Control/VBoxContainer/HBoxContainer4/CheckButton" to="Control/VBoxContainer/HBoxContainer4/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer5/CheckButton" to="Control/VBoxContainer/HBoxContainer5/CheckButton" method="_on_toggled"]
 [connection signal="pressed" from="Credits/Back" to="." method="_on_back_pressed"]

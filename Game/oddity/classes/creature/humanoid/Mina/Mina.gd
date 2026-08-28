@@ -11,6 +11,9 @@ var hand_sprites : Array[Sprite3D]
 var hand_texture : Texture2D = preload("res://classes/creature/humanoid/Mina/sprites/MinaHands.png")
 var suit_hand_texture : Texture2D = preload("res://classes/creature/humanoid/Mina/sprites/MinaHandsSuit.png")
 
+var glasses_textures : SpriteFrames = preload("res://classes/creature/humanoid/Mina/sprites/MinaGlasses.tres")
+var no_glasses_texture : SpriteFrames = preload("res://classes/creature/humanoid/Mina/sprites/Mina.tres")
+
 var in_habitable_atmo : bool
 
 enum State
@@ -24,6 +27,12 @@ var current_state : State = State.IDLE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Globals.wearing_glasses:
+		sprite_frames = glasses_textures
+	else:
+		sprite_frames = no_glasses_texture
+
+
 	humanoid.frame_of_reference_changed.connect(on_frame_of_reference_changed)
 
 	on_frame_of_reference_changed()
@@ -58,8 +67,7 @@ func change_state(old_state : State, new_state : State, atmo_switch : bool = fal
 	elif new_state == State.FALLING:
 		falling()
 	elif new_state == State.FLOATING:
-		# floating()
-		falling()
+		floating()
 
 func idle() -> void:
 	if in_habitable_atmo:	
