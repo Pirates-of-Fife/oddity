@@ -31,6 +31,9 @@ var meows : Array[AudioStreamWAV]
 @export
 var meow_player : AudioStreamPlayer3D
 
+@export
+var meow_particles : PackedScene
+
 func _ready() -> void:
 	_humanoid_ready()
 
@@ -162,6 +165,19 @@ func meow() -> void:
 		
 	meow_player.stream = meows.pick_random()
 	meow_player.play()
+	
+	var meow_particles_instance : GPUParticles3D = meow_particles.instantiate()
+	
+	$Anchor/TwistPivot/Sprite3D.add_child(meow_particles_instance)
+	
+	if third_person:
+		meow_particles_instance.process_material.direction = -camera_anchor.global_basis.z
+		meow_particles_instance.position = Vector3(0.392, 5.5, 3.456)
+	else:
+		meow_particles_instance.process_material.direction = camera_anchor.global_basis.z
+		meow_particles_instance.position = Vector3(0.392, 5.5, 3.456)
+		
+	meow_particles_instance.emitting = true
 
 func eva_move_backwards() -> void:
 	eva_movement_vector.z = 1
