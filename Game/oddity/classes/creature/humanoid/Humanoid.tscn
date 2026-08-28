@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dc4en1jdutixo" path="res://classes/creature/humanoid/meows/meow7.wav" id="8_rf642"]
 [ext_resource type="AudioStream" uid="uid://dviqsuejtb4vp" path="res://classes/creature/humanoid/meows/meow8.wav" id="9_jq4sk"]
 [ext_resource type="AudioStream" uid="uid://dxdrtl0obewgf" path="res://classes/creature/humanoid/meows/meow9.wav" id="10_4vuxm"]
-[ext_resource type="SpriteFrames" uid="uid://cfwfcl7uu64t8" path="res://classes/creature/humanoid/Mina/sprites/Mina.tres" id="14_4d5fh"]
+[ext_resource type="SpriteFrames" uid="uid://dsgh52priqn71" path="res://classes/creature/humanoid/Mina/sprites/MinaGlasses.tres" id="14_d1boj"]
 [ext_resource type="Texture2D" uid="uid://dm72hd2s2vtte" path="res://classes/creature/humanoid/Mina/sprites/MinaHands.png" id="14_xr0yj"]
 [ext_resource type="Script" path="res://classes/creature/humanoid/Mina/Mina.gd" id="15_neqo6"]
 
@@ -296,8 +296,8 @@ cast_shadow = 2
 shaded = true
 alpha_cut = 1
 texture_filter = 0
-sprite_frames = ExtResource("14_4d5fh")
-animation = &"idleSuit"
+sprite_frames = ExtResource("14_d1boj")
+animation = &"idleAtmo"
 autoplay = "idleAtmo"
 speed_scale = 1.2
 script = ExtResource("15_neqo6")
@@ -320,8 +320,10 @@ process_callback = 0
 one_shot = true
 
 [node name="ground_cast" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46189, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496904, 0)
 shape = SubResource("SphereShape3D_1feha")
+target_position = Vector3(0, 0, 0)
+max_results = 64
 collision_mask = 525825
 debug_shape_custom_color = Color(0, 0.67451, 0, 1)
 

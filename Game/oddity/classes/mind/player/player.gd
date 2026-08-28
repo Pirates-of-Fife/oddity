@@ -321,12 +321,11 @@ func _process(delta: float) -> void:
 			get_tree().get_first_node_in_group("World").exit_to_main_menu()
 
 	if (Input.is_action_just_pressed("hide_ui")):
-		if $HeadsUpDisplay.visible:
-			$HeadsUpDisplay.hide()
-			inventory_hud.hide()
+		if ui_visible:
+			hide_ui()
 		else:
-			$HeadsUpDisplay.show()
-			inventory_hud.show()
+			show_ui()
+			
 
 	if (Input.is_action_just_released("player_force_respawn")):
 		force_respawn_pressed_count += 1
@@ -370,3 +369,15 @@ func on_posses(control_entity : ControlEntity) -> void:
 
 func save_last_possessed_starship(starship : Starship) -> void:	
 	get_tree().get_first_node_in_group("World").caretaker.update_last_used_starship(LoadoutGenerator.new().save_loadout(starship))
+
+var ui_visible : bool = true
+
+func hide_ui() -> void:
+	$HeadsUpDisplay.hide()
+	inventory_hud.hide()
+	ui_visible = false
+
+func show_ui() -> void:
+	$HeadsUpDisplay.show()
+	inventory_hud.show()
+	ui_visible = true
