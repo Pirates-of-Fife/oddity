@@ -13,7 +13,9 @@ data = PackedVector3Array(-0.0099, 0.0253, -0.1037, -0.012, 0.0436, -0.1195, -0.
 resource_name = "SeatMina"
 script/source = "extends AnimatedSprite3D
 
+@onready
 var glasses_textures : SpriteFrames = preload(\"res://classes/creature/humanoid/Mina/sprites/MinaGlasses.tres\")
+@onready
 var no_glasses_texture : SpriteFrames = preload(\"res://classes/creature/humanoid/Mina/sprites/Mina.tres\")
 
 func _ready() -> void:
