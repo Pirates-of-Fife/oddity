@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cop5lcnhf25yd"]
+[gd_scene load_steps=45 format=3 uid="uid://cop5lcnhf25yd"]
 
 [ext_resource type="Script" path="res://classes/creature/humanoid/Humanoid.gd" id="1_enw0c"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/mind/player/anchor/Anchor.tscn" id="2_a7dfl"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://dxdrtl0obewgf" path="res://classes/creature/humanoid/meows/meow9.wav" id="10_4vuxm"]
 [ext_resource type="SpriteFrames" uid="uid://cfwfcl7uu64t8" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaClothedIdle.tres" id="14_4d5fh"]
 [ext_resource type="Texture2D" uid="uid://dm72hd2s2vtte" path="res://classes/creature/humanoid/Mina/sprites/MinaHands.png" id="14_xr0yj"]
+[ext_resource type="Script" path="res://classes/creature/humanoid/Mina/Mina.gd" id="15_neqo6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nhlgx"]
 friction = 0.2
@@ -132,6 +133,33 @@ radius = 0.6
 [sub_resource type="SphereShape3D" id="SphereShape3D_nv1ya"]
 radius = 0.4
 
+[sub_resource type="Animation" id="Animation_273vi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.117108, -0.0971466, -0.0167599)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_yjj6o"]
 resource_name = "pick_up"
 length = 0.4
@@ -158,33 +186,6 @@ tracks/1/keys = {
 "transitions": PackedFloat64Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_273vi"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 0,
-"values": [Vector3(0.117108, -0.0971466, -0.0167599)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_indff"]
@@ -288,7 +289,7 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("14_xr0yj")
 
-[node name="Sprite3D" type="AnimatedSprite3D" parent="Anchor/TwistPivot" index="1"]
+[node name="Sprite3D" type="AnimatedSprite3D" parent="Anchor/TwistPivot" index="1" node_paths=PackedStringArray("humanoid", "hand_sprites")]
 transform = Transform3D(-0.103, 0, 1.26139e-17, 0, 0.103, 0, -1.26139e-17, 0, -0.103, 0.118885, -0.52731, 0.078)
 layers = 524289
 cast_shadow = 2
@@ -296,8 +297,13 @@ shaded = true
 alpha_cut = 1
 texture_filter = 0
 sprite_frames = ExtResource("14_4d5fh")
-autoplay = "default"
+animation = &"idleAtmo"
+autoplay = "idleAtmo"
+frame_progress = 0.403547
 speed_scale = 1.2
+script = ExtResource("15_neqo6")
+humanoid = NodePath("../../..")
+hand_sprites = [NodePath("../PitchPivot/Hands"), NodePath("../PitchPivot/Hands2"), NodePath("../PitchPivot/PickUpHand")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Anchor/TwistPivot/Sprite3D"]
 transform = Transform3D(9.70874, 0, -5.91646e-31, 0, 9.70874, 0, 5.91646e-31, 0, 9.70874, 0.391714, 1.30188, 8.6069)
