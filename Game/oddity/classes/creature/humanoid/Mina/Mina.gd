@@ -9,7 +9,7 @@ var humanoid : Humanoid
 var hand_sprites : Array[Sprite3D]
 
 var hand_texture : Texture2D = preload("res://classes/creature/humanoid/Mina/sprites/MinaHands.png")
-var suit_hand_texture : Texture2D = preload("res://classes/creature/humanoid/Mina/sprites/MinaHands.png")
+var suit_hand_texture : Texture2D = preload("res://classes/creature/humanoid/Mina/sprites/MinaHandsSuit.png")
 
 var in_habitable_atmo : bool
 
@@ -56,9 +56,11 @@ func change_state(old_state : State, new_state : State, atmo_switch : bool = fal
 	if new_state == State.IDLE:
 		idle()
 	elif new_state == State.FALLING:
-		falling()
+		# falling()
+		idle()
 	elif new_state == State.FLOATING:
-		floating()
+		# floating()
+		idle()
 
 func idle() -> void:
 	if in_habitable_atmo:	
