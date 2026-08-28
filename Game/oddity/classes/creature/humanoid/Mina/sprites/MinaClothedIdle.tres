@@ -1,102 +1,184 @@
-[gd_resource type="SpriteFrames" load_steps=38 format=3 uid="uid://cfwfcl7uu64t8"]
+[gd_resource type="SpriteFrames" load_steps=56 format=3 uid="uid://cfwfcl7uu64t8"]
 
-[ext_resource type="Texture2D" uid="uid://b1o4af7umm4xe" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle1.png" id="1_ux3kr"]
-[ext_resource type="Texture2D" uid="uid://4u1kyygx751y" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle2.png" id="2_7ymor"]
-[ext_resource type="Texture2D" uid="uid://bnri6fk2vdgbl" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle3.png" id="3_k8qak"]
-[ext_resource type="Texture2D" uid="uid://b7gmbi6bt73nu" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle4.png" id="4_8b5ui"]
-[ext_resource type="Texture2D" uid="uid://dtq8yp1flebsm" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle5.png" id="5_uhom7"]
-[ext_resource type="Texture2D" uid="uid://cwo176f6rka7s" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle6.png" id="6_qgwrf"]
-[ext_resource type="Texture2D" uid="uid://ymj7l0xaiill" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle7.png" id="7_kots1"]
-[ext_resource type="Texture2D" uid="uid://c85263pmm6bjo" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle8.png" id="8_k4nvo"]
-[ext_resource type="Texture2D" uid="uid://kt53qu17htnr" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle9.png" id="9_s0dd1"]
-[ext_resource type="Texture2D" uid="uid://dcgqb1t6i2256" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle10.png" id="10_vx7qm"]
-[ext_resource type="Texture2D" uid="uid://d38i8605i3cxn" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle11.png" id="11_7fvup"]
-[ext_resource type="Texture2D" uid="uid://r20sednqu8yd" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle12.png" id="12_cu82r"]
-[ext_resource type="Texture2D" uid="uid://b4pyuue356xkq" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle13.png" id="13_lw6g8"]
-[ext_resource type="Texture2D" uid="uid://bo7cgrekwvelq" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle14.png" id="14_cxjtm"]
-[ext_resource type="Texture2D" uid="uid://dimf7xi2k262h" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle15.png" id="15_37uvn"]
-[ext_resource type="Texture2D" uid="uid://bs6c5wm3yhmgw" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle16.png" id="16_7ryua"]
-[ext_resource type="Texture2D" uid="uid://d1cr0kp2me4uw" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle17.png" id="17_xrwqs"]
-[ext_resource type="Texture2D" uid="uid://cgu0d3r7n1qq7" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle18.png" id="18_ntu0h"]
-[ext_resource type="Texture2D" uid="uid://llyi5740dsm0" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle19.png" id="19_x3wph"]
-[ext_resource type="Texture2D" uid="uid://x6jdndcwsfmn" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle1.png" id="20_eu0cq"]
-[ext_resource type="Texture2D" uid="uid://c520b6adsaykh" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle2.png" id="21_sacoo"]
-[ext_resource type="Texture2D" uid="uid://cjv4k4lt3ddxx" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle3.png" id="22_s77yl"]
-[ext_resource type="Texture2D" uid="uid://dxyavdwf47jci" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle4.png" id="23_8m388"]
-[ext_resource type="Texture2D" uid="uid://ct4h34e1giim4" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle5.png" id="24_22yf1"]
-[ext_resource type="Texture2D" uid="uid://caxfvoluyuhwu" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle6.png" id="25_52d8c"]
-[ext_resource type="Texture2D" uid="uid://bxi8lsh17jjym" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle7.png" id="26_2fjxi"]
-[ext_resource type="Texture2D" uid="uid://clkn3v6h11387" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle8.png" id="27_dcvb6"]
-[ext_resource type="Texture2D" uid="uid://dq1vwuhtf1m" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle9.png" id="28_gt1qr"]
-[ext_resource type="Texture2D" uid="uid://8l031nta28w7" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle10.png" id="29_dogoj"]
-[ext_resource type="Texture2D" uid="uid://2e00txdc1s37" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle11.png" id="30_3sbk3"]
-[ext_resource type="Texture2D" uid="uid://cynapy7jdomv8" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle12.png" id="31_oq3dy"]
-[ext_resource type="Texture2D" uid="uid://cqq3hnyyaxkip" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle13.png" id="32_ttuao"]
-[ext_resource type="Texture2D" uid="uid://4h711ad5lj62" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle14.png" id="33_oxb1e"]
-[ext_resource type="Texture2D" uid="uid://dfnellklwhqcb" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle15.png" id="34_u6fv6"]
-[ext_resource type="Texture2D" uid="uid://jpr1adijrlob" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle16.png" id="35_77oav"]
-[ext_resource type="Texture2D" uid="uid://dm26wq5gdni8v" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle17.png" id="36_ogrio"]
-[ext_resource type="Texture2D" uid="uid://clytioh5p56cv" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle18.png" id="37_g44tg"]
+[ext_resource type="Texture2D" uid="uid://bqhnkbew4nd6c" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall1.png" id="1_pw54m"]
+[ext_resource type="Texture2D" uid="uid://do2t1fp85j6bs" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall2.png" id="2_67wki"]
+[ext_resource type="Texture2D" uid="uid://bjvf14xcbaj54" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall3.png" id="3_0issm"]
+[ext_resource type="Texture2D" uid="uid://dxhb2g0vnttqx" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall4.png" id="4_51crl"]
+[ext_resource type="Texture2D" uid="uid://rpdhv2ppsrwt" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall5.png" id="5_ktyd8"]
+[ext_resource type="Texture2D" uid="uid://d18507o8uo53p" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall6.png" id="6_onkpe"]
+[ext_resource type="Texture2D" uid="uid://boephxk7x7c86" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall7.png" id="7_dm1ee"]
+[ext_resource type="Texture2D" uid="uid://bef6w8h8px25r" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall8.png" id="8_beu1t"]
+[ext_resource type="Texture2D" uid="uid://dxobybuhy76w2" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall9.png" id="9_jq7oe"]
+[ext_resource type="Texture2D" uid="uid://c00ie0okg0ccf" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall10.png" id="10_jr060"]
+[ext_resource type="Texture2D" uid="uid://dsehb20la8gos" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall11.png" id="11_vsrl7"]
+[ext_resource type="Texture2D" uid="uid://c7qsf78vypwup" path="res://classes/creature/humanoid/Mina/sprites/clothed-fall/MinaFall12.png" id="12_w05ni"]
+[ext_resource type="Texture2D" uid="uid://b1o4af7umm4xe" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle1.png" id="13_1dbdg"]
+[ext_resource type="Texture2D" uid="uid://cuotemhhrawxf" path="res://classes/creature/humanoid/Mina/sprites/suit-fall/MinaFallSuit1.png" id="13_i636i"]
+[ext_resource type="Texture2D" uid="uid://4u1kyygx751y" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle2.png" id="14_l4nyh"]
+[ext_resource type="Texture2D" uid="uid://146m05ummscr" path="res://classes/creature/humanoid/Mina/sprites/suit-fall/MinaFallSuit2.png" id="14_mrvwg"]
+[ext_resource type="Texture2D" uid="uid://bnri6fk2vdgbl" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle3.png" id="15_2djbm"]
+[ext_resource type="Texture2D" uid="uid://bhxc4giba27n6" path="res://classes/creature/humanoid/Mina/sprites/suit-fall/MinaFallSuit3.png" id="15_ekckx"]
+[ext_resource type="Texture2D" uid="uid://b7gmbi6bt73nu" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle4.png" id="16_ehpup"]
+[ext_resource type="Texture2D" uid="uid://cexxt5xn1ofbj" path="res://classes/creature/humanoid/Mina/sprites/suit-fall/MinaFallSuit4.png" id="16_xpo25"]
+[ext_resource type="Texture2D" uid="uid://c35cmuy1xuscs" path="res://classes/creature/humanoid/Mina/sprites/suit-fall/MinaFallSuit5.png" id="17_3c3kk"]
+[ext_resource type="Texture2D" uid="uid://dtq8yp1flebsm" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle5.png" id="17_ainba"]
+[ext_resource type="Texture2D" uid="uid://cwo176f6rka7s" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle6.png" id="18_mg7k4"]
+[ext_resource type="Texture2D" uid="uid://saskers1jnha" path="res://classes/creature/humanoid/Mina/sprites/suit-fall/MinaFallSuit6.png" id="18_ybhi1"]
+[ext_resource type="Texture2D" uid="uid://ymj7l0xaiill" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle7.png" id="19_gi8na"]
+[ext_resource type="Texture2D" uid="uid://c85263pmm6bjo" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle8.png" id="20_n202b"]
+[ext_resource type="Texture2D" uid="uid://kt53qu17htnr" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle9.png" id="21_uymmy"]
+[ext_resource type="Texture2D" uid="uid://dcgqb1t6i2256" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle10.png" id="22_o66xv"]
+[ext_resource type="Texture2D" uid="uid://d38i8605i3cxn" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle11.png" id="23_l04g3"]
+[ext_resource type="Texture2D" uid="uid://r20sednqu8yd" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle12.png" id="24_u80ak"]
+[ext_resource type="Texture2D" uid="uid://b4pyuue356xkq" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle13.png" id="25_jxqow"]
+[ext_resource type="Texture2D" uid="uid://bo7cgrekwvelq" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle14.png" id="26_tini2"]
+[ext_resource type="Texture2D" uid="uid://dimf7xi2k262h" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle15.png" id="27_4jbo8"]
+[ext_resource type="Texture2D" uid="uid://bs6c5wm3yhmgw" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle16.png" id="28_8bova"]
+[ext_resource type="Texture2D" uid="uid://d1cr0kp2me4uw" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle17.png" id="29_ted3s"]
+[ext_resource type="Texture2D" uid="uid://cgu0d3r7n1qq7" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle18.png" id="30_q4eae"]
+[ext_resource type="Texture2D" uid="uid://llyi5740dsm0" path="res://classes/creature/humanoid/Mina/sprites/clothed-idle/MinaIdle19.png" id="31_di4pa"]
+[ext_resource type="Texture2D" uid="uid://x6jdndcwsfmn" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle1.png" id="32_t02sc"]
+[ext_resource type="Texture2D" uid="uid://c520b6adsaykh" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle2.png" id="33_kv32w"]
+[ext_resource type="Texture2D" uid="uid://cjv4k4lt3ddxx" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle3.png" id="34_0wys6"]
+[ext_resource type="Texture2D" uid="uid://dxyavdwf47jci" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle4.png" id="35_y37oa"]
+[ext_resource type="Texture2D" uid="uid://ct4h34e1giim4" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle5.png" id="36_4viup"]
+[ext_resource type="Texture2D" uid="uid://caxfvoluyuhwu" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle6.png" id="37_3dv1i"]
+[ext_resource type="Texture2D" uid="uid://bxi8lsh17jjym" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle7.png" id="38_pnidc"]
+[ext_resource type="Texture2D" uid="uid://clkn3v6h11387" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle8.png" id="39_gy2mg"]
+[ext_resource type="Texture2D" uid="uid://dq1vwuhtf1m" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle9.png" id="40_ct475"]
+[ext_resource type="Texture2D" uid="uid://8l031nta28w7" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle10.png" id="41_wvkm3"]
+[ext_resource type="Texture2D" uid="uid://2e00txdc1s37" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle11.png" id="42_ner36"]
+[ext_resource type="Texture2D" uid="uid://cynapy7jdomv8" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle12.png" id="43_be1qn"]
+[ext_resource type="Texture2D" uid="uid://cqq3hnyyaxkip" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle13.png" id="44_2jk77"]
+[ext_resource type="Texture2D" uid="uid://4h711ad5lj62" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle14.png" id="45_g45cn"]
+[ext_resource type="Texture2D" uid="uid://dfnellklwhqcb" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle15.png" id="46_nx5rr"]
+[ext_resource type="Texture2D" uid="uid://jpr1adijrlob" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle16.png" id="47_mlk33"]
+[ext_resource type="Texture2D" uid="uid://dm26wq5gdni8v" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle17.png" id="48_1o72a"]
+[ext_resource type="Texture2D" uid="uid://clytioh5p56cv" path="res://classes/creature/humanoid/Mina/sprites/suit-idle/MinaSuitIdle18.png" id="49_hyoo6"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ux3kr")
+"texture": ExtResource("1_pw54m")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_7ymor")
+"texture": ExtResource("2_67wki")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_k8qak")
+"texture": ExtResource("3_0issm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_8b5ui")
+"texture": ExtResource("4_51crl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_uhom7")
+"texture": ExtResource("5_ktyd8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_qgwrf")
+"texture": ExtResource("6_onkpe")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_kots1")
+"texture": ExtResource("7_dm1ee")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_k4nvo")
+"texture": ExtResource("8_beu1t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_s0dd1")
+"texture": ExtResource("9_jq7oe")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_vx7qm")
+"texture": ExtResource("10_jr060")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_7fvup")
+"texture": ExtResource("11_vsrl7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_cu82r")
+"texture": ExtResource("12_w05ni")
+}],
+"loop": true,
+"name": &"fallAtmo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_i636i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_lw6g8")
+"texture": ExtResource("14_mrvwg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_cxjtm")
+"texture": ExtResource("15_ekckx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_37uvn")
+"texture": ExtResource("16_xpo25")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_7ryua")
+"texture": ExtResource("17_3c3kk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_xrwqs")
+"texture": ExtResource("18_ybhi1")
+}],
+"loop": true,
+"name": &"fallSuit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_1dbdg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_ntu0h")
+"texture": ExtResource("14_l4nyh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("19_x3wph")
+"texture": ExtResource("15_2djbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ehpup")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ainba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_mg7k4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_gi8na")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_n202b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_uymmy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_o66xv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_l04g3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_u80ak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_jxqow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_tini2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_4jbo8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_8bova")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ted3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_q4eae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_di4pa")
 }],
 "loop": true,
 "name": &"idleAtmo",
@@ -104,58 +186,58 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("20_eu0cq")
+"texture": ExtResource("32_t02sc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("21_sacoo")
+"texture": ExtResource("33_kv32w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("22_s77yl")
+"texture": ExtResource("34_0wys6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("23_8m388")
+"texture": ExtResource("35_y37oa")
 }, {
 "duration": 1.0,
-"texture": ExtResource("24_22yf1")
+"texture": ExtResource("36_4viup")
 }, {
 "duration": 1.0,
-"texture": ExtResource("25_52d8c")
+"texture": ExtResource("37_3dv1i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("26_2fjxi")
+"texture": ExtResource("38_pnidc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("27_dcvb6")
+"texture": ExtResource("39_gy2mg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("28_gt1qr")
+"texture": ExtResource("40_ct475")
 }, {
 "duration": 1.0,
-"texture": ExtResource("29_dogoj")
+"texture": ExtResource("41_wvkm3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("30_3sbk3")
+"texture": ExtResource("42_ner36")
 }, {
 "duration": 1.0,
-"texture": ExtResource("31_oq3dy")
+"texture": ExtResource("43_be1qn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("32_ttuao")
+"texture": ExtResource("44_2jk77")
 }, {
 "duration": 1.0,
-"texture": ExtResource("33_oxb1e")
+"texture": ExtResource("45_g45cn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("34_u6fv6")
+"texture": ExtResource("46_nx5rr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("35_77oav")
+"texture": ExtResource("47_mlk33")
 }, {
 "duration": 1.0,
-"texture": ExtResource("36_ogrio")
+"texture": ExtResource("48_1o72a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("37_g44tg")
+"texture": ExtResource("49_hyoo6")
 }],
 "loop": true,
 "name": &"idleSuit",
