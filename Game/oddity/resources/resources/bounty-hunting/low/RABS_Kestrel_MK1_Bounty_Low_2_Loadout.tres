@@ -9,13 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://v6gv82xubo7h" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RABS_KestrelMk1_RetroThruster.tscn" id="4_5bpku"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ComponentSlotLoadoutResource.gd" id="5_ttu4t"]
 [ext_resource type="PackedScene" uid="uid://dgpwqm2dpuubj" path="res://scenes/modules/test-module/hull-reinforcement/size-2/Size2HullReinforcement.tscn" id="6_imvfv"]
-[ext_resource type="PackedScene" uid="uid://ssxap6l3wimu" path="res://scenes/modules/test-module/Size2AlcubierrreDrive.tscn" id="6_tphou"]
+[ext_resource type="PackedScene" uid="uid://ssxap6l3wimu" path="res://scenes/modules/test-module/alcubierre-drives/fluxline/Size2AlcubierrreDrive.tscn" id="6_tphou"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AlcubierreDriveSlotLoadoutResource.gd" id="7_4ausp"]
 [ext_resource type="PackedScene" uid="uid://cpnhg66txfjsk" path="res://scenes/modules/test-module/ShieldGenerator/size-1/Size1ShieldGenerator.tscn" id="7_slhwb"]
-[ext_resource type="PackedScene" uid="uid://csxjtno0xrxmo" path="res://scenes/modules/test-module/Size2AbyssDrive.tscn" id="8_xja1j"]
+[ext_resource type="PackedScene" uid="uid://csxjtno0xrxmo" path="res://scenes/modules/test-module/abyss-drives/coreline/Size2AbyssDrive.tscn" id="8_xja1j"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="9_pdesa"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="10_lk4la"]
-[ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/Size5Weapon/Size5Weapon.tscn" id="11_yxfon"]
+[ext_resource type="PackedScene" uid="uid://x88nd68bot6m" path="res://scenes/modules/test-module/dread/Size5Weapon.tscn" id="11_yxfon"]
 [ext_resource type="PackedScene" uid="uid://b4yftdtjyvs6p" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_RightRadiator.tscn" id="12_vah8l"]
 [ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="13_l4jwn"]
 [ext_resource type="PackedScene" uid="uid://bs4i4q3qx5qyk" path="res://scenes/modules/rabauke_shipworks/radiators/rabs-kestrel-mk-1/RABS_KestrelMk1_LeftRadiator.tscn" id="14_x3kaw"]
@@ -386,17 +386,29 @@ id = 46
 
 [resource]
 script = ExtResource("15_n1py3")
+ship_type = 0
 module_slots = Array[ExtResource("3_1vn48")]([SubResource("Resource_p5tfs"), SubResource("Resource_350rj"), SubResource("Resource_8c2df"), SubResource("Resource_iselx"), SubResource("Resource_6wn54"), SubResource("Resource_mkint"), SubResource("Resource_a00r7"), SubResource("Resource_w5ogr"), SubResource("Resource_y2hro"), SubResource("Resource_sboi4"), SubResource("Resource_6oi1a"), SubResource("Resource_tisgo"), SubResource("Resource_rgapb"), SubResource("Resource_7h3mv"), SubResource("Resource_28sgm"), SubResource("Resource_dlscg"), SubResource("Resource_imnww"), SubResource("Resource_xg1x0"), SubResource("Resource_c5ohs"), SubResource("Resource_2foug"), SubResource("Resource_6dgny"), SubResource("Resource_a7ivi"), SubResource("Resource_lnceq"), SubResource("Resource_7ai1a"), SubResource("Resource_wi6ej"), SubResource("Resource_5u38n"), SubResource("Resource_ufa64"), SubResource("Resource_it1g5"), SubResource("Resource_i84pk"), SubResource("Resource_xd8a6"), SubResource("Resource_lckmn"), SubResource("Resource_5f82o"), SubResource("Resource_g77d6"), SubResource("Resource_n7vgl"), SubResource("Resource_i8dmf"), SubResource("Resource_pt4br"), SubResource("Resource_g3gl0"), SubResource("Resource_jacr6"), SubResource("Resource_btol5"), SubResource("Resource_dev3m"), SubResource("Resource_vp0ww"), SubResource("Resource_7mqbg"), SubResource("Resource_d4e1k"), SubResource("Resource_psoki"), SubResource("Resource_n4lv3"), SubResource("Resource_wpvw1")])
 cargo = Array[ExtResource("2_p438a")]([SubResource("Resource_hsacr"), SubResource("Resource_hsacr")])
 entities = null
+is_player_ship = false
 ship_name = &"Deckswabber"
 ship_identification = &""
 value = 0
 apply_health = false
+destroyed = false
 current_health = 0.0
+current_armour_health = 0.0
 ship_color = Color(0, 0, 0, 1)
 current_ammo = 10000.0
-max_ammo = 10000.0
 current_heat = 0.0
 current_fuel = 10800.0
-max_fuel = 10800.0
+is_boss = false
+landing_gear_on = false
+current_health_upgrade = 0
+current_heat_capacity_upgrade = 0
+current_fuel_capacity_upgrade = 0
+current_ammo_capacity_upgrade = 0
+current_turning_upgrade = 0
+current_thruster_upgrade = 0
+tractor_beams_upgraded = false
+wing_state = false

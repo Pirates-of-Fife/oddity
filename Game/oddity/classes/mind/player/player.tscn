@@ -1,11 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3ry8dgeqrhg1"]
+[gd_scene load_steps=22 format=3 uid="uid://c3ry8dgeqrhg1"]
 
 [ext_resource type="Script" path="res://classes/mind/player/player.gd" id="1_1lph1"]
 [ext_resource type="PackedScene" uid="uid://f2enjgidilcu" path="res://classes/mind/player/CreditHud.tscn" id="2_gevx3"]
 [ext_resource type="PackedScene" uid="uid://c6fr87c666t64" path="res://scenes/world/gateway/GatewaySystem.tscn" id="2_xvsrd"]
 [ext_resource type="PackedScene" uid="uid://cop5lcnhf25yd" path="res://classes/creature/humanoid/Humanoid.tscn" id="3_lx58o"]
 [ext_resource type="Script" path="res://classes/mind/player/PlayerCamera.gd" id="4_0dcgl"]
+[ext_resource type="Script" path="res://resources/classes/inventory/PlayerInventoryResource.gd" id="4_sgkny"]
 [ext_resource type="PackedScene" uid="uid://c7mjyhgb60j0v" path="res://classes/mind/player/death-hud/DeathHud.tscn" id="5_xduys"]
+[ext_resource type="PackedScene" uid="uid://cw4l3bxh7ybdt" path="res://classes/mind/player/inventory-hud/InventoryHud.tscn" id="7_ewowx"]
+[ext_resource type="Shader" path="res://classes/mind/player/OnFootCrosshair.gdshader" id="9_nc70s"]
+[ext_resource type="Texture2D" uid="uid://cvgf82xdsxmew" path="res://ui/main-menu/blep/zoe headshot blep1.png" id="10_dwmlo"]
+[ext_resource type="Texture2D" uid="uid://df2hyra4a038x" path="res://ui/main-menu/blep/zoe headshot blep2.png" id="11_gwh55"]
+[ext_resource type="Texture2D" uid="uid://c6g8q7x6spd4r" path="res://ui/main-menu/blep/zoe headshot blep3.png" id="12_1d53j"]
+[ext_resource type="Texture2D" uid="uid://ctv0ulmkklngk" path="res://ui/main-menu/blep/zoe headshot blep4.png" id="13_3xulm"]
+[ext_resource type="Texture2D" uid="uid://bggf17ldnsx5r" path="res://ui/main-menu/blep/zoe headshot blep5.png" id="14_xxkc7"]
+[ext_resource type="Texture2D" uid="uid://c17e5wdtn64w3" path="res://ui/main-menu/blep/zoe headshot blep6.png" id="15_xhvme"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="16_3scig"]
+
+[sub_resource type="Resource" id="Resource_bv4eo"]
+script = ExtResource("4_sgkny")
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_genkd"]
 auto_exposure_enabled = true
@@ -13,21 +26,55 @@ auto_exposure_scale = 0.1
 auto_exposure_speed = 0.8
 dof_blur_far_distance = 8192.0
 dof_blur_far_transition = 101.65
+dof_blur_near_enabled = true
 dof_blur_near_distance = 0.5
-auto_exposure_max_sensitivity = 200.0
+auto_exposure_min_sensitivity = 50.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_al7kd"]
 radius = 50.0
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("respawn_hud", "hud") groups=["Player"]]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_henqg"]
+shader = ExtResource("9_nc70s")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s4au7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_dwmlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_gwh55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1d53j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_3xulm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xxkc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_xhvme")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Node3D" node_paths=PackedStringArray("respawn_hud", "hud", "inventory_hud", "exit_ui") groups=["Player"]]
 script = ExtResource("1_1lph1")
 credits = 1000
 respawn_star_system = ExtResource("2_xvsrd")
 respawn_body = ExtResource("3_lx58o")
 respawn_hud = NodePath("DeathHud")
 hud = NodePath("HeadsUpDisplay")
+inventory_hud = NodePath("InventoryHud")
+exit_ui = NodePath("Exiting")
+inventory = SubResource("Resource_bv4eo")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
+physics_interpolation_mode = 1
 attributes = SubResource("CameraAttributesPractical_genkd")
 far = 1e+14
 script = ExtResource("4_0dcgl")
@@ -58,6 +105,48 @@ player = NodePath("..")
 
 [node name="DeathHud" parent="." instance=ExtResource("5_xduys")]
 visible = false
+
+[node name="InventoryHud" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_ewowx")]
+player = NodePath("..")
+
+[node name="Exiting" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Container" type="Control" parent="Exiting"]
+material = SubResource("ShaderMaterial_henqg")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ColorRect" type="ColorRect" parent="Exiting/Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -4.0
+offset_right = 12.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.482353)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Exiting/Container"]
+position = Vector2(315, 149)
+scale = Vector2(0.269141, 0.269141)
+sprite_frames = SubResource("SpriteFrames_s4au7")
+autoplay = "default"
+
+[node name="CreditLabel" type="Label" parent="Exiting"]
+offset_left = 28.0
+offset_top = 258.0
+offset_right = 606.0
+offset_bottom = 286.0
+theme_override_fonts/font = ExtResource("16_3scig")
+theme_override_font_sizes/font_size = 10
+text = "Saving and Exiting!"
+horizontal_alignment = 1
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

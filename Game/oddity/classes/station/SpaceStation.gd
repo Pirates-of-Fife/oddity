@@ -2,6 +2,8 @@ extends StaticGameEntity
 
 class_name SpaceStation
 
+@export_category("Station")
+
 @export
 var station_name : StringName
 
@@ -30,7 +32,21 @@ var speed_limit : float = 100
 
 var enforce_speed_limit : bool = false
 
+@export_category("Trade Information")
+
+@export_range(0, 5, 0.01)
+var buy_markup : float = 1
+
+@export_range(0, 5, 0.01)
+var sell_markup : float = 1
+
+@export
+var trade_items : TradeResourceList
+
+var original_global_rotation : Vector3
+
 func _ready() -> void:
+	original_global_rotation = global_rotation
 	_space_station_ready()
 
 func _space_station_ready() -> void:
@@ -45,31 +61,51 @@ func _on_player_enter_station(body : Node3D) -> void:
 	for i : Node3D in station_frame_of_reference.bodies_in_reference_frame:
 		if i is Creature or i is Starship:
 			rotate_on = false
-
+			
+		if i is Starship:
+			i.current_station = self
+			
 func _on_player_exit_station(body : Node3D) -> void:
 	rotate_on = true
+
+	if body is Starship:
+		body.current_station = null
 
 	for i : Node3D in station_frame_of_reference.bodies_in_reference_frame:
 		if i is Creature or i is Starship:
 			rotate_on = false
+			
 
+			
 func player_near_station() -> void:
+	if !donau_walzer_player:
+		return
+	
+	world.music_player.stop_music()
+	
 	if !donau_walzer_player.playing:
 		donau_walzer_player.resume_playing()
 
 func player_stop_music() -> void:
-	donau_walzer_player.pause_playing()
+	if donau_walzer_player:
+		donau_walzer_player.pause_playing()
 
 func _process(delta: float) -> void:
 	_space_station_process(delta)
 
 func _space_station_process(delta : float) -> void:
-	if rotate_on:
-		rotate_object_local(Vector3(1, 0, 0), rotation_speed * delta)
+	#if rotate_on:
+	#	rotate_object_local(Vector3(1, 0, 0), rotation_speed * delta)
 
 	if enforce_speed_limit:
 		var player : Player = get_tree().get_first_node_in_group("Player")
-
+		
+		if player == null:
+			return
+		
+		if player.control_entity == null:
+			return
+		
 		if player.control_entity is Starship:
 			var ship : Starship = player.control_entity
 			if ship.current_max_velocity > 100:

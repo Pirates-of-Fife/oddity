@@ -5,7 +5,10 @@ class_name WeaponResource
 @export_category("Weapon Stats")
 
 @export
-var damage : float
+var hull_damage : float
+
+@export
+var shield_damage : float
 
 @export
 var penetration : float

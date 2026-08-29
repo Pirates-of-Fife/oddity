@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://djm4bhluugel"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/AbyssalJumpDrive.gd" id="1_4djdj"]
+[ext_resource type="Resource" uid="uid://c1yclqr5bgy6t" path="res://scenes/modules/test-module/abyss-drives/coreline/Size3CorelineResource.tres" id="2_uf1w4"]
+[ext_resource type="Resource" uid="uid://cnp0xe25inuk1" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/coreline/TradeResourceCoreLine3.tres" id="3_2a2pb"]
+[ext_resource type="PackedScene" uid="uid://d3qowdbvmnoir" path="res://scenes/modules/test-module/abyss-drives/coreline/abyss_drive.glb" id="3_3cibd"]
+
+[node name="Size3CoreLine" type="RigidBody3D"]
+collision_layer = 537396225
+collision_mask = 537396225
+mass = 100.0
+script = ExtResource("1_4djdj")
+size = 3
+module_resource = ExtResource("2_uf1w4")
+save = true
+trade_information = ExtResource("3_2a2pb")
+can_be_picked_up = true
+
+[node name="abyss_drive" parent="." instance=ExtResource("3_3cibd")]
+transform = Transform3D(-2, 0, 3.67394e-16, 0, 2, 0, -2.44929e-16, 0, -3, 0, 0, 0)

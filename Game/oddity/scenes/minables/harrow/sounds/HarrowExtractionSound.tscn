@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://djffq28kohdv1"]
+
+[ext_resource type="AudioStream" uid="uid://bk3rae7ltyo6r" path="res://scenes/minables/harrow/sounds/HarrowCrackSound.wav" id="1_y8dd5"]
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/minable/MinableAudio.gd" id="2_ykpud"]
+
+[node name="HarrowSound" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_y8dd5")
+volume_db = -6.0
+max_db = 6.0
+autoplay = true
+max_distance = 3000.0
+bus = &"Environment"
+script = ExtResource("2_ykpud")

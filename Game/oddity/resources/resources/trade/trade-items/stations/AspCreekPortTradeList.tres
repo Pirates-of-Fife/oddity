@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TradeResourceList" load_steps=19 format=3 uid="uid://bqsg2yiyyc6sa"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResourceList.gd" id="1_ey7en"]
+[ext_resource type="Script" path="res://resources/classes/trade/TradeResource.gd" id="2_7hxvo"]
+[ext_resource type="Script" path="res://resources/classes/trade/StarshipTradeResource.gd" id="2_umvmi"]
+[ext_resource type="Resource" uid="uid://nvakvaqc8kir" path="res://resources/resources/trade/trade-items/cargo/TradeResourceSalvagedBlackheartTitanium.tres" id="3_21n61"]
+[ext_resource type="Resource" uid="uid://dhhjrqgs3wv5q" path="res://resources/resources/trade/trade-items/starships/CorkscrewTradeResource.tres" id="3_sjwll"]
+[ext_resource type="Resource" uid="uid://b1x6n3y3vmcyd" path="res://resources/resources/trade/trade-items/mineables/TradeResourceHarrowWood1.tres" id="4_bw8t2"]
+[ext_resource type="Resource" uid="uid://ppl8snve500v" path="res://resources/resources/trade/trade-items/starships/KestrelMk2TradeResource.tres" id="4_q5dvc"]
+[ext_resource type="Resource" uid="uid://bt4rh3lamcslt" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme1.tres" id="5_y8s5w"]
+[ext_resource type="Resource" uid="uid://bhguq6iupj3mx" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme2.tres" id="6_owo7c"]
+[ext_resource type="Resource" uid="uid://duw3fo4yi0ba4" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/cool-max/TradeResourceCoolMax2.tres" id="7_j5yvo"]
+[ext_resource type="Resource" uid="uid://c3nvkl1ilmbb4" path="res://resources/resources/trade/trade-items/modules/ox-vic-pyrr/dread/TradeResourceDread5.tres" id="8_sbj3y"]
+[ext_resource type="Resource" uid="uid://c31fg4gx4h81s" path="res://resources/resources/trade/trade-items/modules/rapid-engagement-armament-lasers/b-series/Real5B15MW.tres" id="10_o7k55"]
+[ext_resource type="Resource" uid="uid://djdv4bjle7ure" path="res://resources/resources/trade/trade-items/modules/rapid-engagement-armament-lasers/b-series/Real6B35MW.tres" id="11_acssd"]
+[ext_resource type="Resource" uid="uid://bekjyikhvtnou" path="res://resources/resources/trade/trade-items/modules/rapid-engagement-armament-lasers/p-series/Real5P35MW.tres" id="12_g885b"]
+[ext_resource type="Resource" uid="uid://8lwui71mux4b" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/mercury/Mercury3TradeResource.tres" id="12_pk0na"]
+[ext_resource type="Resource" uid="uid://bo1mbg3aq541g" path="res://resources/resources/trade/trade-items/modules/rapid-engagement-armament-lasers/p-series/Real6P50MW.tres" id="13_147un"]
+[ext_resource type="Resource" uid="uid://dcsdg0tnkryo7" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/blast-cannon/TradeResourceAresCannon6.tres" id="14_6trko"]
+[ext_resource type="Resource" uid="uid://cbrcfysmjqxn6" path="res://resources/resources/trade/trade-items/modules/ares-industrial-co/blast-cannon/TradeResourceAresCannon5.tres" id="15_264ik"]
+
+[resource]
+script = ExtResource("1_ey7en")
+trade_resources = Array[ExtResource("2_7hxvo")]([ExtResource("3_21n61"), ExtResource("4_bw8t2"), ExtResource("5_y8s5w"), ExtResource("6_owo7c"), ExtResource("7_j5yvo"), ExtResource("8_sbj3y"), ExtResource("12_pk0na"), ExtResource("10_o7k55"), ExtResource("11_acssd"), ExtResource("12_g885b"), ExtResource("13_147un"), ExtResource("14_6trko"), ExtResource("15_264ik")])
+ships_buyable = Array[ExtResource("2_umvmi")]([ExtResource("3_sjwll"), ExtResource("4_q5dvc")])

@@ -37,6 +37,9 @@ var size : FrameOfReferenceSize
 @export
 var mass_lock : bool = false
 
+@export
+var habitable : bool = false
+
 # INFO: Physics parent gets used for game entity freezing.
 # if a frame of reference has a physics parents, it moves unpredictably, so game entities inside it should freeze so they they remain stable during e.g. a flight on a space ship
 @export
@@ -70,11 +73,10 @@ func _enter_tree() -> void:
 	last_rotation = global_basis.get_rotation_quaternion().normalized()
 
 func _physics_process(delta: float) -> void:
-	calculate_movement_deltas(delta)
-	move_bodies_in_frame_of_reference()
-
 	if physics_parent != null:
+		calculate_movement_deltas(delta)
 		relative_velocity = physics_parent.relative_linear_velocity
+		move_bodies_in_frame_of_reference()
 
 func calculate_movement_deltas(delta : float) -> void:
 	velocity = movement_delta / delta
@@ -129,7 +131,7 @@ func on_body_entered(body : Node3D) -> void:
 		bodies_in_reference_frame.append(body)
 		body.in_frame_of_references.append(self)
 		body.evaluate_active_frame_of_reference()
-
+		
 func on_body_exited(body : Node3D) -> void:
 	if (body is GameEntity):
 		bodies_in_reference_frame.erase(body)

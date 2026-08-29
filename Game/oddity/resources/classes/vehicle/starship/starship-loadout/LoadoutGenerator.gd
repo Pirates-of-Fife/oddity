@@ -45,12 +45,12 @@ func clear_modules(starship : Starship) -> void:
 		if node is DynamicModuleSlot:
 			if node.module != null:
 				var module : Module = node.module
-
+				module.quiet_insert = true
 				module.uninsert()
 				module.queue_free()
 
 
-func save_loadout(starship : Starship, save_cargo : bool = false, save_entities : bool = false, save_as_player_ship_save : bool = false) -> void:
+func save_loadout(starship : Starship, save_cargo : bool = false, save_entities : bool = false) -> StarshipLoadout:
 	if starship == null:
 		return
 	
@@ -78,7 +78,7 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 				loadout.cargo.append(generate_cargo_container_entry(cargo))
 
 	if save_entities:
-		var frame_of_references : Array = starship.find_children("*", "FrameOfReference", true, false)
+		var frame_of_references : Array[Node] = starship.find_children("*", "FrameOfReference", true, false)
 
 		for frame_of_reference : FrameOfReference in frame_of_references:
 			for child : Node in frame_of_reference.get_children():
@@ -99,25 +99,33 @@ func save_loadout(starship : Starship, save_cargo : bool = false, save_entities 
 	loadout.ship_identification = starship.ship_identification
 	
 	loadout.current_ammo = starship.current_ammo
-	loadout.max_ammo = starship.max_ammo
 	loadout.current_heat = starship.current_heat
 
-	loadout.max_fuel = starship.max_fuel
 	loadout.current_fuel = starship.current_fuel
+	
+	loadout.current_armour_health = starship.current_armour_health
 
-	if save_as_player_ship_save:
-		loadout.apply_health = true
-		var err : Error = ResourceSaver.save(loadout, Globals.PLAYER_SHIP_SAVE)
-		if err == OK:
-			print("Loadout saved successfully")
-		else:
-			print("Failed to save loadout")
-	else:
-		var err : Error = ResourceSaver.save(loadout, Globals.STARSHIP_SAVED_LOADOUT)
-		if err == OK:
-			print("Loadout saved successfully")
-		else:
-			print("Failed to save loadout")
+	loadout.landing_gear_on = starship.landing_gear_on
+	
+	loadout.current_ammo_capacity_upgrade = starship.current_ammo_capacity_upgrade
+	loadout.current_fuel_capacity_upgrade = starship.current_fuel_capacity_upgrade
+	loadout.current_health_upgrade = starship.current_health_upgrade
+	loadout.current_heat_capacity_upgrade = starship.current_heat_capacity_upgrade
+	loadout.current_turning_upgrade = starship.current_turning_upgrade
+	loadout.current_thruster_upgrade = starship.current_thruster_upgrade
+	loadout.tractor_beams_upgraded = starship.tractor_beams_upgraded
+
+	loadout.ship_color = starship.original_hull_color
+	loadout.landing_gear_on = starship.landing_gear_on
+	
+	loadout.is_player_ship = starship.is_player_ship
+	loadout.destroyed = starship.current_state == starship.State.DESTROYED
+	
+	loadout.ship_type = starship.ship_type
+	
+	loadout.wing_state = starship.wing_state
+	
+	return loadout
 
 func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health : bool = false) -> void:
 	clear_modules(starship)
@@ -133,12 +141,14 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 
 			if module_scene != null:
 				var module : Module = module_scene.instantiate()
-				starship.add_child(module)
-				module.insert(node)
 				
+				starship.add_child(module)
+				module.quiet_insert = true
+				module.insert(node)
+						
 				if module is Weapon:
 					(node as Hardpoint).assignment = (loadout.get_entry_by_id(node.id) as HardpointLoadoutResource).hardpoint_assignment
-
+					
 	for cargo_resource : CargoContainerLoadoutResource in loadout.cargo:
 		var cargo_grid : CargoGrid = null
 
@@ -149,6 +159,8 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		if cargo_grid != null:
 			var cargo : CargoContainer = cargo_resource.cargo_container.instantiate()
 			starship.add_child(cargo)
+			if cargo_resource.value != 0:
+				cargo.value = cargo_resource.value
 			cargo_grid.add_cargo_container(cargo)
 
 	for entity : GameEntityLoadoutResource in loadout.entities:
@@ -156,16 +168,44 @@ func load_loadout(starship : Starship, loadout : StarshipLoadout, apply_health :
 		starship.add_child(game_entity)
 		game_entity.position = entity.position
 		game_entity.rotation = entity.rotation
+		game_entity.value = entity.value
 	
-	starship.max_ammo = loadout.max_ammo
-	loadout.max_fuel = starship.max_fuel
+	starship.landing_gear_on = loadout.landing_gear_on
+	
+	starship.current_ammo_capacity_upgrade = loadout.current_ammo_capacity_upgrade
+	starship.current_fuel_capacity_upgrade = loadout.current_fuel_capacity_upgrade
+	starship.current_health_upgrade = loadout.current_health_upgrade
+	starship.current_heat_capacity_upgrade = loadout.current_heat_capacity_upgrade
+	starship.current_turning_upgrade = loadout.current_turning_upgrade
+	starship.current_thruster_upgrade = loadout.current_thruster_upgrade
+	starship.tractor_beams_upgraded = loadout.tractor_beams_upgraded
 
+	
+	starship.is_boss = loadout.is_boss
+	starship.is_player_ship = loadout.is_player_ship
 	
 	if apply_health:
 		starship.current_hull_health = loadout.current_health
 		starship.current_ammo = loadout.current_ammo
 		starship.current_heat = loadout.current_heat
 		starship.current_fuel = loadout.current_fuel
+		starship.current_armour_health = loadout.current_armour_health
+		
+		if loadout.destroyed:
+			starship.current_state = starship.State.DESTROYED
+			starship.destroyed_on_load = true
+	else:
+		starship.current_hull_health = starship.max_hull_health
+		starship.current_ammo = starship.max_ammo
+		starship.current_fuel = starship.max_fuel
+	
+	starship.ship_type = loadout.ship_type
+	
+	starship.wing_state = loadout.wing_state
+
+	
+	starship.set_material_to_hull(starship.create_new_hull_material())
+	starship.update_color(loadout.ship_color)
 
 func editor_save_current_load_out() -> void:
 	if starship == null:

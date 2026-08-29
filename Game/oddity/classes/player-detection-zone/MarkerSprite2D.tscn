@@ -14,6 +14,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1987.0
+offset_bottom = 1118.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.49, 0.49)
@@ -22,24 +24,24 @@ label = NodePath("Label")
 distance = NodePath("Distance")
 
 [node name="SemiCircle" type="Sprite2D" parent="."]
-position = Vector2(314, 582)
+position = Vector2(1817.37, 1039.57)
 scale = Vector2(1.495, 1.495)
 texture = ExtResource("1_6e6xv")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 431.0
-offset_top = 271.0
-offset_right = 3943.0
-offset_bottom = 499.0
-text = "Label"
+offset_left = 1934.37
+offset_top = 728.571
+offset_right = 5977.37
+offset_bottom = 956.571
+text = "Label LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel"
 label_settings = SubResource("LabelSettings_p6ynv")
 
 [node name="Distance" type="Label" parent="."]
 layout_mode = 0
-offset_left = 640.816
-offset_top = 424.49
-offset_right = 2487.82
-offset_bottom = 652.49
+offset_left = 2144.18
+offset_top = 882.061
+offset_right = 3991.19
+offset_bottom = 1110.06
 text = "5K"
 label_settings = SubResource("LabelSettings_p6ynv")

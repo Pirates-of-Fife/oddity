@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://dr2s4t5u6v7w8"]
+
+[ext_resource type="Script" path="res://scenes/modules/test-module/scatter-gun/scatter_gun.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://6dsga2x2tdas" path="res://scenes/modules/test-module/scatter-gun/size-6/Size6ScatterGun.glb" id="2_model"]
+[ext_resource type="PackedScene" uid="uid://dm7oao0p1q2r3" path="res://scenes/modules/test-module/scatter-gun/ScatterGunSound.tscn" id="3_sound"]
+[ext_resource type="Resource" uid="uid://dq1r3s4t5u6v7" path="res://scenes/modules/test-module/scatter-gun/resources/Size6ScatterGun.tres" id="4_resource"]
+[ext_resource type="Resource" uid="uid://ds3t5u6v7w8ya" path="res://resources/resources/trade/trade-items/modules/ox-vic-pyrr/scatter-gun/TradeResourceScatterGun6.tres" id="5_trade"]
+[ext_resource type="Texture2D" uid="uid://dj451soeu3qt5" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic white.png" id="6_1840j"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_31lbf"]
+points = PackedVector3Array(0.105243, 0.691271, -0.56357, -0.460251, -0.794051, -2.6684, -0.498381, -0.743836, -2.78704, -0.631848, -0.549472, 0.310784, 0.6325, -0.544217, 0.294412, 0.370048, 0.450814, -2.84783, -0.619701, 0.706744, 0.281431, 0.505671, -0.855498, -2.78669, 0.627227, 0.707028, 0.281672, -0.362551, 0.450533, -2.84692, -0.498381, -0.855498, -1.28053, 0.0593531, 0.595151, 0.560498, 0.505671, -0.855498, -1.28053, -0.442542, -0.297507, 0.560498, -0.602673, 0.130238, -1.27528, 0.610569, 0.0798768, -1.22495, 0.505671, -0.185846, 0.560498, -0.317511, -0.233734, -2.93845, -0.55422, 0.762564, 0.393068, -0.55422, -0.576423, 0.393068, 0.323263, 0.406274, -2.92958, 0.226739, -0.46492, 0.560498, 0.323974, -0.233179, -2.93337, -0.442542, 0.371987, 0.560498, 0.449963, 0.371987, 0.560498, -0.315848, 0.406274, -2.92958, 0.0545422, 0.692696, -0.613389, -0.398833, 0.431575, -2.63402, -0.498381, -0.185846, 0.560498, 0.505671, -0.743836, -2.78669, -0.219448, -0.46492, 0.560498, -0.600896, 0.633539, -0.167042)
+
+[node name="Size6ScatterGun" type="RigidBody3D" node_paths=PackedStringArray("nozzle") groups=["GameEntity"]]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 28.0
+script = ExtResource("1_script")
+shot_audio = ExtResource("3_sound")
+size = 6
+nozzle = NodePath("Marker3D")
+module_resource = ExtResource("4_resource")
+save = true
+trade_information = ExtResource("5_trade")
+can_be_picked_up = true
+
+[node name="Size6ScatterGun" parent="." instance=ExtResource("2_model")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.803291, 2.01001)
+
+[node name="Size6ScatterGun" parent="Size6ScatterGun" index="0"]
+layers = 3
+
+[node name="Decal4" type="Decal" parent="Size6ScatterGun"]
+transform = Transform3D(-2.32683e-17, 0.38, -2.32683e-17, -2.32683e-17, -2.32683e-17, -0.38, -0.38, -2.32683e-17, 2.32683e-17, 0.519769, 0.058751, -1.9786)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("6_1840j")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[node name="Decal5" type="Decal" parent="Size6ScatterGun"]
+transform = Transform3D(-2.32683e-17, -0.38, 2.32683e-17, -2.32683e-17, -2.32683e-17, -0.38, 0.38, -2.32683e-17, -2.32683e-17, -0.447378, 0.058751, -1.9786)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("6_1840j")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.803291, 2.70765)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.803291, 2.01001)
+shape = SubResource("ConvexPolygonShape3D_31lbf")
+
+[editable path="Size6ScatterGun"]

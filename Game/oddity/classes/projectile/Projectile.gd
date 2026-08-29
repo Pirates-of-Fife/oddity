@@ -5,13 +5,16 @@ class_name Projectile
 signal hit(game_entity : GameEntity)
 
 @export
+var projectile_speed : Vector3
+
+@export
 var timeout : float
 
 @export
 var on_hit_sound : PackedScene
 
 @export
-var collision_timeout : float = 0.05
+var collision_timeout : float = 0.02
 
 @export_flags_3d_physics
 var projectile_collision_layer : int
@@ -19,14 +22,16 @@ var projectile_collision_layer : int
 @export
 var projectile_hit_particle : PackedScene
 
-var damage : float
+var hull_damage : float
+var shield_damage : float
+var penetration : float
 
 func _ready() -> void:
 	_projectile_ready()
 	
 func _projectile_ready() -> void:
 	body_entered.connect(_on_body_entered)
-	
+		
 	var timer : Timer = Timer.new()
 	var timer_collision : Timer = Timer.new()
 	
@@ -41,11 +46,14 @@ func remove() -> void:
 
 func activate_collision() -> void:
 	collision_layer = projectile_collision_layer
-	collision_mask = projectile_collision_layer
+	collision_mask = projectile_collision_layer 
 
-func _on_body_entered(body : Node) -> void:	
+func _on_body_entered(body : Node) -> void:		
+	if body is Projectile:
+		return
+		
 	if body is GameEntity or body is StaticGameEntity:
-		body.take_damage(damage)
+		body.take_damage(hull_damage, penetration)
 		if body is GameEntity:
 			hit.emit(body)
 		
@@ -54,7 +62,7 @@ func _on_body_entered(body : Node) -> void:
 		hit_sound.global_position = global_position
 	
 	if body is Shield:
-		body.take_damage(damage)
+		body.take_damage(shield_damage)
 		hit.emit(body.game_entity)
 	
 	var particles : GPUParticles3D = projectile_hit_particle.instantiate()

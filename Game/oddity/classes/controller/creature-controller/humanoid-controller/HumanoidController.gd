@@ -12,18 +12,43 @@ var humanoid_eva_move_up_command : HumanoidEvaMoveUpCommand = HumanoidEvaMoveUpC
 var humanoid_eva_roll_left_command : HumanoidEvaRollLeftCommand = HumanoidEvaRollLeftCommand.new()
 var humanoid_eva_roll_right_command : HumanoidEvaRollRightCommand = HumanoidEvaRollRightCommand.new()
 
+var humanoid_inventory_slot_1_command : HumanoidInventorySlot1Command = HumanoidInventorySlot1Command.new()
+var humanoid_inventory_slot_2_command : HumanoidInventorySlot2Command = HumanoidInventorySlot2Command.new()
+var humanoid_inventory_slot_3_command : HumanoidInventorySlot3Command = HumanoidInventorySlot3Command.new()
+var humanoid_inventory_slot_4_command : HumanoidInventorySlot4Command = HumanoidInventorySlot4Command.new()
+var humanoid_inventory_slot_5_command : HumanoidInventorySlot5Command = HumanoidInventorySlot5Command.new()
+
+var humanoid_meow_command : HumanoidMeowCommand = HumanoidMeowCommand.new()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_humanoid_process(delta)
-
 
 func _humanoid_process(delta : float) -> void:
 	_creature_process(delta)
 
 	if control_entity is Humanoid:
+		if Input.is_action_just_pressed("meow"):
+			humanoid_meow_command.execute(control_entity)
+		
+		if Input.is_action_just_pressed("humanoid_inventory_slot_1"):
+			humanoid_inventory_slot_1_command.execute(control_entity)
+
+		if Input.is_action_just_pressed("humanoid_inventory_slot_2"):
+			humanoid_inventory_slot_2_command.execute(control_entity)
+
+		if Input.is_action_just_pressed("humanoid_inventory_slot_3"): 
+			humanoid_inventory_slot_3_command.execute(control_entity)
+			
+		if Input.is_action_just_pressed("humanoid_inventory_slot_4"):
+			humanoid_inventory_slot_4_command.execute(control_entity)
+
+		if Input.is_action_just_pressed("humanoid_inventory_slot_5"):
+			humanoid_inventory_slot_5_command.execute(control_entity)
+		
 		if Input.is_action_pressed("humanoid_eva_forwards"):
 			humanoid_eva_move_forwards_command.execute(control_entity)
-
+		
 		if Input.is_action_pressed("humanoid_eva_backwards"):
 			humanoid_eva_move_backwards_command.execute(control_entity)
 

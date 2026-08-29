@@ -5,7 +5,13 @@ class_name BeamLaserProjectile
 signal hit(game_entity : GameEntity)
 
 @export
-var damage : float
+var hull_damage : float
+
+@export
+var shield_damage : float
+
+@export
+var penetration : float
 
 @export
 var max_beam_length : float
@@ -24,6 +30,9 @@ var beam_mesh : MeshInstance3D
 
 @export
 var mining_efficiency : float
+
+@export
+var damage_rate : float = 0.15
 
 @export
 var can_extract_resources : bool = false
@@ -48,7 +57,7 @@ func _beam_laser_projectile_ready() -> void:
 
 	timer.autostart = false
 	timer.one_shot = false
-	timer.wait_time = 0.15
+	timer.wait_time = damage_rate
 	timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
@@ -57,18 +66,21 @@ func _beam_laser_projectile_ready() -> void:
 func _on_timer_timeout() -> void:
 	if last_hit == null:
 		return
-
-	var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * damage
-
+	
 	if last_hit is GameEntity:
-		last_hit.take_damage(damage_at_distance)
+		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
+		last_hit.take_damage(damage_at_distance, penetration)
+		
 		hit.emit(last_hit)
 
 	if last_hit is Shield:
+		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * shield_damage
 		last_hit.take_damage(damage_at_distance)
-
+		hit.emit(last_hit)
+	
 	if last_hit is StaticGameEntity:
-		last_hit.take_damage(damage_at_distance)
+		var damage_at_distance : float = damage_fall_off.sample(hit_distance / max_beam_length) * hull_damage
+		last_hit.take_damage(damage_at_distance, penetration)
 		hit.emit(last_hit)
 
 	# Mining Stuff here later

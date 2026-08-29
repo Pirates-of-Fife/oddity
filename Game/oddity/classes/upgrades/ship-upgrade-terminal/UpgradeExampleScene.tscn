@@ -1,0 +1,120 @@
+[gd_scene load_steps=15 format=3 uid="uid://87h5uigosd87"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/StaticGameEntity.gd" id="1_ygnqt"]
+[ext_resource type="PackedScene" uid="uid://cmkomt705gvx6" path="res://classes/upgrades/ship-upgrade-terminal/ShipUpgradeTerminal.tscn" id="2_0iaha"]
+[ext_resource type="PackedScene" uid="uid://c4ngoo5a5cmvu" path="res://classes/station/station_landing_pad/StationPad.tscn" id="3_cckfs"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="4_chj2d"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="5_ybbqa"]
+[ext_resource type="Script" path="res://classes/station/SpaceStation.gd" id="6_258dd"]
+[ext_resource type="Resource" uid="uid://ccjtq86n0uwk8" path="res://resources/resources/trade/trade-items/stations/GhostsBeaconTradeList.tres" id="7_4df7n"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="7_ayqsm"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/station-zone/SpaceStationZone.gd" id="9_p7bls"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4t54e"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.158753, 0.140585, 0.124768, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w4eml"]
+material = SubResource("StandardMaterial3D_4t54e")
+size = Vector3(60, 3, 40)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gnv0b"]
+data = PackedVector3Array(-30, 1.5, 20, 30, 1.5, 20, -30, -1.5, 20, 30, 1.5, 20, 30, -1.5, 20, -30, -1.5, 20, 30, 1.5, -20, -30, 1.5, -20, 30, -1.5, -20, -30, 1.5, -20, -30, -1.5, -20, 30, -1.5, -20, 30, 1.5, 20, 30, 1.5, -20, 30, -1.5, 20, 30, 1.5, -20, 30, -1.5, -20, 30, -1.5, 20, -30, 1.5, -20, -30, 1.5, 20, -30, -1.5, -20, -30, 1.5, 20, -30, -1.5, 20, -30, -1.5, -20, 30, 1.5, 20, -30, 1.5, 20, 30, 1.5, -20, -30, 1.5, 20, -30, 1.5, -20, 30, 1.5, -20, -30, -1.5, 20, 30, -1.5, 20, -30, -1.5, -20, 30, -1.5, 20, 30, -1.5, -20, -30, -1.5, -20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q0ggi"]
+resource_local_to_scene = true
+size = Vector3(57.5176, 15.3595, 36.5163)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5g4tn"]
+resource_local_to_scene = true
+size = Vector3(60.1556, 8.5327, 40.0754)
+
+[node name="UpgradeExampleScene" type="Node3D"]
+
+[node name="StaticGameEntity" type="StaticBody3D" parent="."]
+collision_layer = 2097409
+collision_mask = 2097409
+script = ExtResource("1_ygnqt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticGameEntity"]
+mesh = SubResource("BoxMesh_w4eml")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticGameEntity"]
+shape = SubResource("ConcavePolygonShape3D_gnv0b")
+
+[node name="ShipUpgradeTerminal" parent="." node_paths=PackedStringArray("landing_pad") instance=ExtResource("2_0iaha")]
+transform = Transform3D(0.075118, 0, -0.997175, 0, 1, 0, 0.997175, 0, 0.075118, -0.342173, 1.44347, 18.6035)
+landing_pad = NodePath("../StationPad/LandingPad")
+
+[node name="StationPad" parent="." node_paths=PackedStringArray("station") instance=ExtResource("3_cckfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5414, 1.56288, 15.0677)
+station = NodePath("../SpaceStation")
+
+[node name="CollisionShape3D" parent="StationPad/LandingPad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7511, 7.73662, 44.5162)
+shape = SubResource("BoxShape3D_q0ggi")
+
+[node name="Marker3D" parent="StationPad/LandingPad" index="1"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 20.3688, 4.87441, 39.6564)
+
+[node name="SpotLight3D2" parent="StationPad" index="11"]
+light_energy = 16.0
+
+[node name="CollisionShape3D" parent="StationPad/GravityGrid" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7501, 4.2438, -14.9036)
+shape = SubResource("BoxShape3D_5g4tn")
+
+[node name="PlayerDetectionZone" type="Node3D" parent="." node_paths=PackedStringArray("distant_sprite")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5841, 0)
+script = ExtResource("4_chj2d")
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 1500.0
+sprite_max_distance = 1e+06
+
+[node name="MarkerSprite" parent="PlayerDetectionZone" instance=ExtResource("5_ybbqa")]
+text = &"Engineering"
+
+[node name="SpaceStation" type="StaticBody3D" parent="." node_paths=PackedStringArray("space_station_zone", "station_frame_of_reference", "station_label_1", "station_label_2")]
+script = ExtResource("6_258dd")
+station_name = &"Engineering"
+space_station_zone = NodePath("SpaceStationZone")
+station_frame_of_reference = NodePath("../StationPad/GravityGrid")
+station_label_1 = NodePath("Label3D")
+station_label_2 = NodePath("Label3D2")
+speed_limit = 150.0
+buy_markup = 2.34
+sell_markup = 1.33
+trade_items = ExtResource("7_4df7n")
+
+[node name="Label3D" type="Label3D" parent="SpaceStation"]
+transform = Transform3D(1.01033e-17, 0.165, 1.01033e-17, -1.2373e-33, -1.01033e-17, 0.165, 0.165, -1.01033e-17, 6.18651e-34, 27.2079, 1.5036, -0.356049)
+pixel_size = 0.5
+shaded = true
+outline_modulate = Color(1, 1, 1, 0)
+text = "Station Name"
+font = ExtResource("7_ayqsm")
+font_size = 25
+
+[node name="Label3D2" type="Label3D" parent="SpaceStation"]
+transform = Transform3D(1.01033e-17, -0.165, 1.01033e-17, 0, 1.01033e-17, 0.165, -0.165, -1.01033e-17, 6.18651e-34, -27.2393, 1.5036, -3.4462)
+pixel_size = 0.5
+shaded = true
+outline_modulate = Color(1, 1, 1, 0)
+text = "Station Name"
+font = ExtResource("7_ayqsm")
+font_size = 25
+
+[node name="PlayerForceSpeedLimit" type="Node3D" parent="SpaceStation"]
+script = ExtResource("9_p7bls")
+
+[node name="PlayerDetectionZone" type="Node3D" parent="SpaceStation"]
+script = ExtResource("4_chj2d")
+activate_distance = 5000.0
+deactivate_distance = 5000.0
+
+[node name="SpaceStationZone" type="Node3D" parent="SpaceStation"]
+script = ExtResource("9_p7bls")
+
+[editable path="StationPad"]

@@ -9,6 +9,9 @@ var size : ModuleSize.HardpointSize
 @export
 var assignment : HardpointAssignment 
 
+@export
+var mounting_position : Marker3D
+
 enum HardpointAssignment
 {
 	PRIMARY,
@@ -21,7 +24,7 @@ func _module_fits(module : Module) -> bool:
 		return false
 
 	if module is Weapon:
-		if module.size == size:
+		if module.size <= size:
 			return true
 	return false
 
@@ -69,12 +72,10 @@ func _initialize_area() -> void:
 	box_mesh.size = box_shape.size
 	mesh_instance.mesh = box_mesh
 
-	# Assign the highlight material
 	var highlight_material : Material = preload("res://classes/cargo/CargoHighlightMaterial.tres")
 	mesh_instance.material_override = highlight_material
-	mesh_instance.visible = false  # Hide by default
+	mesh_instance.visible = false
 
-	# Add MeshInstance3D as a child of the Area3D
 	area.add_child(mesh_instance)
 	mesh_instance.owner = get_tree().edited_scene_root
 

@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8mtd4qrxakuy"]
+
+[ext_resource type="Script" path="res://classes/module/weapon/BeamWeapon.gd" id="1_iqsum"]
+[ext_resource type="Resource" uid="uid://dh4pr8y5mnqst" path="res://scenes/modules/test-module/fargoth-beam-laser/Size6FargothBeamLaser.tres" id="2_u1tla"]
+[ext_resource type="Resource" uid="uid://clnan0p1q2r3t" path="res://resources/resources/trade/trade-items/modules/fargoth-armaments/royal-beam/Fargoth6RoyalBeam.tres" id="3_app5t"]
+[ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="4_0au8m"]
+[ext_resource type="PackedScene" uid="uid://dt6pr2y3mnrpb" path="res://scenes/modules/test-module/fargoth-beam-laser/size-6/Size6FargothBeamLaser.glb" id="5_aby7a"]
+[ext_resource type="PackedScene" uid="uid://bvqrkt7ynfsva" path="res://scenes/modules/test-module/fargoth-beam-laser/laser-projectile/FargothLaserProjectile.tscn" id="6_ba3ps"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tr4bc"]
+points = PackedVector3Array(-0.171611, 0.684396, 0.0643329, -0.476832, -0.8278, -2.53855, 0.516625, -0.874182, -2.67524, 0.145526, -0.317446, 2.89028, 0.702089, 0.609698, -2.67524, -0.741994, 0.315205, -2.6324, -0.410692, -0.039165, 2.61192, 0.423807, 0.0533079, 2.51894, -0.225228, 0.888325, -2.67524, 0.794907, -0.503082, -2.67524, 0.145526, 0.331589, 2.89028, -0.781791, -0.503082, -2.67524, -0.279058, -0.687009, 0.166389, -0.688264, 0.189868, 0.0679955, 0.227434, 0.404771, -2.90691, 0.339451, 0.636141, 0.0697605, 0.690561, 0.187067, 0.0657561, 0.423807, -0.317446, 2.14817, -0.225228, 0.331589, 2.70432, -0.596155, 0.702689, -2.67524, -0.410692, -0.317446, 2.14817, 0.145526, -0.503082, 2.05519, -0.708625, -0.25626, 0.0722787, -0.301074, -0.388647, -2.89282, 0.688732, -0.172443, 0.0653712, -0.132411, -0.317446, 2.89028, 0.330989, 0.238944, 2.70432, 0.609271, 0.702689, -2.67524, 0.784946, 0.211901, -2.37235, -0.477989, 0.0509792, -2.89708, 0.400878, -0.299617, -2.88349, -0.784302, 0.215137, -2.40859)
+
+[node name="Size6FargothBeamLaser" type="RigidBody3D" node_paths=PackedStringArray("beam_laser", "beam_sound", "nozzle") groups=["GameEntity"]]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 60.0
+script = ExtResource("1_iqsum")
+beam_laser = NodePath("FargothLaserProjectile")
+beam_sound = NodePath("AudioStreamPlayer3D")
+size = 6
+nozzle = NodePath("Nozzle")
+module_resource = ExtResource("2_u1tla")
+save = true
+value = 200000
+sellable = true
+trade_information = ExtResource("3_app5t")
+can_be_picked_up = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.701609, 1.17298)
+stream = ExtResource("4_0au8m")
+volume_db = -3.5
+pitch_scale = 1.5
+bus = &"Weapon"
+
+[node name="Nozzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0299217, 0.811136, 4.69179)
+
+[node name="Size6FargothBeamLaser" parent="." instance=ExtResource("5_aby7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801097, 1.83293)
+
+[node name="FargothLaserProjectile" parent="." instance=ExtResource("6_ba3ps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0255569, 0.794164, 4.71636)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801097, 1.83293)
+shape = SubResource("ConvexPolygonShape3D_tr4bc")

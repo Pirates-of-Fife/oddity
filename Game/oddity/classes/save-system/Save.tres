@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="SaveFile" load_steps=9 format=3 uid="uid://71nvb4r1oomc"]
+
+[ext_resource type="Script" path="res://classes/save-system/StarshipSave.gd" id="1_ot3uo"]
+[ext_resource type="Script" path="res://classes/save-system/GameEntitySave.gd" id="2_rut7w"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="3_v7qst"]
+[ext_resource type="Script" path="res://classes/save-system/PlayerPositionSave.gd" id="4_n8te0"]
+[ext_resource type="Script" path="res://classes/save-system/SaveFile.gd" id="4_owdn8"]
+
+[sub_resource type="Resource" id="Resource_i2b35"]
+script = ExtResource("1_ot3uo")
+game_entity_scene = ""
+value = 0
+
+[sub_resource type="Resource" id="Resource_f1he3"]
+script = ExtResource("2_rut7w")
+game_entity_scene = ""
+value = 0
+
+[sub_resource type="Resource" id="Resource_cho7l"]
+script = ExtResource("4_n8te0")
+respawn_at_station = true
+used_a_bed = false
+bed_index = -1
+starship_slept_with = ""
+
+[resource]
+script = ExtResource("4_owdn8")
+player_position = SubResource("Resource_cho7l")
+credits = 0
+active_ships = Array[ExtResource("1_ot3uo")]([SubResource("Resource_i2b35")])
+insured_ships = Array[ExtResource("3_v7qst")]([null, null, null, null, null, null, null, null, null, null])
+stored_ships = Array[ExtResource("3_v7qst")]([])
+game_entities = Array[ExtResource("2_rut7w")]([SubResource("Resource_f1he3")])

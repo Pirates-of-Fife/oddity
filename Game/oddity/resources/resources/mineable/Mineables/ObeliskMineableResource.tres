@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MineableResource" load_steps=10 format=3 uid="uid://capxe8jdel1x5"]
+
+[ext_resource type="PackedScene" uid="uid://b1n6fsmkoqguk" path="res://scenes/minables/obelisk/extractables/ObeliskExtratable1.tscn" id="1_0haud"]
+[ext_resource type="Script" path="res://resources/resources/mineable/MineableResource.gd" id="1_lk536"]
+[ext_resource type="PackedScene" uid="uid://dex2gytvs2aba" path="res://scenes/minables/obelisk/extractables/ObeliskExtratable2.tscn" id="2_8vmcx"]
+[ext_resource type="PackedScene" uid="uid://b538smq5r2w83" path="res://scenes/minables/obelisk/extractables/ObeliskExtratable3.tscn" id="3_7g3md"]
+[ext_resource type="PackedScene" uid="uid://dmxkpikijb2fc" path="res://scenes/minables/void-diamonds/sounds/VoidDiamondExtractionSound.tscn" id="4_ey10q"]
+[ext_resource type="ArrayMesh" uid="uid://blcwrw143tx8d" path="res://scenes/minables/obelisk/mineables/ObeliskLOD.tres" id="5_4gha0"]
+[ext_resource type="PackedScene" uid="uid://daqm050t44ijy" path="res://scenes/minables/obelisk/mineables/Obelisk1.tscn" id="7_dlfse"]
+[ext_resource type="PackedScene" uid="uid://ch8ny453i6dx4" path="res://scenes/minables/obelisk/mineables/Obelisk2.tscn" id="8_60th3"]
+[ext_resource type="PackedScene" uid="uid://dxpknsmde5d5p" path="res://scenes/minables/obelisk/mineables/Obelisk3.tscn" id="9_7k7b3"]
+
+[resource]
+script = ExtResource("1_lk536")
+mineable_name = &"Obelisk"
+min_resource_health = 30000.0
+max_resource_health = 50000.0
+min_resource_count = 0
+max_resource_count = 2
+extractable_resources = Array[PackedScene]([ExtResource("1_0haud"), ExtResource("2_8vmcx"), ExtResource("3_7g3md")])
+extraction_force = 10.0
+min_rarity = 6.0
+max_rarity = 13.5
+variants = Array[PackedScene]([ExtResource("7_dlfse"), ExtResource("8_60th3"), ExtResource("9_7k7b3")])
+low_detail_mesh = ExtResource("5_4gha0")
+base_value = 30000
+value_variance = 0.8
+extraction_sound = ExtResource("4_ey10q")

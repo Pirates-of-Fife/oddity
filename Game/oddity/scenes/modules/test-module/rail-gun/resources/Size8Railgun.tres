@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://l6tl8ycbgl5l"]
+
+[ext_resource type="Resource" uid="uid://eri2jqmgs8ef" path="res://scenes/modules/test-module/rail-gun/RailgunProjectile.tres" id="1_wdvl3"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_y75ea"]
+[ext_resource type="AudioStream" uid="uid://dlekynry85pnx" path="res://scenes/modules/test-module/rail-gun/railgun_fire.wav" id="3_61aco"]
+
+[resource]
+script = ExtResource("2_y75ea")
+projectile = ExtResource("1_wdvl3")
+projectile_speed = 3000.0
+cooldown = 5.0
+heat_per_shot = 600.0
+ammo_usage = 300.0
+hull_damage = 50000.0
+shield_damage = 45000.0
+penetration = 300.0
+sound = ExtResource("3_61aco")
+type = &"Rail Gun"
+manufacturer = &"Protectorate Federation"
+model = &"RAIL 8"
+size = &"8"
+release_year = &"20"
+power_usage = 0.0

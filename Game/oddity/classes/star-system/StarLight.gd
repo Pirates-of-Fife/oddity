@@ -10,5 +10,8 @@ func _process(delta: float) -> void:
 	if player == null:
 		player = get_tree().get_first_node_in_group("Player")
 		await get_tree().create_timer(0.5).timeout
-		
+	
+	if player == null:
+		return
+	
 	look_at(player.global_position, Vector3(0,0,1))

@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://jytkbapc4rf5"]
+
+[ext_resource type="Script" path="res://classes/module/weapon/BeamWeapon.gd" id="1_4wuu2"]
+[ext_resource type="Resource" uid="uid://dg83a6ynu1nl7" path="res://scenes/modules/test-module/fargoth-beam-laser/Size3FargothBeamLaser.tres" id="2_rxaum"]
+[ext_resource type="Resource" uid="uid://bkxgjon7pjfv" path="res://resources/resources/trade/trade-items/modules/fargoth-armaments/royal-beam/Fargoth3RoyalBeam.tres" id="3_ujihh"]
+[ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="4_qwsha"]
+[ext_resource type="PackedScene" uid="uid://c4i8rmykbpf0n" path="res://scenes/modules/test-module/fargoth-beam-laser/size-5/Size5FargothBeamLaser.glb" id="5_ymmf5"]
+[ext_resource type="PackedScene" uid="uid://bvqrkt7ynfsva" path="res://scenes/modules/test-module/fargoth-beam-laser/laser-projectile/FargothLaserProjectile.tscn" id="6_6xelv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emu5f"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0.365636, 0.753787, 1)
+emission_enabled = true
+emission = Color(0.727895, 0.612902, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d63fk"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_emu5f")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.03
+radial_segments = 6
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3f74u"]
+points = PackedVector3Array(-0.530628, 0.149911, -1.59804, 0.467222, 0.130897, 0.076473, 0.465982, -0.112314, 0.076212, -0.21508, 0.103187, 1.98738, -0.322548, -0.5557, -1.6858, 0.41217, 0.479653, -1.77795, 0.349503, -0.586963, -1.77795, 0.0357035, -0.273163, 1.79905, -0.152413, 0.60522, -1.77795, 0.0984868, 0.228637, 1.98738, -0.479429, -0.16905, 0.0809048, -0.528879, 0.354203, -1.77795, 0.537736, -0.335946, -1.77795, 0.28672, -0.21038, 1.48531, -0.203709, -0.25854, -1.92515, -0.277863, -0.21038, 1.48531, -0.116145, 0.46738, 0.0755173, -0.528879, -0.335946, -1.77795, -0.188836, -0.46042, 0.144564, 0.22969, 0.434694, 0.0791812, 0.153891, 0.278139, -1.93469, 0.223937, 0.103187, 1.98738, -0.395976, 0.268209, 0.0732641, 0.531067, 0.147696, -1.57323, -0.152413, 0.228637, 1.86157, 0.192465, -0.447717, 0.193975, -0.465661, 0.132817, 0.0780081, -0.0896297, -0.21038, 1.98738, -0.403313, 0.479653, -1.77795, 0.271209, -0.198318, -1.91883, 0.474953, 0.41687, -1.77795, -0.277863, -0.0221464, 1.79905)
+
+[node name="Size3FargothBeamLaser" type="RigidBody3D" node_paths=PackedStringArray("beam_laser", "beam_sound", "nozzle") groups=["GameEntity"]]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 30.0
+script = ExtResource("1_4wuu2")
+beam_laser = NodePath("FargothLaserProjectile")
+beam_sound = NodePath("AudioStreamPlayer3D")
+size = 3
+nozzle = NodePath("Nozzle")
+module_resource = ExtResource("2_rxaum")
+save = true
+value = 120000
+sellable = true
+trade_information = ExtResource("3_ujihh")
+can_be_picked_up = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.178996, 1.09116)
+stream = ExtResource("4_qwsha")
+volume_db = -2.0
+unit_size = 16.46
+pitch_scale = 1.4
+bus = &"Weapon"
+
+[node name="Nozzle" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190196, 1.0587)
+
+[node name="Size5FargothBeamLaser" parent="." instance=ExtResource("5_ymmf5")]
+transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0.178996, 0.388792)
+
+[node name="FargothLaserProjectile" parent="." instance=ExtResource("6_6xelv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.178996, 1.0375)
+
+[node name="MeshInstance3D" parent="FargothLaserProjectile" index="1"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0)
+mesh = SubResource("CylinderMesh_d63fk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0.178996, 0.388792)
+shape = SubResource("ConvexPolygonShape3D_3f74u")
+
+[editable path="FargothLaserProjectile"]

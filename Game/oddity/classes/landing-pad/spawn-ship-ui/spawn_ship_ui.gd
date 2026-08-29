@@ -11,6 +11,9 @@ var ship_scene : PackedScene
 @export
 var percentage_of_value : float = 0.4
 
+@export
+var station_pad : StationPad
+
 var loadout_tools : LoadoutGenerator = LoadoutGenerator.new()
 
 func _ready() -> void:
@@ -33,17 +36,16 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 		$Decline.play()
 		return
 
-	if player.credits < loadout.value * percentage_of_value:
+	if player.credits < loadout.value * percentage_of_value * station_pad.station.buy_markup:
 		$Decline.play()
 		return
 
-	player.remove_credits(loadout.value * percentage_of_value)
+	player.remove_credits(loadout.value * percentage_of_value * station_pad.station.buy_markup)
 
 	var starship : Starship = ship_scene.instantiate()
 	starship.current_state = Starship.State.POWER_OFF
 	starship.landing_gear_on = true
 
-	get_tree().get_first_node_in_group("World").player_ship = starship
 	
 	get_tree().get_first_node_in_group("StarSystem").add_child(starship)
 
@@ -53,8 +55,8 @@ func _on_claim_ship_interacted(player: Player, control_entity: ControlEntity) ->
 	loadout_tools.load_loadout(starship, loadout)
 	$Spawn.play()
 	starship.ship_identification = starship.generate_ship_id()
-	
-	loadout_tools.save_loadout(landing_pad.starship, true, true, true)
+		
+	loadout_tools.save_loadout(landing_pad.starship, true, true)
 	loadout_tools.save_loadout(landing_pad.starship)
 
 	update_price_information()
@@ -70,6 +72,7 @@ func _on_request_new_ship_interacted(player: Player, control_entity: ControlEnti
 	starship.landing_gear_on = true
 	get_tree().get_first_node_in_group("StarSystem").add_child(starship)
 	get_tree().get_first_node_in_group("World").player_ship = starship
+	starship.landing_gear_on = true
 
 	
 	starship.global_position = landing_pad.starship_spawn_marker.global_position
@@ -96,9 +99,42 @@ func update_price_information() -> void:
 		return
 
 	var c : CreditHud = CreditHud.new()
-	$Price.text = c.convert_to_human_readable(loadout.value * percentage_of_value)
+	
+	if (station_pad.station == null):
+		await get_tree().create_timer(5).timeout
+	
+	$Price.text = c.convert_to_human_readable(loadout.value * percentage_of_value * station_pad.station.buy_markup)
 	$Spawn.play()
 
 
 func _on_request_new_ship_2_interacted(player: Player, control_entity: ControlEntity) -> void:
 	update_price_information()
+
+
+var presses : int = 0
+
+func _on_blow_ship_up_interacted(player: Player, control_entity: ControlEntity) -> void:
+	
+	if landing_pad.starship == null:
+		presses = 0
+		return
+	
+	presses += 1
+	
+	if presses < 3:
+		return
+	
+	presses = 0
+	
+	landing_pad.starship.take_damage(landing_pad.starship.max_hull_health * 10, 1000000)
+	
+	await get_tree().create_timer(2).timeout
+	
+	var ship : Starship = landing_pad.starship
+	
+	landing_pad.starship.apply_impulse(landing_pad.starship.global_basis.inverse() * Vector3(1, 0.3, 0) * 10000000)
+
+	await get_tree().create_timer(10).timeout
+	
+	ship.queue_free()
+	

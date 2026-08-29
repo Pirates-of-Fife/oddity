@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MusicResource" load_steps=3 format=3 uid="uid://dwqx4g2bgx5j4"]
+
+[ext_resource type="AudioStream" uid="uid://dpk41cpw8casc" path="res://resources/resources/music/music/battle-2.wav" id="1_6uroh"]
+[ext_resource type="Script" path="res://classes/music-player/MusicResource.gd" id="2_jqdjh"]
+
+[resource]
+script = ExtResource("2_jqdjh")
+music = ExtResource("1_6uroh")
+volume_modifier = -12.0
+fade_in_time = 10.0
+fade_out_time = 10.0
+override_current_track = true
+loop = true

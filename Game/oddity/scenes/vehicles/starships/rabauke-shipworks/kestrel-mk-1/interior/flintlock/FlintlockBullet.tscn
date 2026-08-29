@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://l20o4qdn7cpu"]
+
+[ext_resource type="ArrayMesh" uid="uid://bxiun7avnkwrt" path="res://Equipment/Flintlock/Meshes/FlintlockBullet.mesh" id="1_xf2q1"]
+[ext_resource type="ArrayMesh" uid="uid://dleiy5dkh8vh" path="res://Equipment/Flintlock/Meshes/FlintlockCartridge.mesh" id="2_ursot"]
+
+[node name="FlintlockBullet" type="Node3D" unique_id=122559026]
+
+[node name="Bullet" type="MeshInstance3D" parent="." unique_id=1668368155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.014175996)
+mesh = ExtResource("1_xf2q1")
+
+[node name="Cartidge" type="MeshInstance3D" parent="." unique_id=656138915]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = ExtResource("2_ursot")

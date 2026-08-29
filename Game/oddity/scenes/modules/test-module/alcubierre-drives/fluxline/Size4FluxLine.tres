@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AlcubierreDriveResource" load_steps=7 format=3 uid="uid://cki2vobfhn30h"]
+
+[ext_resource type="AudioStream" uid="uid://dlp4trogq3fk" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_end.wav" id="1_l4f77"]
+[ext_resource type="AudioStream" uid="uid://bgxc6texjc537" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_loop.wav" id="2_v8h6l"]
+[ext_resource type="AudioStream" uid="uid://bo7fqw26hxuon" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_start.wav" id="3_vatw8"]
+[ext_resource type="Script" path="res://resources/classes/module/component/alcubierre-drive/AlcubierreDriveResource.gd" id="4_ym3kx"]
+[ext_resource type="AudioStream" uid="uid://c7vtf858tqoyu" path="res://classes/module/component/component-types/alcubierre-drive/sounds/travelling/travelling.wav" id="5_813fr"]
+
+[sub_resource type="Curve" id="Curve_y0by7"]
+_data = [Vector2(0, 0.720914), 0.0, 0.0, 0, 0, Vector2(0.222603, 0.810942), 0.904509, 0.904509, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("4_ym3kx")
+spool_time = 10.0
+acceleration = 1000.0
+deacceleration = 1500.0
+max_speed = 1.25e+06
+max_turn_speed = 2.0
+fuel_per_second = 100.0
+fuel_curve = SubResource("Curve_y0by7")
+charging_start = ExtResource("3_vatw8")
+charging_sound = ExtResource("2_v8h6l")
+charging_end = ExtResource("1_l4f77")
+travelling_sound = ExtResource("5_813fr")
+type = &"Alcubierre Drive"
+manufacturer = &"Meean’kar Corporation"
+model = &"Fluxline"
+size = &"4"
+release_year = &"0"
+power_usage = 0.0

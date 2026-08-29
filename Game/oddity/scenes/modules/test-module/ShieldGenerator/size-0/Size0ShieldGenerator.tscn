@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxblsu1kt4dxg"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/ShieldGenerator.gd" id="1_mwaxr"]
+[ext_resource type="Resource" uid="uid://bakqtcbiacbjf" path="res://scenes/modules/test-module/ShieldGenerator/resources/Size0Shield.tres" id="2_ktd8d"]
+[ext_resource type="Resource" uid="uid://duu7sgm5fw37h" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/aeroguard/TradeResourceAeroguard0.tres" id="3_gnle8"]
+[ext_resource type="PackedScene" uid="uid://bf7s7vwhd8bfp" path="res://scenes/modules/test-module/ShieldGenerator/shield-modul.glb" id="4_bt4ol"]
+
+[node name="Size0ShieldGenerator" type="RigidBody3D" groups=["GameEntity"]]
+collision_layer = 537396737
+collision_mask = 537396737
+mass = 50.0
+script = ExtResource("1_mwaxr")
+module_resource = ExtResource("2_ktd8d")
+passive_heat_generation = 30.0
+save = true
+value = 10000
+trade_information = ExtResource("3_gnle8")
+can_be_picked_up = true
+
+[node name="shield-modul" parent="." instance=ExtResource("4_bt4ol")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://v6gv82xubo7h"]
+[gd_scene load_steps=16 format=3 uid="uid://v6gv82xubo7h"]
 
 [ext_resource type="Script" path="res://classes/module/component/component-types/thruster/RetroThruster.gd" id="1_4xny5"]
 [ext_resource type="PackedScene" uid="uid://qlpo6mpoc0gd" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/RetroThruster.glb" id="2_vipiq"]
-[ext_resource type="AudioStream" uid="uid://bk0pe8kc0frrc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/retro_thruster-001.wav" id="3_6uag6"]
+[ext_resource type="AudioStream" uid="uid://bsd7y2vwvi2qc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/thrust_deep_loop.wav" id="3_1ceka"]
+[ext_resource type="Texture2D" uid="uid://b61ge42edi1vy" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic black.png" id="4_mlycf"]
 
 [sub_resource type="Curve" id="Curve_de3bc"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.766537, 1), 0.0, 0.0, 0, 0]
@@ -15,21 +16,21 @@ points = PackedVector3Array(-0.0692717, 1.77087, 3.73759, 0.358553, -1.6983, -2.
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_8e5q2"]
+[sub_resource type="CurveTexture" id="CurveTexture_4gaau"]
 curve = SubResource("Curve_nu530")
 
 [sub_resource type="Gradient" id="Gradient_vr3g1"]
 offsets = PackedFloat32Array(0, 0.170213, 0.41844, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 0.458824, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_cx1jj"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tdmse"]
 gradient = SubResource("Gradient_vr3g1")
 
 [sub_resource type="Curve" id="Curve_j8ibt"]
 _data = [Vector2(0, 0.274725), 0.0, 0.0, 0, 0, Vector2(0.526627, 0.186813), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_gojhc"]
+[sub_resource type="CurveTexture" id="CurveTexture_47f5j"]
 curve = SubResource("Curve_j8ibt")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7unsp"]
@@ -37,22 +38,23 @@ resource_local_to_scene = true
 emission_shape = 3
 emission_box_extents = Vector3(0.3, 1, 1)
 direction = Vector3(0, 0, -1)
-spread = 5.0
+spread = 3.0
 initial_velocity_min = 120.0
-initial_velocity_max = 150.0
+initial_velocity_max = 180.0
 gravity = Vector3(0, 0, 0)
+scale_min = 2.0
 scale_max = 5.0
-scale_curve = SubResource("CurveTexture_gojhc")
-color_ramp = SubResource("GradientTexture1D_cx1jj")
-alpha_curve = SubResource("CurveTexture_8e5q2")
+scale_curve = SubResource("CurveTexture_47f5j")
+color_ramp = SubResource("GradientTexture1D_tdmse")
+alpha_curve = SubResource("CurveTexture_4gaau")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ta1i7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8gik"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_1vfnt"]
-material = SubResource("StandardMaterial3D_ta1i7")
+material = SubResource("StandardMaterial3D_y8gik")
 radial_segments = 12
 rings = 6
 
@@ -63,28 +65,52 @@ mass = 5000.0
 script = ExtResource("1_4xny5")
 size = 3
 thruster_sound = NodePath("AudioStreamPlayer3D")
-modifier = 4.0
+modifier = 2.0
 thruster_heat_curve = SubResource("Curve_de3bc")
-thruster_heat_multiplier = 7.0
-fuel_usage = 0.18
+thruster_heat_multiplier = 21.0
+fuel_usage = 0.4
 thruster_particles = NodePath("GPUParticles3D")
 value = 15000
 
 [node name="RetroThruster" parent="." instance=ExtResource("2_vipiq")]
+
+[node name="Retro Thruster_002" parent="RetroThruster" index="0"]
+layers = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_pe7na")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.932175, -0.187925, -2.42456)
-amount = 150
-lifetime = 0.17
+amount = 800
+amount_ratio = 0.0
+lifetime = 0.26
 fixed_fps = 15
+visibility_aabb = AABB(-4, -4, -34.99, 8.645, 8.675, 43.58)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_7unsp")
 draw_pass_1 = SubResource("SphereMesh_1vfnt")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_6uag6")
+stream = ExtResource("3_1ceka")
+pitch_scale = 1.98
 max_distance = 500.0
 bus = &"Thruster"
+
+[node name="Decal4" type="Decal" parent="."]
+transform = Transform3D(2.60237e-17, -0.425, -2.60237e-17, 0, 2.60237e-17, -0.425, 0.425, 2.60237e-17, 1.59349e-33, 0.257159, 1.091, -1.39707)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("4_mlycf")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[node name="Decal5" type="Decal" parent="."]
+transform = Transform3D(2.60237e-17, -0.425, -2.60237e-17, 5.20475e-17, -2.60237e-17, 0.425, -0.425, -2.60237e-17, 5.20475e-17, 0.257159, -1.15201, -1.39707)
+size = Vector3(4.115, 1.076, 2)
+texture_albedo = ExtResource("4_mlycf")
+upper_fade = 0.0039417
+lower_fade = 1e-05
+cull_mask = 1048574
+
+[editable path="RetroThruster"]

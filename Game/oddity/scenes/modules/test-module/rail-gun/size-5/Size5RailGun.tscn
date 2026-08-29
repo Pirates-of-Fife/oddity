@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfjflwsaancca"]
+[gd_scene load_steps=9 format=3 uid="uid://cfjflwsaancca"]
 
 [ext_resource type="Script" path="res://scenes/modules/test-module/rail-gun/rail_gun.gd" id="1_8wu6e"]
 [ext_resource type="PackedScene" uid="uid://nssl2fvrxc88" path="res://scenes/modules/test-module/rail-gun/RailGunSound.tscn" id="2_bpqs4"]
 [ext_resource type="PackedScene" uid="uid://chw5mobhsfp6f" path="res://scenes/modules/test-module/rail-gun/railgun.glb" id="2_lldl4"]
-[ext_resource type="Resource" uid="uid://bbqr1rkg6k4cb" path="res://scenes/modules/test-module/rail-gun/size-5/Size5Railgun.tres" id="2_mdyci"]
+[ext_resource type="Resource" uid="uid://bbqr1rkg6k4cb" path="res://scenes/modules/test-module/rail-gun/resources/Size5Railgun.tres" id="2_mdyci"]
+[ext_resource type="Resource" uid="uid://dhqrr42r4x631" path="res://resources/resources/trade/trade-items/modules/protectorate-federation/rail/TradeResourceRail5.tres" id="4_wa27c"]
 [ext_resource type="AudioStream" uid="uid://ccvhspemtu6rg" path="res://scenes/modules/test-module/rail-gun/cooldowncomplete.mp3" id="5_dxcby"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tdrth"]
@@ -12,7 +13,7 @@ points = PackedVector3Array(-0.334642, -0.538758, -0.50336, -0.420504, -8.7925e-
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wxb2g"]
 points = PackedVector3Array(0.146794, 0.00980174, 1.71012, 0.103912, 0.108755, 1.71012, 0.0356838, -0.116498, 1.71012, 0.146794, 0.00980174, -1.70819, -0.0638973, 0.120189, 1.71012, 0.103912, 0.108755, -1.70819, -0.145456, 0.0194093, 1.70677, -0.0797456, -0.135413, 1.70677, 0.0356838, -0.116498, -1.70819, -0.0797456, -0.135413, -1.71121, -0.145456, 0.0194093, -1.71121, -0.0638973, 0.120189, -1.70819)
 
-[node name="RailGun" type="RigidBody3D" node_paths=PackedStringArray("cooldown_complete_sound", "nozzle")]
+[node name="RailGun" type="RigidBody3D" node_paths=PackedStringArray("cooldown_complete_sound", "nozzle") groups=["GameEntity"]]
 collision_layer = 537396737
 collision_mask = 537396737
 script = ExtResource("1_8wu6e")
@@ -21,24 +22,27 @@ shot_audio = ExtResource("2_bpqs4")
 size = 5
 nozzle = NodePath("Marker3D")
 module_resource = ExtResource("2_mdyci")
+save = true
 value = 80000
+trade_information = ExtResource("4_wa27c")
 can_be_picked_up = true
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0987408, 1.99262)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659086, 3.40447)
 
 [node name="railgun" parent="." instance=ExtResource("2_lldl4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.560346, 1.41185)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000326877, -0.0220275, -1.39614)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000326877, 0.538318, 0.0157111)
 shape = SubResource("ConvexPolygonShape3D_tdrth")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(-0.390731, 0.920505, 0, -0.920505, -0.390731, 0, 0, 0, 1, -0.00742181, 0.138469, 0.274112)
+transform = Transform3D(-0.390731, 0.920505, 0, -0.920505, -0.390731, 0, 0, 0, 1, -0.00742181, 0.698815, 1.68596)
 shape = SubResource("ConvexPolygonShape3D_wxb2g")
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.96441)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.560346, 3.37626)
 stream = ExtResource("5_dxcby")
 volume_db = -6.0
 bus = &"Weapon"

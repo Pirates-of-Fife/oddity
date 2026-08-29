@@ -6,6 +6,9 @@ class_name Openable
 
 signal openable_opened
 signal openable_closed
+signal openable_closing
+signal openable_opening
+
 
 enum State {
 	OPEN,
@@ -61,6 +64,7 @@ func open() -> void:
 		if open_sound != null:
 			open_sound.play()
 		state = State.OPENING
+		openable_opening.emit()
 	
 	elif state == State.CLOSING:
 		animation_player.queue("open")
@@ -71,6 +75,7 @@ func close() -> void:
 		if close_sound != null:
 			close_sound.play()
 		state = State.CLOSING
+		openable_closing.emit()
 	
 	elif state == State.OPENING:
 		animation_player.queue("close")
@@ -103,6 +108,7 @@ func on_animation_player_animation_finished(anim_name : String) -> void:
 func on_animation_player_animation_changed(old_name : String, new_name : String) -> void:
 	if new_name == "open" and old_name == "close":
 		state = State.OPENING
+		openable_opening.emit()
 	elif new_name == "close" and old_name == "open":
 		state = State.CLOSING
-		
+		openable_closing.emit()

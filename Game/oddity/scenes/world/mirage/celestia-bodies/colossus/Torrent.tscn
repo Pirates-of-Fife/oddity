@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cdghcmhb6ida7"]
+[gd_scene load_steps=12 format=3 uid="uid://cdghcmhb6ida7"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_30c4r"]
 [ext_resource type="Texture2D" uid="uid://cfxt3tt157r1a" path="res://scenes/world/textures/4k_haumea_fictional.jpg" id="2_aokuo"]
@@ -6,12 +6,15 @@
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_owtyx"]
 [ext_resource type="AudioStream" uid="uid://cywpq5hmk0out" path="res://scenes/world/sounds/deep thudding.wav" id="5_eglk5"]
 [ext_resource type="AudioStream" uid="uid://csgh7rphdatmc" path="res://scenes/world/sounds/booooooooooommmmmmmm.wav" id="6_wmg0q"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="7_a085f"]
+[ext_resource type="PackedScene" uid="uid://2qbl7urkmlvn" path="res://scenes/world/mirage/celestia-bodies/colossus/scatter-objects/TorrentFoliage.tscn" id="8_ikhm8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k87b3"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.874771, 0.507541, 0.340675, 1)
 albedo_texture = ExtResource("2_aokuo")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_f8c21"]
 material = SubResource("StandardMaterial3D_k87b3")
@@ -70,3 +73,10 @@ autoplay = true
 max_distance = 8501.0
 panning_strength = 0.0
 bus = &"Environment"
+
+[node name="SceneLoadingZone" type="Node3D" parent="."]
+script = ExtResource("7_a085f")
+scene = ExtResource("8_ikhm8")
+activate_distance = 20000.0
+deactivate_distance = 21000.0
+update_time = 1.0

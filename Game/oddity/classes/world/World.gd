@@ -2,6 +2,9 @@ extends Node3D
 
 class_name World
 
+@export
+var caretaker : Caretaker
+
 @onready
 var abyss_scene : PackedScene = preload("res://classes/abyss/abyss/Abyss.tscn")
 
@@ -11,7 +14,9 @@ var abyssal_tunnel_scene : PackedScene = preload("res://classes/abyss/abyssal-tu
 var index : int = 0
 
 @export
-var star_systems : Array
+var star_systems : Array[StarSystemResource]
+
+var in_range_systems : Array[StarSystemResource]
 
 var abyss_entered : bool = false
 var new_system_loaded : bool = false
@@ -23,24 +28,35 @@ var player : Player
 var player_control_entity : Creature
 
 @export
-var player_ship : Starship
-
-@export
 var spawn_station : SpaceStationLoadingZone
-
-var auto_save_timer : Timer = Timer.new()
 
 @export
 var is_main_menu_world : bool = false
 
+@export
+var music_player : MusicPlayer
+
+func _ready() -> void:
+	add_to_group("World")
+
+	if is_main_menu_world:
+		return
+	
+	load_save()
+
 func cycle_system() -> StarSystemResource:
-	var size : int = star_systems.size()
+	in_range_systems = get_star_systems_in_range()
+	
+	var size : int = in_range_systems.size()
 
 	if size == 0:
-		return
+		return get_current_star_sytem_resource()
 
-	var system : StarSystemResource = star_systems[index]
+	if in_range_systems.size() - 1 < index:
+		return get_current_star_sytem_resource()
 
+	var system : StarSystemResource = in_range_systems[index]
+	
 	index += 1
 
 	if index == size:
@@ -48,40 +64,59 @@ func cycle_system() -> StarSystemResource:
 
 	return system
 
-func _ready() -> void:
-	add_to_group("World")
+func get_current_star_sytem_resource() -> StarSystemResource:
+	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
+	
+	if star_system.system_name == "The Abyss":
+		return star_systems[0]
+	
+	for system : StarSystemResource in star_systems:
+		if system.name == star_system.system_name:
+			return system
+	
+	return star_systems[0]
 
-	if is_main_menu_world:
-		return
+func get_star_system_resource(system_name : String) -> StarSystemResource:
+	for system : StarSystemResource in star_systems:
+		if system.name == system_name:
+			return system
+			
+	return star_systems[0]
 
-	auto_save_timer.timeout.connect(save_player_ship_state)
-	auto_save_timer.one_shot = false
-	auto_save_timer.autostart = true
-	auto_save_timer.wait_time = 60
-	add_child(auto_save_timer)
-
-	spawn_station = get_tree().get_first_node_in_group("StarSystem").spawn_station
-
-	spawn_player_ship()
-
-	var f : FileAccess = FileAccess.open(Globals.PLAYER_MONEY, FileAccess.READ)
-	if f == null:
-		var res : PlayerMoneyResource = PlayerMoneyResource.new()
-		res.credits = 10000
-
-		ResourceSaver.save(res, Globals.PLAYER_MONEY)
-
-	var credits_resource : PlayerMoneyResource = load(Globals.PLAYER_MONEY)
-
-	player.credits = credits_resource.credits
-	player.hud.current_credits = player.credits
-	player.hud.displayed_credits = player.credits
+func get_star_systems_in_range() -> Array[StarSystemResource]:
+	var systems_in_range : Array[StarSystemResource]
+	var current : StarSystemResource = get_current_star_sytem_resource()
+	
+	if player == null:
+		return systems_in_range
+	
+	if !(player.control_entity is Starship):
+		return systems_in_range
+	
+	for system : StarSystemResource in star_systems:
+		var distance : float = calculate_star_system_distance(current, system)
+		
+		if (distance <= player.control_entity.jump_range and distance > 0):
+			systems_in_range.append(system)
+	
+	return systems_in_range
+	
+func calculate_star_system_distance(current : StarSystemResource, target : StarSystemResource) -> float:
+	return current.position.distance_to(target.position)
 
 func enter_abyss(destination_star_system : PackedScene, starship : Starship, portal_global_rotation : Vector3) -> void:
 	if abyss_entered:
 		return
 
+	caretaker.save()
+
 	abyss_entered = true
+	
+	music_player.stop_music()
+	
+	for node : Node in get_tree().get_nodes_in_group("Starship"):
+		if node != player.control_entity:
+			node.queue_free()
 
 	var old_star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
 	starship.reparent.call_deferred(self)
@@ -91,9 +126,7 @@ func enter_abyss(destination_star_system : PackedScene, starship : Starship, por
 	var spawn_location : Vector3 = new_star_system.player_spawn_position
 	new_star_system.queue_free()
 
-
 	starship.is_in_abyss = true
-
 
 	var abyss : Abyss = abyss_scene.instantiate()
 	add_child.call_deferred(abyss)
@@ -122,11 +155,43 @@ func load_new_system(destination_star_system : PackedScene, starship : Starship)
 	add_child(new_star_system)
 
 	starship.reparent.call_deferred(new_star_system)
-
-	var abyss :Abyss = get_tree().get_first_node_in_group("Abyss")
+	
+	if new_star_system.spawn_station != null:
+		spawn_station = new_star_system.spawn_station
+		player.respawn_star_system = destination_star_system
+		
+	var abyss : Abyss = get_tree().get_first_node_in_group("Abyss")
 	abyss.queue_free()
+	
+	spawn_entities_in_system(new_star_system.name)
+	
+func load_star_system(star_system_resource : StarSystemResource) -> void:
+	player_control_entity.reparent(self)
+	
+	var old_star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
+	
+	if old_star_system != null:
+		old_star_system.queue_free()
+	
+	var system_scene : PackedScene = load(star_system_resource.scene_file)
+	
+	var star_system : StarSystem = system_scene.instantiate()
+	
+	add_child(star_system)
+	
+	if star_system.spawn_station == null:
+		player.respawn_star_system = load(star_systems[0].scene_file)
+	else:
+		spawn_station = star_system.spawn_station
+		player.respawn_star_system = load(star_system_resource.scene_file)
 
-
+	
+	player_control_entity.reparent(star_system)
+	
+	star_system.name = star_system_resource.name
+	
+	index = 0
+	
 func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	abyssal_tunnel.starship.is_in_abyss = false
 
@@ -139,10 +204,88 @@ func unload_tunnel(abyssal_tunnel : AbyssalTunnel) -> void:
 	abyss_entered = false
 	new_system_loaded = false
 
-
 	abyssal_tunnel.queue_free()
 
+func load_save() -> void:
+	var save_file : SaveFile = caretaker.get_save_file()
+	
+	load_star_system(save_file.player_position.star_system)
+	
+	spawn_station = get_tree().get_first_node_in_group("StarSystem").spawn_station
+	
+	var ships_in_system : Array[Starship] = spawn_active_ships(save_file.active_ships, save_file.player_position.star_system.name)
+	
+	spawn_saved_game_entities(save_file.game_entities, save_file.player_position.star_system.name)
+	
+	spawn_player_character(save_file.player_position,save_file.inventory, save_file.credits, ships_in_system)
 
+func spawn_entities_in_system(star_system : String) -> void:
+	var save_file : SaveFile = caretaker.get_save_file()
+	spawn_active_ships(save_file.active_ships, save_file.player_position.star_system.name)
+	spawn_saved_game_entities(save_file.game_entities, save_file.player_position.star_system.name)	
+	
+
+func spawn_player_character(player_position_save : PlayerPositionSave, player_inventory : PlayerInventoryResource, credits : int, ships_in_system : Array[Starship]) -> void:
+	player.inventory = player_inventory
+	player.load_inventory()
+	player.credits = credits
+	player.hud.current_credits = player.credits
+	player.hud.displayed_credits = player.credits
+	
+	if player_position_save.respawn_at_station:
+		player_control_entity.global_position = spawn_station.player_spawn_marker.global_position
+		player_control_entity.global_rotation = spawn_station.player_spawn_marker.global_rotation
+	elif player_position_save.used_a_bed:
+		var ship : Starship
+		
+		for s : Starship in ships_in_system:
+			if s.ship_identification == player_position_save.starship_slept_with:
+				ship = s
+				
+		player_control_entity.global_position = ship.get_bed(player_position_save.bed_index).player_spawn_position
+		player_control_entity.global_rotation = ship.get_bed(player_position_save.bed_index).player_spawn_position_marker.global_rotation
+	else:
+		player_control_entity.global_position = player_position_save.position.toVector3()
+		player_control_entity.global_rotation = player_position_save.rotation.toVector3()
+
+func spawn_active_ships(active_ships : Array[StarshipSave], star_system : String) -> Array[Starship]:
+	var ships_in_system : Array[Starship]
+
+	for ship_save : StarshipSave in active_ships:
+		if ship_save.star_system.name == star_system:
+			ships_in_system.append(spawn_starship(ship_save))
+	
+	return ships_in_system
+
+func spawn_starship(ship_save : StarshipSave) -> Starship:
+	var scene : PackedScene = load(ship_save.game_entity_scene)
+	var ship : Starship = scene.instantiate()
+
+	ship.default_loadout = ship_save.loadout
+	ship.apply_loadout_health = true
+	ship.is_player_ship = true
+	if !ship_save.loadout.destroyed:
+		ship.current_state = Starship.State.POWER_OFF
+	
+	get_tree().get_first_node_in_group("StarSystem").add_child(ship)
+	
+	ship.global_rotation = ship_save.rotation.toVector3()
+	ship.global_position = ship_save.position.toVector3()
+	
+	return ship
+	
+func spawn_saved_game_entities(saved_game_entities : Array[GameEntitySave], star_system : String) -> void:
+	for game_entity_save : GameEntitySave in saved_game_entities:
+		if game_entity_save.star_system.name == star_system:
+			var scene : PackedScene = load(game_entity_save.game_entity_scene)
+			var game_entity : GameEntity = scene.instantiate()
+			
+			get_tree().get_first_node_in_group("StarSystem").add_child(game_entity)
+			
+			game_entity.value = game_entity_save.value
+			game_entity.global_position = game_entity_save.position.toVector3()
+			game_entity.global_rotation = game_entity_save.rotation.toVector3()
+				
 func respawn_player() -> void:
 	if abyss_entered:
 		get_node("AbyssalTunnel").queue_free()
@@ -153,9 +296,9 @@ func respawn_player() -> void:
 	player.reparent(self)
 	add_child(player_body)
 	player.possess(player_body)
-
+	player_control_entity = player_body
 	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
-	star_system.queue_free()
+	star_system.free()
 
 	var new_star_system : StarSystem = player.respawn_star_system.instantiate()
 	add_child(new_star_system)
@@ -165,66 +308,31 @@ func respawn_player() -> void:
 
 	player_body.global_position = spawn_station.player_spawn_marker.global_position
 	player_body.global_rotation = spawn_station.player_spawn_marker.global_rotation
-
-	var default_loadout : StarshipLoadout = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
-
-	ResourceSaver.save(default_loadout, Globals.PLAYER_SHIP_SAVE)
-
-func save_player_ship_state() -> void:
-	if player_ship == null:
-		return
-
-	var loadout_generator : LoadoutGenerator = LoadoutGenerator.new()
-
-	loadout_generator.save_loadout(player_ship, true, true, true)
-
-func save_player_money_state() -> void:
-	var f : FileAccess = FileAccess.open(Globals.PLAYER_MONEY, FileAccess.READ)
-	if f == null:
-		return
-
-	var res : PlayerMoneyResource = PlayerMoneyResource.new()
-	res.credits = player.credits
-
-	ResourceSaver.save(res, Globals.PLAYER_MONEY)
+	
+	spawn_entities_in_system(new_star_system.name)
+	
 
 func _notification(what : int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_player_ship_state()
-		save_player_money_state()
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:		
 		get_tree().quit()
 
-func spawn_player_ship() -> void:
-	var ship_scene : PackedScene = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn")
-	var ship : Starship = ship_scene.instantiate()
-	var loadout : StarshipLoadout
-
-	var f : FileAccess = FileAccess.open(Globals.PLAYER_SHIP_SAVE, FileAccess.READ)
-	if f == null:
-		loadout = load("res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres")
-	else:
-		loadout = load(Globals.PLAYER_SHIP_SAVE)
-
-	ship.default_loadout = loadout
-	ship.apply_loadout_health = true
-
-	ship.current_state = Starship.State.POWER_OFF
-	ship.landing_gear_on = true
-
-	var star_system : StarSystem = get_tree().get_first_node_in_group("StarSystem")
-	star_system.add_child(ship)
-
-	ship.global_position = spawn_station.ship_spawn_marker.global_position
-	ship.global_rotation = spawn_station.ship_spawn_marker.global_rotation
-
-	player_control_entity.global_position = spawn_station.player_spawn_marker.global_position
-	player_control_entity.global_rotation = spawn_station.player_spawn_marker.global_rotation
-
-	player.possess(player_control_entity)
-
-	player_ship = ship
-
+func bed_exit(bed_index : int, ship_id : String) -> void:
+	caretaker.save(true, bed_index, ship_id)
+		
+	exit_to_main_menu()
 
 func exit_to_main_menu() -> void:
-	save_player_ship_state()
+	caretaker.save()
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	get_tree().get_first_node_in_group("Player").reparent(self)
+		
+	for node : Node in get_tree().get_nodes_in_group("Starship"):
+		node.queue_free()
+		
+	await get_tree().create_timer(0.5).timeout
+	
 	get_tree().change_scene_to_file("res://ui/main-menu/MainMenu.tscn")

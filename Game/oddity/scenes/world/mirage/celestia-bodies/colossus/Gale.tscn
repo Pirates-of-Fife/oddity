@@ -1,16 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://mk80syhel3p0"]
+[gd_scene load_steps=11 format=3 uid="uid://mk80syhel3p0"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_qmu0q"]
 [ext_resource type="Texture2D" uid="uid://b4843o6upcfgs" path="res://scenes/world/textures/4k_makemake_fictional.jpg" id="2_jd4tg"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="3_tsupc"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_emvs4"]
 [ext_resource type="PackedScene" uid="uid://cbeuj1io6qndp" path="res://classes/player-detection-zone/salvage-zone/SalvageZone.tscn" id="5_lefbj"]
+[ext_resource type="PackedScene" uid="uid://bhx1qpkmh6bfm" path="res://scenes/world/mirage/celestia-bodies/colossus/scatter-objects/GaleFoliage.tscn" id="9_gfur5"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="11_gk1ep"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hh1f6"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.443137, 0.513726, 0.717647, 1)
 albedo_texture = ExtResource("2_jd4tg")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_mslou"]
 material = SubResource("StandardMaterial3D_hh1f6")
@@ -51,3 +54,10 @@ deactivate_distance = 19000.0
 
 [node name="SalvageZone" parent="." instance=ExtResource("5_lefbj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10222.6, 480.827, 5590.69)
+
+[node name="SceneLoadingZone" type="Node3D" parent="."]
+script = ExtResource("11_gk1ep")
+scene = ExtResource("9_gfur5")
+activate_distance = 15000.0
+deactivate_distance = 16000.0
+update_time = 1.0

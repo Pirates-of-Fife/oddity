@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Star Map — Draggable Systems</title>
+  <style>
+    :root{
+      --bg1:#0f1724;
+      --bg2:#071021;
+      --card: rgba(255,255,255,0.04);
+      --accent: #7ee7f7;
+      --glass: rgba(255,255,255,0.03);
+      --muted: rgba(255,255,255,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;color:#e6eef6}
+    body{background:linear-gradient(160deg,var(--bg1),var(--bg2));display:flex;align-items:center;justify-content:center;padding:28px}
+    .wrap{width:1060px;max-width:95vw;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(2,6,23,0.6);}
+    header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    header h1{font-size:20px;margin:0}
+    header p{margin:0;color:var(--muted);font-size:13px}
+    .grid-row{display:flex;gap:16px}
+    .panel{background:var(--card);border-radius:10px;padding:12px;flex:1}
+    .map-panel{flex:0 0 820px;padding:14px;display:flex;flex-direction:column;gap:10px}
+    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .controls label{font-size:13px;color:var(--muted)}
+    .controls input[type=range]{width:220px}
+    .svg-wrap{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:8px;padding:6px;display:flex;justify-content:center;align-items:center}
+    svg{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:6px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02);}
+    .info-panel{display:flex;flex-direction:column;gap:8px}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+    th{font-weight:600;color:var(--muted);}
+    .mini{font-size:12px;color:var(--muted)}
+    .row-actions{display:flex;gap:8px}
+    button{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--muted);cursor:pointer}
+    button.primary{border-color:var(--accent);color:#04121b;background:linear-gradient(180deg, rgba(126,231,247,0.06), rgba(126,231,247,0.02))}
+    .legend{display:flex;gap:8px;flex-wrap:wrap}
+    .dot-legend{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;background:var(--glass)}
+    .dot-legend .sw{width:14px;height:14px;border-radius:4px}
+    .coords{font-family:monospace;font-size:13px;color:var(--muted)}
+    @media (max-width:1100px){.grid-row{flex-direction:column}.map-panel{flex:1}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Star Map — draggable systems</h1>
+        <p class="mini">Drag the systems on the square. Distances update live (in light years).</p>
+      </div>
+    </header>
+
+    <div class="grid-row">
+      <div class="panel map-panel">
+        <div class="controls">
+          <label>Scale: <span id="scaleLabel">100</span> ly across</label>
+          <input id="scaleRange" type="range" min="20" max="600" value="100">
+
+          <label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="ringsToggle"> Show 5 ly rings from selected</label>
+
+          <div style="flex:1"></div>
+          <button id="resetBtn">Reset</button>
+          <button id="randomBtn">Randomize</button>
+          <button id="exportBtn" class="primary">Export JSON</button>
+        </div>
+
+        <div class="svg-wrap">
+          <!-- SVG map: 800x800 pixels -->
+          <svg id="mapSvg" width="800" height="800" viewBox="0 0 800 800" tabindex="0" aria-label="Star map">
+            <defs>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <rect x="0" y="0" width="800" height="800" fill="transparent" />
+            <g id="gridLines"></g>
+            <g id="rangeRings"></g>
+            <g id="nodes"></g>
+          </svg>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="legend" id="legend"></div>
+          <div class="coords" id="coordsDisplay">Click &amp; drag a node to move it.</div>
+        </div>
+      </div>
+
+      <div class="panel info-panel">
+        <h3 style="margin:0 0 8px 0">Distances (light years)</h3>
+        <div style="overflow:auto;max-height:600px">
+          <table id="distTable">
+            <!-- dynamic -->
+          </table>
+        </div>
+        <div style="margin-top:10px">
+          <div class="mini">Pairwise distances update as you move the nodes. Coordinates shown in light years relative to top-left of the square.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const svg = document.getElementById('mapSvg');
+  const nodesGroup = document.getElementById('nodes');
+  const gridGroup = document.getElementById('gridLines');
+  const ringsGroup = document.getElementById('rangeRings');
+  const legend = document.getElementById('legend');
+  const distTable = document.getElementById('distTable');
+  const coordsDisplay = document.getElementById('coordsDisplay');
+  const scaleRange = document.getElementById('scaleRange');
+  const scaleLabel = document.getElementById('scaleLabel');
+  const resetBtn = document.getElementById('resetBtn');
+  const randomBtn = document.getElementById('randomBtn');
+  const exportBtn = document.getElementById('exportBtn');
+  const ringsToggle = document.getElementById('ringsToggle');
+
+  const W = 800, H = 800;
+  let scaleLY = Number(scaleRange.value); // ly across full width
+  const names = [
+    'kylodai', 'echo', 'rogues gamibt', 'mirage', 'gateway', 'paradox'
+  ];
+  const colors = ['#7ee7f7','#9b7ef7','#f78ebf','#f7c77e','#8ef78b','#f78e4a'];
+  const nodeRadius = 10;
+  const ringSpacingLY_default = 5; // user requested 5 ly rings
+
+  let nodes = [];
+
+  function lyPerPx(){return scaleLY / W}
+
+  function createGrid(){
+    gridGroup.innerHTML = '';
+    const spacingLY = chooseSpacing(scaleLY);
+    const spacingPx = spacingLY / lyPerPx();
+    // draw vertical and horizontal lines
+    for(let x=0;x<=W;x+=spacingPx){
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',x);line.setAttribute('y1',0);line.setAttribute('x2',x);line.setAttribute('y2',H);
+      line.setAttribute('stroke','rgba(255,255,255,0.03)');line.setAttribute('stroke-width', (x% (spacingPx*5)===0?0.9:0.4));
+      gridGroup.appendChild(line);
+    }
+    for(let y=0;y<=H;y+=spacingPx){
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',0);line.setAttribute('y1',y);line.setAttribute('x2',W);line.setAttribute('y2',y);
+      line.setAttribute('stroke','rgba(255,255,255,0.03)');line.setAttribute('stroke-width',(y% (spacingPx*5)===0?0.9:0.4));
+      gridGroup.appendChild(line);
+    }
+    // labels on axes
+    const labelGroup = document.createElementNS('http://www.w3.org/2000/svg','g');
+    for(let x=0;x<=W;x+=spacingPx*5){
+      const lx = document.createElementNS('http://www.w3.org/2000/svg','text');
+      const lyVal = Math.round(x * lyPerPx());
+      lx.setAttribute('x', Math.min(W-40,x+6)); lx.setAttribute('y', 14);
+      lx.setAttribute('fill','rgba(255,255,255,0.35)'); lx.setAttribute('font-size',12);
+      lx.textContent = lyVal + ' ly';
+      labelGroup.appendChild(lx);
+    }
+    gridGroup.appendChild(labelGroup);
+  }
+
+  function chooseSpacing(scale){
+    // choose an easy spacing (10,20,50...) based on scale
+    const candidates = [1,2,5,10,20,25,50,100,200,500];
+    for(let c of candidates){ if(scale / c <= 12) return c; }
+    return 100;
+  }
+
+  function initNodes(){
+    nodes = names.map((name,i)=>({
+      id:i,
+      name,
+      color:colors[i % colors.length],
+      x: 120 + i*90,
+      y: 120 + (i%2)*200
+    }));
+    renderNodes();
+  }
+
+  function renderNodes(){
+    nodesGroup.innerHTML = '';
+    legend.innerHTML = '';
+    nodes.forEach(n=>{
+      const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.setAttribute('transform', `translate(${n.x},${n.y})`);
+      g.setAttribute('cursor','grab');
+      g.setAttribute('data-id', n.id);
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('r', nodeRadius);
+      circle.setAttribute('cx',0);circle.setAttribute('cy',0);
+      circle.setAttribute('fill', n.color);
+      circle.setAttribute('filter','url(#glow)');
+      circle.setAttribute('stroke','rgba(0,0,0,0.2)');circle.setAttribute('stroke-width',1);
+      g.appendChild(circle);
+
+      const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x', 14); txt.setAttribute('y', 6);
+      txt.setAttribute('font-size', 13); txt.setAttribute('fill','white'); txt.setAttribute('opacity',0.95);
+      txt.textContent = n.name;
+      g.appendChild(txt);
+
+      nodesGroup.appendChild(g);
+
+      // legend entry
+      const sw = document.createElement('div'); sw.className = 'dot-legend';
+      sw.innerHTML = `<div style="width:12px;height:12px;border-radius:4px;background:${n.color}"></div><div style='font-size:13px;color:var(--muted)'>${n.name}</div>`;
+      legend.appendChild(sw);
+    });
+
+    attachDragHandlers();
+    updateTable();
+  }
+
+  let dragging = null;
+  function attachDragHandlers(){
+    [...nodesGroup.querySelectorAll('g')].forEach(g=>{
+      g.addEventListener('pointerdown', onPointerDown);
+      g.addEventListener('pointerup', onPointerUp);
+      g.addEventListener('pointercancel', onPointerUp);
+      g.addEventListener('pointerleave', onPointerUp);
+      g.addEventListener('click', ()=>{
+        selected = Number(g.getAttribute('data-id'));
+        updateRings();
+      });
+    });
+    svg.addEventListener('pointermove', onPointerMove);
+    svg.addEventListener('pointerup', onPointerUp);
+  }
+
+  function getPointFromEvent(evt){
+    const rect = svg.getBoundingClientRect();
+    const x = (evt.clientX - rect.left) * (svg.viewBox.baseVal.width / rect.width);
+    const y = (evt.clientY - rect.top) * (svg.viewBox.baseVal.height / rect.height);
+    return {x: Math.max(0, Math.min(W, x)), y: Math.max(0, Math.min(H, y))};
+  }
+
+  function onPointerDown(e){
+    const id = Number(this.getAttribute('data-id'));
+    const p = getPointFromEvent(e);
+    dragging = {id, offsetX: p.x - nodes[id].x, offsetY: p.y - nodes[id].y};
+    this.setPointerCapture(e.pointerId);
+    this.style.cursor = 'grabbing';
+    // select this node for rings
+    selected = id;
+    updateRings();
+  }
+  function onPointerMove(e){
+    if(!dragging) return;
+    const p = getPointFromEvent(e);
+    const node = nodes.find(n=>n.id===dragging.id);
+    node.x = Math.max(0, Math.min(W, p.x - dragging.offsetX));
+    node.y = Math.max(0, Math.min(H, p.y - dragging.offsetY));
+    // update transform
+    const g = nodesGroup.querySelector(`g[data-id='${node.id}']`);
+    if(g) g.setAttribute('transform', `translate(${node.x},${node.y})`);
+    coordsDisplay.textContent = `${node.name}: (${(node.x*lyPerPx()).toFixed(2)} ly, ${(node.y*lyPerPx()).toFixed(2)} ly)`;
+    updateTable();
+    updateRings();
+  }
+  function onPointerUp(e){
+    if(!dragging) return;
+    const g = nodesGroup.querySelector(`g[data-id='${dragging.id}']`);
+    try{ g.releasePointerCapture && g.releasePointerCapture(e.pointerId); } catch(e){}
+    if(g) g.style.cursor = 'grab';
+    dragging = null;
+  }
+
+  function updateTable(){
+    // header
+    let html = '<thead><tr><th></th>' + names.map(n=>`<th>${n}</th>`).join('') + '</tr></thead><tbody>';
+    for(let i=0;i<nodes.length;i++){
+      html += `<tr><th>${nodes[i].name}</th>`;
+      for(let j=0;j<nodes.length;j++){
+        if(i===j) html += '<td>—</td>';
+        else{
+          const dpx = nodes[i].x - nodes[j].x;
+          const dpy = nodes[i].y - nodes[j].y;
+          const dly = Math.sqrt(dpx*dpx + dpy*dpy) * lyPerPx();
+          html += `<td>${dly.toFixed(2)}</td>`;
+        }
+      }
+      html += '</tr>';
+    }
+    html += '</tbody>';
+    distTable.innerHTML = html;
+  }
+
+  function resetPositions(){
+    nodes.forEach((n,i)=>{ n.x = 120 + i*90; n.y = 120 + (i%2)*200 });
+    renderNodes();
+    createGrid();
+    updateRings();
+  }
+  function randomizePositions(){
+    nodes.forEach(n=>{ n.x = 40 + Math.random()*(W-80); n.y = 40 + Math.random()*(H-80); });
+    renderNodes();
+    createGrid();
+    updateRings();
+  }
+
+  scaleRange.addEventListener('input', ()=>{
+    scaleLY = Number(scaleRange.value);
+    scaleLabel.textContent = scaleLY;
+    createGrid();
+    updateTable();
+    updateRings();
+  });
+
+  resetBtn.addEventListener('click', ()=>{ resetPositions(); });
+  randomBtn.addEventListener('click', ()=>{ randomizePositions(); });
+  exportBtn.addEventListener('click', ()=>{
+    const out = nodes.map(n=>({name:n.name,x_ly:(n.x*lyPerPx()),y_ly:(n.y*lyPerPx())}));
+    const txt = JSON.stringify({scaleLY, systems: out}, null, 2);
+    navigator.clipboard && navigator.clipboard.writeText(txt).then(()=>{
+      alert('Export copied to clipboard.');
+    }).catch(()=>{ prompt('Export JSON', txt); });
+  });
+
+  // keyboard: arrow keys nudge selected (optional enhancement)
+  let selected = null;
+  svg.addEventListener('click', (e)=>{
+    const target = e.target.closest && e.target.closest('g[data-id]');
+    if(target){ selected = Number(target.getAttribute('data-id')); updateRings(); }
+  });
+  window.addEventListener('keydown', (e)=>{
+    if(selected===null) return;
+    const node = nodes[selected];
+    const step = e.shiftKey ? 10 : 2;
+    if(e.key==='ArrowLeft') node.x = Math.max(0,node.x-step);
+    if(e.key==='ArrowRight') node.x = Math.min(W,node.x+step);
+    if(e.key==='ArrowUp') node.y = Math.max(0,node.y-step);
+    if(e.key==='ArrowDown') node.y = Math.min(H,node.y+step);
+    const g = nodesGroup.querySelector(`g[data-id='${node.id}']`);
+    if(g) g.setAttribute('transform', `translate(${node.x},${node.y})`);
+    updateTable();
+    updateRings();
+  });
+
+  // RINGS: draw concentric rings from selected node in increments of 5 ly (toggleable)
+  function updateRings(){
+    ringsGroup.innerHTML = '';
+    if(!ringsToggle.checked) return;
+    const sel = (selected === null) ? null : nodes[selected];
+    if(!sel) return; // nothing selected
+    const spacingLY = ringSpacingLY_default;
+    const spacingPx = spacingLY / lyPerPx();
+    // compute max radius so rings cover whole svg
+    const cx = sel.x, cy = sel.y;
+    const maxCornerDist = Math.max(
+      Math.hypot(cx - 0, cy - 0),
+      Math.hypot(cx - W, cy - 0),
+      Math.hypot(cx - 0, cy - H),
+      Math.hypot(cx - W, cy - H)
+    );
+    const ringsCount = Math.ceil(maxCornerDist / spacingPx);
+    for(let i=1;i<=ringsCount;i++){
+      const r = i * spacingPx;
+      const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r);
+      c.setAttribute('fill','none');
+      c.setAttribute('stroke','rgba(126,231,247,0.08)');
+      c.setAttribute('stroke-width','1');
+      c.setAttribute('stroke-dasharray','4 6');
+      ringsGroup.appendChild(c);
+      // label at right-most point of the circle
+      const lx = document.createElementNS('http://www.w3.org/2000/svg','text');
+      const labX = Math.min(W-40, cx + r + 6);
+      const labY = cy;
+      lx.setAttribute('x', labX); lx.setAttribute('y', labY);
+      lx.setAttribute('font-size', 11); lx.setAttribute('fill','rgba(255,255,255,0.45)');
+      lx.textContent = `${(i*spacingLY)} ly`;
+      ringsGroup.appendChild(lx);
+    }
+  }
+
+  // tie rings toggle to redraw
+  ringsToggle.addEventListener('change', ()=> updateRings());
+
+  // initial render
+  createGrid();
+  initNodes();
+
+})();
+</script>
+</body>
+</html>

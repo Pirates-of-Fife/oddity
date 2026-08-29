@@ -37,6 +37,18 @@ func _creature_process(delta : float) -> void:
 		if (Input.is_action_pressed("player_run")):
 			creature_run_command.execute(control_entity)
 
+		if (Input.is_action_just_pressed("general_third_person")):
+			general_toggle_third_person_command.execute(control_entity)
+			print("thirst")
+			third_person = !third_person
+
+		if third_person:
+			if (Input.is_action_just_pressed("general_third_person_increase_distance")):
+				general_increase_third_person_distance_command.execute(control_entity)
+
+			if (Input.is_action_just_pressed("general_third_person_decrease_distance")):
+				general_decrease_third_person_distance_command.execute(control_entity)
+
 	pitch_input = 0
 	twist_input = 0
 

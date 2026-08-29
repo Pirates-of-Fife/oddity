@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CargoContainerTradeResource" load_steps=2 format=3 uid="uid://cej6iem100o58"]
+
+[ext_resource type="Script" path="res://resources/classes/trade/CargoContainerTradeResource.gd" id="1_q0mrd"]
+
+[resource]
+script = ExtResource("1_q0mrd")
+is_mineable = true
+scene = "res://scenes/minables/angels-dust/extractables/AngelsDustPearl.tscn"
+name = &"Angel\'s Dust Pearl"
+description = "Rare gravitic material. Naturally inert to gravity; generates controlled gravity wells under electrical current. Standard use: deck plating & port flooring for artificial gravity. Secondary use: hover-vehicle lift systems."
+value = 75000
+preview_distance = 3.0

@@ -9,8 +9,11 @@ script = ExtResource("1_ghljd")
 planet_name = &"Auric"
 planet_scene = ExtResource("2_ajr7u")
 planet_scale = 1
+activate_distance = 1e+07
+deactivate_distance = 1.1e+07
 use_distance_display = true
 distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 200000.0
 
 [node name="MarkerSprite" parent="." instance=ExtResource("3_op2qd")]
 text = &"Auric"

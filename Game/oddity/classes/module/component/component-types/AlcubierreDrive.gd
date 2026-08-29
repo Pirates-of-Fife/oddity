@@ -81,6 +81,9 @@ func _initialize_collision_shape() -> void:
 
 
 func _on_timer_timeout() -> void:
+	if module_slot == null:
+		return
+	
 	if (module_slot.vehicle != null):
 		var ship : Starship = module_slot.vehicle
 		
@@ -93,3 +96,6 @@ func _on_timer_timeout() -> void:
 		var fuel_multiplier : float = (module_resource as AlcubierreDriveResource).fuel_curve.sample(current_speed / max_speed)
 		
 		ship.current_fuel -= (module_resource as AlcubierreDriveResource).fuel_per_second * fuel_multiplier
+
+func use_special() -> void:
+	pass

@@ -77,7 +77,7 @@ func apply_gravity() -> void:
 				body.relative_gravity_direction = gravity_vector * body.global_basis.inverse()
 				body.gravity_strength = gravity_strenth
 
-			body.apply_central_force(gravity_vector * gravity_strenth * body.mass)
+			body.apply_central_force(gravity_vector * gravity_strenth * body.mass * body.gravity_scale)
 			#print(str(body) + " " + str(gravity_vector * gravity_strenth * body.mass))
 
 func calculate_gravity_vector(body : GameEntity) -> Vector3:

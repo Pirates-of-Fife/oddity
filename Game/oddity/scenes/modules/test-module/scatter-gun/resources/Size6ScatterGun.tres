@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ScatterGunResource" load_steps=6 format=3 uid="uid://dq1r3s4t5u6v7"]
+
+[ext_resource type="Resource" uid="uid://cl6m8oao0p1q2" path="res://scenes/modules/test-module/scatter-gun/projectile/ScatterGunProjectile.tres" id="1_8wkps"]
+[ext_resource type="Script" path="res://scenes/modules/test-module/scatter-gun/ScatterGunResource.gd" id="2_2qw7n"]
+[ext_resource type="Resource" uid="uid://x2l2cxnk55hs" path="res://scenes/modules/test-module/scatter-gun/projectile/ScatterGunSecondaryProjectile.tres" id="3_lywfn"]
+[ext_resource type="AudioStream" uid="uid://bn0x0wfby7pjw" path="res://scenes/modules/test-module/scatter-gun/sounds/scatter_sound.wav" id="4_csn44"]
+[ext_resource type="AudioStream" uid="uid://dsnypcl763sx" path="res://scenes/modules/test-module/scatter-gun/sounds/scatter_gun.wav" id="5_gxscy"]
+
+[resource]
+script = ExtResource("2_2qw7n")
+secondary_projectile = ExtResource("3_lywfn")
+secondary_projectile_sound = ExtResource("4_csn44")
+secondary_projectile_damage = 160.0
+secondary_projetile_penetration = 25.0
+secondary_projectile_shield_damage = 120.0
+secondary_projectile_force = 1200.0
+scatter_time = 0.1
+projectile = ExtResource("1_8wkps")
+projectile_speed = 1200.0
+cooldown = 2.0
+heat_per_shot = 600.0
+ammo_usage = 80.0
+hull_damage = 1500.0
+shield_damage = 975.0
+penetration = 45.0
+sound = ExtResource("5_gxscy")
+type = &"Scatter Gun"
+manufacturer = &"Ox\'vic Pyrr"
+model = &"FU-6"
+size = &"6"
+release_year = &"48"

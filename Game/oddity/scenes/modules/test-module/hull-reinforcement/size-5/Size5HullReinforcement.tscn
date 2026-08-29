@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://eipa6q6mcndd"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/HullReinforcement.gd" id="1_j3pij"]
+[ext_resource type="Resource" uid="uid://dwy5vit3oafkx" path="res://scenes/modules/test-module/hull-reinforcement/size-5/Size5HullReinforcement.tres" id="2_1ro5b"]
+[ext_resource type="Resource" uid="uid://dcdvck4fb5udb" path="res://resources/resources/trade/trade-items/modules/da-dakra-group/tough-hull-extreme/TradeResourceToughHullExtreme5.tres" id="3_c5ogq"]
+[ext_resource type="PackedScene" uid="uid://sqlkqvg7d5tk" path="res://scenes/modules/test-module/hull-reinforcement/hullReinforcementModule.glb" id="4_g5m5n"]
+
+[node name="Size5HullReinforcement" type="RigidBody3D" groups=["GameEntity"]]
+collision_layer = 537396225
+collision_mask = 537396225
+mass = 100.0
+script = ExtResource("1_j3pij")
+size = 5
+module_resource = ExtResource("2_1ro5b")
+save = true
+value = 25000
+trade_information = ExtResource("3_c5ogq")
+can_be_picked_up = true
+
+[node name="hullReinforcementModule" parent="." instance=ExtResource("4_g5m5n")]
+transform = Transform3D(-3, 0, 3.67394e-16, 0, 3, 0, -3.67394e-16, 0, -3, 0, 0, 0)

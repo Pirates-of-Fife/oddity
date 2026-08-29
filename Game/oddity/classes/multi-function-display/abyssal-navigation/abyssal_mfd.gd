@@ -14,6 +14,9 @@ var gateway_open : RichTextLabel
 @export
 var gateway_closed : RichTextLabel
 
+@export
+var distance_label : RichTextLabel
+
 func set_current_system(system : String) -> void:
 	current_system.text = system
 	
@@ -27,3 +30,6 @@ func set_gateway_closed() -> void:
 func set_gateway_open() -> void:
 	gateway_closed.hide()
 	gateway_open.show()
+
+func set_distance(distance : float) -> void:
+	distance_label.text = str(roundf(distance)) + " LY"

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcnfbe411hufj"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/ShieldGenerator.gd" id="1_v5rrq"]
+[ext_resource type="Resource" uid="uid://cgaoybo6hxvhj" path="res://scenes/modules/test-module/protectec/Protectec2.tres" id="2_lu7io"]
+[ext_resource type="PackedScene" uid="uid://cuejgv3xjaj0j" path="res://scenes/modules/test-module/protectec/mesh/WolframIndustrialProtecTec.tscn" id="2_tmq5r"]
+[ext_resource type="Resource" uid="uid://bpa66a8neehdc" path="res://resources/resources/trade/trade-items/modules/wolfram-industrial/protectec/ProtecTec2TradeResource.tres" id="3_k4bgf"]
+
+[node name="ProtecTec2" type="RigidBody3D" groups=["GameEntity"]]
+collision_layer = 537396737
+collision_mask = 537396737
+script = ExtResource("1_v5rrq")
+size = 2
+module_resource = ExtResource("2_lu7io")
+save = true
+sellable = true
+trade_information = ExtResource("3_k4bgf")
+can_be_picked_up = true
+
+[node name="WolframIndustrialProtecTec" parent="." instance=ExtResource("2_tmq5r")]
+transform = Transform3D(-2, 0, 2.44929e-16, 0, 2, 0, -2.44929e-16, 0, -2, 0, 0, 0)

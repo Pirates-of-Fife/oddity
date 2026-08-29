@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://c6fr87c666t64"]
+[gd_scene load_steps=21 format=3 uid="uid://c6fr87c666t64"]
 
 [ext_resource type="Script" path="res://classes/star-system/StarSystem.gd" id="1_rfo0q"]
-[ext_resource type="Shader" path="res://shaders/skybox-shader/star-shader.gdshader" id="2_1xiln"]
+[ext_resource type="Environment" uid="uid://bjbi8djidyqs" path="res://scenes/world/gateway/GatewayEnvironment.tres" id="2_lmmc5"]
 [ext_resource type="PackedScene" uid="uid://cqmac5l8glprl" path="res://scenes/world/gateway/celestial-bodies/Gateway.tscn" id="3_dnbpr"]
 [ext_resource type="PackedScene" uid="uid://b7e4h5rtiy0j6" path="res://scenes/world/gateway/celestial-bodies/arka/NoctilunaZone.tscn" id="4_6f7ci"]
 [ext_resource type="PackedScene" uid="uid://cjuue14xnwrxc" path="res://scenes/world/gateway/celestial-bodies/arka/ArkaZone.tscn" id="5_dbwvd"]
+[ext_resource type="Resource" uid="uid://ceoofi1h8dty5" path="res://resources/resources/trade/trade-items/stations/Everything.tres" id="7_02e06"]
 [ext_resource type="PackedScene" uid="uid://crojdgkgwr1f8" path="res://scenes/world/gateway/celestial-bodies/alcolin/AlcolinZone.tscn" id="8_lc1q5"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="9_n1ioy"]
 [ext_resource type="PackedScene" uid="uid://cffn5ri2p6nrr" path="res://scenes/world/gateway/celestial-bodies/alcolin/AvantZone.tscn" id="10_ulerh"]
 [ext_resource type="PackedScene" uid="uid://n8b0kumefmg0" path="res://scenes/world/gateway/celestial-bodies/alcolin/LogiZone.tscn" id="11_damws"]
 [ext_resource type="PackedScene" uid="uid://dtg1up7xr7k15" path="res://scenes/world/gateway/celestial-bodies/alcolin/RataZone.tscn" id="12_rvpmt"]
@@ -13,29 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://cys7hpq6o76yy" path="res://scenes/world/gateway/celestial-bodies/verit/CrestZone.tscn" id="14_3ctes"]
 [ext_resource type="PackedScene" uid="uid://doqo8e7mmc8xm" path="res://classes/station/SpaceStationLoadingZone.tscn" id="14_fjptq"]
 [ext_resource type="PackedScene" uid="uid://dxpqqnarxjs56" path="res://scenes/world/gateway/celestial-bodies/verit/EvonZone.tscn" id="16_4jkyv"]
+[ext_resource type="Script" path="res://test-scenes/star-system-test-scene/luna_cube.gd" id="16_wrpcj"]
+[ext_resource type="PackedScene" uid="uid://41wbvcfh55ul" path="res://classes/player-detection-zone/MarkerSprite.tscn" id="17_54u7k"]
 [ext_resource type="PackedScene" uid="uid://s0ssiqwmwye0" path="res://scenes/world/gateway/celestial-bodies/verit/VeritZone.tscn" id="18_jwl7x"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3f7i4"]
-shader = ExtResource("2_1xiln")
-shader_parameter/sky_color = Color(0, 0, 0, 1)
-shader_parameter/star_base_color = Color(1, 1, 1, 1)
-shader_parameter/star_hue_offset = 0.6
-shader_parameter/star_intensity = 0.08
-shader_parameter/star_twinkle_speed = 0.8
-shader_parameter/star_twinkle_intensity = 0.2
-shader_parameter/layer_scale = 20.0
-shader_parameter/layer_scale_step = 10.0
-shader_parameter/layers_count = 3
+[sub_resource type="BoxMesh" id="BoxMesh_pteku"]
+size = Vector3(100, 100, 100)
 
-[sub_resource type="Sky" id="Sky_uhae2"]
-sky_material = SubResource("ShaderMaterial_3f7i4")
-
-[sub_resource type="Environment" id="Environment_gm8ak"]
-background_mode = 2
-sky = SubResource("Sky_uhae2")
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_length = 200000.0
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lgtgt"]
+data = PackedVector3Array(-50, 50, 50, 50, 50, 50, -50, -50, 50, 50, 50, 50, 50, -50, 50, -50, -50, 50, 50, 50, -50, -50, 50, -50, 50, -50, -50, -50, 50, -50, -50, -50, -50, 50, -50, -50, 50, 50, 50, 50, 50, -50, 50, -50, 50, 50, 50, -50, 50, -50, -50, 50, -50, 50, -50, 50, -50, -50, 50, 50, -50, -50, -50, -50, 50, 50, -50, -50, 50, -50, -50, -50, 50, 50, 50, -50, 50, 50, 50, 50, -50, -50, 50, 50, -50, 50, -50, 50, 50, -50, -50, -50, 50, 50, -50, 50, -50, -50, -50, 50, -50, 50, 50, -50, -50, -50, -50, -50)
 
 [node name="GatewaySystem" type="Node3D" node_paths=PackedStringArray("main_star", "player_spawn_marker", "player_respawn_marker", "spawn_station")]
 script = ExtResource("1_rfo0q")
@@ -48,7 +36,7 @@ player_respawn_position = Vector3(-2.77895e+06, 0, 0)
 spawn_station = NodePath("ArkaZone/SpaceStationLoadingZone")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_gm8ak")
+environment = ExtResource("2_lmmc5")
 
 [node name="Gateway" parent="." instance=ExtResource("3_dnbpr")]
 
@@ -62,6 +50,33 @@ sprite_max_distance = 1.45e+06
 [node name="SpaceStationLoadingZone" parent="ArkaZone" instance=ExtResource("14_fjptq")]
 transform = Transform3D(0.132291, 0, 0.99121, -2.25495e-07, 1, 4.00834e-07, -0.991211, -2.77556e-17, 0.132291, -1168.6, 0.985943, -44890.1)
 station_name = &"Kintillo Dock"
+trade_list = ExtResource("7_02e06")
+buy_markup = 1.1
+sell_markup = 0.8
+metadata/_edit_group_ = true
+
+[node name="luna cube" type="StaticBody3D" parent="ArkaZone"]
+transform = Transform3D(1, 2.77556e-17, -6.93889e-18, 2.77556e-17, 1, -2.77556e-17, 0, 0, 1, 32081, 93442.4, -6794.27)
+collision_layer = 2097153
+collision_mask = 2097153
+script = ExtResource("16_wrpcj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ArkaZone/luna cube"]
+mesh = SubResource("BoxMesh_pteku")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArkaZone/luna cube"]
+shape = SubResource("ConcavePolygonShape3D_lgtgt")
+
+[node name="PlayerDetectionZone" type="Node3D" parent="ArkaZone/luna cube" node_paths=PackedStringArray("distant_sprite")]
+script = ExtResource("9_n1ioy")
+update_time = 1.0
+use_distance_display = true
+distant_sprite = NodePath("MarkerSprite")
+sprite_distance = 100.0
+sprite_max_distance = 400000.0
+
+[node name="MarkerSprite" parent="ArkaZone/luna cube/PlayerDetectionZone" instance=ExtResource("17_54u7k")]
+text = &"Luna Cube"
 
 [node name="AlcolinZone" parent="." instance=ExtResource("8_lc1q5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61142e+07, 40, -3.96306e+06)

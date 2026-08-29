@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="StarshipInfo" load_steps=2 format=3 uid="uid://dtphwuvape7v3"]
+
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/StarshipInfo.gd" id="1_3abxx"]
+
+[resource]
+script = ExtResource("1_3abxx")
+max_linear_velocity = 600.0
+max_angular_pitch_velocity = 1.8
+max_angular_yaw_velocity = 1.5
+max_angular_roll_velocity = 1.5
+max_health = 5000.0
+max_fuel = 500.0
+max_ammo = 500.0
+max_heat = 3000.0
+base_armour_health = 20000.0
+base_armour_rating = 5.0
+manufacturer = "Rabauke Shipworks"
+model_name = "Corkscrew"
+release_year = "142"

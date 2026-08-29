@@ -1,0 +1,16 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://ckjrj6wdl8r5c"]
+
+[ext_resource type="Texture2D" uid="uid://bho3vahs1y31c" path="res://scenes/world/paradox/paradox.png" id="1_u40o6"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1eqh1"]
+panorama = ExtResource("1_u40o6")
+
+[sub_resource type="Sky" id="Sky_u01oc"]
+sky_material = SubResource("PanoramaSkyMaterial_1eqh1")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_u01oc")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 200000.0

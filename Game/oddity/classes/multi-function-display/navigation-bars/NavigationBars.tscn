@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://4tkfssij1ske"]
+
+[ext_resource type="Script" path="res://classes/multi-function-display/navigation-bars/NavigationBars.gd" id="1_efh1m"]
+[ext_resource type="Texture2D" uid="uid://dd34wglwir3lb" path="res://classes/multi-function-display/navigation-bars/bar-01.png" id="1_eum28"]
+[ext_resource type="Texture2D" uid="uid://cwmkrxnefo03b" path="res://classes/multi-function-display/navigation-bars/bar2-01.png" id="2_svpqi"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="4_wm6ld"]
+
+[node name="NavigationBars" type="Node3D"]
+script = ExtResource("1_efh1m")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(6.12323e-17, -1, 0, 1, 6.12323e-17, 0, 0, 0, 1, -0.165648, 1.0143e-17, 0)
+pixel_size = 0.0001
+texture_filter = 2
+texture = ExtResource("2_svpqi")
+
+[node name="Label3D" type="Label3D" parent="Sprite3D2"]
+transform = Transform3D(-2.23498e-17, 0.365, 4.46996e-17, 0.365, 2.23498e-17, -4.46996e-17, -4.46996e-17, 4.46996e-17, -0.365, 0.00406096, 0.0539663, -2.66356e-17)
+texture_filter = 2
+modulate = Color(0.917647, 1, 0.878431, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "30"
+font = ExtResource("4_wm6ld")
+font_size = 15
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0001
+texture_filter = 2
+texture = ExtResource("1_eum28")
+
+[node name="Markers" type="Sprite3D" parent="."]
+transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, -0.165648, 0.0930666, 0)
+pixel_size = 0.0001
+texture_filter = 2
+texture = ExtResource("2_svpqi")
+
+[node name="Markers2" type="Sprite3D" parent="."]
+transform = Transform3D(-1, -1.22465e-16, 0, 1.22465e-16, -1, 0, 0, 0, 1, -0.165648, -0.106639, 0)
+pixel_size = 0.0001
+texture_filter = 2
+texture = ExtResource("2_svpqi")

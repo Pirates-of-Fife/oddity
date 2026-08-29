@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccuf50esqifjp"]
+
+[ext_resource type="Script" path="res://classes/station/trade-terminal/trade-ui/trade-item-list/TradeItemList.gd" id="1_lkhbs"]
+
+[node name="TradeItemList" type="Node3D"]
+script = ExtResource("1_lkhbs")
+height_per_trade_item_list_item = 0.14

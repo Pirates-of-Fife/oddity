@@ -1,15 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://8uelaj03lcbm"]
+[gd_scene load_steps=10 format=3 uid="uid://8uelaj03lcbm"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_r6d4f"]
 [ext_resource type="Texture2D" uid="uid://b4843o6upcfgs" path="res://scenes/world/textures/4k_makemake_fictional.jpg" id="2_bcllv"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="3_8uol0"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_0x0jq"]
+[ext_resource type="PackedScene" uid="uid://cm8a2t7bkmm73" path="res://scenes/world/gateway/celestial-bodies/alcolin/scatter-objects/LogiFoliage.tscn" id="5_ecet1"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="10_8wrx0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18kyi"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.829781, 0.673716, 1, 1)
 albedo_texture = ExtResource("2_bcllv")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_tpj8o"]
 material = SubResource("StandardMaterial3D_18kyi")
@@ -47,3 +50,10 @@ script = ExtResource("4_0x0jq")
 planet_gravity = NodePath("../GravityWell")
 activate_distance = 18000.0
 deactivate_distance = 19000.0
+
+[node name="SceneLoadingZone" type="Node3D" parent="."]
+script = ExtResource("10_8wrx0")
+scene = ExtResource("5_ecet1")
+activate_distance = 14000.0
+deactivate_distance = 14500.0
+update_time = 1.0

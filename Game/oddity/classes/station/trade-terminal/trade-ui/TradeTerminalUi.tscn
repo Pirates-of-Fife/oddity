@@ -1,0 +1,214 @@
+[gd_scene load_steps=17 format=3 uid="uid://c0m1mj0kaoojt"]
+
+[ext_resource type="Script" path="res://classes/station/trade-terminal/trade-ui/TradeTerminalUi.gd" id="1_affxx"]
+[ext_resource type="PackedScene" uid="uid://m4eqg02uhya4" path="res://classes/station/trade-terminal/trade-ui/trade-buy-button/TradeTerminalBuyButton.tscn" id="2_rdxe2"]
+[ext_resource type="PackedScene" uid="uid://bsgsmtikad2xo" path="res://classes/station/trade-terminal/trade-ui/trade-change-amount-buttons/TradeChangeAmmountButtons.tscn" id="3_xmqof"]
+[ext_resource type="PackedScene" uid="uid://bxjlkxmhmnjit" path="res://classes/station/trade-terminal/trade-ui/trade-credit-total/TradeCreditLabel.tscn" id="4_vghmg"]
+[ext_resource type="PackedScene" uid="uid://b2wnd0bx76rs0" path="res://classes/station/trade-terminal/trade-ui/trade-item-information/TradeItemInformationScreen.tscn" id="5_tca6s"]
+[ext_resource type="PackedScene" uid="uid://ccuf50esqifjp" path="res://classes/station/trade-terminal/trade-ui/trade-item-list/TradeItemList.tscn" id="6_0g7n5"]
+[ext_resource type="AudioStream" uid="uid://crdgvtkwst2i" path="res://classes/landing-pad/spawn-ship-ui/no.wav" id="7_nwsbk"]
+[ext_resource type="PackedScene" uid="uid://dk4seiw4urcm2" path="res://classes/station/trade-terminal/trade-ui/TradeItemButton.tscn" id="9_8rvj2"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="10_78u0o"]
+[ext_resource type="AudioStream" uid="uid://2w7aoby4ad1l" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/button.wav" id="11_y2wfb"]
+[ext_resource type="Script" path="res://classes/insurance-terminal/UiButton.gd" id="12_r3y1u"]
+[ext_resource type="Material" uid="uid://cpqklftecyhba" path="res://classes/insurance-terminal/UiButtonRegularMaterial.tres" id="13_o3y12"]
+[ext_resource type="Material" uid="uid://bi7wue047oe2y" path="res://classes/station/trade-terminal/trade-ui/TradeUIButtonStart.material" id="14_wy3ow"]
+
+[sub_resource type="Resource" id="Resource_88coe"]
+metadata/__load_path__ = "res://resources/resources/trade/trade-items/ExampleTradeResource.tres"
+
+[sub_resource type="BoxMesh" id="BoxMesh_8v5n2"]
+material = ExtResource("13_o3y12")
+size = Vector3(0.38, 0.38, 0.01)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vkr1n"]
+points = PackedVector3Array(0.19, 0.19, 0.005, 0.19, 0.19, -0.005, -0.19, 0.19, 0.005, 0.19, -0.19, 0.005, 0.19, -0.19, -0.005, -0.19, 0.19, -0.005, -0.19, -0.19, 0.005, -0.19, -0.19, -0.005)
+
+[node name="TradeTerminalUi" type="Node3D" node_paths=PackedStringArray("trade_item_root", "ammount_buttons", "trade_terminal_buy_button", "trade_change_ammount_buttons", "previous_button", "next_button", "page_label", "title_label", "trade_credit_label", "error_label", "success_label", "trade_item_information_screen", "error_noise")]
+script = ExtResource("1_affxx")
+trade_item_root = NodePath("TradeItemRoot")
+ammount_buttons = NodePath("TradeChangeAmmountButtons")
+trade_terminal_buy_button = NodePath("TradeTerminalBuyButton")
+trade_change_ammount_buttons = NodePath("TradeChangeAmmountButtons")
+previous_button = NodePath("Pagination/Previous")
+next_button = NodePath("Pagination/Next")
+page_label = NodePath("Pagination/Title")
+title_label = NodePath("Title")
+trade_credit_label = NodePath("TradeCreditLabel")
+error_label = NodePath("Error")
+success_label = NodePath("Success")
+trade_item_information_screen = NodePath("TradeItemInformationScreen")
+error_noise = NodePath("ErrorNoise")
+
+[node name="TradeTerminalBuyButton" parent="." instance=ExtResource("2_rdxe2")]
+transform = Transform3D(1.83697e-17, 0, -0.3, 0, 0.3, 0, 0.3, 0, 1.83697e-17, -0.123252, 1.21244, 2.4898)
+
+[node name="TradeChangeAmmountButtons" parent="." instance=ExtResource("3_xmqof")]
+transform = Transform3D(9.18485e-18, 0, -0.15, 0, 0.15, 0, 0.15, 0, 9.18485e-18, -0.124023, 1.23029, 2.88429)
+
+[node name="TradeCreditLabel" parent="." instance=ExtResource("4_vghmg")]
+transform = Transform3D(1.10218e-17, 0, -0.18, 0, 0.18, 0, 0.18, 0, 1.10218e-17, -0.18364, 1.29169, 4.13546)
+text = "160k Credits"
+horizontal_alignment = 2
+
+[node name="TradeItemList" parent="." instance=ExtResource("6_0g7n5")]
+transform = Transform3D(3.33067e-16, 0, -1, 0, 1, 0, 1, 0, 3.33067e-16, -0.148057, 2.7767, -2.86401)
+
+[node name="ErrorNoise" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_nwsbk")
+volume_db = -32.0
+
+[node name="TradeItemRoot" type="Node3D" parent="."]
+
+[node name="TradeItemButton" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 3.40422, -2.12277)
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton2" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 2.98139, -2.12277)
+id = 1
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton3" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 2.55212, -2.12277)
+id = 2
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton4" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 2.12062, -2.12277)
+id = 3
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton5" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 1.70308, -2.12277)
+id = 4
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton6" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 3.40422, 2.10552)
+id = 5
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton7" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 2.98139, 2.10552)
+id = 6
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton8" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 2.55212, 2.10552)
+id = 7
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton9" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 2.12062, 2.10552)
+id = 8
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="TradeItemButton10" parent="TradeItemRoot" node_paths=PackedStringArray("interaction_sound") instance=ExtResource("9_8rvj2")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -0.145869, 1.70308, 2.10552)
+id = 9
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="Error" type="Label3D" parent="."]
+transform = Transform3D(9.49101e-18, 0, -0.155, 0, 0.155, 0, 0.155, 0, 9.49101e-18, -0.190981, 1.27247, 2.15474)
+visible = false
+texture_filter = 2
+modulate = Color(1, 0.124572, 0.0864943, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "ERROR"
+font = ExtResource("10_78u0o")
+font_size = 76
+horizontal_alignment = 2
+
+[node name="Success" type="Label3D" parent="."]
+transform = Transform3D(9.49101e-18, 0, -0.155, 0, 0.155, 0, 0.155, 0, 9.49101e-18, -0.190981, 1.27247, 2.15474)
+visible = false
+texture_filter = 2
+modulate = Color(0.146916, 0.656981, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "SUCCESS"
+font = ExtResource("10_78u0o")
+font_size = 76
+horizontal_alignment = 2
+
+[node name="ButtonPress" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44865, 0)
+stream = ExtResource("11_y2wfb")
+volume_db = 6.0
+pitch_scale = 0.5
+bus = &"Interior"
+
+[node name="Title" type="Label3D" parent="."]
+transform = Transform3D(1.46958e-17, 0, -0.24, 0, 0.24, 0, 0.24, 0, 1.46958e-17, -0.123411, 3.75426, -4.11806)
+text = "[STATION NAME] Trading Terminal
+"
+font = ExtResource("10_78u0o")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+
+[node name="TradeItemInformationScreen" parent="." instance=ExtResource("5_tca6s")]
+transform = Transform3D(-0.326809, 0, -0.653952, 0, 0.581, 0, 0.303499, 0, -0.704179, -1.23111, 2.79388, 5.60646)
+current_trade_item = SubResource("Resource_88coe")
+
+[node name="Pagination" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124294, 1.25318, -2.33591)
+
+[node name="Previous" type="StaticBody3D" parent="Pagination" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, -0.562598)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("12_r3y1u")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("13_o3y12")
+selected_material = ExtResource("14_wy3ow")
+interaction_sound = NodePath("../../ButtonPress")
+press_delay = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pagination/Previous"]
+mesh = SubResource("BoxMesh_8v5n2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pagination/Previous"]
+shape = SubResource("ConvexPolygonShape3D_vkr1n")
+
+[node name="Label3D" type="Label3D" parent="Pagination/Previous"]
+transform = Transform3D(0.685, 0, 0, 0, 0.685, 0, 0, 0, 0.685, -3.2435e-19, 0.0234543, 0.00529703)
+texture_filter = 2
+text = "<"
+font = ExtResource("10_78u0o")
+font_size = 80
+outline_size = 0
+
+[node name="Next" type="StaticBody3D" parent="Pagination" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 0.533586)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("12_r3y1u")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("13_o3y12")
+selected_material = ExtResource("14_wy3ow")
+interaction_sound = NodePath("../../ButtonPress")
+press_delay = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pagination/Next"]
+mesh = SubResource("BoxMesh_8v5n2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pagination/Next"]
+shape = SubResource("ConvexPolygonShape3D_vkr1n")
+
+[node name="Label3D" type="Label3D" parent="Pagination/Next"]
+transform = Transform3D(0.685, 0, 0, 0, 0.685, 0, 0, 0, 0.685, -3.2435e-19, 0.0234543, 0.00529703)
+texture_filter = 2
+text = ">"
+font = ExtResource("10_78u0o")
+font_size = 80
+outline_size = 0
+
+[node name="Title" type="Label3D" parent="Pagination"]
+transform = Transform3D(1.46958e-17, 0, -0.24, 0, 0.24, 0, 0.24, 0, 1.46958e-17, 0, 0, 0)
+text = "XX / XX"
+font = ExtResource("10_78u0o")
+font_size = 80
+outline_size = 0

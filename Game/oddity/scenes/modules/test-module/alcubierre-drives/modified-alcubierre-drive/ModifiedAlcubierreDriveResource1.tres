@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AlcubierreDriveResource" load_steps=7 format=3 uid="uid://86pkqw1xonxo"]
+
+[ext_resource type="AudioStream" uid="uid://dlp4trogq3fk" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_end.wav" id="1_acx77"]
+[ext_resource type="AudioStream" uid="uid://bgxc6texjc537" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_loop.wav" id="2_rey17"]
+[ext_resource type="AudioStream" uid="uid://bo7fqw26hxuon" path="res://classes/module/component/component-types/alcubierre-drive/sounds/charging/charging_start.wav" id="3_db1qj"]
+[ext_resource type="Script" path="res://resources/classes/module/component/alcubierre-drive/AlcubierreDriveResource.gd" id="4_cahfx"]
+[ext_resource type="AudioStream" uid="uid://c7vtf858tqoyu" path="res://classes/module/component/component-types/alcubierre-drive/sounds/travelling/travelling.wav" id="5_iffl5"]
+
+[sub_resource type="Curve" id="Curve_88v20"]
+_data = [Vector2(0, 0.428571), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("4_cahfx")
+spool_time = 2.0
+acceleration = 1000.0
+deacceleration = 3000.0
+max_speed = 1.75e+06
+max_turn_speed = 0.6
+fuel_per_second = 0.01
+fuel_curve = SubResource("Curve_88v20")
+charging_start = ExtResource("3_db1qj")
+charging_sound = ExtResource("2_rey17")
+charging_end = ExtResource("1_acx77")
+travelling_sound = ExtResource("5_iffl5")
+type = &"Alcubierre Drive"
+manufacturer = &"None"
+model = &"None"
+size = &"1"
+release_year = &"240"
+power_usage = 0.0

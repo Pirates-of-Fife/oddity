@@ -12,6 +12,9 @@ var crosshair : Crosshair3d
 var abyssal_mfd : AbyssalMFD3D
 
 @export
+var star_system_map : StarSystemMap3D
+
+@export
 var super_cruise_mfd : SuperCruiseMFD3D
 
 @export
@@ -39,6 +42,9 @@ var fuel_ui : FuelUi3d
 var interior_lights : Node3D
 
 @export
+var power_screen : RabaukePowerScreen
+
+@export
 var damaged_fires : Node3D
 
 @export
@@ -50,7 +56,14 @@ var alarm_sound_player : AudioStreamPlayer3D
 @export
 var explosion_partcle : GPUParticles3D
 
+@export
+var landing_cam : Sprite3D
 
+@export
+var cargo_bay : RABS_KestrelMk1_Ramp
+
+@export
+var tractor_beams : Array[TractorBeam]
 
 var interior_shown : bool = true
 var player_reference : Player
@@ -78,14 +91,14 @@ func _process(delta: float) -> void:
 	_RABS_Kestrel_Mk1_process(delta)
 
 func _RABS_Kestrel_Mk1_process(delta : float) -> void:
-	_starship_process(delta)
-
-	if player == null:
+	_starship_process(delta)	
+	
+	if player_reference == null:
 		return
 
-	var distance_to_player : float = (global_position - player_reference.control_entity.global_position).length_squared()
+	var distance_to_player : float = (global_position - player_reference.global_position).length_squared()
 
-	if distance_to_player < 625:
+	if distance_to_player < 3000:
 		if !interior_shown:
 			show_interior()
 			interior_shown = true
@@ -93,14 +106,17 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 		if interior_shown:
 			hide_interior()
 			interior_shown = false
-
+	
+	if landing_gear_on == true:
+		current_max_velocity = 100
+	
 	if relative_linear_velocity.length() >= cruise_speed and current_state == State.POWER_ON:
 		if !$Interior/Bridge/CruiseLabel.visible:
 			$Interior/Bridge/CruiseLabel.show()
 			$Interior/Bridge/CruiseLabel/CruiseSound.play()
 	else:
 		if $Interior/Bridge/CruiseLabel.visible:
-			$Interior/Bridge/CruiseLabel/CruiseSound.play()
+			#$Interior/Bridge/CruiseLabel/CruiseSound.play()
 			$Interior/Bridge/CruiseLabel.hide()
 
 	if ship_name.to_lower() == "the sunk'n norwegian":
@@ -115,6 +131,11 @@ func _RABS_Kestrel_Mk1_process(delta : float) -> void:
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Yaw/Blend3/blend_amount", -actual_rotation_vector_unit.y)
 	$ThrusterAnimationPlayer/AnimationTree.set("parameters/Roll/Blend3/blend_amount", -actual_rotation_vector_unit.z)
 
+func set_material_to_hull(material : StandardMaterial3D) -> void:
+	$Mesh/Exterior/BridgeExterior/Cockpit.set_surface_override_material(0, material)
+	$Mesh/Exterior/Hull2/Hull.set_surface_override_material(0, material) 
+	current_hull_material = material
+		
 func _overheat_start() -> void:
 	if (is_bounty_target):
 		return
@@ -165,7 +186,12 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	alcubierre_drive_charging_ended.connect(on_super_cruise_charging_stopped)
 
 	_starship_ready()
-
+	
+	if is_bounty_target:
+		landing_cam.get_children()[0].queue_free()
+		for t : TractorBeam in tractor_beams:
+			t.queue_free()
+	
 	player_reference = get_tree().get_first_node_in_group("Player")
 
 	overheating_start.connect(_overheat_start)
@@ -177,6 +203,10 @@ func RABS_Kestrel_Mk1_ready() -> void:
 	entered_pressure_zone.connect(_on_pressure_zone_entered)
 	exited_pressure_zone.connect(_on_pressure_zone_exited)
 	
+	current_armour_health_changed.connect(_update_armour_ui)
+	
+	_update_armour_ui()
+	
 	if current_state == State.POWER_OFF:
 		$Interior/Bridge/ShieldAndHullUi3d.hide()
 		$Interior/Bridge/VelocityMfd3d.hide()
@@ -184,14 +214,45 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		$Interior/Bridge/RabsControlSeat/Crosshair3d.hide()
 		$Interior/Bridge/MassLockedLabel.hide()
 		$Interior/Bridge/CruiseLabel.hide()
+		$Interior/Bridge/LandingGearLabel.hide()
+		landing_cam.hide()
 		fuel_ui.hide()
 		heat_ui.hide()
 		if damaged:
 			$Interior/Bridge/DamagedLabel.hide()
 		$Interior/Bridge/RadarDisplay.hide()
-		$Interior/Bridge/PowerLabel.show()
+		power_screen.set_state_power_off()
+		#$Interior/Bridge/PowerLabel.show()
 		$Interior/Bridge/StarshipTargetMfd.hide()
 		ammo_ui.hide()
+	else:
+		power_screen.set_state_power_on()
+		
+	color_changed_to_dark.connect(_on_color_dark)
+	color_changed_to_light.connect(_on_color_white)
+	
+	if is_color_light(current_hull_material.albedo_color):
+		_on_color_white()
+	else:
+		_on_color_dark()
+
+func _on_color_white() -> void:
+	ship_identification_label.modulate = Color(0, 0, 0, 1)
+	name_label.modulate = Color(0, 0, 0, 1)
+	
+	$Mesh/Decal.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-04.png")
+	$Mesh/Decal2.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-04.png")
+	$Mesh/Decal3.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-03.png")
+	$Mesh/Decal4.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-03.png")
+	
+func _on_color_dark() -> void:
+	ship_identification_label.modulate = Color(1, 1, 1, 1)
+	name_label.modulate = Color(1, 1, 1, 1)
+	
+	$Mesh/Decal.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png")
+	$Mesh/Decal2.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png")
+	$Mesh/Decal3.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png")
+	$Mesh/Decal4.texture_albedo = load("res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-02.png")
 
 
 func _on_pressure_zone_entered() -> void:
@@ -214,7 +275,8 @@ func _on_fuel_empty() -> void:
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()
-	$Interior/Bridge/PowerLabel.hide()
+	#$Interior/Bridge/PowerLabel.hide()
+	power_screen.hide()
 	$Interior/Bridge/StarshipTargetMfd.hide()
 	$Interior/Bridge/LandingGearLabel.hide()
 	ammo_ui.hide()
@@ -227,6 +289,7 @@ func _on_refueled() -> void:
 	for light : Node3D in interior_lights.get_children():
 		if light is OmniLight3D:
 			light.show()
+	power_screen.show()
 			
 func on_supercruise_engaged() -> void:
 	velocity_mfd.hide()
@@ -295,24 +358,48 @@ func update_ui() -> void:
 
 			
 func on_power_on() -> void:
-	power_on_sound_player.play()
+	_update_armour_ui()
 
-	$Interior/Bridge/ShieldAndHullUi3d.show()
-	$Interior/Bridge/VelocityMfd3d.show()
-	$Interior/Bridge/AbyssalMFD3d.show()
-	$Interior/Bridge/RabsControlSeat/Crosshair3d.show()
-	$Interior/Bridge/MassLockedLabel.show()
-	$Interior/Bridge/CruiseLabel.show()
-	fuel_ui.show()
-	heat_ui.show()
+	power_on_sound_player.play()
+	power_screen.power_on()
+
+	var ui_elements : Array = [
+		$Interior/Bridge/ShieldAndHullUi3d,
+		$Interior/Bridge/VelocityMfd3d,
+		$Interior/Bridge/AbyssalMFD3d,
+		$Interior/Bridge/RabsControlSeat/Crosshair3d,
+		#$Interior/Bridge/MassLockedLabel,
+		$Interior/Bridge/CruiseLabel,
+		fuel_ui,
+		heat_ui,
+		$Interior/Bridge/RadarDisplay,
+		$Interior/Bridge/StarshipTargetMfd,
+		ammo_ui
+	]
 
 	if damaged:
-		$Interior/Bridge/DamagedLabel.show()
-	$Interior/Bridge/RadarDisplay.show()
-	$Interior/Bridge/PowerLabel.hide()
-	$Interior/Bridge/StarshipTargetMfd.show()
+		ui_elements.append($Interior/Bridge/DamagedLabel)
+	if landing_gear_on:
+		ui_elements.append($Interior/Bridge/LandingGearLabel)
+		ui_elements.append(landing_cam)
+	if headlight_left.visible:
+		ui_elements.append(headlight_icon)
 	
-	ammo_ui.show()
+	await get_tree().create_timer(3.5).timeout
+	
+	var boot_time : float = 0.5
+	var flicker_interval : float = 0.05
+	var elapsed : float = 0.0
+
+	while elapsed < boot_time:
+		for element : Node3D in ui_elements:
+			element.visible = randi() % 2 == 0
+		await get_tree().create_timer(flicker_interval).timeout
+		elapsed += flicker_interval
+
+	for element : Node3D in ui_elements:
+		element.show()
+
 
 func on_power_off() -> void:
 	power_off_sound_player.play()
@@ -327,41 +414,63 @@ func on_power_off() -> void:
 	fuel_ui.hide()
 	$Interior/Bridge/AltLabel.hide()
 	$Interior/Bridge/GravityLabel.hide()
-
+	$Interior/Bridge/LandingGearLabel.hide()
+	headlight_icon.hide()
+	
+	landing_cam.hide()
+	
 	if damaged:
 		$Interior/Bridge/DamagedLabel.hide()
 	$Interior/Bridge/RadarDisplay.hide()
-	$Interior/Bridge/PowerLabel.show()
+	#$Interior/Bridge/PowerLabel.show()
+	power_screen.power_off()
 	$Interior/Bridge/StarshipTargetMfd.hide()
 	ammo_ui.hide()
 
 func update_abyssal_mfd() -> void:
 	abyssal_mfd.set_current_system(current_star_system.system_name)
 	abyssal_mfd.set_selected_system(selected_system.name)
-
+	
+	var current_system_resource : StarSystemResource = (get_tree().get_first_node_in_group("World") as World).get_current_star_sytem_resource()
+	
+	var dist : float = (get_tree().get_first_node_in_group("World") as World).calculate_star_system_distance(current_system_resource, selected_system)
+	abyssal_mfd.set_distance(dist)
+	distance_to_target_star_system = dist
+	
+	star_system_map.update_map(current_system_resource, jump_range)
+	
+	
 func on_destroyed() -> void:
-	for fire : GPUParticles3D in destroyed_fires.get_children():
-		fire.start_fire()
-
 	for light : Node3D in interior_lights.get_children():
 		if light is OmniLight3D:
 			light.light_color = interior_lights.red_color
 			light.light_energy = interior_lights.dim_light_energy
-
-	for fire : GPUParticles3D in damaged_fires.get_children():
-		fire.start_fire()
-
+			
+	if !destroyed_on_load:
+		for fire : GPUParticles3D in damaged_fires.get_children():
+			fire.start_fire()
+		for fire : GPUParticles3D in destroyed_fires.get_children():
+			fire.start_fire()
+		
 	alarm_sound_player.play()
+	
+	if !destroyed_on_load:
+		$ExplosionParticle.emitting = true
 
-	$ExplosionParticle.emitting = true
-
-
+	power_screen.hide()
 	velocity_mfd.hide()
 	crosshair.hide()
 	abyssal_mfd.hide()
 	super_cruise_mfd.hide()
 	shield_and_health_ui.hide()
 	damaged_label.hide()
+	
+	await get_tree().create_timer(20).timeout
+	
+	for fire : GPUParticles3D in destroyed_fires.get_children():
+		fire.stop_fire()
+	for fire : GPUParticles3D in damaged_fires.get_children():
+		fire.stop_fire()
 
 func on_repaired() -> void:
 	for light : Node3D in interior_lights.get_children():
@@ -394,7 +503,7 @@ func on_damaged() -> void:
 
 	damaged_label.show()
 
-func toggle_landing_gear() -> void:
+func toggle_landing_gear(force : bool = false) -> void:
 	if $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 0 and $Exterior/LandingGear/RabsKestrelMk1LandingGear.state != 1:
 		return
 
@@ -409,12 +518,39 @@ func toggle_landing_gear() -> void:
 	if $Interior/Bridge/LandingGearLabel.visible:
 		$Interior/Bridge/LandingGearLabel.hide()
 		landing_gear_on = false
+		landing_cam.hide()
 		landing_gear_retracted.emit()
 	else:
 		$Interior/Bridge/LandingGearLabel.show()
 		landing_gear_on = true
+		landing_cam.show()
 		landing_gear_deployed.emit()
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is Projectile:
 		body.activate_collision()
+
+func toggle_tractor_beams() -> void:
+	for t : TractorBeam in tractor_beams:
+		if t.visible:
+			if !t.active:
+				t.activate()
+			else:
+				t.deactivate()
+				
+func toggle_cargo_bay() -> void:
+	cargo_bay.toggle_open_state()
+	
+
+func _on_tractorbeam_button_interacted(player:Player, control_entity:ControlEntity) -> void:
+	toggle_tractor_beams()
+
+func enable_tractor_beam_upgrade() -> void:
+	for t : TractorBeam in tractor_beams:
+		t.enable()
+		
+func _update_armour_ui() -> void:
+	shield_and_health_ui.current_armour_rating = current_armour_rating
+	shield_and_health_ui.current_armour_health = current_armour_health
+	shield_and_health_ui.max_armour_health = max_armour_health
+	shield_and_health_ui._update_armour()

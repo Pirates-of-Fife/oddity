@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=3 format=3 uid="uid://oes7avq4dhql"]
+
+[ext_resource type="PackedScene" uid="uid://8jca3bie0g6x" path="res://scenes/modules/test-module/rail-gun/SmallRailgunProjectile.tscn" id="1_yho75"]
+[ext_resource type="Script" path="res://resources/classes/projectile/ProjectileResource.gd" id="2_pohtk"]
+
+[resource]
+script = ExtResource("2_pohtk")
+projectile_scene_file = ExtResource("1_yho75")

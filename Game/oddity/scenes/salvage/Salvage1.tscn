@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://7a3u3om1vuxa"]
+[gd_scene load_steps=26 format=3 uid="uid://7a3u3om1vuxa"]
 
 [ext_resource type="Script" path="res://scenes/salvage/random_salvage_ship_loadout.gd" id="1_5h7jv"]
 [ext_resource type="Resource" uid="uid://b1pldqyejslhf" path="res://resources/resources/bounty-hunting/low/RABS_Kestrel_MK1_Bounty_Low_1_Loadout.tres" id="2_75ld0"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://h2gmsd4soaa8" path="res://scenes/cargo/bounty-hunting-cargo-containers/Contraband.tscn" id="22_ejp5x"]
 [ext_resource type="PackedScene" uid="uid://bk046jth70dqt" path="res://scenes/cargo/bounty-hunting-cargo-containers/GatewayRum.tscn" id="23_44hux"]
 [ext_resource type="PackedScene" uid="uid://bqpmddm661vhp" path="res://scenes/cargo/bounty-hunting-cargo-containers/HighValueContainer.tscn" id="24_gh5f2"]
+[ext_resource type="PackedScene" uid="uid://rpex7qa7spbx" path="res://test-scenes/star-system-test-scene/GodotPlushie.tscn" id="25_cawf0"]
 
 [node name="Salvage1" type="Node3D" node_paths=PackedStringArray("ship")]
 script = ExtResource("1_5h7jv")
@@ -50,3 +51,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.4848, 0, -39.2974)
 
 [node name="Cu1Container6" parent="." instance=ExtResource("24_gh5f2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63494, 0, -39.7458)
+
+[node name="GodotPlushie" parent="." instance=ExtResource("25_cawf0")]
+transform = Transform3D(-0.907705, 0, 0.41961, 0, 1, 0, -0.41961, 0, -0.907705, 0, 2.19689, 17.7938)

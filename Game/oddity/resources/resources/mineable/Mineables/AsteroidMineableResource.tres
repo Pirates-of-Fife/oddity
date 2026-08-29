@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MineableResource" load_steps=12 format=3 uid="uid://b8q66q6eop8h7"]
+
+[ext_resource type="PackedScene" uid="uid://bwky3jn0doc0y" path="res://scenes/minables/asteroids/asteroid_chunks/AsteroidChunk1.tscn" id="1_shwph"]
+[ext_resource type="PackedScene" uid="uid://de1xbftiaxibp" path="res://scenes/minables/asteroids/asteroid_chunks/AsteroidChunk2.tscn" id="2_u71gm"]
+[ext_resource type="PackedScene" uid="uid://b26er7jfxs4vt" path="res://scenes/minables/asteroids/asteroid_chunks/AsteroidChunk3.tscn" id="3_ver6j"]
+[ext_resource type="PackedScene" uid="uid://chostsn4e5kah" path="res://scenes/minables/asteroids/RockCrackSound.tscn" id="4_3hrlb"]
+[ext_resource type="ArrayMesh" uid="uid://crb4x6y4f2mbi" path="res://scenes/minables/asteroids/asteroid_low_detail_mesh.tres" id="5_j0alo"]
+[ext_resource type="Script" path="res://resources/resources/mineable/MineableResource.gd" id="6_5ps0o"]
+[ext_resource type="PackedScene" uid="uid://b8pfc523il15h" path="res://scenes/minables/asteroids/asteroid1/MinableAsteroid1.tscn" id="7_gcw8b"]
+[ext_resource type="PackedScene" uid="uid://cgxbyrqmcj7pb" path="res://scenes/minables/asteroids/asteroid2/MinableAsteroid2.tscn" id="8_a20f5"]
+[ext_resource type="PackedScene" uid="uid://b2ae0t12ujy5w" path="res://scenes/minables/asteroids/asteroid3/MinableAsteroid3.tscn" id="9_ueon3"]
+[ext_resource type="PackedScene" uid="uid://cuycgbjf6qd2o" path="res://scenes/minables/asteroids/asteroid4/MinableAsteroid4.tscn" id="10_wl76f"]
+[ext_resource type="PackedScene" uid="uid://cwn0ruudw56h5" path="res://scenes/minables/asteroids/asteroid5/MinableAsteroid5.tscn" id="11_kpw2j"]
+
+[resource]
+script = ExtResource("6_5ps0o")
+mineable_name = &"Asteroid"
+min_resource_health = 10000.0
+max_resource_health = 60000.0
+min_resource_count = 3
+max_resource_count = 6
+extractable_resources = [ExtResource("1_shwph"), ExtResource("2_u71gm"), ExtResource("3_ver6j")]
+extraction_force = 150.0
+min_rarity = 0.0
+max_rarity = 10.5
+variants = [ExtResource("7_gcw8b"), ExtResource("8_a20f5"), ExtResource("9_ueon3"), ExtResource("10_wl76f"), ExtResource("11_kpw2j")]
+low_detail_mesh = ExtResource("5_j0alo")
+base_value = 406300
+value_variance = 0.3
+extraction_sound = ExtResource("4_3hrlb")

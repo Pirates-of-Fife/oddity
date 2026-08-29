@@ -26,9 +26,21 @@ var respawn_hud : CanvasLayer
 @export
 var hud : CreditHud
 
+@export
+var inventory_hud : InventoryHud
+
+@export
+var exit_ui : CanvasLayer
+
+@export
+var inventory : PlayerInventoryResource
+
 var force_respawn_pressed_count : int = 0
 var force_respawn_timer : Timer = Timer.new()
 var has_died : bool = false
+
+var current_marker_category : int = 0
+var max_marker_category : int = 1
 
 func _ready() -> void:
 	_player_ready()
@@ -36,14 +48,10 @@ func _ready() -> void:
 func add_credits(credits : int) -> void:
 	self.credits += abs(credits)
 	credits_added.emit(abs(credits))
-	var world : World = get_tree().get_first_node_in_group("World")
-	world.save_player_money_state()
 
 func remove_credits(credits : int) -> void:
 	self.credits -= abs(credits)
 	credits_removed.emit(abs(credits))
-	var world : World = get_tree().get_first_node_in_group("World")
-	world.save_player_money_state()
 
 func _player_ready() -> void:
 	_mind_ready()
@@ -57,14 +65,217 @@ func _player_ready() -> void:
 func force_respawn_timer_timeout() -> void:
 	force_respawn_pressed_count = 0
 
+func store_item_in_slot(slot : int, entity : Node3D) -> void:
+	if !is_entity_storable(entity, true):
+		return
+	
+	if is_inventory_slot_occupied(slot):
+		inventory_hud.show_error("slot occupied")
+		return
+	
+	var inventory_slot : InventoryGameEntitySlot = create_inventory_slot_resource(entity)
+			
+	if entity is CargoContainer:
+		if entity.snapped_to != null:
+			entity.unsnap_from_grid()
+	
+	if entity is Module:
+		if entity.module_slot != null:
+			entity.uninsert()
+	
+	if entity is GameEntity:
+		if entity.is_being_held:
+			if control_entity is Creature:
+				control_entity.drop()
+		
+		entity.queue_free()
+	
+	if control_entity is Humanoid:
+		control_entity.play_store_particles()
+	
+	inventory_hud.store_item_in_slot(slot, inventory_slot)
+	
+	match slot:
+		1:
+			inventory.inventory_slot_1 = inventory_slot
+		2:
+			inventory.inventory_slot_2 = inventory_slot
+		3:
+			inventory.inventory_slot_3 = inventory_slot
+		4:
+			inventory.inventory_slot_4 = inventory_slot
+		5:
+			inventory.inventory_slot_5 = inventory_slot
 
+
+func is_entity_storable(entity : Node3D, show_error : bool = false) -> bool:
+	if entity == null:
+		if show_error:
+			inventory_hud.show_error("NO ENTITY TO STORE")
+		return false
+	
+	if entity is StaticGameEntity:
+		if show_error:
+			inventory_hud.show_error("Cannot store " + str(entity.entity_name))
+		return false
+		
+	if entity is GameEntity:
+		if !entity.can_be_picked_up:
+			if show_error:
+				inventory_hud.show_error("Cannot store " + str(entity.entity_name))
+			return false
+		
+	if entity is CargoContainer:
+		if entity.container_size != CargoUnit.ContainerSize.CU_1:
+			if show_error:
+				inventory_hud.show_error("Cannot store large cargo containers")
+			return false
+	
+	return true
+
+
+func retrieve_item_in_slot(slot : int) -> void:
+	if !is_inventory_slot_occupied(slot):
+		return
+	
+	inventory_hud.retrieve_item_in_slot(slot)
+	
+	if control_entity is not Creature:
+		return
+	
+	var creature : Creature = control_entity
+	var entity : GameEntity
+	
+	match slot:
+		1:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_1)
+			
+			inventory.inventory_slot_1 = null
+		2:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_2)
+			
+			inventory.inventory_slot_2 = null
+		3:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_3)
+			
+			inventory.inventory_slot_3 = null
+		4:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_4)
+			
+			inventory.inventory_slot_4 = null
+		5:
+			entity = create_entity_from_inventory_slot_resource(inventory.inventory_slot_5)
+			
+			inventory.inventory_slot_5 = null
+
+	get_tree().get_first_node_in_group("World").add_child(entity)
+	
+	entity.global_position = creature.pick_up_location.global_position
+	entity.global_rotation = creature.pick_up_location.global_rotation #+ entity.global_basis.inverse() * Vector3(0, deg_to_rad(60), 0)
+	
+	if control_entity is Humanoid:
+		control_entity.play_release_particles()
+
+func create_inventory_slot_resource(entity : GameEntity) -> InventoryGameEntitySlot:
+	var slot : InventoryGameEntitySlot = InventoryGameEntitySlot.new()
+	
+	slot.game_entity = load(entity.scene_file_path)
+	
+	if entity is Module:
+		if entity.module_resource is ComponentResource:
+			var component_resource : ComponentResource = entity.module_resource
+			
+			slot.name = component_resource.manufacturer + " " + component_resource.model + " | Size " + component_resource.size
+	elif entity is CargoContainer:
+		slot.name = entity.contents
+	elif entity is GameEntity:
+		slot.name = entity.entity_name
+	
+	slot.value = entity.value
+	
+	return slot
+
+func create_entity_from_inventory_slot_resource(slot : InventoryGameEntitySlot) -> GameEntity:
+	var entity : GameEntity = slot.game_entity.instantiate()
+	entity.value = slot.value
+	
+	return entity
+
+func is_inventory_used() -> bool:
+	for i : int in range(1, 5):
+		if is_inventory_slot_occupied(i):
+			return true
+			
+	return false
+
+func is_inventory_slot_occupied(slot : int) -> bool:
+	match slot:
+		1:
+			if inventory.inventory_slot_1 == null:
+				return false
+			else:
+				return true
+		2:
+			if inventory.inventory_slot_2 == null:
+				return false
+			else:
+				return true
+		3:
+			if inventory.inventory_slot_3 == null:
+				return false
+			else:
+				return true
+		4:
+			if inventory.inventory_slot_4 == null:
+				return false
+			else:
+				return true
+		5:
+			if inventory.inventory_slot_5 == null:
+				return false
+			else:
+				return true
+	
+	return true
+
+func clear_inventory() -> void:
+	inventory.inventory_slot_1 = null
+	inventory.inventory_slot_2 = null
+	inventory.inventory_slot_3 = null
+	inventory.inventory_slot_4 = null
+	inventory.inventory_slot_5 = null
+	inventory_hud.retrieve_item_in_slot(1)
+	inventory_hud.retrieve_item_in_slot(2)
+	inventory_hud.retrieve_item_in_slot(3)
+	inventory_hud.retrieve_item_in_slot(4)
+	inventory_hud.retrieve_item_in_slot(5)
+
+func load_inventory() -> void:
+	if inventory.inventory_slot_1 != null:
+		inventory_hud.store_item_in_slot(1, inventory.inventory_slot_1)
+
+	if inventory.inventory_slot_2 != null:
+		inventory_hud.store_item_in_slot(2, inventory.inventory_slot_2)
+
+	if inventory.inventory_slot_3 != null:
+		inventory_hud.store_item_in_slot(3, inventory.inventory_slot_3)
+
+	if inventory.inventory_slot_4 != null:
+		inventory_hud.store_item_in_slot(4, inventory.inventory_slot_4)
+
+	if inventory.inventory_slot_5 != null:
+		inventory_hud.store_item_in_slot(5, inventory.inventory_slot_5)
 
 func die() -> void:
 	if has_died:
 		return
-
+	
+	clear_inventory()
+	
+	(get_tree().get_first_node_in_group("World") as World).caretaker.save()
+	
 	has_died = true
-
+	
 	current_controller.queue_free()
 
 	respawn_hud.show()
@@ -101,13 +312,20 @@ func _process(delta: float) -> void:
 
 	if (Input.is_action_just_released("ui_cancel")):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		get_tree().get_first_node_in_group("World").exit_to_main_menu()
+		
+		exit_ui.show()
+		
+		if control_entity is Starship:
+			get_tree().get_first_node_in_group("World").bed_exit(0, control_entity.ship_identification)
+		else:
+			get_tree().get_first_node_in_group("World").exit_to_main_menu()
 
 	if (Input.is_action_just_pressed("hide_ui")):
-		if $HeadsUpDisplay.visible:
-			$HeadsUpDisplay.hide()
+		if ui_visible:
+			hide_ui()
 		else:
-			$HeadsUpDisplay.show()
+			show_ui()
+			
 
 	if (Input.is_action_just_released("player_force_respawn")):
 		force_respawn_pressed_count += 1
@@ -117,21 +335,49 @@ func _process(delta: float) -> void:
 
 		if force_respawn_pressed_count >= 5:
 			die()
+	
+	if (Input.is_action_just_pressed("switch_marker_category")):
+		current_marker_category += 1
+
+		if current_marker_category > max_marker_category:
+			current_marker_category = -1
+		
+		switch_marker_category(current_marker_category)
+	
+	if control_entity == null:
+		return
+	
+	if control_entity is Creature:
+		inventory_hud.inventory_visible = true
+	else:
+		inventory_hud.inventory_visible = false
 
 	if control_entity == null:
 		return
 
+func switch_marker_category(category : int) -> void:
+	var markers : Array[Node] = get_tree().get_nodes_in_group("Marker")
+	
+	for m : Node in markers:
+		if m is MarkerSprite:
+			if m.category != category:
+				m.hide()
 
 func on_posses(control_entity : ControlEntity) -> void:
 	if control_entity is Starship:
-		save_last_possessed_starship(control_entity)
+		save_last_possessed_starship(control_entity as Starship)
 
-func save_last_possessed_starship(starship : Starship) -> void:
-	var save_data : Dictionary = {}
-	save_data["scene_path"] = starship.scene_file_path  # Store scene path, or use a unique ID if preferred
+func save_last_possessed_starship(starship : Starship) -> void:	
+	get_tree().get_first_node_in_group("World").caretaker.update_last_used_starship(LoadoutGenerator.new().save_loadout(starship))
 
-	var save_file : FileAccess = FileAccess.open("user://last_possessed_starship.save", FileAccess.WRITE)
+var ui_visible : bool = true
 
-	if save_file:
-		save_file.store_var(save_data)
-		save_file.close()
+func hide_ui() -> void:
+	$HeadsUpDisplay.hide()
+	inventory_hud.hide()
+	ui_visible = false
+
+func show_ui() -> void:
+	$HeadsUpDisplay.show()
+	inventory_hud.show()
+	ui_visible = true

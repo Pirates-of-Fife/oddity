@@ -1,17 +1,129 @@
-[gd_scene load_steps=8 format=3 uid="uid://cop5lcnhf25yd"]
+[gd_scene load_steps=46 format=3 uid="uid://cop5lcnhf25yd"]
 
 [ext_resource type="Script" path="res://classes/creature/humanoid/Humanoid.gd" id="1_enw0c"]
 [ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/mind/player/anchor/Anchor.tscn" id="2_a7dfl"]
+[ext_resource type="AudioStream" uid="uid://ryk1bmdutpjx" path="res://classes/creature/humanoid/meows/meow1.wav" id="2_rha74"]
+[ext_resource type="AudioStream" uid="uid://ebjuh1kgd1ck" path="res://classes/creature/humanoid/meows/meow2.wav" id="3_2s7er"]
+[ext_resource type="AudioStream" uid="uid://cd6cjm86lqkou" path="res://classes/multi-function-display/targeting/radar/select.wav" id="3_5xttm"]
+[ext_resource type="AudioStream" uid="uid://d4i3ciyikeiom" path="res://classes/creature/humanoid/meows/meow3.wav" id="4_vrh8h"]
+[ext_resource type="AudioStream" uid="uid://corl3g1jqmqj" path="res://classes/creature/humanoid/meows/meow4.wav" id="5_6fdbr"]
+[ext_resource type="AudioStream" uid="uid://crw2cnxtui3sp" path="res://classes/creature/humanoid/meows/meow5.wav" id="6_p1trb"]
+[ext_resource type="AudioStream" uid="uid://binlsge7i5fgt" path="res://classes/creature/humanoid/meows/meow6.wav" id="7_on4xy"]
+[ext_resource type="AudioStream" uid="uid://dc4en1jdutixo" path="res://classes/creature/humanoid/meows/meow7.wav" id="8_rf642"]
+[ext_resource type="AudioStream" uid="uid://dviqsuejtb4vp" path="res://classes/creature/humanoid/meows/meow8.wav" id="9_jq4sk"]
+[ext_resource type="AudioStream" uid="uid://dxdrtl0obewgf" path="res://classes/creature/humanoid/meows/meow9.wav" id="10_4vuxm"]
+[ext_resource type="SpriteFrames" uid="uid://dsgh52priqn71" path="res://classes/creature/humanoid/Mina/sprites/MinaGlasses.tres" id="14_d1boj"]
+[ext_resource type="Texture2D" uid="uid://dm72hd2s2vtte" path="res://classes/creature/humanoid/Mina/sprites/MinaHands.png" id="14_xr0yj"]
+[ext_resource type="Script" path="res://classes/creature/humanoid/Mina/Mina.gd" id="15_neqo6"]
+[ext_resource type="PackedScene" uid="uid://wx7jfprk5l2v" path="res://classes/creature/humanoid/Mina/sprites/MeowParticles.tscn" id="16_45a1k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nhlgx"]
 friction = 0.2
 rough = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7syud"]
-height = 1.6
+radius = 0.229203
+height = 1.7
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8wi0c"]
-height = 1.6
+radius = 0.2
+height = 1.7
+
+[sub_resource type="Curve" id="Curve_l12p1"]
+_data = [Vector2(0, 0.461538), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.725275), 0.0, 0.0, 0, 0, Vector2(0.853333, 0.384615), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_odtyf"]
+curve = SubResource("Curve_l12p1")
+
+[sub_resource type="Gradient" id="Gradient_wrnmm"]
+colors = PackedColorArray(0, 0, 1, 1, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_brouq"]
+gradient = SubResource("Gradient_wrnmm")
+
+[sub_resource type="Curve" id="Curve_yp88i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.484444, 0.846154), 0.0, 0.0, 0, 0, Vector2(1, 0.362637), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qwbeq"]
+curve = SubResource("Curve_yp88i")
+
+[sub_resource type="Curve" id="Curve_bdupb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.835556, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iy8h6"]
+curve = SubResource("Curve_bdupb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6kw22"]
+lifetime_randomness = 0.04
+spread = 180.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_iy8h6")
+color_ramp = SubResource("GradientTexture1D_brouq")
+alpha_curve = SubResource("CurveTexture_odtyf")
+emission_curve = SubResource("CurveTexture_qwbeq")
+hue_variation_min = -0.07
+hue_variation_max = 0.06
+turbulence_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqqb3"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_bvaf6"]
+material = SubResource("StandardMaterial3D_xqqb3")
+radius = 0.2
+height = 0.4
+radial_segments = 4
+rings = 4
+
+[sub_resource type="Curve" id="Curve_wd87l"]
+_data = [Vector2(0, 0.461538), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.725275), 0.0, 0.0, 0, 0, Vector2(0.853333, 0.384615), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_4f1ei"]
+curve = SubResource("Curve_wd87l")
+
+[sub_resource type="Gradient" id="Gradient_2to7p"]
+colors = PackedColorArray(0, 0, 1, 1, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oyg66"]
+gradient = SubResource("Gradient_2to7p")
+
+[sub_resource type="Curve" id="Curve_fjn3c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.484444, 0.846154), 0.0, 0.0, 0, 0, Vector2(1, 0.362637), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ad1ot"]
+curve = SubResource("Curve_fjn3c")
+
+[sub_resource type="Curve" id="Curve_1rr6o"]
+_data = [Vector2(0, 0.527473), 0.0, 0.0, 0, 0, Vector2(0.835556, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q1rjy"]
+curve = SubResource("Curve_1rr6o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xyv88"]
+lifetime_randomness = 0.04
+emission_shape = 2
+emission_sphere_radius = 0.6
+spread = 180.0
+initial_velocity_min = -6.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_q1rjy")
+color_ramp = SubResource("GradientTexture1D_oyg66")
+alpha_curve = SubResource("CurveTexture_4f1ei")
+emission_curve = SubResource("CurveTexture_ad1ot")
+hue_variation_min = -0.07
+hue_variation_max = 0.06
+turbulence_enabled = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1feha"]
 radius = 0.3
@@ -19,7 +131,71 @@ radius = 0.3
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6r51v"]
 radius = 0.6
 
-[node name="Humanoid" type="RigidBody3D" node_paths=PackedStringArray("grounded_marker", "pick_up_location", "fall_timer", "ground_shape_cast", "stand_up_shape_cast", "anchor")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_nv1ya"]
+radius = 0.4
+
+[sub_resource type="Animation" id="Animation_273vi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0.117108, -0.0971466, -0.0167599)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_yjj6o"]
+resource_name = "pick_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.1332, 0.2664),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.037, -0.097, -0.017), Vector3(0.037, -0.097, -0.202), Vector3(0.037, -0.097, -0.017)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/TwistPivot/PitchPivot/PickUpHand:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.2664),
+"transitions": PackedFloat64Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_indff"]
+_data = {
+"RESET": SubResource("Animation_273vi"),
+"pick_up": SubResource("Animation_yjj6o")
+}
+
+[node name="Humanoid" type="RigidBody3D" node_paths=PackedStringArray("store_particles", "retrieve_particles", "meow_player", "camera_anchor", "grounded_marker", "pick_up_location", "fall_timer", "ground_shape_cast", "stand_up_shape_cast", "anchor")]
 collision_layer = 268436993
 collision_mask = 268436993
 mass = 60.0
@@ -28,11 +204,20 @@ continuous_cd = true
 linear_damp = 10.0
 angular_damp = 10.0
 script = ExtResource("1_enw0c")
+eva_speed = 20.0
+store_particles = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2/StoreParticles")
+retrieve_particles = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2/RetrieveParticles")
+meows = Array[AudioStreamWAV]([ExtResource("2_rha74"), ExtResource("3_2s7er"), ExtResource("4_vrh8h"), ExtResource("5_6fdbr"), ExtResource("6_p1trb"), ExtResource("7_on4xy"), ExtResource("8_rf642"), ExtResource("9_jq4sk"), ExtResource("10_4vuxm")])
+meow_player = NodePath("AudioStreamPlayer3D")
+meow_particles = ExtResource("16_45a1k")
+camera_anchor = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor")
+walk_force = 600.0
 jump_force = 300.0
 grounded_marker = NodePath("Marker3D")
 interaction_length = 6.0
 pick_up_distance = 2.0
 pick_up_location = NodePath("Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2")
+interaction_probe_timeout_time = 0.155
 fall_timer = NodePath("Timer")
 ground_shape_cast = NodePath("ground_cast")
 stand_up_shape_cast = NodePath("stand_up_cast")
@@ -40,6 +225,7 @@ controller_reference = "res://classes/controller/creature-controller/humanoid-co
 anchor = NodePath("Anchor")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.189009, 0)
 shape = SubResource("CapsuleShape3D_7syud")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
@@ -48,15 +234,87 @@ mesh = SubResource("CapsuleMesh_8wi0c")
 skeleton = NodePath("../..")
 
 [node name="Anchor" parent="." instance=ExtResource("2_a7dfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.772673, 0)
 enable_pitch_limit = true
 pitch_limit = 90.0
 
+[node name="TwistPivot" parent="Anchor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0715748, 0)
+
 [node name="Marker3D2" type="Marker3D" parent="Anchor/TwistPivot/PitchPivot/CameraAnchor" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 0, 0, 1)
+
+[node name="StoreParticles" type="GPUParticles3D" parent="Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2"]
+emitting = false
+amount = 80
+lifetime = 0.15
+one_shot = true
+explosiveness = 0.59
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_6kw22")
+draw_pass_1 = SubResource("SphereMesh_bvaf6")
+
+[node name="RetrieveParticles" type="GPUParticles3D" parent="Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2"]
+emitting = false
+amount = 80
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.59
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_xyv88")
+draw_pass_1 = SubResource("SphereMesh_bvaf6")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Anchor/TwistPivot/PitchPivot/CameraAnchor/Marker3D2"]
+stream = ExtResource("3_5xttm")
+volume_db = -3.0
+pitch_scale = 3.0
+bus = &"Environment"
+
+[node name="Hands" type="Sprite3D" parent="Anchor/TwistPivot/PitchPivot" index="1"]
+transform = Transform3D(-0.025, 2.94968e-18, 8.20293e-19, 0, 0.0066982, -0.024086, -3.06162e-18, -0.024086, -0.0066982, 0.117108, -0.0971466, -0.180664)
+visible = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("14_xr0yj")
+
+[node name="Hands2" type="Sprite3D" parent="Anchor/TwistPivot/PitchPivot" index="2"]
+transform = Transform3D(-0.025, 2.94968e-18, 8.20293e-19, 0, 0.0066982, -0.024086, -3.06162e-18, -0.024086, -0.0066982, -0.133095, -0.0971466, -0.180664)
+visible = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("14_xr0yj")
+
+[node name="PickUpHand" type="Sprite3D" parent="Anchor/TwistPivot/PitchPivot" index="3"]
+transform = Transform3D(-0.025, 2.94968e-18, 8.20293e-19, 0, 0.0066982, -0.024086, -3.06162e-18, -0.024086, -0.0066982, 0.117108, -0.0971466, -0.0167599)
+visible = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("14_xr0yj")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="Anchor/TwistPivot" index="1" node_paths=PackedStringArray("humanoid", "hand_sprites")]
+transform = Transform3D(-0.103, 0, 1.26139e-17, 0, 0.103, 0, -1.26139e-17, 0, -0.103, 0.118885, -0.52731, 0.078)
+layers = 524289
+cast_shadow = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("14_d1boj")
+animation = &"floatSuit"
+autoplay = "idleAtmo"
+speed_scale = 1.2
+script = ExtResource("15_neqo6")
+humanoid = NodePath("../../..")
+hand_sprites = [NodePath("../PitchPivot/Hands"), NodePath("../PitchPivot/Hands2"), NodePath("../PitchPivot/PickUpHand")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Anchor/TwistPivot/Sprite3D"]
+transform = Transform3D(9.70874, 0, -5.91646e-31, 0, 9.70874, 0, 5.91646e-31, 0, 9.70874, 0.391714, 1.30188, 8.6069)
+layers = 524288
+light_energy = 0.5
+light_cull_mask = 4294443008
+omni_range = 4096.0
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.711, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.559475, 0)
 gizmo_extents = 1.06
 
 [node name="Timer" type="Timer" parent="."]
@@ -64,15 +322,30 @@ process_callback = 0
 one_shot = true
 
 [node name="ground_cast" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.401, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496904, 0)
 shape = SubResource("SphereShape3D_1feha")
+target_position = Vector3(0, 0, 0)
+max_results = 64
 collision_mask = 525825
 debug_shape_custom_color = Color(0, 0.67451, 0, 1)
 
 [node name="stand_up_cast" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.033, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18453, 0)
 shape = SubResource("CapsuleShape3D_6r51v")
 collision_mask = 525825
 debug_shape_custom_color = Color(0, 0.67451, 0, 1)
+
+[node name="GShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nv1ya")
+disabled = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.814575, 0)
+volume_db = 6.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_indff")
+}
 
 [editable path="Anchor"]

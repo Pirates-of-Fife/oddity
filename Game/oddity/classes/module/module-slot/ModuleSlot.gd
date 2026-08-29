@@ -2,8 +2,8 @@ extends Node3D
 
 class_name ModuleSlot
 
-signal module_inserted(module : Module)
-signal module_removed(module : Module)
+signal module_inserted(module : Module, slot_id : int)
+signal module_removed(module : Module, slot_id : int)
 
 @export
 var vehicle : Starship

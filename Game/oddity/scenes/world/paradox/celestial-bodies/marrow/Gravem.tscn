@@ -1,17 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://ogsgnh1ngc6n"]
+[gd_scene load_steps=102 format=3 uid="uid://ogsgnh1ngc6n"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_2qoln"]
 [ext_resource type="Texture2D" uid="uid://bmgfn4wgyi1w4" path="res://scenes/world/textures/4k_ceres_fictional.jpg" id="2_omo63"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="3_q021b"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_sm2uh"]
 [ext_resource type="AudioStream" uid="uid://car8by58unskl" path="res://scenes/world/sounds/wind1.wav" id="6_f6jrr"]
+[ext_resource type="Script" path="res://classes/object-scatter/SectorRootNode.gd" id="7_ipauy"]
+[ext_resource type="Script" path="res://resources/resources/mineable/MineableSector.gd" id="8_kr1rf"]
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/minable/MinableTransform.gd" id="9_6pdbo"]
+[ext_resource type="Resource" uid="uid://cg18rt8yknprx" path="res://resources/resources/mineable/Mineables/VoidDiamondResource.tres" id="10_75e44"]
+[ext_resource type="ArrayMesh" uid="uid://cbkeh2ttub5mu" path="res://scenes/minables/void-diamonds/mineables/VoidDiamondLowLod.tres" id="11_jffk7"]
 [ext_resource type="PackedScene" uid="uid://0ahgehvj4tip" path="res://scenes/world/bounty-zones/MediumDifficultyZone.tscn" id="11_ll40v"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="12_u7ixy"]
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/minable/MineableSpawner.gd" id="13_7ut71"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8w6ea"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0, 0.757001, 0.404188, 1)
 albedo_texture = ExtResource("2_omo63")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_r644m"]
 material = SubResource("StandardMaterial3D_8w6ea")
@@ -27,6 +35,510 @@ data = PackedVector3Array(0, 4000, 0, 0, 4000, 0, 0, 3995.33, 193.254, 0, 4000, 
 density = 0.003
 albedo = Color(0.573007, 0.769271, 0.317037, 1)
 edge_fade = 0.428708
+
+[sub_resource type="Resource" id="Resource_m88uy"]
+script = ExtResource("9_6pdbo")
+index = 0
+mineable_transform = Transform3D(-29.3637, 40.9677, 8.23963, -36.1953, -29.9673, 20.0082, -20.8839, -5.66399, -46.2628, 2523, -73.817, 1355.97)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ka61j"]
+script = ExtResource("9_6pdbo")
+index = 1
+mineable_transform = Transform3D(-5.5923, 32.637, -13.4546, -16.8729, -14.4368, -28.0064, 31.0082, -1.96963, -17.666, 2966.87, 657.331, 1579.08)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_p4w1a"]
+script = ExtResource("9_6pdbo")
+index = 2
+mineable_transform = Transform3D(-20.7361, 14.964, -28.8092, -32.4566, -8.84367, 18.7678, -0.67659, -34.3765, -17.3688, 868.716, 1354.51, -1769.28)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_7xcoi"]
+script = ExtResource("9_6pdbo")
+index = 3
+mineable_transform = Transform3D(-9.78796, -4.00122, 8.9946, 5.02461, -12.9378, -0.287554, -8.46557, -3.05281, -10.5703, -1837.36, -1454.34, 920.047)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_hox6p"]
+script = ExtResource("9_6pdbo")
+index = 4
+mineable_transform = Transform3D(-4.20144, -0.915717, 15.8244, 14.4393, -6.9745, 3.43009, -6.53889, -14.8128, -2.59328, -908.06, 571.749, -1812.92)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_s2hmj"]
+script = ExtResource("9_6pdbo")
+index = 5
+mineable_transform = Transform3D(-15.4591, -54.2511, -15.966, -6.06056, -14.8672, 56.3855, 56.2261, -16.5186, 1.68797, -4385.29, 1258.49, 672.702)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_p2syd"]
+script = ExtResource("9_6pdbo")
+index = 6
+mineable_transform = Transform3D(22.5517, -1.5661, -7.47302, -3.25448, -23.0518, -4.99031, 6.90703, -5.74823, 22.0484, -947.789, -1599.18, 833.983)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ox7py"]
+script = ExtResource("9_6pdbo")
+index = 7
+mineable_transform = Transform3D(-29.7482, 17.5546, -33.8013, -37.8983, -17.9175, 24.0485, 3.79636, -41.3091, -24.795, 767.832, 789.998, -1618.72)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_u3j8u"]
+script = ExtResource("9_6pdbo")
+index = 8
+mineable_transform = Transform3D(-37.4603, 1.80617, -32.3179, -23.9817, -34.7469, 25.8556, 21.7392, -35.2189, -27.1665, -538.852, -534.107, -1045.38)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_c3vye"]
+script = ExtResource("9_6pdbo")
+index = 9
+mineable_transform = Transform3D(9.51462, -12.1452, -19.7444, -7.0773, -21.8458, 10.0273, 22.0739, -1.76918, 11.7255, -2623.03, -1213.85, 1517.11)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_76r5c"]
+script = ExtResource("9_6pdbo")
+index = 10
+mineable_transform = Transform3D(-50.3104, -18.0712, 14.3594, 19.5229, -51.6866, 3.3543, -12.3133, -8.11333, -53.3522, -1990.32, -1461.55, 1213.3)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_wnpux"]
+script = ExtResource("9_6pdbo")
+index = 11
+mineable_transform = Transform3D(10.1341, 39.6226, 25.8513, 47.2136, -6.78324, -8.11175, 3.01867, -26.9254, 40.0856, 2590.16, 1711.95, -425.995)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_t3olq"]
+script = ExtResource("9_6pdbo")
+index = 12
+mineable_transform = Transform3D(-31.3628, 11.2728, -55.1403, -7.92285, -63.3796, -8.45087, 55.7204, -2.66688, -32.238, 14.9331, -1661.23, 1633.93)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ndcv1"]
+script = ExtResource("9_6pdbo")
+index = 13
+mineable_transform = Transform3D(-28.2565, 0.720587, 13.4451, 0.233207, -31.2247, 2.1636, -13.4624, -2.05336, -28.1828, -592.683, -1716.72, 1537.12)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_88yqv"]
+script = ExtResource("9_6pdbo")
+index = 14
+mineable_transform = Transform3D(11.1629, 16.1944, 27.2322, 23.8757, -23.2799, 4.05704, -20.8279, -18.007, 19.246, 1243.1, -498.727, -344.166)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_sl2rv"]
+script = ExtResource("9_6pdbo")
+index = 15
+mineable_transform = Transform3D(-8.79827, 34.7828, 50.4536, 39.0976, -36.0634, 31.6801, -47.1889, -36.3649, 16.8411, 1562.02, -56.8748, -549.499)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_5bmfk"]
+script = ExtResource("9_6pdbo")
+index = 16
+mineable_transform = Transform3D(4.53811, 47.7937, -15.7145, -17.0217, -13.3892, -45.6374, 47.3439, -9.39507, -14.9018, 3098.82, 1212.65, 1055.7)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_8iwlc"]
+script = ExtResource("9_6pdbo")
+index = 17
+mineable_transform = Transform3D(-22.4834, -6.46128, 1.79799, 5.81775, -15.6597, 16.4747, 3.33688, -16.2331, -16.6084, -1786.02, -396.475, -967.348)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_kkekk"]
+script = ExtResource("9_6pdbo")
+index = 18
+mineable_transform = Transform3D(9.45598, -1.85292, 12.7413, 12.5792, -2.0413, -9.63255, -2.74542, -15.735, -0.250757, -1148.59, 1761.6, -2139.54)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_8yo73"]
+script = ExtResource("9_6pdbo")
+index = 19
+mineable_transform = Transform3D(4.81624, 18.3751, 35.9481, 39.555, -9.39469, -0.497335, -8.08154, -35.0314, 18.9893, 1122.55, 1348.58, -1646.1)
+is_mineable_spawned = false
+
+[sub_resource type="MultiMesh" id="MultiMesh_7iylo"]
+transform_format = 1
+instance_count = 20
+mesh = ExtResource("11_jffk7")
+buffer = PackedFloat32Array(-29.3637, 40.9677, 8.23963, 2523, -36.1954, -29.9673, 20.0082, -73.817, -20.8839, -5.66399, -46.2628, 1355.97, -5.5923, 32.637, -13.4546, 2966.87, -16.8729, -14.4368, -28.0064, 657.331, 31.0082, -1.96963, -17.666, 1579.08, -20.7361, 14.964, -28.8092, 868.716, -32.4566, -8.84367, 18.7678, 1354.51, -0.67659, -34.3765, -17.3688, -1769.28, -9.78796, -4.00122, 8.9946, -1837.36, 5.02461, -12.9378, -0.287554, -1454.34, -8.46557, -3.05281, -10.5703, 920.047, -4.20144, -0.915717, 15.8244, -908.06, 14.4393, -6.9745, 3.43009, 571.749, -6.53889, -14.8128, -2.59328, -1812.92, -15.4591, -54.2511, -15.966, -4385.29, -6.06056, -14.8672, 56.3855, 1258.49, 56.2261, -16.5186, 1.68797, 672.702, 22.5517, -1.5661, -7.47302, -947.789, -3.25448, -23.0518, -4.99031, -1599.18, 6.90703, -5.74823, 22.0484, 833.983, -29.7482, 17.5546, -33.8013, 767.832, -37.8983, -17.9175, 24.0485, 789.998, 3.79636, -41.3091, -24.795, -1618.72, -37.4603, 1.80617, -32.318, -538.852, -23.9817, -34.7469, 25.8556, -534.107, 21.7392, -35.2189, -27.1665, -1045.38, 9.51462, -12.1452, -19.7444, -2623.03, -7.0773, -21.8458, 10.0273, -1213.85, 22.0739, -1.76918, 11.7255, 1517.11, -50.3104, -18.0712, 14.3594, -1990.32, 19.5229, -51.6866, 3.3543, -1461.55, -12.3133, -8.11333, -53.3522, 1213.3, 10.1341, 39.6226, 25.8513, 2590.16, 47.2136, -6.78324, -8.11174, 1711.95, 3.01867, -26.9254, 40.0856, -425.995, -31.3628, 11.2728, -55.1403, 14.9331, -7.92285, -63.3796, -8.45087, -1661.23, 55.7204, -2.66688, -32.238, 1633.93, -28.2565, 0.720587, 13.4451, -592.683, 0.233207, -31.2247, 2.1636, -1716.72, -13.4624, -2.05336, -28.1828, 1537.12, 11.1629, 16.1944, 27.2322, 1243.1, 23.8757, -23.2799, 4.05704, -498.727, -20.8279, -18.007, 19.246, -344.166, -8.79827, 34.7828, 50.4536, 1562.02, 39.0976, -36.0634, 31.6801, -56.8748, -47.1889, -36.3649, 16.8411, -549.499, 4.53811, 47.7937, -15.7145, 3098.81, -17.0217, -13.3892, -45.6374, 1212.65, 47.3439, -9.39507, -14.9018, 1055.7, -22.4834, -6.46128, 1.79799, -1786.02, 5.81775, -15.6597, 16.4746, -396.475, 3.33688, -16.2331, -16.6084, -967.348, 9.45598, -1.85292, 12.7413, -1148.59, 12.5792, -2.0413, -9.63255, 1761.6, -2.74542, -15.735, -0.250757, -2139.54, 4.81624, 18.3751, 35.9481, 1122.55, 39.555, -9.39469, -0.497335, 1348.58, -8.08154, -35.0314, 18.9893, -1646.1)
+
+[sub_resource type="Resource" id="Resource_vuyow"]
+script = ExtResource("9_6pdbo")
+index = 0
+mineable_transform = Transform3D(-24.9906, 9.60809, 9.28574, -9.05579, -26.6596, 3.21338, -9.82512, 0.133584, -26.5804, 512.285, -1799.76, -2221.95)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_3k86j"]
+script = ExtResource("9_6pdbo")
+index = 1
+mineable_transform = Transform3D(55.3861, -24.0969, 7.74409, -12.4949, -9.82778, 58.7839, 22.0115, 55.0546, 13.883, -2426, 1316.94, 1374.63)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_1exsu"]
+script = ExtResource("9_6pdbo")
+index = 2
+mineable_transform = Transform3D(-52.2971, -24.0736, 25.0224, -2.15396, -42.9013, -45.7764, -34.6557, 38.9946, -34.9147, -2377.16, -770.657, 243.322)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_jvixe"]
+script = ExtResource("9_6pdbo")
+index = 3
+mineable_transform = Transform3D(49.625, 15.647, 1.13318, 4.211, -16.9071, 49.0425, -15.1122, 46.6698, 17.3867, 358.69, 663.252, 1345.14)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_x7vgn"]
+script = ExtResource("9_6pdbo")
+index = 4
+mineable_transform = Transform3D(-23.9899, 47.0514, 24.0807, -41.3811, -0.266986, -40.7034, 32.8835, 33.9901, -33.6539, 2398.03, 1943.94, 100.937)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_aq3p2"]
+script = ExtResource("9_6pdbo")
+index = 5
+mineable_transform = Transform3D(29.9904, 20.5505, 14.4729, 9.14168, -29.9062, 23.5215, -23.414, 14.6461, 27.7216, 1256.61, -1093.96, -744.027)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_273uf"]
+script = ExtResource("9_6pdbo")
+index = 6
+mineable_transform = Transform3D(-2.06873, -14.496, 7.31314, -7.84175, -5.56334, -13.2458, -14.217, 5.17793, 6.24193, -4385.31, 603.069, -975.7)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ptm6v"]
+script = ExtResource("9_6pdbo")
+index = 7
+mineable_transform = Transform3D(32.892, 22.7186, 20.0358, -17.6581, -9.65061, 39.9314, -24.6122, 37.2852, -1.8727, 1188.22, 1099.25, 1093.71)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_6ikej"]
+script = ExtResource("9_6pdbo")
+index = 8
+mineable_transform = Transform3D(-33.1645, 11.9691, -19.3086, 1.77353, -32.6987, -23.3156, 22.6481, 20.0874, -26.4486, 347.117, -1290.53, -242.512)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ltgql"]
+script = ExtResource("9_6pdbo")
+index = 9
+mineable_transform = Transform3D(38.078, 41.5515, 8.54058, 2.51931, -13.6716, 55.2824, -42.3453, 36.5508, 10.9689, 2071.42, 1003.23, 323.37)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_uwiy7"]
+script = ExtResource("9_6pdbo")
+index = 10
+mineable_transform = Transform3D(-35.9413, 36.6321, -3.76143, -35.5517, -35.8874, -9.79854, 9.59884, 4.24522, -50.3754, 2003.3, -826.66, -1910.88)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_daglx"]
+script = ExtResource("9_6pdbo")
+index = 11
+mineable_transform = Transform3D(14.073, -0.219291, -0.955001, 0.173358, -12.9751, 5.53402, 0.964398, 5.53239, 12.9411, -905.729, -1715.79, -672.505)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_kgqtk"]
+script = ExtResource("9_6pdbo")
+index = 12
+mineable_transform = Transform3D(-25.6821, -2.94117, -7.74817, 8.12851, -13.8593, -21.6819, 1.61615, 22.968, -14.0754, -1279.41, -91.4266, 1162.74)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_killp"]
+script = ExtResource("9_6pdbo")
+index = 13
+mineable_transform = Transform3D(-1.41277, 22.4997, 16.7857, -28.0644, -1.50318, -0.347168, -0.619808, 16.7779, -22.5413, 2357.66, 1748.46, 146.336)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_rgusy"]
+script = ExtResource("9_6pdbo")
+index = 14
+mineable_transform = Transform3D(4.9584, 17.5042, 17.1724, -2.58513, -17.0492, 18.125, -24.3845, 5.36681, 1.57035, 1954.45, -762.949, -1382.92)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_hwo2l"]
+script = ExtResource("9_6pdbo")
+index = 15
+mineable_transform = Transform3D(11.4568, -1.72211, -5.589, 2.15528, -10.1843, 7.55612, 5.43667, 7.66645, 8.78232, -1378.95, -1203.85, 142.606)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_lcac1"]
+script = ExtResource("9_6pdbo")
+index = 16
+mineable_transform = Transform3D(-19.7822, -1.79226, 10.3184, -9.84056, -4.36593, -19.6245, -3.58397, 21.8802, -3.07062, -1163.77, 1182.32, 1668.3)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ltrf4"]
+script = ExtResource("9_6pdbo")
+index = 17
+mineable_transform = Transform3D(-47.54, 44.1026, -2.86165, -31.2806, -36.5464, -43.5794, 31.221, 30.5386, -48.02, 1873.53, -289.236, -359.361)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_bdypb"]
+script = ExtResource("9_6pdbo")
+index = 18
+mineable_transform = Transform3D(24.4222, 6.7743, -12.5961, 11.2564, -24.4809, 8.65861, 8.82303, 12.4815, 23.8194, 113.631, -1496.78, -477.191)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_28cv0"]
+script = ExtResource("9_6pdbo")
+index = 19
+mineable_transform = Transform3D(-46.831, -23.2473, -18.6197, 21.5576, -2.51486, -51.0805, -20.5523, 50.334, -11.1519, -2518.62, 1781.13, 1385.95)
+is_mineable_spawned = false
+
+[sub_resource type="MultiMesh" id="MultiMesh_mno2x"]
+transform_format = 1
+instance_count = 20
+mesh = ExtResource("11_jffk7")
+buffer = PackedFloat32Array(-24.9906, 9.60809, 9.28574, 512.285, -9.05579, -26.6596, 3.21338, -1799.76, -9.82512, 0.133584, -26.5804, -2221.95, 55.3861, -24.0969, 7.74409, -2426, -12.4949, -9.82778, 58.7839, 1316.94, 22.0115, 55.0546, 13.883, 1374.63, -52.2971, -24.0736, 25.0224, -2377.16, -2.15396, -42.9013, -45.7764, -770.657, -34.6557, 38.9946, -34.9147, 243.322, 49.625, 15.647, 1.13318, 358.69, 4.211, -16.9071, 49.0425, 663.252, -15.1122, 46.6698, 17.3867, 1345.14, -23.9899, 47.0514, 24.0807, 2398.03, -41.3811, -0.266986, -40.7034, 1943.94, 32.8835, 33.9901, -33.6539, 100.937, 29.9904, 20.5505, 14.4729, 1256.61, 9.14168, -29.9062, 23.5215, -1093.96, -23.414, 14.6461, 27.7216, -744.027, -2.06873, -14.496, 7.31314, -4385.31, -7.84175, -5.56333, -13.2458, 603.069, -14.217, 5.17793, 6.24193, -975.7, 32.892, 22.7186, 20.0358, 1188.22, -17.6581, -9.65061, 39.9314, 1099.26, -24.6122, 37.2852, -1.8727, 1093.71, -33.1645, 11.9691, -19.3086, 347.117, 1.77353, -32.6987, -23.3156, -1290.53, 22.6481, 20.0874, -26.4486, -242.512, 38.078, 41.5515, 8.54058, 2071.42, 2.51931, -13.6716, 55.2824, 1003.23, -42.3453, 36.5508, 10.9689, 323.37, -35.9413, 36.6321, -3.76143, 2003.3, -35.5517, -35.8874, -9.79854, -826.66, 9.59884, 4.24522, -50.3754, -1910.88, 14.073, -0.219291, -0.955001, -905.729, 0.173358, -12.9751, 5.53402, -1715.79, 0.964397, 5.53239, 12.9411, -672.505, -25.6821, -2.94117, -7.74817, -1279.41, 8.12851, -13.8593, -21.6819, -91.4266, 1.61615, 22.968, -14.0754, 1162.74, -1.41277, 22.4997, 16.7857, 2357.66, -28.0644, -1.50318, -0.347168, 1748.46, -0.619808, 16.7779, -22.5413, 146.336, 4.9584, 17.5042, 17.1724, 1954.45, -2.58513, -17.0492, 18.125, -762.949, -24.3845, 5.36681, 1.57035, -1382.92, 11.4568, -1.72211, -5.589, -1378.95, 2.15528, -10.1843, 7.55612, -1203.85, 5.43667, 7.66645, 8.78232, 142.606, -19.7822, -1.79226, 10.3184, -1163.77, -9.84056, -4.36593, -19.6245, 1182.32, -3.58397, 21.8802, -3.07062, 1668.3, -47.54, 44.1026, -2.86165, 1873.53, -31.2806, -36.5464, -43.5794, -289.236, 31.221, 30.5386, -48.02, -359.361, 24.4222, 6.7743, -12.5961, 113.631, 11.2564, -24.4809, 8.65861, -1496.78, 8.82303, 12.4815, 23.8194, -477.191, -46.831, -23.2473, -18.6197, -2518.62, 21.5576, -2.51486, -51.0805, 1781.13, -20.5523, 50.334, -11.1519, 1385.95)
+
+[sub_resource type="Resource" id="Resource_wcoqo"]
+script = ExtResource("9_6pdbo")
+index = 0
+mineable_transform = Transform3D(-6.36969, -52.2632, -9.36212, -45.3695, 10.2557, -26.3836, -27.5808, -4.80028, 45.5622, -3607.44, -1088.1, 1561.62)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_konme"]
+script = ExtResource("9_6pdbo")
+index = 1
+mineable_transform = Transform3D(-32.4823, 35.9964, 14.0918, 36.8769, 34.3751, -2.80533, 11.5937, -8.48727, 48.4043, 3151.83, 867.501, 1248.39)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_1mv52"]
+script = ExtResource("9_6pdbo")
+index = 2
+mineable_transform = Transform3D(-20.7148, -24.7825, -11.8413, -24.5368, 10.0326, 21.9267, 12.3423, -21.6487, 23.7169, -2579.93, -688.816, -595.927)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_yhot1"]
+script = ExtResource("9_6pdbo")
+index = 3
+mineable_transform = Transform3D(-16.7285, 38.1938, 3.04212, 29.9711, 10.9763, 27.0021, -23.8695, -12.9852, 31.7725, 3954.22, -805.127, 678.521)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_l2yq1"]
+script = ExtResource("9_6pdbo")
+index = 4
+mineable_transform = Transform3D(0.0064554, -54.3895, -9.45449, -21.8879, 8.6771, -49.9323, -50.6806, -3.75438, 21.5635, -3639.04, -1226.48, 1648.63)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ld351"]
+script = ExtResource("9_6pdbo")
+index = 5
+mineable_transform = Transform3D(-11.8678, 3.5065, 2.42048, 4.26073, 9.73096, 6.79362, -0.0212758, -7.21191, 10.3434, 1412.94, 1231.06, -366.608)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_gscgw"]
+script = ExtResource("9_6pdbo")
+index = 6
+mineable_transform = Transform3D(-9.57284, -4.10887, -3.77961, -5.21098, 9.26849, 3.12222, -2.0035, -4.47434, 9.9385, -1181.85, 1489.59, 305.984)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_umtgv"]
+script = ExtResource("9_6pdbo")
+index = 7
+mineable_transform = Transform3D(29.679, 18.6489, 47.9088, 42.5849, 22.0742, -34.9734, 28.8022, -51.8539, 2.34191, 1557.18, -367.993, -1572.6)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_arbjk"]
+script = ExtResource("9_6pdbo")
+index = 8
+mineable_transform = Transform3D(-19.2032, -9.79796, -4.97315, -10.7558, 14.715, 12.5411, 2.24623, -13.3028, 17.5353, -1470.1, 804.687, -483.88)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_phpy8"]
+script = ExtResource("9_6pdbo")
+index = 9
+mineable_transform = Transform3D(0.456978, 8.77104, -24.0631, -10.3056, 22.0956, 7.85818, -23.4469, -9.54067, -3.92287, 1670.16, 1594.4, 431.159)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_a7mec"]
+script = ExtResource("9_6pdbo")
+index = 10
+mineable_transform = Transform3D(6.0742, -13.0285, 25.9995, 28.496, 7.96804, -2.66463, 5.80466, -25.483, -14.1257, -1452.84, -782.49, -1509.58)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_yaus2"]
+script = ExtResource("9_6pdbo")
+index = 11
+mineable_transform = Transform3D(-9.92123, 13.1592, -4.39687, -5.97447, 0.826509, 15.9546, -12.5221, -10.8204, -4.12856, 3386.11, -1661.26, -616.291)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_krpyp"]
+script = ExtResource("9_6pdbo")
+index = 12
+mineable_transform = Transform3D(31.0708, 29.7291, -37.2771, -43.7793, 0.161811, -36.3613, 18.8886, -48.5278, -22.9579, 2389.89, -1843.67, -1489.38)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_esmym"]
+script = ExtResource("9_6pdbo")
+index = 13
+mineable_transform = Transform3D(18.4917, -44.3876, 27.1639, 29.4466, 32.6938, 33.3781, 42.9073, -3.30755, -34.6137, -2913.21, 512.299, 1681.1)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ndhwn"]
+script = ExtResource("9_6pdbo")
+index = 14
+mineable_transform = Transform3D(44.2612, 14.8355, -8.27314, -15.6537, 26.6584, -35.9427, 6.59535, -36.2881, -29.787, 1552.27, 393.64, -1140.36)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ho14y"]
+script = ExtResource("9_6pdbo")
+index = 15
+mineable_transform = Transform3D(9.67193, -22.6171, 6.87702, 21.8633, 5.73259, -11.8956, -8.99005, -10.3912, -21.5308, -3240.24, -957.5, 293.664)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_o2l5g"]
+script = ExtResource("9_6pdbo")
+index = 16
+mineable_transform = Transform3D(-21.651, 4.49501, -27.0597, -3.93669, 33.6072, 8.73247, -27.1466, -8.45864, 20.3154, 815.261, 1990.8, 952.633)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_i30w6"]
+script = ExtResource("9_6pdbo")
+index = 17
+mineable_transform = Transform3D(3.31107, 7.26003, -17.0144, -13.7101, 12.5672, 2.69437, -12.419, -11.9381, -7.51077, 1845.79, 819.215, -619.8)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_pe7c7"]
+script = ExtResource("9_6pdbo")
+index = 18
+mineable_transform = Transform3D(-42.2389, 15.8792, -28.5836, -6.91006, 41.3051, 33.1577, -31.9597, -29.9171, 30.6079, 1489.67, 1237.26, -319.145)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_3ll2k"]
+script = ExtResource("9_6pdbo")
+index = 19
+mineable_transform = Transform3D(6.10183, -19.3685, 9.70285, 20.4919, 1.89117, -9.11164, -7.02611, -11.3049, -18.148, -3140.65, -1519, -88.1384)
+is_mineable_spawned = false
+
+[sub_resource type="MultiMesh" id="MultiMesh_6fnmi"]
+transform_format = 1
+instance_count = 20
+mesh = ExtResource("11_jffk7")
+buffer = PackedFloat32Array(-6.36969, -52.2632, -9.36212, -3607.44, -45.3695, 10.2557, -26.3836, -1088.1, -27.5808, -4.80028, 45.5622, 1561.62, -32.4823, 35.9964, 14.0918, 3151.83, 36.8769, 34.3751, -2.80533, 867.501, 11.5937, -8.48727, 48.4043, 1248.39, -20.7148, -24.7825, -11.8413, -2579.93, -24.5368, 10.0326, 21.9267, -688.816, 12.3423, -21.6487, 23.7169, -595.927, -16.7285, 38.1938, 3.04212, 3954.22, 29.9711, 10.9763, 27.0021, -805.127, -23.8695, -12.9852, 31.7725, 678.521, 0.0064554, -54.3895, -9.45449, -3639.04, -21.8879, 8.6771, -49.9323, -1226.48, -50.6806, -3.75438, 21.5635, 1648.63, -11.8678, 3.50651, 2.42048, 1412.94, 4.26073, 9.73096, 6.79362, 1231.06, -0.0212758, -7.21191, 10.3434, -366.608, -9.57284, -4.10887, -3.77961, -1181.85, -5.21098, 9.26849, 3.12222, 1489.59, -2.0035, -4.47434, 9.9385, 305.984, 29.679, 18.6489, 47.9088, 1557.18, 42.5849, 22.0742, -34.9734, -367.993, 28.8022, -51.8539, 2.34191, -1572.6, -19.2032, -9.79796, -4.97315, -1470.1, -10.7558, 14.715, 12.5411, 804.687, 2.24623, -13.3028, 17.5353, -483.88, 0.456978, 8.77104, -24.0631, 1670.16, -10.3056, 22.0956, 7.85818, 1594.4, -23.4469, -9.54067, -3.92287, 431.159, 6.0742, -13.0285, 25.9995, -1452.84, 28.496, 7.96804, -2.66463, -782.49, 5.80466, -25.483, -14.1257, -1509.58, -9.92123, 13.1592, -4.39687, 3386.11, -5.97447, 0.826509, 15.9546, -1661.26, -12.5221, -10.8204, -4.12856, -616.291, 31.0708, 29.7291, -37.2771, 2389.89, -43.7793, 0.161811, -36.3613, -1843.67, 18.8886, -48.5278, -22.9579, -1489.38, 18.4917, -44.3876, 27.1639, -2913.21, 29.4466, 32.6938, 33.3781, 512.299, 42.9073, -3.30755, -34.6137, 1681.1, 44.2612, 14.8355, -8.27314, 1552.27, -15.6537, 26.6584, -35.9427, 393.64, 6.59535, -36.2881, -29.787, -1140.36, 9.67193, -22.6171, 6.87702, -3240.24, 21.8633, 5.73259, -11.8956, -957.5, -8.99005, -10.3912, -21.5308, 293.664, -21.651, 4.49501, -27.0597, 815.261, -3.93669, 33.6072, 8.73247, 1990.8, -27.1466, -8.45864, 20.3154, 952.633, 3.31107, 7.26003, -17.0144, 1845.79, -13.7101, 12.5672, 2.69437, 819.215, -12.419, -11.9381, -7.51077, -619.8, -42.2389, 15.8792, -28.5836, 1489.67, -6.91006, 41.3051, 33.1577, 1237.26, -31.9597, -29.9171, 30.6079, -319.145, 6.10183, -19.3685, 9.70285, -3140.65, 20.4919, 1.89117, -9.11164, -1519, -7.02611, -11.3049, -18.148, -88.1384)
+
+[sub_resource type="Resource" id="Resource_g3e0x"]
+script = ExtResource("9_6pdbo")
+index = 0
+mineable_transform = Transform3D(5.47453, 7.24829, 13.113, -9.88363, 12.2396, -2.63921, 11.2607, 7.219, -8.69154, 1794.37, 894.765, -174.068)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_j5nyw"]
+script = ExtResource("9_6pdbo")
+index = 1
+mineable_transform = Transform3D(-8.09448, -24.9297, 53.3702, -37.323, 43.8487, 14.8214, 45.5726, 31.4832, 21.6179, -1699.4, 775.481, 133.626)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_rwdgc"]
+script = ExtResource("9_6pdbo")
+index = 2
+mineable_transform = Transform3D(-16.4247, 4.88305, -42.5796, 2.15732, 45.6356, 4.40135, -42.8043, 0.426315, 16.5603, 402.724, 1802.51, -1946.67)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_da0ca"]
+script = ExtResource("9_6pdbo")
+index = 3
+mineable_transform = Transform3D(17.1082, 9.89216, -0.151614, -5.60307, 9.93768, 16.1374, -8.15374, 13.9268, -11.4074, 1978.95, -162.731, 834.27)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ylw6i"]
+script = ExtResource("9_6pdbo")
+index = 4
+mineable_transform = Transform3D(-24.1683, 20.9207, -37.66, 14.6517, 44.599, 15.3726, -40.5127, 3.64909, 28.0261, 1670.94, 1436.95, -1688.4)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_e4ivs"]
+script = ExtResource("9_6pdbo")
+index = 5
+mineable_transform = Transform3D(7.54173, -2.16774, -17.6991, 16.2388, 8.77339, 5.84495, -7.36601, 17.122, -5.23577, -470.478, -361.448, 1552.79)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ira2s"]
+script = ExtResource("9_6pdbo")
+index = 6
+mineable_transform = Transform3D(32.1758, -1.69535, 31.8431, -31.2838, 7.08743, 31.988, 6.1791, 44.7105, -3.86324, -172.386, -1547.96, 1963.1)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_myt1o"]
+script = ExtResource("9_6pdbo")
+index = 7
+mineable_transform = Transform3D(-0.336447, 10.9575, 9.46156, -5.10928, 8.76526, -10.3328, 13.5456, 3.57835, -3.66243, 3003.23, 246.945, -995.64)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_p1jfb"]
+script = ExtResource("9_6pdbo")
+index = 8
+mineable_transform = Transform3D(-30.7321, -53.1406, -8.61224, -50.8318, 31.9099, -15.5062, -17.7263, 0.625324, 59.3965, -3450.94, -115.041, -1943.48)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_io01p"]
+script = ExtResource("9_6pdbo")
+index = 9
+mineable_transform = Transform3D(8.35743, 55.4829, -19.1189, 50.6128, 2.95973, 30.7134, -29.7023, 20.6548, 46.9562, 3720.33, -1973.95, -590.38)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_lokdb"]
+script = ExtResource("9_6pdbo")
+index = 10
+mineable_transform = Transform3D(-26.8392, -32.3742, -32.0371, 22.5568, 22.8572, -41.9946, -39.5684, 34.9896, -2.20914, -2471.64, -444.607, 662.941)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ledq2"]
+script = ExtResource("9_6pdbo")
+index = 11
+mineable_transform = Transform3D(12.562, -27.226, 23.3005, 7.32797, 26.1206, 26.5705, 35.0781, 4.29335, -13.895, -2889.92, 577.158, -1531.68)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_ktg66"]
+script = ExtResource("9_6pdbo")
+index = 12
+mineable_transform = Transform3D(37.4132, -26.0745, 38.1699, -23.7129, 31.3263, 44.6423, 39.6803, 43.3054, -9.31098, -1776.11, -67.0827, 928.254)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_aqj34"]
+script = ExtResource("9_6pdbo")
+index = 13
+mineable_transform = Transform3D(-25.1657, 9.6709, 13.1855, -7.56738, 14.5649, -25.1256, 14.4955, 24.3933, 9.77463, 1265.91, -232.869, 1266.56)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_vvnrj"]
+script = ExtResource("9_6pdbo")
+index = 14
+mineable_transform = Transform3D(-1.5268, 3.1184, 13.738, -13.9522, 1.57588, -1.90831, 1.9478, 13.7324, -2.90067, 857.339, -1728.88, 1891.71)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_jv3mh"]
+script = ExtResource("9_6pdbo")
+index = 15
+mineable_transform = Transform3D(3.57947, -9.59326, -14.2247, 6.95912, 14.0938, -7.75379, -15.6826, 4.06448, -6.68745, -2211.58, 1042.11, -1056.44)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_taw0d"]
+script = ExtResource("9_6pdbo")
+index = 16
+mineable_transform = Transform3D(-20.891, -8.68078, -3.77903, -0.275174, 9.70786, -20.7786, -9.46368, 18.8804, 8.94635, -1536.25, -481.022, 1308.05)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_sa56i"]
+script = ExtResource("9_6pdbo")
+index = 17
+mineable_transform = Transform3D(29.6755, 39.4909, -27.7453, 16.5794, 22.2471, 49.398, -45.3261, 33.9927, -0.0963772, 2764.67, -603.346, 415.492)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_xr65c"]
+script = ExtResource("9_6pdbo")
+index = 18
+mineable_transform = Transform3D(-24.2769, -36.4279, 28.1984, -44.9295, 25.762, -5.40087, 10.1725, 26.8484, 43.4418, -2820.29, -195.169, 78.0706)
+is_mineable_spawned = false
+
+[sub_resource type="Resource" id="Resource_4uk78"]
+script = ExtResource("9_6pdbo")
+index = 19
+mineable_transform = Transform3D(19.731, 25.3064, -37.095, -0.418998, 40.62, 27.4883, -44.903, 10.7409, -16.5565, 2040.54, 1138.18, -1108.09)
+is_mineable_spawned = false
+
+[sub_resource type="MultiMesh" id="MultiMesh_s40k5"]
+transform_format = 1
+instance_count = 20
+mesh = ExtResource("11_jffk7")
+buffer = PackedFloat32Array(5.47453, 7.24829, 13.113, 1794.37, -9.88363, 12.2396, -2.63921, 894.765, 11.2607, 7.219, -8.69154, -174.068, -8.09448, -24.9297, 53.3702, -1699.4, -37.323, 43.8487, 14.8214, 775.481, 45.5726, 31.4832, 21.6179, 133.626, -16.4247, 4.88305, -42.5796, 402.724, 2.15732, 45.6356, 4.40135, 1802.51, -42.8043, 0.426315, 16.5603, -1946.67, 17.1082, 9.89216, -0.151614, 1978.95, -5.60308, 9.93768, 16.1374, -162.731, -8.15374, 13.9268, -11.4074, 834.27, -24.1683, 20.9207, -37.66, 1670.94, 14.6517, 44.599, 15.3726, 1436.95, -40.5127, 3.64909, 28.0261, -1688.4, 7.54173, -2.16774, -17.6991, -470.478, 16.2388, 8.77339, 5.84495, -361.448, -7.36601, 17.122, -5.23577, 1552.79, 32.1758, -1.69535, 31.8431, -172.386, -31.2838, 7.08743, 31.988, -1547.96, 6.1791, 44.7105, -3.86324, 1963.1, -0.336447, 10.9575, 9.46156, 3003.23, -5.10928, 8.76526, -10.3328, 246.945, 13.5456, 3.57835, -3.66243, -995.64, -30.7321, -53.1406, -8.61224, -3450.94, -50.8318, 31.9099, -15.5062, -115.041, -17.7263, 0.625324, 59.3965, -1943.48, 8.35743, 55.4829, -19.1189, 3720.33, 50.6128, 2.95973, 30.7134, -1973.95, -29.7023, 20.6548, 46.9562, -590.38, -26.8392, -32.3742, -32.0371, -2471.64, 22.5568, 22.8572, -41.9946, -444.607, -39.5684, 34.9896, -2.20914, 662.941, 12.562, -27.226, 23.3005, -2889.92, 7.32797, 26.1206, 26.5705, 577.158, 35.0781, 4.29335, -13.895, -1531.68, 37.4132, -26.0745, 38.1699, -1776.11, -23.7129, 31.3263, 44.6423, -67.0827, 39.6803, 43.3054, -9.31098, 928.254, -25.1657, 9.6709, 13.1855, 1265.91, -7.56738, 14.5649, -25.1256, -232.869, 14.4955, 24.3933, 9.77463, 1266.56, -1.5268, 3.1184, 13.738, 857.339, -13.9522, 1.57588, -1.90831, -1728.88, 1.9478, 13.7324, -2.90067, 1891.71, 3.57947, -9.59326, -14.2247, -2211.58, 6.95912, 14.0938, -7.75379, 1042.11, -15.6826, 4.06448, -6.68745, -1056.44, -20.891, -8.68078, -3.77903, -1536.25, -0.275174, 9.70786, -20.7786, -481.022, -9.46368, 18.8804, 8.94635, 1308.05, 29.6755, 39.4909, -27.7453, 2764.67, 16.5794, 22.2471, 49.398, -603.346, -45.3261, 33.9927, -0.0963772, 415.492, -24.2769, -36.4279, 28.1984, -2820.29, -44.9295, 25.762, -5.40087, -195.169, 10.1725, 26.8484, 43.4418, 78.0706, 19.731, 25.3064, -37.095, 2040.54, -0.418998, 40.62, 27.4883, 1138.18, -44.903, 10.7409, -16.5565, -1108.09)
 
 [node name="Gravem" type="StaticBody3D"]
 script = ExtResource("1_2qoln")
@@ -72,3 +584,102 @@ autoplay = true
 max_distance = 4500.0
 panning_strength = 0.0
 bus = &"Environment"
+
+[node name="SectorRootNode" type="Node3D" parent="."]
+script = ExtResource("7_ipauy")
+
+[node name="Sector_5" type="Node3D" parent="SectorRootNode" node_paths=PackedStringArray("mineable_spawn_root", "zone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 684.746, -2272.6, -1799.46)
+script = ExtResource("8_kr1rf")
+mineable_transforms = [SubResource("Resource_m88uy"), SubResource("Resource_ka61j"), SubResource("Resource_p4w1a"), SubResource("Resource_7xcoi"), SubResource("Resource_hox6p"), SubResource("Resource_s2hmj"), SubResource("Resource_p2syd"), SubResource("Resource_ox7py"), SubResource("Resource_u3j8u"), SubResource("Resource_c3vye"), SubResource("Resource_76r5c"), SubResource("Resource_wnpux"), SubResource("Resource_t3olq"), SubResource("Resource_ndcv1"), SubResource("Resource_88yqv"), SubResource("Resource_sl2rv"), SubResource("Resource_5bmfk"), SubResource("Resource_8iwlc"), SubResource("Resource_kkekk"), SubResource("Resource_8yo73")]
+spawn_radius = 2850.0
+mineable_resource = ExtResource("10_75e44")
+mineable_spawn_root = NodePath("@Node3D@110797")
+zone = NodePath("@Node3D@110799")
+
+[node name="@Node3D@110797" type="Node3D" parent="SectorRootNode/Sector_5"]
+
+[node name="@MultiMeshInstance3D@110798" type="MultiMeshInstance3D" parent="SectorRootNode/Sector_5"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 1000.0
+multimesh = SubResource("MultiMesh_7iylo")
+
+[node name="@Node3D@110799" type="Node3D" parent="SectorRootNode/Sector_5"]
+script = ExtResource("12_u7ixy")
+activate_distance = 7461.63
+deactivate_distance = 7561.63
+
+[node name="Sector_6" type="Node3D" parent="SectorRootNode" node_paths=PackedStringArray("mineable_spawn_root", "zone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 843.566, -1962.33, 2240.8)
+script = ExtResource("8_kr1rf")
+mineable_transforms = [SubResource("Resource_vuyow"), SubResource("Resource_3k86j"), SubResource("Resource_1exsu"), SubResource("Resource_jvixe"), SubResource("Resource_x7vgn"), SubResource("Resource_aq3p2"), SubResource("Resource_273uf"), SubResource("Resource_ptm6v"), SubResource("Resource_6ikej"), SubResource("Resource_ltgql"), SubResource("Resource_uwiy7"), SubResource("Resource_daglx"), SubResource("Resource_kgqtk"), SubResource("Resource_killp"), SubResource("Resource_rgusy"), SubResource("Resource_hwo2l"), SubResource("Resource_lcac1"), SubResource("Resource_ltrf4"), SubResource("Resource_bdypb"), SubResource("Resource_28cv0")]
+spawn_radius = 2850.0
+mineable_resource = ExtResource("10_75e44")
+mineable_spawn_root = NodePath("@Node3D@110802")
+zone = NodePath("@Node3D@110804")
+
+[node name="@Node3D@110802" type="Node3D" parent="SectorRootNode/Sector_6"]
+
+[node name="@MultiMeshInstance3D@110803" type="MultiMeshInstance3D" parent="SectorRootNode/Sector_6"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 1000.0
+multimesh = SubResource("MultiMesh_mno2x")
+
+[node name="@Node3D@110804" type="Node3D" parent="SectorRootNode/Sector_6"]
+script = ExtResource("12_u7ixy")
+activate_distance = 7382.83
+deactivate_distance = 7482.83
+
+[node name="Sector_7" type="Node3D" parent="SectorRootNode" node_paths=PackedStringArray("mineable_spawn_root", "zone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -300.876, 1855.04, -1920.59)
+script = ExtResource("8_kr1rf")
+mineable_transforms = [SubResource("Resource_wcoqo"), SubResource("Resource_konme"), SubResource("Resource_1mv52"), SubResource("Resource_yhot1"), SubResource("Resource_l2yq1"), SubResource("Resource_ld351"), SubResource("Resource_gscgw"), SubResource("Resource_umtgv"), SubResource("Resource_arbjk"), SubResource("Resource_phpy8"), SubResource("Resource_a7mec"), SubResource("Resource_yaus2"), SubResource("Resource_krpyp"), SubResource("Resource_esmym"), SubResource("Resource_ndhwn"), SubResource("Resource_ho14y"), SubResource("Resource_o2l5g"), SubResource("Resource_i30w6"), SubResource("Resource_pe7c7"), SubResource("Resource_3ll2k")]
+spawn_radius = 2850.0
+mineable_resource = ExtResource("10_75e44")
+mineable_spawn_root = NodePath("@Node3D@110807")
+zone = NodePath("@Node3D@110809")
+
+[node name="@Node3D@110807" type="Node3D" parent="SectorRootNode/Sector_7"]
+
+[node name="@MultiMeshInstance3D@110808" type="MultiMeshInstance3D" parent="SectorRootNode/Sector_7"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 1000.0
+multimesh = SubResource("MultiMesh_6fnmi")
+
+[node name="@Node3D@110809" type="Node3D" parent="SectorRootNode/Sector_7"]
+script = ExtResource("12_u7ixy")
+activate_distance = 7029.1
+deactivate_distance = 7129.1
+
+[node name="Sector_8" type="Node3D" parent="SectorRootNode" node_paths=PackedStringArray("mineable_spawn_root", "zone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7257, 2173.62, 1983.82)
+script = ExtResource("8_kr1rf")
+mineable_transforms = [SubResource("Resource_g3e0x"), SubResource("Resource_j5nyw"), SubResource("Resource_rwdgc"), SubResource("Resource_da0ca"), SubResource("Resource_ylw6i"), SubResource("Resource_e4ivs"), SubResource("Resource_ira2s"), SubResource("Resource_myt1o"), SubResource("Resource_p1jfb"), SubResource("Resource_io01p"), SubResource("Resource_lokdb"), SubResource("Resource_ledq2"), SubResource("Resource_ktg66"), SubResource("Resource_aqj34"), SubResource("Resource_vvnrj"), SubResource("Resource_jv3mh"), SubResource("Resource_taw0d"), SubResource("Resource_sa56i"), SubResource("Resource_xr65c"), SubResource("Resource_4uk78")]
+spawn_radius = 2850.0
+mineable_resource = ExtResource("10_75e44")
+mineable_spawn_root = NodePath("@Node3D@110812")
+zone = NodePath("@Node3D@110814")
+
+[node name="@Node3D@110812" type="Node3D" parent="SectorRootNode/Sector_8"]
+
+[node name="@MultiMeshInstance3D@110813" type="MultiMeshInstance3D" parent="SectorRootNode/Sector_8"]
+visibility_range_end = 200000.0
+visibility_range_end_margin = 1000.0
+multimesh = SubResource("MultiMesh_s40k5")
+
+[node name="@Node3D@110814" type="Node3D" parent="SectorRootNode/Sector_8"]
+script = ExtResource("12_u7ixy")
+activate_distance = 7102.75
+deactivate_distance = 7202.75
+
+[node name="MineableSpawner" type="Node3D" parent="." node_paths=PackedStringArray("root", "planet_mesh_instance")]
+script = ExtResource("13_7ut71")
+mineable_resource = ExtResource("10_75e44")
+splits = 5
+spawn_count = 100
+spawn_radius = 2850.0
+count_per_multi_mesh = 20
+scale_multiplier = 38.0
+scale_variance = 0.73
+root = NodePath("../SectorRootNode")
+planet_mesh_instance = NodePath("../MeshInstance3D")

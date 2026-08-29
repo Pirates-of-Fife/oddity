@@ -3,10 +3,11 @@ extends RigidBody3D
 class_name GameEntity
 
 signal on_interact
+signal frame_of_reference_changed
 
 signal on_game_entity_drop_request
 
-signal on_damage_taken(damage : float)
+signal on_damage_taken(damage : float, penetration : float)
 
 var is_mass_locked : bool :
 	get:
@@ -15,11 +16,33 @@ var is_mass_locked : bool :
 				return true
 		return false
 
+@export_category("Save")
 
-@export_category("Value")
+# also gets determined by freeze state. Frozen game entities are inside starships, where they get saved in the loadout instead of the regular game save. 
+@export
+var save : bool = false
+
+@export_category("Information")
 
 @export
-var value : int
+var entity_name : StringName = ""
+
+@export
+var value : int :
+	set(v):
+		if trade_information == null:
+			value = v
+	get():
+		if trade_information == null:
+			return value
+		
+		return trade_information.value
+
+@export
+var sellable : bool = false
+
+@export
+var trade_information : TradeResource
 
 @export_category("Interaction")
 
@@ -55,18 +78,35 @@ var can_freeze : bool = true
 @export
 var debug : bool
 
+@export
+var skip_physics_process : bool = false
+
+@export
+var skip_process : bool = false
+
+var world : World : 
+	get:
+		if is_inside_tree():
+			return get_tree().get_first_node_in_group("World")
+		return World.new() # what the fuck
+
 func _physics_process(delta: float) -> void:
+	if skip_physics_process:
+		return
+		
 	_default_physics_process(delta)
 
 func _process(delta: float) -> void:
+	if skip_process:
+		return
+		
 	_default_process(delta)
 
 func _ready() -> void:
 	_default_ready()
 
-# WARNING: temporary, damage will depend on penetration and armour values
-func take_damage(damage : float) -> void:
-	on_damage_taken.emit(damage)
+func take_damage(damage : float, penetration : float) -> void:
+	on_damage_taken.emit(damage, penetration)
 
 func _default_physics_process(delta : float) -> void:
 	calculate_velocities(delta)
@@ -93,6 +133,18 @@ func _default_ready() -> void:
 	freeze_timer.timeout.connect(freeze_timer_timeout)
 
 	on_interact.connect(on_interact_self)
+	
+	if entity_name.is_empty():
+		entity_name = name
+		
+	if save and !(self is Starship):
+		var zone : PlayerDetectionZone = PlayerDetectionZone.new()
+		zone.activate_distance = 4500
+		zone.deactivate_distance = 5000
+		zone.update_time = 1
+		zone.always_deactivate = true
+		add_child(zone)
+		zone.deactivate.connect(despawn_game_entity)
 
 func on_interact_self() -> void:
 	unfreeze()
@@ -125,7 +177,7 @@ func freeze_timer_timeout() -> void:
 		if freeze == false and can_freeze == true and active_frame_of_reference.physics_parent != null and !is_being_held:
 			if relative_linear_velocity.length() < freeze_velocity_limit:
 				freeze_in_reference_frame()
-
+	
 
 func evaluate_active_frame_of_reference() -> void:
 	if in_frame_of_references.size() > 0:
@@ -134,6 +186,8 @@ func evaluate_active_frame_of_reference() -> void:
 
 	if in_frame_of_references.size() == 0:
 		active_frame_of_reference = null
+
+	frame_of_reference_changed.emit()
 
 func _sort_frame_of_references(a : FrameOfReference, b : FrameOfReference) -> bool:
 	return a.size < b.size
@@ -149,6 +203,7 @@ func freeze_static() -> void:
 	freeze = true
 
 func freeze_in_reference_frame() -> void:
+	save = false
 	freeze_static()
 	reparent.call_deferred(active_frame_of_reference)
 
@@ -163,6 +218,7 @@ func unfreeze() -> void:
 	collision_mask = original_collision_mask
 
 	freeze = false
+	save = true
 
 func calculate_velocities(delta : float) -> void:
 	acceleration = (linear_velocity - last_linear_velocity) / delta
@@ -185,3 +241,48 @@ func load_nodes(node_paths: Array) -> Array:
 		if node != null:
 			nodes.append(node)
 	return nodes
+
+var despawned : bool = false
+
+func despawn_game_entity(player : Player, control_entity : ControlEntity) -> void:
+	if !save:
+		return
+	
+	if despawned:
+		return
+		
+	if !save:
+		return
+		
+	if self is Module:
+		if self.module_slot != null:
+			return
+
+	if self is CargoContainer:
+		if self.snapped_to != null:
+			if self.snapped_to.cargo_grid.ship_grid:
+				return
+				
+	if freeze:
+		return
+
+	var new_save : GameEntitySave = GameEntitySave.new()
+	new_save.star_system = world.get_current_star_sytem_resource()
+	new_save.game_entity_scene = scene_file_path
+	new_save.position = StringVector.create(global_position)
+	new_save.rotation = StringVector.create(global_rotation)
+	new_save.value = value
+	
+	var game_entity_zone : GameEntityZone = GameEntityZone.new()
+	game_entity_zone.game_entity_save = new_save
+	
+	get_tree().get_first_node_in_group("StarSystem").add_child(game_entity_zone)
+	
+	game_entity_zone.name = new_save.game_entity_scene
+	
+	game_entity_zone.global_position = global_position
+	game_entity_zone.global_rotation = global_rotation
+	
+	despawned = true
+	
+	queue_free()

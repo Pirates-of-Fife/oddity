@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://m4eqg02uhya4"]
+
+[ext_resource type="Script" path="res://classes/interactable/interaction-button/InteractionButton.gd" id="1_an30u"]
+[ext_resource type="AudioStream" uid="uid://bjxc5hbguibta" path="res://classes/landing-pad/repair-ui/pickupCoin.wav" id="2_q2gcq"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_d637l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thuyy"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.31799, 0.457017, 6.73831e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u8tfg"]
+material = SubResource("StandardMaterial3D_thuyy")
+size = Vector3(1.485, 0.82, 0.025)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qco7c"]
+points = PackedVector3Array(-0.754286, -0.421786, -0.0242857, 0.754286, 0.426786, 0.0228571, 0.754286, 0.426786, -0.0242857, -0.754286, 0.426786, 0.0228571, 0.754286, -0.421786, 0.0228571, 0.754286, -0.421786, -0.0242857, -0.754286, 0.426786, -0.0242857, -0.754286, -0.421786, 0.0228571)
+
+[node name="TradeTerminalBuyButton" type="StaticBody3D" node_paths=PackedStringArray("interaction_sound")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_an30u")
+interaction_sound = NodePath("AudioStreamPlayer3D")
+entity_name = &"Trade Terminal Buy Button"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_q2gcq")
+volume_db = -32.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110527, 0)
+mesh = SubResource("BoxMesh_u8tfg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 0, 0.110527, 0)
+shape = SubResource("ConvexPolygonShape3D_qco7c")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 0, 0.139578, 0.0148309)
+outline_modulate = Color(0, 0, 0, 0)
+text = "BUY
+"
+font = ExtResource("3_d637l")
+font_size = 76

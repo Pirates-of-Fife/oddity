@@ -20,7 +20,9 @@ func _physics_process(delta: float) -> void:
 	calculate_movement_deltas(delta)
 	move_bodies_in_frame_of_reference()
 	set_local_gravity_direction()
-	apply_gravity()
+	
+	if enable_gravity and gravity_strength != 0:
+		apply_gravity()
 
 func apply_gravity() -> void:
 	for body : GameEntity in bodies_in_reference_frame:
@@ -36,7 +38,7 @@ func apply_gravity() -> void:
 				body.relative_gravity_direction = gravity_direction * body.global_basis.inverse()
 				body.gravity_strength = gravity
 			
-			body.apply_central_force(gravity_direction * 9.8 * gravity_strength * body.mass)
+			body.apply_central_force(gravity_direction * 9.8 * gravity_strength * body.mass * body.gravity_scale)
 
 func set_local_gravity_direction() -> void:
 	gravity_direction = -global_transform.basis.y

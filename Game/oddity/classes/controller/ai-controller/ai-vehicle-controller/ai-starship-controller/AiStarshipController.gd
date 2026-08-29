@@ -22,14 +22,18 @@ var starship_shoot_primary_command : StarshipShootPrimaryCommand = StarshipShoot
 var starship_shoot_secondary_command : StarshipShootSecondaryCommand = StarshipShootSecondaryCommand.new()
 var starship_shoot_tertiary_command : StarshipShootTertiaryCommand = StarshipShootTertiaryCommand.new()
 
+var starship_alcubierre_drive_use_special_command : StarshipAlcubierreDriveUseSpecialCommand = StarshipAlcubierreDriveUseSpecialCommand.new()
+
+var starship_start_horn_command : StarshipStartHornCommand = StarshipStartHornCommand.new()
+var starship_end_horn_command : StarshipEndHornCommand = StarshipEndHornCommand.new()
 
 @export_category("AI Settings")
 
 @export
-var player_detection_range : float = 20000
+var player_detection_range : float = 50000
 
 @export
-var player_engagement_range : float = 300
+var player_engagement_range : float = 900
 
 var evade_change_time : float = 15
 
@@ -41,6 +45,9 @@ var roll_timer : Timer = Timer.new()
 
 @onready
 var roll_exit_timer : Timer = Timer.new()
+
+@onready
+var special_timer : Timer = Timer.new()
 
 var current_roll : RollManouver = RollManouver.NONE
 
@@ -95,7 +102,16 @@ func _ai_starship_controller_ready() -> void:
 	roll_exit_timer.one_shot = true
 	roll_exit_timer.autostart = false
 	roll_exit_timer.timeout.connect(stop_roll)
-
+	
+	special_timer.autostart = true
+	special_timer.one_shot = false
+	special_timer.wait_time = 30
+	special_timer.timeout.connect(use_special)
+	
+	add_child(special_timer)
+	add_child(roll_timer)
+	add_child(roll_exit_timer)
+	
 	add_child(timer)
 
 	change_evasion()
@@ -107,7 +123,13 @@ func _ai_starship_controller_ready() -> void:
 		(control_entity as Starship).change_to_damaged_state.connect(change_state_to_flee)
 		(control_entity as Starship).shield_online.connect(change_state_back_to_none)
 
-	evade_change_time = randf_range(0, 60)
+	evade_change_time = randf_range(10, 60)
+	
+	starship_start_horn_command.execute(control_entity)
+	
+	await get_tree().create_timer(randf_range(0.5, 5)).timeout
+	
+	starship_end_horn_command.execute(control_entity)
 
 
 func start_roll() -> void:
@@ -123,7 +145,7 @@ func stop_roll() -> void:
 func change_evasion() -> void:
 	current_evasion = get_random_evasion()
 
-	timer.wait_time = randf_range(1, 20)
+	timer.wait_time = randf_range(3, 30)
 
 func get_random_evasion() -> EvasionDirection:
 	return randi_range(0, 3)
@@ -133,7 +155,8 @@ func _process(delta: float) -> void:
 
 func change_state_to_flee() -> void:
 	if (control_entity as Starship).current_hull_health <= (control_entity as Starship).hull_health_damaged_state:
-		current_ai_state = AiState.FLEE
+		if randf_range(1, 100) <= 50:
+			current_ai_state = AiState.FLEE
 
 func change_state_back_to_none() -> void:
 	current_ai_state = AiState.NONE
@@ -142,14 +165,24 @@ func _ai_starship_controller_process(delta : float) -> void:
 	if player == null:
 		return
 
+	if (player.control_entity is Starship):
+		if ((control_entity as Starship).focused_starship == null):
+			(control_entity as Starship).force_focus(player.control_entity)
+
 	distance_to_player = (control_entity.global_position - player.global_position).length()
+	
+	(control_entity as Starship).current_ammo = 10000
 	
 	if distance_to_player > 12000:
 		(control_entity as Starship).current_max_velocity = (control_entity as Starship).ship_info.max_linear_velocity
 	else:
-		(control_entity as Starship).current_max_velocity = 250
-	
+		(control_entity as Starship).current_max_velocity = maxf(minf(180, (player.control_entity.linear_velocity.length())), 50)
+		
+		if player.control_entity.linear_velocity.length() < 50:
+			(control_entity as Starship).current_max_velocity = 100
+		
 	if current_ai_state == AiState.FLEE:
+		(control_entity as Starship).current_max_velocity = (control_entity as Starship).ship_info.max_linear_velocity * 0.75
 		thrust_towards()
 		rotate_away_from_player()
 		return
@@ -167,15 +200,16 @@ func _ai_starship_controller_process(delta : float) -> void:
 		thrust_towards()
 
 	if current_ai_state == AiState.ENGAGING_PLAYER:
-		rotate_towards_player()
+		#rotate_towards_player()
+		aim_towards_player()
 		evade()
 		shoot_player()
 
 		match current_roll:
 			RollManouver.LEFT:
-				starship_roll_left_command.execute(control_entity, StarshipRollLeftCommand.Params.new(1))
+				starship_roll_left_command.execute(control_entity, StarshipRollLeftCommand.Params.new(0.1))
 			RollManouver.RIGHT:
-				starship_roll_right_command.execute(control_entity, StarshipRollRightCommand.Params.new(1))
+				starship_roll_right_command.execute(control_entity, StarshipRollRightCommand.Params.new(0.1))
 
 func rotate_away_from_player() -> void:
 	var direction_to_player : Vector3 = (player.global_position - control_entity.global_position) * control_entity.global_basis.inverse()
@@ -207,32 +241,75 @@ func rotate_towards_player() -> void:
 
 	# Determine turn intensity based on the magnitude of the deviation
 	# The intensity will be lower the closer the direction is to alignment
-	var yaw_intensity: float = pow(abs(normalized_direction.x), 0.5)
-	var pitch_intensity: float = pow(abs(normalized_direction.y), 0.5)
+	var yaw_intensity: float = pow(abs(normalized_direction.x), 0.9)
+	var pitch_intensity: float = pow(abs(normalized_direction.y), 0.9)
 
 	if direction_to_player.x > 0:
 		starship_yaw_right_command.execute(control_entity, StarshipYawRightCommand.Params.new(yaw_intensity))
 	elif direction_to_player.x < 0:
 		starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(yaw_intensity))
 
-
 	if direction_to_player.y > 0:
 		starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(pitch_intensity))
 	elif direction_to_player.y < 0:
 		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(pitch_intensity))
 
+func get_average_pip_position() -> Vector3:
+	if (control_entity as Starship).pips.is_empty():
+		return Vector3.ZERO
 
+	var sum : Vector3 = Vector3.ZERO
+	
+	for p : Pip in (control_entity as Starship).pips:
+		sum += p.global_position
+	
+	return sum / (control_entity as Starship).pips.size()
 
+func aim_towards_player() -> void:
+
+	#var average_pip_position : Vector3 = control_entity.to_local(get_average_pip_position())
+	
+	var direction_to_player : Vector3 = control_entity.to_local(player.control_entity.global_position)
+		
+	#print("pips: " + str(average_pip_position))
+	
+	#if (average_pip_position == Vector3.ZERO):
+	#	average_pip_position = (control_entity as Starship).focused_starship.global_position
+	
+	var direction_to_aim: Vector3 = direction_to_player
+
+	if direction_to_aim.length() < 0.001:
+		return
+
+	var normalized_direction: Vector3 = direction_to_aim.normalized()
+	var yaw_intensity: float = pow(abs(normalized_direction.x), 0.6)
+	var pitch_intensity: float = pow(abs(normalized_direction.y), 0.6)
+	
+	#print("intentsiesi")
+	#print(yaw_intensity)
+	#print(pitch_intensity)
+
+	if direction_to_aim.x > 0:
+		starship_yaw_right_command.execute(control_entity, StarshipYawRightCommand.Params.new(yaw_intensity))
+	elif direction_to_aim.x < 0:
+		starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(yaw_intensity))
+
+	if direction_to_aim.y > 0:
+		starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(pitch_intensity))
+	elif direction_to_aim.y < 0:
+		starship_pitch_up_command.execute(control_entity, StarshipPitchUpCommand.Params.new(pitch_intensity))
+	
 func thrust_towards() -> void:
 	starship_thrust_forward_command.execute(control_entity, StarshipThrustForwardCommand.Params.new(1))
 
 func shoot_player() -> void:
-	starship_shoot_primary_command.execute(control_entity)
-	starship_shoot_secondary_command.execute(control_entity)
-	starship_shoot_tertiary_command.execute(control_entity)
+	if distance_to_player <= 600:
+		starship_shoot_primary_command.execute(control_entity)
+		starship_shoot_secondary_command.execute(control_entity)
+		starship_shoot_tertiary_command.execute(control_entity)
 
 func evade() -> void:
-	var evasion_amount : float = randf_range(0.1, 0.5)
+	var evasion_amount : float = randf_range(0.1, 0.4)
 
 	match current_evasion:
 		EvasionDirection.EVADE_LEFT:
@@ -243,3 +320,9 @@ func evade() -> void:
 			starship_thrust_up_command.execute(control_entity, StarshipThrustUpCommand.Params.new(evasion_amount))
 		EvasionDirection.EVADE_DOWN:
 			starship_thrust_down_command.execute(control_entity, StarshipThrustDownCommand.Params.new(evasion_amount))
+
+func use_special() -> void:
+	starship_alcubierre_drive_use_special_command.execute(control_entity)
+	
+	special_timer.wait_time = randf_range(3, 20)
+	special_timer.start()

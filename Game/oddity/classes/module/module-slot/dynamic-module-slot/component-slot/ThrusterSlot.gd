@@ -26,6 +26,9 @@ var current_thrust : float :
 	get:
 		return current_thrust
 
+@export
+var ignore_area_stuff : bool = false
+
 enum ThrusterType
 {
 	MAIN = 0,
@@ -75,6 +78,9 @@ func _thruster_slot_ready() -> void:
 	initialize_area_automatically = false
 	_dynamic_module_slot_ready()
 	add_to_group("ComponentSlot")
+	
+	if ignore_area_stuff:
+		return
 
 	var area : Area3D = $SlotArea
 

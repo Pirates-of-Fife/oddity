@@ -1,0 +1,902 @@
+[gd_scene load_steps=15 format=3 uid="uid://o23govmgfw8v"]
+
+[ext_resource type="Script" path="res://classes/insurance-terminal/InsuranceUi.gd" id="1_rg3j1"]
+[ext_resource type="Script" path="res://classes/insurance-terminal/UiButton.gd" id="1_u87fl"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="2_0mvqj"]
+[ext_resource type="AudioStream" uid="uid://2w7aoby4ad1l" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/button.wav" id="3_atb7a"]
+[ext_resource type="Material" uid="uid://cpqklftecyhba" path="res://classes/insurance-terminal/UiButtonRegularMaterial.tres" id="5_434mu"]
+[ext_resource type="Material" uid="uid://b3wkl5mhgp5v3" path="res://classes/insurance-terminal/UiButtonSelectedMaterial.tres" id="6_ghsc6"]
+[ext_resource type="Script" path="res://classes/insurance-terminal/LoadoutSlotButton.gd" id="6_p3uhc"]
+[ext_resource type="AudioStream" uid="uid://cmoi3n1dmx15t" path="res://classes/landing-pad/save-ship-ui/powerUp.wav" id="7_x150b"]
+[ext_resource type="AudioStream" uid="uid://crdgvtkwst2i" path="res://classes/landing-pad/spawn-ship-ui/no.wav" id="8_ss4ly"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cfcr8"]
+material = ExtResource("5_434mu")
+size = Vector3(0.88, 0.2, 0.01)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fn5pj"]
+points = PackedVector3Array(0.44, 0.1, 0.005, 0.44, 0.1, -0.005, -0.44, 0.1, 0.005, 0.44, -0.1, 0.005, 0.44, -0.1, -0.005, -0.44, 0.1, -0.005, -0.44, -0.1, 0.005, -0.44, -0.1, -0.005)
+
+[sub_resource type="BoxMesh" id="BoxMesh_640en"]
+material = ExtResource("5_434mu")
+size = Vector3(1.831, 0.2, 0.01)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_svt6i"]
+points = PackedVector3Array(0.9155, 0.1, 0.005, 0.9155, 0.1, -0.005, -0.9155, 0.1, 0.005, 0.9155, -0.1, 0.005, 0.9155, -0.1, -0.005, -0.9155, 0.1, -0.005, -0.9155, -0.1, 0.005, -0.9155, -0.1, -0.005)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vlfe6"]
+material = ExtResource("5_434mu")
+size = Vector3(1.985, 0.2, 0.01)
+
+[node name="InsuranceTerminalUi" type="Node3D" node_paths=PackedStringArray("landed_ship_name_label", "landed_ship_id_label", "insurance_tab", "storage_tab", "insurance_ui_root", "insurance_slots_root", "delete_insurance_button", "insure_button", "override_insurance_button", "claim_insurance_button", "selected_insurance_ship_name_label", "selected_insurance_price_label", "storage_ui_root", "storage_slots_root", "store_button", "retrieve_button", "sell_button", "selected_stored_ship_name_label", "selected_stored_ship_id_label", "selected_stored_ship_value_label", "success_sound", "decline_sound")]
+script = ExtResource("1_rg3j1")
+landed_ship_name_label = NodePath("CurrentShipNameLabel")
+landed_ship_id_label = NodePath("CurrentShipIDLabel")
+insurance_tab = NodePath("InsuranceTab")
+storage_tab = NodePath("StorageTab")
+insurance_ui_root = NodePath("InsuranceUI")
+insurance_slots_root = NodePath("InsuranceUI/InsuranceSlots")
+delete_insurance_button = NodePath("InsuranceUI/Delete Insurance Button")
+insure_button = NodePath("InsuranceUI/Insure Ship Button")
+override_insurance_button = NodePath("InsuranceUI/Override Button")
+claim_insurance_button = NodePath("InsuranceUI/Claim Button")
+selected_insurance_ship_name_label = NodePath("InsuranceUI/Selected Ship Name")
+selected_insurance_price_label = NodePath("InsuranceUI/Insurance Claim Price")
+storage_ui_root = NodePath("StorageUI")
+storage_slots_root = NodePath("StorageUI/StorageSlots")
+store_button = NodePath("StorageUI/Store Ship")
+retrieve_button = NodePath("StorageUI/Retrieve Ship")
+sell_button = NodePath("StorageUI/Sell Ship")
+selected_stored_ship_name_label = NodePath("StorageUI/Selected Ship Name")
+selected_stored_ship_id_label = NodePath("StorageUI/Selected Ship Id")
+selected_stored_ship_value_label = NodePath("StorageUI/Selected Ship Value")
+success_sound = NodePath("Success")
+decline_sound = NodePath("Decline")
+
+[node name="ButtonPress" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44865, 0)
+stream = ExtResource("3_atb7a")
+volume_db = 6.0
+pitch_scale = 0.5
+bus = &"Interior"
+
+[node name="InsuranceTab" type="StaticBody3D" parent="." node_paths=PackedStringArray("button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58832, 3.42981, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceTab"]
+mesh = SubResource("BoxMesh_cfcr8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceTab"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="InsuranceTab"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="StorageTab" type="StaticBody3D" parent="." node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.650124, 3.42981, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("../InsuranceTab/Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageTab"]
+mesh = SubResource("BoxMesh_cfcr8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageTab"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="StorageTab"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Storage"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="CurrentShipNameLabel" type="Label3D" parent="."]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 3.45622, 0.129233)
+text = "Current Ship Name"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="CurrentShipIDLabel" type="Label3D" parent="."]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 3.28359, 0.129233)
+text = "Current Ship ID
+"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="InsuranceUI" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.715523, 0)
+visible = false
+
+[node name="InsuranceSlots" type="Node3D" parent="InsuranceUI"]
+
+[node name="InteractionButton" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 2.43672, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton2" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 2.20233, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 1
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton2"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton2"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton2"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton3" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.97437, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 2
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton3"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton3"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton3"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton4" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.74713, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 3
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton4"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton4"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton4"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton5" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.53041, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 4
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton5"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton5"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton5"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton6" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.29602, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 5
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton6"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton6"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton6"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton7" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.06806, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 6
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton7"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton7"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton7"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton8" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 0.840818, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 7
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton8"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton8"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton8"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton9" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 0.617857, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 8
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton9"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton9"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton9"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton10" type="StaticBody3D" parent="InsuranceUI/InsuranceSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 0.390616, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 9
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/InsuranceSlots/InteractionButton10"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/InsuranceSlots/InteractionButton10"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/InsuranceSlots/InteractionButton10"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Delete Insurance Button" type="StaticBody3D" parent="InsuranceUI" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973924, 0.417966, 0.11677)
+visible = false
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/Delete Insurance Button"]
+mesh = SubResource("BoxMesh_vlfe6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/Delete Insurance Button"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/Delete Insurance Button"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "DELETE INSURED SHIP"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Insure Ship Button" type="StaticBody3D" parent="InsuranceUI" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973924, 0.655665, 0.11677)
+visible = false
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/Insure Ship Button"]
+mesh = SubResource("BoxMesh_vlfe6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/Insure Ship Button"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/Insure Ship Button"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "INSURE SHIP"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Override Button" type="StaticBody3D" parent="InsuranceUI" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973924, 0.655665, 0.11677)
+visible = false
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/Override Button"]
+mesh = SubResource("BoxMesh_vlfe6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/Override Button"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/Override Button"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "OVERRIDE INSURANCE"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Claim Button" type="StaticBody3D" parent="InsuranceUI" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973924, 0.90064, 0.11677)
+visible = false
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InsuranceUI/Claim Button"]
+mesh = SubResource("BoxMesh_vlfe6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InsuranceUI/Claim Button"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="InsuranceUI/Claim Button"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "CLAIM INSURANCE"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Selected Insurance" type="Label3D" parent="InsuranceUI"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 1.91107, 0.129233)
+text = "Selected Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Selected Ship Name" type="Label3D" parent="InsuranceUI"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 1.74374, 0.129233)
+visible = false
+text = "Current Ship Name"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Insurance Claim Price" type="Label3D" parent="InsuranceUI"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 1.57111, 0.129233)
+visible = false
+text = "59M Cr
+"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="StorageUI" type="Node3D" parent="."]
+visible = false
+
+[node name="StorageSlots" type="Node3D" parent="StorageUI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.718877, 0)
+
+[node name="InteractionButton" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 2.43672, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton2" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 2.20233, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 1
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton2"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton2"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton2"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton3" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.97437, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 2
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton3"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton3"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton3"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton4" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.74713, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 3
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton4"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton4"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton4"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton5" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.53041, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 4
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton5"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton5"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton5"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton6" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.29602, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 5
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton6"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton6"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton6"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton7" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 1.06806, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 6
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton7"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton7"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton7"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton8" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 0.840818, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 7
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton8"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton8"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton8"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton9" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 0.617857, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 8
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton9"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton9"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton9"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="InteractionButton10" type="StaticBody3D" parent="StorageUI/StorageSlots" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11229, 0.390616, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("6_p3uhc")
+id = 9
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/StorageSlots/InteractionButton10"]
+mesh = SubResource("BoxMesh_640en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/StorageSlots/InteractionButton10"]
+shape = SubResource("ConvexPolygonShape3D_svt6i")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/StorageSlots/InteractionButton10"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0289608, 0.00583286)
+text = "Insurance"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Selected Stored" type="Label3D" parent="StorageUI"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 2.61575, 0.129233)
+text = "Selected Ship
+"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Selected Ship Name" type="Label3D" parent="StorageUI"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 2.44841, 0.129233)
+text = "Current Ship Name"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Selected Ship Id" type="Label3D" parent="StorageUI"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 2.27578, 0.129233)
+text = "59M Cr
+"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Selected Ship Value" type="Label3D" parent="StorageUI"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 2.09852, 2.12646, 0.129233)
+text = "59M Cr
+"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 2
+
+[node name="Retrieve Ship" type="StaticBody3D" parent="StorageUI" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973924, 1.26793, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/Retrieve Ship"]
+mesh = SubResource("BoxMesh_vlfe6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/Retrieve Ship"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/Retrieve Ship"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "Retrieve Stored Ship
+"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Store Ship" type="StaticBody3D" parent="StorageUI" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973924, 1.50563, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/Store Ship"]
+mesh = SubResource("BoxMesh_vlfe6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/Store Ship"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/Store Ship"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "Store Landed Ship "
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Sell Ship" type="StaticBody3D" parent="StorageUI" node_paths=PackedStringArray("button_text_label", "button_mesh", "interaction_sound")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.973924, 1.7511, 0.11677)
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_u87fl")
+button_text_label = NodePath("Label3D")
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("5_434mu")
+selected_material = ExtResource("6_ghsc6")
+interaction_sound = NodePath("../../ButtonPress")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StorageUI/Sell Ship"]
+mesh = SubResource("BoxMesh_vlfe6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StorageUI/Sell Ship"]
+shape = SubResource("ConvexPolygonShape3D_fn5pj")
+
+[node name="Label3D" type="Label3D" parent="StorageUI/Sell Ship"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0.0060409, 0.0249569, 0.00583286)
+text = "Sell Stored Ship"
+font = ExtResource("2_0mvqj")
+font_size = 80
+outline_size = 0
+
+[node name="Success" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38388, 0)
+stream = ExtResource("7_x150b")
+volume_db = -30.0
+pitch_scale = 0.58
+
+[node name="Decline" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_ss4ly")
+volume_db = -16.0

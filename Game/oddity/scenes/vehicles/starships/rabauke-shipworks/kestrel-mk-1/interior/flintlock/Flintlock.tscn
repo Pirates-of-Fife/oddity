@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cd0jpvowdtkc5"]
+
+[ext_resource type="ArrayMesh" uid="uid://b211mnueguxpb" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/interior/flintlock/Meshes/FlintlockBody.mesh" id="1_041ha"]
+[ext_resource type="ArrayMesh" uid="uid://c6oromwclijap" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/interior/flintlock/Meshes/FlintlockCylinder.mesh" id="2_wtdga"]
+[ext_resource type="ArrayMesh" uid="uid://bcvv7cltnc7sk" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/interior/flintlock/Meshes/FlintlockTrigger.mesh" id="3_qleqe"]
+[ext_resource type="ArrayMesh" uid="uid://dxdm5x6gxriu1" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/interior/flintlock/Meshes/FlintlockMagazine.mesh" id="4_r1ces"]
+[ext_resource type="ArrayMesh" uid="uid://dcdqqtkoyvnyj" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/interior/flintlock/Meshes/FlintlockThingy.mesh" id="5_kofpc"]
+[ext_resource type="PackedScene" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/interior/flintlock/FlintlockBullet.tscn" id="6_wtdga"]
+
+[node name="Flintlock" type="Node3D"]
+
+[node name="Flintlock" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -5.60729e-08, -1.40198e-07, 0, 0.928491, -0.371354, 1.50996e-07, -0.371354, -0.928491, 0, 0, 0)
+mesh = ExtResource("1_041ha")
+
+[node name="RevolverCylinder" type="MeshInstance3D" parent="Flintlock"]
+transform = Transform3D(1, 0, 0, 0, 0.371354, -0.928491, 0, 0.928491, 0.371354, -4.65661e-10, 0.102074, 0.0790058)
+mesh = ExtResource("2_wtdga")
+
+[node name="FlintlockBullet" parent="Flintlock/RevolverCylinder" instance=ExtResource("6_wtdga")]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.0187628, -0.0247738, 7.99e-05)
+
+[node name="FlintlockBullet2" parent="Flintlock/RevolverCylinder" instance=ExtResource("6_wtdga")]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, -0.0186858, -0.0247738, 7.99e-05)
+
+[node name="Trigger" type="MeshInstance3D" parent="Flintlock"]
+transform = Transform3D(1, 0, 0, 0, 0.922465, 0.386081, 0, -0.386081, 0.922465, 5.15347e-06, 0.0497887, 0.0313548)
+mesh = ExtResource("3_qleqe")
+
+[node name="Magazine" type="Node3D" parent="Flintlock"]
+transform = Transform3D(-1, 0, 8.74228e-08, -3.24648e-08, 0.928491, -0.371354, -8.11713e-08, -0.371354, -0.928491, -4.65661e-10, 0.0151619, 0.0034684)
+
+[node name="Mag" type="MeshInstance3D" parent="Flintlock/Magazine"]
+transform = Transform3D(-1, -5.60729e-08, -1.40198e-07, 0, 0.928491, -0.371354, 1.50996e-07, -0.371354, -0.928491, 0, 0, 0)
+mesh = ExtResource("4_r1ces")
+
+[node name="FlintlockBullet2" parent="Flintlock/Magazine/Mag" instance=ExtResource("6_wtdga")]
+transform = Transform3D(1, 0, 0, 0, 0.994192, 0.107618, 0, -0.107618, 0.994192, -0.000527516, 0.04482, -0.00348735)
+visible = false
+
+[node name="Mag2" type="MeshInstance3D" parent="Flintlock/Magazine"]
+visible = false
+mesh = ExtResource("4_r1ces")
+
+[node name="FlintlockBullet2" parent="Flintlock/Magazine/Mag2" instance=ExtResource("6_wtdga")]
+transform = Transform3D(1, 0, 0, 0, 0.994192, 0.107618, 0, -0.107618, 0.994192, -0.000527516, 0.04482, -0.00348735)
+
+[node name="Trigger Thing" type="MeshInstance3D" parent="Flintlock"]
+transform = Transform3D(1, 0, 0, 0, 0.928491, 0.371354, 0, -0.371354, 0.928491, -0.0211594, 0.0781339, -0.0145202)
+mesh = ExtResource("5_kofpc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

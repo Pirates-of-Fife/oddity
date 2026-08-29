@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://co2gxosduwewk"]
+
+[ext_resource type="Resource" uid="uid://cfpi73fhtbm30" path="res://scenes/modules/test-module/plasma-accelerator/projectiles/PlasmaAcceleratorProjectile.tres" id="1_3e1xn"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_ee0ga"]
+[ext_resource type="AudioStream" uid="uid://bgyqdefvrh8ex" path="res://scenes/modules/test-module/plasma-accelerator/sounds/plasma_accelerator_fire.wav" id="3_3tr8l"]
+
+[resource]
+script = ExtResource("2_ee0ga")
+projectile = ExtResource("1_3e1xn")
+projectile_speed = 900.0
+cooldown = 3.0
+heat_per_shot = 4000.0
+ammo_usage = 500.0
+hull_damage = 14400.0
+shield_damage = 17280.0
+penetration = 140.0
+sound = ExtResource("3_3tr8l")
+type = &"Plasma Weapon"
+manufacturer = &"Plasma Laboratories Corporation"
+model = &"Accelerator 8"
+size = &"8"
+release_year = &"43"
+power_usage = 0.0

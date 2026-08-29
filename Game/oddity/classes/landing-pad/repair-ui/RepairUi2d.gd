@@ -39,28 +39,44 @@ var restock_cost_label : Label
 @export
 var ship_restocked_ui : Control
 
-func ship_landed(starship : Starship, repair_costs : String, refuel_costs : String, restock_costs : String) -> void:
+@export_category("Repair")
+
+@export
+var armour_ui : Control
+
+@export
+var armour_cost_label : Label
+
+@export
+var armour_restored_label : Control
+
+func ship_landed(starship : Starship, repair_costs : String, refuel_costs : String, restock_costs : String, restore_costs : String) -> void:
 	ship_not_landed_ui.hide()
 	ship_repaired_ui.hide()
 	ship_restocked_ui.hide()
 	ship_refueled_ui.hide()
+	armour_restored_label.hide()
 	
 	repair_ui.show()
 	refuel_ui.show()
 	restock_ui.show()
+	armour_ui.show()
 	
 	ship_name.text = starship.ship_name
 	repair_cost_label.text = repair_costs
 	refuel_cost_label.text = refuel_costs
 	restock_cost_label.text = restock_costs
-
+	armour_cost_label.text = restore_costs
+	
 func ship_took_off() -> void:
 	ship_repaired_ui.hide()
 	ship_restocked_ui.hide()
 	ship_refueled_ui.hide()
+	armour_restored_label.hide()
 	repair_ui.hide()
 	refuel_ui.hide()
 	restock_ui.hide()
+	armour_ui.hide()
 	
 	ship_not_landed_ui.show()
 
@@ -76,3 +92,7 @@ func restocked() -> void:
 func refueled() -> void:
 	refuel_ui.hide()
 	ship_refueled_ui.show()
+
+func restored() -> void:
+	armour_ui.hide()
+	armour_restored_label.show()

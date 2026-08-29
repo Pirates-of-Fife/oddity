@@ -22,6 +22,11 @@ var passive_heat_generation : float = 0
 
 var is_being_held_after_uninsert : bool  = false
 
+var module_fx_scene : String = "res://classes/module/module-fx/ModuleFx.tscn"
+
+@export
+var quiet_insert : bool = false
+
 func _ready() -> void:
 	_module_ready()
 
@@ -34,46 +39,74 @@ func _module_ready() -> void:
 	on_interact.connect(_on_interact)
 	inserted.connect(_on_insert)
 	uninserted.connect(_on_uninsert)
-
+	
+	
 func _on_insert(slot : ModuleSlot) -> void:
 	pass
 
 func _on_uninsert(slot : ModuleSlot) -> void:
 	pass
 
+func _insert_fx(slot : ModuleSlot, quiet : bool) -> void:
+	if quiet:
+		return
+
+	var fx : ModuleFX = load(module_fx_scene).instantiate()
+	
+	slot.add_child(fx)
+	
+func _uninsert_fx(slot : ModuleSlot, quiet : bool) -> void:
+	if quiet:
+		return
+
+	var fx : ModuleFX = load(module_fx_scene).instantiate()
+	
+	fx.insert_fx = false
+	
+	slot.add_child(fx)
+			
 func insert(slot : DynamicModuleSlot) -> void:
 	can_freeze = false
 
 	module_slot = slot
 
 	freeze_static()
-
-	global_position = module_slot.global_position
-	global_rotation = module_slot.global_rotation
+	
+	if self is Weapon:
+		global_position = (module_slot as Hardpoint).mounting_position.global_position
+		global_rotation = (module_slot as Hardpoint).mounting_position.global_rotation
+	else:
+		global_position = module_slot.global_position
+		global_rotation = module_slot.global_rotation
+	
 	module_slot.module = self
 
 	if get_parent_node_3d() != module_slot:
-		reparent.call_deferred(module_slot)
-
-	module_slot.module_inserted.emit(self)
+		reparent(module_slot)
+	
+	module_slot.module_inserted.emit(self, module_slot.id)
 	inserted.emit(module_slot)
-
+	
+	_insert_fx(slot, quiet_insert)
+	
+	quiet_insert = false
+	
 
 func uninsert() -> void:
-	uninserted.emit(module_slot)
-	module_slot.module_removed.emit(self)
+	module_slot.module_removed.emit(self, module_slot.id)
 	module_slot.module = null
+	uninserted.emit(module_slot)
+	
+	_uninsert_fx(module_slot, quiet_insert)
+	
 	module_slot = null
-	reparent.call_deferred(get_tree().get_first_node_in_group("StarSystem"))
+	reparent(get_tree().get_first_node_in_group("StarSystem"))
 	can_freeze = true
-
-
+	
 func add_heat(heat : float) -> void:
 	if (module_slot == null):
 		return
-
-
-
+		
 	module_slot.add_heat(heat)
 
 func _on_interact() -> void:

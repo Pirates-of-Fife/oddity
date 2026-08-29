@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dujj1luln23rv" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/secondary-door/SecondaryDoorFrame.glb" id="2_ibvep"]
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/OpenableDetectionArea.gd" id="3_ovvjc"]
 [ext_resource type="PackedScene" uid="uid://cxlfg36h51g0f" path="res://scenes/vehicles/starships/rabauke-shipworks/common/meshes/doors/secondary-door/SecondaryDoor.glb" id="3_x3lp1"]
-[ext_resource type="AudioStream" uid="uid://xq4lkl4qjbjm" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/doors/door_open.wav" id="5_6fgfo"]
+[ext_resource type="AudioStream" uid="uid://bunrp13pvu8xn" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/doors/new door.wav" id="5_2x2df"]
 
 [sub_resource type="Animation" id="Animation_53li6"]
 length = 0.001
@@ -110,6 +110,6 @@ shape = SubResource("BoxShape3D_0kvib")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.873842, -0.999365, -0.00533572)
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_6fgfo")
+stream = ExtResource("5_2x2df")
 volume_db = -9.0
 bus = &"Interior"

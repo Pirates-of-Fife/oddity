@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfpi72ykiab3y"]
+
+[ext_resource type="AudioStream" uid="uid://hlsfp2t6f64" path="res://scenes/modules/test-module/rotary-autocannon/ciws_single_shot.wav" id="1_sound"]
+[ext_resource type="Script" path="res://classes/module/weapon/ProjectileWeaponShootAudioStreamPlayer3D.gd" id="2_script"]
+
+[node name="PlasmaAcceleratorSound" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_sound")
+volume_db = -6.0
+max_db = 6.0
+pitch_scale = 0.55
+bus = &"Weapon"
+script = ExtResource("2_script")
+sound = ExtResource("1_sound")

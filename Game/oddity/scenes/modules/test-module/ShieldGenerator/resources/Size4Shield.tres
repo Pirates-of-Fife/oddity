@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ShieldGeneratorResource" load_steps=2 format=3 uid="uid://bag82uoxr3dx3"]
+
+[ext_resource type="Script" path="res://resources/classes/module/component/shield-generator/ShieldGeneratorResource.gd" id="1_gf12h"]
+
+[resource]
+script = ExtResource("1_gf12h")
+max_shield_health = 26364.0
+charge_rate = 1000.0
+cooldown_time_after_break = 25.0
+cooldown_time_after_hit = 5.0
+charge_time = 0.5
+shield_color = Color(0.710505, 0.805849, 0.369196, 1)
+shield_offline_color = Color(0.650653, 0.39812, 0.596073, 1)
+shield_heat_per_charge = 120.0
+shield_heat_per_full_recharge = 1200.0
+type = &"Shield Generator"
+manufacturer = &"Meean’kar Corporation"
+model = &"Aeroguard"
+size = &"4"
+release_year = &"222"
+power_usage = 0.0

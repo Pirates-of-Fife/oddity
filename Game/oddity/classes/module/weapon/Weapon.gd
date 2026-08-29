@@ -12,6 +12,9 @@ var size : ModuleSize.HardpointSize
 @export
 var nozzle : Marker3D
 
+var aim_point : Vector3
+var aim_assist : float
+
 signal weapon_shot
 signal weapon_stopped_shooting
 signal weapon_hit(target : GameEntity)
@@ -21,7 +24,9 @@ func _ready() -> void:
 	
 func _weapon_ready() -> void:
 	_module_ready()
-	
+		
+	can_be_picked_up = true
+
 func shoot() -> void:
 	pass
 

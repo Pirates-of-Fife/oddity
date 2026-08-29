@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkslwlfp15cg7"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/AlcubierreDrive.gd" id="1_r2nik"]
+[ext_resource type="Resource" uid="uid://cki2vobfhn30h" path="res://scenes/modules/test-module/alcubierre-drives/fluxline/Size4FluxLine.tres" id="2_s58hu"]
+[ext_resource type="Resource" uid="uid://c7ev03ysqr8fw" path="res://resources/resources/trade/trade-items/modules/meean-kar-corporation/fluxline/TradeResourceFluxline4.tres" id="3_c54by"]
+[ext_resource type="PackedScene" uid="uid://b4rqsv1kqush4" path="res://scenes/modules/test-module/alcubierre-drives/fluxline/alcubierre_drive.glb" id="4_3hgmq"]
+
+[sub_resource type="Curve" id="Curve_ceube"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Size4FluxLine" type="RigidBody3D" node_paths=PackedStringArray("charging_start", "charging_sound", "charging_end", "travelling_sound")]
+collision_layer = 537396225
+collision_mask = 537396225
+script = ExtResource("1_r2nik")
+size = 4
+manouvarabilty_curve = SubResource("Curve_ceube")
+charging_start = NodePath("ChargeStart")
+charging_sound = NodePath("ChargeLoop")
+charging_end = NodePath("ChargeEnd")
+travelling_sound = NodePath("Travelling")
+module_resource = ExtResource("2_s58hu")
+save = true
+trade_information = ExtResource("3_c54by")
+can_be_picked_up = true
+
+[node name="alcubierre_drive" parent="." instance=ExtResource("4_3hgmq")]
+transform = Transform3D(1.53081e-16, -2.5, 0, 2.5, 1.53081e-16, 0, 0, 0, 2.5, 0, -0.0260223, 0)
+
+[node name="ChargeStart" type="AudioStreamPlayer3D" parent="."]
+volume_db = -6.0
+
+[node name="ChargeLoop" type="AudioStreamPlayer3D" parent="."]
+volume_db = -6.0
+
+[node name="ChargeEnd" type="AudioStreamPlayer3D" parent="."]
+volume_db = -6.0
+
+[node name="Travelling" type="AudioStreamPlayer3D" parent="."]
+volume_db = -12.0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

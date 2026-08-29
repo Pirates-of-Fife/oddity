@@ -6,4 +6,7 @@ class_name StarSystemResource
 var name : String
 
 @export
-var scene_file : PackedScene
+var scene_file : String
+
+@export
+var position : Vector2

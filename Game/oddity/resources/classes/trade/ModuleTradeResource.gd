@@ -1,0 +1,3 @@
+extends TradeResource
+
+class_name ModuleTradeResource

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://x6o8f8bd4202"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/boss-fight-zone/BossFightZone.gd" id="1_j4vjy"]
+
+[node name="boss" type="Node3D"]
+script = ExtResource("1_j4vjy")
+difficulty = 2
+waves = 1
+ship_count_per_wave = 3
+spawn_radius = 10300.0

@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk4seiw4urcm2"]
+
+[ext_resource type="Script" path="res://classes/station/trade-terminal/trade-ui/TradeItemButton.gd" id="1_mxpjv"]
+[ext_resource type="Material" uid="uid://bi7wue047oe2y" path="res://classes/station/trade-terminal/trade-ui/TradeUIButtonStart.material" id="2_g3vb7"]
+[ext_resource type="Material" uid="uid://cwfjktdjvads4" path="res://classes/station/trade-terminal/trade-ui/TradeUIButtonSelected.material" id="3_fjm7e"]
+[ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="3_ldog3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d2nxw"]
+material = ExtResource("2_g3vb7")
+size = Vector3(4.001, 0.38, 0.01)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_85n7d"]
+points = PackedVector3Array(2.0005, 0.19, 0.005, 2.0005, 0.19, -0.005, -2.0005, 0.19, 0.005, 2.0005, -0.19, 0.005, 2.0005, -0.19, -0.005, -2.0005, 0.19, -0.005, -2.0005, -0.19, 0.005, -2.0005, -0.19, -0.005)
+
+[node name="TradeItemButton" type="StaticBody3D" node_paths=PackedStringArray("button_text_label", "button_mesh")]
+collision_layer = 536870912
+collision_mask = 536870912
+script = ExtResource("1_mxpjv")
+button_text_label = NodePath("Label3D")
+toggleable = true
+button_mesh = NodePath("MeshInstance3D")
+start_material = ExtResource("2_g3vb7")
+selected_material = ExtResource("3_fjm7e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_d2nxw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_85n7d")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -1.9577, 0.0200144, 0.00583286)
+texture_filter = 2
+text = "Meean’kar Corporation Aeroguard | Size 1"
+font = ExtResource("3_ldog3")
+font_size = 80
+outline_size = 0
+horizontal_alignment = 0
+line_spacing = -95.76
+autowrap_mode = 3
+width = 3500.0

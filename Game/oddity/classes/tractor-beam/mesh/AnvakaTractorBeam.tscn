@@ -1,0 +1,281 @@
+[gd_scene load_steps=25 format=3 uid="uid://dj5emjn3ylomv"]
+
+[ext_resource type="Script" path="res://classes/tractor-beam/mesh/TractorBeam.gd" id="1_lhk2p"]
+[ext_resource type="ArrayMesh" uid="uid://cic2qkttx0cuc" path="res://classes/tractor-beam/mesh/meshes/anvaka_base.mesh" id="1_r651b"]
+[ext_resource type="ArrayMesh" uid="uid://b2o81ecvtx280" path="res://classes/tractor-beam/mesh/meshes/anvaka_yaw.mesh" id="2_2clke"]
+[ext_resource type="ArrayMesh" uid="uid://bkpplpm2x3bop" path="res://classes/tractor-beam/mesh/meshes/anvaka_pitch.mesh" id="3_sk8ha"]
+[ext_resource type="ArrayMesh" uid="uid://cbes0v1eili8k" path="res://classes/tractor-beam/mesh/meshes/anvaka_arms.mesh" id="4_4qxqf"]
+[ext_resource type="ArrayMesh" uid="uid://o60tbr28uo6e" path="res://classes/tractor-beam/mesh/meshes/anvaka_pitch2.mesh" id="5_vm1q3"]
+[ext_resource type="ArrayMesh" uid="uid://dlo7xi04ji8up" path="res://classes/tractor-beam/mesh/meshes/anvaka_casing.mesh" id="6_228f2"]
+[ext_resource type="ArrayMesh" uid="uid://djcfefaqjdcf5" path="res://classes/tractor-beam/mesh/meshes/anvaka_tractor.mesh" id="7_d68f5"]
+[ext_resource type="ArrayMesh" uid="uid://c64nmuoag5hgr" path="res://classes/tractor-beam/mesh/meshes/anvaka_power.mesh" id="8_3k8bg"]
+[ext_resource type="AudioStream" uid="uid://wo1qf8us8mc5" path="res://scenes/modules/test-module/mining-laser/mining-laser/mining_laser.wav" id="9_ysjd1"]
+[ext_resource type="AudioStream" uid="uid://dqgqhjqod613c" path="res://classes/tractor-beam/mesh/tractor.wav" id="11_fqrm1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8l2v"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.378907, 0.844604, 0.352804, 1)
+emission_enabled = true
+emission = Color(0.400724, 0.772169, 0.678075, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bhiui"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_r8l2v")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.1
+radial_segments = 6
+
+[sub_resource type="Animation" id="Animation_110mw"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 1, 0, 3.17865e-08)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh/Yaw/Pitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat64Array(0, 1, 0, 1, 0, 4.37114e-08)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2v31b"]
+resource_name = "TractorBeamExtend"
+length = 3.0
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 0, 1, 0, 3.17865e-08, 0.666, 1, -6.25366e-08, 0.851352, -0.524595, 2.70615e-08, 2.1978, 1, 1.19123e-07, 0.0379344, 0.99928, 1.2058e-09)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh/Yaw/Pitch")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat64Array(0, 1, 0, 1, 0, 4.37114e-08, 1.0323, 1, 8.56957e-09, 0.980594, 0.196049, 4.28631e-08)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0.0333),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rpi61"]
+resource_name = "TractorBeamRetract"
+length = 3.0
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat64Array(0, 1, 1.19123e-07, 0.0379344, 0.99928, 1.2058e-09, 0.666, 1, -6.25366e-08, 0.851352, -0.524595, 2.70615e-08, 1.6983, 1, 0, 1, 0, 3.17865e-08)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh/Yaw/Pitch")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat64Array(0, 1, 8.56957e-09, 0.980594, 0.196049, 4.28631e-08, 2.2977, 1, 0, 1, 0, 4.37114e-08)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4uvvl"]
+_data = {
+"RESET": SubResource("Animation_110mw"),
+"TractorBeamExtend": SubResource("Animation_2v31b"),
+"TractorBeamRetract": SubResource("Animation_rpi61")
+}
+
+[sub_resource type="Gradient" id="Gradient_odmip"]
+offsets = PackedFloat32Array(0.211618, 1)
+colors = PackedColorArray(0.102, 0.5917, 0.6, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uvrdy"]
+gradient = SubResource("Gradient_odmip")
+
+[sub_resource type="Curve" id="Curve_3hbgg"]
+_data = [Vector2(0, 0.648352), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wot8r"]
+curve = SubResource("Curve_3hbgg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ucfvb"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -720.0
+angle_max = 1120.5
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_wot8r")
+color_ramp = SubResource("GradientTexture1D_uvrdy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e316f"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.407843)
+
+[sub_resource type="SphereMesh" id="SphereMesh_dmhje"]
+material = SubResource("StandardMaterial3D_e316f")
+
+[node name="AnvakaTractorBeam" type="Node3D" node_paths=PackedStringArray("animator", "yaw", "casing", "nozzle", "raycast", "mesh", "audio", "particles", "area", "timer_to_start_picking", "timer_between_picks")]
+script = ExtResource("1_lhk2p")
+animator = NodePath("AnimationPlayer")
+yaw = NodePath("Mesh/Yaw")
+casing = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2/Casing")
+nozzle = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle")
+raycast = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle/RayCast3D")
+mesh = NodePath("Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle/Node3D/MeshInstance3D2")
+audio = NodePath("AudioStreamPlayer3D")
+particles = NodePath("Particles")
+movement_speed = 10.0
+area = NodePath("Area3D")
+timer_to_start_picking = NodePath("TimerToStartPicking")
+timer_between_picks = NodePath("TimerBetweenPicks")
+
+[node name="Mesh" type="Node3D" parent="."]
+transform = Transform3D(-5, 0, -6.12323e-16, 0, 5, 0, 6.12323e-16, 0, -5, 0, 0, 0)
+
+[node name="Mounting" type="MeshInstance3D" parent="Mesh"]
+mesh = ExtResource("1_r651b")
+skeleton = NodePath("")
+
+[node name="Yaw" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0185399, 0)
+mesh = ExtResource("2_2clke")
+skeleton = NodePath("")
+
+[node name="Pitch" type="MeshInstance3D" parent="Mesh/Yaw"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.0299187, 0)
+mesh = ExtResource("3_sk8ha")
+skeleton = NodePath("")
+
+[node name="Arms" type="MeshInstance3D" parent="Mesh/Yaw/Pitch"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.00145028, -0.00132152)
+mesh = ExtResource("4_4qxqf")
+skeleton = NodePath("")
+
+[node name="Pitch 2" type="MeshInstance3D" parent="Mesh/Yaw/Pitch/Arms"]
+transform = Transform3D(-1, 0, 6.3573e-08, 0, 1, 0, -6.3573e-08, 0, -1, -5.45939e-23, 0.00368508, -0.354723)
+mesh = ExtResource("5_vm1q3")
+skeleton = NodePath("")
+
+[node name="Casing" type="MeshInstance3D" parent="Mesh/Yaw/Pitch/Arms/Pitch 2"]
+transform = Transform3D(-1, 1.84917e-23, 3.01992e-07, 1.84917e-23, -1, 1.22465e-16, 3.01992e-07, 1.22465e-16, 1, 0, 0.000363395, 4.12464e-05)
+mesh = ExtResource("6_228f2")
+skeleton = NodePath("")
+
+[node name="Tractor Beam" type="MeshInstance3D" parent="Mesh/Yaw/Pitch/Arms/Pitch 2/Casing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000354715, -0.123294)
+mesh = ExtResource("7_d68f5")
+skeleton = NodePath("")
+
+[node name="Nozzle" type="Marker3D" parent="Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam"]
+transform = Transform3D(1, -6.61744e-24, -5.29396e-23, -6.61744e-24, 1, -5.55112e-17, 5.29396e-23, 1.66533e-16, 1, -2.97571e-08, 0.00275776, -0.16683)
+
+[node name="RayCast3D" type="RayCast3D" parent="Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle"]
+transform = Transform3D(0.2, 0, 0, 0, -0.2, 2.44929e-17, 0, -2.44929e-17, -0.2, 0, 0, 0)
+enabled = false
+target_position = Vector3(0, 0, 12.405)
+collision_mask = 24117248
+hit_back_faces = false
+debug_shape_custom_color = Color(0.800805, 0.789137, 0.727161, 1)
+debug_shape_thickness = 5
+
+[node name="Node3D" type="Node3D" parent="Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh/Yaw/Pitch/Arms/Pitch 2/Casing/Tractor Beam/Nozzle/Node3D"]
+transform = Transform3D(0.2, 0, 0, 0, 1.22465e-17, 0.2, 0, -0.2, 1.22465e-17, 0, 0, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_bhiui")
+skeleton = NodePath("../../../../../../../../../..")
+
+[node name="Power Unit" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0606083, 0)
+mesh = ExtResource("8_3k8bg")
+skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, -1.38613e-15, 0, -11.3186)
+collision_layer = 538443777
+collision_mask = 538443777
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4uvvl")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 0, 0)
+stream = ExtResource("9_ysjd1")
+volume_db = -4.235
+unit_size = 16.46
+pitch_scale = 0.7
+bus = &"Weapon"
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 0, 0)
+emitting = false
+amount = 200
+lifetime = 0.46
+process_material = SubResource("ParticleProcessMaterial_ucfvb")
+draw_pass_1 = SubResource("SphereMesh_dmhje")
+
+[node name="TimerToStartPicking" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+
+[node name="TimerBetweenPicks" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_fqrm1")
+volume_db = -8.0
+unit_size = 24.8
+pitch_scale = 0.82
+max_distance = 10.0
+max_polyphony = 4
+panning_strength = 2.0
+bus = &"Environment"

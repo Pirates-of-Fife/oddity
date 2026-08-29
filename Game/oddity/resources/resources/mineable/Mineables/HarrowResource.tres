@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MineableResource" load_steps=10 format=3 uid="uid://do3frppppjlr5"]
+
+[ext_resource type="PackedScene" uid="uid://buhchmvefv38a" path="res://scenes/minables/harrow/extractables/HarrowExtractable1.tscn" id="1_37bfb"]
+[ext_resource type="Script" path="res://resources/resources/mineable/MineableResource.gd" id="1_lacw7"]
+[ext_resource type="PackedScene" uid="uid://cxvrtim01ui8u" path="res://scenes/minables/harrow/extractables/HarrowExtractable2.tscn" id="2_rlm1t"]
+[ext_resource type="PackedScene" uid="uid://dnyasispot0c3" path="res://scenes/minables/harrow/extractables/HarrowExtractable3.tscn" id="3_fpvpm"]
+[ext_resource type="PackedScene" uid="uid://djffq28kohdv1" path="res://scenes/minables/harrow/sounds/HarrowExtractionSound.tscn" id="4_qpl8c"]
+[ext_resource type="ArrayMesh" uid="uid://ba2fg6vb3bewp" path="res://scenes/minables/harrow/mineables/HarrowLOD.tres" id="5_ylp43"]
+[ext_resource type="PackedScene" uid="uid://bhbr4gp4yp0hc" path="res://scenes/minables/harrow/mineables/Harrow1.tscn" id="7_o3rwd"]
+[ext_resource type="PackedScene" uid="uid://dc3iqvelwtuui" path="res://scenes/minables/harrow/mineables/Harrow2.tscn" id="8_p3eeb"]
+[ext_resource type="PackedScene" uid="uid://bsafwmboy5t7h" path="res://scenes/minables/harrow/mineables/Harrow3.tscn" id="9_5jm17"]
+
+[resource]
+script = ExtResource("1_lacw7")
+mineable_name = &"Harrow"
+min_resource_health = 18000.0
+max_resource_health = 44000.0
+min_resource_count = 5
+max_resource_count = 10
+extractable_resources = Array[PackedScene]([ExtResource("1_37bfb"), ExtResource("2_rlm1t"), ExtResource("3_fpvpm")])
+extraction_force = 50.0
+min_rarity = 0.0
+max_rarity = 2.5
+variants = Array[PackedScene]([ExtResource("7_o3rwd"), ExtResource("8_p3eeb"), ExtResource("9_5jm17")])
+low_detail_mesh = ExtResource("5_ylp43")
+base_value = 20000
+value_variance = 0.5
+extraction_sound = ExtResource("4_qpl8c")

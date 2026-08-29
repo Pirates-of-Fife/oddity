@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="StarshipTradeResource" load_steps=5 format=3 uid="uid://dhhjrqgs3wv5q"]
+
+[ext_resource type="Texture2D" uid="uid://y2egs1074hbh" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png" id="1_c754x"]
+[ext_resource type="Script" path="res://resources/classes/trade/StarshipTradeResource.gd" id="2_08hmp"]
+[ext_resource type="Resource" uid="uid://dtphwuvape7v3" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/CorkscrewInfo.tres" id="3_65t3h"]
+[ext_resource type="Resource" uid="uid://b0joutki1lyop" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/CorkscrewThrusterForces.tres" id="4_ponwa"]
+
+[resource]
+script = ExtResource("2_08hmp")
+manufacturer_logo = ExtResource("1_c754x")
+logo_scale = 0.085
+component_description = PackedStringArray("1 x S1 - Alcubierre Drive", "1 X S1 - Abyssal Jump Drive", "6 X S0 - Component", "4 X S1 - Component", "1 X - Fuel Tank 500 IFV (Internal)", "1 X S1 - Coolant Pump", "4 X S3 - Hardpoints")
+cargo_capacity = 4
+thruster_force = ExtResource("4_ponwa")
+ship_info = ExtResource("3_65t3h")
+scene = "res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/RABS_Corkscrew.tscn"
+name = &"Rabauke Shipworks Corkscrew"
+description = "The most dependable shuttle craft in the entire bubble!"
+value = 567000
+size = 0
+preview_distance = 15.0

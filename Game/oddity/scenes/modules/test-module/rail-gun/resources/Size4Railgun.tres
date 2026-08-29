@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ProjectileWeaponResource" load_steps=4 format=3 uid="uid://dwrpdh0pseipj"]
+
+[ext_resource type="Resource" uid="uid://oes7avq4dhql" path="res://scenes/modules/test-module/rail-gun/SmallRailgunProjectile.tres" id="1_ugc8g"]
+[ext_resource type="Script" path="res://resources/classes/module/component/weapon/ProjectileWeaponResource.gd" id="2_3jfil"]
+[ext_resource type="AudioStream" uid="uid://dlekynry85pnx" path="res://scenes/modules/test-module/rail-gun/railgun_fire.wav" id="3_ijlgu"]
+
+[resource]
+script = ExtResource("2_3jfil")
+projectile = ExtResource("1_ugc8g")
+projectile_speed = 3000.0
+cooldown = 2.0
+heat_per_shot = 2000.0
+ammo_usage = 70.0
+hull_damage = 8000.0
+shield_damage = 6500.0
+penetration = 100.0
+sound = ExtResource("3_ijlgu")
+type = &"Rail Gun"
+manufacturer = &"Protectorate Federation"
+model = &"RAIL 4"
+size = &"4"
+release_year = &"20"
+power_usage = 0.0

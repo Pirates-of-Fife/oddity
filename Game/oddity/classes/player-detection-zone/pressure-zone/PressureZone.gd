@@ -32,6 +32,12 @@ func _pressure_zone_ready() -> void:
 func _pressure_timer_timeout() -> void:
 	print("HEATss")
 	
+	if player == null:
+		return
+		
+	if player.control_entity == null:
+		return
+	
 	if (player.control_entity is Starship):
 		var distance : float = get_player_distance()
 		var damage_modifier : float =  distance / activate_distance
@@ -47,5 +53,17 @@ func _on_activate(player : Player, control_entity : ControlEntity) -> void:
 
 func _on_deactivate(player : Player, control_entity : ControlEntity) -> void:
 	pressure_heat_timer.stop()
+	if (player.control_entity is Starship):
+		(player.control_entity as Starship).exited_pressure_zone.emit()
+
+func _exit_tree() -> void:
+	pressure_heat_timer.stop()
+	
+	if player == null:
+		return
+	
+	if player.control_entity == null:
+		return
+	
 	if (player.control_entity is Starship):
 		(player.control_entity as Starship).exited_pressure_zone.emit()

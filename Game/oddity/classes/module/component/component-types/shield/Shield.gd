@@ -62,6 +62,15 @@ func _ready() -> void:
 	collision_mask = layer_mask_online
 	collision_layer = layer_collision_online
 
+func update_mesh() -> void:
+	shield_material = shield_material_resource.duplicate()
+	mesh_instance.set_surface_override_material(0, shield_material)
+	shield_material.albedo_color = shield_color
+	shield_material.albedo_color.a = 0
+	shield_offline_color.a = 0
+	collision_mask = layer_mask_online
+	collision_layer = layer_collision_online
+
 func _physics_process(delta: float) -> void:
 	shield_material.albedo_color.a -= shield_alpha_down_per_physics_tick
 	shield_material.albedo_color.a = clampf(shield_material.albedo_color.a, 0, alpha_max)
@@ -94,6 +103,9 @@ func on_shield_broken() -> void:
 	shield_break_sound.play()
 
 func on_shield_online() -> void:
+	if (game_entity as Starship).destroyed_on_load:
+		return
+
 	if (game_entity as Starship).shield_max_health <= 0:
 		return
 

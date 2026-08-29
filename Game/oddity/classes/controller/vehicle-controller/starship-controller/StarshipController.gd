@@ -42,13 +42,21 @@ var starship_focus_target_command : StarshipFocusTargetCommand = StarshipFocusTa
 
 var starship_toggle_headlights_command : StarshipToggleHeadlightsCommand = StarshipToggleHeadlightsCommand.new()
 
+var starship_alcubierre_drive_use_special_command : StarshipAlcubierreDriveUseSpecialCommand = StarshipAlcubierreDriveUseSpecialCommand.new()
+
+var starship_start_horn_command : StarshipStartHornCommand = StarshipStartHornCommand.new()
+var starship_end_horn_command : StarshipEndHornCommand = StarshipEndHornCommand.new()
+
+var starship_tractor_beam_command : StarshipTractorBeamCommand = StarshipTractorBeamCommand.new()
+var starship_cargo_bay_command : StarshipCargoBayCommand = StarshipCargoBayCommand.new()
+
 var starship_last_throttle_value : float = 0
 var current_throttle_forwards_axis : float = 0
 
 @export_category("Control Settings")
 
 @export
-var mouse_joystick_deadzone : float = 0.04
+var mouse_joystick_deadzone : float = 0.01
 
 @export
 var ship_mouse_controls_sensitivity : float = Globals.starship_controller_sensitity
@@ -123,21 +131,32 @@ func _on_supercruise_exit_timer_timeout() -> void:
 	starship_ready_to_supercruise = true
 
 func _starship_controller_process(delta : float) -> void:
+	if control_entity == null:
+		return
+
 	if control_entity is Starship:
 
 		if (Input.is_action_just_pressed("player_interact")):
 			starship_player_interact_command.execute(control_entity)
 		
 		if (Input.is_key_label_pressed(KEY_0)):
-			control_entity.global_position = Vector3(-4409300 + 15000, 2041180, -1091460)
 			control_entity.repair()
+			control_entity.restock()
+			control_entity.refuel()
+			control_entity.restore_armour()
+			control_entity.current_heat = 0
 			
 		if (Input.is_action_just_pressed("vehicle_exit_seat")):
-			if control_entity.relative_linear_velocity.length() < 10 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
+			if control_entity.relative_linear_velocity.length() < 285 and control_entity.relative_angular_velocity.length() < 0.1 and control_entity.is_in_abyss == false and control_entity.travel_mode != StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				vehicle_exit_seat_command.execute(control_entity)
-
+				
+				if (control_entity.is_horn_playing):
+					starship_end_horn_command.execute(control_entity)
+				
 				if control_entity is RABS_KestrelMk1:
 					control_entity.show_interior()
+					
+				control_entity.reset_thrust_vectors()
 
 		if (Input.is_action_just_pressed("starship_cycle_power_state")):
 			starship_cycle_power_state_command.execute(control_entity)
@@ -151,6 +170,11 @@ func _starship_controller_process(delta : float) -> void:
 			mouse_pitch = 0
 			general_toggle_look_around_command.execute(control_entity)
 			look_around = !look_around
+
+		if (Input.is_action_just_pressed("starship_tractor_beams")):
+			starship_tractor_beam_command.execute(control_entity)
+		if (Input.is_action_just_pressed("starship_cargo_bay")):
+			starship_cargo_bay_command.execute(control_entity)
 
 		if look_around:
 			if control_entity.active_control_seat != null:
@@ -174,7 +198,13 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_just_pressed("ship_toggle_headlights")):
 			starship_toggle_headlights_command.execute(control_entity)
-
+		
+		if (Input.is_action_just_pressed("ship_horn")):
+			starship_start_horn_command.execute(control_entity)
+			
+		if (Input.is_action_just_released("ship_horn")):
+			starship_end_horn_command.execute(control_entity)
+		
 		current_throttle_forwards_axis = starship_last_throttle_value #control_entity.target_thrust_vector.z
 
 		if (Input.is_action_pressed("starship_throttle_forward")):
@@ -202,21 +232,34 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_pressed("starship_throttle_left")):
 			starship_thrust_left_command.execute(control_entity, StarshipThrustLeftCommand.Params.new(Input.get_action_strength("starship_throttle_left")))
+		elif (Input.is_action_just_released("starship_throttle_left")):
+			starship_thrust_left_command.execute(control_entity, StarshipThrustLeftCommand.Params.new(0))
 
 		if (Input.is_action_pressed("starship_throttle_right")):
 			starship_thrust_right_command.execute(control_entity, StarshipThrustRightCommand.Params.new(Input.get_action_strength("starship_throttle_right")))
+		elif (Input.is_action_just_released("starship_throttle_right")):
+			starship_thrust_right_command.execute(control_entity, StarshipThrustRightCommand.Params.new(0))
 
 		if (Input.is_action_pressed("starship_throttle_up")):
 			starship_thrust_up_command.execute(control_entity, StarshipThrustUpCommand.Params.new(Input.get_action_strength("starship_throttle_up")))
+		elif (Input.is_action_just_released("starship_throttle_up")):
+			starship_thrust_up_command.execute(control_entity, StarshipThrustUpCommand.Params.new(0))
+
 
 		if (Input.is_action_pressed("starship_throttle_down")):
 			starship_thrust_down_command.execute(control_entity, StarshipThrustDownCommand.Params.new(Input.get_action_strength("starship_throttle_down")))
-
+		elif (Input.is_action_just_released("starship_throttle_down")):
+			starship_thrust_down_command.execute(control_entity, StarshipThrustDownCommand.Params.new(0))
+			
 		if (Input.is_action_pressed("starship_rotate_roll_left")):
 			starship_roll_left_command.execute(control_entity, StarshipRollLeftCommand.Params.new(Input.get_action_strength("starship_rotate_roll_left")))
+		elif (Input.is_action_just_released("starship_rotate_roll_left")):
+			starship_roll_left_command.execute(control_entity, StarshipRollLeftCommand.Params.new(0))
 
 		if (Input.is_action_pressed("starship_rotate_roll_right")):
 			starship_roll_right_command.execute(control_entity, StarshipRollRightCommand.Params.new(Input.get_action_strength("starship_rotate_roll_right")))
+		elif (Input.is_action_just_released("starship_rotate_roll_right")):
+			starship_roll_right_command.execute(control_entity, StarshipRollRightCommand.Params.new(0))
 
 		# Starship Mouse Pitch
 
@@ -236,7 +279,7 @@ func _starship_controller_process(delta : float) -> void:
 				starship_pitch_down_command.execute(control_entity, StarshipPitchDownCommand.Params.new(abs(deazoned_pitch)))
 
 			# Starship Mouse Yaw
-
+						
 			if (mouse_yaw > 0):
 				starship_yaw_left_command.execute(control_entity, StarshipYawLeftCommand.Params.new(abs(deadzoned_yaw)))
 			else:
@@ -273,19 +316,11 @@ func _starship_controller_process(delta : float) -> void:
 					control_entity.alcubierre_drive_charge_start()
 
 		if (Input.is_action_just_released("starship_initiate_super_cruise")):
-			print("WORK")
-			
 			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 				return
-			
-			print("super")
-			
+						
 			if control_entity.is_in_abyss:
 				return
-			
-			print("abyss")
-			
-			print(starship_ready_to_supercruise)
 			
 			if starship_ready_to_supercruise:
 				supercruise_initialization_timer.stop()
@@ -311,6 +346,12 @@ func _starship_controller_process(delta : float) -> void:
 
 		if (Input.is_action_just_released("starship_focus_target")):
 			starship_focus_target_command.execute(control_entity)
+			
+		if Input.is_action_just_pressed("starship_alcubierre_drive_special"):
+			if control_entity.travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
+				return
+				
+			starship_alcubierre_drive_use_special_command.execute(control_entity)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

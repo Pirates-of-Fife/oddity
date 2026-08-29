@@ -1,0 +1,16 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://d0pqik8jwcpxd"]
+
+[ext_resource type="Texture2D" uid="uid://c6wrjgo4as66w" path="res://scenes/world/mirage/panorama_image.png" id="1_jictf"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8s2ew"]
+panorama = ExtResource("1_jictf")
+
+[sub_resource type="Sky" id="Sky_sxt0v"]
+sky_material = SubResource("PanoramaSkyMaterial_8s2ew")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_sxt0v")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 200000.0

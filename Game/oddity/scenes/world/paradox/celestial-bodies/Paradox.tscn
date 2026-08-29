@@ -13,14 +13,14 @@ collision_mask = 0
 script = ExtResource("1_0ngm8")
 danger_distance = 200000.0
 mesh = NodePath("Node3D")
-rotation_speed = 0.1
+rotation_speed = 0.01
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-3.32666, -3.73197, -0.0759467, -0.0667774, 0.161215, -4.99695, 3.73215, -3.32362, -0.157103, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_6gfbv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-light_color = Color(0.0701247, 0.393444, 1, 1)
+light_color = Color(0.670163, 0.372018, 0.080136, 1)
 light_energy = 2.0
 shadow_enabled = true
 shadow_opacity = 0.97

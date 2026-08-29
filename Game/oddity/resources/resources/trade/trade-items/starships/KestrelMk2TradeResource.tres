@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="StarshipTradeResource" load_steps=5 format=3 uid="uid://ppl8snve500v"]
+
+[ext_resource type="Texture2D" uid="uid://y2egs1074hbh" path="res://scenes/vehicles/starships/rabauke-shipworks/common/logo/RabaukeLogo-01.png" id="1_e6svs"]
+[ext_resource type="Script" path="res://resources/classes/trade/StarshipTradeResource.gd" id="1_itbhg"]
+[ext_resource type="Resource" uid="uid://nuqwyo3ktwps" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_KestrelMk1_Info.tres" id="3_eutyi"]
+[ext_resource type="Resource" uid="uid://7eoo6o05mlfj" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_KestrelMk1_Thruster.tres" id="4_f3wu0"]
+
+[resource]
+script = ExtResource("1_itbhg")
+manufacturer_logo = ExtResource("1_e6svs")
+logo_scale = 0.085
+component_description = PackedStringArray("1 x S2 - Alcubierre Drive", "1 X S2 - Abyssal Jump Drive", "4 X S1 - Component", "4 X S2 - Component", "4 X S3 - Component", "2 X S4 - Component", "2 X S5 - Fuel Tanks (Internal)", "1 X S4 - Coolant Pump (Internal)", "2 X S5 - Hardpoints", "4 X S6 - Hardpoints")
+cargo_capacity = 54
+thruster_force = ExtResource("4_f3wu0")
+ship_info = ExtResource("3_eutyi")
+scene = "res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn"
+name = &"Rabauke Shipworks Kestrel MKII"
+description = "Why aren't you flying one already?"
+value = 13500000
+size = 0
+preview_distance = 50.0

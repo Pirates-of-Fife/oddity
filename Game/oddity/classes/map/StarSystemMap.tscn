@@ -1,0 +1,79 @@
+[gd_scene load_steps=16 format=3 uid="uid://yhjgtp74m23u"]
+
+[ext_resource type="Texture2D" uid="uid://vcuuyhldm3wg" path="res://classes/map/sprites/map_background.png" id="1_278mo"]
+[ext_resource type="Script" path="res://classes/map/StarSystemMap.gd" id="1_x11ef"]
+[ext_resource type="Texture2D" uid="uid://yhoxap2yf5m8" path="res://classes/map/sprites/mirage_icon.png" id="2_715te"]
+[ext_resource type="Texture2D" uid="uid://tvmvfvs3d28y" path="res://classes/map/sprites/paradox_icon.png" id="3_bq2ik"]
+[ext_resource type="Script" path="res://classes/map/StarSystemMapIcon.gd" id="4_jmfgm"]
+[ext_resource type="Texture2D" uid="uid://c4l4qd66ouro" path="res://classes/map/sprites/rogues_gambit_icon.png" id="4_s25l7"]
+[ext_resource type="Texture2D" uid="uid://cuynrkmv233j2" path="res://classes/map/sprites/kylodai_icon.png" id="5_fmjva"]
+[ext_resource type="Resource" uid="uid://0wtfxp7u6y8l" path="res://scenes/world/mirage/MirageResource.tres" id="5_vr482"]
+[ext_resource type="Texture2D" uid="uid://mynot800u0cx" path="res://classes/map/sprites/gateway_icon.png" id="6_n61qg"]
+[ext_resource type="Resource" uid="uid://cso46hk7o5fg6" path="res://scenes/world/paradox/ParadoxResource.tres" id="7_fpua8"]
+[ext_resource type="Texture2D" uid="uid://t8k6fh4nblkx" path="res://classes/map/sprites/echo_icon.png" id="7_js5uo"]
+[ext_resource type="Resource" uid="uid://bssd3ptw5jt84" path="res://scenes/world/rogues-gambit/RoguesGambitResource.tres" id="9_ni8ax"]
+[ext_resource type="Resource" uid="uid://bhr768vxa5a12" path="res://scenes/world/kyloadai-rx-t-d3-8/KyloadaiResource.tres" id="11_qd37q"]
+[ext_resource type="Resource" uid="uid://hjfcmfeltkkc" path="res://scenes/world/gateway/GatewayResource.tres" id="13_s7em1"]
+[ext_resource type="Resource" uid="uid://budqbmc455pxb" path="res://scenes/world/echo/EchoResource.tres" id="15_ncscb"]
+
+[node name="StarSystemMap" type="Node2D"]
+script = ExtResource("1_x11ef")
+line_color = Color(0.164699, 0.485796, 0.831599, 1)
+from = ExtResource("7_fpua8")
+
+[node name="MapBackground" type="Sprite2D" parent="."]
+scale = Vector2(3.39333, 3.39333)
+texture = ExtResource("1_278mo")
+offset = Vector2(300, 300)
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Systems" type="Node2D" parent="."]
+
+[node name="MirageIcon" type="Sprite2D" parent="Systems" node_paths=PackedStringArray("map")]
+position = Vector2(490.968, 103.464)
+texture = ExtResource("2_715te")
+offset = Vector2(44.635, 54.165)
+script = ExtResource("4_jmfgm")
+map = NodePath("../..")
+star_system_resource = ExtResource("5_vr482")
+
+[node name="ParadoxIcon" type="Sprite2D" parent="Systems" node_paths=PackedStringArray("map")]
+position = Vector2(396.144, 521.424)
+texture = ExtResource("3_bq2ik")
+offset = Vector2(25.96, 52.51)
+script = ExtResource("4_jmfgm")
+map = NodePath("../..")
+star_system_resource = ExtResource("7_fpua8")
+
+[node name="RoguesGambitIcon" type="Sprite2D" parent="Systems" node_paths=PackedStringArray("map")]
+position = Vector2(1003.54, 817.776)
+texture = ExtResource("4_s25l7")
+offset = Vector2(44.355, 29.325)
+script = ExtResource("4_jmfgm")
+map = NodePath("../..")
+star_system_resource = ExtResource("9_ni8ax")
+
+[node name="KylodaiIcon" type="Sprite2D" parent="Systems" node_paths=PackedStringArray("map")]
+position = Vector2(1718.06, 562.68)
+texture = ExtResource("5_fmjva")
+offset = Vector2(104.395, 48.28)
+script = ExtResource("4_jmfgm")
+map = NodePath("../..")
+star_system_resource = ExtResource("11_qd37q")
+
+[node name="GatewayIcon" type="Sprite2D" parent="Systems" node_paths=PackedStringArray("map")]
+position = Vector2(179.928, 113.184)
+texture = ExtResource("6_n61qg")
+offset = Vector2(-28.82, 40.455)
+script = ExtResource("4_jmfgm")
+map = NodePath("../..")
+star_system_resource = ExtResource("13_s7em1")
+
+[node name="EchoIcon" type="Sprite2D" parent="Systems" node_paths=PackedStringArray("map")]
+position = Vector2(1054.73, 288.144)
+texture = ExtResource("7_js5uo")
+offset = Vector2(27.32, -43.83)
+script = ExtResource("4_jmfgm")
+map = NodePath("../..")
+star_system_resource = ExtResource("15_ncscb")

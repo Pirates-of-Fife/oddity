@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://e10kuiin0vgc"]
+
+[ext_resource type="Script" path="res://classes/player-detection-zone/boss-fight-zone/BossFightZone.gd" id="1_4ap0o"]
+[ext_resource type="Resource" uid="uid://y7nc4524mhy" path="res://resources/resources/bounty-hunting/boss/TestBoss.tres" id="2_xcjyd"]
+[ext_resource type="Resource" uid="uid://c6ma50s6g2ir" path="res://resources/resources/bounty-hunting/low/BountyHuntingLow.tres" id="3_uujuq"]
+
+[node name="TestBossFight" type="Node3D"]
+script = ExtResource("1_4ap0o")
+boss_name = "Linus"
+difficulty = 2
+boss_loadout = ExtResource("2_xcjyd")
+possible_loadouts = ExtResource("3_uujuq")
+waves = 1
+ship_count_per_wave = 2
+spawn_radius = 3300.0

@@ -22,6 +22,9 @@ var update_time : float = 0.5
 @export
 var one_shot : bool = false
 
+@export
+var always_deactivate : bool = false
+
 var has_been_activated : bool = false
 
 var active : bool = false
@@ -39,6 +42,10 @@ var sprite_distance : float
 
 @export_range(0, 20000, 100, "or_greater")
 var sprite_max_distance : float
+
+var world : World : 
+	get:
+		return get_tree().get_first_node_in_group("World")
 
 func _ready() -> void:
 	_player_detection_zone_ready()
@@ -60,7 +67,13 @@ func update() -> void:
 
 	if !is_instance_valid(player):
 		return
+	
+	if player == null:
+		return
 
+	if player.control_entity == null:
+		return
+	
 	if use_distance_display:
 		if player.control_entity.third_person or player.control_entity is not Starship:
 			distant_sprite.hide()
@@ -74,7 +87,10 @@ func update() -> void:
 
 			if distance > sprite_max_distance and sprite_max_distance > 0:
 				distant_sprite.hide()
-
+		
+		if player.current_marker_category != distant_sprite.category:
+			distant_sprite.hide()
+		
 	if !active:
 		if one_shot:
 			if has_been_activated:
@@ -88,8 +104,13 @@ func update() -> void:
 		if distance > deactivate_distance:
 			deactivate.emit(player, player.control_entity)
 			active = false
-
-func get_player_distance() -> float:
+	
+	if always_deactivate:
+		if distance > deactivate_distance:
+			deactivate.emit(player, player.control_entity)
+			active = false
+	
+func get_player_distance() -> float:	
 	if player == null:
 		return 100000000
 

@@ -29,12 +29,18 @@ var ship_max_heat_capacity : float :
 	get:
 		if (module_slot == null):
 			return 0
+		
+		if (module_slot.vehicle == null):
+			return 0
 
 		return module_slot.vehicle.maximum_heat_capacity
 
 var ship_current_heat : float :
 	get:
 		if (module_slot == null):
+			return 0
+
+		if (module_slot.vehicle == null):
 			return 0
 
 		return module_slot.vehicle.current_heat

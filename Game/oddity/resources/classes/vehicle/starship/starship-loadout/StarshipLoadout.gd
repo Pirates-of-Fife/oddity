@@ -2,6 +2,13 @@ extends Resource
 
 class_name StarshipLoadout
 
+@export_category("Ship")
+
+@export
+var ship_type : Starship.ShipType 
+
+@export_category("Objects")
+
 @export
 var module_slots : Array[ModuleSlotLoadoutResource] = []
 
@@ -10,6 +17,11 @@ var cargo : Array[CargoContainerLoadoutResource] = []
 
 @export
 var entities : Array[GameEntityLoadoutResource] = []
+
+@export_category("info")
+
+@export
+var is_player_ship : bool = false
 
 @export
 var ship_name : StringName
@@ -24,17 +36,19 @@ var value : int = 0
 var apply_health : bool = false
 
 @export
+var destroyed : bool = false
+
+@export
 var current_health : float
 
-## not implemented yet
 @export
-var ship_color : Color
+var current_armour_health : float
+
+@export
+var ship_color : Color = Color("e7bd74")
 
 @export
 var current_ammo : float = 10000
-
-@export
-var max_ammo : float = 10000
 
 @export
 var current_heat : float = 0
@@ -43,7 +57,36 @@ var current_heat : float = 0
 var current_fuel : float = 10800
 
 @export
-var max_fuel : float = 10800
+var is_boss : bool = false
+
+@export
+var landing_gear_on : bool = false
+
+@export_category("Upgrades")
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_health_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_heat_capacity_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_fuel_capacity_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_ammo_capacity_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_turning_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_thruster_upgrade : int
+
+@export
+var tractor_beams_upgraded : bool
+
+@export
+var wing_state : bool 
 
 func get_module_by_id(id : int) -> PackedScene:
 	for slot : ModuleSlotLoadoutResource in module_slots:

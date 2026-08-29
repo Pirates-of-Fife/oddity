@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://dosyblgqb1seo"]
+
+[ext_resource type="Script" path="res://classes/module/module-fx/ModuleFX.gd" id="1_wkasm"]
+[ext_resource type="AudioStream" uid="uid://di3n55l0dj2u7" path="res://classes/module/module-fx/ModuleInsertion.wav" id="2_u5lk7"]
+[ext_resource type="AudioStream" uid="uid://8rih2i4uppcx" path="res://classes/module/module-fx/ModuleTakeOut.wav" id="3_0ge1u"]
+
+[sub_resource type="Gradient" id="Gradient_x5dj0"]
+colors = PackedColorArray(0.266575, 0.266575, 0.266575, 1, 0.65834, 0.65834, 0.65834, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0lon6"]
+gradient = SubResource("Gradient_x5dj0")
+
+[sub_resource type="Curve" id="Curve_4g26i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a1lgj"]
+curve = SubResource("Curve_4g26i")
+
+[sub_resource type="Curve" id="Curve_ay12y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3u4ec"]
+curve = SubResource("Curve_ay12y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qhpba"]
+spread = 180.0
+initial_velocity_max = 5.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 15.0
+radial_velocity_curve = SubResource("CurveTexture_a1lgj")
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -20.46
+linear_accel_max = -2.23517e-06
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_3u4ec")
+color = Color(0.716296, 0.716296, 0.716296, 1)
+color_ramp = SubResource("GradientTexture1D_0lon6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3uev"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_gi705"]
+material = SubResource("StandardMaterial3D_w3uev")
+size = Vector2(0.05, 0.05)
+
+[node name="ModuleFx" type="GPUParticles3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+emitting = false
+amount = 300
+lifetime = 0.32
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_qhpba")
+draw_pass_1 = SubResource("QuadMesh_gi705")
+script = ExtResource("1_wkasm")
+insert_sound = ExtResource("2_u5lk7")
+take_out_sound = ExtResource("3_0ge1u")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"Environment"
+
+[connection signal="finished" from="." to="." method="_on_finished"]
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]

@@ -11,6 +11,7 @@ data = PackedVector3Array(0, 190000, 0, 0, 190000, 0, 0, 189140, 18060.6, 0, 190
 script = ExtResource("1_owk28")
 danger_distance = 215000.0
 mesh = NodePath("Node3D")
+rotation_speed = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-3.32666, -3.73197, -0.0759467, -0.0667774, 0.161215, -4.99695, 3.73215, -3.32362, -0.157103, 0, 0, 0)
@@ -18,10 +19,9 @@ shape = SubResource("ConcavePolygonShape3D_528wt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 light_color = Color(0.839438, 0.127332, 0.306508, 1)
-light_energy = 3.0
+light_energy = 2.0
 shadow_enabled = true
-shadow_opacity = 0.97
-directional_shadow_max_distance = 1000.0
+directional_shadow_max_distance = 10000.0
 script = ExtResource("3_m4ke7")
 
 [node name="Node3D" type="Node3D" parent="."]

@@ -5,6 +5,11 @@ extends Vehicle
 
 class_name Starship
 
+@export_category("Save and Player Information")
+
+@export
+var is_player_ship : bool = false
+
 @export_category("Target Thrust Vector")
 
 @export
@@ -15,15 +20,30 @@ var target_rotational_thrust_vector : Vector3 = Vector3.ZERO
 
 @export_category("Info")
 
+signal ship_name_changed(ship_name : String)
+
+enum ShipType
+{
+	CORKSCREW,
+	KESTREL,
+	BLACKPOOL,
+	ACI,
+	KANARA,
+	TRIFID
+}
+
+@export
+var ship_type : ShipType
+
 @export
 var ship_name : StringName = "Default Starship" :
 	set(value):
 		ship_name = value
 		if name_label != null:
 			name_label.text = value
+			ship_name_changed.emit(value)
 	get:
 		return ship_name
-
 
 @export
 var ship_identification : StringName = "Default Starship" :
@@ -33,7 +53,6 @@ var ship_identification : StringName = "Default Starship" :
 			ship_identification_label.text = value
 	get:
 		return ship_identification
-
 
 @export
 var cruise_speed : float = 300.1234
@@ -58,10 +77,13 @@ var thruster_force : ThrusterForces
 @export
 var current_state : State = State.POWER_OFF
 
+var wing_state : bool 
+
 signal state_changed_to_power_off
 signal state_changed_to_power_on
 signal state_changed_to_destroyed
 signal repaired
+signal armour_restored
 signal change_to_damaged_state
 
 signal restocked
@@ -147,6 +169,17 @@ var module_slots : Array = Array()
 @export
 var abyss_drive_slot : AbyssalJumpDriveSlot
 
+var jump_range : float :
+	get():
+		if (abyss_drive_slot.module == null):
+			return 0
+			
+		var abyss_drive_resource : AbyssalJumpDriveResource = (abyss_drive_slot.module as AbyssalJumpDrive).module_resource
+		
+		return abyss_drive_resource.jump_range
+
+var distance_to_target_star_system : float = 0
+
 @export
 var abyssal_portal_spawn_point : Marker3D
 
@@ -192,13 +225,13 @@ var hardpoints : Array
 
 signal max_ammo_changed(ammo : float)
 
+@onready
+var base_max_ammo : float = ship_info.max_ammo
+
 @export
-var max_ammo : float = 10000 :  #max ammo in IFU
-	set(value):
-		max_ammo = value
-		max_ammo_changed.emit(value)
+var max_ammo : float :  #max ammo in IFU
 	get():
-		return max_ammo
+		return base_max_ammo * ShipUpgrades.ship_ammo_capacity_upgrade[current_ammo_capacity_upgrade]
 	
 signal current_ammo_changed(ammo : float)
 
@@ -284,18 +317,69 @@ var shield_break_cooldown_complete : bool = true
 @export_subgroup("Hull")
 
 @onready
-var max_hull_health : float = ship_info.max_health
+var base_max_hull_health : float = ship_info.max_health
+
+@onready
+var max_hull_health : float :
+	get():
+		return base_max_hull_health * ShipUpgrades.ship_health_upgrade[current_health_upgrade] + hull_reeinforcement_health_addition
+
+var hull_reeinforcement_health_addition : float = 0
 
 var hull_reinforcements : Array = Array()
 
-@export
-var current_hull_health : float
+signal current_health_changed
 
 @export
-var hull_health_damaged_state : float
+var current_hull_health : float : 
+	get:
+		return current_hull_health
+	set(value):
+		current_hull_health = value
+		current_health_changed.emit()
+
+var hull_health_damaged_state : float :
+	get:
+		return max_hull_health * 0.25
+
+@export_subgroup("Armour")
+
+signal current_armour_health_changed
+
+@onready
+var max_armour_health : float :
+	get:
+		return base_armour_health + additional_armour_health
 
 @export
-var hull_hardness : float
+var current_armour_health : float :
+	set(value):
+		current_armour_health = value
+		current_armour_health_changed.emit()
+	get:
+		return current_armour_health
+		
+@onready
+var base_armour_health : float  = ship_info.base_armour_health
+
+@export
+var additional_armour_health : float = 0
+
+@export
+var max_armour_rating : float :
+	get:
+		return base_armour_rating + additional_armour_rating
+
+@onready
+var base_armour_rating : float = ship_info.base_armour_rating
+
+@export
+var additional_armour_rating : float = 0
+
+@export
+var current_armour_rating : float :
+	get:
+		return clampf(current_armour_health / max_armour_health * max_armour_rating, 0, 100000)
 
 @export_subgroup("Radar")
 
@@ -324,9 +408,15 @@ signal exited_pressure_zone
 @export
 var passive_heat_generation : float = 0
 
-@export
-var maximum_heat_capacity : float
+@onready
+var base_maximum_heat_capacity : float = ship_info.max_heat
 
+@export
+var maximum_heat_capacity : float :
+	get():
+		return base_maximum_heat_capacity * ShipUpgrades.ship_heat_capacity_upgrade[current_heat_capacity_upgrade]
+
+signal max_heat_capacity_changed(max_capacity : float)
 signal heat_changed(heat : float)
 signal overheating_start
 signal overheating_stop
@@ -382,13 +472,13 @@ signal current_fuel_changed(fuel : float)
 
 signal fuel_empty
 
+@onready
+var base_max_fuel : float = ship_info.max_fuel
+
 @export
 var max_fuel : float : 
-	set(value):
-		max_fuel = value
-		max_fuel_changed.emit(max_fuel)
 	get():
-		return max_fuel
+		return base_max_fuel * ShipUpgrades.ship_fuel_capacity_upgrade[current_fuel_capacity_upgrade]
 
 @export
 var current_fuel : float : 
@@ -402,6 +492,32 @@ var current_fuel : float :
 		current_fuel_changed.emit(current_fuel)
 	get():
 		return current_fuel
+
+@export_category("Upgrades")
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_health_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_heat_capacity_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_fuel_capacity_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_ammo_capacity_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_turning_upgrade : int
+
+@export_range(0, 5, 1, "suffix:Grade")
+var current_thruster_upgrade : int
+
+@export
+var supports_tractor_beam_upgrade : bool = false
+
+@export
+var tractor_beams_upgraded : bool = false
 
 @export_category("Cargo")
 @export
@@ -455,6 +571,8 @@ var current_max_velocity : float = ship_info.max_linear_velocity
 
 var damaged : bool = false
 
+var destroyed_on_load : bool = false
+
 var lock_timer : Timer = Timer.new()
 
 enum State
@@ -469,6 +587,9 @@ enum State
 var is_bounty_target : bool = false
 
 @export
+var is_boss : bool = false
+
+@export
 var difficulty : BountyDifficulty
 
 var reward : int = 0
@@ -481,7 +602,35 @@ enum BountyDifficulty
 	EXTREME
 }
 
+@export_category("Color")
+
+@export
+var original_hull_color : Color
+
+@export
+var dev_override_color : Color :
+	set(value):
+		dev_override_color = value
+		update_color(value)
+
+var current_hull_material : StandardMaterial3D
+
+signal color_changed_to_dark
+signal color_changed_to_light
+
+@export_category("Beds")
+@export
+var beds : Array[Bed]
+
+@export_category("Save stuff")
+
+@export
+var zone : PlayerDetectionZone
+
 @export_category("Other")
+
+@export
+var ship_horn : ShipHorn
 
 @export
 var headlight_left : SpotLight3D
@@ -498,10 +647,87 @@ var altitude : float :
 		if active_frame_of_reference is GravityWell:
 			return distance_to(active_frame_of_reference.global_position) - active_frame_of_reference.radius
 		return -1
-		
+
+@export
+var landing_cam_marker : Marker3D
+
+## for saving the player position
+var current_station : SpaceStation 
+
 func _ready() -> void:
 	_starship_ready()
 
+## to be implemented in child class
+func set_material_to_hull(material : StandardMaterial3D) -> void:
+	pass
+
+func _on_current_health_changed() -> void:
+	update_material_saturation_based_on_hull_damage()
+
+func update_material_saturation_based_on_hull_damage() -> void:
+	if current_hull_material == null:
+		return
+	
+	current_hull_material.albedo_color.s = lerpf(0, original_hull_color.s, current_hull_health / max_hull_health)
+	current_hull_material.roughness = lerpf(0.1, 0.5, current_hull_health / max_hull_health)
+	
+	set_material_to_hull(current_hull_material)
+
+func update_color(new_color : Color) -> void:
+	original_hull_color = new_color
+	
+	if is_color_light(new_color):
+		color_changed_to_light.emit()
+	else:
+		color_changed_to_dark.emit()
+	
+	if current_hull_material != null:
+		current_hull_material.albedo_color = original_hull_color
+			
+	update_material_saturation_based_on_hull_damage()
+	
+func is_color_light(color : Color) -> bool:
+	var luma : float = sqrt(0.299 * pow(color.r, 2) + 0.587 * pow(color.g, 2) + 0.114 * pow(color.b, 2))
+		
+	if luma > 0.5:
+		return true
+	
+	return false
+
+func create_new_hull_material() -> StandardMaterial3D:
+	var new_material : StandardMaterial3D = StandardMaterial3D.new()
+	
+	new_material.albedo_color = Color(0.5, 0.5, 0.5, 1)
+	new_material.diffuse_mode = BaseMaterial3D.DIFFUSE_TOON
+	new_material.specular_mode = BaseMaterial3D.SPECULAR_TOON
+	new_material.metallic = 0.7
+	new_material.metallic_specular = 1
+	new_material.roughness = 0.1
+	new_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	
+	return new_material
+
+func upgrade_fuel() -> void:
+	current_fuel_capacity_upgrade = min(current_fuel_capacity_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	max_fuel_changed.emit(max_fuel)
+
+func upgrade_health() -> void:
+	current_health_upgrade = min(current_health_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+
+func upgrade_heat() -> void:
+	current_heat_capacity_upgrade = min(current_heat_capacity_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	max_heat_capacity_changed.emit(maximum_heat_capacity)
+	
+func upgrade_ammo() -> void:
+	current_ammo_capacity_upgrade = min(current_ammo_capacity_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	max_ammo_changed.emit(max_ammo)
+
+func upgrade_thruster() -> void:
+	current_thruster_upgrade = min(current_thruster_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	
+func upgrade_turning() -> void:
+	current_turning_upgrade = min(current_turning_upgrade + 1, ShipUpgrades.MAX_UPGRADE)
+	
 func update_module_stats() -> void:
 	passive_heat_generation = 0
 	current_heat = 0
@@ -521,6 +747,13 @@ func sound_power_state_change_complete() -> void:
 
 	power_state_change_complete = true
 
+func get_bed(index : int) -> Bed:
+	for b : Bed in beds:
+		if b.bed_index == index:
+			return b
+	
+	return null
+	
 func toggle_power_state() -> void:
 	if !power_state_change_complete:
 		return
@@ -554,6 +787,22 @@ func on_decrease_distance() -> void:
 	if third_person:
 		active_control_seat.decrease_distance(third_person_distance_change_sensitivity)
 
+func force_focus(ship : Starship) -> void:
+	if ship == null:
+		if focused_starship != null:
+			unfocus_target(focused_starship)
+		return
+
+	if ship == focused_starship:
+		unfocus_target(focused_starship)
+	
+	create_pips(ship)
+	
+	focused_starship = ship
+	focused_target.emit(focused_starship)
+	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
+	focused_starship.is_targeted = true
+
 func focus_target() -> void:
 	var ship : Starship = radar_focus_area.focus_target()
 
@@ -564,7 +813,14 @@ func focus_target() -> void:
 
 	if ship == focused_starship:
 		unfocus_target(focused_starship)
-
+		return
+	
+	if focused_starship != null:
+		unfocus_target(focused_starship)
+		return
+		
+	create_pips(ship)
+	
 	focused_starship = ship
 	focused_target.emit(focused_starship)
 	focused_starship.state_changed_to_destroyed.connect(focused_ship_destroyed)
@@ -576,31 +832,68 @@ func focus_target() -> void:
 func focused_ship_destroyed() -> void:
 	unfocus_target(focused_starship)
 
+var pips : Array[Pip]
+
+func create_pips(target : Starship) -> void:
+	var weapons : Array[Weapon]
+	
+	for hp : Hardpoint in hardpoints:
+		if hp.module != null:
+			weapons.append(hp.module)
+		
+	var projectile_speeds : Array[float]
+	
+	for w : Weapon in weapons:
+		var p_scene : PackedScene = load("res://classes/pip/Pip.tscn")
+		var p : Pip = p_scene.instantiate()
+		if w.module_resource is ProjectileWeaponResource:
+			p.projectile_speed = (w.module_resource as ProjectileWeaponResource).projectile_speed
+		else:
+			p.projectile_speed = 300000000
+		p.aimer = self
+		p.target = target
+		
+		if is_bounty_target:
+			p.enemy_pip = true
+		
+		p.gun = w
+		
+		pips.append(p)
+		world.add_child(p)
+		
+	
+func remove_pips() -> void:
+	for p : Pip in pips:
+		if is_instance_valid(p):
+			p.queue_free()
+
 func unfocus_target(starship : Starship) -> void:
 	unfocused_target.emit(starship)
 	focused_starship.is_targeted = false
 	focused_starship.state_changed_to_destroyed.disconnect(focused_ship_destroyed)
 	focused_starship = null
+	remove_pips()
 
 var apply_loadout_health : bool = false
 
 func _starship_ready() -> void:
 	_default_ready()
-
+	
+	current_armour_health = ship_info.base_armour_health
+	
 	toggle_third_person_view.connect(on_third_person)
 	increase_third_person_distance.connect(on_increase_distance)
 	decrease_third_person_distance.connect(on_decrease_distance)
 
 	body_entered.connect(on_collision)
 	on_damage_taken.connect(ship_take_damage)
+	
+	current_health_changed.connect(_on_current_health_changed)
 
 	power_off_sound_player.finished.connect(sound_power_state_change_complete)
 	power_on_sound_player.finished.connect(sound_power_state_change_complete)
 
 	fuel_empty.connect(on_fuel_empty)
-	
-	if !landing_gear_on:
-		toggle_landing_gear()
 
 	name_label.text = ship_name
 	ship_identification_label.text = ship_identification
@@ -631,14 +924,13 @@ func _starship_ready() -> void:
 	alcubierre_drive_slot.module_inserted.connect(on_alcubierre_drive_inserted)
 
 	if alcubierre_drive_slot.module != null:
-		on_alcubierre_drive_inserted(alcubierre_drive_slot.module)
+		on_alcubierre_drive_inserted(alcubierre_drive_slot.module, alcubierre_drive_slot.id)
 
 	current_star_system = get_tree().get_first_node_in_group("StarSystem")
 	selected_system = get_tree().get_first_node_in_group("World").cycle_system()
 	update_abyssal_mfd()
 
 	get_cargo_grids()
-
 
 	shield.shield_hit.connect(shield_damage)
 
@@ -665,6 +957,9 @@ func _starship_ready() -> void:
 	shield_online.connect(shield.on_shield_online)
 
 	loadout_tools.load_loadout(self, default_loadout, apply_loadout_health)
+	
+	if !landing_gear_on:
+		toggle_landing_gear()
 
 	if module_node != null:
 		for node : Node in module_node.get_children():
@@ -674,12 +969,12 @@ func _starship_ready() -> void:
 					n.module_inserted.connect(_on_module_insert)
 					n.module_removed.connect(_on_module_uninserted)
 
-			if node is ModuleSlot:
-				module_slots.append(node)
-				node.module_inserted.connect(_on_module_insert)
-				node.module_removed.connect(_on_module_uninserted)
+			#if node is ModuleSlot:
+			#	module_slots.append(node)
+			#	node.module_inserted.connect(_on_module_insert)
+			#	node.module_removed.connect(_on_module_uninserted)
 
-	max_hull_health = ship_info.max_health
+	#max_hull_health = ship_info.max_health
 
 	for module_slot : ModuleSlot in module_slots:
 		if module_slot is DynamicModuleSlot:
@@ -687,7 +982,7 @@ func _starship_ready() -> void:
 				shield_generators.append(module_slot.module)
 
 			if module_slot.module is HullReinforcement:
-				_on_module_insert(module_slot.module)
+				_on_module_insert(module_slot.module, module_slot.id, true)
 
 			if module_slot.module is Cooler:
 				coolers.append(module_slot.module)
@@ -702,6 +997,7 @@ func _starship_ready() -> void:
 
 	if default_loadout.apply_health:
 		current_hull_health = default_loadout.current_health
+		current_armour_health = default_loadout.current_armour_health
 
 	if is_bounty_target:
 		match difficulty:
@@ -716,7 +1012,7 @@ func _starship_ready() -> void:
 
 	get_thrusters()
 
-	for c : Node3D in hardpoints_root.get_children():
+	for c : Node in hardpoints_root.find_children("*", "", true, false):
 		if c is Hardpoint:
 			hardpoints.append(c)
 
@@ -728,17 +1024,24 @@ func _starship_ready() -> void:
 	if !is_bounty_target:
 		heat_damage_timer.start()
 	
+	base_max_ammo = ship_info.max_ammo
+
 	current_ammo_changed.emit(current_ammo)
 	max_ammo_changed.emit(max_ammo)
 	
 	current_fuel_changed.emit(current_fuel)
 	max_fuel_changed.emit(max_fuel)
+	max_heat_capacity_changed.emit(maximum_heat_capacity)
+
+	update_material_saturation_based_on_hull_damage()
 	
+	zone.deactivate.connect(despawn_ship)
+		
 func heat_damage_timer_timeout() -> void:
 	if current_heat < maximum_heat_capacity:
 		return
 
-	ship_take_damage(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity), true)
+	ship_take_damage(damage_per_heat_over_capacity * log(current_heat - maximum_heat_capacity), 30, true)
 
 func add_heat(heat : float) -> void:
 	current_heat += heat
@@ -831,9 +1134,7 @@ func power_off() -> void:
 
 	current_state = State.POWER_OFF
 	power_state_change_complete = true
-	axis_lock_linear_x = false
-	axis_lock_linear_y = false
-	axis_lock_linear_z = false
+	unlock_ship()
 
 	actual_rotation_vector = Vector3.ZERO
 	actual_rotation_vector_unit = Vector3.ZERO
@@ -850,6 +1151,11 @@ func refuel() -> void:
 	current_fuel = max_fuel
 	refueled.emit()
 	linear_damp = 0
+	
+func restore_armour() -> void:
+	current_armour_health = max_armour_health
+	current_armour_health_changed.emit()
+	armour_restored.emit()
 
 func on_fuel_empty() -> void:
 	var starship_cycle_power_state_command : StarshipCyclePowerStateCommand = StarshipCyclePowerStateCommand.new()
@@ -858,7 +1164,7 @@ func on_fuel_empty() -> void:
 	
 	if travel_mode == StarshipTravelModes.TravelMode.SUPER_CRUISE:
 		exit_super_cruise(true)
-		ship_take_damage(current_super_cruise_speed * 6, true)
+		ship_take_damage(current_super_cruise_speed, 100, true)
 		(player.current_controller as StarshipController).supercruise_exit_timer.start()
 		
 		if current_state != State.POWER_OFF:
@@ -878,14 +1184,19 @@ func restock() -> void:
 	current_ammo = max_ammo
 
 func destroyed() -> void:
+	remove_pips()
+
 	stop_shooting_primary()
 	stop_shooting_secondary()
 	stop_shooting_tertiary()
 
+	is_player_ship = true
+
+	if is_bounty_target:
+		pass
+
 	current_state = State.DESTROYED
-	axis_lock_linear_x = false
-	axis_lock_linear_y = false
-	axis_lock_linear_z = false
+	unlock_ship()
 	state_changed_to_destroyed.emit()
 	linear_damp = 0.3
 	angular_damp = 0.3
@@ -894,24 +1205,43 @@ func destroyed() -> void:
 	actual_rotation_vector_unit = Vector3.ZERO
 	actual_thrust_vector = Vector3.ZERO
 	actual_thrust_vector_unit = Vector3.ZERO
+	
+	shield.collision_mask = shield.layer_mask_offline
+	shield.collision_layer = shield.layer_mask_offline
+	shield.hide()
+	
+	shield_current_health = 0
+	
+	if !destroyed_on_load:
+		explosion_sound_player.stream = explosion_sounds.pick_random()
+		explosion_sound_player.play()
 
-	explosion_sound_player.stream = explosion_sounds.pick_random()
-	explosion_sound_player.play()
+		if player != null:
+			player.die()
+		else:
+			var p : Player = get_tree().get_first_node_in_group("Player")
+			if (p.global_position - global_position).length() <= blast_radius:
+				if p.control_entity is Starship:
+					p.control_entity.take_damage(5000, 10)
+				else:
+					p.die()
+	
+		if is_bounty_target:
+			get_tree().get_first_node_in_group("Player").add_credits(reward)
 
-	if player != null:
-		player.die()
-	else:
-		var p : Player = get_tree().get_first_node_in_group("Player")
-		if (p.global_position - global_position).length() <= blast_radius:
-			if p.control_entity is Starship:
-				p.control_entity.take_damage(5000)
-			else:
-				p.die()
-
-
-	if is_bounty_target:
-		get_tree().get_first_node_in_group("Player").add_credits(reward)
-
+	var destruction_percentage : float = 0.5
+	
+	for slot : ModuleSlot in module_slots:
+		if slot is DynamicModuleSlot:
+			if slot.module != null:
+				var destroy : bool = randf_range(0, 1) >= destruction_percentage
+				
+				if destroy:
+					var module : Module = slot.module
+					slot.module.quiet_insert = true
+					slot.module.uninsert()
+					
+					module.queue_free()
 
 func shield_damage(damage : float) -> void:
 	shield_current_health -= damage
@@ -956,27 +1286,31 @@ func shield_charge_cooldown_finished() -> void:
 	if shield.collision_mask == shield.layer_mask_offline and shield_current_health > 0:
 		shield.collision_mask = shield.layer_mask_online
 
-func _on_module_insert(module : Module) -> void:
+func _on_module_insert(module : Module, slot_id : int, loading : bool = false) -> void:
 	passive_heat_generation += module.passive_heat_generation
 	current_heat += module.passive_heat_generation
-
 
 	if module is ShieldGenerator:
 		shield_generators.append(module)
 		update_shield_stats()
 
-	if module is HullReinforcement:
+	if module is HullReinforcement:	
 		hull_reinforcements.append(module)
-		max_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
-		current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
-		hull_hardness += (module.module_resource as HullReinforcementResource).additional_hardness
-
+		
+		hull_reeinforcement_health_addition += (module.module_resource as HullReinforcementResource).additional_hull_health
+		if !loading:
+			current_hull_health += (module.module_resource as HullReinforcementResource).additional_hull_health
+			current_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
+			
+		additional_armour_rating += (module.module_resource as HullReinforcementResource).additional_armour_rating
+		
+		additional_armour_health += (module.module_resource as HullReinforcementResource).additional_armour_health
+		
 	if module is Cooler:
 		coolers.append(module)
 		on_cooler_config_changed.emit()
 
-
-func _on_module_uninserted(module : Module) -> void:
+func _on_module_uninserted(module : Module, slot_id : int) -> void:
 	passive_heat_generation -= module.passive_heat_generation
 	current_heat -= module.passive_heat_generation
 
@@ -990,18 +1324,23 @@ func _on_module_uninserted(module : Module) -> void:
 
 	if module is HullReinforcement:
 		hull_reinforcements.erase(module)
-		max_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
+		hull_reeinforcement_health_addition -= (module.module_resource as HullReinforcementResource).additional_hull_health
 		current_hull_health -= (module.module_resource as HullReinforcementResource).additional_hull_health
-		hull_hardness -= (module.module_resource as HullReinforcementResource).additional_hardness
-
-
+		
+		additional_armour_rating -= (module.module_resource as HullReinforcementResource).additional_armour_rating
+		
+		additional_armour_health -= (module.module_resource as HullReinforcementResource).additional_armour_health
+		current_armour_health -= (module.module_resource as HullReinforcementResource).additional_armour_health
+		
 		if current_hull_health <= 0:
 			current_hull_health = 1
+		if current_armour_health <= 0:
+			current_armour_health = 0
 
 
 func _starship_process(delta: float) -> void:
 	_vehicle_process(delta)
-
+	
 func update_shield_stats() -> void:
 	shield_max_health = 0
 	shield_charge_rate = 0
@@ -1156,11 +1495,11 @@ func stop_shooting_tertiary() -> void:
 			if hardpoint.module != null:
 				hardpoint.module.stop_shooting()
 
-func on_alcubierre_drive_removed(alcubierre_drive : Module) -> void:
-	alcubierre_drive_removed.emit(alcubierre_drive)
+func on_alcubierre_drive_removed(alcubierre_drive : Module, id : int) -> void:
+	alcubierre_drive_removed.emit(alcubierre_drive, id)
 
-func on_alcubierre_drive_inserted(alcubierre_drive : Module) -> void:
-	alcubierre_drive_inserted.emit(alcubierre_drive)
+func on_alcubierre_drive_inserted(alcubierre_drive : Module, id : int) -> void:
+	alcubierre_drive_inserted.emit(alcubierre_drive, id)
 
 func alcubierre_drive_charge_start() -> void:
 	if alcubierre_drive_slot.module == null:
@@ -1185,15 +1524,30 @@ func cycle_selected_system() -> void:
 	selected_system = world.cycle_system()
 	update_abyssal_mfd()
 
-func ship_take_damage(damage : float, ignore_shield : bool = false) -> void:
+func ship_take_damage(damage : float, penetration : float, ignore_shield : bool = false) -> void:
 	if current_state == State.DESTROYED:
 		return
 
 	if shield_current_health > 0 and ignore_shield == false:
 		return
+	
+	var armour_rating_in_damage : float = clampf(current_armour_rating, 1, 100000000000)
 
-	current_hull_health -= calculate_final_damage(damage)
+	var proportional_armour_difference : float = penetration - current_armour_rating
+	
+	if current_armour_health <= 0:
+		current_hull_health -= damage
+	# weapon doesn't penetrate armour -> only damage armour
+	elif (proportional_armour_difference <= 0):
+		current_armour_health -= (clampf(1 - (absf(proportional_armour_difference) / armour_rating_in_damage), 0, 1)) * damage
+		current_hull_health -= (clampf(1 - (absf(proportional_armour_difference) / armour_rating_in_damage), 0, 1)) * damage / 10
+	# weapon penetrates armour -> do full armour damage, only damage hull proportionally
+	elif (proportional_armour_difference > 0):
+		current_armour_health -= damage
+		current_hull_health -= (clampf(1 - armour_rating_in_damage / (absf(proportional_armour_difference)), 0, 1)) * damage
+	
 	current_hull_health = clampf(current_hull_health, 0, max_hull_health)
+	current_armour_health = clampf(current_armour_health, 0, max_armour_health)
 
 	if current_hull_health <= hull_health_damaged_state and damaged == false:
 		change_to_damaged_state.emit()
@@ -1207,8 +1561,8 @@ func on_collision(body : Node3D) -> void:
 		return
 
 	if body is AbyssalTunnelCollider:
-		shield.take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
-		take_damage(pow(relative_linear_velocity.length(), 4) * 0.08)
+		shield.take_damage(pow(relative_linear_velocity.length(), 4) * 0.12)
+		take_damage(pow(relative_linear_velocity.length(), 4) * 0.08, 500)
 
 
 	if landing_gear_on and relative_linear_velocity.length() <= 50:
@@ -1218,8 +1572,8 @@ func on_collision(body : Node3D) -> void:
 	var hull_damage : float = pow(relative_linear_velocity.length(), 2) * 0.15
 
 	if body is GameEntity:
-		shield_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.35
-		hull_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.15
+		shield_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.55
+		hull_damage = pow(relative_linear_velocity.length() + body.relative_linear_velocity.length(), 2) * 0.25
 
 
 	if shield_current_health > 0:
@@ -1228,7 +1582,7 @@ func on_collision(body : Node3D) -> void:
 		shield.take_damage(shield_damage)
 
 		if shield_damage / 4 > shield_max_health:
-			take_damage(shield_damage - old_health)
+			take_damage(shield_damage - old_health, 100)
 
 		return
 
@@ -1239,27 +1593,11 @@ func on_collision(body : Node3D) -> void:
 	if (current_hull_health - hull_damage) <= 0 and body is not Starship:
 		reward = 10000
 
-	take_damage(hull_damage)
+	take_damage(hull_damage, 500)
 
 	if !hull_collision_player.playing:
 		hull_collision_player.stream = current_sound
 		hull_collision_player.play()
-
-func calculate_final_damage(base_damage: float) -> float:
-	var max_hardness: float = 164
-	var max_reduction: float = 0.6
-
-	var linear_factor: float = hull_hardness / max_hardness  # Pure linear scaling (0 to 1)
-	var log_factor: float = log(1 + hull_hardness) / log(1 + max_hardness)  # Log scaling
-
-	# Blend the two (adjust weight to control effect)
-	var blend_ratio: float = 0.6  # Higher = more linear, Lower = more logarithmic
-	var reduction: float = max_reduction * ((blend_ratio * linear_factor) + ((1 - blend_ratio) * log_factor))
-
-	var final_damage: float = base_damage * (1.0 - reduction)
-
-	return final_damage
-
 
 func update_abyssal_mfd() -> void:
 	pass
@@ -1267,13 +1605,20 @@ func update_abyssal_mfd() -> void:
 func lock_ship() -> void:
 	if !is_powered_on():
 		return
-
+	
 	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
 		axis_lock_linear_x = true
 		axis_lock_linear_y = true
 		axis_lock_linear_z = true
 
-func toggle_landing_gear() -> void:
+func unlock_ship() -> void:
+	axis_lock_linear_x = false
+	axis_lock_linear_y = false
+	axis_lock_linear_z = false
+	
+	print("unlocked")
+
+func toggle_landing_gear(force : bool = false) -> void:
 	pass
 
 func initiate_abyssal_travel() -> void:
@@ -1294,8 +1639,10 @@ func initiate_abyssal_travel() -> void:
 		current_abyss_portal = null
 		abyssal_portal_active = false
 		return
-
-	if current_fuel <= (abyss_drive_slot.module as AbyssalJumpDrive).fuel_per_jump:
+	
+	var fuel_cost : float = ((abyss_drive_slot.module as AbyssalJumpDrive).module_resource as AbyssalJumpDriveResource).get_fuel_usage(distance_to_target_star_system)
+	
+	if current_fuel <= fuel_cost:
 		return
 
 	var abyssal_portal_scene : PackedScene = preload("res://classes/abyss/abyssal-portal/AbyssalPortal.tscn")
@@ -1304,12 +1651,12 @@ func initiate_abyssal_travel() -> void:
 	current_abyss_portal = abyssal_portal
 	abyssal_portal_active = true
 
-	current_fuel -= (abyss_drive_slot.module as AbyssalJumpDrive).fuel_per_jump
+	current_fuel -= fuel_cost
 
 	get_tree().get_first_node_in_group("StarSystem").add_child(abyssal_portal)
 	abyssal_portal.global_position = abyssal_portal_spawn_point.global_position
 	abyssal_portal.global_rotation = abyssal_portal_spawn_point.global_rotation
-	abyssal_portal.destination_star_system = selected_system.scene_file
+	abyssal_portal.destination_star_system = load(selected_system.scene_file)
 	abyssal_portal.starship = self
 
 func initiate_super_cruise() -> void:
@@ -1340,7 +1687,7 @@ func initiate_super_cruise() -> void:
 func exit_super_cruise(force_exit : bool = false) -> void:
 
 	if !force_exit:
-		if current_super_cruise_speed > 500:
+		if current_super_cruise_speed > 300000:
 			return
 
 	(alcubierre_drive_slot.module as AlcubierreDrive).super_cruise_end()
@@ -1354,17 +1701,17 @@ func exit_super_cruise(force_exit : bool = false) -> void:
 	collision_mask = super_cruise_exit_collision_mask
 
 	super_cruise_disengaged.emit()
+	
+	reset_thrust_vectors()
 
 func cruise_travel(delta : float) -> void:
-	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1:
+	if (abs(target_speed_vector.length() - local_linear_velocity.length()) < 0.7) and local_linear_velocity.length() < 1 and local_angular_velocity.length() < 0.1:
 		if active_frame_of_reference is GravityGrid or active_frame_of_reference is GravityWell:
 			if active_frame_of_reference.enable_gravity == true:
 				if lock_timer.is_stopped():
 					lock_timer.start()
 	else:
-		axis_lock_linear_x = false
-		axis_lock_linear_y = false
-		axis_lock_linear_z = false
+		unlock_ship()
 
 	target_speed_vector = calculate_target_speed_vector()
 	target_rotation_speed_vector = calculate_target_rotation_speed_vector()
@@ -1440,16 +1787,16 @@ func cruise_travel(delta : float) -> void:
 		roll_left(thrust)
 
 
-	apply_central_force(actual_thrust_vector * global_basis.inverse())
+	apply_central_force(actual_thrust_vector * ShipUpgrades.ship_thruster_upgrade[current_thruster_upgrade] * global_basis.inverse())
 
-	apply_torque(actual_rotation_vector * global_basis.inverse())
+	apply_torque(actual_rotation_vector * ShipUpgrades.ship_turning_upgrade[current_turning_upgrade] * global_basis.inverse())
 
 var last_position : Vector3 = Vector3.ZERO
 
 func super_cruise_travel(delta : float) -> void:
 	var target_velocity : float = target_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_speed + 250
 	
-	if current_fuel < 100 and target_velocity > 500:
+	if current_fuel < 10 and target_velocity > 500:
 		target_velocity = 500
 	
 	var velocity_diff : float = abs(current_super_cruise_speed - target_velocity)
@@ -1460,26 +1807,29 @@ func super_cruise_travel(delta : float) -> void:
 	var turning_multiplier : float =  manouvarability_curve.sample((current_super_cruise_speed / alcubierre_drive_slot.module.module_resource.max_speed))
 
 	if current_super_cruise_speed > target_velocity:
-		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale
+		current_super_cruise_speed -= alcubierre_drive_slot.module.module_resource.deacceleration * acceleration_scale * delta
 	if current_super_cruise_speed < target_velocity:
-		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale
+		current_super_cruise_speed += alcubierre_drive_slot.module.module_resource.acceleration * acceleration_scale * delta
 
 	current_super_cruise_speed = clampf(current_super_cruise_speed, 0, alcubierre_drive_slot.module.module_resource.max_speed)
 
 	(alcubierre_drive_slot.module as AlcubierreDrive).travelling_sound.pitch_scale = lerpf(0.7, 4, current_super_cruise_speed / alcubierre_drive_slot.module.module_resource.max_speed)
 
-	global_position += global_transform.basis.z * current_super_cruise_speed
+	global_position += global_transform.basis.z * current_super_cruise_speed * delta
 
 	current_super_cruise_speed_in_c = ((((global_position - last_position) / delta) / 299_792_458.0) * 1000).length()
 
 	last_position = global_position
 
-	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
-	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
-	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier)
+	rotate_object_local(Vector3(1, 0, 0), target_rotational_thrust_vector.x * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier * delta)
+	rotate_object_local(Vector3(0, 1, 0), target_rotational_thrust_vector.y * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier * delta)
+	rotate_object_local(Vector3(0, 0, 1), target_rotational_thrust_vector.z * alcubierre_drive_slot.module.module_resource.max_turn_speed * turning_multiplier * delta)
 
 func _physics_process(delta: float) -> void:
 	_default_physics_process(delta)
+
+	if current_state == State.DESTROYED or current_state == State.POWER_OFF:
+		return
 	
 	calculate_local_linear_velocity()
 	calculate_local_angular_velocity()
@@ -1496,12 +1846,14 @@ func _physics_process(delta: float) -> void:
 			cruise_travel(delta)
 		elif travel_mode == starship_travel_modes.TravelMode.SUPER_CRUISE:
 			super_cruise_travel(delta)
+	
+	if is_player_ship:
+		update_ui()
 
-	update_ui()
+	#print(target_rotation_speed_vector)
 
-
-		# reset thrust vector
-	reset_thrust_vectors()
+	# resetting is shit dont do it...
+	# reset_thrust_vectors()
 
 	relative_gravity_vector = Vector3.ZERO
 
@@ -1522,12 +1874,36 @@ func decrease_max_velocity(velocity : float) -> void:
 
 	current_max_velocity -= velocity
 
+func despawn_ship(player : Player, control_entity : ControlEntity) -> void:
+	if !is_player_ship:
+		return
+	
+	if despawned:
+		return
+
+	var ship_zone : ShipZone = ShipZone.new()
+	
+	ship_zone.loadout = loadout_tools.save_loadout(self, true, true)
+	
+	get_tree().get_first_node_in_group("StarSystem").add_child(ship_zone)
+	
+	ship_zone.global_position = global_position
+	ship_zone.global_rotation = global_rotation
+	
+	despawned = true
+	
+	queue_free()
+
 func generate_ship_id() -> String:
-	var prefix : Array = ["RABS"]
+	var id_prefix : String = ""
+	if ship_type <= 1:
+		id_prefix = "RABS"
+	if ship_type == 2:
+		id_prefix = "OXPY"
+	
 	var letters : String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	var numbers : String = "0123456789"
 
-	var id_prefix : String = prefix[randi() % prefix.size()]
 	var id_letters : String = ""
 	for i : int in range(3):
 		id_letters += letters[randi() % letters.length()]
@@ -1546,6 +1922,25 @@ func use_interact() -> void:
 
 		if collider is Interactable:
 			collider.interact(player, self)
+
+var is_horn_playing : bool = false
+
+func start_horn() -> void:
+	ship_horn.start_horn()
+	is_horn_playing = true
+
+func end_horn() -> void:
+	ship_horn.end_horn()
+	is_horn_playing = false
+
+func toggle_cargo_bay() -> void:
+	pass
+	
+func toggle_tractor_beams() -> void:
+	pass
+	
+func enable_tractor_beam_upgrade() -> void:
+	pass	
 
 func reset_thrust_vectors() -> void:
 	target_thrust_vector = Vector3.ZERO
@@ -1570,7 +1965,7 @@ func calculate_target_rotation_speed_vector() -> Vector3:
 	new_target_vector.x *= ship_info.max_angular_pitch_velocity
 	new_target_vector.y *= ship_info.max_angular_yaw_velocity
 	new_target_vector.z *= ship_info.max_angular_roll_velocity
-
+	
 	return new_target_vector
 
 #===========================================================================#
@@ -1591,7 +1986,7 @@ func thrust_forward(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.forward_thrust)
 	actual_thrust_vector.z = thrust
 	actual_thrust_vector_unit.z = thrust / thruster_force.forward_thrust
-
+	
 func thrust_backward(thrust: float) -> void:
 	thrust = clampf(thrust, 0, thruster_force.backward_thrust)
 	actual_thrust_vector.z = -thrust
@@ -1662,7 +2057,8 @@ func set_target_rotation_pitch_up(thrust : float) -> void:
 
 func set_target_rotation_pitch_down(thrust : float) -> void:
 	target_rotational_thrust_vector.x = -thrust
-
+	
+	
 func set_target_rotation_yaw_left(thrust : float) -> void:
 	target_rotational_thrust_vector.y = -thrust
 
@@ -1674,3 +2070,12 @@ func set_target_rotation_roll_left(thrust : float) -> void:
 
 func set_target_rotation_roll_right(thrust : float) -> void:
 	target_rotational_thrust_vector.z = thrust
+	
+static func get_ship_scene(type : ShipType) -> String:
+	match type:
+		ShipType.CORKSCREW:
+			return "res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/RABS_Corkscrew.tscn"
+		ShipType.KESTREL:
+			return "res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.tscn"
+	
+	return ""

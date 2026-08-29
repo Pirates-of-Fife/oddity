@@ -1,15 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://cs520326tu707"]
+[gd_scene load_steps=11 format=3 uid="uid://cs520326tu707"]
 
 [ext_resource type="Script" path="res://classes/star-system/planet/Planet.gd" id="1_dnb3i"]
 [ext_resource type="Texture2D" uid="uid://bmgfn4wgyi1w4" path="res://scenes/world/textures/4k_ceres_fictional.jpg" id="2_fplkc"]
 [ext_resource type="Script" path="res://classes/frame-of-reference/GravityWell.gd" id="3_jl0ix"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/planet-zone/PlanetZone.gd" id="4_0q31d"]
 [ext_resource type="PackedScene" uid="uid://cbeuj1io6qndp" path="res://classes/player-detection-zone/salvage-zone/SalvageZone.tscn" id="5_whkx4"]
+[ext_resource type="PackedScene" uid="uid://dwj8ssotf6b7s" path="res://scenes/world/gateway/celestial-bodies/arka/scatter-objects/NoctilunaRocks.tscn" id="6_fwe01"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/scene-loading-zone/SceneLoadingZone.gd" id="10_wyvlc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eecmk"]
 diffuse_mode = 3
 specular_mode = 1
 albedo_texture = ExtResource("2_fplkc")
+texture_filter = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_w274e"]
 material = SubResource("StandardMaterial3D_eecmk")
@@ -50,3 +53,10 @@ deactivate_distance = 19000.0
 
 [node name="SalvageZone" parent="." instance=ExtResource("5_whkx4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -969.616, 2754.6, -2781.69)
+
+[node name="SceneLoadingZone" type="Node3D" parent="."]
+script = ExtResource("10_wyvlc")
+scene = ExtResource("6_fwe01")
+activate_distance = 12000.0
+deactivate_distance = 13000.0
+update_time = 0.75

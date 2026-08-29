@@ -13,8 +13,12 @@ var landed_ship : Starship
 var repair_costs : int
 var refuel_costs : int
 var restock_costs : int
+var armour_repair_costs : int
 
 var credit_hud : CreditHud = CreditHud.new()
+
+@export
+var station_pad : StationPad
 
 func _ready() -> void:
 	landing_pad.starship_landed.connect(_on_ship_landed)
@@ -23,24 +27,30 @@ func _ready() -> void:
 func calculate_repair_costs(starship : Starship) -> int:
 	var health_difference : float = starship.max_hull_health - starship.current_hull_health
 
-	return (health_difference * 1.5) as int
+	return (health_difference * 1.5) * station_pad.station.buy_markup as int
+
+func calculate_armour_repair_costs(starship : Starship) -> int:
+	var health_difference : float = starship.max_armour_health - starship.current_armour_health
+	
+	return (health_difference) * station_pad.station.buy_markup as int
 
 func calculate_refuel_costs(starship : Starship) -> int:
 	var refuel_difference : float = starship.max_fuel - starship.current_fuel
 	
-	return (refuel_difference)
+	return (refuel_difference * station_pad.station.buy_markup)
 	
 func calculate_restock_costs(starship : Starship) -> int:
 	var restock_difference : float = starship.max_ammo - starship.current_ammo
 	
-	return (roundf(restock_difference * 4))
+	return (roundf(restock_difference * 4 * station_pad.station.buy_markup))
 
 func _on_ship_landed(starship : Starship) -> void:
 	repair_costs = calculate_repair_costs(starship)
 	refuel_costs = calculate_refuel_costs(starship)
 	restock_costs = calculate_restock_costs(starship)
+	armour_repair_costs = calculate_armour_repair_costs(starship)
 	
-	repair_ui_2d.ship_landed(starship, credit_hud.convert_to_human_readable(repair_costs), credit_hud.convert_to_human_readable(refuel_costs), credit_hud.convert_to_human_readable(restock_costs))
+	repair_ui_2d.ship_landed(starship, credit_hud.convert_to_human_readable(repair_costs), credit_hud.convert_to_human_readable(refuel_costs), credit_hud.convert_to_human_readable(restock_costs), credit_hud.convert_to_human_readable(armour_repair_costs))
 
 	landed_ship = starship
 
@@ -117,11 +127,35 @@ func _on_interaction_button_3_interacted(player: Player, control_entity: Control
 		$Decline.play()
 		return
 	
-		landed_ship.repair()
-
 	repair_ui_2d.restocked()
 	landed_ship.restock()
 	
 	$AudioStreamPlayer3D.play()
 
 	player.remove_credits(restock_costs)
+
+
+func _on_interaction_button_4_interacted(player: Player, control_entity: ControlEntity) -> void:
+	if landed_ship == null:
+		$Decline.play()
+		return
+
+	if landed_ship.current_armour_health == landed_ship.max_armour_health:
+		$Decline.play()
+		return
+
+	if armour_repair_costs == 0:
+		$Decline.play()
+		return
+
+	if player.credits < armour_repair_costs:
+		$Decline.play()
+		return
+
+	landed_ship.restore_armour()
+
+	repair_ui_2d.restored()
+	
+	$AudioStreamPlayer3D.play()
+
+	player.remove_credits(armour_repair_costs)
