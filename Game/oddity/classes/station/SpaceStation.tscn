@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bifjawf38tw3r"]
+[gd_scene load_steps=20 format=3 uid="uid://bifjawf38tw3r"]
 
 [ext_resource type="Script" path="res://classes/station/SpaceStation.gd" id="1_inwp3"]
 [ext_resource type="Resource" uid="uid://c5fejwytq48u6" path="res://resources/resources/trade/trade-items/example/ExampleTradeResourceList.tres" id="2_b30wo"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://classes/frame-of-reference/FrameOfReference.gd" id="10_kh2ml"]
 [ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="10_pk7ie"]
 [ext_resource type="FontFile" uid="uid://bm53fppaujf5v" path="res://ui/font/Pixeled.ttf" id="11_ift0s"]
+[ext_resource type="PackedScene" uid="uid://7wyl777r3bfm" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/F7_Blackpool.tscn" id="12_0v4tb"]
 [ext_resource type="PackedScene" uid="uid://oj7tc4oxwdby" path="res://classes/station/BlueDanubePlayer.tscn" id="12_p5ocr"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tebqv"]
@@ -150,6 +151,11 @@ activate_distance = 5000.0
 deactivate_distance = 5000.0
 
 [node name="InteriorRoot" type="Node3D" parent="."]
+
+[node name="F7Blackpool" parent="." instance=ExtResource("12_0v4tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1442.8, 162.369, 104.292)
+freeze = true
+script = null
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="activate" from="SpaceStationZone" to="." method="_on_space_station_zone_activate"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://7wyl777r3bfm"]
+
+[ext_resource type="Script" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/F7-Blackpool.gd" id="1_cqu6p"]
+[ext_resource type="PackedScene" uid="uid://da1uk1nr8o10v" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Paint.glb" id="2_tripu"]
+[ext_resource type="PackedScene" uid="uid://cnuvt4xoidrxa" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Exterior.glb" id="3_13vmy"]
+[ext_resource type="PackedScene" uid="uid://bfbg8bogalwrj" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Interior.glb" id="4_vn283"]
+[ext_resource type="Texture2D" uid="uid://buf6r5gkydash" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic color.png" id="5_s10fs"]
+
+[node name="F7Blackpool" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.183948, 1.77636e-15, -0.0646057)
+script = ExtResource("1_cqu6p")
+
+[node name="Root" type="Node3D" parent="."]
+
+[node name="F7Blackpool_Paint" parent="Root" instance=ExtResource("2_tripu")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="F7Blackpool_Exterior" parent="Root" instance=ExtResource("3_13vmy")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="F7Blackpool_Interior" parent="Root" instance=ExtResource("4_vn283")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(0.632493, -1.52092, -2.9228, 0.141172, 2.98594, -1.52323, 3.29182, 0.164178, 0.626915, -12.0381, 8.17759, 10.4207)
+layers = 512
+size = Vector3(3.727, 0.363732, 2)
+texture_albedo = ExtResource("5_s10fs")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
