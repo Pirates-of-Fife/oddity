@@ -1,30 +1,1049 @@
-[gd_scene load_steps=6 format=3 uid="uid://7wyl777r3bfm"]
+[gd_scene load_steps=15 format=3 uid="uid://7wyl777r3bfm"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/F7-Blackpool.gd" id="1_cqu6p"]
+[ext_resource type="Resource" uid="uid://b5ot5wjf8fc8t" path="res://resources/resources/trade/trade-items/starships/F7BlackpoolTradeResource.tres" id="2_fx81g"]
 [ext_resource type="PackedScene" uid="uid://da1uk1nr8o10v" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Paint.glb" id="2_tripu"]
 [ext_resource type="PackedScene" uid="uid://cnuvt4xoidrxa" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Exterior.glb" id="3_13vmy"]
 [ext_resource type="PackedScene" uid="uid://bfbg8bogalwrj" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Interior.glb" id="4_vn283"]
-[ext_resource type="Texture2D" uid="uid://buf6r5gkydash" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/oxvic color.png" id="5_s10fs"]
+[ext_resource type="Texture2D" uid="uid://bfdkwdjdmd6xh" path="res://images/oxvic pyrr color.png" id="5_j1hve"]
+[ext_resource type="Texture2D" uid="uid://d044rr2jhbn4d" path="res://images/F7 Color.png" id="6_8et2g"]
+[ext_resource type="PackedScene" uid="uid://b3xtnalwkwj55" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/doors/F7_EngiDoor.tscn" id="6_8npbl"]
+[ext_resource type="Texture2D" uid="uid://dg5pacghhe2yd" path="res://images/oxvic pyrr white.png" id="7_1qwsi"]
+[ext_resource type="PackedScene" uid="uid://bpa0ysynl0b7l" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/doors/F7_BigDoor.tscn" id="8_7du2e"]
+[ext_resource type="Texture2D" uid="uid://cm2y4wivnv2ab" path="res://images/F7 White.png" id="8_jqmlt"]
+[ext_resource type="PackedScene" uid="uid://b1iigwogxwn63" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Scenes/Button/InvisibleButton.tscn" id="9_6r2qj"]
+[ext_resource type="PackedScene" uid="uid://duiv4fjcmu0vi" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/doors/F7_Door.tscn" id="11_gk6qb"]
+
+[sub_resource type="GDScript" id="GDScript_owdxx"]
+resource_name = "InternalLights"
+script/source = "extends Node3D
+
+@export
+var default_color : Color = Color(\"614219\")
+
+@export
+var red_color : Color = Color.RED
+
+@export
+var default_light_energy : float = 2.027
+
+@export
+var dim_light_energy : float = 0.8
+"
 
 [node name="F7Blackpool" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.183948, 1.77636e-15, -0.0646057)
 script = ExtResource("1_cqu6p")
+ship_type = 2
+ship_name = &"F7 Blackpool"
+cruise_speed = 10000.0
+trade_information = ExtResource("2_fx81g")
 
 [node name="Root" type="Node3D" parent="."]
 
-[node name="F7Blackpool_Paint" parent="Root" instance=ExtResource("2_tripu")]
+[node name="Mesh" type="Node3D" parent="Root"]
+
+[node name="F7Blackpool_Paint" parent="Root/Mesh" instance=ExtResource("2_tripu")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="F7Blackpool_Exterior" parent="Root" instance=ExtResource("3_13vmy")]
+[node name="F7Blackpool_Exterior" parent="Root/Mesh" instance=ExtResource("3_13vmy")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="F7Blackpool_Interior" parent="Root" instance=ExtResource("4_vn283")]
+[node name="F7Blackpool_Interior" parent="Root/Mesh" instance=ExtResource("4_vn283")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
-[node name="Decal" type="Decal" parent="."]
-transform = Transform3D(0.632493, -1.52092, -2.9228, 0.141172, 2.98594, -1.52323, 3.29182, 0.164178, 0.626915, -12.0381, 8.17759, 10.4207)
+[node name="Doors" type="Node3D" parent="Root/Mesh/F7Blackpool_Interior"]
+
+[node name="F7EngiDoor" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("6_8npbl")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, -3.26222, -1.77636e-15, -4.50873)
+interactables = [NodePath("../../Buttons/Bottom Left Engi door"), NodePath("../../Buttons/Bottom Engi Left")]
+
+[node name="F7EngiDoor2" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("6_8npbl")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 3.27629, -1.77636e-15, -4.50873)
+interactables = [NodePath("../../Buttons/Bottom Right Engi Door"), NodePath("../../Buttons/Bottom Engi Right")]
+
+[node name="F7EngiDoor3" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("6_8npbl")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 0, -18.935)
+interactables = [NodePath("../../Buttons/entrance room door"), NodePath("../../Buttons/entrance door")]
+
+[node name="F7EngiDoor4" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("6_8npbl")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 0, -23.164)
+interactables = [NodePath("../../Buttons/outside entrance"), NodePath("../../Buttons/outside entrance 2")]
+
+[node name="F7EngiDoor5" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("6_8npbl")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 3.90502, -23.328)
+interactables = [NodePath("../../Buttons/rec room main"), NodePath("../../Buttons/rec room main2")]
+
+[node name="F7EngiDoor6" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("6_8npbl")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 3.905, -18.934)
+interactables = [NodePath("../../Buttons/top engi entrance2"), NodePath("../../Buttons/engineering room top entrance")]
+
+[node name="F7Door" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, -2.45907, 3.90729, -5.98509)
+interactables = [NodePath("../../Buttons/small cargo top door entrance"), NodePath("../../Buttons/small cargo door")]
+
+[node name="F7Door2" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, -3.41071, 3.90729, 2.13627)
+interactables = [NodePath("../../Buttons/entrance rer"), NodePath("../../Buttons/entrance rear")]
+
+[node name="F7Door3" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, -3.41071, 3.90729, 8.24421)
+interactables = [NodePath("../../Buttons/outside"), NodePath("../../Buttons/outside2")]
+
+[node name="F7Door4" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(6.12327e-17, 0, -1, 0, 1, 0, 1, 0, 6.12327e-17, -3.12384, 3.90729, -22.4074)
+interactables = [NodePath("../../Buttons/eva room"), NodePath("../../Buttons/eva room2")]
+
+[node name="F7Door5" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(6.12327e-17, 0, -1, 0, 1, 0, 1, 0, 6.12327e-17, 1.8591, 3.90729, -22.4288)
+interactables = [NodePath("../../Buttons/medbay"), NodePath("../../Buttons/medbay2")]
+
+[node name="F7Door6" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(6.12327e-17, 0, -1, 0, 1, 0, 1, 0, 6.12327e-17, 2.28898, 3.90729, -26.0573)
+interactables = [NodePath("../../Buttons/hab1"), NodePath("../../Buttons/hab 1")]
+
+[node name="F7Door7" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(-1.83697e-16, 0, 1, 0, 1, 0, -1, 0, -1.83697e-16, 2.28898, 3.90729, -27.6877)
+interactables = [NodePath("../../Buttons/hab 2"), NodePath("../../Buttons/hab 2 2")]
+
+[node name="F7Door8" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(-1.83697e-16, 0, 1, 0, 1, 0, -1, 0, -1.83697e-16, 2.28898, 3.90729, -31.8247)
+interactables = [NodePath("../../Buttons/bathrrom"), NodePath("../../Buttons/nathroom")]
+
+[node name="F7Door9" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(-1.83697e-16, 0, 1, 0, 1, 0, -1, 0, -1.83697e-16, -3.36674, 3.90729, -34.3518)
+interactables = [NodePath("../../Buttons/Bridge"), NodePath("../../Buttons/Bridge2")]
+
+[node name="F7Door10" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_gk6qb")]
+transform = Transform3D(6.12327e-17, 0, -1, 0, 1, 0, 1, 0, 6.12327e-17, -1.56882, 3.90729, -26.0149)
+interactables = [NodePath("../../Buttons/gym"), NodePath("../../Buttons/gym2")]
+
+[node name="F7BigDoor" parent="Root/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("8_7du2e")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0.0711077, 3.90726, -5.92292)
+interactables = [NodePath("../../Buttons/big cargo"), NodePath("../../Buttons/big cargo2")]
+
+[node name="Reflection Probes" type="Node3D" parent="Root/Mesh/F7Blackpool_Interior"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="CargoBay" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0413465, 3.61019, 1.16296)
+size = Vector3(16.9158, 7.29939, 6.42648)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="CargoRamp" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0727029, 2.49656, -3.8756)
+size = Vector3(3.49708, 5.07215, 3.79097)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="CargoRamp2" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00585085, 2.45348, -8.53673)
+size = Vector3(2.96994, 4.94541, 5.70948)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Balcony" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43846, 4.88965, -5.06321)
+size = Vector3(1.57839, 2.07157, 6.11237)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Top Engi Bay" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0309727, 5.72844, 11.6146)
+size = Vector3(12.0386, 3.40632, 14.4431)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Hallway" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63966, 5.03604, 21.0994)
+size = Vector3(5.01558, 2.34102, 4.31674)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Medbay" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.21241, 5.03604, 21.5661)
+size = Vector3(2.53167, 2.34102, 3.35632)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Armoury" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.79395, 5.03604, 21.5661)
+size = Vector3(7.29301, 2.34102, 3.35632)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Gym" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62732, 5.03604, 25.062)
+size = Vector3(4.38976, 2.34102, 3.55748)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Crew Quarter 1" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80876, 5.03604, 25.149)
+size = Vector3(5.0359, 2.34102, 3.3836)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Crew Quarter 2" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80876, 5.03604, 28.5532)
+size = Vector3(5.0359, 2.34102, 3.48412)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Bathroom" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80753, 5.03604, 31.4253)
+size = Vector3(5.03834, 2.34102, 2.30094)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Rec Room" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.388288, 5.12867, 30.1623)
+size = Vector3(3.74606, 2.52629, 13.5005)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Kitchen" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3143, 5.12867, 30.1978)
+size = Vector3(3.74606, 2.52629, 6.78158)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Bridge Entrance" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41595, 5.12867, 35.2027)
+size = Vector3(1.94936, 2.52629, 3.26508)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Bridge 1" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.15303, 5.12867, 35.219)
+size = Vector3(3.73531, 2.52629, 3.29785)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Bridge 2" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.79835, 5.12867, 38.9049)
+size = Vector3(4.44467, 2.52629, 4.15805)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Bridge 3" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.79835, 5.70827, 44.4826)
+size = Vector3(4.44467, 3.68548, 7.56314)
+box_projection = true
+enable_shadows = true
+
+[node name="Lower Engi Bay" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123399, 1.85169, 11.6146)
+size = Vector3(12.7777, 3.74321, 14.4431)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Lower Engi Comps" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.23123, 1.60661, 11.6146)
+size = Vector3(2.02231, 2.22721, 14.4431)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Lower Engi Comps2" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15373, 1.60661, 11.6146)
+size = Vector3(2.02231, 2.22721, 14.4431)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Entrance Room" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0106684, 1.92446, 21.1625)
+size = Vector3(6.20628, 3.88874, 4.25578)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Entrance Room2" type="ReflectionProbe" parent="Root/Mesh/F7Blackpool_Interior/Reflection Probes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.791185, 1.28273, 24.0281)
+size = Vector3(4.64524, 2.6053, 1.91526)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="Lighting" type="Node3D" parent="Root/Mesh/F7Blackpool_Interior"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, -2.88658e-15, 6.18699, -25.1673)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, -3.4972e-15, 6.18699, -30.2594)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, -4.10783e-15, 6.18699, -35.4714)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, -2.81913, 6.18699, -30.2594)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 2.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, 4.89946, 6.20181, -28.116)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, 4.89946, 6.20181, -25.0564)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, 3.5757, 6.20181, -31.4785)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 3.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, 6.33613, 6.20181, -30.7768)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 0.5
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D9" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 0, -7.4988e-33, 7.4988e-33, -6.12323e-17, 1, 0, -1, -6.12323e-17, 6.33613, 6.20181, -32.0173)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 0.5
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D34" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lighting"]
+transform = Transform3D(1, 2.77516e-18, -3.16598e-17, 3.15125e-17, -0.215843, 0.976428, -4.1238e-18, -0.976428, -0.215843, -3.60971, 5.96658, 8.94797)
+light_color = Color(0.94109, 0.854564, 0.764664, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="Lights" type="Node3D" parent="Root/Mesh/F7Blackpool_Interior"]
+script = SubResource("GDScript_owdxx")
+default_color = Color(0.87, 0.87, 0.87, 1)
+default_light_energy = 5.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, 3.52768e-17, -9.13389e-17, 8.97501e-17, -0.703159, 0.711033, -3.91428e-17, -0.711033, -0.703159, 4.44089e-16, 4.74097, 2.12616)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1.00375e-16, 0.711033, 0.703159, 8.97501e-17, -0.703159, 0.711033, 1, -8.26139e-18, -1.34395e-16, 8.00659, 7.01035, -1.04168)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 14.4426
+spot_angle = 84.32
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(-2.2284e-16, -0.711033, -0.703159, 8.97501e-17, -0.703159, 0.711033, -1, 9.53378e-17, 2.20507e-16, -7.97786, 7.01035, -1.04168)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 14.4426
+spot_angle = 84.32
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, 4.42534e-17, -9.95561e-17, 9.75768e-17, -0.770257, 0.637733, -4.84619e-17, -0.637733, -0.770257, -3.05311e-16, 6.92615, -4.1662)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, 3.32751e-17, 7.88135e-17, -8.01618e-17, 0.686237, 0.727378, -2.98812e-17, -0.727378, 0.686237, -5.82867e-16, 7.04379, -6.38262)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.572
+spot_angle = 84.32
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, 5.41485e-17, -1.06941e-16, 1.04532e-16, -0.830557, 0.556934, -5.86632e-17, -0.556934, -0.830557, -1.9984e-15, 7.12565, -18.5155)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1.19896e-16, 0.556934, 0.830557, 1.04532e-16, -0.830557, 0.556934, 1, 2.00462e-17, -1.57798e-16, 3.39744, 7.12565, -12.7007)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(2.56914e-18, -0.556934, -0.830557, 1.04532e-16, -0.830557, 0.556934, -1, -8.82509e-17, 5.60838e-17, -3.36955, 7.12565, -12.7007)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D9" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -2.08167e-15, 6.16921, -20.1102)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D10" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -2.38698e-15, 6.16921, -22.7942)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D11" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -3.80697, 6.16921, -21.8925)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D12" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -6.40754, 6.16921, -21.8925)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D13" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -8.78788, 6.16921, -21.8925)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D14" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, 2.81842, 6.16921, -21.8925)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D15" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -2.10031, 6.16921, -22.0387)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D16" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -2.839, 6.16921, -25.1627)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D17" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -4.67412, 6.16921, -25.1627)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 2.88454
+spot_angle = 84.32
+
+[node name="SpotLight3D18" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, 0, 3.617, -17.16)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D19" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, 4.22458, 3.617, -17.16)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D20" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, 4.22458, 3.617, -7.07199)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D21" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, 4.22458, 3.617, -11.9451)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D22" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -3.9321, 3.66283, -17.16)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D23" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -3.9321, 3.66283, -7.07199)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D24" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -3.9321, 3.66283, -11.9451)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D25" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, 0.235463, 2.47202, -19.375)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D26" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -2.38408, 3.04084, -22.0976)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D27" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, 0.0246313, 2.33744, -23.7488)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D28" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -4.85939, 6.11351, -35.2151)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D29" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -1.11362e-19, -4.99569e-18, 4.9959e-18, 0.00188496, 0.999998, -1.01945e-19, -0.999998, 0.00188496, -4.85939, 6.11351, -38.4555)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D30" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, 1.69057e-17, 5.70507e-17, -5.77202e-17, 0.508531, 0.861044, -1.44555e-17, -0.861044, 0.508531, -4.85939, 6.84838, -41.2666)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 5.61722
+spot_angle = 84.32
+
+[node name="SpotLight3D31" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, 1.69057e-17, 5.70507e-17, -5.77202e-17, 0.508531, 0.861044, -1.44555e-17, -0.861044, 0.508531, -4.85939, 6.1718, -45.7711)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 3.21378
+spot_angle = 84.32
+
+[node name="SpotLight3D32" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -9.54819e-20, -7.21211e-18, 7.20961e-18, -0.0162134, 0.999869, -2.12402e-19, -0.999869, -0.0162134, -3.60971, 5.96658, 3.42112)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="SpotLight3D33" type="SpotLight3D" parent="Root/Mesh/F7Blackpool_Interior/Lights"]
+transform = Transform3D(1, -9.54819e-20, -7.21211e-18, 7.20961e-18, -0.0162134, 0.999869, -2.12402e-19, -0.999869, -0.0162134, -3.60971, 5.96658, 6.97155)
+light_color = Color(0.87, 0.87, 0.87, 1)
+light_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+spot_range = 6.155
+spot_angle = 84.32
+
+[node name="Buttons" type="Node3D" parent="Root/Mesh/F7Blackpool_Interior"]
+
+[node name="Elevator" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.84561, 1.21708, -4.36579)
+
+[node name="Bottom Left Engi door" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.56624, 1.21708, -4.36579)
+
+[node name="Bottom Right Engi Door" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61133, 1.21708, -4.36579)
+
+[node name="Cargo Ramp" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 1.52889, 1.21708, 2.55281)
+
+[node name="Cargo ramp outside" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(0.931131, 0.0169526, 0.364289, 0.249952, 0.697719, -0.671351, -0.265553, 0.71617, 0.645431, 1.88682, -0.248117, 5.52367)
+
+[node name="Bottom Engi Left" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58405, 1.24627, -4.71286)
+
+[node name="S4 comps" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.89668e-17, -0.486488, -0.873687, -2.97889e-17, 0.873687, -0.486488, 1, 5.95777e-17, 4.57635e-17, -5.47341, 1.24627, -4.88948)
+
+[node name="S4 Comps" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.89668e-17, -0.486488, -0.873687, -2.97889e-17, 0.873687, -0.486488, 1, 5.95777e-17, 4.57635e-17, -5.5061, 1.24627, -18.3876)
+
+[node name="Bottom Engi Right" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.60063, 1.24627, -4.71286)
+
+[node name="S4 Comps Right" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(2.28218e-17, 0.611941, 0.790903, -1.12412e-16, 0.790903, -0.611941, -1, -7.49414e-17, 8.68394e-17, 5.54731, 1.24627, -4.88765)
+
+[node name="S4 Comps Right2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(5.18167e-17, 0.316046, 0.948744, -5.80569e-17, 0.948744, -0.316046, -1, -3.87046e-17, 6.75094e-17, 5.54731, 1.24627, -18.4726)
+
+[node name="entrance room door" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30509, 1.21603, -18.7883)
+
+[node name="s1 comps" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03526, 1.21603, -15.6453)
+
+[node name="lower s3 comps left" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -2.22087, 1.21603, -15.4205)
+
+[node name="lower s3 comps right" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.19916, 1.21603, -15.3596)
+
+[node name="entrance door" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4086, 1.21603, -19.0843)
+
+[node name="outside entrance" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4086, 1.21603, -22.992)
+
+[node name="outside entrance 2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4086, 1.21603, -23.3445)
+
+[node name="rec room main" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35564, 5.0911, -23.5569)
+
+[node name="rec room main2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32528, 5.12476, -23.141)
+
+[node name="eva room" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45489, 5.12476, -23.141)
+
+[node name="eva room2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.76247, 5.12476, -23.141)
+
+[node name="eva hatch" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.63032, 5.12476, -23.141)
+
+[node name="eva hatch2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.35435e-17, 0.272146, -0.962256, 1.66642e-17, 0.962256, 0.272146, 1, -3.33283e-17, 5.661e-17, -10.703, 5.12476, -23.7185)
+
+[node name="hab1" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.09016, 5.12476, -25.0688)
+
+[node name="hab 1" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.40015, 5.12476, -25.0688)
+
+[node name="engineering room top entrance" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -1.37009, 5.12476, -19.4939)
+
+[node name="medbay" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 1.68896, 5.12476, -21.4468)
+
+[node name="medbay2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 2.3953, 5.12476, -23.1251)
+
+[node name="hab 2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.09016, 5.12476, -28.6349)
+
+[node name="hab 2 2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.40015, 5.12476, -28.6349)
+
+[node name="nathroom" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.09862, 5.12476, -30.8307)
+
+[node name="bathrrom" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.43957, 5.12476, -30.8307)
+
+[node name="TopWindows" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.09862, 5.12476, -34.1533)
+
+[node name="TV" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 2.09862, 5.12476, -36.0416)
+
+[node name="FrontWindow" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 1.83273, 5.12476, -36.7672)
+
+[node name="Bridge" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -3.23272, 5.12476, -35.376)
+
+[node name="Bridge2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -3.58889, 5.12476, -35.3268)
+
+[node name="gym" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -1.39578, 5.12476, -25.0688)
+
+[node name="gym2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -1.78914, 5.12476, -25.0437)
+
+[node name="abyss drive" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71117, 5.12476, -18.6719)
+
+[node name="top engi entrance2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29838, 5.12476, -18.6719)
+
+[node name="top s3 compos" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(5.70871e-17, 0.21124, 0.977434, -3.88041e-17, 0.977434, -0.21124, -1, -2.58694e-17, 6.39958e-17, -4.00283, 5.12476, -18.1956)
+
+[node name="top s3 comps" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(4.93486e-17, -0.353834, 0.935308, 6.49984e-17, 0.935308, 0.353834, -1, 4.33323e-17, 6.91548e-17, 3.94757, 5.12476, -18.1435)
+
+[node name="top s3 comps2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(4.93486e-17, -0.353834, 0.935308, 6.49984e-17, 0.935308, 0.353834, -1, 4.33323e-17, 6.91548e-17, 3.94757, 5.12476, -6.76862)
+
+[node name="top s3 comps3" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(5.70871e-17, 0.21124, 0.977434, -3.88041e-17, 0.977434, -0.21124, -1, -2.58694e-17, 6.39958e-17, -4.00283, 5.12476, -6.82988)
+
+[node name="small cargo top door entrance" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.41977, 5.12476, -6.15761)
+
+[node name="big cargo" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77802, 5.12476, -6.15761)
+
+[node name="big cargo2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 1.48004, 5.12476, -5.3531)
+
+[node name="elevator" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 1.48004, 5.12476, -4.63968)
+
+[node name="small cargo door" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -1.53561, 5.12476, -5.25642)
+
+[node name="entrance rer" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, -2.50176, 5.21892, 1.99397)
+
+[node name="entrance rear" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2.66693, 5.21892, 3.25455)
+
+[node name="outside" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2.66693, 5.21892, 7.50449)
+
+[node name="outside2" parent="Root/Mesh/F7Blackpool_Interior/Buttons" instance=ExtResource("9_6r2qj")]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -2.66693, 5.21892, 8.71703)
+
+[node name="Decals" type="Node3D" parent="Root"]
+
+[node name="Decal4" type="Decal" parent="Root/Decals"]
+transform = Transform3D(3.355, -4.10868e-16, 4.10869e-16, 4.1087e-16, -2.05434e-16, -3.355, 4.1087e-16, 3.35499, -2.05434e-16, 0.152355, 6.97568, 38.1347)
 layers = 512
-size = Vector3(3.727, 0.363732, 2)
-texture_albedo = ExtResource("5_s10fs")
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("7_1qwsi")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal5" type="Decal" parent="Root/Decals"]
+transform = Transform3D(1.25793e-32, 3.35499, 2.05434e-16, -2.05435e-16, 2.05434e-16, -3.355, -3.355, 0, 2.05434e-16, 3.07455, 5.251, 38.6071)
+layers = 512
+size = Vector3(1, 0.355, 1)
+texture_albedo = ExtResource("8_jqmlt")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal6" type="Decal" parent="Root/Decals"]
+transform = Transform3D(-3.355, 2.05434e-16, 2.05434e-16, -2.05435e-16, 2.05434e-16, -3.355, -2.05435e-16, -3.35499, -2.05434e-16, 4.9073, 5.60638, 42.0254)
+layers = 512
+size = Vector3(0.1, 0.05, 0.1)
+texture_albedo = ExtResource("7_1qwsi")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal7" type="Decal" parent="Root/Decals"]
+transform = Transform3D(-3.355, 2.05434e-16, 2.05434e-16, -2.05435e-16, 2.05434e-16, -3.355, -2.05435e-16, -3.35499, -2.05434e-16, 4.9073, 5.27219, 44.3862)
+layers = 512
+size = Vector3(0.1, 0.05, 0.1)
+texture_albedo = ExtResource("7_1qwsi")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal8" type="Decal" parent="Root/Decals"]
+transform = Transform3D(-3.355, 2.05434e-16, 2.05434e-16, -2.05435e-16, 2.05434e-16, -3.355, -2.05435e-16, -3.35499, -2.05434e-16, 4.9073, 4.75038, 45.8316)
+layers = 512
+size = Vector3(0.1, 0.05, 0.1)
+texture_albedo = ExtResource("7_1qwsi")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal9" type="Decal" parent="Root/Decals"]
+transform = Transform3D(-3.355, 2.05434e-16, 2.05434e-16, -2.05435e-16, 2.05434e-16, -3.355, -2.05435e-16, -3.35499, -2.05434e-16, 4.9073, 5.02599, 43.4807)
+layers = 512
+size = Vector3(0.1, 0.05, 0.1)
+texture_albedo = ExtResource("7_1qwsi")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal10" type="Decal" parent="Root/Decals"]
+transform = Transform3D(3.355, 2.05434e-16, -2.05434e-16, -2.05435e-16, 2.05434e-16, -3.355, -2.05435e-16, 3.35499, 2.05434e-16, 4.9073, 5.2731, 44.5767)
+layers = 512
+size = Vector3(0.1, 0.05, 0.1)
+texture_albedo = ExtResource("7_1qwsi")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal11" type="Decal" parent="Root/Decals"]
+transform = Transform3D(3.355, 2.05434e-16, -2.05434e-16, -2.05435e-16, 2.05434e-16, -3.355, -2.05435e-16, 3.35499, 2.05434e-16, 4.9073, 5.54597, 42.1806)
+layers = 512
+size = Vector3(0.1, 0.05, 0.1)
+texture_albedo = ExtResource("7_1qwsi")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal12" type="Decal" parent="Root/Decals"]
+transform = Transform3D(3.355, -4.10868e-16, 4.10869e-16, 1.09427e-16, -1.88312, -2.77666, 5.7066e-16, 2.77666, -1.88312, 0.0272788, 1.41282, 33.148)
+layers = 512
+size = Vector3(1, 0.3, 1)
+texture_albedo = ExtResource("7_1qwsi")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal13" type="Decal" parent="Root/Decals"]
+transform = Transform3D(3.355, 0, 2.51585e-32, 2.51585e-32, -2.05434e-16, -3.355, 0, 3.35499, -2.05434e-16, -0.0186455, 2.39744, 24.906)
+layers = 512
+size = Vector3(0.5, 0.1, 0.5)
+texture_albedo = ExtResource("8_jqmlt")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal14" type="Decal" parent="Root/Decals"]
+transform = Transform3D(-0.599789, 3.30067, -0.0429197, 0.217453, -0.00401957, -3.34794, -3.29379, -0.601307, -0.213213, 2.98359, 4.88472, 44.117)
+layers = 512
+size = Vector3(0.6, 0.01, 0.6)
+texture_albedo = ExtResource("8_jqmlt")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Colored Decals" type="Node3D" parent="Root"]
+
+[node name="Decal" type="Decal" parent="Root/Colored Decals"]
+transform = Transform3D(0.447347, -1.52772, -2.95329, 0.141172, 2.98594, -1.52323, 3.32205, 0.0788353, 0.462422, -14.427, 6.94111, 3.73086)
+layers = 512
+size = Vector3(3.727, 1, 3.727)
+texture_albedo = ExtResource("5_j1hve")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal2" type="Decal" parent="Root/Colored Decals"]
+transform = Transform3D(0.696623, 1.46516, 2.93667, 0.141172, 2.98594, -1.52323, -3.27885, 0.439846, 0.55834, 8.31337, 8.38645, 25.9367)
+layers = 512
+size = Vector3(4, 0.579926, 4)
+texture_albedo = ExtResource("6_8et2g")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal3" type="Decal" parent="Root/Colored Decals"]
+transform = Transform3D(-3.355, -7.62461e-32, -4.10869e-16, 3.09569e-16, -2.20593, -2.52782, -2.7015e-16, -2.52782, 2.20593, 0.0216927, 5.67539, -12.0877)
+layers = 512
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("5_j1hve")
 upper_fade = 2.68082e-05
 lower_fade = 0.000336533

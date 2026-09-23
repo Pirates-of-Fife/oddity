@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://da1uk1nr8o10v"
-path="res://.godot/imported/F7Blackpool_Paint.glb-6fb2c4db3b2729e59658015f48b29084.scn"
+uid="uid://b8xp372futp0"
+path="res://.godot/imported/F7_BigDoor.glb-1cbeed1cf1a783882b8293391162a721.scn"
 
 [deps]
 
-source_file="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Paint.glb"
-dest_files=["res://.godot/imported/F7Blackpool_Paint.glb-6fb2c4db3b2729e59658015f48b29084.scn"]
+source_file="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7_BigDoor.glb"
+dest_files=["res://.godot/imported/F7_BigDoor.glb-1cbeed1cf1a783882b8293391162a721.scn"]
 
 [params]
 
@@ -33,14 +33,23 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"OXPY_Blackpool_Paint": {
+"OXPY_Doors": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/material/OXPY_Paint.material"
+"use_external/path": "res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/material/OXPY_Doors.material"
 }
 },
 "nodes": {
-"PATH:HullPaint": {
-"mesh_instance/layers": 513
+"PATH:External": {
+"import/skip_import": true
+},
+"PATH:Interior": {
+"import/skip_import": true
+},
+"PATH:Landing Gear": {
+"import/skip_import": true
+},
+"PATH:TopEngiDoor": {
+"mesh_instance/layers": 257
 }
 }
 }

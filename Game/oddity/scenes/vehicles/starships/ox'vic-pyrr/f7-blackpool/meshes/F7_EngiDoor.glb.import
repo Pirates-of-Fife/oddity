@@ -1,0 +1,60 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://r5yofmud81rp"
+path="res://.godot/imported/F7_EngiDoor.glb-6407360502fe8bc17479f9a48eab5acc.scn"
+
+[deps]
+
+source_file="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7_EngiDoor.glb"
+dest_files=["res://.godot/imported/F7_EngiDoor.glb-6407360502fe8bc17479f9a48eab5acc.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"materials": {
+"OXPY_Doors": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/material/OXPY_Doors.material"
+}
+},
+"nodes": {
+"PATH:DoorRoot/EngiDoorL": {
+"mesh_instance/layers": 257
+},
+"PATH:DoorRoot/EngiDoorR": {
+"mesh_instance/layers": 257
+},
+"PATH:External": {
+"import/skip_import": true
+},
+"PATH:Interior": {
+"import/skip_import": true
+},
+"PATH:Landing Gear": {
+"import/skip_import": true
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

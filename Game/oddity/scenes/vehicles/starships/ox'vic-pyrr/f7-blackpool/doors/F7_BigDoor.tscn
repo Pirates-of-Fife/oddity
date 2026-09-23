@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpa0ysynl0b7l"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_lmg21"]
+[ext_resource type="PackedScene" uid="uid://b8xp372futp0" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7_BigDoor.glb" id="2_1kwas"]
+[ext_resource type="Texture2D" uid="uid://cm2y4wivnv2ab" path="res://images/F7 White.png" id="3_oduop"]
+
+[sub_resource type="Animation" id="Animation_vwwhv"]
+resource_name = "open"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.5994, 0.7326, 0.8991, 2.997),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.129502, 0), Vector3(0, 0.1, 0), Vector3(0, 0.129502, 0), Vector3(0, 3.26183, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nxla4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e7qdk"]
+resource_name = "close"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 2.1645, 2.2977, 2.4642, 2.997),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.26183, 0), Vector3(0, 0.129502, 0), Vector3(0, 0.1, 0), Vector3(0, 0.129502, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ok5e2"]
+_data = {
+"RESET": SubResource("Animation_nxla4"),
+"close": SubResource("Animation_e7qdk"),
+"open": SubResource("Animation_vwwhv")
+}
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hm3qp"]
+points = PackedVector3Array(-1.5, 0, -0.15, 1.5, 0, -0.15, -1.5, 0, 0.15, -1.5, 3.3, -0.15, 1.5, 0, 0.15, 1.5, 3.3, -0.15, -1.5, 3.3, 0.15, 1.5, 3.3, 0.15)
+
+[node name="F7BigDoor" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+collision_layer = 1024
+collision_mask = 1024
+script = ExtResource("1_lmg21")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ok5e2")
+}
+
+[node name="Door" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_hm3qp")
+
+[node name="F7_BigDoor" parent="Door" instance=ExtResource("2_1kwas")]
+
+[node name="Decal" type="Decal" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 6.12323e-17, -1, 0, 1.13636, 6.95822e-17, 0.0153617, 1.97813, 0.0235089)
+layers = 256
+size = Vector3(1.5, 0.04, 1.5)
+texture_albedo = ExtResource("3_oduop")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+
+[node name="Decal2" type="Decal" parent="Door"]
+transform = Transform3D(-1, -1.39164e-16, -8.52136e-33, 0, 6.12323e-17, -1, 1.22465e-16, -1.13636, -6.95822e-17, 0.0153617, 1.97813, -0.00834033)
+layers = 256
+size = Vector3(1.5, 0.04, 1.5)
+texture_albedo = ExtResource("3_oduop")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
