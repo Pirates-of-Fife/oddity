@@ -1,5 +1,9 @@
 extends Node3D
 
+func _ready() -> void:
+	$Top.interacted.connect(_on_top_interacted)
+	$Bottom.interacted.connect(_on_bottom_interacted)
+
 func _on_bottom_interacted(player:Player, control_entity:ControlEntity) -> void:
 	control_entity.global_position = $Top.global_position
 
