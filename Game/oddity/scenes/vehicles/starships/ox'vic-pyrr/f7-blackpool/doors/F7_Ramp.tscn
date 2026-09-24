@@ -1,0 +1,191 @@
+[gd_scene load_steps=19 format=3 uid="uid://dj4fmtyq7hm1p"]
+
+[ext_resource type="Script" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/doors/F7Ramp.gd" id="1_vl7sf"]
+[ext_resource type="PackedScene" uid="uid://qxnxngnywpxj" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7CargoRamp.glb" id="2_rp1y4"]
+[ext_resource type="PackedScene" uid="uid://b3tcxamb4qkfg" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7CargoRampInner.glb" id="3_lhrro"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wkpw6"]
+points = PackedVector3Array(0.427944, -0.104512, -0.0523846, 3.42794, -0.104512, -0.0523846, 0.427944, 0.00035236, 0.0700812, 0.427944, -0.0984907, -0.0910293, 3.42794, -0.0984907, -0.0910293, 3.42794, 0.00035236, 0.0700812, 0.427944, 0.158903, 0.245343, 0.427944, 0.00035236, -0.090485, 3.42794, 0.00035236, -0.090485, 3.42794, 0.158903, 0.245343, 0.427944, 4.88581, 5.46946, 0.427944, 0.163418, 0.0858656, 3.42794, 0.163418, 0.0858656, 3.42794, 4.88581, 5.46946, 0.709267, 5.00071, 5.36495, 0.427944, 5.02078, 5.34645, 0.427944, 4.30379, 4.56974, 3.42794, 4.30379, 4.56974, 3.42794, 5.02078, 5.34645, 3.14633, 5.00071, 5.36495)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kt0dj"]
+points = PackedVector3Array(-0.227715, -0.0743143, -0.115789, 2.5488, -0.0743143, -0.115789, -0.227715, -0.0443519, -0.029976, -0.227715, 1.45098, 1.53573, 2.5488, -0.0443519, -0.029976, 2.5488, 1.45098, 1.53573, -0.227715, 0.0681812, 0.0945293, -0.227715, 2.97627, 3.18763, 2.5488, 0.0681812, 0.0945293, 2.5488, 2.97627, 3.18763, -0.227715, 0.450376, 0.517081, -0.227715, 3.36927, 3.61324, 2.5488, 0.450376, 0.517081, 2.5488, 3.36927, 3.61324, -0.227715, 1.93456, 2.15749, -0.227715, 3.48494, 3.73851, 2.5488, 1.93456, 2.15749, 2.5488, 3.48494, 3.73851, -0.227715, 2.42929, 2.70416, -0.227715, 3.41909, 3.79789, 2.5488, 2.42929, 2.70416, 2.5488, 3.41909, 3.79789)
+
+[sub_resource type="Animation" id="Animation_akeuf"]
+resource_name = "open"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ramp:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 2.3976, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.0472, 0, 0), Vector3(1.18682, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ramp/F7CargoRamp/InnerRamp:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 2, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.0678394, 2.54232, 2.89942)]
+}
+
+[sub_resource type="Animation" id="Animation_wj3ae"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ramp:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ramp/F7CargoRamp/InnerRamp:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mal2q"]
+resource_name = "close"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ramp:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.9657, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.18682, 0, 0), Vector3(1.0472, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ramp/F7CargoRamp/InnerRamp:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.9657, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0678394, 2.54232, 2.89942), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wep4g"]
+_data = {
+"RESET": SubResource("Animation_wj3ae"),
+"close": SubResource("Animation_mal2q"),
+"open": SubResource("Animation_akeuf")
+}
+
+[sub_resource type="Curve" id="Curve_ehrbg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dfi17"]
+curve = SubResource("Curve_ehrbg")
+
+[sub_resource type="Gradient" id="Gradient_g8dfp"]
+offsets = PackedFloat32Array(0, 0.170213, 0.41844, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.244776, 0.244776, 0.244776, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4noer"]
+gradient = SubResource("Gradient_g8dfp")
+
+[sub_resource type="Curve" id="Curve_iio8r"]
+_data = [Vector2(0, 0.593407), 0.0, 0.0, 0, 0, Vector2(0.526627, 0.186813), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h558v"]
+curve = SubResource("Curve_iio8r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rwa8t"]
+resource_local_to_scene = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.1, 1)
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 0.1
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.9
+scale_curve = SubResource("CurveTexture_h558v")
+color_ramp = SubResource("GradientTexture1D_4noer")
+alpha_curve = SubResource("CurveTexture_dfi17")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oeuv4"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.145098)
+
+[sub_resource type="SphereMesh" id="SphereMesh_75wvi"]
+material = SubResource("StandardMaterial3D_oeuv4")
+radial_segments = 12
+rings = 6
+
+[node name="F7Ramp" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("1_vl7sf")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Ramp" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.72627, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_wkpw6")
+
+[node name="F7CargoRamp" parent="Ramp" instance=ExtResource("2_rp1y4")]
+
+[node name="InnerRamp" type="StaticBody3D" parent="Ramp/F7CargoRamp"]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ramp/F7CargoRamp/InnerRamp"]
+transform = Transform3D(0.708901, 0, 0, 0, 0.708901, 0, 0, 0, 0.708901, 1.18525, 2.28828, 2.46758)
+shape = SubResource("ConvexPolygonShape3D_kt0dj")
+
+[node name="F7CargoRampInner" parent="Ramp/F7CargoRamp/InnerRamp" instance=ExtResource("3_lhrro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18525, 2.28828, 2.46758)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wep4g")
+}
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120949, 0.0662971, -0.0873393)
+emitting = false
+amount = 300
+lifetime = 7.0
+fixed_fps = 15
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_rwa8t")
+draw_pass_1 = SubResource("SphereMesh_75wvi")
+
+[connection signal="openable_closed" from="." to="." method="_on_openable_closed"]
+[connection signal="openable_closing" from="." to="." method="_on_openable_closing"]
+[connection signal="openable_opened" from="." to="." method="_on_openable_opened"]
+[connection signal="openable_opening" from="." to="." method="_on_openable_opening"]

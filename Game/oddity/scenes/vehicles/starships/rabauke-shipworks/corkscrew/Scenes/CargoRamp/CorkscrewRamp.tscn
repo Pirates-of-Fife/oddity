@@ -51,22 +51,6 @@ material = SubResource("StandardMaterial3D_oeuv4")
 radial_segments = 12
 rings = 6
 
-[sub_resource type="Animation" id="Animation_8p6r2"]
-resource_name = "open"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RampCollider:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 4.8618, 4.995),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(1.19381, 0, 0), Vector3(1.14145, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_s5yf1"]
 length = 0.001
 tracks/0/type = "value"
@@ -96,6 +80,22 @@ tracks/0/keys = {
 "transitions": PackedFloat64Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(1.14145, 0, 0), Vector3(1.19381, 0, 0), Vector3(-0.0294652, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8p6r2"]
+resource_name = "open"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RampCollider:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 4.8618, 4.995),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.19381, 0, 0), Vector3(1.14145, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u7l27"]
@@ -174,7 +174,6 @@ libraries = {
 }
 
 [node name="RampCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_xi66a")
 
 [node name="Ramp" type="MeshInstance3D" parent="RampCollider"]
