@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://7wyl777r3bfm"]
+[gd_scene load_steps=114 format=3 uid="uid://7wyl777r3bfm"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/F7-Blackpool.gd" id="1_cqu6p"]
 [ext_resource type="Resource" uid="uid://b5ot5wjf8fc8t" path="res://resources/resources/trade/trade-items/starships/F7BlackpoolTradeResource.tres" id="2_fx81g"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://04hhdok1i0y5" path="res://classes/module/component/component-types/shield/TestShield.tscn" id="17_i6sk1"]
 [ext_resource type="PackedScene" uid="uid://c7ivc3wbirvqp" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7BlackpoolShield.glb" id="18_kcdqw"]
 [ext_resource type="PackedScene" uid="uid://dj4fmtyq7hm1p" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/doors/F7_Ramp.tscn" id="19_hbvq6"]
+[ext_resource type="PackedScene" uid="uid://cfviif1scwhwg" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/landing-gear/F7_FrontLandingGear.tscn" id="22_iwfjc"]
 
 [sub_resource type="GDScript" id="GDScript_owdxx"]
 resource_name = "InternalLights"
@@ -414,7 +415,6 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0.0711
 interactables = [NodePath("../../Buttons/big cargo"), NodePath("../../Buttons/big cargo2")]
 
 [node name="F7FrontBlastShield" parent="Mesh/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("10_qc6pk")]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 interactables = [NodePath("../../Buttons/FrontWindow")]
 
 [node name="F7TopBlastDoors" parent="Mesh/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_0mocw")]
@@ -1766,6 +1766,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_cu8j3")
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0.360851, 3.91325, 1.76405)
 visible = false
 shape = SubResource("ConcavePolygonShape3D_iwqhj")
+
+[node name="Landing Gear" type="Node3D" parent="."]
+
+[node name="F7FrontLandingGear" parent="Landing Gear" instance=ExtResource("22_iwfjc")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
 [editable path="Mesh/Mesh/F7Blackpool_Paint"]
 [editable path="Shield/F7BlackpoolShield"]
