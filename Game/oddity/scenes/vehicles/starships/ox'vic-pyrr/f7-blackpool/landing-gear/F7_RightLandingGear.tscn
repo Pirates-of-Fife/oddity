@@ -76,7 +76,7 @@ tracks/5/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0.0175636)]
+"values": [Vector3(0, 0, -2.16668)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -88,7 +88,7 @@ tracks/6/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(0, 0, -0.0198075)]
+"values": [Vector3(0, 0, 2.26041)]
 }
 
 [sub_resource type="Animation" id="Animation_t0636"]
@@ -277,6 +277,7 @@ _data = {
 [node name="F7RightLandingGear" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_grga1")
 animation_player = NodePath("AnimationPlayer")
+force_state = true
 
 [node name="F7RearLandingGear" parent="." instance=ExtResource("2_3mjd3")]
 
@@ -293,10 +294,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.479712, -4.24715, -0.983949
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0308877, -0.0112089, 0.00963353)
 
 [node name="ladning gear rr" parent="F7RearLandingGearRightFlaps/Empty_002" index="0"]
-transform = Transform3D(0.999846, -0.0175627, 0, 0.0175627, 0.999846, 0, 0, 0, 1, -2.60358, -0.756114, 0.34646)
+transform = Transform3D(-0.56124, 0.827653, 0, -0.827653, -0.56124, 0, 0, 0, 1, -2.60358, -0.756114, 0.34646)
 
 [node name="ladning gear rr_001" parent="F7RearLandingGearRightFlaps/Empty_002" index="1"]
-transform = Transform3D(0.999804, 0.0198062, 0, -0.0198062, 0.999804, 0, 0, 0, 1, 2.39511, 0.591906, -0.522946)
+transform = Transform3D(-0.636239, -0.771492, 0, 0.771492, -0.636239, 0, 0, 0, 1, 2.39511, 0.591906, -0.522946)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

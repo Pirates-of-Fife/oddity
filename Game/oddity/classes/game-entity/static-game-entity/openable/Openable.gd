@@ -31,6 +31,9 @@ var state : State
 var starting_state : State = State.CLOSED
 
 @export
+var force_state : bool = false
+
+@export
 var type : Type
 
 @export
@@ -45,9 +48,27 @@ var open_sound : AudioStreamPlayer3D
 @export
 var close_sound : AudioStreamPlayer3D
 
+var og_vol_open : float
+var og_vol_close : float
+
 func _ready() -> void:
 	animation_player.animation_finished.connect(on_animation_player_animation_finished)
 	animation_player.animation_changed.connect(on_animation_player_animation_changed)
+	
+	if force_state:
+		if open_sound != null and close_sound != null:
+			og_vol_open = open_sound.volume_db
+			og_vol_close = close_sound.volume_db
+			
+			open_sound.volume_db = -10000
+			close_sound.volume_db = -10000
+		
+		if starting_state == State.OPEN:
+			animation_player.speed_scale = 1000000
+			open()
+		elif starting_state == State.CLOSED:
+			animation_player.speed_scale = 1000000
+			close()
 	
 	state = starting_state
 	
@@ -79,7 +100,7 @@ func close() -> void:
 	
 	elif state == State.OPENING:
 		animation_player.queue("close")
-		
+				
 func toggle_open_state() -> void:
 	if state == State.OPEN or state == State.OPENING:
 		close()
@@ -104,7 +125,13 @@ func on_animation_player_animation_finished(anim_name : String) -> void:
 	elif anim_name == "close":
 		state = State.CLOSED
 		openable_closed.emit()
-		
+	
+	animation_player.speed_scale = 1
+	
+	if open_sound != null and close_sound != null:
+		open_sound.volume_db = og_vol_open
+		close_sound.volume_db = og_vol_close
+	
 func on_animation_player_animation_changed(old_name : String, new_name : String) -> void:
 	if new_name == "open" and old_name == "close":
 		state = State.OPENING

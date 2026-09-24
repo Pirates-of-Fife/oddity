@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rrsdv"]
 resource_name = "close"
-length = 0.3
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -32,7 +32,7 @@ tracks/0/path = NodePath("Door:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.2664),
+"times": PackedFloat64Array(0, 0.6993),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
 "values": [Vector3(1.50671, 0, 0), Vector3(0, 0, 0)]
@@ -40,7 +40,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_3jfxj"]
 resource_name = "open"
-length = 0.3
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -48,7 +48,7 @@ tracks/0/path = NodePath("Door:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.2997),
+"times": PackedFloat64Array(0, 0.666),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(1.50671, 0, 0)]

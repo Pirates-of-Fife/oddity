@@ -4,33 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://ba36b7kaaoly6" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7TopLeftBlastShield.glb" id="2_e5nmc"]
 [ext_resource type="PackedScene" uid="uid://dwxf38yqj0ecv" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7TopRightBlastShield.glb" id="3_3ou0w"]
 
-[sub_resource type="Animation" id="Animation_by2an"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("F7TopLeftBlastShield:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.999),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1.19216, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("F7TopRightBlastShield:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 0.999),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.817595, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_q7lr0"]
 length = 0.001
 tracks/0/type = "value"
@@ -43,7 +16,7 @@ tracks/0/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(-1.19216, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -55,7 +28,7 @@ tracks/1/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0.817595, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_m7uqw"]
@@ -85,6 +58,33 @@ tracks/1/keys = {
 "values": [Vector3(0.817595, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_by2an"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7TopLeftBlastShield:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.19216, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("F7TopRightBlastShield:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.817595, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ltfqe"]
 _data = {
 "RESET": SubResource("Animation_q7lr0"),
@@ -100,8 +100,10 @@ animation_player = NodePath("AnimationPlayer")
 starting_state = 0
 
 [node name="F7TopLeftBlastShield" parent="." instance=ExtResource("2_e5nmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19216, 0, 0)
 
 [node name="F7TopRightBlastShield" parent="." instance=ExtResource("3_3ou0w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.817595, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

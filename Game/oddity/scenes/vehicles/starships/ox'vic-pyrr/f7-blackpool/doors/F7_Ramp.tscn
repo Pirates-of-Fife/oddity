@@ -100,26 +100,26 @@ _data = {
 "open": SubResource("Animation_akeuf")
 }
 
-[sub_resource type="Curve" id="Curve_ehrbg"]
+[sub_resource type="Curve" id="Curve_ikf5h"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_dfi17"]
-curve = SubResource("Curve_ehrbg")
+curve = SubResource("Curve_ikf5h")
 
-[sub_resource type="Gradient" id="Gradient_g8dfp"]
+[sub_resource type="Gradient" id="Gradient_5abeh"]
 offsets = PackedFloat32Array(0, 0.170213, 0.41844, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.244776, 0.244776, 0.244776, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4noer"]
-gradient = SubResource("Gradient_g8dfp")
+gradient = SubResource("Gradient_5abeh")
 
-[sub_resource type="Curve" id="Curve_iio8r"]
+[sub_resource type="Curve" id="Curve_46tie"]
 _data = [Vector2(0, 0.593407), 0.0, 0.0, 0, 0, Vector2(0.526627, 0.186813), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_h558v"]
-curve = SubResource("Curve_iio8r")
+curve = SubResource("Curve_46tie")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rwa8t"]
 resource_local_to_scene = true

@@ -3,22 +3,6 @@
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_80gp1"]
 [ext_resource type="PackedScene" uid="uid://d0bswbb4j64f0" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7FrontBlastShield.glb" id="2_qmgcv"]
 
-[sub_resource type="Animation" id="Animation_0sks3"]
-resource_name = "open"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("F7FrontBlastShield:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.166667, 0.5994, 1.4985),
-"transitions": PackedFloat64Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0.0501074, 0), Vector3(0, 1.7861, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_fmt2h"]
 length = 0.001
 tracks/0/type = "value"
@@ -31,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 1.7861, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_mjk0q"]
@@ -50,6 +34,22 @@ tracks/0/keys = {
 "values": [Vector3(0, 1.7861, 0), Vector3(0, 0.0501074, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_0sks3"]
+resource_name = "open"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7FrontBlastShield:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.166667, 0.5994, 1.4985),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0.0501074, 0), Vector3(0, 1.7861, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u4i5l"]
 _data = {
 "RESET": SubResource("Animation_fmt2h"),
@@ -65,7 +65,7 @@ animation_player = NodePath("AnimationPlayer")
 starting_state = 0
 
 [node name="F7FrontBlastShield" parent="." instance=ExtResource("2_qmgcv")]
-transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 1.7861, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

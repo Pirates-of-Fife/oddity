@@ -348,6 +348,7 @@ _data = {
 [node name="F7LeftLandingGear" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_ymrqg")
 animation_player = NodePath("AnimationPlayer")
+force_state = true
 
 [node name="F7RearLandingGearRightFlaps" type="Node3D" parent="."]
 
