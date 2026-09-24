@@ -1,96 +1,78 @@
-[gd_scene load_steps=8 format=3 uid="uid://cciswgt7ejw71"]
+[gd_scene load_steps=14 format=4 uid="uid://cciswgt7ejw71"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_ymrqg"]
-[ext_resource type="PackedScene" uid="uid://dopkpsdjftlux" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7RearLandingGearLeftFlaps.glb" id="3_qiben"]
+[ext_resource type="Material" uid="uid://cy8drrp0uo62t" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/material/OXPY_LandingGear.material" id="2_yqbxi"]
 [ext_resource type="PackedScene" uid="uid://cbjadl72l46n3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7RearLandingGear.glb" id="4_frtuf"]
 
-[sub_resource type="Animation" id="Animation_t0636"]
-resource_name = "close"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("F7RearLandingGear/Cube_098:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 2.2977),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.91637)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("F7RearLandingGear/Cube_098/Cube_097:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 2.2977),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.56207)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("F7RearLandingGear/Cube_098/Cube_097/Cylinder_027:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat64Array(0, 0.7992, 1.3986, 2.4309),
-"transitions": PackedFloat64Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.71562), Vector3(0, 0, 1.16658)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("F7RearLandingGear/Cube_098/Cube_097/Cylinder_027/Cylinder_028:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat64Array(0, 0.3996, 1.0323, 1.3986, 1.8315, 2.4642),
-"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.366938), Vector3(0, 0, 0.523407), Vector3(0, 0, -0.752342), Vector3(0, 0, -1.45379), Vector3(0, 0, -2.11174)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("F7RearLandingGear/Cube_098/Cube_097/Rear Landing Foot:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat64Array(0, 1.6983, 2.5308),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.34389), Vector3(0, 0, -0.234345)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat64Array(0, 2.7306, 3.5964),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, -2.16668), Vector3(0, 0, -2.16668), Vector3(0, 0, 0.0320323)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr_001:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat64Array(0, 2.7639, 3.5631),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 2.26041), Vector3(0, 0, 2.26041), Vector3(0, 0, -0.0311521)]
-}
+[sub_resource type="ArrayMesh" id="ArrayMesh_xnof8"]
+_surfaces = [{
+"aabb": AABB(-0.218036, -2.57238, -3.02006, 0.50284, 2.62667, 6.23704),
+"format": 34896613377,
+"index_count": 96,
+"index_data": PackedByteArray("BQAAAAIABQAEAAAAAQAEAAUAAQADAAQAAgAGAAUAAgAHAAYABQAIAAEABQAGAAgADgAJAA0ADgALAAkACgANAAwACgAOAA0ACwAPABAACwAOAA8ADgARAA8ADgAKABEACAAKAAEACAARAAoAAQAMAAMAAQAKAAwAAAALAAIAAAAJAAsAAwANAAQAAwAMAA0ABAAJAAAABAANAAkAAgAQAAcAAgALABAABwAPAAYABwAQAA8ABgARAAgABgAPABEA"),
+"name": "OXPY_LandingGear",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("Rs3/////AAB/aoR3EwQAAKU5BzHs5wAAAABj9kwIAACCb5f7tpAAAFJN6koldQAAWDAkGSdvAACDFzkB7OIAAERQjEAAAAAA//81/9//AABknUl3CQQAAEtsDTDd5wAA1DLj9jQIAABgokr7mZAAACKAUkoadQAA6mIGGDRvAAAESgAA9+IAAOeCij8NAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lxdrp"]
+resource_name = "F7RearLandingGearLeftFlaps_Plane_029"
+_surfaces = [{
+"aabb": AABB(-0.218036, -2.57238, -3.02006, 0.50284, 2.62667, 6.23704),
+"attribute_data": PackedByteArray("gBULcIAVC3AZYM5PERf5RxEX+UdwVRkvcFUZL2IUGnxiFBp8M1SaTTNUmk3hFRVP4RUVT6NcCi+nFTthpxU7YXxeFkF8XhZBUVRJPlFUST5RVEk+UVRJPn8V+zV/Ffs1dFG/PXRRvz0gFN5+IBScJnRRLk3OFtlEzhbZRFFS1y4LFhJwBWHOTwsWEnCcF/ZHqWscL6lrHC+cF/ZH72yeTe9snk3uFCN87hQjfGxkCS9tFhxPbRYcTzMWQ2GdYhZBnWIWQTMWQ2HMbE0+zGxNPsxsTT7MbE0+sG/GPbBvxj0KFu41ChbuNbBvNU2rFOl+qxSPJlkXzETUbt8uWRfMRA=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("FAACAAoAFAAQAAIABgARABUABgANABEACQAYABIACQAcABgAEwAfAAUAEwAZAB8ANAAhAC8ANAAoACEAJQAwACsAJQA1ADAAJwA2ADoAJwAyADYAMwA+ADcAMwAkAD4AHQAjAAMAHQA9ACMABAAtAAwABAAmAC0AAQApAAcAAQAiACkACwAxAA8ACwAsADEADgAgAAAADgAuACAACAA7ABoACAAqADsAGwA5ABcAGwA8ADkAFgA/AB4AFgA4AD8A"),
+"material": ExtResource("2_yqbxi"),
+"name": "OXPY_LandingGear",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("Rs3/////y8BGzf////8Oi0bN/////8LQf2qEdxMEEfl/aoR3EwTs/H9qhHcTBBTRf2qEdxME+tOlOQcx7OcOi6U5BzHs59uJpTkHMeznoNClOQcx7Oe90AAAY/ZMCKbAAABj9kwI7PwAAGP2TAgC1IJvl/u2kMvAgm+X+7aQpsCCb5f7tpDJ0IJvl/u2kPDTUk3qSiV1l9BSTepKJXUe0VJN6koldcTQUk3qSiV16NNYMCQZJ29qxlgwJBknb/rDWDAkGSdvmNBYMCQZJ28f0YMXOQHs4tuJgxc5Aezi+sODFzkB7OKi0ERQjEAAABH5RFCMQAAAasZEUIxAAAAV0f//Nf/f/8vA//81/9//69X//zX/3/8Oi2SdSXcJBBH5ZJ1JdwkEaNVknUl3CQTH0mSdSXcJBOz8S2wNMN3nENZLbA0w3efm1UtsDTDd5w6LS2wNMN3n24nUMuP2NAjP0tQy4/Y0CKbA1DLj9jQI7Pxgokr7mZDLwGCiSvuZkPLVYKJK+5mQvtJgokr7mZCmwCKAUkoadQbWIoBSShp1c9UigFJKGnXt1SKAUkoadbfS6mIGGDRvCNbqYgYYNG901epiBhg0b2rG6mIGGDRv+sMESgAA9+IS1gRKAAD34tuJBEoAAPfi+sPngoo/DQAR+eeCij8NAGnV54KKPw0AasYa+NB2ABEKf2DUkdS5/nx/of+JfvjTitOI0lzY/xAKf2caiIhr1NPSWtSU1Pj7wHai/4l+ktJX2Bv40Hb4+792atSM1HzSYthd1NnSB9SD02LUkNRz0mfYAAuMgcEMI4Jf1NjSCdSC02oah4jBDCKCbdTS0rr+fX8AC4uB+tOJ0xr40HZ3p1NRABEKf7n+fX9SpmpRP6s4U6H/iX7CpTRRdKdOUf8QCn9mGoiIRKtCU/j7wHai/4l+G/jQdnynXFE5qyxT+Pu/drulJ1FZpndReKdWUTSrIlO8pSlRWqZ5UQALjIHBDCOCw6U1UWkaiIjBDCKCuv59f1OmbFEAC4uB")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_xnof8")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_uvf2b"]
+data = PackedVector3Array(-0.0661543, -1.80369, -0.165914, 0.185176, 0.0542972, 3.21697, -0.104806, -2.06931, 2.63046, -0.0661543, -1.80369, -0.165914, 0.000996416, 0.00909229, 0.50566, 0.185176, 0.0542972, 3.21697, -0.00884345, -1.34607, -2.92079, 0.000996416, 0.00909229, 0.50566, -0.0661543, -1.80369, -0.165914, -0.00884345, -1.34607, -2.92079, -0.218036, -0.0442954, -2.81783, 0.000996416, 0.00909229, 0.50566, -0.104806, -2.06931, 2.63046, -0.123074, -2.31441, -0.311884, -0.0661543, -1.80369, -0.165914, -0.104806, -2.06931, 2.63046, -0.171846, -2.55982, 2.50868, -0.123074, -2.31441, -0.311884, -0.0661543, -1.80369, -0.165914, -0.0603677, -1.91007, -3.02006, -0.00884345, -1.34607, -2.92079, -0.0661543, -1.80369, -0.165914, -0.123074, -2.31441, -0.311884, -0.0603677, -1.91007, -3.02006, 0.0336549, -1.80978, -0.166932, 0.284804, 0.0462034, 3.21402, 0.100913, 0.00603515, 0.502943, 0.0336549, -1.80978, -0.166932, -0.00532132, -2.07934, 2.62902, 0.284804, 0.0462034, 3.21402, 0.0911247, -1.34842, -2.92169, 0.100913, 0.00603515, 0.502943, -0.118194, -0.0391662, -2.82014, 0.0911247, -1.34842, -2.92169, 0.0336549, -1.80978, -0.166932, 0.100913, 0.00603515, 0.502943, -0.00532132, -2.07934, 2.62902, -0.0237393, -2.32586, -0.310686, -0.0726436, -2.57238, 2.50972, -0.00532132, -2.07934, 2.62902, 0.0336549, -1.80978, -0.166932, -0.0237393, -2.32586, -0.310686, 0.0336549, -1.80978, -0.166932, 0.0390896, -1.92039, -3.01879, -0.0237393, -2.32586, -0.310686, 0.0336549, -1.80978, -0.166932, 0.0911247, -1.34842, -2.92169, 0.0390896, -1.92039, -3.01879, -0.0603677, -1.91007, -3.02006, 0.0911247, -1.34842, -2.92169, -0.00884345, -1.34607, -2.92079, -0.0603677, -1.91007, -3.02006, 0.0390896, -1.92039, -3.01879, 0.0911247, -1.34842, -2.92169, -0.00884345, -1.34607, -2.92079, -0.118194, -0.0391662, -2.82014, -0.218036, -0.0442954, -2.81783, -0.00884345, -1.34607, -2.92079, 0.0911247, -1.34842, -2.92169, -0.118194, -0.0391662, -2.82014, 0.185176, 0.0542972, 3.21697, -0.00532132, -2.07934, 2.62902, -0.104806, -2.06931, 2.63046, 0.185176, 0.0542972, 3.21697, 0.284804, 0.0462034, 3.21402, -0.00532132, -2.07934, 2.62902, -0.218036, -0.0442954, -2.81783, 0.100913, 0.00603515, 0.502943, 0.000996416, 0.00909229, 0.50566, -0.218036, -0.0442954, -2.81783, -0.118194, -0.0391662, -2.82014, 0.100913, 0.00603515, 0.502943, 0.000996416, 0.00909229, 0.50566, 0.284804, 0.0462034, 3.21402, 0.185176, 0.0542972, 3.21697, 0.000996416, 0.00909229, 0.50566, 0.100913, 0.00603515, 0.502943, 0.284804, 0.0462034, 3.21402, -0.104806, -2.06931, 2.63046, -0.0726436, -2.57238, 2.50972, -0.171846, -2.55982, 2.50868, -0.104806, -2.06931, 2.63046, -0.00532132, -2.07934, 2.62902, -0.0726436, -2.57238, 2.50972, -0.171846, -2.55982, 2.50868, -0.0237393, -2.32586, -0.310686, -0.123074, -2.31441, -0.311884, -0.171846, -2.55982, 2.50868, -0.0726436, -2.57238, 2.50972, -0.0237393, -2.32586, -0.310686, -0.123074, -2.31441, -0.311884, 0.0390896, -1.92039, -3.01879, -0.0603677, -1.91007, -3.02006, -0.123074, -2.31441, -0.311884, -0.0237393, -2.32586, -0.310686, 0.0390896, -1.92039, -3.01879)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tnxeo"]
+_surfaces = [{
+"aabb": AABB(-0.086876, -3.20999, -2.69767, 0.807783, 3.35474, 6.0768),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AwABAAUAAwACAAEABAACAAMABAAAAAIACQAHAAgACQALAAcACgAIAAYACgAJAAgABAAGAAAABAAKAAYAAgAHAAEAAgAIAAcAAAAIAAIAAAAGAAgAAQALAAUAAQAHAAsABAAJAAoABAADAAkAAwALAAkAAwAFAAsA"),
+"name": "OXPY_LandingGear",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("vUH//6/jAADzHojpAAAAALAvxvM/ZwAAd+pvICGJAACe4GEz8/8AAP//pAELFwAApCKI/sLjAAAAAObnFAAAAKwQN/JTZwAAcsvfHi6JAACHwecx//8AAA3hAAAYFwAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mhd7f"]
+resource_name = "F7RearLandingGearLeftFlaps_Plane_030"
+_surfaces = [{
+"aabb": AABB(-0.086876, -3.20999, -2.69767, 0.807783, 3.35474, 6.0768),
+"attribute_data": PackedByteArray("2TlWGzUTn281E59v9hIoUuQ7vDj2EihS9jpnK/Y6ZysXE4VfFxOFXzATATIwEwEyJCvgKCQr4CgxE5cirCp4GfYS6X40E+pANBPqQKwqxzepEp9vqRKfbzNwGCxrEidSaxInUj1ysg6LEoRfixKEX1BxBxxQcQccpRIAMqUSADJ9YYsefWGLHqYSlyJrEul+BWHzLagS6UCoEulABWGlDw=="),
+"format": 34896613399,
+"index_count": 60,
+"index_data": PackedByteArray("DAAEABMADAAGAAQADwAHAA0ADwAAAAcAIAAZABwAIAAnABkAJAAdABYAJAAhAB0AEAAUAAEAEAAjABQACQAYAAUACQAbABgAAgAaAAgAAgAVABoAAwAlABEAAwAXACUADgAeACIADgAKAB4ACwAmAB8ACwASACYA"),
+"material": ExtResource("2_yqbxi"),
+"name": "OXPY_LandingGear",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("vUH//6/jf9e9Qf//r+O9jL1B//+v437C8x6I6QAA5PjzHojpAAAW2PMeiOkAAIjCsC/G8z9nFtiwL8bzP2d/17AvxvM/Z37CsC/G8z9niMJ36m8gIYnQvHfqbyAhiWK6d+pvICGJFth36m8gIYl+157gYTPz/9C8nuBhM/P/f9ee4GEz8/+9jP//pAELF+T4//+kAQsXYrr//6QBCxcW2KQiiP7C472MpCKI/sLjfsKkIoj+wuOs3AAA5ucUAOT4AADm5xQAiMIAAObnFAA73awQN/JTZ37CrBA38lNniMKsEDfyU2c73awQN/JTZ6zccsvfHi6J0Lxyy98eLoliunLL3x4uiTvdcsvfHi6JrNyHwecx///QvIfB5zH//72Mh8HnMf//rNwN4QAAGBfk+A3hAAAYF2K6DeEAABgXO93dMJsjf/0Yu3P26JRlDGxzKzH8IvT16pUrMfwi3TCbI3P26JTz9eqVBQuxaY4L+WcrMfwi3TCbIwMLsWndMJsjf/0Yu2UMa3OOC/lnKzH8In/9GLtz9uiUDtYK2WUMbHP09eqVvdWo2XP26JTz9eqVvdWo2Q7WCtkFC7Fpjgv5Z73VqNkO1grZAwuxaX/9GLsO1grZZQxrc44L+We91ajZ")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_tnxeo")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j7lyo"]
+data = PackedVector3Array(0.652969, -2.78495, 0.557522, 0.0107885, -0.149627, -2.69767, 0.720907, -3.18844, -2.15066, 0.652969, -2.78495, 0.557522, 0.063605, -0.0153985, -0.2468, 0.0107885, -0.149627, -2.69767, 0.621904, -2.53668, 3.37809, 0.063605, -0.0153985, -0.2468, 0.652969, -2.78495, 0.557522, 0.621904, -2.53668, 3.37809, 0.120568, 0.144754, 2.70707, 0.063605, -0.0153985, -0.2468, 0.555087, -2.80538, 0.55872, -0.086876, -0.171025, -2.69573, -0.0342661, -0.0358366, -0.244919, 0.555087, -2.80538, 0.55872, 0.623265, -3.20999, -2.14938, -0.086876, -0.171025, -2.69573, 0.523799, -2.55602, 3.37913, -0.0342661, -0.0358366, -0.244919, 0.0224355, 0.125604, 2.70887, 0.523799, -2.55602, 3.37913, 0.555087, -2.80538, 0.55872, -0.0342661, -0.0358366, -0.244919, 0.621904, -2.53668, 3.37809, 0.0224355, 0.125604, 2.70887, 0.120568, 0.144754, 2.70707, 0.621904, -2.53668, 3.37809, 0.523799, -2.55602, 3.37913, 0.0224355, 0.125604, 2.70887, 0.063605, -0.0153985, -0.2468, -0.086876, -0.171025, -2.69573, 0.0107885, -0.149627, -2.69767, 0.063605, -0.0153985, -0.2468, -0.0342661, -0.0358366, -0.244919, -0.086876, -0.171025, -2.69573, 0.120568, 0.144754, 2.70707, -0.0342661, -0.0358366, -0.244919, 0.063605, -0.0153985, -0.2468, 0.120568, 0.144754, 2.70707, 0.0224355, 0.125604, 2.70887, -0.0342661, -0.0358366, -0.244919, 0.0107885, -0.149627, -2.69767, 0.623265, -3.20999, -2.14938, 0.720907, -3.18844, -2.15066, 0.0107885, -0.149627, -2.69767, -0.086876, -0.171025, -2.69573, 0.623265, -3.20999, -2.14938, 0.621904, -2.53668, 3.37809, 0.555087, -2.80538, 0.55872, 0.523799, -2.55602, 3.37913, 0.621904, -2.53668, 3.37809, 0.652969, -2.78495, 0.557522, 0.555087, -2.80538, 0.55872, 0.652969, -2.78495, 0.557522, 0.623265, -3.20999, -2.14938, 0.555087, -2.80538, 0.55872, 0.652969, -2.78495, 0.557522, 0.720907, -3.18844, -2.15066, 0.623265, -3.20999, -2.14938)
 
 [sub_resource type="Animation" id="Animation_hhxu8"]
 length = 0.001
@@ -179,6 +161,94 @@ tracks/6/keys = {
 "values": [Vector3(0, 0, -0.0198075)]
 }
 
+[sub_resource type="Animation" id="Animation_t0636"]
+resource_name = "close"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7RearLandingGear/Cube_098:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 2.2977),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.91637)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("F7RearLandingGear/Cube_098/Cube_097:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 2.2977),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.56207)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("F7RearLandingGear/Cube_098/Cube_097/Cylinder_027:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0, 0.7992, 1.3986, 2.4309),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.71562), Vector3(0, 0, 1.16658)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("F7RearLandingGear/Cube_098/Cube_097/Cylinder_027/Cylinder_028:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0, 0.3996, 1.0323, 1.3986, 1.8315, 2.4642),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.366938), Vector3(0, 0, 0.523407), Vector3(0, 0, -0.752342), Vector3(0, 0, -1.45379), Vector3(0, 0, -2.11174)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("F7RearLandingGear/Cube_098/Cube_097/Rear Landing Foot:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat64Array(0, 1.6983, 2.5308),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.34389), Vector3(0, 0, -0.234345)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat64Array(0, 2.5, 3.4299),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.0175636), Vector3(0, 0, 0.0175636), Vector3(0, 0, 1.93287)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr_001:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat64Array(0, 2.5, 3.4299),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.346205), Vector3(0, 0, 0.346205), Vector3(0, 0, -1.5668)]
+}
+
 [sub_resource type="Animation" id="Animation_sibo3"]
 resource_name = "open"
 length = 5.1
@@ -249,10 +319,10 @@ tracks/5/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr:
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat64Array(0, 1.7982),
+"times": PackedFloat64Array(0, 1.7316),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0.0175636), Vector3(0, 0, -2.16668)]
+"values": [Vector3(0, 0, 1.93287), Vector3(0, 0, 0.0175636)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -261,13 +331,14 @@ tracks/6/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr_
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat64Array(0, 1.7982),
+"times": PackedFloat64Array(0, 1.7316),
 "transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, -0.0198075), Vector3(0, 0, 2.26041)]
+"values": [Vector3(0, 0, -1.5668), Vector3(0, 0, 0.346205)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ys35f"]
+resource_local_to_scene = true
 _data = {
 "RESET": SubResource("Animation_hhxu8"),
 "close": SubResource("Animation_t0636"),
@@ -278,10 +349,34 @@ _data = {
 script = ExtResource("1_ymrqg")
 animation_player = NodePath("AnimationPlayer")
 
-[node name="F7RearLandingGearLeftFlaps" parent="." instance=ExtResource("3_qiben")]
+[node name="F7RearLandingGearRightFlaps" type="Node3D" parent="."]
 
-[node name="ladning gear rr_003" parent="F7RearLandingGearLeftFlaps/Empty_003" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39511, 0.591906, -0.522946)
+[node name="Empty_002" type="Node3D" parent="F7RearLandingGearRightFlaps"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5208, 0.783895, -1.83392)
+
+[node name="ladning gear rr" type="MeshInstance3D" parent="F7RearLandingGearRightFlaps/Empty_002"]
+transform = Transform3D(0.999846, -0.0175627, 0, 0.0175627, 0.999846, 0, 0, 0, 1, -2.60358, -0.756114, 0.34646)
+mesh = SubResource("ArrayMesh_lxdrp")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="F7RearLandingGearRightFlaps/Empty_002/ladning gear rr"]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="F7RearLandingGearRightFlaps/Empty_002/ladning gear rr/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_uvf2b")
+
+[node name="ladning gear rr_001" type="MeshInstance3D" parent="F7RearLandingGearRightFlaps/Empty_002"]
+transform = Transform3D(0.999804, 0.0198062, 0, -0.0198062, 0.999804, 0, 0, 0, 1, 2.39511, 0.591906, -0.522946)
+mesh = SubResource("ArrayMesh_mhd7f")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="F7RearLandingGearRightFlaps/Empty_002/ladning gear rr_001"]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="F7RearLandingGearRightFlaps/Empty_002/ladning gear rr_001/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_j7lyo")
 
 [node name="F7RearLandingGear" parent="." instance=ExtResource("4_frtuf")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -0.105882, 0, -3.81967)
@@ -300,5 +395,4 @@ libraries = {
 "": SubResource("AnimationLibrary_ys35f")
 }
 
-[editable path="F7RearLandingGearLeftFlaps"]
 [editable path="F7RearLandingGear"]

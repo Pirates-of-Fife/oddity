@@ -417,6 +417,7 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0.0711
 interactables = [NodePath("../../Buttons/big cargo"), NodePath("../../Buttons/big cargo2")]
 
 [node name="F7FrontBlastShield" parent="Mesh/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("10_qc6pk")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 interactables = [NodePath("../../Buttons/FrontWindow")]
 
 [node name="F7TopBlastDoors" parent="Mesh/Mesh/F7Blackpool_Interior/Doors" instance=ExtResource("11_0mocw")]
