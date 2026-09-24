@@ -1337,7 +1337,7 @@ tracks/22/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(-2.0101, 0, 0)]
+"values": [Vector3(0, 0, 0)]
 }
 tracks/23/type = "value"
 tracks/23/imported = false
@@ -2284,7 +2284,7 @@ mesh = SubResource("ArrayMesh_08fbg")
 skeleton = NodePath("")
 
 [node name="SideRailing" type="MeshInstance3D" parent="Ramp1"]
-transform = Transform3D(1, 0, 0, 0, -0.425305, 0.90505, 0, -0.90505, -0.425305, -0.71283, -0.118775, -0.175285)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71283, -0.118775, -0.175285)
 mesh = SubResource("ArrayMesh_gornt")
 skeleton = NodePath("")
 
