@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://7wyl777r3bfm"]
+[gd_scene load_steps=116 format=3 uid="uid://7wyl777r3bfm"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/F7-Blackpool.gd" id="1_cqu6p"]
 [ext_resource type="Resource" uid="uid://b5ot5wjf8fc8t" path="res://resources/resources/trade/trade-items/starships/F7BlackpoolTradeResource.tres" id="2_fx81g"]
@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://c7ivc3wbirvqp" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7BlackpoolShield.glb" id="18_kcdqw"]
 [ext_resource type="PackedScene" uid="uid://dj4fmtyq7hm1p" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/doors/F7_Ramp.tscn" id="19_hbvq6"]
 [ext_resource type="PackedScene" uid="uid://cfviif1scwhwg" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/landing-gear/F7_FrontLandingGear.tscn" id="22_iwfjc"]
+[ext_resource type="PackedScene" uid="uid://cciswgt7ejw71" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/landing-gear/F7_LeftLandingGear.tscn" id="23_r112s"]
+[ext_resource type="PackedScene" uid="uid://cukusx6rytab3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/landing-gear/F7_RightLandingGear.tscn" id="24_x40oi"]
 
 [sub_resource type="GDScript" id="GDScript_owdxx"]
 resource_name = "InternalLights"
@@ -1770,6 +1772,12 @@ shape = SubResource("ConcavePolygonShape3D_iwqhj")
 [node name="Landing Gear" type="Node3D" parent="."]
 
 [node name="F7FrontLandingGear" parent="Landing Gear" instance=ExtResource("22_iwfjc")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="F7LeftLandingGear" parent="Landing Gear" instance=ExtResource("23_r112s")]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="F7RightLandingGear" parent="Landing Gear" instance=ExtResource("24_x40oi")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
 
 [editable path="Mesh/Mesh/F7Blackpool_Paint"]

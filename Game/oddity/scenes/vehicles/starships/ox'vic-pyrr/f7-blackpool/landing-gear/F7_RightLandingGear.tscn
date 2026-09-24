@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cukusx6rytab3"]
+[gd_scene load_steps=8 format=3 uid="uid://cukusx6rytab3"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_grga1"]
 [ext_resource type="PackedScene" uid="uid://cbjadl72l46n3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7RearLandingGear.glb" id="2_3mjd3"]
 [ext_resource type="PackedScene" uid="uid://cwypd2elrwfj8" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7RearLandingGearRightFlaps.glb" id="3_s2lql"]
-[ext_resource type="PackedScene" uid="uid://7wyl777r3bfm" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/F7_Blackpool.tscn" id="4_s353x"]
 
 [sub_resource type="Animation" id="Animation_t0636"]
 resource_name = "close"
@@ -75,10 +74,10 @@ tracks/5/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr:
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat64Array(0, 3.03447, 5.0949),
+"times": PackedFloat64Array(0, 2.7306, 3.5964),
 "transitions": PackedFloat64Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, -1.9079), Vector3(0, 0, -1.9079), Vector3(0, 0, 0.0175636)]
+"values": [Vector3(0, 0, -2.16668), Vector3(0, 0, -2.16668), Vector3(0, 0, 0.0320323)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -87,10 +86,10 @@ tracks/6/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr_
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat64Array(0, 2.3976, 5.0616),
+"times": PackedFloat64Array(0, 2.7639, 3.5631),
 "transitions": PackedFloat64Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 1.55436), Vector3(0, 0, 2.1197), Vector3(0, 0, -0.0198075)]
+"values": [Vector3(0, 0, 2.26041), Vector3(0, 0, 2.26041), Vector3(0, 0, -0.0311521)]
 }
 
 [sub_resource type="Animation" id="Animation_hhxu8"]
@@ -165,7 +164,7 @@ tracks/5/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(0, 0, -1.9079)]
+"values": [Vector3(0, 0, 0.0175636)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -177,7 +176,7 @@ tracks/6/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 1.55436)]
+"values": [Vector3(0, 0, -0.0198075)]
 }
 
 [sub_resource type="Animation" id="Animation_sibo3"]
@@ -250,10 +249,10 @@ tracks/5/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr:
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat64Array(0, 3.03447, 4.662),
-"transitions": PackedFloat64Array(1, 1, 1),
+"times": PackedFloat64Array(0, 1.7982),
+"transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0.0175636), Vector3(0, 0, -1.9079), Vector3(0, 0, -1.9079)]
+"values": [Vector3(0, 0, 0.0175636), Vector3(0, 0, -2.16668)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -262,13 +261,13 @@ tracks/6/path = NodePath("F7RearLandingGearRightFlaps/Empty_002/ladning gear rr_
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat64Array(0, 2.3976, 4.3623),
-"transitions": PackedFloat64Array(1, 1, 1),
+"times": PackedFloat64Array(0, 1.7982),
+"transitions": PackedFloat64Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, -0.0198075), Vector3(0, 0, 2.1197), Vector3(0, 0, 1.55436)]
+"values": [Vector3(0, 0, -0.0198075), Vector3(0, 0, 2.26041)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ys35f"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c37dn"]
 _data = {
 "RESET": SubResource("Animation_hhxu8"),
 "close": SubResource("Animation_t0636"),
@@ -294,17 +293,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.479712, -4.24715, -0.983949
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0308877, -0.0112089, 0.00963353)
 
 [node name="ladning gear rr" parent="F7RearLandingGearRightFlaps/Empty_002" index="0"]
-transform = Transform3D(-0.330756, 0.943716, 0, -0.943716, -0.330756, 0, 0, 0, 1, -2.60358, -0.756114, 0.34646)
+transform = Transform3D(0.999846, -0.0175627, 0, 0.0175627, 0.999846, 0, 0, 0, 1, -2.60358, -0.756114, 0.34646)
 
 [node name="ladning gear rr_001" parent="F7RearLandingGearRightFlaps/Empty_002" index="1"]
-transform = Transform3D(0.0164382, -0.999865, 0, 0.999865, 0.0164382, 0, 0, 0, 1, 2.39511, 0.591906, -0.522946)
-
-[node name="F7Blackpool" parent="." instance=ExtResource("4_s353x")]
-transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -0.183948, 1.77636e-15, -0.0646057)
+transform = Transform3D(0.999804, 0.0198062, 0, -0.0198062, 0.999804, 0, 0, 0, 1, 2.39511, 0.591906, -0.522946)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ys35f")
+"": SubResource("AnimationLibrary_c37dn")
 }
 
 [editable path="F7RearLandingGear"]
