@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnjimu8k4ova5"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/ComponentHatch.gd" id="1_arkqd"]
+[ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="2_lr3mr"]
+[ext_resource type="PackedScene" uid="uid://bi1abri17rx7g" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/component-panels/S3_Top_Left.glb" id="4_6mjce"]
+
+[sub_resource type="Animation" id="Animation_gxegv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S3_Top_Left:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w0rxo"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S3_Top_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.7659, 0.999),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.590616, 1.95232, 0), Vector3(-0.08998, 0.455998, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g46tf"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S3_Top_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.2664, 0.999),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.08998, 0.455998, 0), Vector3(-0.590616, 1.95232, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ef7r1"]
+_data = {
+"RESET": SubResource("Animation_gxegv"),
+"close": SubResource("Animation_w0rxo"),
+"open": SubResource("Animation_g46tf")
+}
+
+[node name="F7TopLeftS3" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
+script = ExtResource("1_arkqd")
+animation_player = NodePath("AnimationPlayer")
+open_sound = NodePath("open")
+close_sound = NodePath("open")
+
+[node name="open" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97636, 5.41799, 12.7133)
+stream = ExtResource("2_lr3mr")
+volume_db = 6.0
+panning_strength = 0.22
+bus = &"Interior"
+
+[node name="S3_Top_Left" parent="." instance=ExtResource("4_6mjce")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ef7r1")
+}

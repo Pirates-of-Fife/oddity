@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://bb0tpd1qpn8c7"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/ComponentHatch.gd" id="1_at6jw"]
+[ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="2_mbqf4"]
+[ext_resource type="PackedScene" uid="uid://d1nhrq8h5v3qa" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/component-panels/S4_Left.glb" id="3_shi6m"]
+
+[sub_resource type="Animation" id="Animation_s378i"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S4_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.914761, 2.8845, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qf8xx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S4_Left:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_doo66"]
+_data = {
+"RESET": SubResource("Animation_qf8xx"),
+"open": SubResource("Animation_s378i")
+}
+
+[node name="F7S4LeftComponentBayHatch" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
+script = ExtResource("1_at6jw")
+animation_player = NodePath("AnimationPlayer")
+open_sound = NodePath("open")
+close_sound = NodePath("open")
+
+[node name="open" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.31101, 1.31152, 11.8463)
+stream = ExtResource("2_mbqf4")
+volume_db = 6.0
+panning_strength = 0.22
+bus = &"Interior"
+
+[node name="S4_Left" parent="." instance=ExtResource("3_shi6m")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_doo66")
+}

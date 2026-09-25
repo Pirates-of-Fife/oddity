@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://0nnicxgbshm8"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/ComponentHatch.gd" id="1_xwior"]
+[ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="2_ikayb"]
+[ext_resource type="PackedScene" uid="uid://b610ys8yx6mxe" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/component-panels/S3_Bottom_Left.glb" id="4_14ag3"]
+
+[sub_resource type="Animation" id="Animation_nir5p"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S3_Bottom_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.70532, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_abve2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S3_Bottom_Left:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ka8h0"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S3_Bottom_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.70532, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7nkoh"]
+_data = {
+"RESET": SubResource("Animation_abve2"),
+"close": SubResource("Animation_ka8h0"),
+"open": SubResource("Animation_nir5p")
+}
+
+[node name="F7BottomS3Left" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
+script = ExtResource("1_xwior")
+animation_player = NodePath("AnimationPlayer")
+open_sound = NodePath("open")
+close_sound = NodePath("open")
+
+[node name="open" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.31101, 1.31152, 11.8463)
+stream = ExtResource("2_ikayb")
+volume_db = 6.0
+panning_strength = 0.22
+bus = &"Interior"
+
+[node name="S3_Bottom_Left" parent="." instance=ExtResource("4_14ag3")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7nkoh")
+}

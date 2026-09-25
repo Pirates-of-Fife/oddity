@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=3 uid="uid://dy2g08gl057bf"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/ComponentHatch.gd" id="1_wilp8"]
+[ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="2_5mipu"]
+[ext_resource type="PackedScene" uid="uid://bc2bkakvrbv4d" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/component-panels/S1_Left.glb" id="3_0sqm5"]
+[ext_resource type="PackedScene" uid="uid://4f0giw8ictjs" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/component-panels/S1_Right.glb" id="4_y8utq"]
+
+[sub_resource type="Animation" id="Animation_e62hv"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S1_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.3663, 0.999),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.928945, 0), Vector3(0, 1.73534, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("S1_Right:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.7659, 0.999),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.23367, 0), Vector3(0, 1.70959, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1fwrl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S1_Left:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("S1_Right:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tomft"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S1_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.5994, 0.8325),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.73534, 0), Vector3(0, 0.928945, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("S1_Right:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.2997, 0.9657),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.70959, 0), Vector3(0, 1.23367, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hlf0e"]
+_data = {
+"RESET": SubResource("Animation_1fwrl"),
+"close": SubResource("Animation_tomft"),
+"open": SubResource("Animation_e62hv")
+}
+
+[node name="F7Size1Hatch" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
+script = ExtResource("1_wilp8")
+animation_player = NodePath("AnimationPlayer")
+open_sound = NodePath("open")
+close_sound = NodePath("open")
+
+[node name="open" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.15746, 1.31152, 9.56895)
+stream = ExtResource("2_5mipu")
+volume_db = 6.0
+panning_strength = 0.22
+bus = &"Interior"
+
+[node name="S1_Left" parent="." instance=ExtResource("3_0sqm5")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="S1_Right" parent="." instance=ExtResource("4_y8utq")]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hlf0e")
+}

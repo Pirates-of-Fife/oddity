@@ -22,6 +22,18 @@ var initialize_area_in_editor : bool :
 	set(value):
 		_initialize_area()
 
+@export
+var usable : bool = true : 
+	set(value):
+		if !value:
+			if module != null:
+				module.can_be_picked_up = false
+		else:
+			if module != null:
+				module.can_be_picked_up = true
+		
+		usable = value 
+
 func _ready() -> void:
 	_dynamic_module_slot_ready()
 

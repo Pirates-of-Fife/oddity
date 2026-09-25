@@ -10,34 +10,6 @@ points = PackedVector3Array(0.427944, -0.104512, -0.0523846, 3.42794, -0.104512,
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kt0dj"]
 points = PackedVector3Array(-0.227715, -0.0743143, -0.115789, 2.5488, -0.0743143, -0.115789, -0.227715, -0.0443519, -0.029976, -0.227715, 1.45098, 1.53573, 2.5488, -0.0443519, -0.029976, 2.5488, 1.45098, 1.53573, -0.227715, 0.0681812, 0.0945293, -0.227715, 2.97627, 3.18763, 2.5488, 0.0681812, 0.0945293, 2.5488, 2.97627, 3.18763, -0.227715, 0.450376, 0.517081, -0.227715, 3.36927, 3.61324, 2.5488, 0.450376, 0.517081, 2.5488, 3.36927, 3.61324, -0.227715, 1.93456, 2.15749, -0.227715, 3.48494, 3.73851, 2.5488, 1.93456, 2.15749, 2.5488, 3.48494, 3.73851, -0.227715, 2.42929, 2.70416, -0.227715, 3.41909, 3.79789, 2.5488, 2.42929, 2.70416, 2.5488, 3.41909, 3.79789)
 
-[sub_resource type="Animation" id="Animation_akeuf"]
-resource_name = "open"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Ramp:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 2.3976, 3.996),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(1.0472, 0, 0), Vector3(1.18682, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Ramp/F7CargoRamp/InnerRamp:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat64Array(0, 2, 3.996),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.0678394, 2.54232, 2.89942)]
-}
-
 [sub_resource type="Animation" id="Animation_wj3ae"]
 length = 0.001
 tracks/0/type = "value"
@@ -91,6 +63,34 @@ tracks/1/keys = {
 "transitions": PackedFloat64Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.0678394, 2.54232, 2.89942), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_akeuf"]
+resource_name = "open"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ramp:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 2.3976, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.0472, 0, 0), Vector3(1.18682, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ramp/F7CargoRamp/InnerRamp:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 2, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.0678394, 2.54232, 2.89942)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wep4g"]

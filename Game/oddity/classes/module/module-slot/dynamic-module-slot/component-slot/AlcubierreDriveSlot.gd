@@ -7,6 +7,9 @@ class_name AlcubierreDriveSlot
 var alcubierre_drive_size : ModuleSize.AlcubierreDriveSize
 
 func _module_fits(module : Module) -> bool:
+	if !usable:
+		return false
+
 	if self.module != null:
 		return false
 

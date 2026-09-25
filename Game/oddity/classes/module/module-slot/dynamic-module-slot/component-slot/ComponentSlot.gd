@@ -7,6 +7,9 @@ class_name ComponentSlot
 var size : ModuleSize.ComponentSize
 
 func _module_fits(module : Module) -> bool:
+	if !usable:
+		return false
+
 	if self.module != null:
 		return false
 
@@ -43,7 +46,7 @@ func _initialize_area() -> void:
 
 	var module_size : ModuleSize = ModuleSize.new()
 
-	box_shape.size = module_size.get_component_size(size) * 1.1
+	box_shape.size = module_size.get_component_size(size) #* 1.1
 
 	var collision_shape : CollisionShape3D = CollisionShape3D.new()
 
