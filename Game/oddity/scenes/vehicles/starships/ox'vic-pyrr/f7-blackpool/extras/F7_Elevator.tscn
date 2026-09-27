@@ -1,0 +1,129 @@
+[gd_scene load_steps=14 format=3 uid="uid://bjkelrdychyc8"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_bb6pn"]
+[ext_resource type="PackedScene" uid="uid://b600q2sgm1vub" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7EvevatorRailing.glb" id="2_e5vq2"]
+[ext_resource type="PackedScene" uid="uid://32b2plldmr5v" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Evevator.glb" id="3_suk5a"]
+[ext_resource type="Texture2D" uid="uid://d044rr2jhbn4d" path="res://images/F7 Color.png" id="4_2cwar"]
+[ext_resource type="PackedScene" uid="uid://b1iigwogxwn63" path="res://scenes/vehicles/starships/rabauke-shipworks/corkscrew/Scenes/Button/InvisibleButton.tscn" id="5_ls6vg"]
+[ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="6_g004j"]
+[ext_resource type="Script" path="res://classes/frame-of-reference/GravityGrid.gd" id="7_fx7py"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hg4to"]
+size = Vector3(0.707739, 1.0844, 0.192368)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f40jj"]
+size = Vector3(3.16233, 2.04019, 1.3213)
+
+[sub_resource type="Animation" id="Animation_ymh07"]
+resource_name = "open"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7Evevator:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.4329, 0.6327, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.294265, 0), Vector3(0, 0.294265, 0), Vector3(0, 3.85767, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nxwte"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7Evevator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0rabj"]
+resource_name = "close"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7Evevator:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 3.0303, 3.33, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.85767, 0), Vector3(0, 0.294265, 0), Vector3(0, 0.294265, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tgrj6"]
+_data = {
+"RESET": SubResource("Animation_nxwte"),
+"close": SubResource("Animation_0rabj"),
+"open": SubResource("Animation_ymh07")
+}
+
+[node name="F7Elevator" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
+script = ExtResource("1_bb6pn")
+animation_player = NodePath("AnimationPlayer")
+interactables = [NodePath("F7Evevator/InvisibleButton")]
+open_sound = NodePath("F7Evevator/open")
+close_sound = NodePath("F7Evevator/open")
+
+[node name="F7EvevatorRailing" parent="." instance=ExtResource("2_e5vq2")]
+
+[node name="F7Evevator" parent="." instance=ExtResource("3_suk5a")]
+
+[node name="Decal2" type="Decal" parent="F7Evevator"]
+transform = Transform3D(3.35501, 0, 0, 0, 3.355, 0, 0, 0, 3.355, 0.28202, 0.0950135, -3.58958)
+layers = 512
+size = Vector3(0.6, 0.0263322, 0.6)
+texture_albedo = ExtResource("4_2cwar")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+distance_fade_enabled = true
+distance_fade_begin = 60.0
+
+[node name="Decal3" type="Decal" parent="F7Evevator"]
+transform = Transform3D(-3.35501, 0, 4.10869e-16, -4.1087e-16, 2.05434e-16, -3.355, -1.07866e-31, -3.355, -2.05434e-16, -0.908522, 0.927581, -2.98481)
+layers = 512
+size = Vector3(0.1, 0.0279351, 0.1)
+texture_albedo = ExtResource("4_2cwar")
+upper_fade = 2.68082e-05
+lower_fade = 0.000336533
+distance_fade_enabled = true
+distance_fade_begin = 60.0
+
+[node name="InvisibleButton" parent="F7Evevator" instance=ExtResource("5_ls6vg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.972534, 0.899536, -3.11875)
+press_delay = 4.0
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="F7Evevator/InvisibleButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0518739, -0.216215, 0.137129)
+shape = SubResource("BoxShape3D_hg4to")
+
+[node name="open" type="AudioStreamPlayer3D" parent="F7Evevator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.69406)
+stream = ExtResource("6_g004j")
+volume_db = 18.0
+pitch_scale = 0.25
+panning_strength = 0.22
+bus = &"Interior"
+
+[node name="GravityGrid" type="Area3D" parent="F7Evevator"]
+script = ExtResource("7_fx7py")
+habitable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="F7Evevator/GravityGrid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21747, 1.05881, -3.60092)
+shape = SubResource("BoxShape3D_f40jj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tgrj6")
+}

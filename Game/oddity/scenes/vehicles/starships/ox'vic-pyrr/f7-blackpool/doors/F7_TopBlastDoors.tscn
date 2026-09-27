@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmhao4vskg5nq"]
+[gd_scene load_steps=9 format=3 uid="uid://bmhao4vskg5nq"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_qk162"]
 [ext_resource type="PackedScene" uid="uid://ba36b7kaaoly6" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7TopLeftBlastShield.glb" id="2_e5nmc"]
 [ext_resource type="PackedScene" uid="uid://dwxf38yqj0ecv" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7TopRightBlastShield.glb" id="3_3ou0w"]
+[ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="4_2dubg"]
 
 [sub_resource type="Animation" id="Animation_q7lr0"]
 length = 0.001
@@ -92,12 +93,14 @@ _data = {
 "open": SubResource("Animation_by2an")
 }
 
-[node name="F7TopBlastDoors" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+[node name="F7TopBlastDoors" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_qk162")
 animation_player = NodePath("AnimationPlayer")
 starting_state = 0
+open_sound = NodePath("open")
+close_sound = NodePath("open")
 
 [node name="F7TopLeftBlastShield" parent="." instance=ExtResource("2_e5nmc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19216, 0, 0)
@@ -109,3 +112,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.817595, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_ltfqe")
 }
+
+[node name="open" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0197176, 7.238, -32.2946)
+stream = ExtResource("4_2dubg")
+volume_db = 6.0
+panning_strength = 0.22
+bus = &"Interior"
