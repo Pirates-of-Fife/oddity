@@ -38,7 +38,23 @@ var size : FrameOfReferenceSize
 var mass_lock : bool = false
 
 @export
-var habitable : bool = false
+var habitable : bool :
+	get:
+		if determine_habitabiliy_from_physics_parents and physics_parent != null:
+			if !(physics_parent is GameEntity):
+				return habitable
+			if physics_parent.active_frame_of_reference == null:
+				return false
+			else:
+				return physics_parent.active_frame_of_reference.habitable
+	
+		return habitable
+	set(value):
+		habitable = value
+
+@export
+var determine_habitabiliy_from_physics_parents : bool = false
+
 
 # INFO: Physics parent gets used for game entity freezing.
 # if a frame of reference has a physics parents, it moves unpredictably, so game entities inside it should freeze so they they remain stable during e.g. a flight on a space ship
