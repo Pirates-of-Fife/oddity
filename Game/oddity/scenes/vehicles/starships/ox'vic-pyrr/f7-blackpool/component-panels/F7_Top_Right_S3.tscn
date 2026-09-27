@@ -4,21 +4,6 @@
 [ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="3_2urjy"]
 [ext_resource type="PackedScene" uid="uid://vpyqo4pyrxo6" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/component-panels/S3_Top_Right.glb" id="4_hbfth"]
 
-[sub_resource type="Animation" id="Animation_4fudq"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("S3_Top_Right:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.1665, 0.999),
-"transitions": PackedFloat64Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.0573311, 0, 0), Vector3(0.618947, 1.96899, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_uamoa"]
 length = 0.001
 tracks/0/type = "value"
@@ -47,6 +32,21 @@ tracks/0/keys = {
 "transitions": PackedFloat64Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0.618947, 1.96899, 0), Vector3(-0.0573311, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4fudq"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S3_Top_Right:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.1665, 0.999),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.0573311, 0, 0), Vector3(0.618947, 1.96899, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_newhf"]

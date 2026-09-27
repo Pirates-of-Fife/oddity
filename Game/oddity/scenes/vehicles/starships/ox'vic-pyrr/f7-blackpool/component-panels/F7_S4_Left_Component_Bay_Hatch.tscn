@@ -1,23 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bb0tpd1qpn8c7"]
+[gd_scene load_steps=8 format=3 uid="uid://bb0tpd1qpn8c7"]
 
 [ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/ComponentHatch.gd" id="1_at6jw"]
 [ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="2_mbqf4"]
 [ext_resource type="PackedScene" uid="uid://d1nhrq8h5v3qa" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/component-panels/S4_Left.glb" id="3_shi6m"]
-
-[sub_resource type="Animation" id="Animation_s378i"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("S4_Left:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.999),
-"transitions": PackedFloat64Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.914761, 2.8845, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_qf8xx"]
 length = 0.001
@@ -34,9 +19,40 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_s378i"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S4_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.914761, 2.8845, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hrm5k"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S4_Left:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0.914761, 2.8845, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_doo66"]
 _data = {
 "RESET": SubResource("Animation_qf8xx"),
+"close": SubResource("Animation_hrm5k"),
 "open": SubResource("Animation_s378i")
 }
 

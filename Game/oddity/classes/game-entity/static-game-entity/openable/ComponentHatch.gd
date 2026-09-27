@@ -9,6 +9,7 @@ var component_slots : Array[DynamicModuleSlot]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	openable_opening.connect(_on_open)
 	openable_closing.connect(_on_close)
 
