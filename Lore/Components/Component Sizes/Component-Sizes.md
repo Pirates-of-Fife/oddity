@@ -107,3 +107,9 @@ Alcubierre Drive: 6m x 3m x 3m
 Abyss Drive: 8m x 4m x 20m
 
 Alcubierre Drive: 8m x 4m x 4m
+
+## Size 7
+
+Abyss Drive: 10m x 5m x 25m
+
+Alcubierre Drive: 10m x 5m x 5m
