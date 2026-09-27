@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctumlwh5vtg3n"]
+
+[ext_resource type="Script" path="res://classes/game-entity/static-game-entity/openable/Openable.gd" id="1_bdhxs"]
+[ext_resource type="PackedScene" uid="uid://crrfixfbusx8" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7_TV.glb" id="2_equk8"]
+[ext_resource type="AudioStream" uid="uid://d4mmqm8fcutx3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/component-panels/component hatch.wav" id="4_8lkwm"]
+
+[sub_resource type="Animation" id="Animation_knppj"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7_TV:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -1.727, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_is0yn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7_TV:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ghsav"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7_TV:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.999),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.727, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5k8oo"]
+_data = {
+"RESET": SubResource("Animation_is0yn"),
+"close": SubResource("Animation_knppj"),
+"open": SubResource("Animation_ghsav")
+}
+
+[node name="F7_Tv" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "open_sound", "close_sound")]
+script = ExtResource("1_bdhxs")
+animation_player = NodePath("AnimationPlayer")
+force_state = true
+open_sound = NodePath("open")
+close_sound = NodePath("open")
+
+[node name="F7_TV" parent="." instance=ExtResource("2_equk8")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5k8oo")
+}
+
+[node name="open" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402786, 3.96682, -33.8324)
+stream = ExtResource("4_8lkwm")
+volume_db = 6.0
+panning_strength = 0.22
+bus = &"Interior"

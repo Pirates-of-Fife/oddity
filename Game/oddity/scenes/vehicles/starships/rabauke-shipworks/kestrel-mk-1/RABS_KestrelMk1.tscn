@@ -1,4 +1,4 @@
-[gd_scene load_steps=206 format=3 uid="uid://24n0p54vbhsm"]
+[gd_scene load_steps=243 format=3 uid="uid://24n0p54vbhsm"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/RABS_KestrelMk1.gd" id="1_pouwl"]
 [ext_resource type="Resource" uid="uid://dryumn61chwql" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/resources/RABS_Kestrel_MK1_Default_Loadout.tres" id="2_jt03q"]
@@ -103,6 +103,7 @@
 [ext_resource type="AudioStream" uid="uid://ftlh5xvnksvd" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/sounds/power_states/starship_power_off.wav" id="77_01wg0"]
 [ext_resource type="PackedScene" uid="uid://bpoau7ueslq3g" path="res://scenes/environment/fire/Fire.tscn" id="78_nmody"]
 [ext_resource type="PackedScene" uid="uid://bkcjtkhnjpavu" path="res://scenes/environment/fire/BigFire.tscn" id="79_ebdjj"]
+[ext_resource type="Material" uid="uid://b6xwyx8uah1e6" path="res://classes/cargo/CargoHighlightMaterial.tres" id="81_se6n7"]
 [ext_resource type="PackedScene" uid="uid://bxqf1dxwfvcbt" path="res://classes/starship/ThrusterAnimationPlayer.tscn" id="81_uj10q"]
 [ext_resource type="PackedScene" uid="uid://dj5emjn3ylomv" path="res://classes/tractor-beam/mesh/AnvakaTractorBeam.tscn" id="83_4jk5f"]
 [ext_resource type="Script" path="res://classes/targeting/RadarSurroundingArea.gd" id="83_etpha"]
@@ -344,6 +345,114 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ho3cq"]
+size = Vector3(2, 2, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vhium"]
+size = Vector3(2, 2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lyoes"]
+size = Vector3(2, 2, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nb5gl"]
+size = Vector3(2, 2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hk63t"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vpp48"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vcy1x"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t1xxx"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m5ti6"]
+size = Vector3(1.5, 1.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sbw4c"]
+size = Vector3(1.5, 1.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n35nv"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3q6ia"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_66j2t"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rglq1"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2r320"]
+size = Vector3(1.5, 1.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pv25o"]
+size = Vector3(1.5, 1.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4qnpj"]
+size = Vector3(1.5, 1.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rprb2"]
+size = Vector3(1.5, 1.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xmvvk"]
+size = Vector3(1.5, 1.5, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uu5he"]
+size = Vector3(1.5, 1.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ug8kx"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r88k8"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u50yo"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ks8rr"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2xka"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ant32"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0rpds"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bie2k"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hut6j"]
+size = Vector3(8, 8, 16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c70jk"]
+size = Vector3(8, 8, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1lhhi"]
+size = Vector3(8, 8, 16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ruvt5"]
+size = Vector3(8, 8, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6i11u"]
+size = Vector3(0.825, 1.65, 0.825)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ccii0"]
+size = Vector3(0.825, 1.65, 0.825)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pycrw"]
+size = Vector3(0.825, 1.65, 4.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7t42l"]
+size = Vector3(0.825, 1.65, 4.4)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_db5yq"]
 points = PackedVector3Array(15.5566, -3.25721, 22.8671, 3.82189, 2.29823, -16.0283, -16.5488, -3.25721, 22.8671, -4.19817, -2.63967, -16.6472, -15.3137, 3.53407, 22.2482, 10.6163, 4.76914, 21.6294, -4.81413, 2.29823, -16.0283, 9.99407, -3.25721, 3.72108, -9.13528, 4.76914, 14.8335, 15.5566, 2.91576, 21.0144, 3.3808, -2.2928, -14.629, -16.5488, 2.91576, 21.0144, -10.9863, -3.25721, 3.72108, 8.76215, 4.76914, 15.4562, -11.6085, 4.76914, 20.3917, 12.4673, 4.15082, 22.2482, 14.3215, -3.25721, 16.6901, 4.43785, 2.29823, -14.7945, -7.2874, 4.76914, 13.5997, -16.5488, -3.25721, 21.0144, 14.3215, 2.91576, 16.6901, -13.4596, 4.15082, 22.2482, 10.6163, -3.25721, 4.95493, 10.6163, 4.76914, 19.7728, -15.3137, 3.53407, 21.0144, 8.14305, 4.76914, 14.8335, -4.19817, 2.91576, -9.23634, -11.6085, 4.76914, 21.6294, 14.3215, 3.53407, 22.2482, 15.5566, -3.25721, 21.0144, -10.3735, 4.76914, 16.6901, -12.8436, -3.25721, 9.27923)
@@ -3515,177 +3624,369 @@ quiet_insert = true
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -6.09151, 1.38761, -0.0192481)
 script = ExtResource("31_fx4iv")
 size = 4
-highlight_box = NodePath("@Node3D@111009/@Area3D@17831/@MeshInstance3D@17833")
+highlight_box = NodePath("@Node3D@111009/@Area3D@187778/@MeshInstance3D@187780")
 area_root = NodePath("@Node3D@111009")
 vehicle = NodePath("../../..")
 id = 21
 
 [node name="@Node3D@111009" type="Node3D" parent="Modules/Components/ComponentSlot"]
 
+[node name="@Area3D@187778" type="Area3D" parent="Modules/Components/ComponentSlot/@Node3D@111009"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187779" type="CollisionShape3D" parent="Modules/Components/ComponentSlot/@Node3D@111009/@Area3D@187778"]
+shape = SubResource("BoxShape3D_ho3cq")
+
+[node name="@MeshInstance3D@187780" type="MeshInstance3D" parent="Modules/Components/ComponentSlot/@Node3D@111009/@Area3D@187778"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_vhium")
+
 [node name="ComponentSlot2" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.11497, 1.38761, 0.0169349)
 script = ExtResource("31_fx4iv")
 size = 4
-highlight_box = NodePath("@Node3D@111241/@Area3D@17834/@MeshInstance3D@17836")
+highlight_box = NodePath("@Node3D@111241/@Area3D@187781/@MeshInstance3D@187783")
 area_root = NodePath("@Node3D@111241")
 vehicle = NodePath("../../..")
 id = 22
 
 [node name="@Node3D@111241" type="Node3D" parent="Modules/Components/ComponentSlot2"]
 
+[node name="@Area3D@187781" type="Area3D" parent="Modules/Components/ComponentSlot2/@Node3D@111241"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187782" type="CollisionShape3D" parent="Modules/Components/ComponentSlot2/@Node3D@111241/@Area3D@187781"]
+shape = SubResource("BoxShape3D_lyoes")
+
+[node name="@MeshInstance3D@187783" type="MeshInstance3D" parent="Modules/Components/ComponentSlot2/@Node3D@111241/@Area3D@187781"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_nb5gl")
+
 [node name="ComponentSlot3" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.52849, 3.11693, 1.23841)
 script = ExtResource("31_fx4iv")
 size = 2
-highlight_box = NodePath("@Node3D@115200/@Area3D@17837/@MeshInstance3D@17839")
+highlight_box = NodePath("@Node3D@115200/@Area3D@187784/@MeshInstance3D@187786")
 area_root = NodePath("@Node3D@115200")
 vehicle = NodePath("../../..")
 id = 23
 
 [node name="@Node3D@115200" type="Node3D" parent="Modules/Components/ComponentSlot3"]
 
+[node name="@Area3D@187784" type="Area3D" parent="Modules/Components/ComponentSlot3/@Node3D@115200"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187785" type="CollisionShape3D" parent="Modules/Components/ComponentSlot3/@Node3D@115200/@Area3D@187784"]
+shape = SubResource("BoxShape3D_hk63t")
+
+[node name="@MeshInstance3D@187786" type="MeshInstance3D" parent="Modules/Components/ComponentSlot3/@Node3D@115200/@Area3D@187784"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_vpp48")
+
 [node name="ComponentSlot4" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.51171, 3.09328, -1.18094)
 script = ExtResource("31_fx4iv")
 size = 2
-highlight_box = NodePath("@Node3D@115204/@Area3D@17840/@MeshInstance3D@17842")
+highlight_box = NodePath("@Node3D@115204/@Area3D@187787/@MeshInstance3D@187789")
 area_root = NodePath("@Node3D@115204")
 vehicle = NodePath("../../..")
 id = 24
 
 [node name="@Node3D@115204" type="Node3D" parent="Modules/Components/ComponentSlot4"]
 
+[node name="@Area3D@187787" type="Area3D" parent="Modules/Components/ComponentSlot4/@Node3D@115204"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187788" type="CollisionShape3D" parent="Modules/Components/ComponentSlot4/@Node3D@115204/@Area3D@187787"]
+shape = SubResource("BoxShape3D_vcy1x")
+
+[node name="@MeshInstance3D@187789" type="MeshInstance3D" parent="Modules/Components/ComponentSlot4/@Node3D@115204/@Area3D@187787"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_t1xxx")
+
 [node name="ComponentSlot11" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -3.11827, 2.02855, -10.4993)
 script = ExtResource("31_fx4iv")
 size = 3
-highlight_box = NodePath("@Node3D@115208/@Area3D@17843/@MeshInstance3D@17845")
+highlight_box = NodePath("@Node3D@115208/@Area3D@187790/@MeshInstance3D@187792")
 area_root = NodePath("@Node3D@115208")
 vehicle = NodePath("../../..")
 id = 25
 
 [node name="@Node3D@115208" type="Node3D" parent="Modules/Components/ComponentSlot11"]
 
+[node name="@Area3D@187790" type="Area3D" parent="Modules/Components/ComponentSlot11/@Node3D@115208"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187791" type="CollisionShape3D" parent="Modules/Components/ComponentSlot11/@Node3D@115208/@Area3D@187790"]
+shape = SubResource("BoxShape3D_m5ti6")
+
+[node name="@MeshInstance3D@187792" type="MeshInstance3D" parent="Modules/Components/ComponentSlot11/@Node3D@115208/@Area3D@187790"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_sbw4c")
+
 [node name="ComponentSlot5" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -5.52661, 3.11693, 1.23841)
 script = ExtResource("31_fx4iv")
 size = 2
-highlight_box = NodePath("@Node3D@115212/@Area3D@17846/@MeshInstance3D@17848")
+highlight_box = NodePath("@Node3D@115212/@Area3D@187793/@MeshInstance3D@187795")
 area_root = NodePath("@Node3D@115212")
 vehicle = NodePath("../../..")
 id = 26
 
 [node name="@Node3D@115212" type="Node3D" parent="Modules/Components/ComponentSlot5"]
 
+[node name="@Area3D@187793" type="Area3D" parent="Modules/Components/ComponentSlot5/@Node3D@115212"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187794" type="CollisionShape3D" parent="Modules/Components/ComponentSlot5/@Node3D@115212/@Area3D@187793"]
+shape = SubResource("BoxShape3D_n35nv")
+
+[node name="@MeshInstance3D@187795" type="MeshInstance3D" parent="Modules/Components/ComponentSlot5/@Node3D@115212/@Area3D@187793"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_3q6ia")
+
 [node name="ComponentSlot6" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -5.54339, 3.09328, -1.18094)
 script = ExtResource("31_fx4iv")
 size = 2
-highlight_box = NodePath("@Node3D@115216/@Area3D@17849/@MeshInstance3D@17851")
+highlight_box = NodePath("@Node3D@115216/@Area3D@187796/@MeshInstance3D@187798")
 area_root = NodePath("@Node3D@115216")
 vehicle = NodePath("../../..")
 id = 27
 
 [node name="@Node3D@115216" type="Node3D" parent="Modules/Components/ComponentSlot6"]
 
+[node name="@Area3D@187796" type="Area3D" parent="Modules/Components/ComponentSlot6/@Node3D@115216"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187797" type="CollisionShape3D" parent="Modules/Components/ComponentSlot6/@Node3D@115216/@Area3D@187796"]
+shape = SubResource("BoxShape3D_66j2t")
+
+[node name="@MeshInstance3D@187798" type="MeshInstance3D" parent="Modules/Components/ComponentSlot6/@Node3D@115216/@Area3D@187796"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_rglq1")
+
 [node name="ComponentSlot15" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -3.11827, 2.02855, -6.91392)
 script = ExtResource("31_fx4iv")
 size = 3
-highlight_box = NodePath("@Node3D@115220/@Area3D@17852/@MeshInstance3D@17854")
+highlight_box = NodePath("@Node3D@115220/@Area3D@187799/@MeshInstance3D@187801")
 area_root = NodePath("@Node3D@115220")
 vehicle = NodePath("../../..")
 id = 28
 
 [node name="@Node3D@115220" type="Node3D" parent="Modules/Components/ComponentSlot15"]
 
+[node name="@Area3D@187799" type="Area3D" parent="Modules/Components/ComponentSlot15/@Node3D@115220"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187800" type="CollisionShape3D" parent="Modules/Components/ComponentSlot15/@Node3D@115220/@Area3D@187799"]
+shape = SubResource("BoxShape3D_2r320")
+
+[node name="@MeshInstance3D@187801" type="MeshInstance3D" parent="Modules/Components/ComponentSlot15/@Node3D@115220/@Area3D@187799"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_pv25o")
+
 [node name="ComponentSlot16" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.13228, 2.02855, -6.91392)
 script = ExtResource("31_fx4iv")
 size = 3
-highlight_box = NodePath("@Node3D@115224/@Area3D@17855/@MeshInstance3D@17857")
+highlight_box = NodePath("@Node3D@115224/@Area3D@187802/@MeshInstance3D@187804")
 area_root = NodePath("@Node3D@115224")
 vehicle = NodePath("../../..")
 id = 29
 
 [node name="@Node3D@115224" type="Node3D" parent="Modules/Components/ComponentSlot16"]
 
+[node name="@Area3D@187802" type="Area3D" parent="Modules/Components/ComponentSlot16/@Node3D@115224"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187803" type="CollisionShape3D" parent="Modules/Components/ComponentSlot16/@Node3D@115224/@Area3D@187802"]
+shape = SubResource("BoxShape3D_4qnpj")
+
+[node name="@MeshInstance3D@187804" type="MeshInstance3D" parent="Modules/Components/ComponentSlot16/@Node3D@115224/@Area3D@187802"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_rprb2")
+
 [node name="ComponentSlot17" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.13228, 2.02855, -10.5067)
 script = ExtResource("31_fx4iv")
 size = 3
-highlight_box = NodePath("@Node3D@115228/@Area3D@17858/@MeshInstance3D@17860")
+highlight_box = NodePath("@Node3D@115228/@Area3D@187805/@MeshInstance3D@187807")
 area_root = NodePath("@Node3D@115228")
 vehicle = NodePath("../../..")
 id = 30
 
 [node name="@Node3D@115228" type="Node3D" parent="Modules/Components/ComponentSlot17"]
 
+[node name="@Area3D@187805" type="Area3D" parent="Modules/Components/ComponentSlot17/@Node3D@115228"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187806" type="CollisionShape3D" parent="Modules/Components/ComponentSlot17/@Node3D@115228/@Area3D@187805"]
+shape = SubResource("BoxShape3D_xmvvk")
+
+[node name="@MeshInstance3D@187807" type="MeshInstance3D" parent="Modules/Components/ComponentSlot17/@Node3D@115228/@Area3D@187805"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_uu5he")
+
 [node name="ComponentSlot18" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59226, 2.16494, -13.1932)
 script = ExtResource("31_fx4iv")
 size = 1
-highlight_box = NodePath("@Node3D@115232/@Area3D@17861/@MeshInstance3D@17863")
+highlight_box = NodePath("@Node3D@115232/@Area3D@187808/@MeshInstance3D@187810")
 area_root = NodePath("@Node3D@115232")
 vehicle = NodePath("../../..")
 id = 31
 
 [node name="@Node3D@115232" type="Node3D" parent="Modules/Components/ComponentSlot18"]
 
+[node name="@Area3D@187808" type="Area3D" parent="Modules/Components/ComponentSlot18/@Node3D@115232"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187809" type="CollisionShape3D" parent="Modules/Components/ComponentSlot18/@Node3D@115232/@Area3D@187808"]
+shape = SubResource("BoxShape3D_ug8kx")
+
+[node name="@MeshInstance3D@187810" type="MeshInstance3D" parent="Modules/Components/ComponentSlot18/@Node3D@115232/@Area3D@187808"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_r88k8")
+
 [node name="ComponentSlot19" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59226, 1.55044, -13.1932)
 script = ExtResource("31_fx4iv")
 size = 1
-highlight_box = NodePath("@Node3D@115236/@Area3D@17864/@MeshInstance3D@17866")
+highlight_box = NodePath("@Node3D@115236/@Area3D@187811/@MeshInstance3D@187813")
 area_root = NodePath("@Node3D@115236")
 vehicle = NodePath("../../..")
 id = 32
 
 [node name="@Node3D@115236" type="Node3D" parent="Modules/Components/ComponentSlot19"]
 
+[node name="@Area3D@187811" type="Area3D" parent="Modules/Components/ComponentSlot19/@Node3D@115236"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187812" type="CollisionShape3D" parent="Modules/Components/ComponentSlot19/@Node3D@115236/@Area3D@187811"]
+shape = SubResource("BoxShape3D_u50yo")
+
+[node name="@MeshInstance3D@187813" type="MeshInstance3D" parent="Modules/Components/ComponentSlot19/@Node3D@115236/@Area3D@187811"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_ks8rr")
+
 [node name="ComponentSlot20" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.58884, 2.16494, -13.1932)
 script = ExtResource("31_fx4iv")
 size = 1
-highlight_box = NodePath("@Node3D@115240/@Area3D@17867/@MeshInstance3D@17869")
+highlight_box = NodePath("@Node3D@115240/@Area3D@187814/@MeshInstance3D@187816")
 area_root = NodePath("@Node3D@115240")
 vehicle = NodePath("../../..")
 id = 33
 
 [node name="@Node3D@115240" type="Node3D" parent="Modules/Components/ComponentSlot20"]
 
+[node name="@Area3D@187814" type="Area3D" parent="Modules/Components/ComponentSlot20/@Node3D@115240"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187815" type="CollisionShape3D" parent="Modules/Components/ComponentSlot20/@Node3D@115240/@Area3D@187814"]
+shape = SubResource("BoxShape3D_e2xka")
+
+[node name="@MeshInstance3D@187816" type="MeshInstance3D" parent="Modules/Components/ComponentSlot20/@Node3D@115240/@Area3D@187814"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_ant32")
+
 [node name="ComponentSlot21" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, -2.58884, 1.55044, -13.1932)
 script = ExtResource("31_fx4iv")
 size = 1
-highlight_box = NodePath("@Node3D@115244/@Area3D@17870/@MeshInstance3D@17872")
+highlight_box = NodePath("@Node3D@115244/@Area3D@187817/@MeshInstance3D@187819")
 area_root = NodePath("@Node3D@115244")
 vehicle = NodePath("../../..")
 id = 34
 
 [node name="@Node3D@115244" type="Node3D" parent="Modules/Components/ComponentSlot21"]
 
+[node name="@Area3D@187817" type="Area3D" parent="Modules/Components/ComponentSlot21/@Node3D@115244"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187818" type="CollisionShape3D" parent="Modules/Components/ComponentSlot21/@Node3D@115244/@Area3D@187817"]
+shape = SubResource("BoxShape3D_0rpds")
+
+[node name="@MeshInstance3D@187819" type="MeshInstance3D" parent="Modules/Components/ComponentSlot21/@Node3D@115244/@Area3D@187817"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_bie2k")
+
 [node name="ComponentSlot7" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.92648, 1.83165, -7.05445)
 script = ExtResource("31_fx4iv")
 size = 10
-highlight_box = NodePath("@Node3D@115248/@Area3D@17873/@MeshInstance3D@17875")
+highlight_box = NodePath("@Node3D@115248/@Area3D@187820/@MeshInstance3D@187822")
 area_root = NodePath("@Node3D@115248")
 vehicle = NodePath("../../..")
 id = 35
 
 [node name="@Node3D@115248" type="Node3D" parent="Modules/Components/ComponentSlot7"]
 
+[node name="@Area3D@187820" type="Area3D" parent="Modules/Components/ComponentSlot7/@Node3D@115248"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187821" type="CollisionShape3D" parent="Modules/Components/ComponentSlot7/@Node3D@115248/@Area3D@187820"]
+shape = SubResource("BoxShape3D_hut6j")
+
+[node name="@MeshInstance3D@187822" type="MeshInstance3D" parent="Modules/Components/ComponentSlot7/@Node3D@115248/@Area3D@187820"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_c70jk")
+
 [node name="ComponentSlot8" type="Node3D" parent="Modules/Components" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.61254, 1.73942, -7.38852)
 script = ExtResource("31_fx4iv")
 size = 10
-highlight_box = NodePath("@Node3D@115196/@Area3D@17876/@MeshInstance3D@17878")
+highlight_box = NodePath("@Node3D@115196/@Area3D@187823/@MeshInstance3D@187825")
 area_root = NodePath("@Node3D@115196")
 vehicle = NodePath("../../..")
 id = 36
 
 [node name="@Node3D@115196" type="Node3D" parent="Modules/Components/ComponentSlot8"]
+
+[node name="@Area3D@187823" type="Area3D" parent="Modules/Components/ComponentSlot8/@Node3D@115196"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187824" type="CollisionShape3D" parent="Modules/Components/ComponentSlot8/@Node3D@115196/@Area3D@187823"]
+shape = SubResource("BoxShape3D_1lhhi")
+
+[node name="@MeshInstance3D@187825" type="MeshInstance3D" parent="Modules/Components/ComponentSlot8/@Node3D@115196/@Area3D@187823"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_ruvt5")
 
 [node name="FTL" type="Node3D" parent="Modules"]
 
@@ -3693,23 +3994,47 @@ id = 36
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.28652e-17, 2.20814, -11.2021)
 script = ExtResource("33_q2p3u")
 alcubierre_drive_size = 2
-highlight_box = NodePath("@Node3D@182446/@Area3D@17879/@MeshInstance3D@17881")
+highlight_box = NodePath("@Node3D@182446/@Area3D@187826/@MeshInstance3D@187828")
 area_root = NodePath("@Node3D@182446")
 vehicle = NodePath("../../..")
 id = 37
 
 [node name="@Node3D@182446" type="Node3D" parent="Modules/FTL/AlcubierreDriveSlot"]
 
+[node name="@Area3D@187826" type="Area3D" parent="Modules/FTL/AlcubierreDriveSlot/@Node3D@182446"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187827" type="CollisionShape3D" parent="Modules/FTL/AlcubierreDriveSlot/@Node3D@182446/@Area3D@187826"]
+shape = SubResource("BoxShape3D_6i11u")
+
+[node name="@MeshInstance3D@187828" type="MeshInstance3D" parent="Modules/FTL/AlcubierreDriveSlot/@Node3D@182446/@Area3D@187826"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_ccii0")
+
 [node name="AbyssalJumpDriveSlot" type="Node3D" parent="Modules/FTL" node_paths=PackedStringArray("highlight_box", "area_root", "vehicle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2197, -8.49325)
 script = ExtResource("34_6da6r")
 abyssal_jump_drive_size = 2
-highlight_box = NodePath("@Node3D@182793/@Area3D@17882/@MeshInstance3D@17884")
+highlight_box = NodePath("@Node3D@182793/@Area3D@187829/@MeshInstance3D@187831")
 area_root = NodePath("@Node3D@182793")
 vehicle = NodePath("../../..")
 id = 38
 
 [node name="@Node3D@182793" type="Node3D" parent="Modules/FTL/AbyssalJumpDriveSlot"]
+
+[node name="@Area3D@187829" type="Area3D" parent="Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793"]
+collision_layer = 524288
+collision_mask = 524288
+
+[node name="@CollisionShape3D@187830" type="CollisionShape3D" parent="Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793/@Area3D@187829"]
+shape = SubResource("BoxShape3D_pycrw")
+
+[node name="@MeshInstance3D@187831" type="MeshInstance3D" parent="Modules/FTL/AbyssalJumpDriveSlot/@Node3D@182793/@Area3D@187829"]
+visible = false
+material_override = ExtResource("81_se6n7")
+mesh = SubResource("BoxMesh_7t42l")
 
 [node name="Hardpoints" type="Node3D" parent="Modules"]
 
@@ -3790,7 +4115,7 @@ gizmo_extents = 0.87
 [node name="RabsKestrelMk1RightRadiatorSlot" parent="Modules/Radiators" node_paths=PackedStringArray("module", "highlight_box", "vehicle") instance=ExtResource("38_kus7s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62465, 5.46835, 2.76372)
 module = NodePath("RabsKestrelMk1RightRadiator")
-highlight_box = NodePath("SlotArea/@MeshInstance3D@17885")
+highlight_box = NodePath("SlotArea/@MeshInstance3D@187832")
 vehicle = NodePath("../../..")
 id = 45
 
@@ -3801,7 +4126,7 @@ quiet_insert = true
 [node name="RabsKestrelMk1LeftRadiatorSlot" parent="Modules/Radiators" node_paths=PackedStringArray("module", "highlight_box", "vehicle") instance=ExtResource("40_cj5je")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.60867, 5.46328, 2.80676)
 module = NodePath("RabsKestrelMk1LeftRadiator")
-highlight_box = NodePath("SlotArea/@MeshInstance3D@17886")
+highlight_box = NodePath("SlotArea/@MeshInstance3D@187833")
 vehicle = NodePath("../../..")
 id = 46
 
