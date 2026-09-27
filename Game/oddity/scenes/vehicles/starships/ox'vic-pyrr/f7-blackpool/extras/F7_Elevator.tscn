@@ -14,22 +14,6 @@ size = Vector3(0.707739, 1.0844, 0.192368)
 [sub_resource type="BoxShape3D" id="BoxShape3D_f40jj"]
 size = Vector3(3.16233, 2.04019, 1.3213)
 
-[sub_resource type="Animation" id="Animation_ymh07"]
-resource_name = "open"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("F7Evevator:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat64Array(0, 0.4329, 0.6327, 3.996),
-"transitions": PackedFloat64Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.294265, 0), Vector3(0, 0.294265, 0), Vector3(0, 3.85767, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_nxwte"]
 length = 0.001
 tracks/0/type = "value"
@@ -59,6 +43,22 @@ tracks/0/keys = {
 "transitions": PackedFloat64Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 3.85767, 0), Vector3(0, 0.294265, 0), Vector3(0, 0.294265, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ymh07"]
+resource_name = "open"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7Evevator:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.4329, 0.6327, 3.996),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.294265, 0), Vector3(0, 0.294265, 0), Vector3(0, 3.85767, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tgrj6"]

@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0ca6l4pnihy2"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/Radiator.gd" id="1_pamah"]
+[ext_resource type="PackedScene" uid="uid://dval3cmll0hip" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/radiator/F7_Radiator.glb" id="2_v4f8j"]
+[ext_resource type="PackedScene" uid="uid://u38eeeihifvu" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/radiator/F7_TopRadiator.glb" id="3_4yj86"]
+[ext_resource type="PackedScene" uid="uid://cipuhdfnw8k0w" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/radiator/F7_BottomRadiator.glb" id="4_sy3ex"]
+
+[sub_resource type="Gradient" id="Gradient_jvin0"]
+offsets = PackedFloat32Array(0, 0.276018, 0.828054, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.611765, 0, 0, 1, 1, 0.548609, 0.145742, 1, 1, 0.858824, 0.145098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hk3l4"]
+gradient = SubResource("Gradient_jvin0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtocv"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 10.0
+
+[sub_resource type="Animation" id="Animation_ro8i7"]
+resource_name = "heat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7_TopRadiator:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.0666, 0.999),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.62139, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("F7_BottomRadiator:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 0.0666, 0.999),
+"transitions": PackedFloat64Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.729914, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jppf6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("F7_TopRadiator:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("F7_BottomRadiator:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3yr2w"]
+_data = {
+"RESET": SubResource("Animation_jppf6"),
+"heat": SubResource("Animation_ro8i7")
+}
+
+[node name="F7Radiator" type="RigidBody3D" node_paths=PackedStringArray("radiator_animation", "heat_mesh")]
+script = ExtResource("1_pamah")
+heat_colors = SubResource("GradientTexture1D_hk3l4")
+cooling_capacity = 500.0
+cooling_rate = 0.15
+start_cooling_at_heat = 0.05
+radiator_animation = NodePath("AnimationPlayer")
+heat_mesh = NodePath("F7_Radiator/Radiator_001")
+heat_material = SubResource("StandardMaterial3D_xtocv")
+size = 5
+
+[node name="F7_Radiator" parent="." instance=ExtResource("2_v4f8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.812, 7.835, 6.016)
+
+[node name="Radiator_001" parent="F7_Radiator" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xtocv")
+
+[node name="F7_TopRadiator" parent="." instance=ExtResource("3_4yj86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.051, 9.658, 4.697)
+
+[node name="F7_BottomRadiator" parent="." instance=ExtResource("4_sy3ex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034, 8.379, 8.221)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3yr2w")
+}
+
+[editable path="F7_Radiator"]
