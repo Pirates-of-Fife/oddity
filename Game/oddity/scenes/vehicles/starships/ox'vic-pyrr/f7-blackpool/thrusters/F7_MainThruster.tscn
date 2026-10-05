@@ -66,6 +66,7 @@ thruster_particles = NodePath("GPUParticles3D")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 3500
+amount_ratio = 0.0
 lifetime = 0.29
 speed_scale = 2.21
 randomness = 1.0
