@@ -11,21 +11,21 @@ point_count = 4
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_wn1nn"]
+[sub_resource type="CurveTexture" id="CurveTexture_hprav"]
 curve = SubResource("Curve_k6e5x")
 
 [sub_resource type="Gradient" id="Gradient_p7u5n"]
 offsets = PackedFloat32Array(0, 0.0710383, 0.163934, 0.371585, 0.825137, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0.312847, 0.473569, 1, 0, 0.216667, 1, 1, 0.0909091, 0.287879, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_1kex7"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_icfpy"]
 gradient = SubResource("Gradient_p7u5n")
 
 [sub_resource type="Curve" id="Curve_vvklt"]
 _data = [Vector2(0, 0.175824), 0.0, 0.0, 0, 0, Vector2(0.232227, 1), 0.0, 0.0, 0, 0, Vector2(0.829384, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_45hjp"]
+[sub_resource type="CurveTexture" id="CurveTexture_n0o7s"]
 curve = SubResource("Curve_vvklt")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tyry1"]
@@ -38,19 +38,19 @@ initial_velocity_min = 600.0
 initial_velocity_max = 10000.0
 gravity = Vector3(0, 0, 0)
 scale_max = 15.0
-scale_curve = SubResource("CurveTexture_45hjp")
-color_ramp = SubResource("GradientTexture1D_1kex7")
-alpha_curve = SubResource("CurveTexture_wn1nn")
+scale_curve = SubResource("CurveTexture_n0o7s")
+color_ramp = SubResource("GradientTexture1D_icfpy")
+alpha_curve = SubResource("CurveTexture_hprav")
 hue_variation_min = -0.01
 hue_variation_max = 0.00999998
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_raqa4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xapgk"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_mq711"]
-material = SubResource("StandardMaterial3D_raqa4")
+material = SubResource("StandardMaterial3D_xapgk")
 radial_segments = 12
 rings = 6
 

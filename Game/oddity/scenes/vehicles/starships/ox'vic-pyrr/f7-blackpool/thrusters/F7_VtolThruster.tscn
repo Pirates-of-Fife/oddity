@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://cend82nwr18cm"]
+
+[ext_resource type="Script" path="res://classes/module/component/component-types/thruster/VtolThruster.gd" id="1_ethoe"]
+[ext_resource type="AudioStream" uid="uid://bsd7y2vwvi2qc" path="res://scenes/modules/rabauke_shipworks/thrusters/rabs-kestrel-mk-1/retro-thruster/thrust_deep_loop.wav" id="2_vhu16"]
+
+[sub_resource type="Curve" id="Curve_6pj5r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.766537, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_jfllu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ky5te"]
+curve = SubResource("Curve_jfllu")
+
+[sub_resource type="Gradient" id="Gradient_xk84d"]
+offsets = PackedFloat32Array(0, 0.0710383, 0.163934, 0.371585, 0.825137, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0.312847, 0.473569, 1, 0, 0.216667, 1, 1, 0.0909091, 0.287879, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ws2t"]
+gradient = SubResource("Gradient_xk84d")
+
+[sub_resource type="Curve" id="Curve_l4c0j"]
+_data = [Vector2(0, 0.175824), 0.0, 0.0, 0, 0, Vector2(0.232227, 1), 0.0, 0.0, 0, 0, Vector2(0.829384, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_hhpcg"]
+curve = SubResource("Curve_l4c0j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ux17"]
+resource_local_to_scene = true
+emission_shape = 3
+emission_box_extents = Vector3(0.34, 1.27, 3.705)
+direction = Vector3(0, -1, 0)
+spread = 2.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_hhpcg")
+color_ramp = SubResource("GradientTexture1D_6ws2t")
+alpha_curve = SubResource("CurveTexture_ky5te")
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbq7i"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_2hf33"]
+material = SubResource("StandardMaterial3D_fbq7i")
+radial_segments = 12
+rings = 6
+
+[node name="F7VtolThruster" type="RigidBody3D" node_paths=PackedStringArray("thruster_sound", "thruster_particles")]
+script = ExtResource("1_ethoe")
+size = 7
+thruster_sound = NodePath("AudioStreamPlayer3D")
+modifier = 2.0
+thruster_heat_curve = SubResource("Curve_6pj5r")
+thruster_heat_multiplier = 30.0
+fuel_usage = 5.0
+thruster_particles = NodePath("GPUParticles3D")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 1000
+amount_ratio = 0.0
+lifetime = 0.09
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_3ux17")
+draw_pass_1 = SubResource("SphereMesh_2hf33")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_vhu16")
+pitch_scale = 1.98
+max_distance = 500.0
+bus = &"Thruster"

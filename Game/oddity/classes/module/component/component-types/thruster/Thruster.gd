@@ -37,6 +37,11 @@ var current_thrust : float :
 	set(value):
 		current_thrust = clampf(value, 0, 1)
 
+		if current_thrust < 0.01:
+			thruster_particles.hide()
+		else:
+			thruster_particles.show()
+		
 		if thruster_particles != null:
 			var t : float = current_thrust
 			if current_thrust >= 0.01 and current_thrust <= 0.05:
