@@ -1,0 +1,77 @@
+[gd_resource type="AnimationLibrary" load_steps=19 format=3 uid="uid://b4eekm7qtj60w"]
+
+[sub_resource type="Animation" id="Animation_7e8jc"]
+resource_name = "fly_backwards"
+
+[sub_resource type="Animation" id="Animation_axvk6"]
+resource_name = "fly_down"
+
+[sub_resource type="Animation" id="Animation_e36nn"]
+resource_name = "fly_forwards"
+
+[sub_resource type="Animation" id="Animation_eyaem"]
+resource_name = "fly_left"
+
+[sub_resource type="Animation" id="Animation_u04lu"]
+resource_name = "fly_right"
+
+[sub_resource type="Animation" id="Animation_6xs8k"]
+resource_name = "fly_up"
+
+[sub_resource type="Animation" id="Animation_hfh0b"]
+resource_name = "not_firing_forwards"
+
+[sub_resource type="Animation" id="Animation_yvow7"]
+resource_name = "not_firing_lateral"
+
+[sub_resource type="Animation" id="Animation_a4vck"]
+resource_name = "not_firing_yaw"
+
+[sub_resource type="Animation" id="Animation_qk74j"]
+resource_name = "not_flying_pitch"
+
+[sub_resource type="Animation" id="Animation_6osa1"]
+resource_name = "not_flying_roll"
+
+[sub_resource type="Animation" id="Animation_mqua6"]
+resource_name = "not_flying_vertical"
+
+[sub_resource type="Animation" id="Animation_qdvhq"]
+resource_name = "pitch_down"
+
+[sub_resource type="Animation" id="Animation_2gsax"]
+resource_name = "pitch_up"
+
+[sub_resource type="Animation" id="Animation_4its4"]
+resource_name = "roll_left"
+
+[sub_resource type="Animation" id="Animation_r4t52"]
+resource_name = "roll_right"
+
+[sub_resource type="Animation" id="Animation_7fkqb"]
+resource_name = "yaw_left"
+
+[sub_resource type="Animation" id="Animation_1njyh"]
+resource_name = "yaw_right"
+
+[resource]
+_data = {
+"fly_backwards": SubResource("Animation_7e8jc"),
+"fly_down": SubResource("Animation_axvk6"),
+"fly_forwards": SubResource("Animation_e36nn"),
+"fly_left": SubResource("Animation_eyaem"),
+"fly_right": SubResource("Animation_u04lu"),
+"fly_up": SubResource("Animation_6xs8k"),
+"not_firing_forwards": SubResource("Animation_hfh0b"),
+"not_firing_lateral": SubResource("Animation_yvow7"),
+"not_firing_yaw": SubResource("Animation_a4vck"),
+"not_flying_pitch": SubResource("Animation_qk74j"),
+"not_flying_roll": SubResource("Animation_6osa1"),
+"not_flying_vertical": SubResource("Animation_mqua6"),
+"pitch_down": SubResource("Animation_qdvhq"),
+"pitch_up": SubResource("Animation_2gsax"),
+"roll_left": SubResource("Animation_4its4"),
+"roll_right": SubResource("Animation_r4t52"),
+"yaw_left": SubResource("Animation_7fkqb"),
+"yaw_right": SubResource("Animation_1njyh")
+}

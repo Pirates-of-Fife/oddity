@@ -1,0 +1,178 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=36 format=3 uid="uid://ddnwmjdl3ktn3"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_2rcgy"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_12xcr"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_krqlr"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_3yrjq"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_k3y0n"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t4j1j"]
+animation = &"not_firing_forwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1w7si"]
+animation = &"fly_backwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_repjv"]
+animation = &"fly_forwards"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_xwqhg"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vkxoa"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_repjv")
+nodes/Animation/position = Vector2(245.3, 217.8)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_t4j1j")
+"nodes/Animation 2/position" = Vector2(141.9, 364.1)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_1w7si")
+"nodes/Animation 3/position" = Vector2(224.4, 518.1)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_xwqhg")
+nodes/Blend3/position = Vector2(455.4, 297)
+nodes/output/position = Vector2(660, 360)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tv8ry"]
+animation = &"not_firing_lateral"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s0mhi"]
+animation = &"fly_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mjghw"]
+animation = &"fly_left"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_4c5qf"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6ecyc"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_mjghw")
+nodes/Animation/position = Vector2(280, 100)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_tv8ry")
+"nodes/Animation 2/position" = Vector2(220, 320)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_s0mhi")
+"nodes/Animation 3/position" = Vector2(321.566, 523.112)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_4c5qf")
+nodes/Blend3/position = Vector2(480, 220)
+nodes/output/position = Vector2(660, 260)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_flxev"]
+animation = &"not_flying_pitch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gfn4m"]
+animation = &"pitch_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kgavc"]
+animation = &"pitch_up"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_rlg68"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vxcg7"]
+graph_offset = Vector2(-309.564, -102.225)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_kgavc")
+nodes/Animation/position = Vector2(-149.121, -17.8475)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_flxev")
+"nodes/Animation 2/position" = Vector2(-160, 140)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_gfn4m")
+"nodes/Animation 3/position" = Vector2(-160, 320)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_rlg68")
+nodes/Blend3/position = Vector2(100, 80)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e0tsq"]
+animation = &"not_flying_roll"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qvxom"]
+animation = &"roll_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_24abh"]
+animation = &"roll_left"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_iyuph"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fi324"]
+graph_offset = Vector2(-38.894, 14.656)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_24abh")
+nodes/Animation/position = Vector2(198.035, 119.568)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_e0tsq")
+"nodes/Animation 2/position" = Vector2(58.5387, 276.502)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_qvxom")
+"nodes/Animation 3/position" = Vector2(222.945, 464.573)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_iyuph")
+nodes/Blend3/position = Vector2(467.064, 159.424)
+nodes/output/position = Vector2(720, 280)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3gj7g"]
+animation = &"not_flying_vertical"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k4un8"]
+animation = &"fly_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7vf4q"]
+animation = &"fly_up"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_lol0v"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_rq0kt"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_7vf4q")
+nodes/Animation/position = Vector2(385, 144.1)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_3gj7g")
+"nodes/Animation 2/position" = Vector2(275, 301.4)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_k4un8")
+"nodes/Animation 3/position" = Vector2(309.1, 470.8)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_lol0v")
+nodes/Blend3/position = Vector2(560, 220)
+nodes/output/position = Vector2(760, 260)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i0sqn"]
+animation = &"not_firing_yaw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1p4bs"]
+animation = &"yaw_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_abi7a"]
+animation = &"yaw_left"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_efm05"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_egur6"]
+graph_offset = Vector2(89, 90)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_abi7a")
+nodes/Animation/position = Vector2(420, 80)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_i0sqn")
+"nodes/Animation 2/position" = Vector2(316.8, 280.5)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_1p4bs")
+"nodes/Animation 3/position" = Vector2(521.4, 530.2)
+nodes/Blend3/node = SubResource("AnimationNodeBlend3_efm05")
+nodes/Blend3/position = Vector2(740, 240)
+nodes/output/position = Vector2(980, 300)
+node_connections = [&"Blend3", 0, &"Animation", &"Blend3", 1, &"Animation 2", &"Blend3", 2, &"Animation 3", &"output", 0, &"Blend3"]
+
+[resource]
+graph_offset = Vector2(-1139.01, 485.537)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_k3y0n")
+nodes/Add2/position = Vector2(-240, 460)
+"nodes/Add2 2/node" = SubResource("AnimationNodeAdd2_2rcgy")
+"nodes/Add2 2/position" = Vector2(-420, 580)
+"nodes/Add2 3/node" = SubResource("AnimationNodeAdd2_12xcr")
+"nodes/Add2 3/position" = Vector2(-600, 740)
+"nodes/Add2 4/node" = SubResource("AnimationNodeAdd2_krqlr")
+"nodes/Add2 4/position" = Vector2(-820, 900)
+"nodes/Add2 5/node" = SubResource("AnimationNodeAdd2_3yrjq")
+"nodes/Add2 5/position" = Vector2(-1000, 1080)
+nodes/Forwards/node = SubResource("AnimationNodeBlendTree_vkxoa")
+nodes/Forwards/position = Vector2(-877.308, 639.511)
+nodes/Lateral/node = SubResource("AnimationNodeBlendTree_6ecyc")
+nodes/Lateral/position = Vector2(-1280, 1160)
+nodes/Pitch/node = SubResource("AnimationNodeBlendTree_vxcg7")
+nodes/Pitch/position = Vector2(-520, 380)
+nodes/Roll/node = SubResource("AnimationNodeBlendTree_fi324")
+nodes/Roll/position = Vector2(-1220, 960)
+nodes/Vertical/node = SubResource("AnimationNodeBlendTree_rq0kt")
+nodes/Vertical/position = Vector2(-800, 500)
+nodes/Yaw/node = SubResource("AnimationNodeBlendTree_egur6")
+nodes/Yaw/position = Vector2(-1080, 760)
+nodes/output/position = Vector2(60, 500)
+node_connections = [&"Add2", 0, &"Pitch", &"Add2", 1, &"Add2 2", &"Add2 2", 0, &"Vertical", &"Add2 2", 1, &"Add2 3", &"Add2 3", 0, &"Forwards", &"Add2 3", 1, &"Add2 4", &"Add2 4", 0, &"Yaw", &"Add2 4", 1, &"Add2 5", &"Add2 5", 0, &"Roll", &"Add2 5", 1, &"Lateral", &"output", 0, &"Add2"]
