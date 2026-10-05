@@ -3318,7 +3318,7 @@ id = 37
 
 [node name="Retro" type="Node3D" parent="Components/Thrusters"]
 
-[node name="ThrusterSlot" type="Node3D" parent="Components/Thrusters/Retro" node_paths=PackedStringArray("module", "vehicle")]
+[node name="Retro1" type="Node3D" parent="Components/Thrusters/Retro" node_paths=PackedStringArray("module", "vehicle")]
 transform = Transform3D(1, 0, -2.44929e-16, 0, 1, 0, 2.44929e-16, 0, 1, -20.523, 4.51064, 4.11115)
 script = ExtResource("46_26wl8")
 size = 6
@@ -3328,10 +3328,10 @@ module = NodePath("F7RetroThruster")
 vehicle = NodePath("../../../..")
 id = 38
 
-[node name="F7RetroThruster" parent="Components/Thrusters/Retro/ThrusterSlot" node_paths=PackedStringArray("module_slot") instance=ExtResource("46_m0y3x")]
+[node name="F7RetroThruster" parent="Components/Thrusters/Retro/Retro1" node_paths=PackedStringArray("module_slot") instance=ExtResource("46_m0y3x")]
 module_slot = NodePath("..")
 
-[node name="ThrusterSlot2" type="Node3D" parent="Components/Thrusters/Retro" node_paths=PackedStringArray("module", "vehicle")]
+[node name="Retro2" type="Node3D" parent="Components/Thrusters/Retro" node_paths=PackedStringArray("module", "vehicle")]
 transform = Transform3D(1, 0, -2.44929e-16, 0, 1, 0, 2.44929e-16, 0, 1, 19.776, 4.51064, 4.11115)
 script = ExtResource("46_26wl8")
 size = 6
@@ -3341,7 +3341,7 @@ module = NodePath("F7RetroThruster")
 vehicle = NodePath("../../../..")
 id = 39
 
-[node name="F7RetroThruster" parent="Components/Thrusters/Retro/ThrusterSlot2" node_paths=PackedStringArray("module_slot") instance=ExtResource("46_m0y3x")]
+[node name="F7RetroThruster" parent="Components/Thrusters/Retro/Retro2" node_paths=PackedStringArray("module_slot") instance=ExtResource("46_m0y3x")]
 module_slot = NodePath("..")
 
 [node name="RCS" type="Node3D" parent="Components/Thrusters"]
