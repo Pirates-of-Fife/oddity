@@ -1,9 +1,12 @@
-[gd_scene load_steps=217 format=3 uid="uid://7wyl777r3bfm"]
+[gd_scene load_steps=231 format=3 uid="uid://7wyl777r3bfm"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/F7-Blackpool.gd" id="1_cqu6p"]
 [ext_resource type="Resource" uid="uid://b5ot5wjf8fc8t" path="res://resources/resources/trade/trade-items/starships/F7BlackpoolTradeResource.tres" id="2_fx81g"]
+[ext_resource type="AudioStream" uid="uid://du1jyf8jsgrqv" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/collision-sounds/hull_collision_1.wav" id="2_qs6b1"]
 [ext_resource type="PackedScene" uid="uid://da1uk1nr8o10v" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Paint.glb" id="2_tripu"]
 [ext_resource type="PackedScene" uid="uid://cnuvt4xoidrxa" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Exterior.glb" id="3_13vmy"]
+[ext_resource type="AudioStream" uid="uid://cpntm8opmec66" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/collision-sounds/hull_collision_2.wav" id="3_vclxc"]
+[ext_resource type="AudioStream" uid="uid://dd6cymfvoiefb" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/collision-sounds/hull_collision_3.wav" id="4_frxne"]
 [ext_resource type="PackedScene" uid="uid://bfbg8bogalwrj" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/meshes/F7Blackpool_Interior.glb" id="4_vn283"]
 [ext_resource type="Texture2D" uid="uid://bfdkwdjdmd6xh" path="res://images/oxvic pyrr color.png" id="5_j1hve"]
 [ext_resource type="Texture2D" uid="uid://d044rr2jhbn4d" path="res://images/F7 Color.png" id="6_8et2g"]
@@ -53,6 +56,15 @@
 [ext_resource type="PackedScene" uid="uid://cend82nwr18cm" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/thrusters/F7_VtolThruster.tscn" id="48_ljren"]
 [ext_resource type="AnimationLibrary" uid="uid://b4eekm7qtj60w" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/animations/F7_ThrusterAnimationLibrary.tres" id="52_a7ax4"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://ddnwmjdl3ktn3" path="res://scenes/vehicles/starships/ox'vic-pyrr/f7-blackpool/animations/F7_ThrusterAnimationTreeRoot.tres" id="53_3t3lw"]
+[ext_resource type="Script" path="res://classes/player-detection-zone/PlayerDetectionZone.gd" id="54_jvmkn"]
+[ext_resource type="PackedScene" uid="uid://dj5emjn3ylomv" path="res://classes/tractor-beam/mesh/AnvakaTractorBeam.tscn" id="55_f54y8"]
+[ext_resource type="PackedScene" uid="uid://bxdkumdfiftmg" path="res://scenes/vehicles/starships/rabauke-shipworks/common/scenes/buttons/normal-button/RABS_Button.tscn" id="56_g0fme"]
+[ext_resource type="AudioStream" uid="uid://c0n6nsntyy61l" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/interior-sound/interior_main.wav" id="60_wcpo2"]
+[ext_resource type="AudioStream" uid="uid://i34mw80pdit2" path="res://scenes/vehicles/starships/rabauke-shipworks/common/sounds/alarm/alarm.wav" id="61_0pcw2"]
+[ext_resource type="AudioStream" uid="uid://m28ripgucnhk" path="res://classes/module/component/component-types/alcubierre-drive/sounds/entering/entering.wav" id="62_eaisu"]
+[ext_resource type="AudioStream" uid="uid://b5qxxa2v4bjxx" path="res://classes/module/component/component-types/alcubierre-drive/sounds/leave/leave.wav" id="63_kxqyp"]
+[ext_resource type="AudioStream" uid="uid://punb1myeiyt3" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/sounds/power_states/engine_start.wav" id="64_myn0r"]
+[ext_resource type="AudioStream" uid="uid://ftlh5xvnksvd" path="res://scenes/vehicles/starships/rabauke-shipworks/kestrel-mk-1/sounds/power_states/starship_power_off.wav" id="65_d1lwp"]
 
 [sub_resource type="GDScript" id="GDScript_owdxx"]
 resource_name = "InternalLights"
@@ -564,7 +576,13 @@ size = Vector3(1.5, 1.5, 3)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vl6rh"]
 size = Vector3(12.68, 4.67, 3.9)
 
-[node name="F7Blackpool" type="RigidBody3D" node_paths=PackedStringArray("name_label", "ship_identification_label", "module_node", "abyss_drive_slot", "alcubierre_drive_slot", "hardpoints_root", "thruster_slots_root", "shield")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xp5lm"]
+size = Vector3(1000, 1373.51, 2132.29)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5r2a"]
+size = Vector3(28.065, 18.0914, 42.0897)
+
+[node name="F7Blackpool" type="RigidBody3D" node_paths=PackedStringArray("name_label", "ship_identification_label", "module_node", "abyss_drive_slot", "alcubierre_drive_slot", "hardpoints_root", "thruster_slots_root", "thruster_animation_player", "shield", "hull_collision_player", "super_cruise_enter", "super_cruise_exit", "explosion_sound_player")]
 collision_layer = 2097412
 collision_mask = 2097408
 script = ExtResource("1_cqu6p")
@@ -581,7 +599,15 @@ hardpoints_root = NodePath("Components/Hardpoints")
 max_ammo = 40000.0
 current_ammo = 40000.0
 thruster_slots_root = NodePath("Components/Thrusters")
+thruster_animation_player = NodePath("ThrusterAnimations")
 shield = NodePath("Shield")
+maximum_heat_capacity = 16000.0
+damage_per_heat_over_capacity = 800.0
+hull_collision_sounds = [ExtResource("2_qs6b1"), ExtResource("3_vclxc"), ExtResource("4_frxne")]
+hull_collision_player = NodePath("Sounds/CollisionSound/CollisionSoundPlayer")
+super_cruise_enter = NodePath("Sounds/Supercruise/SuperCruiseEnter")
+super_cruise_exit = NodePath("Sounds/Supercruise/SuperCruiseExit")
+explosion_sound_player = NodePath("Sounds/Explosion/ExplosionPlayer")
 trade_information = ExtResource("2_fx81g")
 
 [node name="Mesh" type="Node3D" parent="."]
@@ -4153,6 +4179,163 @@ parameters/Pitch/Blend3/blend_amount = 0
 parameters/Roll/Blend3/blend_amount = 0
 parameters/Vertical/Blend3/blend_amount = 0
 parameters/Yaw/Blend3/blend_amount = 0
+
+[node name="AbyssalPortalSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10946, -2.49575, 605.872)
+gizmo_extents = 10.0
+
+[node name="PlayerDetectionZone" type="Node3D" parent="."]
+script = ExtResource("54_jvmkn")
+activate_distance = 4500.0
+deactivate_distance = 5500.0
+update_time = 1.0
+always_deactivate = true
+
+[node name="AnvakaTractorBeam" parent="." node_paths=PackedStringArray("intermediate_position", "cargo_bay_drop_off_position", "cargo_grid", "ramp", "collision_shapes") instance=ExtResource("55_f54y8")]
+transform = Transform3D(1, 1.22465e-16, 1.22465e-16, 1.22465e-16, -1, 0, 1.22465e-16, 1.49976e-32, -1, -6.15782e-16, 4.88258, -7.34035)
+disabled = true
+intermediate_position = NodePath("Intermediate2")
+cargo_bay_drop_off_position = NodePath("Drop Off2")
+cargo_grid = NodePath("../Cargo/CargoGrid")
+ramp = NodePath("../Mesh/Mesh/F7Blackpool_Exterior/F7Ramp")
+collision_shapes = [NodePath("CollisionShape3D3")]
+
+[node name="Intermediate2" type="Marker3D" parent="AnvakaTractorBeam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27289e-19, 2.73785, 7.89882)
+
+[node name="Drop Off2" type="Marker3D" parent="AnvakaTractorBeam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.14446e-19, 1.75971, -8.46398)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="AnvakaTractorBeam"]
+transform = Transform3D(1, 1.83668e-48, 0, 1.83669e-48, 1, 0, 0, 0, 1, -1.76113e-28, 378.289, 1071.92)
+shape = SubResource("BoxShape3D_xp5lm")
+
+[node name="tractorbeam_button" parent="AnvakaTractorBeam" instance=ExtResource("56_g0fme")]
+transform = Transform3D(-0.999942, 1.22465e-16, 0.010734, -1.22458e-16, -1, 1.31454e-18, 0.010734, 7.6225e-38, 0.999942, 1.51581, 3.16722, -7.88898)
+
+[node name="Label3D" type="Label3D" parent="AnvakaTractorBeam/tractorbeam_button"]
+transform = Transform3D(0.269985, 0, 0.00282738, 0, 0.27, 0, -0.00282738, 0, 0.269985, -6.26255e-70, 0.270596, 6.71366e-72)
+shaded = true
+texture_filter = 2
+modulate = Color(0.9, 1, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Tractor Beam"
+font = ExtResource("48_35e5t")
+font_size = 35
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="InteriorSounds" type="Node3D" parent="Sounds"]
+
+[node name="Alarm" type="AudioStreamPlayer3D" parent="Sounds/InteriorSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33913, 13.1662)
+stream = ExtResource("61_0pcw2")
+volume_db = -10.0
+max_db = -9.0
+pitch_scale = 0.7
+max_distance = 35.0
+panning_strength = 0.2
+bus = &"Interior"
+
+[node name="InteriorSounds" type="AudioStreamPlayer3D" parent="Sounds/InteriorSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44878, -3.53953)
+stream = ExtResource("60_wcpo2")
+volume_db = -3.0
+autoplay = true
+max_distance = 8.0
+panning_strength = 0.2
+bus = &"Interior"
+
+[node name="InteriorSounds2" type="AudioStreamPlayer3D" parent="Sounds/InteriorSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.70634, 4.0551)
+stream = ExtResource("60_wcpo2")
+volume_db = -3.0
+autoplay = true
+max_distance = 8.0
+panning_strength = 0.2
+bus = &"Interior"
+
+[node name="InteriorSounds3" type="AudioStreamPlayer3D" parent="Sounds/InteriorSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35876, 12.6786)
+stream = ExtResource("60_wcpo2")
+volume_db = -3.0
+autoplay = true
+max_distance = 8.0
+panning_strength = 0.2
+bus = &"Interior"
+
+[node name="InteriorSounds4" type="AudioStreamPlayer3D" parent="Sounds/InteriorSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35876, 22.6647)
+stream = ExtResource("60_wcpo2")
+volume_db = -3.0
+autoplay = true
+max_distance = 8.0
+panning_strength = 0.2
+bus = &"Interior"
+
+[node name="InteriorSounds5" type="AudioStreamPlayer3D" parent="Sounds/InteriorSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.87554, 27.9469)
+stream = ExtResource("60_wcpo2")
+volume_db = -3.0
+autoplay = true
+max_distance = 8.0
+panning_strength = 0.2
+bus = &"Interior"
+
+[node name="InteriorSounds6" type="AudioStreamPlayer3D" parent="Sounds/InteriorSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.87554, 35.5849)
+stream = ExtResource("60_wcpo2")
+volume_db = -3.0
+autoplay = true
+max_distance = 8.0
+panning_strength = 0.2
+bus = &"Interior"
+
+[node name="CollisionSound" type="Node3D" parent="Sounds"]
+
+[node name="CollisionSoundPlayer" type="AudioStreamPlayer3D" parent="Sounds/CollisionSound"]
+max_distance = 100.0
+bus = &"Collision"
+
+[node name="Supercruise" type="Node3D" parent="Sounds"]
+
+[node name="SuperCruiseEnter" type="AudioStreamPlayer3D" parent="Sounds/Supercruise"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86374, 12.9369)
+stream = ExtResource("62_eaisu")
+
+[node name="SuperCruiseExit" type="AudioStreamPlayer3D" parent="Sounds/Supercruise"]
+stream = ExtResource("63_kxqyp")
+
+[node name="Explosion" type="Node3D" parent="Sounds"]
+
+[node name="ExplosionPlayer" type="AudioStreamPlayer3D" parent="Sounds/Explosion"]
+volume_db = 10.0
+unit_size = 50.0
+max_db = 6.0
+max_distance = 500.0
+
+[node name="Power State" type="Node3D" parent="Sounds"]
+
+[node name="PowerOnPlayer" type="AudioStreamPlayer3D" parent="Sounds/Power State"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.57668, -8.25008)
+stream = ExtResource("64_myn0r")
+volume_db = 32.0
+max_db = 6.0
+
+[node name="PowerOffPlayer" type="AudioStreamPlayer3D" parent="Sounds/Power State"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.57668, -8.25008)
+stream = ExtResource("65_d1lwp")
+volume_db = 24.0
+max_db = 6.0
+pitch_scale = 0.93
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8388608
+collision_mask = 8388608
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.17996, 27.734)
+shape = SubResource("BoxShape3D_o5r2a")
 
 [editable path="Mesh/Mesh/F7Blackpool_Paint"]
 [editable path="Mesh/Mesh/F7Blackpool_Interior/F7Elevator"]

@@ -2,10 +2,6 @@ extends Resource
 
 class_name ThrusterForces
 
-#=======================================================================================#
-# Temporary resource class for thruster forces until thrusters get properly implemented #
-#=======================================================================================#
-
 @export_category("Movement")
 
 @export
@@ -16,6 +12,9 @@ var backward_thrust : float
 
 @export
 var up_thrust : float
+
+@export
+var vtol_up_thrust : float
 
 @export
 var down_thrust : float

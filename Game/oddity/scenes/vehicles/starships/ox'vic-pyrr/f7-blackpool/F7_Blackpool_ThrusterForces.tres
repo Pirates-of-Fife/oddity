@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ThrusterForces" load_steps=2 format=3 uid="uid://b6qo1mg5cvgsd"]
+
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/ThrusterForceResource.gd" id="1_ildlc"]
+
+[resource]
+script = ExtResource("1_ildlc")
+forward_thrust = 600000.0
+backward_thrust = 400000.0
+up_thrust = 330000.0
+vtol_up_thrust = 500000.0
+down_thrust = 330000.0
+left_thrust = 250000.0
+right_thrust = 250000.0
+roll_left_thrust = 948750.0
+roll_right_thrust = 948750.0
+yaw_left_thrust = 948750.0
+yaw_right_thrust = 948750.0
+pitch_up_thrust = 1.23338e+06
+pitch_down_thrust = 1.23338e+06

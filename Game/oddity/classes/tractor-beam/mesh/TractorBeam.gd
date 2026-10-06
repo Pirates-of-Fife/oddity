@@ -54,7 +54,7 @@ var cargo_bay_drop_off_position : Marker3D
 var cargo_grid : CargoGrid
 
 @export
-var ramp : RABS_KestrelMk1_Ramp
+var ramp : Openable
 
 @export
 var timer_to_start_picking : Timer
