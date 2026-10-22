@@ -617,6 +617,7 @@ var current_hull_material : StandardMaterial3D
 
 signal color_changed_to_dark
 signal color_changed_to_light
+signal color_changed_to_white
 
 @export_category("Beds")
 @export
@@ -676,7 +677,9 @@ func update_material_saturation_based_on_hull_damage() -> void:
 func update_color(new_color : Color) -> void:
 	original_hull_color = new_color
 	
-	if is_color_light(new_color):
+	if is_color_white(new_color):
+		color_changed_to_white.emit()
+	elif is_color_light(new_color):
 		color_changed_to_light.emit()
 	else:
 		color_changed_to_dark.emit()
@@ -690,6 +693,14 @@ func is_color_light(color : Color) -> bool:
 	var luma : float = sqrt(0.299 * pow(color.r, 2) + 0.587 * pow(color.g, 2) + 0.114 * pow(color.b, 2))
 		
 	if luma > 0.5:
+		return true
+	
+	return false
+
+func is_color_white(color : Color) -> bool:
+	var luma : float = sqrt(0.299 * pow(color.r, 2) + 0.587 * pow(color.g, 2) + 0.114 * pow(color.b, 2))
+
+	if luma > 0.9:
 		return true
 	
 	return false

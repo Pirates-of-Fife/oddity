@@ -1,0 +1,498 @@
+[gd_resource type="Resource" script_class="StarshipLoadout" load_steps=75 format=3 uid="uid://cruijd36dbvw"]
+
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/cargo/CargoContainerLoadoutResource.gd" id="1_eo34y"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/objects/GameEntityLoadoutResource.gd" id="2_lwgeu"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/ModuleSlotLoadoutResource.gd" id="3_fh2dj"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AbyssalJumpDriveSlotLoadoutResource.gd" id="4_d7pyx"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/AlcubierreDriveSlotLoadoutResource.gd" id="5_nhit5"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ComponentSlotLoadoutResource.gd" id="6_2wry0"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/RadiatorSlotLoadoutResource.gd" id="7_c4mua"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/HardpointLoudoutResource.gd" id="8_qum51"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/module-slots/ThrusterSlotLoadoutResource.gd" id="9_lp374"]
+[ext_resource type="Script" path="res://resources/classes/vehicle/starship/starship-loadout/StarshipLoadout.gd" id="10_gkg44"]
+
+[sub_resource type="Resource" id="Resource_b8ic5"]
+script = ExtResource("4_d7pyx")
+size = 3
+name = &"AbyssalJumpDriveSlot"
+value = 0
+id = 21
+
+[sub_resource type="Resource" id="Resource_x2vql"]
+script = ExtResource("5_nhit5")
+size = 3
+name = &"AlcubierreDriveSlot"
+value = 0
+id = 22
+
+[sub_resource type="Resource" id="Resource_54tmu"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_BR_1"
+value = 0
+id = 0
+
+[sub_resource type="Resource" id="Resource_fih0h"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_BR_2"
+value = 0
+id = 1
+
+[sub_resource type="Resource" id="Resource_rxfbv"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_BR_3"
+value = 0
+id = 2
+
+[sub_resource type="Resource" id="Resource_o5mml"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_BL_1"
+value = 0
+id = 3
+
+[sub_resource type="Resource" id="Resource_btssw"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_BL_2"
+value = 0
+id = 4
+
+[sub_resource type="Resource" id="Resource_wg0fw"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_BL_3"
+value = 0
+id = 5
+
+[sub_resource type="Resource" id="Resource_07aqw"]
+script = ExtResource("6_2wry0")
+size = 1
+name = &"S1_1"
+value = 0
+id = 6
+
+[sub_resource type="Resource" id="Resource_a0wq0"]
+script = ExtResource("6_2wry0")
+size = 1
+name = &"S1_2"
+value = 0
+id = 7
+
+[sub_resource type="Resource" id="Resource_2iqdx"]
+script = ExtResource("6_2wry0")
+size = 1
+name = &"S1_3"
+value = 0
+id = 8
+
+[sub_resource type="Resource" id="Resource_dqrr1"]
+script = ExtResource("6_2wry0")
+size = 1
+name = &"S1_4"
+value = 0
+id = 9
+
+[sub_resource type="Resource" id="Resource_m7tyq"]
+script = ExtResource("6_2wry0")
+size = 1
+name = &"S1_5"
+value = 0
+id = 10
+
+[sub_resource type="Resource" id="Resource_es2oj"]
+script = ExtResource("6_2wry0")
+size = 1
+name = &"S1_6"
+value = 0
+id = 11
+
+[sub_resource type="Resource" id="Resource_nqrio"]
+script = ExtResource("6_2wry0")
+size = 4
+name = &"S4_L_1"
+value = 0
+id = 12
+
+[sub_resource type="Resource" id="Resource_pa6dg"]
+script = ExtResource("6_2wry0")
+size = 4
+name = &"S4_L_2"
+value = 0
+id = 13
+
+[sub_resource type="Resource" id="Resource_n6dly"]
+script = ExtResource("6_2wry0")
+size = 4
+name = &"S4_L_3"
+value = 0
+id = 14
+
+[sub_resource type="Resource" id="Resource_e6y4i"]
+script = ExtResource("6_2wry0")
+size = 4
+name = &"S4_R_1"
+value = 0
+id = 15
+
+[sub_resource type="Resource" id="Resource_1ntur"]
+script = ExtResource("6_2wry0")
+size = 4
+name = &"S4_R_2"
+value = 0
+id = 16
+
+[sub_resource type="Resource" id="Resource_b8ml2"]
+script = ExtResource("6_2wry0")
+size = 4
+name = &"S4_R_3"
+value = 0
+id = 17
+
+[sub_resource type="Resource" id="Resource_w5hnu"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_TR_1"
+value = 0
+id = 18
+
+[sub_resource type="Resource" id="Resource_he715"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_TR_2"
+value = 0
+id = 19
+
+[sub_resource type="Resource" id="Resource_txts0"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_TR_3"
+value = 0
+id = 20
+
+[sub_resource type="Resource" id="Resource_gu8n8"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_TL_1"
+value = 0
+id = 23
+
+[sub_resource type="Resource" id="Resource_atwkt"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_TL_2"
+value = 0
+id = 24
+
+[sub_resource type="Resource" id="Resource_ggk3t"]
+script = ExtResource("6_2wry0")
+size = 3
+name = &"S3_TL_3"
+value = 0
+id = 25
+
+[sub_resource type="Resource" id="Resource_bpany"]
+script = ExtResource("7_c4mua")
+size = 7
+name = &"RadiatorSlot"
+value = 0
+id = 35
+
+[sub_resource type="Resource" id="Resource_ka2d6"]
+script = ExtResource("8_qum51")
+size = 10
+hardpoint_assignment = 0
+name = &"S10"
+value = 0
+id = 26
+
+[sub_resource type="Resource" id="Resource_kwdx0"]
+script = ExtResource("8_qum51")
+size = 5
+hardpoint_assignment = 0
+name = &"S5_TOP_RIGHT"
+value = 0
+id = 27
+
+[sub_resource type="Resource" id="Resource_mcnvr"]
+script = ExtResource("8_qum51")
+size = 5
+hardpoint_assignment = 0
+name = &"S5_TOP_LEFT"
+value = 0
+id = 28
+
+[sub_resource type="Resource" id="Resource_sibxn"]
+script = ExtResource("8_qum51")
+size = 5
+hardpoint_assignment = 0
+name = &"S5_PORT_RIGHT"
+value = 0
+id = 29
+
+[sub_resource type="Resource" id="Resource_7qpva"]
+script = ExtResource("8_qum51")
+size = 5
+hardpoint_assignment = 0
+name = &"S5_PORT_LEFT"
+value = 0
+id = 30
+
+[sub_resource type="Resource" id="Resource_fguwg"]
+script = ExtResource("8_qum51")
+size = 5
+hardpoint_assignment = 0
+name = &"S5_BOTTOM_RIGHT"
+value = 0
+id = 31
+
+[sub_resource type="Resource" id="Resource_v0l81"]
+script = ExtResource("8_qum51")
+size = 5
+hardpoint_assignment = 0
+name = &"S5_BOTTOM_LEFT"
+value = 0
+id = 32
+
+[sub_resource type="Resource" id="Resource_addm0"]
+script = ExtResource("8_qum51")
+size = 5
+hardpoint_assignment = 0
+name = &"S5_STARBOARD_RIGHT"
+value = 0
+id = 33
+
+[sub_resource type="Resource" id="Resource_4bre0"]
+script = ExtResource("8_qum51")
+size = 5
+hardpoint_assignment = 0
+name = &"S5_STARBOARD_LEFT"
+value = 0
+id = 34
+
+[sub_resource type="Resource" id="Resource_dpckb"]
+script = ExtResource("9_lp374")
+size = 10
+name = &"MainLeft"
+value = 0
+id = 36
+
+[sub_resource type="Resource" id="Resource_m4nw7"]
+script = ExtResource("9_lp374")
+size = 10
+name = &"MainRight"
+value = 0
+id = 37
+
+[sub_resource type="Resource" id="Resource_ohp1v"]
+script = ExtResource("9_lp374")
+size = 6
+name = &"Retro1"
+value = 0
+id = 38
+
+[sub_resource type="Resource" id="Resource_qgdo8"]
+script = ExtResource("9_lp374")
+size = 6
+name = &"Retro2"
+value = 0
+id = 39
+
+[sub_resource type="Resource" id="Resource_q15m8"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"FL"
+value = 0
+id = 40
+
+[sub_resource type="Resource" id="Resource_lkf0t"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"FR"
+value = 0
+id = 41
+
+[sub_resource type="Resource" id="Resource_7bn5j"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"MR"
+value = 0
+id = 42
+
+[sub_resource type="Resource" id="Resource_2puar"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"ML"
+value = 0
+id = 43
+
+[sub_resource type="Resource" id="Resource_3h52k"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"RL"
+value = 0
+id = 44
+
+[sub_resource type="Resource" id="Resource_g6hx4"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"RR"
+value = 0
+id = 45
+
+[sub_resource type="Resource" id="Resource_bxu8u"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"FL"
+value = 0
+id = 46
+
+[sub_resource type="Resource" id="Resource_b1cee"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"FR"
+value = 0
+id = 47
+
+[sub_resource type="Resource" id="Resource_oghjl"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"MR"
+value = 0
+id = 48
+
+[sub_resource type="Resource" id="Resource_d2nns"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"ML"
+value = 0
+id = 49
+
+[sub_resource type="Resource" id="Resource_p603s"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"RL"
+value = 0
+id = 50
+
+[sub_resource type="Resource" id="Resource_rpg5n"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"RR"
+value = 0
+id = 51
+
+[sub_resource type="Resource" id="Resource_6m6q5"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"FT"
+value = 0
+id = 52
+
+[sub_resource type="Resource" id="Resource_403qo"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"FB"
+value = 0
+id = 53
+
+[sub_resource type="Resource" id="Resource_ietmh"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"RF"
+value = 0
+id = 54
+
+[sub_resource type="Resource" id="Resource_4lauu"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"RB"
+value = 0
+id = 55
+
+[sub_resource type="Resource" id="Resource_h7hwq"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"FT"
+value = 0
+id = 56
+
+[sub_resource type="Resource" id="Resource_rakwm"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"FB"
+value = 0
+id = 57
+
+[sub_resource type="Resource" id="Resource_k8a1a"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"RF"
+value = 0
+id = 58
+
+[sub_resource type="Resource" id="Resource_uvv7l"]
+script = ExtResource("9_lp374")
+size = 3
+name = &"RB"
+value = 0
+id = 59
+
+[sub_resource type="Resource" id="Resource_g1ri1"]
+script = ExtResource("9_lp374")
+size = 7
+name = &"ThrusterSlot"
+value = 0
+id = 60
+
+[sub_resource type="Resource" id="Resource_dfpp5"]
+script = ExtResource("9_lp374")
+size = 7
+name = &"ThrusterSlot2"
+value = 0
+id = 61
+
+[sub_resource type="Resource" id="Resource_17j2q"]
+script = ExtResource("9_lp374")
+size = 7
+name = &"ThrusterSlot3"
+value = 0
+id = 62
+
+[sub_resource type="Resource" id="Resource_actrb"]
+script = ExtResource("9_lp374")
+size = 7
+name = &"ThrusterSlot4"
+value = 0
+id = 63
+
+[resource]
+script = ExtResource("10_gkg44")
+ship_type = 2
+module_slots = Array[ExtResource("3_fh2dj")]([SubResource("Resource_b8ic5"), SubResource("Resource_x2vql"), SubResource("Resource_54tmu"), SubResource("Resource_fih0h"), SubResource("Resource_rxfbv"), SubResource("Resource_o5mml"), SubResource("Resource_btssw"), SubResource("Resource_wg0fw"), SubResource("Resource_07aqw"), SubResource("Resource_a0wq0"), SubResource("Resource_2iqdx"), SubResource("Resource_dqrr1"), SubResource("Resource_m7tyq"), SubResource("Resource_es2oj"), SubResource("Resource_nqrio"), SubResource("Resource_pa6dg"), SubResource("Resource_n6dly"), SubResource("Resource_e6y4i"), SubResource("Resource_1ntur"), SubResource("Resource_b8ml2"), SubResource("Resource_w5hnu"), SubResource("Resource_he715"), SubResource("Resource_txts0"), SubResource("Resource_gu8n8"), SubResource("Resource_atwkt"), SubResource("Resource_ggk3t"), SubResource("Resource_bpany"), SubResource("Resource_ka2d6"), SubResource("Resource_kwdx0"), SubResource("Resource_mcnvr"), SubResource("Resource_sibxn"), SubResource("Resource_7qpva"), SubResource("Resource_fguwg"), SubResource("Resource_v0l81"), SubResource("Resource_addm0"), SubResource("Resource_4bre0"), SubResource("Resource_dpckb"), SubResource("Resource_m4nw7"), SubResource("Resource_ohp1v"), SubResource("Resource_qgdo8"), SubResource("Resource_q15m8"), SubResource("Resource_lkf0t"), SubResource("Resource_7bn5j"), SubResource("Resource_2puar"), SubResource("Resource_3h52k"), SubResource("Resource_g6hx4"), SubResource("Resource_bxu8u"), SubResource("Resource_b1cee"), SubResource("Resource_oghjl"), SubResource("Resource_d2nns"), SubResource("Resource_p603s"), SubResource("Resource_rpg5n"), SubResource("Resource_6m6q5"), SubResource("Resource_403qo"), SubResource("Resource_ietmh"), SubResource("Resource_4lauu"), SubResource("Resource_h7hwq"), SubResource("Resource_rakwm"), SubResource("Resource_k8a1a"), SubResource("Resource_uvv7l"), SubResource("Resource_g1ri1"), SubResource("Resource_dfpp5"), SubResource("Resource_17j2q"), SubResource("Resource_actrb")])
+cargo = Array[ExtResource("1_eo34y")]([])
+entities = Array[ExtResource("2_lwgeu")]([])
+is_player_ship = false
+ship_name = &""
+ship_identification = &""
+value = 0
+apply_health = false
+destroyed = false
+current_health = 0.0
+current_armour_health = 0.0
+ship_color = Color(0.91, 0.91, 0.91, 1)
+current_ammo = 10000.0
+current_heat = 0.0
+current_fuel = 10800.0
+is_boss = false
+landing_gear_on = false
+current_health_upgrade = 0
+current_heat_capacity_upgrade = 0
+current_fuel_capacity_upgrade = 0
+current_ammo_capacity_upgrade = 0
+current_turning_upgrade = 0
+current_thruster_upgrade = 0
+tractor_beams_upgraded = false
+wing_state = false

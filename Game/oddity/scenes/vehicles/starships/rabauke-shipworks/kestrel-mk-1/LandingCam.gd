@@ -5,5 +5,8 @@ var ships : Starship
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if ships == null:
+		return
+		
 	global_position = ships.landing_cam_marker.global_position
 	global_rotation = ships.landing_cam_marker.global_rotation

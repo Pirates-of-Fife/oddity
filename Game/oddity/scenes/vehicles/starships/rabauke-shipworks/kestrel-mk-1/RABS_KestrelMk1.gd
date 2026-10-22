@@ -230,6 +230,7 @@ func RABS_Kestrel_Mk1_ready() -> void:
 		
 	color_changed_to_dark.connect(_on_color_dark)
 	color_changed_to_light.connect(_on_color_white)
+	color_changed_to_white.connect(_on_color_white)
 	
 	if is_color_light(current_hull_material.albedo_color):
 		_on_color_white()

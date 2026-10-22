@@ -229,6 +229,8 @@ func editor_save_current_load_out() -> void:
 		if node is RadiatorSlot:
 			loadout.module_slots.append(generate_radiator_slot_entry(node))
 
+	loadout.ship_type = starship.ship_type
+
 	output = loadout
 
 func generate_empty_loadout_resource() -> void:
@@ -252,6 +254,8 @@ func generate_empty_loadout_resource() -> void:
 			loadout.module_slots.append(generate_abyss_slot_entry(node, false))
 		if node is RadiatorSlot:
 			loadout.module_slots.append(generate_radiator_slot_entry(node, false))
+
+	loadout.ship_type = starship.ship_type
 
 	output = loadout
 

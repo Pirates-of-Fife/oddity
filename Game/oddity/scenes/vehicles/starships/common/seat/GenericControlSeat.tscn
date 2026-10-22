@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddfqh54iojjeg"]
+
+[ext_resource type="Script" path="res://classes/interactable/control-seat/ControlSeat.gd" id="1_j1sa2"]
+[ext_resource type="PackedScene" uid="uid://bocuwsyrmf57u" path="res://classes/mind/player/anchor/Anchor.tscn" id="2_4530q"]
+[ext_resource type="SpriteFrames" uid="uid://dsgh52priqn71" path="res://classes/creature/humanoid/Mina/sprites/MinaGlasses.tres" id="3_oorqy"]
+
+[sub_resource type="GDScript" id="GDScript_o5l6d"]
+resource_name = "SeatMina"
+script/source = "extends AnimatedSprite3D
+
+@onready
+var glasses_textures : SpriteFrames = preload(\"res://classes/creature/humanoid/Mina/sprites/MinaGlasses.tres\")
+@onready
+var no_glasses_texture : SpriteFrames = preload(\"res://classes/creature/humanoid/Mina/sprites/Mina.tres\")
+
+func _ready() -> void:
+	if Globals.wearing_glasses:
+		sprite_frames = glasses_textures
+	else:
+		sprite_frames = no_glasses_texture
+"
+
+[node name="GenericControlSeat" type="StaticBody3D"]
+collision_layer = 536871936
+collision_mask = 536871936
+script = ExtResource("1_j1sa2")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0464789, 0.761728, 1.3198)
+
+[node name="Anchor" parent="." instance=ExtResource("2_4530q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02091, 0)
+enable_twist_limit = true
+twist_limit = 179.0
+enable_pitch_limit = true
+pitch_limit = 90.0
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(-0.103, 0, 1.26139e-17, 0, 0.103, 0, -1.26139e-17, 0, -0.103, 0.118885, 0.89402, 0.078)
+visible = false
+visibility_range_begin = 1.0
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("3_oorqy")
+animation = &"idleAtmo"
+autoplay = "idleAtmo"
+speed_scale = 1.2
+script = SubResource("GDScript_o5l6d")
